@@ -28,6 +28,11 @@ jobs:
       - name: Test analytics worker
         run: node worker/test/worker.test.mjs
 
+      - name: Check reading volume (v3 density rules)
+        run: |
+          python3 scripts/check_density.py
+          python3 scripts/check_density.py --labs
+
       - name: Check no Mermaid remains
         run: |
           if grep -rl '```mermaid' docs/content/ 2>/dev/null; then

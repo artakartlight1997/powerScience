@@ -39,9 +39,19 @@ GitHub Pages で公開でき、スマートフォンからも学習できます�
 全レッスンの冒頭に「なぜ学ぶのか」「このレッスンで身につく力」「到達目標」「次に開けること」を表示します。
 前提レッスンが未完了なら警告が出ます。学習が積み上がっている実感が持てる作りです。
 
-**2. 図で理解させる**
+**2. 図で理解させる（読ませない）**
 Mermaid は使っていません。図は `figure` ブロックに書いた設定から、専用エンジンが大きなSVG/HTMLとして描画します。
 13種類（工程図・比較・スタースキーマ・データ変換の前後・DAXの解剖図・グラフ・階層図ほか）を使い分けます。
+
+説明は文章ではなく図に載せる方針を、機械チェックで強制しています。
+**1レッスンあたり「読む文字」は2,200字以下・図は10枚以上**（ハンズオンは2,800字以下・6枚以上）。
+1段落は100字まで、段落が3つ続いたらそこは図にします。超過するとビルドと CI が失敗します。
+
+```bash
+python3 scripts/check_density.py          # レッスン
+python3 scripts/check_density.py --labs   # ハンズオン
+python3 scripts/check_density.py --top 20 # 読む文字が多い順
+```
 
 **3. 操作して覚える**
 フィルターコンテキストや結合の挙動は、読むより触るほうが速く身につきます。
@@ -93,6 +103,7 @@ Actions では、デプロイ前に次を実行します。
 - カリキュラム・用語集・クイズのインデックス生成
 - 図(figure)のJSON検査
 - コンテンツ整合性チェック（リンク切れ・クイズの正解範囲・PL-300コードなど）
+- **本文の文字量チェック**（読む文字が多すぎる／図が少なすぎるレッスンを弾く）
 - 計測APIの単体テスト
 - Mermaid が混入していないかの確認
 
@@ -221,6 +232,7 @@ python3 scripts/build_all.py
 | `python3 scripts/build_search_index.py` | サイト内検索のインデックス |
 | `python3 scripts/fix_figures.py --write` | 図のJSONの機械的な誤りを自動修正 |
 | `python3 scripts/validate_content.py` | 整合性チェック |
+| `python3 scripts/check_density.py` | 本文の文字量チェック（`--labs` / `--top N`） |
 | `python3 scripts/generate_sample_data.py` | サンプルデータの再生成 |
 
 テストは [`tests/README.md`](tests/README.md) を参照してください。

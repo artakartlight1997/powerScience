@@ -9,6 +9,7 @@
   2. build_glossary_index.py glossary/*.json → glossary/index.json
   3. build_quiz_index.py     quizzes/*.json  → quizzes/index.json
   4. validate_content.py     整合性チェック
+  5. check_density.py        本文の「読む文字」の量を検査（v3基準）
 
 いずれかが失敗したら 0 以外で終了します（CI でそのまま使えます）。
 """
@@ -22,10 +23,14 @@ STEPS = [
     ("検索インデックスの生成", "build_search_index.py"),
     ("図(figure)のJSON検査", "fix_figures.py"),
     ("コンテンツの検証", "validate_content.py"),
+    ("本文の文字量の検査（レッスン）", "check_density.py"),
+    ("本文の文字量の検査（ハンズオン）", "check_density.py", ["--labs"]),
 ]
 
 failed = []
-for label, script in STEPS:
+for step in STEPS:
+    label, script = step[0], step[1]
+    extra = step[2] if len(step) > 2 else []
     path = os.path.join(HERE, script)
     if not os.path.exists(path):
         print("\n--- %s : スクリプトがありません (%s) ---" % (label, script))
@@ -33,7 +38,7 @@ for label, script in STEPS:
     print("\n" + "=" * 62)
     print(" %s  (%s)" % (label, script))
     print("=" * 62)
-    r = subprocess.run([sys.executable, path])
+    r = subprocess.run([sys.executable, path] + extra)
     if r.returncode != 0:
         failed.append(label)
 
