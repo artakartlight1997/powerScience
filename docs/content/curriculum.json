@@ -10,7 +10,7 @@
       "modules": 22,
       "lessons": 118,
       "labs": 12,
-      "figures": 1692,
+      "figures": 1706,
       "lessonsWritten": 118,
       "modulesPlanned": 22,
       "lessonsPlanned": 118
@@ -4502,7 +4502,7 @@
       "level": "T4",
       "order": 91,
       "hasBody": true,
-      "figures": 13
+      "figures": 18
     },
     {
       "id": "L1704",
@@ -4547,7 +4547,7 @@
       "level": "T4",
       "order": 92,
       "hasBody": true,
-      "figures": 13
+      "figures": 18
     },
     {
       "id": "L1705",
@@ -5363,7 +5363,7 @@
       "level": "T4",
       "order": 110,
       "hasBody": true,
-      "figures": 17
+      "figures": 19
     },
     {
       "id": "L2103",
@@ -5408,7 +5408,7 @@
       "level": "T4",
       "order": 111,
       "hasBody": true,
-      "figures": 15
+      "figures": 17
     },
     {
       "id": "L2104",

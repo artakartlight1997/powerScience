@@ -192,7 +192,7 @@
       "分析"
     ],
     "plain":"かけっこの順位を出すには、まず誰と競走するのかを決めないといけない。競う相手と比べる数字を指定して順位を返すのがRANKXです。",
-    "figure":{"type": "formula", "lang": "dax", "title": "順位を出すときに指定する2つのこと", "code": "RANKX( ALL( Dim_商品[商品名] ), [売上合計] )", "caption": "競う相手を指定し忘れると、自分1人だけの競走になって全員1位になる", "parts": [{"match": "RANKX", "label": "何番目かを返す", "tone": "violet"}, {"match": "ALL( Dim_商品[商品名] )", "label": "競う相手：全商品を並べる", "tone": "amber"}, {"match": "[売上合計]", "label": "順位をつけるときに比べる数字", "tone": "blue"}]} },
+    "figure":{"type": "formula", "lang": "dax", "title": "順位を出すときに指定するもの", "code": "RANKX( ALL( Dim_商品[商品名] ), [売上合計] )", "caption": "競う相手を指定し忘れると、自分1人だけの競走になって全員1位になる", "parts": [{"match": "RANKX", "label": "何番目かを返す", "tone": "violet"}, {"match": "ALL( Dim_商品[商品名] )", "label": "競う相手：全商品を並べる", "tone": "amber"}, {"match": "[売上合計]", "label": "順位をつけるときに比べる数字", "tone": "blue"}]} },
   {
     "term": "RELATED",
     "en": "RELATED",
