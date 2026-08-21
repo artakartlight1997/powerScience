@@ -124,11 +124,20 @@ def check(m, LIM=LIM):
     return b
 
 
-args = [a for a in sys.argv[1:] if not a.startswith("--")]
-top = 0
-if "--top" in sys.argv:
-    i = sys.argv.index("--top")
-    top = int(sys.argv[i + 1]) if len(sys.argv) > i + 1 else 20
+# --top N の N を、レッスンIDの絞り込みと取り違えないように順に読む
+args, top, i = [], 0, 1
+argv = sys.argv
+while i < len(argv):
+    a = argv[i]
+    if a == "--top":
+        top = 20
+        if i + 1 < len(argv) and argv[i + 1].isdigit():
+            top = int(argv[i + 1]); i += 1
+    elif a.startswith("--top="):
+        top = int(a.split("=", 1)[1] or 20)
+    elif not a.startswith("--"):
+        args.append(a)
+    i += 1
 
 labs_mode = "--labs" in sys.argv or any(a.startswith("LAB") for a in args)
 paths = sorted(glob.glob(os.path.join(BDIR if labs_mode else LDIR, "*.md")))
