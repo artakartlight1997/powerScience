@@ -19,6 +19,7 @@ STEPS = [
     ("カリキュラムの生成", "build_curriculum.py"),
     ("用語集インデックスの生成", "build_glossary_index.py"),
     ("クイズインデックスの生成", "build_quiz_index.py"),
+    ("検索インデックスの生成", "build_search_index.py"),
     ("図(figure)のJSON検査", "fix_figures.py"),
     ("コンテンツの検証", "validate_content.py"),
 ]

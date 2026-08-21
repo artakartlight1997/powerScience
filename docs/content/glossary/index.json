@@ -1,7 +1,11 @@
 {
- "count": 467,
+ "count": 535,
  "sources": [
   "M00",
+  "M01",
+  "M02",
+  "M03",
+  "M04",
   "M05",
   "M06",
   "M07",
@@ -19,59 +23,65 @@
   "モデリング",
   "DAX",
   "統計",
+  "データサイエンス",
   "分析",
+  "データ品質",
   "データ基盤",
   "可視化",
-  "データ品質",
   "実務",
-  "Power Query",
   "基礎",
-  "データサイエンス",
-  "性能",
   "運用",
+  "Power Query",
+  "性能",
   "コンテキスト",
-  "時系列",
   "エンジン",
-  "M言語",
   "ガバナンス",
+  "時系列",
+  "整形",
+  "M言語",
+  "指標",
   "資格",
   "セキュリティ",
-  "可視化理論",
-  "対話",
   "ツール",
   "結合",
   "データエンジニアリング",
   "集計",
   "予測",
   "配色",
+  "可視化理論",
   "権限",
+  "対話",
+  "画面",
   "アクセシビリティ",
   "増分更新",
-  "データフロー",
+  "接続",
   "レイアウト",
-  "更新",
   "階層",
-  "ストレージ",
   "レポート",
+  "製品",
   "ライセンス",
+  "データフロー",
   "設計",
-  "配布",
+  "ストレージ",
   "書式",
-  "因果推論",
+  "取り込み",
   "学習法",
+  "ファイル",
   "データ構造",
   "リレーションシップ",
   "モデル共有",
   "診断",
   "タイムインテリジェンス",
   "再利用",
+  "設定",
   "分析手法",
+  "計算",
+  "配布",
+  "因果推論",
   "異常検知",
-  "ワークスペース",
-  "モバイル",
   "顧客分析",
-  "データ型",
-  "バイアス"
+  "バイアス",
+  "更新"
  ],
  "terms": [
   {
@@ -235,24 +245,84 @@
    "lessonTitle": "M言語の構造 — let ... in を読み書きする"
   },
   {
+   "term": "Microsoft Fabric",
+   "en": "Microsoft Fabric",
+   "reading": "まいくろそふとふぁぶりっく",
+   "short": "データの保管・加工・分析・可視化を統合したMicrosoftのデータ基盤。",
+   "desc": "Power BI はその可視化部分として組み込まれている。ティア1の学習では意識する必要はないが、公式ドキュメントや管理画面に用語が現れるため「Power BIの上位の器」と理解しておくとよい。",
+   "lesson": "L0204",
+   "tags": [
+    "基礎"
+   ],
+   "aliases": [
+    "Fabric"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "ライセンスと組織での使われ方"
+  },
+  {
+   "term": "Power BI Desktop",
+   "en": "Power BI Desktop",
+   "reading": "ぱわーびーあいですくとっぷ",
+   "short": "データの取得・整形・モデル化・レポート作成を行うWindowsアプリ。無料。",
+   "desc": "開発の主戦場であり、モデル構造を変える作業はすべてここで行う。macOSには対応しておらず、仮想環境やクラウドPCが必要。毎月更新されるため、学習中は最新版の維持が望ましい。",
+   "lesson": "L0202",
+   "tags": [
+    "製品"
+   ],
+   "aliases": [
+    "Desktop",
+    "デスクトップ版"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Desktop・Service・Mobile の役割分担"
+  },
+  {
+   "term": "Power BI Service",
+   "en": "Power BI Service",
+   "reading": "ぱわーびーあいさーびす",
+   "short": "ブラウザで動作し、共有・更新・権限管理を担うクラウドサービス。",
+   "desc": "発行されたレポートとセマンティックモデルを保持し、スケジュール更新・アプリ配布・ダッシュボード作成・使用状況の計測を行う。ダッシュボードとスケジュール更新はここでしか作れない。",
+   "lesson": "L0202",
+   "tags": [
+    "製品"
+   ],
+   "aliases": [
+    "Service",
+    "Power BIサービス",
+    "app.powerbi.com"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Desktop・Service・Mobile の役割分担"
+  },
+  {
    "term": "Premium Per User",
-   "en": "Premium Per User (PPU)",
+   "en": "Premium Per User",
    "reading": "ぷれみあむぱーゆーざー",
-   "short": "Pro の機能に加えて大規模モデルや高頻度更新が使える、利用者単位の上位ライセンス。",
-   "desc": "閲覧者にも PPU が必要になるため、大人数への配布には向かない。少人数で高度な機能（より大きなモデル、48回更新など）が必要な場合に選ぶ。",
-   "lesson": "L1001",
+   "short": "Proの上位に位置するユーザー単位の有償ライセンス。",
+   "desc": "大規模モデル、高頻度更新、デプロイパイプライン、ページ分割レポートなどが使える。ただしPPUワークスペースの内容はPPU保有者しか閲覧できないため、多人数への配布手段にはならない。",
+   "lesson": "L0204",
    "tags": [
     "ライセンス"
    ],
    "aliases": [
     "PPU",
-    "Premium Per User (PPU)"
+    "Premium Per User"
    ],
-   "source": "M10",
-   "module": "M10",
-   "tier": "T2",
-   "moduleTitle": "共有と運用",
-   "lessonTitle": "ワークスペースとロール — 権限設計の基本"
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "ライセンスと組織での使われ方"
   },
   {
    "term": "SUMMARIZECOLUMNS",
@@ -356,6 +426,26 @@
    "lessonTitle": "役割の異なる日付（USERELATIONSHIP）と複数ファクト"
   },
   {
+   "term": "Power BI Mobile",
+   "en": "Power BI Mobile",
+   "reading": "ぱわーびーあいもばいる",
+   "short": "iOS / Android向けの閲覧とアラート受信に特化したアプリ。",
+   "desc": "作成機能はほぼなく、閲覧・データアラート・注釈共有が中心。Desktopで作成したモバイルレイアウトが適用され、縦画面でも読みやすくなる。経営層の利用率向上に効果が大きい。",
+   "lesson": "L0202",
+   "tags": [
+    "製品"
+   ],
+   "aliases": [
+    "モバイルアプリ",
+    "Mobile"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Desktop・Service・Mobile の役割分担"
+  },
+  {
    "term": "Power BI テンプレート",
    "en": "Power BI template (.pbit)",
    "reading": "ぱわーびーあいてんぷれーと",
@@ -421,23 +511,22 @@
    "term": "オンプレミスデータゲートウェイ",
    "en": "On-premises data gateway",
    "reading": "おんぷれみすでーたげーとうぇい",
-   "short": "クラウドの Power BI サービスと社内ネットワークのデータソースをつなぐ中継ソフトウェア。",
-   "desc": "社内 SQL Server や共有フォルダーのファイルを更新するときに必要になる。業務用は常時稼働のサーバーに入れる標準モードを使い、個人モードは検証用に限る。ゲートウェイのデータソース設定は、Desktop の接続文字列と完全に一致させる必要がある。",
-   "lesson": "L1003",
+   "short": "クラウドのServiceから社内データへ安全に接続するための中継ソフト。",
+   "desc": "社内サーバに常駐し、Serviceからの更新要求を受けて社内DBや共有フォルダのデータを取得する。SharePointやAzure上のデータには不要だが、オンプレミスのソースには必須。",
+   "lesson": "L0202",
    "tags": [
-    "更新"
+    "運用"
    ],
    "aliases": [
     "データゲートウェイ",
     "ゲートウェイ",
-    "標準モードゲートウェイ",
-    "個人モードゲートウェイ"
+    "gateway"
    ],
-   "source": "M10",
-   "module": "M10",
-   "tier": "T2",
-   "moduleTitle": "共有と運用",
-   "lessonTitle": "データ更新の自動化とゲートウェイ"
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Desktop・Service・Mobile の役割分担"
   },
   {
    "term": "コンフォームド ディメンション",
@@ -793,21 +882,21 @@
    "term": "Power BI Pro",
    "en": "Power BI Pro",
    "reading": "ぱわーびーあいぷろ",
-   "short": "共有ワークスペースでの発行・共有・閲覧ができる有償ライセンス。",
-   "desc": "共有容量にあるコンテンツを閲覧する側にも必要になる点が重要。数十人規模までは全員 Pro が現実的だが、数百人規模では Fabric 容量に切り替えるほうが費用面で有利になることが多い。試算は必ず現時点の価格で行う。",
-   "lesson": "L1001",
+   "short": "発行・共有・アプリ配布ができるユーザー単位の有償ライセンス。",
+   "desc": "実務の標準的なライセンス。共有には発行側にProが必要で、通常ワークスペースの内容を見る閲覧者にもProが必要になる。スケジュール更新の回数やモデルサイズには上限がある。",
+   "lesson": "L0204",
    "tags": [
     "ライセンス"
    ],
    "aliases": [
-    "Pro ライセンス",
+    "Pro",
     "Proライセンス"
    ],
-   "source": "M10",
-   "module": "M10",
-   "tier": "T2",
-   "moduleTitle": "共有と運用",
-   "lessonTitle": "ワークスペースとロール — 権限設計の基本"
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "ライセンスと組織での使われ方"
   },
   {
    "term": "RELATEDTABLE",
@@ -1096,6 +1185,47 @@
    "lessonTitle": "フィルターはどう流れるか — 伝播を図で追う"
   },
   {
+   "term": "DirectQuery",
+   "en": "DirectQuery",
+   "reading": "だいれくとくえり",
+   "short": "データを元の場所に置いたまま、表示のたびにソースへ問い合わせる接続方式。",
+   "desc": "常に最新でモデルサイズの制限を受けないが、速度はソース性能に依存し、Power Queryの多くの変換と一部のDAX関数が使えない。リアルタイム性・巨大データ・コピー禁止の3つの理由がある場合に選ぶ。",
+   "lesson": "L0401",
+   "tags": [
+    "接続"
+   ],
+   "aliases": [
+    "ダイレクトクエリ",
+    "DQ"
+   ],
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "接続方式の三択 — インポート / DirectQuery / ライブ接続"
+  },
+  {
+   "term": "Goodhartの法則",
+   "en": "Goodhart's law",
+   "reading": "ぐっどはーとのほうそく",
+   "short": "指標が目標になった時点で、その指標は良い指標ではなくなるという法則。",
+   "desc": "評価に直結する指標は、人がその数字自体を最適化するため本来測りたかったものからずれていく。通話時間の短縮を評価すると問題未解決のまま電話を切るようになるのが典型例。ペア指標をセットで置くことで防ぐ。",
+   "lesson": "L0103",
+   "tags": [
+    "指標",
+    "データサイエンス"
+   ],
+   "aliases": [
+    "グッドハートの法則",
+    "Goodhart's law"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "指標(KPI)の設計 — 何を測るかで組織は変わる"
+  },
+  {
    "term": "KEEPFILTERS",
    "en": "KEEPFILTERS",
    "reading": "きーぷふぃるたーず",
@@ -1111,6 +1241,26 @@
    "tier": "T2",
    "moduleTitle": "DAXコンテキスト",
    "lessonTitle": "KEEPFILTERS と FILTER — 条件の書き方を選ぶ"
+  },
+  {
+   "term": "Power Query",
+   "en": "Power Query",
+   "reading": "ぱわーくえり",
+   "short": "取り込んだデータを分析できる形に整形する機能とそのエンジン。",
+   "desc": "列の削除、型変換、行のフィルター、複数ファイルの結合などを行う。操作は「適用したステップ」として記録され、更新のたびに自動で再実行される。ExcelやFabricでも同じものが使われるため、投資が広く回収できる。",
+   "lesson": "L0201",
+   "tags": [
+    "整形"
+   ],
+   "aliases": [
+    "パワークエリ",
+    "Power Queryエディタ"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Power BIとは何か — 5つの工程"
   },
   {
    "term": "オンライン監督付き試験",
@@ -1131,6 +1281,27 @@
    "tier": "T3",
    "moduleTitle": "PL-300 完全対策",
    "lessonTitle": "PL-300の全体像 — 4領域と採点の仕組み"
+  },
+  {
+   "term": "クエリフォールディング",
+   "en": "Query folding",
+   "reading": "くえりふぉーるでぃんぐ",
+   "short": "Power Queryの操作をソース側のSQLに翻訳して、ソース側で実行させる仕組み。",
+   "desc": "1億行を持ってきてから絞るのではなく、絞った結果だけを受け取れるため劇的に速い。ステップを右クリックして「ネイティブクエリの表示」が有効なら効いている。フィルターや列削除を先に置くと維持しやすい。",
+   "lesson": "L0402",
+   "tags": [
+    "性能",
+    "整形"
+   ],
+   "aliases": [
+    "フォールディング",
+    "query folding"
+   ],
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "Excel・CSV・Web・データベースへの接続"
   },
   {
    "term": "シーケンシャルパレット",
@@ -1290,6 +1461,27 @@
     "明細データ"
    ],
    "source": "M00"
+  },
+  {
+   "term": "ノーススターメトリック",
+   "en": "North Star Metric",
+   "reading": "のーすすたーめとりっく",
+   "short": "組織全体が共有する、最も重要な1つの指標。",
+   "desc": "顧客が受け取る価値を表し、事業成長と連動し、チームの行動で動かせるという3条件を満たす指標を1つだけ決める。指標が増えすぎて優先順位を失うことを防ぐ役割を持つ。",
+   "lesson": "L0103",
+   "tags": [
+    "指標"
+   ],
+   "aliases": [
+    "北極星指標",
+    "North Star Metric",
+    "NSM"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "指標(KPI)の設計 — 何を測るかで組織は変わる"
   },
   {
    "term": "バイテンポラル モデル",
@@ -1574,6 +1766,27 @@
    "lessonTitle": "PL-300の全体像 — 4領域と採点の仕組み"
   },
   {
+   "term": "セマンティックモデル",
+   "en": "Semantic model",
+   "reading": "せまんてぃっくもでる",
+   "short": "データ・リレーションシップ・メジャー・メタデータを保持する「意味の層」。",
+   "desc": "以前は「データセット」と呼ばれていた。ここに数字の定義があるため、1つのモデルに複数のレポートをぶら下げると、どのレポートでも同じ計算結果になる。組織で単一の真実を実現する中核。",
+   "lesson": "L0201",
+   "tags": [
+    "モデリング"
+   ],
+   "aliases": [
+    "データセット",
+    "Dataset",
+    "データモデル"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Power BIとは何か — 5つの工程"
+  },
+  {
    "term": "ハイブリッドテーブル",
    "en": "hybrid table",
    "reading": "はいぶりっどてーぶる",
@@ -1635,23 +1848,23 @@
   },
   {
    "term": "行レベルセキュリティ",
-   "en": "Row-Level Security",
+   "en": "Row-level security",
    "reading": "ぎょうれべるせきゅりてぃ",
-   "short": "閲覧するユーザーによって、モデル内の見える行を変える仕組み。",
-   "desc": "表示を隠すのではなく、クエリの対象データそのものを減らすため、合計値もそのユーザーが見られる行だけで計算される。ロールはDesktopで定義し、メンバーの割り当てはServiceで行う。適用されるのはワークスペースの閲覧者ロールを持つユーザーのみ。",
-   "lesson": "L1204",
+   "short": "同じレポートでも、見る人によって表示される行を制限する仕組み。",
+   "desc": "東京の店長には東京の行だけを見せるといった制御ができる。ロールの定義はDesktop、ユーザーの割り当てはServiceという分担になっている点が試験でも実務でもよく問われる。",
+   "lesson": "L0204",
    "tags": [
     "セキュリティ"
    ],
    "aliases": [
     "RLS",
-    "Row Level Security"
+    "Row-level security"
    ],
-   "source": "M12",
-   "module": "M12",
-   "tier": "T3",
-   "moduleTitle": "高度なモデリング",
-   "lessonTitle": "行レベルセキュリティ(RLS) — 静的・動的・階層"
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "ライセンスと組織での使われ方"
   },
   {
    "term": "ALLEXCEPT",
@@ -1746,6 +1959,26 @@
    "lessonTitle": "テーブル関数 — VALUES・SUMMARIZE・ADDCOLUMNS・SELECTCOLUMNS"
   },
   {
+   "term": "アンスコムの四重奏",
+   "en": "Anscombe's quartet",
+   "reading": "あんすこむのしじゅうそう",
+   "short": "平均や相関係数がほぼ同一なのに、分布の形がまったく違う4つのデータセット。",
+   "desc": "要約統計量だけではデータの本当の姿は分からないことを示す古典的な例。BIの実務では「合計のカードだけを見て安心せず、明細と分布を必ず目視する」という教訓に翻訳される。",
+   "lesson": "L0302",
+   "tags": [
+    "データサイエンス"
+   ],
+   "aliases": [
+    "Anscombe's quartet",
+    "アンスコムの例"
+   ],
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "画面の地図 — 3つのビューと3つのペイン"
+  },
+  {
    "term": "クエリの折りたたみ",
    "en": "Query Folding",
    "reading": "くえりのおりたたみ",
@@ -1792,23 +2025,21 @@
    "term": "サブスクリプション",
    "en": "Subscription",
    "reading": "さぶすくりぷしょん",
-   "short": "レポートのスナップショットを決まった時刻にメール配信する機能。",
-   "desc": "レポートを開いて「サブスクライブ」から設定する。配信時刻がデータ更新より前だと、古い数字が静かに配られ続ける。RLS 適用レポートでは、誰の目線のデータが送られるかを受信者アカウントで検証する。",
-   "lesson": "L1005",
+   "short": "レポートのスナップショットを定期的にメール送信するService の機能。",
+   "desc": "URLを送っただけでは人は見に来ないため、決まった時刻に主要な数字をメールで届けることで閲覧率が上がる。更新完了後に配信されるよう時刻をずらして設定する。",
+   "lesson": "L0202",
    "tags": [
-    "運用",
-    "配布"
+    "運用"
    ],
    "aliases": [
     "定期配信",
-    "subscription",
-    "サブスクライブ"
+    "subscription"
    ],
-   "source": "M10",
-   "module": "M10",
-   "tier": "T2",
-   "moduleTitle": "共有と運用",
-   "lessonTitle": "レポートの運用 — 監視・サブスクリプション・使用状況"
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Desktop・Service・Mobile の役割分担"
   },
   {
    "term": "ストレージ モード",
@@ -1969,66 +2200,84 @@
    "source": "M00"
   },
   {
+   "term": "データ品質の6次元",
+   "en": "Six dimensions of data quality",
+   "reading": "でーたひんしつのろくじげん",
+   "short": "完全性・正確性・一貫性・適時性・一意性・妥当性という品質の評価軸。",
+   "desc": "健康診断の各項目はこの枠組みに対応する。品質問題を直すコストは下流に行くほど跳ね上がるため、発見したら変換ロジックを書く前にソース側へ返すのが最も安い対処になる。",
+   "lesson": "L0404",
+   "tags": [
+    "データ品質"
+   ],
+   "aliases": [
+    "データ品質の次元",
+    "data quality dimensions"
+   ],
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "列プロファイルでデータを健康診断する"
+  },
+  {
    "term": "プライバシーレベル",
    "en": "Privacy level",
    "reading": "ぷらいばしーれべる",
-   "short": "データソースごとに設定する、他ソースとの結合可否を制御する区分。",
-   "desc": "組織／プライベート／パブリックの3段階。異なるレベルのソースを結合しようとすると更新が失敗することがある。Desktop では成功するのにサービスで失敗する典型的な原因のひとつ。",
-   "lesson": "L1003",
+   "short": "あるソースのデータを別のソースへ送ってよいかを制御する設定。",
+   "desc": "プライベート・組織・パブリックの3段階。厳格な設定はフォールディングを無効化して性能を落とすことがあるが、緩めることは社内データを外部へ送信する可能性を開くため、内容を理解して判断する。",
+   "lesson": "L0402",
    "tags": [
-    "更新"
+    "セキュリティ"
    ],
    "aliases": [
-    "privacy level",
-    "プライバシー レベル"
+    "Privacy level",
+    "プライバシー設定"
    ],
-   "source": "M10",
-   "module": "M10",
-   "tier": "T2",
-   "moduleTitle": "共有と運用",
-   "lessonTitle": "データ更新の自動化とゲートウェイ"
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "Excel・CSV・Web・データベースへの接続"
   },
   {
    "term": "マイワークスペース",
    "en": "My workspace",
    "reading": "まいわーくすぺーす",
-   "short": "利用者ごとに1つ用意される個人用のワークスペース。",
-   "desc": "所有者本人しか編集できず、他者を招くこともアプリとして配布することもできない。担当者の退職・異動でアクセス不能になるため、業務用レポートを置いてはいけない。発行ダイアログの既定になっているので選び直す習慣が必要。",
-   "lesson": "L1001",
+   "short": "各ユーザー個人専用のワークスペース。",
+   "desc": "自分だけの領域であり、他人と共有しにくい。ここに業務用レポートを置くと、担当者の異動や退職でアクセスできなくなる。学習用途に限って使うのが安全。",
+   "lesson": "L0202",
    "tags": [
-    "ワークスペース"
+    "運用"
    ],
    "aliases": [
-    "個人用ワークスペース",
-    "My Workspace",
-    "マイ ワークスペース"
+    "My workspace"
    ],
-   "source": "M10",
-   "module": "M10",
-   "tier": "T2",
-   "moduleTitle": "共有と運用",
-   "lessonTitle": "ワークスペースとロール — 権限設計の基本"
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Desktop・Service・Mobile の役割分担"
   },
   {
    "term": "モバイルレイアウト",
    "en": "Mobile layout",
    "reading": "もばいるれいあうと",
-   "short": "スマートフォンの縦画面用に、ページを別途組み直す編集モード。",
-   "desc": "表示 → モバイル レイアウト で開き、必要なビジュアルだけを縦枠へドラッグする。PCレイアウトと自動同期しないため、ビジュアルを追加するたびに手動で配置する必要がある。載せるのは3〜5枚に絞る。",
-   "lesson": "L0906",
+   "short": "スマートフォンの縦画面向けに、別途配置を定義する機能。",
+   "desc": "Desktopの「表示 → モバイルレイアウト」で作成する。必要なビジュアルだけを縦に並べる。作らないとPC用の画面が縮小表示されて読めないため、経営層向けレポートでは効果が大きい。",
+   "lesson": "L0305",
    "tags": [
-    "モバイル"
+    "可視化",
+    "運用"
    ],
    "aliases": [
-    "モバイル レイアウト",
-    "mobile layout",
-    "モバイルビュー"
+    "Mobile layout",
+    "モバイル表示"
    ],
-   "source": "M09",
-   "module": "M09",
-   "tier": "T2",
-   "moduleTitle": "可視化の設計",
-   "lessonTitle": "モバイルレイアウトとアクセシビリティ"
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "保存・発行・共有の第一歩"
   },
   {
    "term": "ランレングス符号化",
@@ -2086,6 +2335,26 @@
    "tier": "T2",
    "moduleTitle": "共有と運用",
    "lessonTitle": "レポートの運用 — 監視・サブスクリプション・使用状況"
+  },
+  {
+   "term": "使用状況メトリック",
+   "en": "Usage metrics",
+   "reading": "しようじょうきょうめとりっく",
+   "short": "誰がどのレポートを何回閲覧したかを計測するService の機能。",
+   "desc": "見られていないレポートを特定して棚卸しするために使う。半年間アクセスがないレポートは維持コストだけが発生している資産であり、削除の判断材料になる。",
+   "lesson": "L0202",
+   "tags": [
+    "運用"
+   ],
+   "aliases": [
+    "利用状況メトリック",
+    "usage metrics"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Desktop・Service・Mobile の役割分担"
   },
   {
    "term": "共有ディメンション",
@@ -2204,25 +2473,44 @@
    "lessonTitle": "条件分岐と安全な割り算 — IF・SWITCH・DIVIDE"
   },
   {
+   "term": "Excelで分析",
+   "en": "Analyze in Excel",
+   "reading": "えくせるでぶんせき",
+   "short": "発行済みのセマンティックモデルにExcelのピボットテーブルから接続する機能。",
+   "desc": "数字の定義はPower BIで一元管理しつつ、深掘りはExcelで自由に行える。Excelユーザーの反発を減らしながらBI化を進める、現実的な併用手段。",
+   "lesson": "L0203",
+   "tags": [
+    "運用"
+   ],
+   "aliases": [
+    "Analyze in Excel"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Excelとの使い分け — どちらをいつ使うか"
+  },
+  {
    "term": "Fabric容量",
-   "en": "Fabric capacity (F SKU)",
+   "en": "Fabric capacity",
    "reading": "ふぁぶりっくようりょう",
-   "short": "ワークスペースに割り当てる計算資源。組織単位で購入する容量ライセンス。",
-   "desc": "容量に割り当てたワークスペースのコンテンツは、一定以上のSKUであれば Free ライセンスの利用者でも閲覧できる。大規模配布の標準解だが、レポートを作成・発行する側には引き続き Pro が必要。更新回数48回、タイムアウト延長、デプロイメントパイプラインなどの機能も伴う。",
-   "lesson": "L1001",
+   "short": "組織単位で購入する計算資源。一定規模以上なら閲覧者は無料ライセンスでよい。",
+   "desc": "ユーザー数に比例せず固定費で運用できるため、閲覧者が多いほど有利になる。大規模モデルや高頻度更新にも対応する。旧来のPower BI Premium容量を含む位置づけ。",
+   "lesson": "L0204",
    "tags": [
     "ライセンス"
    ],
    "aliases": [
-    "F SKU",
     "Premium容量",
+    "F SKU",
     "容量"
    ],
-   "source": "M10",
-   "module": "M10",
-   "tier": "T2",
-   "moduleTitle": "共有と運用",
-   "lessonTitle": "ワークスペースとロール — 権限設計の基本"
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "ライセンスと組織での使われ方"
   },
   {
    "term": "JoinKind",
@@ -2265,6 +2553,26 @@
    "tier": "T3",
    "moduleTitle": "高度なモデリング",
    "lessonTitle": "行レベルセキュリティ(RLS) — 静的・動的・階層"
+  },
+  {
+   "term": "Power BI",
+   "en": "Power BI",
+   "reading": "ぱわーびーあい",
+   "short": "データの取得・整形・モデル化・可視化・共有を1つで行うMicrosoftのBIプラットフォーム。",
+   "desc": "Desktop・Service・Mobileの3製品と、Power Query・DAXという2つのエンジンで構成される。5工程（取得・整形・モデル化・可視化・共有）の全体を1製品でカバーする点が特徴。",
+   "lesson": "L0201",
+   "tags": [
+    "基礎"
+   ],
+   "aliases": [
+    "PowerBI",
+    "パワーBI"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Power BIとは何か — 5つの工程"
   },
   {
    "term": "TOTALYTD",
@@ -2310,22 +2618,22 @@
    "term": "VertiPaq",
    "en": "VertiPaq",
    "reading": "ばーてぃぱっく",
-   "short": "Power BI が使うインメモリ列指向ストレージエンジン。",
-   "desc": "データをディスクではなくメモリに、行単位ではなく列単位で、圧縮して保持する。辞書符号化・値符号化・ランレングス符号化を列ごとに自動で選び、セグメント単位で並列にスキャンする。数億行の集計が1秒以内で終わる理由がこの構造にある。Analysis Services Tabular や Excel のパワーピボットも同じエンジンを使う。",
-   "lesson": "L1401",
+   "short": "Power BIがデータを列指向で圧縮して保持する内部エンジン。",
+   "desc": "行ではなく列単位で保存するため、同じ値の繰り返しを大幅に圧縮でき、元データの5〜10分の1のサイズになる。集計時も必要な列だけを読むため高速。値の種類が多い列は圧縮が効かずモデルを重くする。",
+   "lesson": "L0201",
    "tags": [
-    "エンジン"
+    "エンジン",
+    "性能"
    ],
    "aliases": [
     "ヴァーティパック",
-    "vertipaq",
     "xVelocity"
    ],
-   "source": "M14",
-   "module": "M14",
-   "tier": "T3",
-   "moduleTitle": "パフォーマンス",
-   "lessonTitle": "VertiPaqの仕組み — なぜ速いのか"
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Power BIとは何か — 5つの工程"
   },
   {
    "term": "アクセシビリティ",
@@ -2403,6 +2711,27 @@
    "source": "M00"
   },
   {
+   "term": "クロスフィルター",
+   "en": "Cross-filtering",
+   "reading": "くろすふぃるたー",
+   "short": "1つのビジュアルをクリックすると、他のビジュアルが連動して絞り込まれる挙動。",
+   "desc": "「フィルター」「ハイライト」「なし」の3モードがあり、書式タブの「相互作用を編集」で個別に設定できる。KPIカードを常に全体値にしたい場合は「なし」を選ぶ。",
+   "lesson": "L0304",
+   "tags": [
+    "可視化"
+   ],
+   "aliases": [
+    "相互作用",
+    "cross-filter",
+    "相互作用の編集"
+   ],
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "最初のグラフを作る — カード・棒・折れ線"
+  },
+  {
    "term": "ゲシュタルト原則",
    "en": "Gestalt principles",
    "reading": "げしゅたるとげんそく",
@@ -2460,22 +2789,22 @@
    "term": "スケジュール更新",
    "en": "Scheduled refresh",
    "reading": "すけじゅーるこうしん",
-   "short": "決まった時刻にセマンティックモデルのデータを取り直す自動更新の設定。",
-   "desc": "セマンティックモデルの設定から構成する。共有容量は1日8回、Premium系容量は1日48回まで。タイムゾーン設定と、元データの確定時刻との前後関係に注意する。元データ未確定のまま更新するとエラーにならずに数字が欠ける。",
-   "lesson": "L1003",
+   "short": "決めた時刻にセマンティックモデルのデータを自動で取り直す設定。",
+   "desc": "Service上のセマンティックモデルの設定画面で構成する。「ソースのデータ確定 → Power BI更新 → 閲覧」の順に余裕を持って時刻を並べる。失敗通知の宛先は複数人にしておく。",
+   "lesson": "L0305",
    "tags": [
-    "更新"
+    "運用"
    ],
    "aliases": [
-    "更新スケジュール",
+    "自動更新",
     "scheduled refresh",
     "定期更新"
    ],
-   "source": "M10",
-   "module": "M10",
-   "tier": "T2",
-   "moduleTitle": "共有と運用",
-   "lessonTitle": "データ更新の自動化とゲートウェイ"
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "保存・発行・共有の第一歩"
   },
   {
    "term": "スナップショット",
@@ -2559,6 +2888,27 @@
    "source": "M00"
   },
   {
+   "term": "ネイティブクエリ",
+   "en": "Native query",
+   "reading": "ねいてぃぶくえり",
+   "short": "データソースに対して直接発行されるSQL文などのクエリ。",
+   "desc": "接続時にSQL文を直書きするとフォールディングが止まり、以降の処理がすべてPower BI側で実行されて遅くなる。複雑な結合が必要ならDB側にビューを作ってもらうのが正しい対処。",
+   "lesson": "L0402",
+   "tags": [
+    "接続",
+    "性能"
+   ],
+   "aliases": [
+    "Native query",
+    "SQL直書き"
+   ],
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "Excel・CSV・Web・データベースへの接続"
+  },
+  {
    "term": "ピボットテーブル",
    "en": "Pivot table",
    "reading": "ぴぼっとてーぶる",
@@ -2596,23 +2946,42 @@
   },
   {
    "term": "フィルターペイン",
-   "en": "Filter pane",
+   "en": "Filters pane",
    "reading": "ふぃるたーぺいん",
-   "short": "ビジュアル・ページ・レポートの3階層でフィルターを設定・確認する領域。",
-   "desc": "下位ほど適用範囲が狭い。読み手に触らせたくない条件は「非表示」または「ロック」に設定する。ペイン自体を消すと、どのフィルターが効いているか読み手が確認できなくなるため、消さずに整理する。",
-   "lesson": "L0904",
+   "short": "ビジュアル単位・ページ単位・レポート単位の3階層で絞り込みを設定するペイン。",
+   "desc": "作成者が固定したい条件を設定する場所。作業中に試したフィルターが残っていると、そのビジュアルだけ違う数字を出し続けるため、完成時には必ず点検する。",
+   "lesson": "L0302",
    "tags": [
-    "対話"
+    "画面"
    ],
    "aliases": [
-    "フィルター ウィンドウ",
-    "filter pane"
+    "Filters pane"
    ],
-   "source": "M09",
-   "module": "M09",
-   "tier": "T2",
-   "moduleTitle": "可視化の設計",
-   "lessonTitle": "相互作用・ドリルダウン・ドリルスルー"
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "画面の地図 — 3つのビューと3つのペイン"
+  },
+  {
+   "term": "フィールドウェル",
+   "en": "Field well",
+   "reading": "ふぃーるどうぇる",
+   "short": "ビジュアルにフィールドを置くための枠（X軸・Y軸・凡例など）。",
+   "desc": "X軸・Y軸・凡例・小さい倍数・ツールヒント・ドリルスルーなどがある。同じ2つの列でも、置き場所を変えるだけで推移グラフにも比較グラフにも系列分けにもなる。",
+   "lesson": "L0302",
+   "tags": [
+    "画面"
+   ],
+   "aliases": [
+    "Field well",
+    "フィールドの配置"
+   ],
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "画面の地図 — 3つのビューと3つのペイン"
   },
   {
    "term": "フラットテーブル",
@@ -2696,25 +3065,44 @@
    "lessonTitle": "集合演算と仮想リレーション — UNION・EXCEPT・TREATAS"
   },
   {
-   "term": "列指向ストレージ",
-   "en": "columnar storage",
-   "reading": "れつしこうすとれーじ",
-   "short": "データを行単位ではなく列単位に並べて保存・圧縮する方式。",
-   "desc": "Power BI のインポートモデルが採用している。同じ値が繰り返される列ほど強く圧縮されるため、伝票番号やGUIDのような高カーディナリティ列がモデルサイズの大半を占めることが多い。分析に使わない識別子列をモデルから外すのが最も確実な軽量化になる。",
-   "lesson": "L1103",
+   "term": "列のプロファイル",
+   "en": "Column profile",
+   "reading": "れつのぷろふぁいる",
+   "short": "選択した列の最小・最大・平均・標準偏差などの詳細統計を表示する機能。",
+   "desc": "日付が1900年になっていないか、金額がマイナスでないかといった妥当性の確認に使う。標準偏差が平均を大きく超えていれば、歪んだ分布のサインとして読む。",
+   "lesson": "L0404",
    "tags": [
-    "データサイエンス",
+    "データ品質"
+   ],
+   "aliases": [
+    "Column profile"
+   ],
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "列プロファイルでデータを健康診断する"
+  },
+  {
+   "term": "列指向ストレージ",
+   "en": "Columnar storage",
+   "reading": "れつしこうすとれーじ",
+   "short": "データを行ではなく列ごとに保存する方式。",
+   "desc": "同じ値の繰り返しをまとめて圧縮でき、集計時に必要な列だけを読めるため分析処理が高速になる。一方で1件の追加や更新は苦手。Power BIのVertiPaqはこの方式を採用している。",
+   "lesson": "L0203",
+   "tags": [
+    "エンジン",
     "性能"
    ],
    "aliases": [
-    "columnar",
-    "列ストア"
+    "カラムナ",
+    "columnar"
    ],
-   "source": "M11",
-   "module": "M11",
-   "tier": "T3",
-   "moduleTitle": "高度なデータ整形",
-   "lessonTitle": "クエリ フォールディング — 更新時間を決める仕組み"
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Excelとの使い分け — どちらをいつ使うか"
   },
   {
    "term": "情報探索マントラ",
@@ -2737,6 +3125,26 @@
    "tier": "T2",
    "moduleTitle": "可視化の設計",
    "lessonTitle": "相互作用・ドリルダウン・ドリルスルー"
+  },
+  {
+   "term": "探索的データ分析",
+   "en": "Exploratory Data Analysis",
+   "reading": "たんさくてきでーたぶんせき",
+   "short": "仮説を持つ前に、データの形や特徴を可視化して確かめる作業。",
+   "desc": "分布・外れ値・欠損・関係性を目視で確認し、そこから問いを立てる。要約統計量だけでは見えない構造を見つけるための工程で、BIレポート作成の前段階として不可欠。",
+   "lesson": "L0105",
+   "tags": [
+    "データサイエンス"
+   ],
+   "aliases": [
+    "EDA",
+    "Exploratory Data Analysis"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "分析の5つの型 — 比較・推移・構成・分布・関係"
   },
   {
    "term": "更新アセスメント",
@@ -2774,24 +3182,24 @@
   },
   {
    "term": "自動の日付/時刻",
-   "en": "Auto Date/Time",
+   "en": "Auto date/time",
    "reading": "じどうのひづけじこく",
-   "short": "日付列ごとに隠しの日付テーブルを自動生成する機能。実務では無効にする。",
-   "desc": "日付列の数だけ隠しテーブルが作られるためモデルが肥大し、年・四半期・月・日しか持てず、会計年度や祝日を追加できない。ファイル → オプションで「グローバル」と「現在のファイル」の両方をオフにする。オフにする前に自作の日付テーブルを用意し、参照先を差し替えておく。",
-   "lesson": "L0605",
+   "short": "モデル内のすべての日付列に隠しの日付テーブルを自動生成する既定設定。",
+   "desc": "手軽に年・四半期・月の階層が使えるが、日付列ごとに隠しテーブルが作られモデルが肥大化する。会計年度や営業日など独自の暦も扱えない。実務では必ずオフにし、専用の日付テーブルを自作する。",
+   "lesson": "L0301",
    "tags": [
-    "モデリング",
+    "設定",
     "性能"
    ],
    "aliases": [
-    "Auto Date/Time",
-    "自動の日付"
+    "自動日付/時刻",
+    "Auto date/time"
    ],
-   "source": "M06",
-   "module": "M06",
-   "tier": "T2",
-   "moduleTitle": "データモデリング",
-   "lessonTitle": "日付テーブル — 時系列分析の土台"
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "環境構築とPower BI Desktopの起動"
   },
   {
    "term": "計算エンティティ",
@@ -2831,23 +3239,23 @@
   },
   {
    "term": "適用したステップ",
-   "en": "Applied Steps",
+   "en": "Applied steps",
    "reading": "てきようしたすてっぷ",
-   "short": "Power Queryが記録する変換手順の一覧。1行が1つの操作に対応する。",
-   "desc": "Power Query エディターの右側に表示される、実行した変換操作の記録。上から順に実行され、各ステップは1つ前のステップの結果を入力として受け取る。ステップの追加・削除・並べ替え・名前変更が後から自由に行え、これによりデータ加工が再現可能になる。1行がM言語のコード1行に対応する。",
-   "lesson": "L0501",
+   "short": "Power Queryで行った操作が1行ずつ記録された手順のリスト。",
+   "desc": "上から順に実行され、クリックすれば途中経過を確認でき、歯車で設定を編集でき、ドラッグで順序を変えられる。ステップ名は「なぜそうしたか」が分かる名前に変えるのが実務の作法。",
+   "lesson": "L0405",
    "tags": [
-    "Power Query"
+    "整形"
    ],
    "aliases": [
-    "適用されたステップ",
-    "Applied Steps"
+    "Applied steps",
+    "ステップ"
    ],
-   "source": "M05",
-   "module": "M05",
-   "tier": "T2",
-   "moduleTitle": "Power Query 実践",
-   "lessonTitle": "適用したステップという考え方 — 手順を記録する"
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "Power Queryエディタ初めの一歩"
   },
   {
    "term": "DATEADD",
@@ -2865,6 +3273,26 @@
    "tier": "T2",
    "moduleTitle": "DAXコンテキスト",
    "lessonTitle": "タイムインテリジェンス — 前年比・YTD・移動平均"
+  },
+  {
+   "term": "DIKWモデル",
+   "en": "DIKW model",
+   "reading": "でぃーあいけーだぶりゅーもでる",
+   "short": "データが情報・知識・知恵へと変わる過程を4段階で表す整理。",
+   "desc": "Data（生の記録）、Information（集約して読める形）、Knowledge（比較して意味を持つ）、Wisdom（行動に変わる）の4段。どの段で詰まっているかを特定すると、必要な手当てが決まる。",
+   "lesson": "L0102",
+   "tags": [
+    "基礎"
+   ],
+   "aliases": [
+    "DIKW",
+    "データ・情報・知識・知恵"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "データ・情報・知識・意思決定の階段"
   },
   {
    "term": "EARLIER",
@@ -2960,6 +3388,26 @@
    "tier": "T2",
    "moduleTitle": "共有と運用",
    "lessonTitle": "ワークスペースとロール — 権限設計の基本"
+  },
+  {
+   "term": "アクショナブル",
+   "en": "Actionable",
+   "reading": "あくしょなぶる",
+   "short": "その数字を見て具体的な行動を決められる状態のこと。",
+   "desc": "操作できる（自分たちの行動で動かせる）、時期がわかる（いつ見るか決まっている）、責任者がいるの3条件が揃うと、指標は行動に変わる。1つでも欠けると、見るだけで終わる指標になる。",
+   "lesson": "L0102",
+   "tags": [
+    "指標"
+   ],
+   "aliases": [
+    "actionable",
+    "行動可能"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "データ・情報・知識・意思決定の階段"
   },
   {
    "term": "アーカイブ期間",
@@ -3192,6 +3640,26 @@
    "lessonTitle": "PL-300の全体像 — 4領域と採点の仕組み"
   },
   {
+   "term": "テーブルビュー",
+   "en": "Table view",
+   "reading": "てーぶるびゅー",
+   "short": "取り込んだデータを表として1行ずつ確認する画面。",
+   "desc": "行数の検算、異常値の目視、並べ替えによる最大最小の確認に使う。インポートのときだけ利用でき、DirectQueryやライブ接続では表示されない。品質を守る最後の砦。",
+   "lesson": "L0302",
+   "tags": [
+    "画面"
+   ],
+   "aliases": [
+    "Table view",
+    "データビュー"
+   ],
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "画面の地図 — 3つのビューと3つのペイン"
+  },
+  {
    "term": "テーマJSON",
    "en": "Report theme JSON",
    "reading": "てーまじぇいそん",
@@ -3253,21 +3721,22 @@
    "term": "データインク比",
    "en": "Data-ink ratio",
    "reading": "でーたいんくひ",
-   "short": "グラフの総インク量のうち、データそのものを表すインクが占める割合。",
-   "desc": "Edward Tufte が提唱した指標で、これを高めるほど図は読みやすくなる。実務では「消しても意味が失われないものを消す」という操作になる。ただし軸ラベル・単位・出典など意味の保存に必要な要素は削らない。",
-   "lesson": "L0902",
+   "short": "グラフのインクのうち、データそのものを表す割合。",
+   "desc": "エドワード・タフトが提唱した可視化の原則で、この比率を最大化することが良いグラフの条件とされる。背景の網掛け・3D効果・不要な枠線は情報を覆い隠すノイズであり、消しても情報が失われないなら消す。",
+   "lesson": "L0304",
    "tags": [
-    "可視化理論"
+    "可視化",
+    "データサイエンス"
    ],
    "aliases": [
-    "データ・インク比",
-    "data ink ratio"
+    "data-ink ratio",
+    "タフト"
    ],
-   "source": "M09",
-   "module": "M09",
-   "tier": "T2",
-   "moduleTitle": "可視化の設計",
-   "lessonTitle": "レポートのレイアウトと視線導線"
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "最初のグラフを作る — カード・棒・折れ線"
   },
   {
    "term": "データカタログ",
@@ -3452,6 +3921,48 @@
    "lessonTitle": "CALCULATE — フィルターを変更する唯一の関数"
   },
   {
+   "term": "フォルダー接続",
+   "en": "Folder connector",
+   "reading": "ふぉるだーせつぞく",
+   "short": "フォルダ内の同形式ファイルをまとめて1つのテーブルに結合する接続方法。",
+   "desc": "サンプルファイルから変換手順を自動生成し、全ファイルに適用して縦に積む。以降はフォルダにファイルを置くだけで更新時に取り込まれる。全ファイルの列構成が同じであることが前提。",
+   "lesson": "L0402",
+   "tags": [
+    "接続",
+    "整形"
+   ],
+   "aliases": [
+    "フォルダ接続",
+    "Folder",
+    "フォルダーコネクタ"
+   ],
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "Excel・CSV・Web・データベースへの接続"
+  },
+  {
+   "term": "プレビュー機能",
+   "en": "Preview features",
+   "reading": "ぷれびゅーきのう",
+   "short": "正式リリース前の実験的な機能を有効化する設定項目。",
+   "desc": "オプション画面の専用タブから切り替え、有効化には再起動が必要。将来仕様が変わる可能性があるため、学習中や本番運用では既定のままにしておくのが安全。",
+   "lesson": "L0301",
+   "tags": [
+    "設定"
+   ],
+   "aliases": [
+    "Preview features",
+    "プレビュー"
+   ],
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "環境構築とPower BI Desktopの起動"
+  },
+  {
    "term": "ヘッダーの昇格",
    "en": "Promote Headers",
    "reading": "へっだーのしょうかく",
@@ -3490,6 +4001,45 @@
    "tier": "T3",
    "moduleTitle": "DAX上級",
    "lessonTitle": "実務パターン集 — 構成比・累計・ランキング・ABC分析・コホート"
+  },
+  {
+   "term": "レポートビュー",
+   "en": "Report view",
+   "reading": "れぽーとびゅー",
+   "short": "グラフを配置し書式や対話を設定する、作業時間の大半を過ごす画面。",
+   "desc": "キャンバスにビジュアルを置き、データペインから列をドラッグして作る。3つのビューのうち最も使用頻度が高い。ページの追加や書式設定もここで行う。",
+   "lesson": "L0302",
+   "tags": [
+    "画面"
+   ],
+   "aliases": [
+    "Report view"
+   ],
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "画面の地図 — 3つのビューと3つのペイン"
+  },
+  {
+   "term": "ワークスペース",
+   "en": "Workspace",
+   "reading": "わーくすぺーす",
+   "short": "Service上でアイテムを置く共同作業の場所であり、権限の単位。",
+   "desc": "管理者・メンバー・共同作成者・閲覧者の4ロールで権限を管理する。業務で使うコンテンツは、個人用のマイワークスペースではなく必ずチーム用ワークスペースに置く。",
+   "lesson": "L0202",
+   "tags": [
+    "運用"
+   ],
+   "aliases": [
+    "Workspace",
+    "作業領域"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Desktop・Service・Mobile の役割分担"
   },
   {
    "term": "主張型タイトル",
@@ -3657,6 +4207,26 @@
    "lessonTitle": "スタースキーマ — Power BI最重要の設計原則"
   },
   {
+   "term": "浮動小数点誤差",
+   "en": "Floating point error",
+   "reading": "ふどうしょうすうてんごさ",
+   "short": "10進数の小数を2進数で近似するために生じる、ごくわずかなずれ。",
+   "desc": "0.1 + 0.2 が 0.30000000000000004 になる現象で、ほぼすべてのプログラミング言語に共通する仕様。金額を等号で比較せず、丸めてから比較するのが実務の作法。",
+   "lesson": "L0403",
+   "tags": [
+    "データサイエンス"
+   ],
+   "aliases": [
+    "丸め誤差",
+    "floating point error"
+   ],
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "データ型を制する — 型が違うと何が壊れるか"
+  },
+  {
    "term": "生存者バイアス",
    "en": "Survivorship bias",
    "reading": "せいぞんしゃばいあす",
@@ -3775,20 +4345,21 @@
    "term": "詳細エディター",
    "en": "Advanced Editor",
    "reading": "しょうさいえでぃたー",
-   "short": "クエリ全体のMコードをまとめて表示・編集する画面。",
-   "desc": "適用したステップを1つずつ見る代わりに、クエリ全体のMコードを一覧できる画面。ステップの一括修正、他のクエリへのコピー、構造の把握に使う。`let` と `in` の対応、各行末のカンマ（最終行にはカンマなし）が構文上の要点になる。",
-   "lesson": "L0501",
+   "short": "クエリ全体のM言語コードを直接確認・編集する画面。",
+   "desc": "ホームタブから開く。ステップを削除したときにエラーが出る理由（後続ステップが名前を参照している）を確認できる。書けなくても読めれば十分役に立つ。",
+   "lesson": "L0405",
    "tags": [
-    "Power Query"
+    "整形"
    ],
    "aliases": [
-    "Advanced Editor"
+    "Advanced Editor",
+    "詳細エディタ"
    ],
-   "source": "M05",
-   "module": "M05",
-   "tier": "T2",
-   "moduleTitle": "Power Query 実践",
-   "lessonTitle": "適用したステップという考え方 — 手順を記録する"
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "Power Queryエディタ初めの一歩"
   },
   {
    "term": "A/Bテスト",
@@ -4068,24 +4639,45 @@
   },
   {
    "term": "データフロー",
-   "en": "dataflow",
+   "en": "Dataflow",
    "reading": "でーたふろー",
-   "short": "Power BI Service 上で動き、整形結果をクラウドに保存して共有する Power Query。",
-   "desc": "複数のセマンティックモデルが同じ整形結果を参照できるため、定義のずれを構造的に防げる。ただしメジャーもリレーションシップも持たないため、セマンティックモデルの代わりにはならない。更新順序（データフロー→モデル）は自分で制御する必要がある。",
-   "lesson": "L1105",
+   "short": "Service側で動作する、再利用可能なPower Query処理。",
+   "desc": "複数のセマンティックモデルから同じ整形処理を使い回せる。整形ロジックを組織で共有し、二重定義を防ぐための仕組み。Desktopではなくブラウザ上で編集する。",
+   "lesson": "L0205",
    "tags": [
-    "データフロー",
+    "整形",
     "運用"
    ],
    "aliases": [
     "Dataflow",
-    "データフロー Gen2"
+    "データフローGen1"
    ],
-   "source": "M11",
-   "module": "M11",
-   "tier": "T3",
-   "moduleTitle": "高度なデータ整形",
-   "lessonTitle": "データフローとETL設計 — 変換をどこに置くか"
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "ファイル形式と用語の整理"
+  },
+  {
+   "term": "データペイン",
+   "en": "Data pane",
+   "reading": "でーたぺいん",
+   "short": "取り込んだテーブルと列の一覧が並ぶ、画面右端のペイン。",
+   "desc": "ここから列をドラッグしてビジュアルを作る。列名の左のアイコン（Σ・カレンダー・電卓）が列の性質を表しており、ID列にΣが付いていれば型の誤りだと即座に判断できる。",
+   "lesson": "L0302",
+   "tags": [
+    "画面"
+   ],
+   "aliases": [
+    "フィールドペイン",
+    "Data pane",
+    "フィールド"
+   ],
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "画面の地図 — 3つのビューと3つのペイン"
   },
   {
    "term": "データマート",
@@ -4197,6 +4789,25 @@
     "ドリル"
    ],
    "source": "M00"
+  },
+  {
+   "term": "ナビゲーター",
+   "en": "Navigator",
+   "reading": "なびげーたー",
+   "short": "Excelやデータベースから取り込む対象を選択する画面。",
+   "desc": "Excelではシートとテーブル（名前付き範囲）が並び、テーブルを選ぶのが正解。データベースではテーブルとビューの一覧から必要なものだけにチェックを入れる。全部を選ばないことが重要。",
+   "lesson": "L0303",
+   "tags": [
+    "取り込み"
+   ],
+   "aliases": [
+    "Navigator"
+   ],
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "最初のデータを読み込む"
   },
   {
    "term": "バックテスト",
@@ -4388,6 +4999,26 @@
    "lessonTitle": "条件付き書式・ツールチップ・スモールマルチプル"
   },
   {
+   "term": "モデルビュー",
+   "en": "Model view",
+   "reading": "もでるびゅー",
+   "short": "テーブル同士のリレーションシップを線で確認・作成する画面。",
+   "desc": "列の非表示設定や表示形式の変更もここで行える。テーブルが増えたときの全体構造の把握に使い、スタースキーマが正しく組めているかを目視で確認する場所でもある。",
+   "lesson": "L0302",
+   "tags": [
+    "画面",
+    "モデリング"
+   ],
+   "aliases": [
+    "Model view"
+   ],
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "画面の地図 — 3つのビューと3つのペイン"
+  },
+  {
    "term": "リテンション",
    "en": "Retention",
    "reading": "りてんしょん",
@@ -4452,22 +5083,21 @@
    "term": "代替テキスト",
    "en": "Alt text",
    "reading": "だいたいてきすと",
-   "short": "スクリーンリーダーが読み上げる、ビジュアルの説明文。",
-   "desc": "書式ペインの「全般 → 代替テキスト」で設定する。「グラフ」ではなく、内容と結論を含む文にする。fx から DAX メジャーを割り当てれば、フィルター状態に応じた動的な読み上げにできる。",
-   "lesson": "L0906",
+   "short": "ビジュアルの内容を説明する文章。スクリーンリーダーが読み上げる。",
+   "desc": "書式設定の「全般 → 代替テキスト」で設定する。色だけに頼らない配色、タブ順序の整備とあわせて、アクセシビリティ確保の基本3点の1つ。",
+   "lesson": "L0304",
    "tags": [
     "アクセシビリティ"
    ],
    "aliases": [
-    "alt text",
-    "代替テキスト（Alt Text）",
-    "altテキスト"
+    "Alt text",
+    "代替テキスト設定"
    ],
-   "source": "M09",
-   "module": "M09",
-   "tier": "T2",
-   "moduleTitle": "可視化の設計",
-   "lessonTitle": "モバイルレイアウトとアクセシビリティ"
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "最初のグラフを作る — カード・棒・折れ線"
   },
   {
    "term": "仮想テーブル",
@@ -4488,6 +5118,27 @@
    "tier": "T3",
    "moduleTitle": "DAX上級",
    "lessonTitle": "テーブル関数 — VALUES・SUMMARIZE・ADDCOLUMNS・SELECTCOLUMNS"
+  },
+  {
+   "term": "個別カウント",
+   "en": "Distinct count",
+   "reading": "こべつかうんと",
+   "short": "重複を除いた値の種類の数を数える集計方法。",
+   "desc": "注文件数を数えるときは、行数を数える「カウント」ではなくOrderIDの個別カウントを使う。1注文が複数行に分かれるデータでは、両者は必ず食い違う。カーディナリティが高い列では計算コストも高い。",
+   "lesson": "L0304",
+   "tags": [
+    "計算"
+   ],
+   "aliases": [
+    "DistinctCount",
+    "一意のカウント",
+    "distinct count"
+   ],
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "最初のグラフを作る — カード・棒・折れ線"
   },
   {
    "term": "切断テーブル",
@@ -4574,23 +5225,24 @@
   },
   {
    "term": "固定小数点数",
-   "en": "Fixed decimal number / Currency.Type",
+   "en": "Fixed decimal number",
    "reading": "こていしょうすうてんすう",
-   "short": "小数点以下4桁を正確に保持する数値型。金額に使う。",
-   "desc": "Mでは Currency.Type、Power BI では「固定小数点数」と表示される。type number（倍精度浮動小数点）は10進小数を正確に表現できず、合計で微小な誤差が現れるため、金額列には必ず固定小数点数を使う。",
-   "lesson": "L1101",
+   "short": "小数第4位までを誤差なく正確に保持する通貨向けのデータ型。",
+   "desc": "内部的には整数として扱われるため丸め誤差が起きない。金額列にはこの型を使うのが安全。扱える桁数に上限がある点だけ注意する。",
+   "lesson": "L0403",
    "tags": [
-    "データ型"
+    "整形"
    ],
    "aliases": [
-    "Currency.Type",
-    "通貨型"
+    "通貨型",
+    "Fixed decimal",
+    "Currency"
    ],
-   "source": "M11",
-   "module": "M11",
-   "tier": "T3",
-   "moduleTitle": "高度なデータ整形",
-   "lessonTitle": "M言語の構造 — let ... in を読み書きする"
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "データ型を制する — 型が違うと何が壊れるか"
   },
   {
    "term": "変換テーブル",
@@ -4677,20 +5329,21 @@
    "term": "平均への回帰",
    "en": "Regression to the mean",
    "reading": "へいきんへのかいき",
-   "short": "極端な値を示した集団が、次の期間には平均に近づく現象。",
-   "desc": "前期に成績が悪かった店舗を選んで施策を打つと、何もしなくても改善する。対照群を持たないかぎり、この回復を施策の効果と区別できない。人事評価や教育でも同じ誤解を生む。",
-   "lesson": "L1506",
+   "short": "極端な値が観測された次は、平均に近い値が出やすいという統計的性質。",
+   "desc": "成績が極端に悪かった店舗は、指導の有無にかかわらず翌月は改善しやすい。この性質を知らないと、施策の効果を過大評価する。効果を判定するには施策を打たなかった比較対象が必要になる。",
+   "lesson": "L0103",
    "tags": [
-    "統計"
+    "データサイエンス"
    ],
    "aliases": [
-    "regression to the mean"
+    "regression to the mean",
+    "回帰効果"
    ],
-   "source": "M15",
-   "module": "M15",
-   "tier": "T3",
-   "moduleTitle": "分析手法とデータサイエンス",
-   "lessonTitle": "効果検証の基礎 — A/Bテストと因果推論の入口"
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "指標(KPI)の設計 — 何を測るかで組織は変わる"
   },
   {
    "term": "折れ線グラフ",
@@ -4758,6 +5411,45 @@
     "カラースケール"
    ],
    "source": "M00"
+  },
+  {
+   "term": "確証バイアス",
+   "en": "Confirmation bias",
+   "reading": "かくしょうばいあす",
+   "short": "自分の仮説を支持する情報ばかりを集め、反証する情報を軽視する傾向。",
+   "desc": "人が持つ代表的な認知バイアスの1つ。「若い層が伸びている」と信じていると、それを裏づける事例だけが記憶に残り、反対の事実が見えなくなる。データによる網羅的な集計は、このバイアスを補正する手段になる。",
+   "lesson": "L0101",
+   "tags": [
+    "データサイエンス"
+   ],
+   "aliases": [
+    "confirmation bias"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "なぜデータ分析が必要なのか — 勘と経験の限界"
+  },
+  {
+   "term": "視覚化ペイン",
+   "en": "Visualizations pane",
+   "reading": "しかくかぺいん",
+   "short": "ビジュアルの種類を選び、フィールドを配置し、書式を設定するペイン。",
+   "desc": "上半分にビジュアルのアイコンが並び、下半分にフィールドウェルと書式設定タブがある。同じ列でもどのウェルに置くかで、まったく別の分析になる。",
+   "lesson": "L0302",
+   "tags": [
+    "画面"
+   ],
+   "aliases": [
+    "Visualizations pane",
+    "ビジュアルペイン"
+   ],
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "画面の地図 — 3つのビューと3つのペイン"
   },
   {
    "term": "計算グループ",
@@ -4831,25 +5523,23 @@
   },
   {
    "term": "集計テーブル",
-   "en": "aggregation table",
+   "en": "Aggregation table",
    "reading": "しゅうけいてーぶる",
-   "short": "明細を粗い粒度で集計して保持し、クエリを高速化するためのテーブル。",
-   "desc": "「集計の管理」で集計列と明細列の対応を定義すると、答えられる質問については自動的に集計側へクエリが書き換えられる。利用者からは非表示にする。ディメンションとのリレーションシップを張らないとヒットしない点に注意。",
-   "lesson": "L1205",
+   "short": "よく使う粒度の集計済みデータをインポートしておく仕組み。",
+   "desc": "複合モデルと組み合わせ、通常のクエリは集計テーブルで高速に処理し、詳細が必要なときだけDirectQueryを走らせる。大規模データで速度と鮮度を両立させる手法。",
+   "lesson": "L0401",
    "tags": [
-    "性能",
-    "モデリング"
+    "性能"
    ],
    "aliases": [
-    "アグリゲーション",
-    "集計",
-    "aggregations"
+    "Aggregations",
+    "集約テーブル"
    ],
-   "source": "M12",
-   "module": "M12",
-   "tier": "T3",
-   "moduleTitle": "高度なモデリング",
-   "lessonTitle": "複合モデルと集計テーブル"
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "接続方式の三択 — インポート / DirectQuery / ライブ接続"
   },
   {
    "term": "非加法的指標",
@@ -4979,6 +5669,26 @@
     "RFM"
    ],
    "source": "M00"
+  },
+  {
+   "term": "SMART",
+   "en": "SMART criteria",
+   "reading": "すまーと",
+   "short": "指標が使えるかを点検する5つの観点。",
+   "desc": "Specific（具体的）、Measurable（測定可能）、Achievable（達成可能）、Relevant（ゴールと関連）、Time-bound（期限がある）の頭文字。実務で最も見落とされるのはRelevantで、測りやすいだけの指標が集まる原因になる。",
+   "lesson": "L0103",
+   "tags": [
+    "指標"
+   ],
+   "aliases": [
+    "SMART条件",
+    "SMARTの原則"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "指標(KPI)の設計 — 何を測るかで組織は変わる"
   },
   {
    "term": "Type1",
@@ -5332,21 +6042,22 @@
    "term": "トリミング",
    "en": "Trim",
    "reading": "とりみんぐ",
-   "short": "文字列の前後の空白を削除する変換。全角スペースは既定で削除されない。",
-   "desc": "「変換 → 書式 → トリミング」で実行され、Mでは `Text.Trim` に対応する。日本語データでは全角スペース（U+3000）が残るため、`Text.Trim(_, {\" \", \"　\"})` のように削る文字を明示する必要がある。マージが一致しない原因として最も多い。",
-   "lesson": "L0502",
+   "short": "文字列の前後にある余分な空白を取り除く変換。",
+   "desc": "「S001」と「S001 」は別の値として扱われるため、結合が一致しない原因になる。制御文字を除去する「クリーン」とあわせて、キー列には取り込み時に適用しておくのが安全。",
+   "lesson": "L0404",
    "tags": [
-    "データ品質"
+    "整形"
    ],
    "aliases": [
     "Trim",
-    "Text.Trim"
+    "クリーン",
+    "空白除去"
    ],
-   "source": "M05",
-   "module": "M05",
-   "tier": "T2",
-   "moduleTitle": "Power Query 実践",
-   "lessonTitle": "データクレンジング実践 — 空白・表記ゆれ・エラー"
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "列プロファイルでデータを健康診断する"
   },
   {
    "term": "バッチ処理",
@@ -5471,6 +6182,45 @@
    "source": "M00"
   },
   {
+   "term": "ライブ接続",
+   "en": "Live connection",
+   "reading": "らいぶせつぞく",
+   "short": "既存の発行済みセマンティックモデルに接続し、レポートだけを作る方式。",
+   "desc": "モデルの編集はできず、テーブル追加やリレーションシップ変更も不可。これは制約ではなく、指標定義を1か所に集約するための仕組み。組織展開の基本形になる。",
+   "lesson": "L0401",
+   "tags": [
+    "接続"
+   ],
+   "aliases": [
+    "Live connection",
+    "ライブコネクション"
+   ],
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "接続方式の三択 — インポート / DirectQuery / ライブ接続"
+  },
+  {
+   "term": "予測的分析",
+   "en": "Predictive analytics",
+   "reading": "よそくてきぶんせき",
+   "short": "「何が起きそうか」を過去データから推定する分析の段階。",
+   "desc": "需要予測や離脱予測など、統計モデルや機械学習を用いて将来を推定する。記述的分析が正確であることが前提であり、順番を飛ばすと誤ったデータで学習した予測が出る。",
+   "lesson": "L0101",
+   "tags": [
+    "データサイエンス"
+   ],
+   "aliases": [
+    "predictive analytics"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "なぜデータ分析が必要なのか — 勘と経験の限界"
+  },
+  {
    "term": "共同作成者",
    "en": "Contributor",
    "reading": "きょうどうさくせいしゃ",
@@ -5533,6 +6283,25 @@
    "lessonTitle": "色とテーマ — 伝わる配色、伝わらない配色"
   },
   {
+   "term": "処方的分析",
+   "en": "Prescriptive analytics",
+   "reading": "しょほうてきぶんせき",
+   "short": "「どうすべきか」まで踏み込んで最適な行動を示す分析の段階。",
+   "desc": "予測を踏まえて発注量や価格を最適化するなど、意思決定そのものを支援する。分析の4段階の最上層で、下の3段が揃って初めて機能する。",
+   "lesson": "L0101",
+   "tags": [
+    "データサイエンス"
+   ],
+   "aliases": [
+    "prescriptive analytics"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "なぜデータ分析が必要なのか — 勘と経験の限界"
+  },
+  {
    "term": "動的RLS",
    "en": "dynamic RLS",
    "reading": "どうてきあーるえるえす",
@@ -5550,6 +6319,48 @@
    "tier": "T3",
    "moduleTitle": "高度なモデリング",
    "lessonTitle": "行レベルセキュリティ(RLS) — 静的・動的・階層"
+  },
+  {
+   "term": "区切り記号",
+   "en": "Delimiter",
+   "reading": "くぎりきごう",
+   "short": "CSVで列を区切る文字。通常はコンマ。",
+   "desc": "タブ区切り（TSV）やセミコロン区切りのファイルもある。値そのものにコンマが含まれる場合はダブルクォートで囲む必要があり、元ファイルの作りが悪いと列がずれる。",
+   "lesson": "L0303",
+   "tags": [
+    "取り込み"
+   ],
+   "aliases": [
+    "デリミタ",
+    "delimiter"
+   ],
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "最初のデータを読み込む"
+  },
+  {
+   "term": "単一の真実",
+   "en": "Single Source of Truth",
+   "reading": "たんいつのしんじつ",
+   "short": "組織全体が参照する唯一の正しいデータの置き場のこと。",
+   "desc": "部署ごとに違う定義・違う数字が存在する状態を解消し、全員が同じ数字を同じ定義で見られるようにする考え方。BI導入の最大の効果はここにある。Power BI ではセマンティックモデルがその役割を担う。",
+   "lesson": "L0101",
+   "tags": [
+    "基礎",
+    "ガバナンス"
+   ],
+   "aliases": [
+    "SSOT",
+    "Single Source of Truth",
+    "信頼できる唯一の情報源"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "なぜデータ分析が必要なのか — 勘と経験の限界"
   },
   {
    "term": "参照整合性",
@@ -5576,9 +6387,9 @@
    "term": "四分位範囲",
    "en": "Interquartile range",
    "reading": "しぶんいはんい",
-   "short": "Q3 − Q1。データの真ん中50%が収まる幅。",
-   "desc": "第3四分位から第1四分位を引いた値で、外れ値の影響を受けにくいばらつきの指標。箱ひげ図のひげは慣習的に Q1−1.5×IQR から Q3+1.5×IQR まで伸ばし、そこを外れた点を外れ値として描く。",
-   "lesson": "L1501",
+   "short": "Q3からQ1を引いた値で、真ん中50%の広がりを表す。",
+   "desc": "外れ値の影響を受けないばらつきの指標で、箱ひげ図の箱の長さそのもの。「Q3＋1.5×IQRより大きい値」を外れ値の候補とする判定によく使われる。",
+   "lesson": "L0104",
    "tags": [
     "統計"
    ],
@@ -5586,11 +6397,30 @@
     "IQR",
     "interquartile range"
    ],
-   "source": "M15",
-   "module": "M15",
-   "tier": "T3",
-   "moduleTitle": "分析手法とデータサイエンス",
-   "lessonTitle": "記述統計 — 分布を見ずに平均を語るな"
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "数字の読み方の基礎 — 平均のウソと分布"
+  },
+  {
+   "term": "大数の法則",
+   "en": "Law of large numbers",
+   "reading": "たいすうのほうそく",
+   "short": "観測回数を増やすほど、平均が真の値に近づくという性質。",
+   "desc": "サイコロを6回振ると出目は偏るが、6,000回振れば各目はほぼ6分の1に収束する。少数の事例から結論を出す危険性と、十分な件数で検証することの価値を説明する基礎的な法則。",
+   "lesson": "L0101",
+   "tags": [
+    "データサイエンス"
+   ],
+   "aliases": [
+    "law of large numbers"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "なぜデータ分析が必要なのか — 勘と経験の限界"
   },
   {
    "term": "左外部結合",
@@ -5614,6 +6444,26 @@
    "lessonTitle": "マージと追加 — 結合の種類を図で理解する"
   },
   {
+   "term": "指標ツリー",
+   "en": "KPI tree",
+   "reading": "しひょうつりー",
+   "short": "KGIを掛け算で分解して、動かせる要素まで降ろした図。",
+   "desc": "「売上＝客数×客単価＝(来店数×購買率)×(商品単価×買上点数)」のように分解する。足し算の内訳ではなく掛け算で割ることで、各要素が率や単価になり施策と結びつく。責任分担の設計にも使える。",
+   "lesson": "L0103",
+   "tags": [
+    "指標"
+   ],
+   "aliases": [
+    "KPIツリー",
+    "KPI tree"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "指標(KPI)の設計 — 何を測るかで組織は変わる"
+  },
+  {
    "term": "整然データ",
    "en": "Tidy data",
    "reading": "せいぜんでーた",
@@ -5631,23 +6481,47 @@
    "source": "M00"
   },
   {
+   "term": "文字コード",
+   "en": "Character encoding",
+   "reading": "もじこーど",
+   "short": "文字をコンピュータ上でどのバイト列として表すかの規則。",
+   "desc": "CSV取り込み時の「ファイルの原点」で指定する。日本語CSVはUTF-8かShift-JIS(932)が多い。指定が合っていないと文字化けする。UTF-8には先頭にBOMが付く場合があり、1列目の列名が壊れる原因になる。",
+   "lesson": "L0303",
+   "tags": [
+    "取り込み"
+   ],
+   "aliases": [
+    "エンコーディング",
+    "UTF-8",
+    "Shift-JIS",
+    "ファイルの原点"
+   ],
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "最初のデータを読み込む"
+  },
+  {
    "term": "時系列分解",
    "en": "Time series decomposition",
    "reading": "じけいれつぶんかい",
-   "short": "時系列をトレンド・季節性・残差の3成分に分けること。",
-   "desc": "観測値 = トレンド + 季節性 + 残差（加法モデル）、または掛け算で表す乗法モデルがある。売上金額のように水準が上がると振れ幅も広がる指標は乗法モデルを選ぶ。分解して初めて「本当に異常な変化」が見える。",
-   "lesson": "L1503",
+   "short": "時系列データをトレンド・季節変動・不規則変動に分けて考える方法。",
+   "desc": "売上の増減が長期的な傾向によるものか、毎年繰り返す季節性か、単なるノイズかを切り分ける。前年同月比や移動平均は、季節変動を簡易に打ち消すための実務的な手段。",
+   "lesson": "L0102",
    "tags": [
-    "時系列"
+    "データサイエンス"
    ],
    "aliases": [
-    "decomposition"
+    "季節調整",
+    "トレンド",
+    "季節変動"
    ],
-   "source": "M15",
-   "module": "M15",
-   "tier": "T3",
-   "moduleTitle": "分析手法とデータサイエンス",
-   "lessonTitle": "時系列分析 — トレンド・季節性・移動平均・異常検知"
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "データ・情報・知識・意思決定の階段"
   },
   {
    "term": "曖昧なパス",
@@ -5737,24 +6611,62 @@
   },
   {
    "term": "複合モデル",
-   "en": "composite model",
+   "en": "Composite model",
    "reading": "ふくごうもでる",
-   "short": "インポートとDirectQueryのテーブルを1つのモデルに同居させる構成。",
-   "desc": "よく使う粗い集計はインポートでメモリに載せ、めったに使わない明細だけDirectQueryでソースに問い合わせる、という使い分けができる。他のセマンティックモデルを参照して拡張することも可能だが、RLSの伝播は実ユーザーで必ず検証する。",
-   "lesson": "L1205",
+   "short": "1つのモデル内にインポートとDirectQueryのテーブルを混在させる方式。",
+   "desc": "変化しないマスタはインポート、巨大な明細はDirectQueryにするのが典型例。集計テーブルを併用すると、多くのクエリを高速なインポート側で処理できる。",
+   "lesson": "L0401",
    "tags": [
-    "ストレージ",
+    "接続",
     "モデリング"
    ],
    "aliases": [
-    "コンポジットモデル",
-    "composite model"
+    "Composite model",
+    "コンポジットモデル"
    ],
-   "source": "M12",
-   "module": "M12",
-   "tier": "T3",
-   "moduleTitle": "高度なモデリング",
-   "lessonTitle": "複合モデルと集計テーブル"
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "接続方式の三択 — インポート / DirectQuery / ライブ接続"
+  },
+  {
+   "term": "記述的分析",
+   "en": "Descriptive analytics",
+   "reading": "きじゅつてきぶんせき",
+   "short": "「何が起きたか」を集計して示す分析の段階。",
+   "desc": "売上や件数を集計し、過去の事実を正確に把握する。分析の4段階の最下層であり、ここが不正確なままでは上位の分析は成立しない。Power BI が最も得意とする領域。",
+   "lesson": "L0101",
+   "tags": [
+    "データサイエンス"
+   ],
+   "aliases": [
+    "descriptive analytics"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "なぜデータ分析が必要なのか — 勘と経験の限界"
+  },
+  {
+   "term": "診断的分析",
+   "en": "Diagnostic analytics",
+   "reading": "しんだんてきぶんせき",
+   "short": "「なぜ起きたか」を要因に分解して探る分析の段階。",
+   "desc": "売上が落ちた原因を店舗別・商品別に分解して特定するような分析。ドリルダウンやスライサーによる探索が中心で、Power BI の対話機能が最も活きる領域。",
+   "lesson": "L0101",
+   "tags": [
+    "データサイエンス"
+   ],
+   "aliases": [
+    "diagnostic analytics"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "なぜデータ分析が必要なのか — 勘と経験の限界"
   },
   {
    "term": "誤答ノート",
@@ -6085,6 +6997,66 @@
    "lessonTitle": "データクレンジング実践 — 空白・表記ゆれ・エラー"
   },
   {
+   "term": "pbip",
+   "en": "pbip",
+   "reading": "ぴーびーあいぴー",
+   "short": "レポートとモデル定義をテキストファイル群としてフォルダに展開する形式。",
+   "desc": "Power BI Project形式。中身がテキストのためGitで差分をレビューでき、チーム開発と自動デプロイに対応する。pbixがバイナリでバージョン管理に向かない問題への解答。",
+   "lesson": "L0205",
+   "tags": [
+    "ファイル"
+   ],
+   "aliases": [
+    ".pbip",
+    "Power BI Project"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "ファイル形式と用語の整理"
+  },
+  {
+   "term": "pbit",
+   "en": "pbit",
+   "reading": "ぴーびーあいてぃー",
+   "short": "データを含まない、レポートとモデル定義だけのテンプレート形式。",
+   "desc": "接続先をパラメータ化して配布すれば、開いた人が自分の環境の値を入れるだけで同じレポートが作れる。データを含まないため軽く、顧客データを渡さずに構造だけを共有できる。",
+   "lesson": "L0205",
+   "tags": [
+    "ファイル"
+   ],
+   "aliases": [
+    ".pbit",
+    "テンプレート"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "ファイル形式と用語の整理"
+  },
+  {
+   "term": "pbix",
+   "en": "pbix",
+   "reading": "ぴーびーあいえっくす",
+   "short": "レポート・モデル定義・データ本体を1つに収めた標準の保存形式。",
+   "desc": "保存すると自動的にこの形式になる。データも含むため、ファイルを渡すことは中のデータをすべて渡すことを意味する。バイナリのためGitでの差分管理には向かない。",
+   "lesson": "L0205",
+   "tags": [
+    "ファイル"
+   ],
+   "aliases": [
+    ".pbix",
+    "pbixファイル"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "ファイル形式と用語の整理"
+  },
+  {
    "term": "エラー値",
    "en": "Error",
    "reading": "えらーち",
@@ -6274,6 +7246,26 @@
    "source": "M00"
   },
   {
+   "term": "ペア指標",
+   "en": "Paired metrics",
+   "reading": "ぺあしひょう",
+   "short": "片方を追いすぎると起きる歪みを防ぐために、対で置く指標。",
+   "desc": "通話時間には一次解決率、新規契約件数には3か月後の継続率、在庫削減率には欠品率を組み合わせる。Goodhartの法則による局所最適を防ぎ、全体最適に近づける実務的な手法。",
+   "lesson": "L0103",
+   "tags": [
+    "指標"
+   ],
+   "aliases": [
+    "対の指標",
+    "カウンターメトリック"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "指標(KPI)の設計 — 何を測るかで組織は変わる"
+  },
+  {
    "term": "メジャー",
    "en": "Measure",
    "reading": "めじゃー",
@@ -6368,22 +7360,41 @@
    "term": "ロケール",
    "en": "Locale",
    "reading": "ろけーる",
-   "short": "日付や数値の表記規則を定める地域設定。",
-   "desc": "`04/03/2025` を4月3日と読むか3月4日と読むかは地域によって異なる。型変換でエラーが出る場合、「データ型の変更 → ロケールを使用」で `ja-JP` や `en-US` を明示することで解決できる。海外システムから届くファイルを扱うときに必須の知識。",
-   "lesson": "L0501",
+   "short": "日付や小数点の書式をどの言語圏の規則で解釈するかの設定。",
+   "desc": "03/04/2025 は米国式なら3月4日、英国式なら4月3日になる。エラーにならず黙って別の値になるため最も危険。「型の変更 → ロケールを使用」で明示するか、ソースにISO 8601形式を依頼する。",
+   "lesson": "L0403",
    "tags": [
-    "Power Query",
-    "データ品質"
+    "整形"
    ],
    "aliases": [
     "Locale",
     "地域設定"
    ],
-   "source": "M05",
-   "module": "M05",
-   "tier": "T2",
-   "moduleTitle": "Power Query 実践",
-   "lessonTitle": "適用したステップという考え方 — 手順を記録する"
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "データ型を制する — 型が違うと何が壊れるか"
+  },
+  {
+   "term": "一意の値",
+   "en": "Unique values",
+   "reading": "いちいのあたい",
+   "short": "その列で1回しか出現しない値の数。",
+   "desc": "「家電・家電・衣料・食品・家電」なら一意の値は2（衣料と食品）。個別の値とは意味がまったく違うため混同しないこと。",
+   "lesson": "L0404",
+   "tags": [
+    "データ品質"
+   ],
+   "aliases": [
+    "Unique",
+    "一意値"
+   ],
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "列プロファイルでデータを健康診断する"
   },
   {
    "term": "予実差異",
@@ -6420,6 +7431,27 @@
    "tier": "T3",
    "moduleTitle": "分析手法とデータサイエンス",
    "lessonTitle": "予測と不確実性 — 予測値に幅を持たせる"
+  },
+  {
+   "term": "代理指標",
+   "en": "Proxy metric",
+   "reading": "だいりしひょう",
+   "short": "直接測れないものを、測れる別の数字で代用したもの。",
+   "desc": "顧客満足度を再購入率で、ブランド価値を指名検索数で代用するなど。代理には必ず本来の目的とのズレが含まれるため、定期的に代理指標と目的の関係が保たれているかを検証する必要がある。",
+   "lesson": "L0103",
+   "tags": [
+    "指標",
+    "データサイエンス"
+   ],
+   "aliases": [
+    "プロキシ",
+    "proxy metric"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "指標(KPI)の設計 — 何を測るかで組織は変わる"
   },
   {
    "term": "仮説検定",
@@ -6470,6 +7502,26 @@
    "source": "M00"
   },
   {
+   "term": "個別の値",
+   "en": "Distinct values",
+   "reading": "こべつのあたい",
+   "short": "その列に含まれる値の種類の数。",
+   "desc": "「家電・家電・衣料・食品・家電」なら個別の値は3。マスタのキー列では行数と一致していなければならず、一致しなければ重複がありリレーションシップが引けない。",
+   "lesson": "L0404",
+   "tags": [
+    "データ品質"
+   ],
+   "aliases": [
+    "Distinct",
+    "個別値"
+   ],
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "列プロファイルでデータを健康診断する"
+  },
+  {
    "term": "値符号化",
    "en": "Value encoding",
    "reading": "あたいふごうか",
@@ -6488,6 +7540,26 @@
    "tier": "T3",
    "moduleTitle": "パフォーマンス",
    "lessonTitle": "VertiPaqの仕組み — なぜ速いのか"
+  },
+  {
+   "term": "先行指標",
+   "en": "Leading indicator",
+   "reading": "せんこうしひょう",
+   "short": "結果より先に動き、行動によって直接動かせる指標。",
+   "desc": "商談件数、来店客数、カート投入数など。まだ手を打てる段階で状況を知らせてくれる。遅行指標と組み合わせて使うのが基本で、先行指標だけでは目標への接近を確認できない。",
+   "lesson": "L0103",
+   "tags": [
+    "指標"
+   ],
+   "aliases": [
+    "leading indicator",
+    "リーディングインジケーター"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "指標(KPI)の設計 — 何を測るかで組織は変わる"
   },
   {
    "term": "内部結合",
@@ -6544,6 +7616,44 @@
    "tier": "T3",
    "moduleTitle": "PL-300 完全対策",
    "lessonTitle": "PL-300の全体像 — 4領域と採点の仕組み"
+  },
+  {
+   "term": "列の分布",
+   "en": "Column distribution",
+   "reading": "れつのぶんぷ",
+   "short": "値の分布と、個別の値・一意の値の数を表示するプロファイリング機能。",
+   "desc": "キー列の重複検出や、カテゴリ列の表記ゆれ発見に使う。値の種類が少ない列は、そこに業務ルールが埋め込まれているサインでもある。",
+   "lesson": "L0404",
+   "tags": [
+    "データ品質"
+   ],
+   "aliases": [
+    "Column distribution"
+   ],
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "列プロファイルでデータを健康診断する"
+  },
+  {
+   "term": "列の品質",
+   "en": "Column quality",
+   "reading": "れつのひんしつ",
+   "short": "各列の「有効」「エラー」「空」の割合を%で表示するプロファイリング機能。",
+   "desc": "Power Queryエディタの「表示」タブでオンにする。取り込み直後に最初に見るべき指標で、エラーが1%でもあれば原因を特定する。既定では先頭1,000行のみが対象。",
+   "lesson": "L0404",
+   "tags": [
+    "データ品質"
+   ],
+   "aliases": [
+    "Column quality"
+   ],
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "列プロファイルでデータを健康診断する"
   },
   {
    "term": "加重平均",
@@ -6783,6 +7893,29 @@
    "tier": "T3",
    "moduleTitle": "分析手法とデータサイエンス",
    "lessonTitle": "時系列分析 — トレンド・季節性・移動平均・異常検知"
+  },
+  {
+   "term": "尺度水準",
+   "en": "Level of measurement",
+   "reading": "しゃくどすいじゅん",
+   "short": "データを名義・順序・間隔・比率の4種類に分ける分類。",
+   "desc": "名義尺度は区別だけ（商品ID）、順序尺度は順番だけ（会員ランク）、間隔尺度は差に意味がある（気温）、比率尺度は比にも意味がある（売上金額）。この区別が、そのままデータ型の判断とグラフ選択の根拠になる。",
+   "lesson": "L0102",
+   "tags": [
+    "データサイエンス"
+   ],
+   "aliases": [
+    "測定の尺度",
+    "名義尺度",
+    "順序尺度",
+    "間隔尺度",
+    "比率尺度"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "データ・情報・知識・意思決定の階段"
   },
   {
    "term": "左反結合",
@@ -7192,6 +8325,26 @@
    "lessonTitle": "複合モデルと集計テーブル"
   },
   {
+   "term": "表記ゆれ",
+   "en": "Inconsistent notation",
+   "reading": "ひょうきゆれ",
+   "short": "同じ意味の値が異なる表記で混在している状態。",
+   "desc": "「家電」「家電 」「カデン」が別カテゴリとして集計され、合計だけが合わないという事故を起こす。トリミング・大文字小文字の統一・値の置換・変換テーブルでの結合の順に対処し、根本的にはソース側の入力方式を直す。",
+   "lesson": "L0404",
+   "tags": [
+    "データ品質"
+   ],
+   "aliases": [
+    "表記揺れ",
+    "名寄せ"
+   ],
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "列プロファイルでデータを健康診断する"
+  },
+  {
    "term": "視線導線",
    "en": "Visual flow",
    "reading": "しせんどうせん",
@@ -7252,6 +8405,28 @@
    "lessonTitle": "記述統計 — 分布を見ずに平均を語るな"
   },
   {
+   "term": "認定済み",
+   "en": "Certified",
+   "reading": "にんていずみ",
+   "short": "組織が公式に品質を保証したセマンティックモデルやレポートに付けるラベル。",
+   "desc": "推奨（Endorsement）機能の1つで、「昇格済み」より上位。利用者が検索時に信頼できる資産を区別できるようになる。コストをかけずに始められるガバナンス施策。",
+   "lesson": "L0204",
+   "tags": [
+    "ガバナンス"
+   ],
+   "aliases": [
+    "Certified",
+    "推奨",
+    "エンドースメント",
+    "昇格済み"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "ライセンスと組織での使われ方"
+  },
+  {
    "term": "遅延評価",
    "en": "lazy evaluation",
    "reading": "ちえんひょうか",
@@ -7270,6 +8445,26 @@
    "tier": "T3",
    "moduleTitle": "高度なデータ整形",
    "lessonTitle": "M言語の構造 — let ... in を読み書きする"
+  },
+  {
+   "term": "遅行指標",
+   "en": "Lagging indicator",
+   "reading": "ちこうしひょう",
+   "short": "結果が確定してから分かる、操作できない指標。",
+   "desc": "売上高、利益、解約率など。正確だが、分かった時点では手遅れであることが多い。評価と報告には適するが、日々の行動管理には向かない。",
+   "lesson": "L0103",
+   "tags": [
+    "指標"
+   ],
+   "aliases": [
+    "lagging indicator",
+    "ラギングインジケーター"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "指標(KPI)の設計 — 何を測るかで組織は変わる"
   },
   {
    "term": "集計関数",
@@ -7369,21 +8564,20 @@
    "term": "DAX",
    "en": "Data Analysis Expressions",
    "reading": "だっくす",
-   "short": "Power BI で指標を定義するための計算式言語。",
-   "desc": "列・表・フィルターを扱う関数型の式言語で、Power BI・Analysis Services・Power Pivot で共通に使われる。Excelの数式と関数名は似ているが、セルという概念を持たず、式は1つだけ書いて適用範囲は外部のコンテキストから与えられる。",
-   "lesson": "L0701",
+   "short": "Power BIでメジャーや計算列を定義するための計算式言語。",
+   "desc": "Excelの数式に似た見た目だが、動作原理が違う。メジャーは「今画面に効いているフィルターの下で」評価されるため、同じ式が切り口に応じて正しく再計算される。Excelパワーピボットでも共通して使える。",
+   "lesson": "L0201",
    "tags": [
-    "DAX",
-    "基礎"
+    "計算"
    ],
    "aliases": [
     "Data Analysis Expressions"
    ],
-   "source": "M07",
-   "module": "M07",
-   "tier": "T2",
-   "moduleTitle": "DAX基礎",
-   "lessonTitle": "DAXとは何か — Excelの数式と何が違うのか"
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Power BIとは何か — 5つの工程"
   },
   {
    "term": "ELT",
@@ -7410,6 +8604,26 @@
    ],
    "aliases": [],
    "source": "M00"
+  },
+  {
+   "term": "KGI",
+   "en": "Key Goal Indicator",
+   "reading": "けいじーあい",
+   "short": "最終的に達成したいゴールを表す指標。",
+   "desc": "年間売上高や営業利益率など、組織が到達したい状態そのものを測る。KGIを掛け算で分解して得られるのがKPI。KGIだけでは日々の行動は決まらない。",
+   "lesson": "L0103",
+   "tags": [
+    "指標"
+   ],
+   "aliases": [
+    "重要目標達成指標",
+    "Key Goal Indicator"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "指標(KPI)の設計 — 何を測るかで組織は変わる"
   },
   {
    "term": "KPI",
@@ -7447,24 +8661,23 @@
   },
   {
    "term": "M言語",
-   "en": "Power Query M formula language",
+   "en": "M language",
    "reading": "えむげんご",
-   "short": "Power Queryの変換手順を記述する関数型の言語。",
-   "desc": "Power Query が内部で使用する言語。`let 〜 in` の構文で複数のステップを順に定義し、最後に返す値を1つ指定する。GUIの操作は自動的にMコードへ変換され、詳細エディターで直接編集できる。大文字小文字を区別する点、列を名前で参照する点が実務上の注意点になる。",
-   "lesson": "L0501",
+   "short": "Power Queryの変換手順を記述する関数型言語。",
+   "desc": "画面の操作がそのままMのコードとして生成される。大文字小文字を厳密に区別し、各ステップが前のステップを入力として受け取る `let 〜 in` 構造を持つ。書けなくても読めれば原因究明が速くなる。",
+   "lesson": "L0201",
    "tags": [
-    "Power Query"
+    "整形"
    ],
    "aliases": [
     "M",
-    "Mコード",
-    "M 言語"
+    "Power Query M"
    ],
-   "source": "M05",
-   "module": "M05",
-   "tier": "T2",
-   "moduleTitle": "Power Query 実践",
-   "lessonTitle": "適用したステップという考え方 — 手順を記録する"
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Power BIとは何か — 5つの工程"
   },
   {
    "term": "SCD",
@@ -7538,6 +8751,26 @@
    "source": "M00"
   },
   {
+   "term": "アプリ",
+   "en": "Power BI App",
+   "reading": "あぷり",
+   "short": "ワークスペースの内容を整理して閲覧者に配布する公開版。",
+   "desc": "作りかけを含むワークスペースとは異なり、公開したものだけが表示される。ナビゲーションを整えられ、対象者をグループで指定できるため、閲覧者が多い場合の配布手段として推奨される。",
+   "lesson": "L0202",
+   "tags": [
+    "運用"
+   ],
+   "aliases": [
+    "Power BIアプリ",
+    "App"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "Desktop・Service・Mobile の役割分担"
+  },
+  {
    "term": "カード",
    "en": "Card",
    "reading": "かーど",
@@ -7580,6 +8813,25 @@
     "ゲージビジュアル"
    ],
    "source": "M00"
+  },
+  {
+   "term": "タイル",
+   "en": "Tile",
+   "reading": "たいる",
+   "short": "ダッシュボードに配置された1つ1つのパネル。",
+   "desc": "レポートのビジュアルを「ピン留め」して作成する。値が閾値を超えたときに通知するデータアラートを設定できるのは、レポートのビジュアルではなくタイルに対して。",
+   "lesson": "L0205",
+   "tags": [
+    "基礎"
+   ],
+   "aliases": [
+    "Tile"
+   ],
+   "source": "M02",
+   "module": "M02",
+   "tier": "T1",
+   "moduleTitle": "Power BIの全体像",
+   "lessonTitle": "ファイル形式と用語の整理"
   },
   {
    "term": "データ",
@@ -7765,6 +9017,27 @@
    "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
   },
   {
+   "term": "分位数",
+   "en": "Quantile",
+   "reading": "ぶんいすう",
+   "short": "データを順に並べて等分したときの区切りの値。",
+   "desc": "四分位数は4等分し、Q1（下位25%）、中央値、Q3（上位25%）を示す。サンプルデータの注文金額はQ1が3,200円、Q3が29,800円で、真ん中の50%がこの範囲に収まる。分布の広がりを外れ値に影響されずに表せる。",
+   "lesson": "L0104",
+   "tags": [
+    "統計"
+   ],
+   "aliases": [
+    "四分位数",
+    "パーセンタイル",
+    "quantile"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "数字の読み方の基礎 — 平均のウソと分布"
+  },
+  {
    "term": "前処理",
    "en": "Preprocessing",
    "reading": "ぜんしょり",
@@ -7934,6 +9207,27 @@
     "アクチュアル"
    ],
    "source": "M00"
+  },
+  {
+   "term": "平均値",
+   "en": "Mean",
+   "reading": "へいきんち",
+   "short": "すべての値を足して個数で割った代表値。",
+   "desc": "合計を件数で復元できるため、総額の計算や予算策定に必須。ただし極端な値に強く引っ張られるため、歪んだ分布では「典型的な値」を表さない。サンプルデータの注文金額は平均39,728円に対し中央値7,900円。",
+   "lesson": "L0104",
+   "tags": [
+    "統計"
+   ],
+   "aliases": [
+    "平均",
+    "mean",
+    "算術平均"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "数字の読み方の基礎 — 平均のウソと分布"
   },
   {
    "term": "散布図",
@@ -8300,23 +9594,22 @@
    "term": "交絡",
    "en": "Confounding",
    "reading": "こうらく",
-   "short": "原因と結果の両方に影響する第三の変数が、見かけの相関を作り出すこと。",
-   "desc": "広告費と売上の相関が、実は店舗規模という共通の原因によって生じている、といった構造。交絡変数で層別しても関係が残るかを確認するのが基本の点検手順で、Power BI ではスモールマルチプルが最短の手段になる。",
-   "lesson": "L1502",
+   "short": "2つの変数の関係に影響を与えている第三の変数が存在すること。",
+   "desc": "アイスの売上と水難事故が相関するのは、どちらも気温という交絡因子で動いているため。交絡を無視して因果を主張すると誤った施策につながる。層別して確認するのが基本的な対処。",
+   "lesson": "L0104",
    "tags": [
-    "統計",
-    "因果推論"
+    "データサイエンス"
    ],
    "aliases": [
-    "交絡変数",
+    "交絡因子",
     "confounding",
-    "コンファウンディング"
+    "第三の変数"
    ],
-   "source": "M15",
-   "module": "M15",
-   "tier": "T3",
-   "moduleTitle": "分析手法とデータサイエンス",
-   "lessonTitle": "相関と因果 — 交絡・選択バイアス・シンプソンのパラドックス"
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "数字の読み方の基礎 — 平均のウソと分布"
   },
   {
    "term": "仮説",
@@ -8346,6 +9639,26 @@
    "source": "M00"
   },
   {
+   "term": "分布",
+   "en": "Distribution",
+   "reading": "ぶんぷ",
+   "short": "値がどのように散らばっているかの全体像。",
+   "desc": "左右対称・右に歪んだ形・二山の3つが実務でよく出会う形。二山の場合は平均が実在しない値になるため、群を分けて分析すべきサインになる。代表値を見る前に必ず分布の形を確認する。",
+   "lesson": "L0104",
+   "tags": [
+    "統計"
+   ],
+   "aliases": [
+    "distribution",
+    "ヒストグラム"
+   ],
+   "source": "M01",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "数字の読み方の基礎 — 平均のウソと分布"
+  },
+  {
    "term": "分散",
    "en": "Variance",
    "reading": "ぶんさん",
@@ -8372,6 +9685,27 @@
     "クラス分類"
    ],
    "source": "M00"
+  },
+  {
+   "term": "参照",
+   "en": "Reference",
+   "reading": "さんしょう",
+   "short": "既存クエリの結果を入力として使う、新しいクエリの作り方。",
+   "desc": "元のクエリを変更すると参照先にも反映されるため、共通の前処理を1か所にまとめられる。手順ごとコピーする「複製」とは異なり、二重管理を防げる。中間クエリは読み込みを無効にしておく。",
+   "lesson": "L0405",
+   "tags": [
+    "整形"
+   ],
+   "aliases": [
+    "Reference",
+    "クエリの参照",
+    "複製"
+   ],
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "Power Queryエディタ初めの一歩"
   },
   {
    "term": "合計",
@@ -8457,6 +9791,27 @@
    "source": "M00"
   },
   {
+   "term": "検算",
+   "en": "Reconciliation",
+   "reading": "けんざん",
+   "short": "取り込んだデータが元データと一致しているかを突き合わせて確認すること。",
+   "desc": "会計や監査で言う突合（レコンサイル）と同じ発想。行数・合計金額・期間の3点を最低限の確認項目とし、加えて月別件数を並べて取り込み漏れを検出する。分析を始める前の必須動作。",
+   "lesson": "L0303",
+   "tags": [
+    "データ品質"
+   ],
+   "aliases": [
+    "突合",
+    "レコンサイル",
+    "reconciliation"
+   ],
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "最初のデータを読み込む"
+  },
+  {
    "term": "標本",
    "en": "Sample",
    "reading": "ひょうほん",
@@ -8489,6 +9844,26 @@
    "tier": "T3",
    "moduleTitle": "分析手法とデータサイエンス",
    "lessonTitle": "記述統計 — 分布を見ずに平均を語るな"
+  },
+  {
+   "term": "発行",
+   "en": "Publish",
+   "reading": "はっこう",
+   "short": "Desktopで作成したレポートをPower BI Serviceへアップロードすること。",
+   "desc": "発行すると1つのpbixが「レポート」と「セマンティックモデル」の2アイテムに分かれる。発行後は資格情報の入力とスケジュール更新の設定が必要。保存とはまったく別の操作。",
+   "lesson": "L0305",
+   "tags": [
+    "運用"
+   ],
+   "aliases": [
+    "Publish",
+    "パブリッシュ"
+   ],
+   "source": "M03",
+   "module": "M03",
+   "tier": "T1",
+   "moduleTitle": "はじめてのレポート",
+   "lessonTitle": "保存・発行・共有の第一歩"
   },
   {
    "term": "相関",

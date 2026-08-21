@@ -15,7 +15,7 @@ build_curriculum.py — docs/content/modules/M*.json を統合して
 usage:  python3 scripts/build_curriculum.py
 """
 
-import json
+import io, json
 import os
 import sys
 import datetime
@@ -293,7 +293,19 @@ def build():
         })
 
     # ---- ラボ -----------------------------------------------------------
-    src_labs = old_labs if old_labs is not None else FALLBACK_LABS
+    # ラボは docs/content/labs/index.json を正とする（無ければ旧定義にフォールバック）
+    lab_index_path = os.path.join(CONTENT, "labs", "index.json")
+    index_labs = None
+    if os.path.exists(lab_index_path):
+        try:
+            index_labs = json.load(io.open(lab_index_path, encoding="utf-8")).get("labs")
+            if not isinstance(index_labs, list) or not index_labs:
+                index_labs = None
+        except Exception as e:
+            print("  警告: labs/index.json を読めません (%s)" % e)
+            index_labs = None
+
+    src_labs = index_labs if index_labs is not None else (old_labs if old_labs is not None else FALLBACK_LABS)
     labs = []
     for lb in src_labs:
         if not isinstance(lb, dict):

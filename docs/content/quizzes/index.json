@@ -1,14 +1,14 @@
 {
- "totalQuestions": 580,
- "lessonQuestions": 340,
+ "totalQuestions": 640,
+ "lessonQuestions": 400,
  "examQuestions": 240,
  "byArea": {
-  "データの準備": 120,
-  "データのモデル化": 231,
-  "視覚化と分析": 109,
-  "資産の管理とセキュリティ": 77,
-  "データサイエンス": 34,
-  "基礎": 9
+  "データの準備": 121,
+  "データのモデル化": 237,
+  "視覚化と分析": 138,
+  "資産の管理とセキュリティ": 81,
+  "基礎": 16,
+  "データサイエンス": 47
  },
  "bySkill": {
   "1.1 データソースへの接続": 11,
@@ -37,10 +37,10 @@
   "4.5 ガバナンスとライフサイクル": 8
  },
  "byDifficulty": {
-  "2": 172,
-  "4": 99,
-  "3": 267,
-  "1": 42
+  "2": 203,
+  "4": 102,
+  "3": 290,
+  "1": 45
  },
  "quizzes": {
   "EXAM-PL300": {
@@ -48,6 +48,18 @@
    "count": 240,
    "lesson": null,
    "isExam": true
+  },
+  "L0101": {
+   "title": "なぜデータ分析が必要なのか",
+   "count": 5,
+   "lesson": "L0101",
+   "isExam": false
+  },
+  "L0102": {
+   "title": "データ・情報・知識・意思決定の階段",
+   "count": 5,
+   "lesson": "L0102",
+   "isExam": false
   },
   "L0501": {
    "title": "適用したステップ",
@@ -455,6 +467,66 @@
    "title": "学習計画と当日戦略",
    "count": 5,
    "lesson": "L1605",
+   "isExam": false
+  },
+  "L2001": {
+   "title": "AIビジュアルを正しく使う",
+   "count": 5,
+   "lesson": "L2001",
+   "isExam": false
+  },
+  "L2002": {
+   "title": "Q&Aとスマートナラティブ",
+   "count": 5,
+   "lesson": "L2002",
+   "isExam": false
+  },
+  "L2003": {
+   "title": "Copilot と生成AI",
+   "count": 5,
+   "lesson": "L2003",
+   "isExam": false
+  },
+  "L2004": {
+   "title": "Python・R連携と外部機械学習",
+   "count": 5,
+   "lesson": "L2004",
+   "isExam": false
+  },
+  "L2005": {
+   "title": "予測モデルをBIに載せる",
+   "count": 5,
+   "lesson": "L2005",
+   "isExam": false
+  },
+  "L2101": {
+   "title": "情報設計",
+   "count": 5,
+   "lesson": "L2101",
+   "isExam": false
+  },
+  "L2102": {
+   "title": "可視化の理論",
+   "count": 5,
+   "lesson": "L2102",
+   "isExam": false
+  },
+  "L2103": {
+   "title": "ダッシュボード設計の原則",
+   "count": 5,
+   "lesson": "L2103",
+   "isExam": false
+  },
+  "L2104": {
+   "title": "データストーリーテリング",
+   "count": 5,
+   "lesson": "L2104",
+   "isExam": false
+  },
+  "L2105": {
+   "title": "レビューと改善",
+   "count": 5,
+   "lesson": "L2105",
    "isExam": false
   }
  }

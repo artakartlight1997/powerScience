@@ -9,9 +9,9 @@
       "tiers": 4,
       "modules": 22,
       "lessons": 118,
-      "labs": 6,
-      "figures": 1421,
-      "lessonsWritten": 115,
+      "labs": 12,
+      "figures": 1458,
+      "lessonsWritten": 118,
       "modulesPlanned": 22,
       "lessonsPlanned": 118
     },
@@ -4962,7 +4962,7 @@
       "level": "T4",
       "order": 101,
       "hasBody": true,
-      "figures": 10
+      "figures": 11
     },
     {
       "id": "L1904",
@@ -5006,8 +5006,8 @@
       "tier": "T4",
       "level": "T4",
       "order": 102,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 10
     },
     {
       "id": "L1905",
@@ -5053,8 +5053,8 @@
       "tier": "T4",
       "level": "T4",
       "order": 103,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 12
     },
     {
       "id": "L2001",
@@ -5722,98 +5722,276 @@
       "tier": "T4",
       "level": "T4",
       "order": 118,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 14
     }
   ],
   "labs": [
     {
       "id": "LAB01",
       "title": "はじめてのレポート — 売上ダッシュボードを30分で作る",
-      "level": "T1",
+      "tier": "T1",
+      "module": "M03",
       "minutes": 30,
       "difficulty": 1,
+      "goal": "CSVを読み込み、KPIカード・横棒グラフ・折れ線・スライサーを配置したレポートを1枚完成させる。",
       "dataset": [
-        "sales.csv"
+        "sales.csv",
+        "products.csv"
       ],
-      "goal": "CSVを読み込み、KPIカード・棒グラフ・折れ線を配置したレポートを完成させる。",
-      "legacyLevel": "T1",
-      "tier": "T1"
+      "lessons": [
+        "L0301",
+        "L0303",
+        "L0304",
+        "L0402"
+      ],
+      "legacyLevel": null,
+      "level": "T1"
     },
     {
       "id": "LAB02",
       "title": "汚いデータを洗う — Power Query実践",
-      "level": "T2",
+      "tier": "T2",
+      "module": "M05",
       "minutes": 45,
       "difficulty": 2,
+      "goal": "全角空白・型崩れ・横持ち・重複・小計行を含むファイルを、整然データに変換する。",
       "dataset": [
         "sales_dirty.csv"
       ],
-      "goal": "全角空白・型崩れ・横持ち・重複を含むデータを整然データに変換する。",
-      "legacyLevel": "T2",
-      "tier": "T2"
+      "lessons": [
+        "L0403",
+        "L0503",
+        "L0504",
+        "L0505"
+      ],
+      "legacyLevel": null,
+      "level": "T2"
     },
     {
       "id": "LAB03",
       "title": "スタースキーマを組む",
-      "level": "T2",
+      "tier": "T2",
+      "module": "M06",
       "minutes": 45,
       "difficulty": 3,
+      "goal": "4つのCSVを分解し、日付テーブルを含む完全なスタースキーマを構築する。",
       "dataset": [
         "sales.csv",
         "products.csv",
         "customers.csv",
         "stores.csv"
       ],
-      "goal": "フラットな表を分解し、日付テーブルを含むスタースキーマを構築する。",
-      "legacyLevel": "T2",
-      "tier": "T2"
+      "lessons": [
+        "L0601",
+        "L0603",
+        "L0605",
+        "L0606"
+      ],
+      "legacyLevel": null,
+      "level": "T2"
     },
     {
       "id": "LAB04",
       "title": "DAXメジャー10本ノック",
-      "level": "T2",
+      "tier": "T1",
+      "module": "M08",
       "minutes": 60,
       "difficulty": 4,
+      "goal": "売上・粗利・前年比・YTD・構成比・ランキング・累計など15指標を実装する。",
       "dataset": [
         "sales.csv",
         "products.csv",
         "customers.csv",
         "stores.csv"
       ],
-      "goal": "売上・粗利・前年比・累計・構成比・ランキングなど10指標を実装する。",
-      "legacyLevel": "T2",
-      "tier": "T2"
+      "lessons": [
+        "L0702",
+        "L0801",
+        "L0803",
+        "L0806"
+      ],
+      "legacyLevel": null,
+      "level": "T1"
     },
     {
       "id": "LAB05",
       "title": "伝わるダッシュボード設計 + モバイル対応",
-      "level": "T3",
+      "tier": "T1",
+      "module": "M09",
       "minutes": 60,
       "difficulty": 3,
+      "goal": "3ページ構成のレポートを作り、ドリルスルー・ツールチップ・モバイルレイアウトまで仕上げる。",
       "dataset": [
         "sales.csv",
         "products.csv",
         "customers.csv",
         "stores.csv"
       ],
-      "goal": "1画面で意思決定できるレポートを設計し、スマホビューまで作り込む。",
-      "legacyLevel": "T3",
-      "tier": "T3"
+      "lessons": [
+        "L0901",
+        "L0902",
+        "L0903",
+        "L0905"
+      ],
+      "legacyLevel": null,
+      "level": "T1"
     },
     {
       "id": "LAB06",
       "title": "RLSを設定して安全に配布する",
-      "level": "T4",
+      "tier": "T1",
+      "module": "M12",
       "minutes": 45,
       "difficulty": 4,
+      "goal": "店舗別に閲覧範囲を絞る動的RLSを実装し、アプリとして安全に配布する。",
       "dataset": [
+        "stores.csv",
+        "security_users.csv",
+        "sales.csv"
+      ],
+      "lessons": [
+        "L1204",
+        "L1202",
+        "L1001",
+        "L1002"
+      ],
+      "legacyLevel": null,
+      "level": "T1"
+    },
+    {
+      "id": "LAB07",
+      "title": "M言語で再利用可能な変換パイプラインを作る",
+      "tier": "T1",
+      "module": "M11",
+      "minutes": 75,
+      "difficulty": 4,
+      "goal": "パラメーター・カスタム関数・フォルダー接続・エラー処理を組み合わせ、毎月のファイルを自動で取り込む仕組みを作る。",
+      "dataset": [
+        "sales.csv"
+      ],
+      "lessons": [
+        "L1101",
+        "L1102",
+        "L1103",
+        "L1104"
+      ],
+      "legacyLevel": null,
+      "level": "T1"
+    },
+    {
+      "id": "LAB08",
+      "title": "DAX 20本ノック（上級編）",
+      "tier": "T1",
+      "module": "M13",
+      "minutes": 90,
+      "difficulty": 5,
+      "goal": "累計・移動平均・ABC分析・コホート・新規/既存顧客・バスケット・目標達成率・色メジャーなど20指標を実装する。",
+      "dataset": [
+        "sales.csv",
+        "products.csv",
+        "customers.csv",
+        "stores.csv"
+      ],
+      "lessons": [
+        "L1301",
+        "L1302",
+        "L1305",
+        "L0806"
+      ],
+      "legacyLevel": null,
+      "level": "T1"
+    },
+    {
+      "id": "LAB09",
+      "title": "遅いレポートを速くする — 計測して直す",
+      "tier": "T1",
+      "module": "M14",
+      "minutes": 75,
+      "difficulty": 5,
+      "goal": "わざと遅いパターンを作り、パフォーマンスアナライザーとDAX Studioで計測し、改善効果を数字で示す。",
+      "dataset": [
+        "sales.csv",
+        "products.csv",
+        "customers.csv",
+        "stores.csv"
+      ],
+      "lessons": [
+        "L1401",
+        "L1402",
+        "L1403",
+        "L1404"
+      ],
+      "legacyLevel": null,
+      "level": "T1"
+    },
+    {
+      "id": "LAB10",
+      "title": "動的RLSと階層セキュリティの実装",
+      "tier": "T1",
+      "module": "M12",
+      "minutes": 75,
+      "difficulty": 5,
+      "goal": "静的RLSから動的RLS、PATH/PATHCONTAINSによる階層RLSまでを段階的に実装しテストする。",
+      "dataset": [
+        "stores.csv",
+        "security_users.csv",
+        "sales.csv"
+      ],
+      "lessons": [
+        "L1204",
+        "L1202",
+        "L1206"
+      ],
+      "legacyLevel": null,
+      "level": "T1"
+    },
+    {
+      "id": "LAB11",
+      "title": "意思決定を促すダッシュボードを設計する",
+      "tier": "T1",
+      "module": "M21",
+      "minutes": 90,
+      "difficulty": 4,
+      "goal": "要件ヒアリングからKPIツリー・ワイヤーフレーム・実装・レビューまでを一周し、5秒/30秒/5分の情報階層で設計する。",
+      "dataset": [
+        "sales.csv",
+        "products.csv",
+        "customers.csv",
+        "stores.csv"
+      ],
+      "lessons": [
+        "L2101",
+        "L2102",
+        "L2103",
+        "L2201"
+      ],
+      "legacyLevel": null,
+      "level": "T1"
+    },
+    {
+      "id": "LAB12",
+      "title": "PL-300 模擬演習 — 総合実習",
+      "tier": "T1",
+      "module": "M16",
+      "minutes": 120,
+      "difficulty": 5,
+      "goal": "取得から整形・モデリング・DAX・可視化・RLS・発行までを制限時間120分で一気通貫し、採点表で弱点を特定する。",
+      "dataset": [
+        "sales.csv",
+        "products.csv",
+        "customers.csv",
         "stores.csv",
         "security_users.csv"
       ],
-      "goal": "店舗別に閲覧範囲を絞る動的RLSを実装し、アプリとして配布する。",
-      "legacyLevel": "T4",
-      "tier": "T4"
+      "lessons": [
+        "L1601",
+        "L1602",
+        "L1603",
+        "L1605"
+      ],
+      "legacyLevel": null,
+      "level": "T1"
     }
   ]
 }
