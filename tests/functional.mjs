@@ -75,7 +75,7 @@ ok('quiz result persisted', !!(qres && qres.L0801), JSON.stringify(qres || {}));
 
 // --- 8. 模擬試験（タイマー動作） ---
 await page.goto(`${BASE}/exam.html`, { waitUntil: 'networkidle' });
-await page.selectOption('#sel-count', '10');
+await page.click('.mode >> nth=0');            // 15問モード
 await page.click('#start');
 await page.waitForSelector('.choice');
 const timer1 = await page.textContent('#q-timer');
@@ -98,17 +98,17 @@ ok('dark mode toggle', theme === 'dark' && bg !== 'rgb(246, 248, 252)', `theme=$
 
 // --- 10. 用語集の検索 ---
 await page.goto(`${BASE}/glossary.html`, { waitUntil: 'networkidle' });
-const before = await page.$$eval('#list .card', e => e.length);
+const before = await page.$$eval('.gl-card', e => e.length);
 await page.fill('#q', 'CALCULATE');
 await page.waitForTimeout(250);
-const after = await page.$$eval('#list .card', e => e.length);
+const after = await page.$$eval('.gl-card', e => e.length);
 ok('glossary search filters', after > 0 && after < before, `${before} -> ${after}`);
 
 // --- 11. 進捗のエクスポート/リセット ---
 await page.goto(`${BASE}/progress.html`, { waitUntil: 'networkidle' });
 await page.click('#btn-export');
 const exported = await page.inputValue('#io');
-ok('progress export', exported.includes('L201'), `${exported.length} chars`);
+ok('progress export', exported.includes('L0601'), `${exported.length} chars`);
 
 // --- 12. 計測は endpoint 未設定なら送信しない ---
 let requests = 0;
@@ -116,6 +116,21 @@ page.on('request', r => { if (!r.url().startsWith(BASE)) requests++; });
 await page.goto(`${BASE}/index.html`, { waitUntil: 'networkidle' });
 await page.waitForTimeout(500);
 ok('no analytics traffic when unconfigured', requests === 0, `external requests=${requests}`);
+
+
+// --- 13. サイト内検索 ---
+await page.goto(`${BASE}/index.html`, { waitUntil: 'networkidle' });
+await page.waitForTimeout(400);
+await page.keyboard.press('Control+k');
+await page.waitForSelector('.sr-overlay.on', { timeout: 6000 });
+await page.waitForTimeout(1200);
+await page.fill('#sr-input', 'CALCULATE');
+await page.waitForTimeout(500);
+const hits = await page.$$eval('.sr-item', e => e.length);
+await page.keyboard.press('Escape');
+await page.waitForTimeout(200);
+const closed = !(await page.isVisible('.sr-overlay.on'));
+ok('site search', hits > 0 && closed, `hits=${hits} closedOnEsc=${closed}`);
 
 console.log(errs.length ? '\nPAGE ERRORS:\n' + errs.join('\n') : '\nno page errors');
 await browser.close();
