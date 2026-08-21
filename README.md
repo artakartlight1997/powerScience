@@ -21,6 +21,7 @@ GitHub Pages で公開でき、スマートフォンからも学習できます�
 | ハンズオンラボ | 12（サンプルデータ同梱） |
 | 演習問題 | レッスン別クイズ + PL-300 模擬試験バンク |
 | 用語集 | 検索・索引つき。本文中の用語から自動でリンク |
+| サイト内検索 | Ctrl/⌘ + K。レッスン・見出し・ハンズオン・用語を横断検索 |
 | 想定学習時間 | 約230時間 |
 
 ### 4つのティア
@@ -48,6 +49,8 @@ Mermaid は使っていません。図は `figure` ブロックに書いた設�
 
 **4. 用語で迷わせない**
 本文中の専門用語は自動的に用語集にリンクされ、ホバーで1文の定義が出ます。
+クイズの解説の中でも同じようにリンクされます。
+さらに **Ctrl/⌘ + K**（または `/`）で、レッスン本文・見出し・ハンズオン・用語を横断検索できます。
 「バイブル」として、分からない語が出てきたらその場で解決できます。
 
 **5. Power BI だけでは足りない知識も入れる**
@@ -163,6 +166,7 @@ docs/                       GitHub Pages で公開されるサイト本体
 │       ├── interactive.js  操作できる図解（10種類）
 │       ├── glossary.js     用語の自動リンクとポップオーバー
 │       ├── quiz.js         クイズ・試験エンジン
+│       ├── search.js       サイト内検索（Ctrl/⌘ + K）
 │       └── analytics.js    計測クライアント
 ├── content/
 │   ├── modules/M01〜M22.json   ★ モジュールとレッスンの定義
@@ -171,7 +175,8 @@ docs/                       GitHub Pages で公開されるサイト本体
 │   ├── quizzes/*.json          設問
 │   ├── glossary/*.json         用語集（モジュール別）
 │   ├── curriculum.json         生成物（build_all.py が作る）
-│   └── pl300.json              生成物（スキル項目 → レッスンの逆引き）
+│   ├── pl300.json              生成物（スキル項目 → レッスンの逆引き）
+│   └── search.json             生成物（サイト内検索のインデックス）
 └── data/*.csv              ハンズオン用サンプルデータ
 
 worker/                     アクセス統計バックエンド（Cloudflare Workers + D1）
@@ -213,6 +218,7 @@ python3 scripts/build_all.py
 | `python3 scripts/build_curriculum.py` | モジュール定義 → curriculum.json / pl300.json |
 | `python3 scripts/build_glossary_index.py` | 用語集の統合インデックス |
 | `python3 scripts/build_quiz_index.py` | クイズのインデックス |
+| `python3 scripts/build_search_index.py` | サイト内検索のインデックス |
 | `python3 scripts/fix_figures.py --write` | 図のJSONの機械的な誤りを自動修正 |
 | `python3 scripts/validate_content.py` | 整合性チェック |
 | `python3 scripts/generate_sample_data.py` | サンプルデータの再生成 |
