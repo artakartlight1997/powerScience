@@ -587,5 +587,483 @@
    "表記揺れ",
    "名寄せ"
   ]
+ },
+ {
+  "term": "Text.From",
+  "en": "Text.From",
+  "reading": "てきすとふろむ",
+  "short": "数値や日付などの値を、そのまま文字列に変える。",
+  "desc": "Text.From(3) は \"3\" を返す。M言語の & は文字列どうししかつなげられないため、\"Q\" & Text.From(Date.QuarterOfYear([Date])) のように、数値を文字にはさむ場面でよく使う。第2引数にカルチャを渡すと、日付や小数の書き方をそろえられる。空欄（null）を渡すと空欄のまま返るので、\"null\" という文字が入ってしまうことはない。",
+  "lesson": "L0502",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "text.from"
+  ]
+ },
+ {
+  "term": "Text.Trim",
+  "en": "Text.Trim",
+  "reading": "てきすととりむ",
+  "short": "文字列の前後にある余分な空白を取り除く。",
+  "desc": "Text.Trim(\"  東京  \") は \"東京\" を返す。取り除くのは前後だけで、\"東 京\" のような途中の空白は残る（途中も消したいときは Text.Remove、別の文字に替えたいときは Text.Replace）。既定では半角の空白しか対象にならないので、日本語のデータでは Text.Trim(_, {\" \", \"　\"}) と全角スペースも並べて指定する。キー列に空白が残っていると結合が一致しなくなるため、取り込んだ直後にかけておくのが安全。",
+  "lesson": "L0502",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "text.trim"
+  ]
+ },
+ {
+  "term": "Text.Replace",
+  "en": "Text.Replace",
+  "reading": "てきすとりぷれいす",
+  "short": "文字列の中の指定した部分を、別の文字に置き換える。",
+  "desc": "Text.Replace(\"1,234\", \",\", \"\") は \"1234\" を返す。見つかった箇所は最初の1つだけでなく、すべてが置き換わる。大文字と小文字は区別されるので、\"ABC\" を探しても \"abc\" は置き換わらない。第1引数が数値だとエラーになるため、Text.Replace(Text.From(_), \",\", \"\") のように文字列にしてから渡す。",
+  "lesson": "L0502",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "text.replace"
+  ]
+ },
+ {
+  "term": "Text.Lower",
+  "en": "Text.Lower",
+  "reading": "てきすとろわー",
+  "short": "英字をすべて小文字にそろえて返す。",
+  "desc": "Text.Lower(\".CSV\") は \".csv\" を返す。M言語は大文字と小文字を区別するので、拡張子やコードを比べるときは両側をそろえてから比べる。フォルダー接続でCSVだけを残す Table.SelectRows(ソース, each Text.Lower([Extension]) = \".csv\") が定番の使い方。変わるのは英字だけで、全角と半角の違いや日本語の表記ゆれには効かないため、そちらは別に直す。",
+  "lesson": "L1102",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "text.lower"
+  ]
+ },
+ {
+  "term": "Text.StartsWith",
+  "en": "Text.StartsWith",
+  "reading": "てきすとすたーつうぃず",
+  "short": "文字列が、指定した文字で始まっているかどうかを返す。",
+  "desc": "Text.StartsWith(\"~$売上.xlsx\", \"~$\") は true を返す。フォルダーから読むときに Excel の一時ファイルを外す each not Text.StartsWith([Name], \"~$\") が典型例。「含むか」ではなく「先頭が一致するか」なので、同じ文字が途中にあっても false になる。既定では大文字と小文字を区別するため、区別せずに調べたいときは第3引数に Comparer.OrdinalIgnoreCase を渡す。",
+  "lesson": "L1102",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "text.startswith"
+  ]
+ },
+ {
+  "term": "Text.Start",
+  "en": "Text.Start",
+  "reading": "てきすとすたーと",
+  "short": "文字列の先頭から、指定した文字数だけ取り出す。",
+  "desc": "Text.Start(\"2026-04_売上.csv\", 7) は \"2026-04\" を返す。ファイル名の先頭に入れた年月を取り出して日付の列にする、といった使い方をする。数えるのは文字数なので、ファイル名の付け方が1文字ずれても、エラーにならないまま違う値が入るのがこわいところ。末尾から取りたいときは Text.End、途中から取りたいときは Text.Middle を使う。",
+  "lesson": "L1102",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "text.start"
+  ]
+ },
+ {
+  "term": "Text.AfterDelimiter",
+  "en": "Text.AfterDelimiter",
+  "reading": "てきすとあふたーでりみたー",
+  "short": "決めた区切り文字より後ろの部分を取り出す。",
+  "desc": "Text.AfterDelimiter(\"tanaka@example.com\", \"@\") は \"example.com\" を返す。メールアドレスから会社のドメインを取り出す、といった用途に向く。区切り文字が見つからないときはエラーではなく空文字が返るので、空欄が急に増えたら区切り文字の指定を疑う。同じ区切り文字が複数あるときは、第3引数で何番目から後ろを取るかを指定できる。",
+  "lesson": "L0502",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "text.afterdelimiter"
+  ]
+ },
+ {
+  "term": "Text.Remove",
+  "en": "Text.Remove",
+  "reading": "てきすとりむーぶ",
+  "short": "指定した文字を、文字列のどこにあってもすべて消す。",
+  "desc": "Text.Remove(\"東 京 店\", {\" \", \"　\"}) は \"東京店\" を返す。前後だけを削る Text.Trim との違いは、途中にある文字も消える点にある。第2引数は「文字のリスト」なので、\"  \" のような文字列ではなく {\" \", \"　\"} の形で渡す。消しすぎると別の値と同じ文字列になってしまうため、住所や商品名のような列に広くかけるのは避ける。",
+  "lesson": "L0502",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "text.remove"
+  ]
+ },
+ {
+  "term": "Text.BeforeDelimiter",
+  "en": "Text.BeforeDelimiter",
+  "reading": "てきすとびふぉあでりみたー",
+  "short": "決めた区切り文字より前の部分を取り出す。",
+  "desc": "Text.BeforeDelimiter(\"2026年4月\", \"年\") は \"2026\" を返す。「2026年4月」のような文字列を、年と月に分けて日付に直すときの入口になる。区切り文字が見つからないと空文字が返り、そのまま Number.FromText に渡すとエラーになるので、間に try をはさむか先に空欄を確認する。取り出した結果は文字列なので、数値として使うには Number.FromText で変換する。",
+  "lesson": "L0504",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "text.beforedelimiter"
+  ]
+ },
+ {
+  "term": "Text.BetweenDelimiters",
+  "en": "Text.BetweenDelimiters",
+  "reading": "てきすとびとうぃーんでりみたーず",
+  "short": "2つの区切り文字にはさまれた部分を取り出す。",
+  "desc": "Text.BetweenDelimiters(\"2026年4月\", \"年\", \"月\") は \"4\" を返す。前を切って後ろを切って、と2段階で書くより短くすむのが利点。どちらかの区切り文字が見つからないと空文字になり、エラーにならないまま後ろの処理でつまずくことがある。同じ区切り文字が何度も出てくる文字列では、第4・第5引数で何番目を使うかを指定する。",
+  "lesson": "L0504",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "text.betweendelimiters"
+  ]
+ },
+ {
+  "term": "Text.Split",
+  "en": "Text.Split",
+  "reading": "てきすとすぷりっと",
+  "short": "区切り文字で文字列を分け、分けた結果をリストで返す。",
+  "desc": "Text.Split(\"赤,青,緑\", \",\") は {\"赤\", \"青\", \"緑\"} というリストを返す。返るのは文字列ではなくリストなので、列に入れた場合は Table.ExpandListColumn で行に展開してから使う。区切り文字が続いていると空文字の要素ができ、区切りの前後に空白が残ることもあるため、展開したあとに Text.Trim をかける。1つのセルに複数の値が入った「タグ列」を、行に分けて整理するときの定番。",
+  "lesson": "L1201",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "text.split"
+  ]
+ },
+ {
+  "term": "Text.Combine",
+  "en": "Text.Combine",
+  "reading": "てきすとこんばいん",
+  "short": "複数の文字列を、1つの文字列につなげる。",
+  "desc": "Text.Combine({\"田中\", \"A\"}, \"|\") は \"田中|A\" を返す。第2引数を省くと、区切りなしでそのままつながる。数値や日付が混ざっているとエラーになるので、Text.From で文字列にそろえてから渡す。複数の列を組み合わせてキーを作るときによく使うが、値の中に区切り文字が含まれていると別の行と同じキーになってしまうため、\"|\" のようにデータに現れにくい文字を選ぶ。",
+  "lesson": "L1206",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "text.combine"
+  ]
+ },
+ {
+  "term": "Date.FromText",
+  "en": "Date.FromText",
+  "reading": "でーとふろむてきすと",
+  "short": "文字列を日付に変える。",
+  "desc": "Date.FromText(\"2026-04-01\") は 2026年4月1日 を返す。同じ \"03/04/2026\" でもロケールによって3月4日とも4月3日とも読まれるため、開いた人の環境で結果が変わるのが最大の落とし穴。\"2026-04-01\" の形にそろえてから渡すか、Date.FromText([年月], [Culture=\"ja-JP\"]) のようにカルチャを明示すると安定する。変換できない文字列はエラーになるので、try Date.FromText([日付]) otherwise null で受け止めておくとよい。",
+  "lesson": "L0502",
+  "tags": [
+   "Power Query",
+   "データ品質"
+  ],
+  "aliases": [
+   "date.fromtext"
+  ]
+ },
+ {
+  "term": "Date.StartOfMonth",
+  "en": "Date.StartOfMonth",
+  "reading": "でーとすたーとおぶまんす",
+  "short": "その日付が入っている月の1日を返す。",
+  "desc": "Date.StartOfMonth(#date(2026,4,17)) は 2026年4月1日 を返す。月ごとにまとめる列を作るとき、\"2026年4月\" という文字列ではなくこの関数で日付として持つと、並べ替えが正しくなり日付テーブルともつなげられる。日時（datetime）を渡すと日時が返り、時刻の部分は 0:00 になる。月末がほしいときは Date.EndOfMonth を使う。",
+  "lesson": "L0506",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "date.startofmonth"
+  ]
+ },
+ {
+  "term": "Date.Year",
+  "en": "Date.Year",
+  "reading": "でーといやー",
+  "short": "日付から年の数値を取り出す。",
+  "desc": "Date.Year(#date(2026,4,17)) は 2026 を返す。日付テーブルに年の列を作る Table.AddColumn(型設定, \"年\", each Date.Year([Date]), Int64.Type) が基本の使い方。会計年度は暦の年とずれることがあり、4月始まりなら if Date.Month([Date]) >= 4 then Date.Year([Date]) else Date.Year([Date]) - 1 のように自分で書く。データベースを読むときに each Date.Year([売上日]) = 2026 と書くと、列に関数を当てているせいでクエリフォールディングが止まるので、each [売上日] >= #date(2026,1,1) のように列そのものを範囲で比べる。",
+  "lesson": "L0605",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "date.year"
+  ]
+ },
+ {
+  "term": "Date.Month",
+  "en": "Date.Month",
+  "reading": "でーとまんす",
+  "short": "日付から月の数値（1〜12）を取り出す。",
+  "desc": "Date.Month(#date(2026,4,17)) は 4 を返す。返るのは数値なので、Text.From(Date.Month([Date])) & \"月\" のようにして表示用の月名を作る。表示用の文字列で並べ替えると「10月・11月・1月」の順になってしまうため、並べ替えにはこの月番号の列を使う。年をまたぐ集計では、年の列と組み合わせないと去年の4月と今年の4月が一緒になってしまう。",
+  "lesson": "L0605",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "date.month"
+  ]
+ },
+ {
+  "term": "Date.QuarterOfYear",
+  "en": "Date.QuarterOfYear",
+  "reading": "でーとくぉーたーおぶいやー",
+  "short": "日付が1年のうち何番目の四半期かを1〜4で返す。",
+  "desc": "Date.QuarterOfYear(#date(2026,4,17)) は 2 を返す。表示用には \"Q\" & Text.From(Date.QuarterOfYear([Date])) と書いて \"Q2\" のような文字列を作る。基準はあくまで1月始まりなので、4月始まりの会計四半期がほしいときは月番号から自分で計算する。返るのは数値で、文字列と & でつなぐには Text.From が必要になる。",
+  "lesson": "L0605",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "date.quarterofyear"
+  ]
+ },
+ {
+  "term": "Date.ToText",
+  "en": "Date.ToText",
+  "reading": "でーととぅーてきすと",
+  "short": "日付を、決めた書き方の文字列に変える。",
+  "desc": "Date.ToText(#date(2026,4,17), \"ddd\", \"ja-JP\") は \"金\" を返す。書き方（書式）とカルチャの両方を指定しないと、開いた人の環境で曜日名が英語になったり順番が変わったりする。文字列にすると並べ替えが辞書の順になってしまうので、曜日番号のような並べ替え用の数値列をあわせて作る。逆に文字列から日付に戻すのは Date.FromText。",
+  "lesson": "L0605",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "date.totext"
+  ]
+ },
+ {
+  "term": "Date.From",
+  "en": "Date.From",
+  "reading": "でーとふろむ",
+  "short": "日時や文字列などの値を、日付に変える。",
+  "desc": "Date.From(DateTime.LocalNow()) は今日の日付を返す。日時から時刻を落として日付だけにしたいときの定番。日付テーブルの終わりを Date.EndOfYear(Date.From(DateTime.LocalNow())) と書いておくと、年が変わっても当年末まで自動で伸びる。文字列も渡せるが、その場合は読み方がロケール次第で変わるので、Date.FromText でカルチャを明示するほうが安全。数値を渡すと日付のシリアル値として解釈される。",
+  "lesson": "L0605",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "date.from"
+  ]
+ },
+ {
+  "term": "Date.EndOfYear",
+  "en": "Date.EndOfYear",
+  "reading": "でーとえんどおぶいやー",
+  "short": "その日付が入っている年の最終日を返す。",
+  "desc": "Date.EndOfYear(#date(2026,4,17)) は 2026年12月31日 を返す。日付テーブルの終わりを固定の日付で書かずにこれで求めておくと、年が変わっても直さずにすむ。日時（datetime）を渡すと12月31日の23時59分台が返るため、日付として使いたいときは Date.EndOfYear(Date.From(DateTime.LocalNow())) のように先に日付へ落とす。会計年度の終わりがほしいときは、この関数ではなく開始月をもとに自分で計算する。",
+  "lesson": "L0605",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "date.endofyear"
+  ]
+ },
+ {
+  "term": "Date.AddDays",
+  "en": "Date.AddDays",
+  "reading": "でーとあどでいず",
+  "short": "日付に指定した日数を足す（マイナスを渡せば引く）。",
+  "desc": "Date.AddDays(#date(2026,4,1), -1) は 2026年3月31日 を返す。月末や閏年をまたいでも正しく計算されるので、日数の足し算を自分で組み立てる必要はない。履歴を持つ表で「有効終了日 = 次の行の開始日の1日前」を作る Date.AddDays(次{0}[スナップ日], -1) が代表的な使い方。逆に2つの日付の間隔がほしいときは、引き算をしてから Duration.Days で日数に直す。",
+  "lesson": "L1206",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "date.adddays"
+  ]
+ },
+ {
+  "term": "Number.Round",
+  "en": "Number.Round",
+  "reading": "なんばーらうんど",
+  "short": "数値を、指定した桁で丸める。",
+  "desc": "Number.Round(1234.56, 0) は 1235 を返す。気をつけたいのはちょうど半分のときの扱いで、既定は近いほうの偶数に寄せる方式のため、Number.Round(0.5, 0) は 0、Number.Round(1.5, 0) は 2 になる。Excel や DAX の ROUND と同じく0から遠いほうへ寄せたいときは、Number.Round(x, 0, RoundingMode.AwayFromZero) と第3引数を渡す。丸めた値を足し合わせると元の合計とずれるので、丸めるのは表示の直前だけにする。",
+  "lesson": "L1102",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "number.round"
+  ]
+ },
+ {
+  "term": "Number.FromText",
+  "en": "Number.FromText",
+  "reading": "なんばーふろむてきすと",
+  "short": "文字列を数値に変える。",
+  "desc": "Number.FromText(\"1234\") は 1234 を返す。\"1,234\" のように桁区切りや通貨記号が入っているとエラーになるため、Number.FromText(Text.Replace([金額], \",\", \"\")) のように先に取り除く。小数点がピリオドかカンマかはロケールで変わるので、海外で作られたファイルでは第2引数にカルチャを指定する。止まらないように try Number.FromText(...) otherwise null で受けておくと、変換できなかった行だけをあとから確認できる。",
+  "lesson": "L0502",
+  "tags": [
+   "Power Query",
+   "データ品質"
+  ],
+  "aliases": [
+   "number.fromtext"
+  ]
+ },
+ {
+  "term": "Number.From",
+  "en": "Number.From",
+  "reading": "なんばーふろむ",
+  "short": "文字列や日付など、いろいろな値を数値に変える。",
+  "desc": "Number.From(\"12\") は 12、Number.From(true) は 1 を返す。文字列専用の Number.FromText と違って何でも受け取れる分、意図しない変換が通ってしまうこともある。日付を渡すとシリアル値（1899年12月30日からの日数）になる点は覚えておきたい。変換できない値はエラーになるので、try Number.From([金額]) の形で受け、返ってきたレコードの [HasError] を見て問題の行を洗い出す。",
+  "lesson": "L1101",
+  "tags": [
+   "Power Query",
+   "データ品質"
+  ],
+  "aliases": [
+   "number.from"
+  ]
+ },
+ {
+  "term": "Number.RoundDown",
+  "en": "Number.RoundDown",
+  "reading": "なんばーらうんどだうん",
+  "short": "数値を切り捨てる。",
+  "desc": "Number.RoundDown(12345 / 5000) * 5000 は 10000 を返す。このように「割って、切り捨てて、掛け戻す」と、金額を5000円刻みのグループにまとめられる。第2引数で桁数を指定でき、Number.RoundDown(1.267, 2) は 1.26 になる。四捨五入ではないので、切り捨てた値を集めて合計すると元の合計より必ず小さくなる点に注意する。",
+  "lesson": "L1501",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "number.rounddown"
+  ]
+ },
+ {
+  "term": "Duration.Days",
+  "en": "Duration.Days",
+  "reading": "でゅれーしょんでいず",
+  "short": "期間から、まるまる何日分かを取り出す。",
+  "desc": "日付どうしを引くと期間（duration）が返り、そのままでは数値として使えないので、Duration.Days([出荷日] - [受注日]) として日数に直す。日付テーブルの行数を Duration.Days(終了日 - 開始日) + 1 で求める、という使い方もよくする。返るのは日の部分だけなので、1日と5時間の期間なら 1 になる（時間まで含めた小数がほしいときは Duration.TotalDays）。どちらかの日付が空だと結果も空になるため、if [出荷日] = null then null else Duration.Days(...) と分けておくと、0日と混ざらない。",
+  "lesson": "L0605",
+  "tags": [
+   "Power Query",
+   "整形"
+  ],
+  "aliases": [
+   "duration.days"
+  ]
+ },
+ {
+  "term": "DateTime.LocalNow",
+  "en": "DateTime.LocalNow",
+  "reading": "でーとたいむろーかるなう",
+  "short": "実行したその時点の日付と時刻を返す。",
+  "desc": "Date.From(DateTime.LocalNow()) で今日の日付が得られるので、日付テーブルの終わりを当年末まで自動で伸ばすときに使う。呼ぶたびに値が変わるため、同じ入力から同じ結果が返るという性質（冪等性）が崩れる。この関数をフィルターの条件に使うと、クエリフォールディングが効かなくなったり、増分更新の区切りが更新のたびにずれたりするので避ける。Power BI サービス上ではUTC（世界標準時）が返り、手元のPCで見た結果とずれる。日本時間が必要なら DateTimeZone.SwitchZone(DateTimeZone.UtcNow(), 9) のように時差を明示する。",
+  "lesson": "L0605",
+  "tags": [
+   "Power Query",
+   "性能"
+  ],
+  "aliases": [
+   "datetime.localnow"
+  ]
+ },
+ {
+  "term": "Csv.Document",
+  "en": "Csv.Document",
+  "reading": "しーえすぶいどきゅめんと",
+  "short": "CSVファイルの中身を表として読み取る。",
+  "desc": "Csv.Document(File.Contents(\"C:\\data\\sales.csv\"), [Delimiter=\",\", Encoding=65001]) が基本の形。日本語が読めない文字に化けるときは Encoding の指定が原因で、UTF-8 なら 65001、Shift_JIS なら 932 を渡す。読み込んだ直後の先頭行はまだ見出しではないので、Table.PromoteHeaders で見出しに上げる。値の中に改行や引用符が入っているCSVでは、QuoteStyle=QuoteStyle.Csv を付けないと行がずれる。タブ区切りなら Delimiter に \"#(tab)\" を指定する。",
+  "lesson": "L0405",
+  "tags": [
+   "Power Query",
+   "接続"
+  ],
+  "aliases": [
+   "csv.document"
+  ]
+ },
+ {
+  "term": "Sql.Database",
+  "en": "Sql.Database",
+  "reading": "えすきゅーえるでーたべーす",
+  "short": "SQL Serverのデータベースにつないで、テーブルを取り出す。",
+  "desc": "Sql.Database(pServer, pDatabase){[Schema=\"dbo\", Item=\"FactSales\"]}[Data] の形で、サーバー名とデータベース名を指定し、後ろの{...}[Data]で目的のテーブルまで降りる。サーバー名とデータベース名をパラメータにしておくと、開発用と本番用を切り替えやすい。オプションに [Query=\"SELECT ...\"] と生のSQLを書くこともできるが、それはネイティブクエリにあたり、そこから先のステップがクエリフォールディングされなくなることがある。折りたたまれているかどうかは、ステップを右クリックして「ネイティブ クエリの表示」が押せるかで確かめる。",
+  "lesson": "L1103",
+  "tags": [
+   "Power Query",
+   "接続",
+   "性能"
+  ],
+  "aliases": [
+   "sql.database"
+  ]
+ },
+ {
+  "term": "Splitter.SplitByNothing",
+  "en": "Splitter.SplitByNothing",
+  "reading": "すぷりったーすぷりっとばいなっしんぐ",
+  "short": "「区切らない」という分け方の指定。",
+  "desc": "Table.FromList(日付リスト, Splitter.SplitByNothing(), {\"Date\"}) のように、リストを1列の表に変えるときに使う。Table.FromList は既定で各要素をカンマ区切りとして分けてしまうため、日付や数値をそのまま1行1値で入れたいときにこれを渡す。名前は分け方の指定だが、中身は「分け方を返す関数」なので、Splitter.SplitByNothing() とかっこを付けて呼ぶ点に注意する。List.Dates で日付の並びを作り、そこから日付テーブルを組み立てる流れで必ず出てくる。",
+  "lesson": "L0605",
+  "tags": [
+   "Power Query"
+  ],
+  "aliases": [
+   "splitter.splitbynothing"
+  ]
+ },
+ {
+  "term": "Record.FieldValues",
+  "en": "Record.FieldValues",
+  "reading": "れこーどふぃーるどばりゅーず",
+  "short": "レコードの中身の値だけを、順番に並べて取り出す。",
+  "desc": "1行はレコードとして扱えるので、Record.FieldValues(_) と書くとその行の全項目の値がリストで得られる。全部の項目が空の行を落とすときに、each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {\"\", null})) のように使う。取り出せるのは値だけで列名は消えるため、「3番目の値」のような順番に頼った書き方をすると、列の並びが変わったときに壊れる。列名のほうがほしいときは Record.FieldNames を使う。",
+  "lesson": "L1102",
+  "tags": [
+   "Power Query"
+  ],
+  "aliases": [
+   "record.fieldvalues"
+  ]
+ },
+ {
+  "term": "PERCENTILE.INC",
+  "en": "PERCENTILE.INC",
+  "reading": "ぱーせんたいるいんく",
+  "short": "並べた数値のうち、下から数えて指定した割合の位置にある値を返す。",
+  "desc": "これはM言語ではなくDAXの関数で、売上_Q3 := PERCENTILE.INC( Fact_売上[金額], 0.75 ) のように、列と 0〜1 の割合を渡す。0.5 を渡すと中央値、0.25 と 0.75 を渡すと四分位数が得られ、平均だけでは見えない上位と下位の開きがつかめる。INC は両端（0と1）を含む方式で、両端を含まない PERCENTILE.EXC とは同じ割合でも結果が変わる。受け取れるのは列だけなので、メジャーの計算結果に対して求めたいときは PERCENTILEX.INC を使う。",
+  "lesson": "L1501",
+  "tags": [
+   "DAX"
+  ],
+  "aliases": [
+   "percentile.inc"
+  ]
  }
 ]

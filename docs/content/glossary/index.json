@@ -1,5 +1,5 @@
 {
- "count": 695,
+ "count": 763,
  "sources": [
   "M00",
   "M01",
@@ -26,29 +26,29 @@
   "M22"
  ],
  "tags": [
-  "モデリング",
   "DAX",
-  "統計",
+  "モデリング",
   "Power Query",
+  "統計",
   "データサイエンス",
   "運用",
+  "整形",
   "データ品質",
   "可視化",
   "データ基盤",
   "分析",
   "基礎",
-  "ガバナンス",
-  "実務",
-  "整形",
-  "Fabric",
-  "性能",
-  "M言語",
-  "コンテキスト",
   "時系列",
-  "AI",
-  "セキュリティ",
-  "エンジン",
+  "性能",
+  "ガバナンス",
   "集計",
+  "実務",
+  "Fabric",
+  "コンテキスト",
+  "M言語",
+  "セキュリティ",
+  "AI",
+  "エンジン",
   "設計",
   "指標",
   "機械学習",
@@ -56,6 +56,7 @@
   "資格",
   "結合",
   "ツール",
+  "接続",
   "予測",
   "配色",
   "可視化理論",
@@ -64,21 +65,21 @@
   "対話",
   "画面",
   "データ構造",
-  "接続",
+  "増分更新",
   "アクセシビリティ",
   "理論",
-  "増分更新",
+  "タイムインテリジェンス",
   "導入",
+  "品質保証",
   "データマネジメント",
   "伝達",
   "レポート",
   "効果測定",
   "レイアウト",
   "階層",
-  "タイムインテリジェンス",
-  "品質保証",
   "組織",
   "経営",
+  "書式",
   "分析手法",
   "顧客分析",
   "開発",
@@ -94,7 +95,6 @@
   "レビュー",
   "アーキテクチャ",
   "設定",
-  "書式",
   "認知",
   "因果推論",
   "取り込み",
@@ -108,6 +108,7 @@
   "再利用",
   "プロジェクト",
   "最適化",
+  "SQL",
   "計算",
   "配布",
   "異常検知",
@@ -220,6 +221,25 @@
    "lessonTitle": "グループ化・集計・行列の操作"
   },
   {
+   "term": "Splitter.SplitByNothing",
+   "en": "Splitter.SplitByNothing",
+   "reading": "すぷりったーすぷりっとばいなっしんぐ",
+   "short": "「区切らない」という分け方の指定。",
+   "desc": "Table.FromList(日付リスト, Splitter.SplitByNothing(), {\"Date\"}) のように、リストを1列の表に変えるときに使う。Table.FromList は既定で各要素をカンマ区切りとして分けてしまうため、日付や数値をそのまま1行1値で入れたいときにこれを渡す。名前は分け方の指定だが、中身は「分け方を返す関数」なので、Splitter.SplitByNothing() とかっこを付けて呼ぶ点に注意する。List.Dates で日付の並びを作り、そこから日付テーブルを組み立てる流れで必ず出てくる。",
+   "lesson": "L0605",
+   "tags": [
+    "Power Query"
+   ],
+   "aliases": [
+    "splitter.splitbynothing"
+   ],
+   "source": "M04",
+   "module": "M06",
+   "tier": "T2",
+   "moduleTitle": "データモデリング",
+   "lessonTitle": "日付テーブル — 時系列分析の土台"
+  },
+  {
    "term": "Table.ExpandTableColumn",
    "en": "Table.ExpandTableColumn",
    "reading": "てーぶるえくすぱんどてーぶるからむ",
@@ -321,6 +341,26 @@
    "lessonTitle": "データクレンジング実践 — 空白・表記ゆれ・エラー"
   },
   {
+   "term": "Text.BetweenDelimiters",
+   "en": "Text.BetweenDelimiters",
+   "reading": "てきすとびとうぃーんでりみたーず",
+   "short": "2つの区切り文字にはさまれた部分を取り出す。",
+   "desc": "Text.BetweenDelimiters(\"2026年4月\", \"年\", \"月\") は \"4\" を返す。前を切って後ろを切って、と2段階で書くより短くすむのが利点。どちらかの区切り文字が見つからないと空文字になり、エラーにならないまま後ろの処理でつまずくことがある。同じ区切り文字が何度も出てくる文字列では、第4・第5引数で何番目を使うかを指定する。",
+   "lesson": "L0504",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "text.betweendelimiters"
+   ],
+   "source": "M04",
+   "module": "M05",
+   "tier": "T2",
+   "moduleTitle": "Power Query 実践",
+   "lessonTitle": "ピボット解除 — 横持ちを縦持ちにする最重要スキル"
+  },
+  {
    "term": "RangeStart / RangeEnd",
    "en": "RangeStart / RangeEnd",
    "reading": "れんじすたーとれんじえんど",
@@ -379,6 +419,26 @@
    "tier": "T2",
    "moduleTitle": "Power Query 実践",
    "lessonTitle": "適用したステップという考え方 — 手順を記録する"
+  },
+  {
+   "term": "Text.BeforeDelimiter",
+   "en": "Text.BeforeDelimiter",
+   "reading": "てきすとびふぉあでりみたー",
+   "short": "決めた区切り文字より前の部分を取り出す。",
+   "desc": "Text.BeforeDelimiter(\"2026年4月\", \"年\") は \"2026\" を返す。「2026年4月」のような文字列を、年と月に分けて日付に直すときの入口になる。区切り文字が見つからないと空文字が返り、そのまま Number.FromText に渡すとエラーになるので、間に try をはさむか先に空欄を確認する。取り出した結果は文字列なので、数値として使うには Number.FromText で変換する。",
+   "lesson": "L0504",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "text.beforedelimiter"
+   ],
+   "source": "M04",
+   "module": "M05",
+   "tier": "T2",
+   "moduleTitle": "Power Query 実践",
+   "lessonTitle": "ピボット解除 — 横持ちを縦持ちにする最重要スキル"
   },
   {
    "term": "Table.RemoveColumns",
@@ -441,6 +501,46 @@
    "lessonTitle": "グループ化・集計・行列の操作"
   },
   {
+   "term": "Text.AfterDelimiter",
+   "en": "Text.AfterDelimiter",
+   "reading": "てきすとあふたーでりみたー",
+   "short": "決めた区切り文字より後ろの部分を取り出す。",
+   "desc": "Text.AfterDelimiter(\"tanaka@example.com\", \"@\") は \"example.com\" を返す。メールアドレスから会社のドメインを取り出す、といった用途に向く。区切り文字が見つからないときはエラーではなく空文字が返るので、空欄が急に増えたら区切り文字の指定を疑う。同じ区切り文字が複数あるときは、第3引数で何番目から後ろを取るかを指定できる。",
+   "lesson": "L0502",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "text.afterdelimiter"
+   ],
+   "source": "M04",
+   "module": "M05",
+   "tier": "T2",
+   "moduleTitle": "Power Query 実践",
+   "lessonTitle": "データクレンジング実践 — 空白・表記ゆれ・エラー"
+  },
+  {
+   "term": "Date.QuarterOfYear",
+   "en": "Date.QuarterOfYear",
+   "reading": "でーとくぉーたーおぶいやー",
+   "short": "日付が1年のうち何番目の四半期かを1〜4で返す。",
+   "desc": "Date.QuarterOfYear(#date(2026,4,17)) は 2 を返す。表示用には \"Q\" & Text.From(Date.QuarterOfYear([Date])) と書いて \"Q2\" のような文字列を作る。基準はあくまで1月始まりなので、4月始まりの会計四半期がほしいときは月番号から自分で計算する。返るのは数値で、文字列と & でつなぐには Text.From が必要になる。",
+   "lesson": "L0605",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "date.quarterofyear"
+   ],
+   "source": "M04",
+   "module": "M06",
+   "tier": "T2",
+   "moduleTitle": "データモデリング",
+   "lessonTitle": "日付テーブル — 時系列分析の土台"
+  },
+  {
    "term": "DirectQueryフォールバック",
    "en": "DirectQuery fallback",
    "reading": "だいれくとくえりふぉーるばっく",
@@ -460,6 +560,25 @@
    "tier": "T4",
    "moduleTitle": "Microsoft Fabric",
    "lessonTitle": "Direct Lake — インポートとDirectQueryの第三の道"
+  },
+  {
+   "term": "Record.FieldValues",
+   "en": "Record.FieldValues",
+   "reading": "れこーどふぃーるどばりゅーず",
+   "short": "レコードの中身の値だけを、順番に並べて取り出す。",
+   "desc": "1行はレコードとして扱えるので、Record.FieldValues(_) と書くとその行の全項目の値がリストで得られる。全部の項目が空の行を落とすときに、each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {\"\", null})) のように使う。取り出せるのは値だけで列名は消えるため、「3番目の値」のような順番に頼った書き方をすると、列の並びが変わったときに壊れる。列名のほうがほしいときは Record.FieldNames を使う。",
+   "lesson": "L1102",
+   "tags": [
+    "Power Query"
+   ],
+   "aliases": [
+    "record.fieldvalues"
+   ],
+   "source": "M04",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
   },
   {
    "term": "SAMEPERIODLASTYEAR",
@@ -497,6 +616,46 @@
    "tier": "T2",
    "moduleTitle": "Power Query 実践",
    "lessonTitle": "データクレンジング実践 — 空白・表記ゆれ・エラー"
+  },
+  {
+   "term": "Date.StartOfMonth",
+   "en": "Date.StartOfMonth",
+   "reading": "でーとすたーとおぶまんす",
+   "short": "その日付が入っている月の1日を返す。",
+   "desc": "Date.StartOfMonth(#date(2026,4,17)) は 2026年4月1日 を返す。月ごとにまとめる列を作るとき、\"2026年4月\" という文字列ではなくこの関数で日付として持つと、並べ替えが正しくなり日付テーブルともつなげられる。日時（datetime）を渡すと日時が返り、時刻の部分は 0:00 になる。月末がほしいときは Date.EndOfMonth を使う。",
+   "lesson": "L0506",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "date.startofmonth"
+   ],
+   "source": "M04",
+   "module": "M05",
+   "tier": "T2",
+   "moduleTitle": "Power Query 実践",
+   "lessonTitle": "グループ化・集計・行列の操作"
+  },
+  {
+   "term": "DateTime.LocalNow",
+   "en": "DateTime.LocalNow",
+   "reading": "でーとたいむろーかるなう",
+   "short": "実行したその時点の日付と時刻を返す。",
+   "desc": "Date.From(DateTime.LocalNow()) で今日の日付が得られるので、日付テーブルの終わりを当年末まで自動で伸ばすときに使う。呼ぶたびに値が変わるため、同じ入力から同じ結果が返るという性質（冪等性）が崩れる。この関数をフィルターの条件に使うと、クエリフォールディングが効かなくなったり、増分更新の区切りが更新のたびにずれたりするので避ける。Power BI サービス上ではUTC（世界標準時）が返り、手元のPCで見た結果とずれる。日本時間が必要なら DateTimeZone.SwitchZone(DateTimeZone.UtcNow(), 9) のように時差を明示する。",
+   "lesson": "L0605",
+   "tags": [
+    "Power Query",
+    "性能"
+   ],
+   "aliases": [
+    "datetime.localnow"
+   ],
+   "source": "M04",
+   "module": "M06",
+   "tier": "T2",
+   "moduleTitle": "データモデリング",
+   "lessonTitle": "日付テーブル — 時系列分析の土台"
   },
   {
    "term": "Power Query エディター",
@@ -736,6 +895,26 @@
    "lessonTitle": "ライセンスと組織での使われ方"
   },
   {
+   "term": "Number.RoundDown",
+   "en": "Number.RoundDown",
+   "reading": "なんばーらうんどだうん",
+   "short": "数値を切り捨てる。",
+   "desc": "Number.RoundDown(12345 / 5000) * 5000 は 10000 を返す。このように「割って、切り捨てて、掛け戻す」と、金額を5000円刻みのグループにまとめられる。第2引数で桁数を指定でき、Number.RoundDown(1.267, 2) は 1.26 になる。四捨五入ではないので、切り捨てた値を集めて合計すると元の合計より必ず小さくなる点に注意する。",
+   "lesson": "L1501",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "number.rounddown"
+   ],
+   "source": "M04",
+   "module": "M15",
+   "tier": "T3",
+   "moduleTitle": "分析手法とデータサイエンス",
+   "lessonTitle": "記述統計 — 分布を見ずに平均を語るな"
+  },
+  {
    "term": "Power BI Desktop",
    "en": "Power BI Desktop",
    "reading": "ぱわーびーあいですくとっぷ",
@@ -944,6 +1123,26 @@
    "lessonTitle": "役割の異なる日付（USERELATIONSHIP）と複数ファクト"
   },
   {
+   "term": "Number.FromText",
+   "en": "Number.FromText",
+   "reading": "なんばーふろむてきすと",
+   "short": "文字列を数値に変える。",
+   "desc": "Number.FromText(\"1234\") は 1234 を返す。\"1,234\" のように桁区切りや通貨記号が入っているとエラーになるため、Number.FromText(Text.Replace([金額], \",\", \"\")) のように先に取り除く。小数点がピリオドかカンマかはロケールで変わるので、海外で作られたファイルでは第2引数にカルチャを指定する。止まらないように try Number.FromText(...) otherwise null で受けておくと、変換できなかった行だけをあとから確認できる。",
+   "lesson": "L0502",
+   "tags": [
+    "Power Query",
+    "データ品質"
+   ],
+   "aliases": [
+    "number.fromtext"
+   ],
+   "source": "M04",
+   "module": "M05",
+   "tier": "T2",
+   "moduleTitle": "Power Query 実践",
+   "lessonTitle": "データクレンジング実践 — 空白・表記ゆれ・エラー"
+  },
+  {
    "term": "Power BI Mobile",
    "en": "Power BI Mobile",
    "reading": "ぱわーびーあいもばいる",
@@ -1004,6 +1203,26 @@
    "tier": "T2",
    "moduleTitle": "Power Query 実践",
    "lessonTitle": "データクレンジング実践 — 空白・表記ゆれ・エラー"
+  },
+  {
+   "term": "Text.StartsWith",
+   "en": "Text.StartsWith",
+   "reading": "てきすとすたーつうぃず",
+   "short": "文字列が、指定した文字で始まっているかどうかを返す。",
+   "desc": "Text.StartsWith(\"~$売上.xlsx\", \"~$\") は true を返す。フォルダーから読むときに Excel の一時ファイルを外す each not Text.StartsWith([Name], \"~$\") が典型例。「含むか」ではなく「先頭が一致するか」なので、同じ文字が途中にあっても false になる。既定では大文字と小文字を区別するため、区別せずに調べたいときは第3引数に Comparer.OrdinalIgnoreCase を渡す。",
+   "lesson": "L1102",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "text.startswith"
+   ],
+   "source": "M04",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
   },
   {
    "term": "USERELATIONSHIP",
@@ -1216,6 +1435,26 @@
    "lessonTitle": "ストレージエンジンと数式エンジン — 遅さの正体"
   },
   {
+   "term": "Date.EndOfYear",
+   "en": "Date.EndOfYear",
+   "reading": "でーとえんどおぶいやー",
+   "short": "その日付が入っている年の最終日を返す。",
+   "desc": "Date.EndOfYear(#date(2026,4,17)) は 2026年12月31日 を返す。日付テーブルの終わりを固定の日付で書かずにこれで求めておくと、年が変わっても直さずにすむ。日時（datetime）を渡すと12月31日の23時59分台が返るため、日付として使いたいときは Date.EndOfYear(Date.From(DateTime.LocalNow())) のように先に日付へ落とす。会計年度の終わりがほしいときは、この関数ではなく開始月をもとに自分で計算する。",
+   "lesson": "L0605",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "date.endofyear"
+   ],
+   "source": "M04",
+   "module": "M06",
+   "tier": "T2",
+   "moduleTitle": "データモデリング",
+   "lessonTitle": "日付テーブル — 時系列分析の土台"
+  },
+  {
    "term": "List.Transform",
    "en": "List.Transform",
    "reading": "りすととらんすふぉーむ",
@@ -1251,6 +1490,25 @@
    "tier": "T2",
    "moduleTitle": "DAXコンテキスト",
    "lessonTitle": "タイムインテリジェンス — 前年比・YTD・移動平均"
+  },
+  {
+   "term": "PERCENTILE.INC",
+   "en": "PERCENTILE.INC",
+   "reading": "ぱーせんたいるいんく",
+   "short": "並べた数値のうち、下から数えて指定した割合の位置にある値を返す。",
+   "desc": "これはM言語ではなくDAXの関数で、売上_Q3 := PERCENTILE.INC( Fact_売上[金額], 0.75 ) のように、列と 0〜1 の割合を渡す。0.5 を渡すと中央値、0.25 と 0.75 を渡すと四分位数が得られ、平均だけでは見えない上位と下位の開きがつかめる。INC は両端（0と1）を含む方式で、両端を含まない PERCENTILE.EXC とは同じ割合でも結果が変わる。受け取れるのは列だけなので、メジャーの計算結果に対して求めたいときは PERCENTILEX.INC を使う。",
+   "lesson": "L1501",
+   "tags": [
+    "DAX"
+   ],
+   "aliases": [
+    "percentile.inc"
+   ],
+   "source": "M04",
+   "module": "M15",
+   "tier": "T3",
+   "moduleTitle": "分析手法とデータサイエンス",
+   "lessonTitle": "記述統計 — 分布を見ずに平均を語るな"
   },
   {
    "term": "Server Timings",
@@ -1471,6 +1729,46 @@
    "lessonTitle": "データフローとレイクハウス — 変換をどこで行うか"
   },
   {
+   "term": "Date.FromText",
+   "en": "Date.FromText",
+   "reading": "でーとふろむてきすと",
+   "short": "文字列を日付に変える。",
+   "desc": "Date.FromText(\"2026-04-01\") は 2026年4月1日 を返す。同じ \"03/04/2026\" でもロケールによって3月4日とも4月3日とも読まれるため、開いた人の環境で結果が変わるのが最大の落とし穴。\"2026-04-01\" の形にそろえてから渡すか、Date.FromText([年月], [Culture=\"ja-JP\"]) のようにカルチャを明示すると安定する。変換できない文字列はエラーになるので、try Date.FromText([日付]) otherwise null で受け止めておくとよい。",
+   "lesson": "L0502",
+   "tags": [
+    "Power Query",
+    "データ品質"
+   ],
+   "aliases": [
+    "date.fromtext"
+   ],
+   "source": "M04",
+   "module": "M05",
+   "tier": "T2",
+   "moduleTitle": "Power Query 実践",
+   "lessonTitle": "データクレンジング実践 — 空白・表記ゆれ・エラー"
+  },
+  {
+   "term": "Duration.Days",
+   "en": "Duration.Days",
+   "reading": "でゅれーしょんでいず",
+   "short": "期間から、まるまる何日分かを取り出す。",
+   "desc": "日付どうしを引くと期間（duration）が返り、そのままでは数値として使えないので、Duration.Days([出荷日] - [受注日]) として日数に直す。日付テーブルの行数を Duration.Days(終了日 - 開始日) + 1 で求める、という使い方もよくする。返るのは日の部分だけなので、1日と5時間の期間なら 1 になる（時間まで含めた小数がほしいときは Duration.TotalDays）。どちらかの日付が空だと結果も空になるため、if [出荷日] = null then null else Duration.Days(...) と分けておくと、0日と混ざらない。",
+   "lesson": "L0605",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "duration.days"
+   ],
+   "source": "M04",
+   "module": "M06",
+   "tier": "T2",
+   "moduleTitle": "データモデリング",
+   "lessonTitle": "日付テーブル — 時系列分析の土台"
+  },
+  {
    "term": "List.Distinct",
    "en": "List.Distinct",
    "reading": "りすとでぃすてぃんくと",
@@ -1546,6 +1844,26 @@
    "tier": "T3",
    "moduleTitle": "DAX上級",
    "lessonTitle": "テーブル関数 — VALUES・SUMMARIZE・ADDCOLUMNS・SELECTCOLUMNS"
+  },
+  {
+   "term": "SELECTEDVALUE",
+   "en": "SELECTEDVALUE",
+   "reading": "せれくてっどばりゅー",
+   "short": "いま1つに絞られている値を取り出す関数。",
+   "desc": "`SELECTEDVALUE( Dim_日付基準[基準], \"受注日\" )` のように、列と既定値を渡す。選択が1つに定まっていればその値を返し、複数見えているときや何も無いときは第2引数の既定値（省略時はBLANK）を返す。スライサーの選択で計算を切り替える `SWITCH` と組み合わせる場面が多い。既定値を省くと、総計行や複数選択のときだけ式全体がBLANKになり、原因の分かりにくい不具合になりやすい。",
+   "lesson": "L1203",
+   "tags": [
+    "DAX",
+    "コンテキスト"
+   ],
+   "aliases": [
+    "selectedvalue"
+   ],
+   "source": "M07",
+   "module": "M12",
+   "tier": "T3",
+   "moduleTitle": "高度なモデリング",
+   "lessonTitle": "役割の異なる日付（USERELATIONSHIP）と複数ファクト"
   },
   {
    "term": "Table.IsEmpty",
@@ -1752,6 +2070,66 @@
    "lessonTitle": "ダッシュボード設計の原則 — 5秒・30秒・5分"
   },
   {
+   "term": "CONCATENATEX",
+   "en": "CONCATENATEX",
+   "reading": "こんかてねーとえっくす",
+   "short": "表の各行の文字をつないで、1つの文にする関数。",
+   "desc": "`CONCATENATEX( VALUES( Dim_商品[Category] ), Dim_商品[Category], \"、\" )` のように、表・行ごとの式・区切り文字を渡す。第4引数以降に並べ替えの列と `ASC` / `DESC` を書けば、つなぐ順番を固定できる。選択中の値をタイトルに出す用途で使うが、値が多いと極端に長い文字列になるため、`HASONEVALUE` や `COUNTROWS` で件数を確かめてから出す。",
+   "lesson": "L1301",
+   "tags": [
+    "DAX",
+    "集計"
+   ],
+   "aliases": [
+    "concatenatex"
+   ],
+   "source": "M07",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "イテレータ関数 — SUMX・AVERAGEX・RANKX"
+  },
+  {
+   "term": "Csv.Document",
+   "en": "Csv.Document",
+   "reading": "しーえすぶいどきゅめんと",
+   "short": "CSVファイルの中身を表として読み取る。",
+   "desc": "Csv.Document(File.Contents(\"C:\\data\\sales.csv\"), [Delimiter=\",\", Encoding=65001]) が基本の形。日本語が読めない文字に化けるときは Encoding の指定が原因で、UTF-8 なら 65001、Shift_JIS なら 932 を渡す。読み込んだ直後の先頭行はまだ見出しではないので、Table.PromoteHeaders で見出しに上げる。値の中に改行や引用符が入っているCSVでは、QuoteStyle=QuoteStyle.Csv を付けないと行がずれる。タブ区切りなら Delimiter に \"#(tab)\" を指定する。",
+   "lesson": "L0405",
+   "tags": [
+    "Power Query",
+    "接続"
+   ],
+   "aliases": [
+    "csv.document"
+   ],
+   "source": "M04",
+   "module": "M04",
+   "tier": "T1",
+   "moduleTitle": "データの読み込み入門",
+   "lessonTitle": "Power Queryエディタ初めの一歩"
+  },
+  {
+   "term": "Date.AddDays",
+   "en": "Date.AddDays",
+   "reading": "でーとあどでいず",
+   "short": "日付に指定した日数を足す（マイナスを渡せば引く）。",
+   "desc": "Date.AddDays(#date(2026,4,1), -1) は 2026年3月31日 を返す。月末や閏年をまたいでも正しく計算されるので、日数の足し算を自分で組み立てる必要はない。履歴を持つ表で「有効終了日 = 次の行の開始日の1日前」を作る Date.AddDays(次{0}[スナップ日], -1) が代表的な使い方。逆に2つの日付の間隔がほしいときは、引き算をしてから Duration.Days で日数に直す。",
+   "lesson": "L1206",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "date.adddays"
+   ],
+   "source": "M04",
+   "module": "M12",
+   "tier": "T3",
+   "moduleTitle": "高度なモデリング",
+   "lessonTitle": "SCD（緩やかに変化する次元）と履歴管理"
+  },
+  {
    "term": "List.IsEmpty",
    "en": "List.IsEmpty",
    "reading": "りすといずえんぷてぃ",
@@ -1770,6 +2148,26 @@
    "tier": "T3",
    "moduleTitle": "高度なデータ整形",
    "lessonTitle": "M言語の構造 — let ... in を読み書きする"
+  },
+  {
+   "term": "Number.Round",
+   "en": "Number.Round",
+   "reading": "なんばーらうんど",
+   "short": "数値を、指定した桁で丸める。",
+   "desc": "Number.Round(1234.56, 0) は 1235 を返す。気をつけたいのはちょうど半分のときの扱いで、既定は近いほうの偶数に寄せる方式のため、Number.Round(0.5, 0) は 0、Number.Round(1.5, 0) は 2 になる。Excel や DAX の ROUND と同じく0から遠いほうへ寄せたいときは、Number.Round(x, 0, RoundingMode.AwayFromZero) と第3引数を渡す。丸めた値を足し合わせると元の合計とずれるので、丸めるのは表示の直前だけにする。",
+   "lesson": "L1102",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "number.round"
+   ],
+   "source": "M04",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
   },
   {
    "term": "PATHCONTAINS",
@@ -1850,6 +2248,27 @@
    "lessonTitle": "OneLake と Lakehouse — データを1か所に置く"
   },
   {
+   "term": "Sql.Database",
+   "en": "Sql.Database",
+   "reading": "えすきゅーえるでーたべーす",
+   "short": "SQL Serverのデータベースにつないで、テーブルを取り出す。",
+   "desc": "Sql.Database(pServer, pDatabase){[Schema=\"dbo\", Item=\"FactSales\"]}[Data] の形で、サーバー名とデータベース名を指定し、後ろの{...}[Data]で目的のテーブルまで降りる。サーバー名とデータベース名をパラメータにしておくと、開発用と本番用を切り替えやすい。オプションに [Query=\"SELECT ...\"] と生のSQLを書くこともできるが、それはネイティブクエリにあたり、そこから先のステップがクエリフォールディングされなくなることがある。折りたたまれているかどうかは、ステップを右クリックして「ネイティブ クエリの表示」が押せるかで確かめる。",
+   "lesson": "L1103",
+   "tags": [
+    "Power Query",
+    "接続",
+    "性能"
+   ],
+   "aliases": [
+    "sql.database"
+   ],
+   "source": "M04",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "クエリ フォールディング — 更新時間を決める仕組み"
+  },
+  {
    "term": "Table.Buffer",
    "en": "Table.Buffer",
    "reading": "てーぶるばっふぁ",
@@ -1868,6 +2287,46 @@
    "tier": "T3",
    "moduleTitle": "高度なデータ整形",
    "lessonTitle": "クエリ フォールディング — 更新時間を決める仕組み"
+  },
+  {
+   "term": "Text.Combine",
+   "en": "Text.Combine",
+   "reading": "てきすとこんばいん",
+   "short": "複数の文字列を、1つの文字列につなげる。",
+   "desc": "Text.Combine({\"田中\", \"A\"}, \"|\") は \"田中|A\" を返す。第2引数を省くと、区切りなしでそのままつながる。数値や日付が混ざっているとエラーになるので、Text.From で文字列にそろえてから渡す。複数の列を組み合わせてキーを作るときによく使うが、値の中に区切り文字が含まれていると別の行と同じキーになってしまうため、\"|\" のようにデータに現れにくい文字を選ぶ。",
+   "lesson": "L1206",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "text.combine"
+   ],
+   "source": "M04",
+   "module": "M12",
+   "tier": "T3",
+   "moduleTitle": "高度なモデリング",
+   "lessonTitle": "SCD（緩やかに変化する次元）と履歴管理"
+  },
+  {
+   "term": "Text.Replace",
+   "en": "Text.Replace",
+   "reading": "てきすとりぷれいす",
+   "short": "文字列の中の指定した部分を、別の文字に置き換える。",
+   "desc": "Text.Replace(\"1,234\", \",\", \"\") は \"1234\" を返す。見つかった箇所は最初の1つだけでなく、すべてが置き換わる。大文字と小文字は区別されるので、\"ABC\" を探しても \"abc\" は置き換わらない。第1引数が数値だとエラーになるため、Text.Replace(Text.From(_), \",\", \"\") のように文字列にしてから渡す。",
+   "lesson": "L0502",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "text.replace"
+   ],
+   "source": "M04",
+   "module": "M05",
+   "tier": "T2",
+   "moduleTitle": "Power Query 実践",
+   "lessonTitle": "データクレンジング実践 — 空白・表記ゆれ・エラー"
   },
   {
    "term": "What-ifパラメータ",
@@ -2196,6 +2655,26 @@
    "lessonTitle": "フィルターはどう流れるか — 伝播を図で追う"
   },
   {
+   "term": "Date.ToText",
+   "en": "Date.ToText",
+   "reading": "でーととぅーてきすと",
+   "short": "日付を、決めた書き方の文字列に変える。",
+   "desc": "Date.ToText(#date(2026,4,17), \"ddd\", \"ja-JP\") は \"金\" を返す。書き方（書式）とカルチャの両方を指定しないと、開いた人の環境で曜日名が英語になったり順番が変わったりする。文字列にすると並べ替えが辞書の順になってしまうので、曜日番号のような並べ替え用の数値列をあわせて作る。逆に文字列から日付に戻すのは Date.FromText。",
+   "lesson": "L0605",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "date.totext"
+   ],
+   "source": "M04",
+   "module": "M06",
+   "tier": "T2",
+   "moduleTitle": "データモデリング",
+   "lessonTitle": "日付テーブル — 時系列分析の土台"
+  },
+  {
    "term": "Direct Lake",
    "en": "Direct Lake",
    "reading": "だいれくとれいく",
@@ -2283,6 +2762,26 @@
    "lessonTitle": "指標(KPI)の設計 — 何を測るかで組織は変わる"
   },
   {
+   "term": "HASONEVALUE",
+   "en": "HASONEVALUE",
+   "reading": "はずわんばりゅー",
+   "short": "その列の値がいま1つに定まっているかを、はい／いいえで返す関数。",
+   "desc": "`IF( HASONEVALUE( Dim_商品[Category] ), [カテゴリ別の計算], [全体の計算] )` のように、明細行と総計行で計算を変えるときに使う。総計行では複数の値が見えているためFALSEになり、これを見落とすと総計だけが不自然な値になる。値そのものが必要なら、判定と取り出しを1つにまとめた `SELECTEDVALUE` が使える。",
+   "lesson": "L1306",
+   "tags": [
+    "DAX",
+    "コンテキスト"
+   ],
+   "aliases": [
+    "hasonevalue"
+   ],
+   "source": "M07",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "DAXのよくある間違い20選"
+  },
+  {
    "term": "KEEPFILTERS",
    "en": "KEEPFILTERS",
    "reading": "きーぷふぃるたーず",
@@ -2298,6 +2797,46 @@
    "tier": "T2",
    "moduleTitle": "DAXコンテキスト",
    "lessonTitle": "KEEPFILTERS と FILTER — 条件の書き方を選ぶ"
+  },
+  {
+   "term": "LOOKUPVALUE",
+   "en": "LOOKUPVALUE",
+   "reading": "るっくあっぷばりゅー",
+   "short": "条件に合う行を探して、指定した列の値を1つ取り出す関数。",
+   "desc": "`LOOKUPVALUE( Dim_社員[社員ID], Dim_社員[メール], USERPRINCIPALNAME() )` のように、取り出したい列・探す列・探す値の順に渡し、条件は組にして複数並べられる。一致する行が無ければBLANK、一致した値が2種類以上あるとエラーになるため、探す先のキーが重複していないことが前提になる。最後に代替値を1つ足しておくと、見つからないときと複数一致したときにその値が返る。リレーションでつながっている表どうしなら、`RELATED` のほうが速く意図も明確。",
+   "lesson": "L1204",
+   "tags": [
+    "DAX",
+    "モデリング"
+   ],
+   "aliases": [
+    "lookupvalue"
+   ],
+   "source": "M07",
+   "module": "M12",
+   "tier": "T3",
+   "moduleTitle": "高度なモデリング",
+   "lessonTitle": "行レベルセキュリティ(RLS) — 静的・動的・階層"
+  },
+  {
+   "term": "Number.From",
+   "en": "Number.From",
+   "reading": "なんばーふろむ",
+   "short": "文字列や日付など、いろいろな値を数値に変える。",
+   "desc": "Number.From(\"12\") は 12、Number.From(true) は 1 を返す。文字列専用の Number.FromText と違って何でも受け取れる分、意図しない変換が通ってしまうこともある。日付を渡すとシリアル値（1899年12月30日からの日数）になる点は覚えておきたい。変換できない値はエラーになるので、try Number.From([金額]) の形で受け、返ってきたレコードの [HasError] を見て問題の行を洗い出す。",
+   "lesson": "L1101",
+   "tags": [
+    "Power Query",
+    "データ品質"
+   ],
+   "aliases": [
+    "number.from"
+   ],
+   "source": "M04",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "M言語の構造 — let ... in を読み書きする"
   },
   {
    "term": "Power Query",
@@ -2339,6 +2878,26 @@
    "tier": "T4",
    "moduleTitle": "高度な分析とAI",
    "lessonTitle": "Python・R連携と外部機械学習"
+  },
+  {
+   "term": "Text.Remove",
+   "en": "Text.Remove",
+   "reading": "てきすとりむーぶ",
+   "short": "指定した文字を、文字列のどこにあってもすべて消す。",
+   "desc": "Text.Remove(\"東 京 店\", {\" \", \"　\"}) は \"東京店\" を返す。前後だけを削る Text.Trim との違いは、途中にある文字も消える点にある。第2引数は「文字のリスト」なので、\"  \" のような文字列ではなく {\" \", \"　\"} の形で渡す。消しすぎると別の値と同じ文字列になってしまうため、住所や商品名のような列に広くかけるのは避ける。",
+   "lesson": "L0502",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "text.remove"
+   ],
+   "source": "M04",
+   "module": "M05",
+   "tier": "T2",
+   "moduleTitle": "Power Query 実践",
+   "lessonTitle": "データクレンジング実践 — 空白・表記ゆれ・エラー"
   },
   {
    "term": "イノベーション普及理論",
@@ -2846,6 +3405,26 @@
    "lessonTitle": "計測する — パフォーマンスアナライザーとDAX Studio"
   },
   {
+   "term": "Date.Month",
+   "en": "Date.Month",
+   "reading": "でーとまんす",
+   "short": "日付から月の数値（1〜12）を取り出す。",
+   "desc": "Date.Month(#date(2026,4,17)) は 4 を返す。返るのは数値なので、Text.From(Date.Month([Date])) & \"月\" のようにして表示用の月名を作る。表示用の文字列で並べ替えると「10月・11月・1月」の順になってしまうため、並べ替えにはこの月番号の列を使う。年をまたぐ集計では、年の列と組み合わせないと去年の4月と今年の4月が一緒になってしまう。",
+   "lesson": "L0605",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "date.month"
+   ],
+   "source": "M04",
+   "module": "M06",
+   "tier": "T2",
+   "moduleTitle": "データモデリング",
+   "lessonTitle": "日付テーブル — 時系列分析の土台"
+  },
+  {
    "term": "Delta Lake",
    "en": "Delta Lake",
    "reading": "でるたれいく",
@@ -2865,6 +3444,26 @@
    "tier": "T4",
    "moduleTitle": "Microsoft Fabric",
    "lessonTitle": "OneLake と Lakehouse — データを1か所に置く"
+  },
+  {
+   "term": "ISFILTERED",
+   "en": "ISFILTERED",
+   "reading": "いずふぃるたーど",
+   "short": "その列がいま直接絞り込まれているかを、はい／いいえで返す関数。",
+   "desc": "`IF( ISFILTERED( Dim_店舗[Region] ), CONCATENATEX( VALUES( Dim_店舗[Region] ), Dim_店舗[Region], \"・\" ), \"全地域\" )` のように、見出しの出し分けに使う。見ているのはその列自体への絞り込みだけで、別の表からの絞り込みで結果的に行が減っている場合はFALSEになる。間接的な絞り込みまで含めたいときは `ISCROSSFILTERED` を使う。総計行かどうかを見分けたいだけなら、値が1つに定まっているかを調べる `HASONEVALUE` のほうが合うことが多い。",
+   "lesson": "L1305",
+   "tags": [
+    "DAX",
+    "コンテキスト"
+   ],
+   "aliases": [
+    "isfiltered"
+   ],
+   "source": "M07",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "実務パターン集 — 構成比・累計・ランキング・ABC分析・コホート"
   },
   {
    "term": "List.Count",
@@ -2925,6 +3524,66 @@
    "tier": "T3",
    "moduleTitle": "高度なモデリング",
    "lessonTitle": "SCD（緩やかに変化する次元）と履歴管理"
+  },
+  {
+   "term": "Text.Lower",
+   "en": "Text.Lower",
+   "reading": "てきすとろわー",
+   "short": "英字をすべて小文字にそろえて返す。",
+   "desc": "Text.Lower(\".CSV\") は \".csv\" を返す。M言語は大文字と小文字を区別するので、拡張子やコードを比べるときは両側をそろえてから比べる。フォルダー接続でCSVだけを残す Table.SelectRows(ソース, each Text.Lower([Extension]) = \".csv\") が定番の使い方。変わるのは英字だけで、全角と半角の違いや日本語の表記ゆれには効かないため、そちらは別に直す。",
+   "lesson": "L1102",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "text.lower"
+   ],
+   "source": "M04",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
+  },
+  {
+   "term": "Text.Split",
+   "en": "Text.Split",
+   "reading": "てきすとすぷりっと",
+   "short": "区切り文字で文字列を分け、分けた結果をリストで返す。",
+   "desc": "Text.Split(\"赤,青,緑\", \",\") は {\"赤\", \"青\", \"緑\"} というリストを返す。返るのは文字列ではなくリストなので、列に入れた場合は Table.ExpandListColumn で行に展開してから使う。区切り文字が続いていると空文字の要素ができ、区切りの前後に空白が残ることもあるため、展開したあとに Text.Trim をかける。1つのセルに複数の値が入った「タグ列」を、行に分けて整理するときの定番。",
+   "lesson": "L1201",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "text.split"
+   ],
+   "source": "M04",
+   "module": "M12",
+   "tier": "T3",
+   "moduleTitle": "高度なモデリング",
+   "lessonTitle": "多対多とブリッジテーブル"
+  },
+  {
+   "term": "Text.Start",
+   "en": "Text.Start",
+   "reading": "てきすとすたーと",
+   "short": "文字列の先頭から、指定した文字数だけ取り出す。",
+   "desc": "Text.Start(\"2026-04_売上.csv\", 7) は \"2026-04\" を返す。ファイル名の先頭に入れた年月を取り出して日付の列にする、といった使い方をする。数えるのは文字数なので、ファイル名の付け方が1文字ずれても、エラーにならないまま違う値が入るのがこわいところ。末尾から取りたいときは Text.End、途中から取りたいときは Text.Middle を使う。",
+   "lesson": "L1102",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "text.start"
+   ],
+   "source": "M04",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
   },
   {
    "term": "ウォーターフォール図",
@@ -3489,6 +4148,85 @@
    "lessonTitle": "集計関数を使いこなす — SUM・COUNT・DISTINCTCOUNT"
   },
   {
+   "term": "DATATABLE",
+   "en": "DATATABLE",
+   "reading": "でーたてーぶる",
+   "short": "DAXの式の中に小さな表を直接書いて作る関数。",
+   "desc": "`Dim_日付基準 = DATATABLE( \"基準\", STRING, {{\"受注日\"},{\"出荷日\"},{\"請求日\"}} )` のように、列名・型・値の並びを渡す。スライサーの選択肢のような、元データを持たない小さな表を作るのに向く。型は `STRING` `INTEGER` `DOUBLE` `DATETIME` `BOOLEAN` `CURRENCY` を大文字で指定し、値として書けるのは定数だけで式は使えない。中身が増えたり変わったりする表なら、Power Query 側で作ったほうが保守しやすい。",
+   "lesson": "L1203",
+   "tags": [
+    "DAX",
+    "モデリング"
+   ],
+   "aliases": [
+    "datatable"
+   ],
+   "source": "M07",
+   "module": "M12",
+   "tier": "T3",
+   "moduleTitle": "高度なモデリング",
+   "lessonTitle": "役割の異なる日付（USERELATIONSHIP）と複数ファクト"
+  },
+  {
+   "term": "Date.From",
+   "en": "Date.From",
+   "reading": "でーとふろむ",
+   "short": "日時や文字列などの値を、日付に変える。",
+   "desc": "Date.From(DateTime.LocalNow()) は今日の日付を返す。日時から時刻を落として日付だけにしたいときの定番。日付テーブルの終わりを Date.EndOfYear(Date.From(DateTime.LocalNow())) と書いておくと、年が変わっても当年末まで自動で伸びる。文字列も渡せるが、その場合は読み方がロケール次第で変わるので、Date.FromText でカルチャを明示するほうが安全。数値を渡すと日付のシリアル値として解釈される。",
+   "lesson": "L0605",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "date.from"
+   ],
+   "source": "M04",
+   "module": "M06",
+   "tier": "T2",
+   "moduleTitle": "データモデリング",
+   "lessonTitle": "日付テーブル — 時系列分析の土台"
+  },
+  {
+   "term": "Date.Year",
+   "en": "Date.Year",
+   "reading": "でーといやー",
+   "short": "日付から年の数値を取り出す。",
+   "desc": "Date.Year(#date(2026,4,17)) は 2026 を返す。日付テーブルに年の列を作る Table.AddColumn(型設定, \"年\", each Date.Year([Date]), Int64.Type) が基本の使い方。会計年度は暦の年とずれることがあり、4月始まりなら if Date.Month([Date]) >= 4 then Date.Year([Date]) else Date.Year([Date]) - 1 のように自分で書く。データベースを読むときに each Date.Year([売上日]) = 2026 と書くと、列に関数を当てているせいでクエリフォールディングが止まるので、each [売上日] >= #date(2026,1,1) のように列そのものを範囲で比べる。",
+   "lesson": "L0605",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "date.year"
+   ],
+   "source": "M04",
+   "module": "M06",
+   "tier": "T2",
+   "moduleTitle": "データモデリング",
+   "lessonTitle": "日付テーブル — 時系列分析の土台"
+  },
+  {
+   "term": "INTERSECT",
+   "en": "INTERSECT",
+   "reading": "いんたーせくと",
+   "short": "2つの表の、両方にある行だけを残す関数。",
+   "desc": "`COUNTROWS( INTERSECT( 今年の顧客, 昨年の顧客 ) )` と書けば、続けて買ってくれた人の件数が出る。突き合わせは列名ではなく左からの位置と数で行われるため、2つの表の列の並びと型をそろえておく必要がある。片方にしかない行を取りたいときは `EXCEPT`、両方を合わせたいときは `UNION` を使う。",
+   "lesson": "L1304",
+   "tags": [
+    "DAX"
+   ],
+   "aliases": [
+    "intersect"
+   ],
+   "source": "M07",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "集合演算と仮想リレーション — UNION・EXCEPT・TREATAS"
+  },
+  {
    "term": "ISINSCOPE",
    "en": "ISINSCOPE",
    "reading": "いずいんすこーぷ",
@@ -3587,6 +4325,46 @@
    "tier": "T2",
    "moduleTitle": "Power Query 実践",
    "lessonTitle": "グループ化・集計・行列の操作"
+  },
+  {
+   "term": "Text.From",
+   "en": "Text.From",
+   "reading": "てきすとふろむ",
+   "short": "数値や日付などの値を、そのまま文字列に変える。",
+   "desc": "Text.From(3) は \"3\" を返す。M言語の & は文字列どうししかつなげられないため、\"Q\" & Text.From(Date.QuarterOfYear([Date])) のように、数値を文字にはさむ場面でよく使う。第2引数にカルチャを渡すと、日付や小数の書き方をそろえられる。空欄（null）を渡すと空欄のまま返るので、\"null\" という文字が入ってしまうことはない。",
+   "lesson": "L0502",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "text.from"
+   ],
+   "source": "M04",
+   "module": "M05",
+   "tier": "T2",
+   "moduleTitle": "Power Query 実践",
+   "lessonTitle": "データクレンジング実践 — 空白・表記ゆれ・エラー"
+  },
+  {
+   "term": "Text.Trim",
+   "en": "Text.Trim",
+   "reading": "てきすととりむ",
+   "short": "文字列の前後にある余分な空白を取り除く。",
+   "desc": "Text.Trim(\"  東京  \") は \"東京\" を返す。取り除くのは前後だけで、\"東 京\" のような途中の空白は残る（途中も消したいときは Text.Remove、別の文字に替えたいときは Text.Replace）。既定では半角の空白しか対象にならないので、日本語のデータでは Text.Trim(_, {\" \", \"　\"}) と全角スペースも並べて指定する。キー列に空白が残っていると結合が一致しなくなるため、取り込んだ直後にかけておくのが安全。",
+   "lesson": "L0502",
+   "tags": [
+    "Power Query",
+    "整形"
+   ],
+   "aliases": [
+    "text.trim"
+   ],
+   "source": "M04",
+   "module": "M05",
+   "tier": "T2",
+   "moduleTitle": "Power Query 実践",
+   "lessonTitle": "データクレンジング実践 — 空白・表記ゆれ・エラー"
   },
   {
    "term": "アクションタイトル",
@@ -4358,6 +5136,26 @@
    "lessonTitle": "クエリ フォールディング — 更新時間を決める仕組み"
   },
   {
+   "term": "AVERAGEX",
+   "en": "AVERAGEX",
+   "reading": "あべれーじえっくす",
+   "short": "表を1行ずつ見て、行ごとの計算結果を平均する関数。",
+   "desc": "`AVERAGEX( VALUES( Dim_顧客[CustomerID] ), [売上合計] )` のように、対象の表と、1行ごとに評価する式を渡す。この例は「顧客あたりの平均」であり、明細1行あたりの平均とはまったく違う値になる。`AVERAGE` は列しか受け取れないので、行ごとの計算が必要なときや、顧客単位・注文単位でならしたいときに使う。式の結果が空白になった行は、平均の対象から外れる。",
+   "lesson": "L0703",
+   "tags": [
+    "DAX",
+    "集計"
+   ],
+   "aliases": [
+    "averagex"
+   ],
+   "source": "M07",
+   "module": "M07",
+   "tier": "T2",
+   "moduleTitle": "DAX基礎",
+   "lessonTitle": "集計関数を使いこなす — SUM・COUNT・DISTINCTCOUNT"
+  },
+  {
    "term": "CALENDAR",
    "en": "CALENDAR / CALENDARAUTO",
    "reading": "かれんだー",
@@ -4395,6 +5193,47 @@
    "tier": "T2",
    "moduleTitle": "DAX基礎",
    "lessonTitle": "条件分岐と安全な割り算 — IF・SWITCH・DIVIDE"
+  },
+  {
+   "term": "DATEDIFF",
+   "en": "DATEDIFF",
+   "reading": "でーとでぃふ",
+   "short": "2つの日付の差を、指定した単位の数で返す関数。",
+   "desc": "`DATEDIFF( 最終購入日, TODAY(), DAY )` のように、開始・終了・単位（DAY / MONTH / YEAR / HOUR など）の順に渡す。数えているのは経過した長さではなく単位の境目を何回またいだかで、`DATEDIFF( DATE( 2024, 12, 31 ), DATE( 2025, 1, 1 ), YEAR )` は1日違いでも1を返す。「まる何年」がほしいときは日数で計算するか、月数を数えて12で割る。時刻を含む列を渡すと、DAY単位でも時刻の分だけ境目の数え方が変わる点に注意する。",
+   "lesson": "L1003",
+   "tags": [
+    "DAX",
+    "時系列"
+   ],
+   "aliases": [
+    "datediff"
+   ],
+   "source": "M07",
+   "module": "M10",
+   "tier": "T2",
+   "moduleTitle": "共有と運用",
+   "lessonTitle": "データ更新の自動化とゲートウェイ"
+  },
+  {
+   "term": "DATESMTD",
+   "en": "DATESMTD",
+   "reading": "でーつえむてぃーでぃー",
+   "short": "月初から今見ている日までの日付をまとめて返す関数。",
+   "desc": "`CALCULATE( [売上合計], DATESMTD( Dim_日付[Date] ) )` と書けば当月の累計になる。返るのは値ではなく日付の並び（表）なので、`CALCULATE` の絞り込みとして渡して使う。抜けのない連続した日付テーブルが必要で、その表を「日付テーブルとしてマーク」しておかないと結果が狂う。年初からなら `DATESYTD`、四半期初からなら `DATESQTD` を使う。",
+   "lesson": "L1503",
+   "tags": [
+    "DAX",
+    "時系列",
+    "タイムインテリジェンス"
+   ],
+   "aliases": [
+    "datesmtd"
+   ],
+   "source": "M07",
+   "module": "M15",
+   "tier": "T3",
+   "moduleTitle": "分析手法とデータサイエンス",
+   "lessonTitle": "時系列分析 — トレンド・季節性・移動平均・異常検知"
   },
   {
    "term": "Excelで分析",
@@ -5609,6 +6448,26 @@
    "lessonTitle": "AIビジュアルを正しく使う — 主要因・分解ツリー・異常検知"
   },
   {
+   "term": "AVERAGE",
+   "en": "AVERAGE",
+   "reading": "あべれーじ",
+   "short": "列に入っている数値の平均を出す関数。",
+   "desc": "`平均売上 = AVERAGE( Fact_売上[SalesAmount] )` のように、列を1つ渡す。値が空白の行は合計にも件数にも入らないため、「空白を0とみなした平均」とは答えが変わる。行ごとの計算結果を平均したいときや、顧客単位・注文単位でならしたいときは `AVERAGEX` を使う。平均は極端に大きい値に引っ張られるので、真ん中の値を返す `MEDIAN` や `MEDIANX` と並べて見ると誤読を防げる。",
+   "lesson": "L0104",
+   "tags": [
+    "DAX",
+    "集計"
+   ],
+   "aliases": [
+    "average"
+   ],
+   "source": "M07",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "数字の読み方の基礎 — 平均のウソと分布"
+  },
+  {
    "term": "Copilot",
    "en": "Copilot",
    "reading": "こぱいろっと",
@@ -5703,6 +6562,46 @@
    "lessonTitle": "行コンテキストとは何か — 2つの文脈を区別する"
   },
   {
+   "term": "ISBLANK",
+   "en": "ISBLANK",
+   "reading": "いずぶらんく",
+   "short": "値が空かどうかを調べて、はい／いいえで返す関数。",
+   "desc": "`IF( ISBLANK( [売上合計] ), \"データなし\", [売上合計] )` のように、値が無いときの見せ方を切り替える用途で使う。`[売上合計] = BLANK()` と書く方法もあるが、DAXでは0や空文字がBLANKと等しいと判定されるため、「0」と「値がない」を区別したいときは `ISBLANK` を使う。判定できるのは値1つ（スカラー）だけで、表には使えない。空白を既定値に置き換えたいだけなら `COALESCE` のほうが短く書ける。",
+   "lesson": "L0704",
+   "tags": [
+    "DAX",
+    "基礎"
+   ],
+   "aliases": [
+    "isblank"
+   ],
+   "source": "M07",
+   "module": "M07",
+   "tier": "T2",
+   "moduleTitle": "DAX基礎",
+   "lessonTitle": "条件分岐と安全な割り算 — IF・SWITCH・DIVIDE"
+  },
+  {
+   "term": "MEDIANX",
+   "en": "MEDIANX",
+   "reading": "めでぃあんえっくす",
+   "short": "表を1行ずつ見て、行ごとの計算結果の真ん中の値を返す関数。",
+   "desc": "`MEDIANX( VALUES( Dim_顧客[CustomerID] ), CALCULATE( SUM( Fact_売上[SalesAmount] ) ) )` は、顧客ごとの売上を小さい順に並べたときのちょうど真ん中の値を返す。`MEDIAN` は列しか受け取れないため、顧客単位・注文単位でまとめたあとの真ん中の値はこの形でしか出せない。平均と違って一部の極端に大きい値に引っぱられにくく、平均と並べて見ると偏りに気づける。走査する表の行数だけ式を評価するので、細かすぎる表を渡すと重くなる。",
+   "lesson": "L1501",
+   "tags": [
+    "DAX",
+    "集計"
+   ],
+   "aliases": [
+    "medianx"
+   ],
+   "source": "M07",
+   "module": "M15",
+   "tier": "T3",
+   "moduleTitle": "分析手法とデータサイエンス",
+   "lessonTitle": "記述統計 — 分布を見ずに平均を語るな"
+  },
+  {
    "term": "OneLake",
    "en": "OneLake",
    "reading": "わんれいく",
@@ -5739,6 +6638,25 @@
    "tier": "T2",
    "moduleTitle": "DAXコンテキスト",
    "lessonTitle": "行コンテキストとは何か — 2つの文脈を区別する"
+  },
+  {
+   "term": "ROUNDUP",
+   "en": "ROUNDUP",
+   "reading": "らうんどあっぷ",
+   "short": "数値を指定した桁で切り上げる関数。",
+   "desc": "`ROUNDUP( 3.2, 0 )` は4、`ROUNDUP( -3.2, 0 )` は-4 で、0から遠いほうへ動かす。第2引数は残す小数の桁数で、負の数を渡すと `ROUNDUP( 1234, -2 )` が1300になるように整数側の桁で切り上がる。四半期を出す `ROUNDUP( MONTH( [Date] ) / 3, 0 )` が定番の使い方。近いほうに丸めるなら `ROUND`、切り捨てなら `ROUNDDOWN` を使う。",
+   "lesson": "L0605",
+   "tags": [
+    "DAX"
+   ],
+   "aliases": [
+    "roundup"
+   ],
+   "source": "M07",
+   "module": "M06",
+   "tier": "T2",
+   "moduleTitle": "データモデリング",
+   "lessonTitle": "日付テーブル — 時系列分析の土台"
   },
   {
    "term": "SEキャッシュ",
@@ -5800,6 +6718,26 @@
    "tier": "T4",
    "moduleTitle": "Microsoft Fabric",
    "lessonTitle": "OneLake と Lakehouse — データを1か所に置く"
+  },
+  {
+   "term": "WEEKDAY",
+   "en": "WEEKDAY",
+   "reading": "うぃーくでい",
+   "short": "日付が何曜日かを数値で返す関数。",
+   "desc": "`WEEKDAY( [Date], 2 )` のように第2引数で数え方を選び、2なら月曜が1・日曜が7になる（省略時は1で、日曜が1）。`IF( WEEKDAY( [Date], 2 ) >= 6, \"週末\", \"平日\" )` のように、平日と週末を分ける列によく使う。第2引数を書き忘れると番号が1つずれ、月曜のつもりの判定が日曜を指してしまう。返るのは数値なので、曜日名で見せたいときは `FORMAT( [Date], \"ddd\" )` や対応表を使う。",
+   "lesson": "L0605",
+   "tags": [
+    "DAX",
+    "時系列"
+   ],
+   "aliases": [
+    "weekday"
+   ],
+   "source": "M07",
+   "module": "M06",
+   "tier": "T2",
+   "moduleTitle": "データモデリング",
+   "lessonTitle": "日付テーブル — 時系列分析の土台"
   },
   {
    "term": "Web に公開",
@@ -7492,6 +8430,25 @@
    "lessonTitle": "条件分岐と安全な割り算 — IF・SWITCH・DIVIDE"
   },
   {
+   "term": "EXCEPT",
+   "en": "EXCEPT",
+   "reading": "えくせぷと",
+   "short": "1つ目の表にあって、2つ目の表に無い行だけを残す関数。",
+   "desc": "`COUNTROWS( EXCEPT( 昨年の顧客, 今年の顧客 ) )` と書けば、昨年いて今年いない件数が出る。突き合わせは列名ではなく左からの位置と数で行われるため、2つの表の列の並びと型をそろえておく必要がある。渡すのは `VALUES( Dim_顧客[CustomerID] )` のように、キー1列だけの表にするのが分かりやすい。両方にある行を残したいときは `INTERSECT` を使う。",
+   "lesson": "L1304",
+   "tags": [
+    "DAX"
+   ],
+   "aliases": [
+    "except"
+   ],
+   "source": "M07",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "集合演算と仮想リレーション — UNION・EXCEPT・TREATAS"
+  },
+  {
    "term": "FILTER",
    "en": "FILTER",
    "reading": "ふぃるたー",
@@ -7508,6 +8465,46 @@
    "tier": "T2",
    "moduleTitle": "DAXコンテキスト",
    "lessonTitle": "KEEPFILTERS と FILTER — 条件の書き方を選ぶ"
+  },
+  {
+   "term": "FORMAT",
+   "en": "FORMAT",
+   "reading": "ふぉーまっと",
+   "short": "数値や日付を、指定した見た目の文字に変換する関数。",
+   "desc": "`FORMAT( [売上合計], \"#,##0円\" )` や `FORMAT( [Date], \"yyyy年M月\" )` のように、書式の指定を第2引数に渡す。戻り値は文字になるため、通した値は足し算も大小の並べ替えもできなくなる。並び順が必要なら、表示用の文字とは別に並べ替え用の数値列を用意する。桁区切りや通貨記号を付けたいだけなら、メジャーの書式設定で行うほうが安全。",
+   "lesson": "L0605",
+   "tags": [
+    "DAX",
+    "書式"
+   ],
+   "aliases": [
+    "format"
+   ],
+   "source": "M07",
+   "module": "M06",
+   "tier": "T2",
+   "moduleTitle": "データモデリング",
+   "lessonTitle": "日付テーブル — 時系列分析の土台"
+  },
+  {
+   "term": "ISNULL",
+   "en": "ISNULL",
+   "reading": "いずぬる",
+   "short": "SQLで、値がNULLのときに別の値へ置き換える書き方。",
+   "desc": "`ISNULL( 更新日時, 登録日時 ) AS 最終更新日時` のように、第1引数がNULLなら第2引数を返す。増分更新では「必ず値が入っている更新日時の列」が要るため、この形で穴を埋めておくと差分の取りこぼしを防げる。SQL Server 系の書き方で、候補を3つ以上並べたいときは標準SQLの `COALESCE` を使う。名前が似ているDAXの `ISBLANK` は、はい／いいえを返す判定用で、置き換えは行わない。",
+   "lesson": "L1104",
+   "tags": [
+    "SQL",
+    "増分更新"
+   ],
+   "aliases": [
+    "isnull"
+   ],
+   "source": "M07",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "増分更新 — 大規模ファクトを現実的に運用する"
   },
   {
    "term": "KPIツリー",
@@ -9422,6 +10419,26 @@
    "lessonTitle": "条件分岐と安全な割り算 — IF・SWITCH・DIVIDE"
   },
   {
+   "term": "COUNT",
+   "en": "COUNT",
+   "reading": "かうんと",
+   "short": "列に値が入っている行の数を数える関数。",
+   "desc": "`COUNT( Fact_売上[SalesAmount] )` は、その列が空白でない行だけを数える。表の行数そのものを数えたいなら `COUNTROWS( Fact_売上 )` のほうが速く、意図もはっきりする。値の種類が何通りあるかを知りたいときは `DISTINCTCOUNT` で、取り違えると「注文件数」と「明細件数」が入れ替わる。空白がどれだけあるかを知りたいときは `COUNTBLANK` を使う。",
+   "lesson": "L0104",
+   "tags": [
+    "DAX",
+    "集計"
+   ],
+   "aliases": [
+    "count"
+   ],
+   "source": "M07",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "数字の読み方の基礎 — 平均のウソと分布"
+  },
+  {
    "term": "DMBOK",
    "en": "Data Management Body of Knowledge",
    "reading": "でぃーえむぼっく",
@@ -9509,6 +10526,26 @@
    "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
   },
   {
+   "term": "EDATE",
+   "en": "EDATE",
+   "reading": "いーでーと",
+   "short": "日付を、指定した月数だけ前後にずらす関数。",
+   "desc": "`EDATE( [Date], -3 )` は3か月前の同じ日を返し、4月始まりの年度を出す `YEAR( EDATE( [Date], -3 ) )` が定番の使い方。月末の扱いが賢く、1月31日の1か月後は2月28日（うるう年なら29日）になる。日数でずらしたいときは足し算か `DATEADD` を使う。戻り値は日付なので、そのまま比較したり `YEAR` `MONTH` に渡したりできる。",
+   "lesson": "L0806",
+   "tags": [
+    "DAX",
+    "時系列"
+   ],
+   "aliases": [
+    "edate"
+   ],
+   "source": "M07",
+   "module": "M08",
+   "tier": "T2",
+   "moduleTitle": "DAXコンテキスト",
+   "lessonTitle": "タイムインテリジェンス — 前年比・YTD・移動平均"
+  },
+  {
    "term": "Git統合",
    "en": "Git integration",
    "reading": "ぎっとうごう",
@@ -9528,6 +10565,46 @@
    "tier": "T4",
    "moduleTitle": "ガバナンスとライフサイクル",
    "lessonTitle": "PBIP と Git — BIをソース管理する"
+  },
+  {
+   "term": "LOWER",
+   "en": "LOWER",
+   "reading": "ろわー",
+   "short": "文字をすべて小文字にして返す関数。",
+   "desc": "`[Email] = LOWER( USERPRINCIPALNAME() )` のように、ログインしたユーザーのメールアドレスの表記をそろえてから突き合わせる使い方が代表的。DAXの文字の比較はもともと大文字と小文字を区別しないが、両側を `LOWER` でそろえておくと、表示や外部への受け渡しでも表記が安定する。大文字にそろえたいときは `UPPER` を使う。前後の余分な空白は落とせないので、必要なら `TRIM` と組み合わせる。",
+   "lesson": "L1204",
+   "tags": [
+    "DAX",
+    "セキュリティ"
+   ],
+   "aliases": [
+    "lower"
+   ],
+   "source": "M07",
+   "module": "M12",
+   "tier": "T3",
+   "moduleTitle": "高度なモデリング",
+   "lessonTitle": "行レベルセキュリティ(RLS) — 静的・動的・階層"
+  },
+  {
+   "term": "MONTH",
+   "en": "MONTH",
+   "reading": "まんす",
+   "short": "日付から、月の数値（1〜12）だけを取り出す関数。",
+   "desc": "`MONTH( [Date] )` は4月なら4を返す。四半期は `ROUNDUP( MONTH( [Date] ) / 3, 0 )` のように月から計算できる。返るのは1〜12の数値なので、複数年ぶんのデータをこの列だけで集計すると、別の年の同じ月が1つにまとまってしまう。年月でまとめたいときは `FORMAT( [Date], \"yyyy-MM\" )` のような列を作り、並べ替え用の数値列を添える。",
+   "lesson": "L0605",
+   "tags": [
+    "DAX",
+    "時系列"
+   ],
+   "aliases": [
+    "month"
+   ],
+   "source": "M07",
+   "module": "M06",
+   "tier": "T2",
+   "moduleTitle": "データモデリング",
+   "lessonTitle": "日付テーブル — 時系列分析の土台"
   },
   {
    "term": "RANKX",
@@ -9610,6 +10687,26 @@
    "tier": "T1",
    "moduleTitle": "データ分析とBIの基礎",
    "lessonTitle": "指標(KPI)の設計 — 何を測るかで組織は変わる"
+  },
+  {
+   "term": "TODAY",
+   "en": "TODAY",
+   "reading": "とぅでい",
+   "short": "今日の日付を返す関数。",
+   "desc": "`IF( DATEDIFF( 最終購入日, TODAY(), DAY ) > 120, \"離反\", \"継続\" )` のように、今日からの経過日数で区分けする使い方が多い。時刻は含まれず、その日の0時ちょうどの日付になるため、時刻まで要るときは `NOW` を使う。基準の時計は式が評価された環境のもので、Power BI サービス上ではUTCなので日本時間とは日付がずれることがある。計算列に書くと更新した日の値で固定され、翌日になっても変わらない。",
+   "lesson": "L1504",
+   "tags": [
+    "DAX",
+    "時系列"
+   ],
+   "aliases": [
+    "today"
+   ],
+   "source": "M07",
+   "module": "M15",
+   "tier": "T3",
+   "moduleTitle": "分析手法とデータサイエンス",
+   "lessonTitle": "顧客分析 — コホート・RFM・LTV・チャーン"
   },
   {
    "term": "Type1",
@@ -11434,6 +12531,46 @@
    "source": "M00"
   },
   {
+   "term": "CAST",
+   "en": "CAST",
+   "reading": "きゃすと",
+   "short": "SQLで、値の型を別の型に変換する書き方。",
+   "desc": "`CAST( 売上日 AS date )` のように書き、日時から日付の部分だけを取り出すときなどに使う。Power BI からデータベースへ送るクエリの中に現れ、変換をデータベース側にやらせることで、受け取る行数や桁を減らせる。ただし絞り込みに使う列を `CAST` で包むと、データベース側の索引が使われず、かえって遅くなることがある。DAXで同じことをするなら `CONVERT` や `DATEVALUE` にあたる。",
+   "lesson": "L1103",
+   "tags": [
+    "SQL",
+    "データ基盤"
+   ],
+   "aliases": [
+    "cast"
+   ],
+   "source": "M07",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "クエリ フォールディング — 更新時間を決める仕組み"
+  },
+  {
+   "term": "DATE",
+   "en": "DATE",
+   "reading": "でーと",
+   "short": "年・月・日の3つの数から、日付の値を作る関数。",
+   "desc": "`DATE( 2025, 4, 1 )` のように書く。文字で書いた日付をそのまま使うより安全で、国ごとの書き方の違い（月と日の順番）に左右されない。月に13以上、日に月末を超える数を渡すと繰り上がり、`DATE( 2024, 13, 1 )` は2025年1月1日になる。`CALENDAR( DATE( 2022, 4, 1 ), DATE( 2026, 3, 31 ) )` のように、日付テーブルの範囲指定でよく使う。",
+   "lesson": "L0605",
+   "tags": [
+    "DAX",
+    "時系列"
+   ],
+   "aliases": [
+    "date"
+   ],
+   "source": "M07",
+   "module": "M06",
+   "tier": "T2",
+   "moduleTitle": "データモデリング",
+   "lessonTitle": "日付テーブル — 時系列分析の土台"
+  },
+  {
    "term": "JSON",
    "en": "JavaScript Object Notation",
    "reading": "じぇいそん",
@@ -11464,6 +12601,26 @@
    "tier": "T3",
    "moduleTitle": "分析手法とデータサイエンス",
    "lessonTitle": "予測と不確実性 — 予測値に幅を持たせる"
+  },
+  {
+   "term": "MAXX",
+   "en": "MAXX",
+   "reading": "まっくすえっくす",
+   "short": "表を1行ずつ見て、行ごとの計算結果のうち最大のものを返す関数。",
+   "desc": "`MAXX( VALUES( Dim_顧客[CustomerID] ), [売上合計] )` は、顧客ごとの売上を出したうえで、その最大値を返す。`MAX` は列しか受け取れないため、行ごとの計算やメジャーの結果どうしを比べたいときは `MAXX` を使う。走査する表の行数だけ式が評価されるので、対象は必要な細かさの表に絞る。式の結果が空白になった行は対象から外れる。",
+   "lesson": "L0703",
+   "tags": [
+    "DAX",
+    "集計"
+   ],
+   "aliases": [
+    "maxx"
+   ],
+   "source": "M07",
+   "module": "M07",
+   "tier": "T2",
+   "moduleTitle": "DAX基礎",
+   "lessonTitle": "集計関数を使いこなす — SUM・COUNT・DISTINCTCOUNT"
   },
   {
    "term": "NULL",
@@ -11666,6 +12823,25 @@
    "lessonTitle": "予測と不確実性 — 予測値に幅を持たせる"
   },
   {
+   "term": "SQRT",
+   "en": "SQRT",
+   "reading": "すくえあるーと",
+   "short": "平方根（2乗するとその数になる値）を返す関数。",
+   "desc": "`SQRT( 16 )` は4を返し、`[値] ^ 0.5` と同じ結果になる。2乗して足し合わせた値を元の単位に戻すときに使い、ばらつきの大きさを見る計算で登場する。負の数を渡すとエラーになるため、`ABS` で符号を落とすか、差の2乗のように負にならない値を渡す。値が空白のときは結果も空白になる。",
+   "lesson": "L1502",
+   "tags": [
+    "DAX"
+   ],
+   "aliases": [
+    "sqrt"
+   ],
+   "source": "M07",
+   "module": "M15",
+   "tier": "T3",
+   "moduleTitle": "分析手法とデータサイエンス",
+   "lessonTitle": "相関と因果 — 交絡・選択バイアス・シンプソンのパラドックス"
+  },
+  {
    "term": "SUMX",
    "en": "SUMX",
    "reading": "さむえっくす",
@@ -11702,6 +12878,45 @@
    "tier": "T4",
    "moduleTitle": "ガバナンスとライフサイクル",
    "lessonTitle": "PBIP と Git — BIをソース管理する"
+  },
+  {
+   "term": "TOPN",
+   "en": "TOPN",
+   "reading": "とっぷえぬ",
+   "short": "上から指定した件数ぶんの行だけを取り出す関数。",
+   "desc": "`TOPN( 3, VALUES( Dim_商品[Category] ), [売上合計], DESC )` のように、件数・対象の表・並べ替えの式・向きを渡す。返るのは表なのでそのままでは表示できず、`CALCULATE( [売上合計], 上位3カテゴリ )` のように絞り込みとして使うか、`COUNTROWS` で数える。同点の行はすべて残るため、3件のつもりが4件返ることがある。返る表の並び順は決まっていないので、見せる順番はビジュアル側で指定する。",
+   "lesson": "L0705",
+   "tags": [
+    "DAX"
+   ],
+   "aliases": [
+    "topn"
+   ],
+   "source": "M07",
+   "module": "M07",
+   "tier": "T2",
+   "moduleTitle": "DAX基礎",
+   "lessonTitle": "VAR と RETURN — 読める・速いDAXを書く"
+  },
+  {
+   "term": "YEAR",
+   "en": "YEAR",
+   "reading": "いやー",
+   "short": "日付から、年の数値だけを取り出す関数。",
+   "desc": "`YEAR( [Date] )` は2025のような整数を返す。日付テーブルに年の列を作るときの基本で、4月始まりの年度なら `YEAR( EDATE( [Date], -3 ) )` と3か月ずらしてから取り出す。返るのは数値なので、「2025年」と見せたいときは `FORMAT` や文字の連結が必要になる。年と月を別々の列で持つと並び順が崩れやすいため、並べ替え用に `YEAR( [Date] ) * 100 + MONTH( [Date] )` のような列を添えておく。",
+   "lesson": "L0605",
+   "tags": [
+    "DAX",
+    "時系列"
+   ],
+   "aliases": [
+    "year"
+   ],
+   "source": "M07",
+   "module": "M06",
+   "tier": "T2",
+   "moduleTitle": "データモデリング",
+   "lessonTitle": "日付テーブル — 時系列分析の土台"
   },
   {
    "term": "Zスコア",
@@ -14871,6 +16086,25 @@
    "lessonTitle": "相関と因果 — 交絡・選択バイアス・シンプソンのパラドックス"
   },
   {
+   "term": "ABS",
+   "en": "ABS",
+   "reading": "あぶす",
+   "short": "符号を取り去って、0からの距離（絶対値）を返す関数。",
+   "desc": "`ABS( [予測値] - [実績値] )` のように、差の大きさだけを見たいときに使う。プラスとマイナスの差をそのまま平均すると打ち消し合ってしまうため、ずれの大きさを見るときは `ABS` を通してから平均する。`ABS( -3 )` も `ABS( 3 )` も3を返す。符号そのものが意味を持つ場面（増えたのか減ったのか）で使うと、方向の情報が消えてしまう点に注意する。",
+   "lesson": "L1505",
+   "tags": [
+    "DAX"
+   ],
+   "aliases": [
+    "abs"
+   ],
+   "source": "M07",
+   "module": "M15",
+   "tier": "T3",
+   "moduleTitle": "分析手法とデータサイエンス",
+   "lessonTitle": "予測と不確実性 — 予測値に幅を持たせる"
+  },
+  {
    "term": "ALL",
    "en": "ALL",
    "reading": "おーる",
@@ -14933,6 +16167,26 @@
    "tier": "T1",
    "moduleTitle": "Power BIの全体像",
    "lessonTitle": "Power BIとは何か — 5つの工程"
+  },
+  {
+   "term": "DAY",
+   "en": "DAY",
+   "reading": "でい",
+   "short": "日付から、日にちの数値（1〜31）だけを取り出す関数。",
+   "desc": "`DAY( [Date] )` は4月5日なら5を返す。月のうち何日目かで比べたいときや、月初・月末の判定に使う。`DATEDIFF( 開始, 終了, DAY )` にも同じ綴りが出てくるが、そちらは関数ではなく単位の指定であって別物。返るのは数値なので、日付そのものが必要な場面では `DATE( YEAR( [Date] ), MONTH( [Date] ), 1 )` のように組み立て直す。",
+   "lesson": "L1503",
+   "tags": [
+    "DAX",
+    "時系列"
+   ],
+   "aliases": [
+    "day"
+   ],
+   "source": "M07",
+   "module": "M15",
+   "tier": "T3",
+   "moduleTitle": "分析手法とデータサイエンス",
+   "lessonTitle": "時系列分析 — トレンド・季節性・移動平均・異常検知"
   },
   {
    "term": "ELT",
@@ -15090,6 +16344,46 @@
    "lessonTitle": "顧客分析 — コホート・RFM・LTV・チャーン"
   },
   {
+   "term": "MAX",
+   "en": "MAX",
+   "reading": "まっくす",
+   "short": "いちばん大きい値を返す関数。",
+   "desc": "列を1つ渡す `MAX( Dim_日付[Date] )` の形と、2つの値を比べる `MAX( [売上合計], 0 )` の形の2種類がある。列版は今の絞り込みで見えている行だけを対象にするため、スライサーを変えると結果も変わる。行ごとに計算した結果の最大値がほしいときは `MAXX` を使う。文字の列にも使えるが、その場合の大小は辞書の並び順で決まる。",
+   "lesson": "L0703",
+   "tags": [
+    "DAX",
+    "集計"
+   ],
+   "aliases": [
+    "max"
+   ],
+   "source": "M07",
+   "module": "M07",
+   "tier": "T2",
+   "moduleTitle": "DAX基礎",
+   "lessonTitle": "集計関数を使いこなす — SUM・COUNT・DISTINCTCOUNT"
+  },
+  {
+   "term": "MIN",
+   "en": "MIN",
+   "reading": "みん",
+   "short": "いちばん小さい値を返す関数。",
+   "desc": "`MIN( Dim_日付[Date] )` のように列を渡す形と、`MIN( [在庫数], [必要数] )` のように2つの値を比べる形がある。列版は今の絞り込みで見えている行だけを見るため、表示中の期間の先頭日を取り出す用途によく使う。行ごとに計算した結果の最小値がほしいときは `MINX` を使う。値が空白の行は無視される。",
+   "lesson": "L1305",
+   "tags": [
+    "DAX",
+    "集計"
+   ],
+   "aliases": [
+    "min"
+   ],
+   "source": "M07",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "実務パターン集 — 構成比・累計・ランキング・ABC分析・コホート"
+  },
+  {
    "term": "M言語",
    "en": "M language",
    "reading": "えむげんご",
@@ -15108,6 +16402,26 @@
    "tier": "T1",
    "moduleTitle": "Power BIの全体像",
    "lessonTitle": "Power BIとは何か — 5つの工程"
+  },
+  {
+   "term": "NOW",
+   "en": "NOW",
+   "reading": "なう",
+   "short": "式が評価された時点の日付と時刻を返す関数。",
+   "desc": "`DATEDIFF( MAX( '更新情報'[最終更新] ), NOW(), HOUR )` のように、最終更新からどれだけ経ったかを出す用途で使う。基準になる時計はレポートを見ている人の端末ではなく式が評価された環境のもので、Power BI サービス上ではUTCが返る。日本時間で見せたいなら9時間足すか、時差を反映した列を用意する。時刻が要らない場合は `TODAY` を使い、計算列に書くと更新した時点の値で固定される点にも注意する。",
+   "lesson": "L1003",
+   "tags": [
+    "DAX",
+    "時系列"
+   ],
+   "aliases": [
+    "now"
+   ],
+   "source": "M07",
+   "module": "M10",
+   "tier": "T2",
+   "moduleTitle": "共有と運用",
+   "lessonTitle": "データ更新の自動化とゲートウェイ"
   },
   {
    "term": "OKR",
@@ -15170,6 +16484,26 @@
    "tier": "T4",
    "moduleTitle": "現場で価値を出す",
    "lessonTitle": "効果測定とキャリア — BIの価値を証明する"
+  },
+  {
+   "term": "ROW",
+   "en": "ROW",
+   "reading": "ろう",
+   "short": "列名と値を並べて、1行だけの表を作る関数。",
+   "desc": "`ROW( \"テスト名\", \"売上金額_2025年1月\", \"期待値\", 期待, \"実測値\", 実測 )` のように、列名と値を交互に渡す。`EVALUATE` と組み合わせて、メジャーの結果を1行の表として取り出す確認用のクエリでよく使う。返るのは表なので、ビジュアルにそのまま置くことはできない。複数行をまとめたいときは `UNION` でつなぐか、値が固定なら `DATATABLE` を使う。",
+   "lesson": "L1803",
+   "tags": [
+    "DAX",
+    "品質保証"
+   ],
+   "aliases": [
+    "row"
+   ],
+   "source": "M07",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "テストと品質保証 — BIにおけるテストとは何か"
   },
   {
    "term": "SCD",
@@ -15270,6 +16604,26 @@
    ],
    "aliases": [],
    "source": "M00"
+  },
+  {
+   "term": "SUM",
+   "en": "SUM",
+   "reading": "さむ",
+   "short": "列に入っている数値を、すべて足し合わせる関数。",
+   "desc": "`売上合計 = SUM( Fact_売上[SalesAmount] )` のように、列を1つだけ渡して使う。受け取れるのは列そのものなので、`SUM( 数量 * 単価 )` のような式は書けない。行ごとに掛け算してから足したいときは `SUMX` を使う。値が空白の行は無視され、対象の行が1つもないときは0ではなくBLANKが返る。",
+   "lesson": "L0104",
+   "tags": [
+    "DAX",
+    "集計"
+   ],
+   "aliases": [
+    "sum"
+   ],
+   "source": "M07",
+   "module": "M01",
+   "tier": "T1",
+   "moduleTitle": "データ分析とBIの基礎",
+   "lessonTitle": "数字の読み方の基礎 — 平均のウソと分布"
   },
   {
    "term": "VAR",
