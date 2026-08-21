@@ -25,6 +25,7 @@ STEPS = [
     ("図(figure)のJSON検査", "fix_figures.py"),
     ("コンテンツの検証", "validate_content.py"),
     ("用語の説明に未定義語がないか検査", "check_jargon.py"),
+    ("DAX / M 関数が用語集にあるか検査", "check_functions.py"),
     ("アセット参照のハッシュ付与", "stamp_assets.py", ["--write"]),
     ("本文の文字量の検査（レッスン）", "check_density.py"),
     ("本文の文字量の検査（ハンズオン）", "check_density.py", ["--labs"]),

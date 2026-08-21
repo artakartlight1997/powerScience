@@ -567,7 +567,7 @@
    "reading": "れこーどふぃーるどばりゅーず",
    "short": "レコードの中身の値だけを、順番に並べて取り出す。",
    "desc": "1行はレコードとして扱えるので、Record.FieldValues(_) と書くとその行の全項目の値がリストで得られる。全部の項目が空の行を落とすときに、each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {\"\", null})) のように使う。取り出せるのは値だけで列名は消えるため、「3番目の値」のような順番に頼った書き方をすると、列の並びが変わったときに壊れる。列名のほうがほしいときは Record.FieldNames を使う。",
-   "lesson": "L1102",
+   "lesson": "L1101",
    "tags": [
     "Power Query"
    ],
@@ -578,7 +578,7 @@
    "module": "M11",
    "tier": "T3",
    "moduleTitle": "高度なデータ整形",
-   "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
+   "lessonTitle": "M言語の構造 — let ... in を読み書きする"
   },
   {
    "term": "SAMEPERIODLASTYEAR",
@@ -1734,7 +1734,7 @@
    "reading": "でーとふろむてきすと",
    "short": "文字列を日付に変える。",
    "desc": "Date.FromText(\"2026-04-01\") は 2026年4月1日 を返す。同じ \"03/04/2026\" でもロケールによって3月4日とも4月3日とも読まれるため、開いた人の環境で結果が変わるのが最大の落とし穴。\"2026-04-01\" の形にそろえてから渡すか、Date.FromText([年月], [Culture=\"ja-JP\"]) のようにカルチャを明示すると安定する。変換できない文字列はエラーになるので、try Date.FromText([日付]) otherwise null で受け止めておくとよい。",
-   "lesson": "L0502",
+   "lesson": "L0504",
    "tags": [
     "Power Query",
     "データ品質"
@@ -1746,7 +1746,7 @@
    "module": "M05",
    "tier": "T2",
    "moduleTitle": "Power Query 実践",
-   "lessonTitle": "データクレンジング実践 — 空白・表記ゆれ・エラー"
+   "lessonTitle": "ピボット解除 — 横持ちを縦持ちにする最重要スキル"
   },
   {
    "term": "Duration.Days",
