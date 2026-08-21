@@ -1,27 +1,124 @@
 {
- "totalQuestions": 237,
- "lessonQuestions": 170,
- "examQuestions": 67,
+ "totalQuestions": 555,
+ "lessonQuestions": 315,
+ "examQuestions": 240,
  "byArea": {
-  "データの準備": 37,
-  "データのモデル化": 130,
-  "視覚化と分析": 40,
-  "資産の管理とセキュリティ": 18,
-  "データサイエンス": 12
+  "データの準備": 114,
+  "データのモデル化": 228,
+  "視覚化と分析": 107,
+  "資産の管理とセキュリティ": 72,
+  "データサイエンス": 34
  },
- "bySkill": {},
+ "bySkill": {
+  "1.1 データソースへの接続": 11,
+  "1.2 データの取得と変換": 14,
+  "1.3 データのプロファイリング": 10,
+  "1.4 データのクリーニング": 11,
+  "1.5 データの構造化": 10,
+  "1.6 パフォーマンスを考慮した取り込み": 10,
+  "2.1 データモデルの設計": 11,
+  "2.2 リレーションシップの構成": 12,
+  "2.3 計算列とメジャーの作成": 12,
+  "2.4 タイムインテリジェンス": 10,
+  "2.5 モデルの最適化": 10,
+  "2.6 行レベルセキュリティ": 11,
+  "3.1 レポートの作成": 10,
+  "3.2 ビジュアルの選択と構成": 11,
+  "3.3 対話機能の設定": 11,
+  "3.4 レポートの書式とアクセシビリティ": 10,
+  "3.5 データの探索と分析": 10,
+  "3.6 AI ビジュアルの活用": 8,
+  "3.7 モバイル対応": 8,
+  "4.1 ワークスペースの管理": 8,
+  "4.2 セマンティックモデルの管理": 8,
+  "4.3 データ更新の管理": 8,
+  "4.4 アクセス権とセキュリティ": 8,
+  "4.5 ガバナンスとライフサイクル": 8
+ },
  "byDifficulty": {
-  "2": 72,
-  "1": 6,
-  "3": 118,
-  "4": 41
+  "2": 171,
+  "4": 88,
+  "3": 264,
+  "1": 32
  },
  "quizzes": {
   "EXAM-PL300": {
    "title": "PL-300 模擬試験 問題バンク",
-   "count": 67,
+   "count": 240,
    "lesson": null,
    "isExam": true
+  },
+  "L0501": {
+   "title": "適用したステップ",
+   "count": 5,
+   "lesson": "L0501",
+   "isExam": false
+  },
+  "L0502": {
+   "title": "データクレンジング",
+   "count": 5,
+   "lesson": "L0502",
+   "isExam": false
+  },
+  "L0503": {
+   "title": "整然データ",
+   "count": 5,
+   "lesson": "L0503",
+   "isExam": false
+  },
+  "L0504": {
+   "title": "ピボット解除",
+   "count": 5,
+   "lesson": "L0504",
+   "isExam": false
+  },
+  "L0505": {
+   "title": "マージと追加",
+   "count": 5,
+   "lesson": "L0505",
+   "isExam": false
+  },
+  "L0506": {
+   "title": "グループ化と集計",
+   "count": 5,
+   "lesson": "L0506",
+   "isExam": false
+  },
+  "L0601": {
+   "title": "スタースキーマ",
+   "count": 5,
+   "lesson": "L0601",
+   "isExam": false
+  },
+  "L0602": {
+   "title": "ファクトとディメンション",
+   "count": 5,
+   "lesson": "L0602",
+   "isExam": false
+  },
+  "L0603": {
+   "title": "リレーションシップの3要素",
+   "count": 5,
+   "lesson": "L0603",
+   "isExam": false
+  },
+  "L0604": {
+   "title": "フィルターの伝播",
+   "count": 5,
+   "lesson": "L0604",
+   "isExam": false
+  },
+  "L0605": {
+   "title": "日付テーブル",
+   "count": 5,
+   "lesson": "L0605",
+   "isExam": false
+  },
+  "L0606": {
+   "title": "モデルの仕上げ",
+   "count": 5,
+   "lesson": "L0606",
+   "isExam": false
   },
   "L0701": {
    "title": "DAXとは何か",
@@ -119,6 +216,48 @@
    "lesson": "L0904",
    "isExam": false
   },
+  "L0905": {
+   "title": "条件付き書式・ツールチップ・スモールマルチプル",
+   "count": 5,
+   "lesson": "L0905",
+   "isExam": false
+  },
+  "L0906": {
+   "title": "モバイルレイアウトとアクセシビリティ",
+   "count": 5,
+   "lesson": "L0906",
+   "isExam": false
+  },
+  "L1001": {
+   "title": "ワークスペースとロール",
+   "count": 5,
+   "lesson": "L1001",
+   "isExam": false
+  },
+  "L1002": {
+   "title": "発行とアプリ配布",
+   "count": 5,
+   "lesson": "L1002",
+   "isExam": false
+  },
+  "L1003": {
+   "title": "データ更新の自動化とゲートウェイ",
+   "count": 5,
+   "lesson": "L1003",
+   "isExam": false
+  },
+  "L1004": {
+   "title": "セマンティックモデルの共有と再利用",
+   "count": 5,
+   "lesson": "L1004",
+   "isExam": false
+  },
+  "L1005": {
+   "title": "レポートの運用",
+   "count": 5,
+   "lesson": "L1005",
+   "isExam": false
+  },
   "L1101": {
    "title": "M言語の構造",
    "count": 5,
@@ -159,6 +298,30 @@
    "title": "双方向リレーションシップの罠",
    "count": 5,
    "lesson": "L1202",
+   "isExam": false
+  },
+  "L1203": {
+   "title": "役割の異なる日付と複数ファクト",
+   "count": 5,
+   "lesson": "L1203",
+   "isExam": false
+  },
+  "L1204": {
+   "title": "行レベルセキュリティ(RLS)",
+   "count": 5,
+   "lesson": "L1204",
+   "isExam": false
+  },
+  "L1205": {
+   "title": "複合モデルと集計テーブル",
+   "count": 5,
+   "lesson": "L1205",
+   "isExam": false
+  },
+  "L1206": {
+   "title": "SCDと履歴管理",
+   "count": 5,
+   "lesson": "L1206",
    "isExam": false
   },
   "L1301": {
@@ -225,6 +388,42 @@
    "title": "レポート最適化",
    "count": 5,
    "lesson": "L1405",
+   "isExam": false
+  },
+  "L1501": {
+   "title": "記述統計",
+   "count": 5,
+   "lesson": "L1501",
+   "isExam": false
+  },
+  "L1502": {
+   "title": "相関と因果",
+   "count": 5,
+   "lesson": "L1502",
+   "isExam": false
+  },
+  "L1503": {
+   "title": "時系列分析",
+   "count": 5,
+   "lesson": "L1503",
+   "isExam": false
+  },
+  "L1504": {
+   "title": "顧客分析",
+   "count": 5,
+   "lesson": "L1504",
+   "isExam": false
+  },
+  "L1505": {
+   "title": "予測と不確実性",
+   "count": 5,
+   "lesson": "L1505",
+   "isExam": false
+  },
+  "L1506": {
+   "title": "効果検証の基礎",
+   "count": 5,
+   "lesson": "L1506",
    "isExam": false
   }
  }

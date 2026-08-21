@@ -120,3 +120,14 @@
   max-width: calc(100vw - 32px); text-align: center;
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- レイアウトの安全弁 ----------
+   本文に広いコードブロックや表があると、grid の 1fr が min-content まで
+   広がって目次を画面外へ押し出す。minmax(0,1fr) にして本文列を縮められるようにし、
+   広い要素は要素の中で横スクロールさせる。                                   */
+@media (min-width: 1080px) {
+  .lesson-layout { grid-template-columns: minmax(0, 1fr) 220px; }
+}
+.lesson-layout > article { min-width: 0; }
+.prose pre, .prose .table-scroll, .prose .pbm-figure { max-width: 100%; }
+.prose pre { overflow-x: auto; }

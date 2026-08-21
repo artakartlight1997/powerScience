@@ -1,28 +1,87 @@
 {
- "count": 203,
+ "count": 274,
  "sources": [
   "M00",
   "M07",
-  "M08"
+  "M08",
+  "M11",
+  "M13",
+  "M14"
  ],
  "tags": [
   "DAX",
   "統計",
   "分析",
   "データ基盤",
+  "モデリング",
   "可視化",
   "実務",
-  "モデリング",
   "基礎",
   "コンテキスト",
   "データ品質",
-  "集計",
-  "時系列",
+  "M言語",
+  "エンジン",
   "データサイエンス",
+  "性能",
+  "集計",
+  "ツール",
+  "時系列",
+  "Power Query",
+  "データエンジニアリング",
   "運用",
-  "性能"
+  "増分更新",
+  "データフロー",
+  "設計",
+  "結合",
+  "診断",
+  "再利用",
+  "分析手法",
+  "ストレージ",
+  "レポート",
+  "データ型",
+  "ガバナンス"
  ],
  "terms": [
+  {
+   "term": "Best Practice Analyzer",
+   "en": "Best Practice Analyzer",
+   "reading": "べすとぷらくてぃすあならいざー",
+   "short": "Tabular Editor でモデルのアンチパターンを機械的に検出する機能。",
+   "desc": "BPA と略す。DIVIDE を使っていない除算、自動の日付/時刻が有効な状態、数値が文字列型になっている列、双方向リレーション、非表示にすべき列などをルールに基づいて一覧化する。レビューの一次スクリーニングとして使い、人間は指標の定義の妥当性という判断に集中するのが効率的である。",
+   "lesson": "L1404",
+   "tags": [
+    "ツール"
+   ],
+   "aliases": [
+    "BPA",
+    "ベストプラクティスアナライザー"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "計測する — パフォーマンスアナライザーとDAX Studio"
+  },
+  {
+   "term": "RangeStart / RangeEnd",
+   "en": "RangeStart / RangeEnd",
+   "reading": "れんじすたーとれんじえんど",
+   "short": "増分更新で期間の範囲を受け渡す、名前が固定された2つのパラメータ。",
+   "desc": "綴りと大文字小文字が完全に一致し、型が「日付/時刻」でなければ増分更新ダイアログが認識しない。フィルターは >= RangeStart and < RangeEnd という半開区間にする。両端を閉じるとパーティション境界のデータが二重計上される。",
+   "lesson": "L1104",
+   "tags": [
+    "増分更新"
+   ],
+   "aliases": [
+    "RangeStart",
+    "RangeEnd"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "増分更新 — 大規模ファクトを現実的に運用する"
+  },
   {
    "term": "SAMEPERIODLASTYEAR",
    "en": "SAMEPERIODLASTYEAR",
@@ -41,6 +100,148 @@
    "lessonTitle": "タイムインテリジェンス — 前年比・YTD・移動平均"
   },
   {
+   "term": "Value.NativeQuery",
+   "en": "Value.NativeQuery",
+   "reading": "ばりゅーねいてぃぶくえり",
+   "short": "ソースに対してSQLを直接実行させるM関数。",
+   "desc": "第3引数にパラメータのレコードを渡し、第4引数に [EnableFolding = true] を指定すると、その結果に対する後続ステップも折りたたまれる。接続時点でSQLを埋め込む方式（Sql.Database の Query オプション）と違い、増分更新とも併用できる。",
+   "lesson": "L1103",
+   "tags": [
+    "性能",
+    "M言語"
+   ],
+   "aliases": [
+    "NativeQuery",
+    "ネイティブSQL"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "クエリ フォールディング — 更新時間を決める仕組み"
+  },
+  {
+   "term": "VertiPaq Analyzer",
+   "en": "VertiPaq Analyzer",
+   "reading": "ばーてぃぱっくあならいざー",
+   "short": "モデル内の各テーブル・各列のサイズとカーディナリティを一覧できる分析機能。",
+   "desc": "DAX Studio の Advanced タブから View Metrics を実行すると取得できる。Columns タブを Total Size で降順に並べると、モデルサイズを食っている列が上から並ぶ。最適化はここから始めるのが鉄則で、推測ではなく事実に基づいて対象を決められる。",
+   "lesson": "L1402",
+   "tags": [
+    "ツール"
+   ],
+   "aliases": [
+    "View Metrics",
+    "ヴァーティパックアナライザー"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "カーディナリティとモデルサイズ — 何が容量を食うのか"
+  },
+  {
+   "term": "try ... otherwise",
+   "en": "try otherwise",
+   "reading": "とらいあざーわいず",
+   "short": "式の評価が失敗したときの代替値を指定するMの構文。",
+   "desc": "try は [HasError, Value, Error] を持つレコードを返すので、一旦列として保持すれば失敗理由まで記録できる。otherwise で代替値を指定すると簡潔だが、失敗した行と本来その値だった行の区別がつかなくなる。実務では otherwise null にして件数を監視するのが安全。",
+   "lesson": "L1101",
+   "tags": [
+    "M言語",
+    "データ品質"
+   ],
+   "aliases": [
+    "try",
+    "otherwise"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "M言語の構造 — let ... in を読み書きする"
+  },
+  {
+   "term": "SUMMARIZECOLUMNS",
+   "en": "SUMMARIZECOLUMNS",
+   "reading": "さまらいずからむず",
+   "short": "グループ化・フィルター・集計を1つの関数で行う、ビジュアルが内部生成する関数。",
+   "desc": "起点テーブルの指定が不要で、集計列も安全に追加できる。すべての集計列が BLANK になる行を自動的に除外するため、売上のない商品がビジュアルに出てこない挙動の正体でもある。フィルターコンテキストが既に存在する状態での呼び出しには制約があるため、メジャー内では使わない。",
+   "lesson": "L1303",
+   "tags": [
+    "DAX"
+   ],
+   "aliases": [
+    "summarizecolumns"
+   ],
+   "source": "M13",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "テーブル関数 — VALUES・SUMMARIZE・ADDCOLUMNS・SELECTCOLUMNS"
+  },
+  {
+   "term": "Table.NestedJoin",
+   "en": "Table.NestedJoin",
+   "reading": "てーぶるねすてっどじょいん",
+   "short": "2つのテーブルを結合し、結果を入れ子のテーブル列として1本追加するM関数。",
+   "desc": "GUIの「クエリのマージ」が生成する関数。実行直後はテーブルが入った列が1本増えるだけで、Table.ExpandTableColumn で展開して初めて通常の列になる。右テーブルのキーに重複があると展開時に行が増えるため、事前に一意性を確認する。",
+   "lesson": "L1102",
+   "tags": [
+    "M言語",
+    "結合"
+   ],
+   "aliases": [
+    "NestedJoin",
+    "クエリのマージ"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
+  },
+  {
+   "term": "拡張コンピューティング エンジン",
+   "en": "enhanced compute engine",
+   "reading": "かくちょうこんぴゅーてぃんぐえんじん",
+   "short": "データフローの計算エンティティを高速に処理するための実行基盤。",
+   "desc": "Premium / Fabric 容量で利用でき、リンクされたエンティティに対する変換をSQLベースで実行する。有効にすると、大きなデータフローの更新時間が大幅に短縮されることがある。",
+   "lesson": "L1105",
+   "tags": [
+    "データフロー",
+    "性能"
+   ],
+   "aliases": [
+    "enhanced compute engine"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "データフローとETL設計 — 変換をどこに置くか"
+  },
+  {
+   "term": "CallbackDataID",
+   "en": "CallbackDataID",
+   "reading": "こーるばっくでーたあいでぃー",
+   "short": "ストレージエンジンがスキャン中に数式エンジンを行ごとに呼び出している印。",
+   "desc": "SE が処理できない式（IF・SWITCH・DIVIDE・DATEDIFF・FORMAT など）がスキャンに埋め込まれると発生する。呼び出しのオーバーヘッドが行数だけ積み上がるうえ、SE キャッシュが使われなくなるため、2回目以降も速くならない。CALCULATE によるフィルター分割で解消できることが多い。",
+   "lesson": "L1403",
+   "tags": [
+    "エンジン"
+   ],
+   "aliases": [
+    "コールバックデータID",
+    "callbackdataid"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "ストレージエンジンと数式エンジン — 遅さの正体"
+  },
+  {
    "term": "PARALLELPERIOD",
    "en": "PARALLELPERIOD",
    "reading": "ぱられるぴりおど",
@@ -56,6 +257,25 @@
    "tier": "T2",
    "moduleTitle": "DAXコンテキスト",
    "lessonTitle": "タイムインテリジェンス — 前年比・YTD・移動平均"
+  },
+  {
+   "term": "Server Timings",
+   "en": "Server Timings",
+   "reading": "さーばーたいみんぐす",
+   "short": "DAX Studio でクエリの実行時間を SE と FE に分けて表示する機能。",
+   "desc": "Total・SE・FE・SE CPU・SE Queries・Rows・SE Cache といった項目が表示される。FE が支配的なら数式エンジンの処理過多、返された行数が多ければマテリアライゼーション、xmSQL に CallbackDataID があれば式の書き換えが必要、と機械的に原因を絞り込める。",
+   "lesson": "L1404",
+   "tags": [
+    "ツール"
+   ],
+   "aliases": [
+    "サーバータイミング"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "計測する — パフォーマンスアナライザーとDAX Studio"
   },
   {
    "term": "DATESINPERIOD",
@@ -109,6 +329,66 @@
    "lessonTitle": "ALL・ALLSELECTED・REMOVEFILTERS — フィルターを外す"
   },
   {
+   "term": "SELECTCOLUMNS",
+   "en": "SELECTCOLUMNS",
+   "reading": "せれくとからむず",
+   "short": "指定した列だけを、指定した名前で取り出した表を返す関数。",
+   "desc": "元の列は含まれず、選んだ列だけが返る。集合演算に渡すテーブルの列順と列名を揃えるために使う。列をそのまま射影すればデータ系列は保たれるが、式を挟むと系列が失われフィルターとして機能しなくなる点に注意が必要である。",
+   "lesson": "L1303",
+   "tags": [
+    "DAX"
+   ],
+   "aliases": [
+    "selectcolumns"
+   ],
+   "source": "M13",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "テーブル関数 — VALUES・SUMMARIZE・ADDCOLUMNS・SELECTCOLUMNS"
+  },
+  {
+   "term": "データ品質のディメンション",
+   "en": "data quality dimensions",
+   "reading": "でーたひんしつのでぃめんしょん",
+   "short": "データ品質を測るための観点。正確性・完全性・整合性・適時性・一意性・妥当性の6つが代表的。",
+   "desc": "データ品質とは「きれいにする」作業ではなく、「何をもって正しいとするかを定義し、測り続ける」活動である。各観点に測定可能な指標（顧客IDがnullの行の割合、重複伝票番号の件数など）を対応させ、更新のたびに記録して閾値超過に気づける仕組みを作る。",
+   "lesson": "L1105",
+   "tags": [
+    "データ品質",
+    "データサイエンス"
+   ],
+   "aliases": [
+    "データ品質の6次元",
+    "品質ディメンション"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "データフローとETL設計 — 変換をどこに置くか"
+  },
+  {
+   "term": "パフォーマンスアナライザー",
+   "en": "Performance Analyzer",
+   "reading": "ぱふぉーまんすあならいざー",
+   "short": "Power BI Desktop 標準の、ビジュアルごとの処理時間を記録する機能。",
+   "desc": "表示タブから開き、記録を開始してからビジュアルの更新やスライサー操作を行うと、各ビジュアルの時間が「DAXクエリ」「ビジュアルの表示」「その他」の3つに分けて記録される。遅いビジュアルのDAXクエリをコピーして DAX Studio で深掘りできる。改善は必ずここから始める。",
+   "lesson": "L1404",
+   "tags": [
+    "ツール"
+   ],
+   "aliases": [
+    "パフォーマンス アナライザー",
+    "Performance Analyzer"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "計測する — パフォーマンスアナライザーとDAX Studio"
+  },
+  {
    "term": "リレーショナルデータベース",
    "en": "Relational database",
    "reading": "りれーしょなるでーたべーす",
@@ -142,6 +422,48 @@
    "lessonTitle": "行コンテキストとは何か — 2つの文脈を区別する"
   },
   {
+   "term": "Table.Buffer",
+   "en": "Table.Buffer",
+   "reading": "てーぶるばっふぁ",
+   "short": "テーブルをメモリに固定するM関数。その時点で折りたたみが切れる。",
+   "desc": "小さなマスタを大きなテーブルの各行から繰り返し参照する場合には有効だが、クエリの先頭に置くと全件をメモリへ読み込むことになり最悪の結果になる。「速くなりそうだから」で入れると、ほぼ確実に遅くなる。",
+   "lesson": "L1103",
+   "tags": [
+    "性能",
+    "M言語"
+   ],
+   "aliases": [
+    "Buffer"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "クエリ フォールディング — 更新時間を決める仕組み"
+  },
+  {
+   "term": "クエリ フォールディング",
+   "en": "query folding",
+   "reading": "くえりふぉーるでぃんぐ",
+   "short": "Power Query のステップをソース側の言語に翻訳し、ソースで実行させる仕組み。",
+   "desc": "フィルターや集計がSQLのWHERE句・GROUP BY句に変換されると、Power BI へ転送されるデータ量が劇的に減る。リレーショナルデータベースやOData では成立するが、CSVやExcelなどのファイルソースには存在しない。増分更新が効くための絶対条件でもある。",
+   "lesson": "L1103",
+   "tags": [
+    "性能",
+    "Power Query"
+   ],
+   "aliases": [
+    "フォールディング",
+    "折りたたみ",
+    "query folding"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "クエリ フォールディング — 更新時間を決める仕組み"
+  },
+  {
    "term": "シンプソンのパラドックス",
    "en": "Simpson's paradox",
    "reading": "しんぷそんのぱらどっくす",
@@ -171,6 +493,68 @@
     "ストーリーテリング"
    ],
    "source": "M00"
+  },
+  {
+   "term": "ネイティブ クエリの表示",
+   "en": "View Native Query",
+   "reading": "ねいてぃぶくえりのひょうじ",
+   "short": "そのステップまでで生成されるソース側クエリ（SQLなど）を確認する機能。",
+   "desc": "適用したステップを右クリックして選ぶ。選択できればそのステップまで折りたたまれており、グレーアウトしていれば折りたたみが切れている。上から順に調べれば、折りたたみを壊したステップを特定できる。",
+   "lesson": "L1103",
+   "tags": [
+    "性能",
+    "診断"
+   ],
+   "aliases": [
+    "View Native Query",
+    "ネイティブクエリ"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "クエリ フォールディング — 更新時間を決める仕組み"
+  },
+  {
+   "term": "メダリオンアーキテクチャ",
+   "en": "medallion architecture",
+   "reading": "めだりおんあーきてくちゃ",
+   "short": "ブロンズ・シルバー・ゴールドの3層でデータの加工段階を分ける設計。",
+   "desc": "ブロンズは生データの忠実な保存、シルバーは品質の担保（型・重複・キーの整合）、ゴールドは業務定義の適用とスタースキーマ化を担う。層を分ける目的は「どこを直せばよいか」が一意に決まることであり、層の数を揃えることではない。",
+   "lesson": "L1105",
+   "tags": [
+    "データエンジニアリング",
+    "設計"
+   ],
+   "aliases": [
+    "メダリオン",
+    "ブロンズ シルバー ゴールド"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "データフローとETL設計 — 変換をどこに置くか"
+  },
+  {
+   "term": "リンクされたエンティティ",
+   "en": "linked entity",
+   "reading": "りんくされたえんてぃてぃ",
+   "short": "別のデータフローのテーブルを参照する仕組み。",
+   "desc": "データフロー同士を参照させることで、ブロンズ→シルバー→ゴールドの層を Power BI 内だけで組める。Premium / Fabric 容量が必要で、Pro のみの環境では各データフローが独立にソースへ接続することになる。",
+   "lesson": "L1105",
+   "tags": [
+    "データフロー"
+   ],
+   "aliases": [
+    "linked entity",
+    "リンクエンティティ"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "データフローとETL設計 — 変換をどこに置くか"
   },
   {
    "term": "暗黙のCALCULATE",
@@ -277,6 +661,65 @@
    "lessonTitle": "フィルターコンテキストとは何か"
   },
   {
+   "term": "マテリアライゼーション",
+   "en": "Materialization",
+   "reading": "まてりあらいぜーしょん",
+   "short": "ストレージエンジンが返す中間結果が巨大になり、数式エンジンが処理しきれなくなる現象。",
+   "desc": "実体化とも呼ぶ。Server Timings で SE の時間は短いのに全体が遅く、返された行数（Rows）が数百万に達している場合がこれにあたる。ファクトテーブルを直接イテレートする、高カーディナリティの列で SUMMARIZE するといった書き方が原因になる。走査する粒度をディメンション側に落とすのが基本の対処である。",
+   "lesson": "L1403",
+   "tags": [
+    "エンジン"
+   ],
+   "aliases": [
+    "実体化",
+    "materialization"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "ストレージエンジンと数式エンジン — 遅さの正体"
+  },
+  {
+   "term": "ADDCOLUMNS",
+   "en": "ADDCOLUMNS",
+   "reading": "あどからむず",
+   "short": "既存のテーブルに計算列を追加した新しいテーブルを返すイテレータ関数。",
+   "desc": "ADDCOLUMNS( テーブル, \"列名\", 式 ) の形で使い、元のテーブルの全列に新しい列を足す。行コンテキストを作るため、メジャー参照でコンテキスト遷移が起きる。SUMMARIZE と組み合わせた ADDCOLUMNS( SUMMARIZE( ... ), ... ) が上級DAXの基本形である。",
+   "lesson": "L1303",
+   "tags": [
+    "DAX"
+   ],
+   "aliases": [
+    "addcolumns"
+   ],
+   "source": "M13",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "テーブル関数 — VALUES・SUMMARIZE・ADDCOLUMNS・SELECTCOLUMNS"
+  },
+  {
+   "term": "DAX Studio",
+   "en": "DAX Studio",
+   "reading": "だっくすすたじお",
+   "short": "DAXクエリの実行・整形・計測を行う無料の外部ツール。",
+   "desc": "Power BI Desktop に接続し、Server Timings で SE と FE の内訳を、Query Plan で実行計画を確認できる。Clear Cache によるコールドキャッシュからの計測、DEFINE MEASURE によるモデルを変更しない書き換え比較、VertiPaq Analyzer によるモデル分析が行える。実務では事実上の必須ツールである。",
+   "lesson": "L1404",
+   "tags": [
+    "ツール"
+   ],
+   "aliases": [
+    "DAXスタジオ",
+    "daxstudio"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "計測する — パフォーマンスアナライザーとDAX Studio"
+  },
+  {
    "term": "ウォーターフォール図",
    "en": "Waterfall chart",
    "reading": "うぉーたーふぉーるず",
@@ -291,6 +734,68 @@
     "滝グラフ"
    ],
    "source": "M00"
+  },
+  {
+   "term": "ウォーターマーク方式",
+   "en": "watermark-based incremental load",
+   "reading": "うぉーたーまーくほうしき",
+   "short": "「前回どこまで取り込んだか」を基準に、以降の差分だけを取得する手法。",
+   "desc": "データエンジニアリングの古典的な差分取得パターン。Power BI の増分更新は、この基準を日付範囲としてパラメータ化し、パーティション管理まで自動化したものにあたる。基準にする列は、必ず単調に増加する値である必要がある。",
+   "lesson": "L1104",
+   "tags": [
+    "データサイエンス",
+    "データエンジニアリング"
+   ],
+   "aliases": [
+    "watermark",
+    "高水位方式"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "増分更新 — 大規模ファクトを現実的に運用する"
+  },
+  {
+   "term": "サンプルファイル関数",
+   "en": "transform sample file function",
+   "reading": "さんぷるふぁいるかんすう",
+   "short": "フォルダ取り込み時に自動生成される、1ファイル分の変換を関数化したもの。",
+   "desc": "「フォルダーから」で接続すると、サンプル ファイル・ファイルの変換（関数）・パラメーター1・変換後のサンプルの4つのクエリが作られる。仕様変更時に修正するのは「ファイルの変換」関数で、そこを直せば全ファイルに反映される。",
+   "lesson": "L1102",
+   "tags": [
+    "Power Query",
+    "再利用"
+   ],
+   "aliases": [
+    "ファイルの変換",
+    "Transform Sample File"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
+  },
+  {
+   "term": "ハイブリッドテーブル",
+   "en": "hybrid table",
+   "reading": "はいぶりっどてーぶる",
+   "short": "最新パーティションだけをDirectQueryにし、履歴はインポートで持つテーブル。",
+   "desc": "増分更新の「最新の期間のデータをリアルタイムで取得する」を有効にすると構成される。大量の履歴と直近のリアルタイム性を両立できるが、Premium / Fabric 容量が必要で、DirectQuery部分の性能はソースDBに直結する。",
+   "lesson": "L1104",
+   "tags": [
+    "増分更新",
+    "ストレージ"
+   ],
+   "aliases": [
+    "hybrid table"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "増分更新 — 大規模ファクトを現実的に運用する"
   },
   {
    "term": "ALLEXCEPT",
@@ -345,6 +850,66 @@
    "tier": "T2",
    "moduleTitle": "DAX基礎",
    "lessonTitle": "集計関数を使いこなす — SUM・COUNT・DISTINCTCOUNT"
+  },
+  {
+   "term": "SUMMARIZE",
+   "en": "SUMMARIZE",
+   "reading": "さまらいず",
+   "short": "起点テーブルを指定した列でグループ化した表を返す関数。",
+   "desc": "SQL の GROUP BY に相当し、データに実在する組み合わせだけを返す。集計列を直接追加する構文も持つが、フィルターコンテキストの扱いが直感に反することがあるため、集計は ADDCOLUMNS と組み合わせるのが公式の推奨形である。",
+   "lesson": "L1303",
+   "tags": [
+    "DAX"
+   ],
+   "aliases": [
+    "summarize"
+   ],
+   "source": "M13",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "テーブル関数 — VALUES・SUMMARIZE・ADDCOLUMNS・SELECTCOLUMNS"
+  },
+  {
+   "term": "コールドキャッシュ",
+   "en": "Cold cache",
+   "reading": "こーるどきゃっしゅ",
+   "short": "キャッシュが空の状態から実行したときの計測条件。",
+   "desc": "DAX Studio の Clear Cache を実行してから測ると、SE が実際にスキャンした本来のコストが分かる。改善の効果を比較するときは必ずこの条件で測る。対してウォームキャッシュは2回目以降の実行で、ユーザーが繰り返し操作したときの体感速度に相当する。",
+   "lesson": "L1404",
+   "tags": [
+    "ツール"
+   ],
+   "aliases": [
+    "Cold cache",
+    "ウォームキャッシュ",
+    "Warm cache"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "計測する — パフォーマンスアナライザーとDAX Studio"
+  },
+  {
+   "term": "ストレージエンジン",
+   "en": "Storage Engine",
+   "reading": "すとれーじえんじん",
+   "short": "VertiPaq の圧縮データを直接スキャンする、マルチスレッドの実行層。",
+   "desc": "SE と略す。できることはフィルター・GROUP BY・SUM / MIN / MAX / COUNT / DISTINCTCOUNT・単純な列同士の四則演算に限られるが、並列実行され結果をキャッシュするため非常に速い。DAX最適化の基本方針は、SE にできるだけ多くの仕事を任せることである。",
+   "lesson": "L1403",
+   "tags": [
+    "エンジン"
+   ],
+   "aliases": [
+    "SE",
+    "storage engine"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "ストレージエンジンと数式エンジン — 遅さの正体"
   },
   {
    "term": "セグメンテーション",
@@ -424,6 +989,27 @@
    "source": "M00"
   },
   {
+   "term": "ランレングス符号化",
+   "en": "Run-length encoding",
+   "reading": "らんれんぐすふごうか",
+   "short": "同じ値の連続を「値 × 回数」にまとめる圧縮方式。",
+   "desc": "RLE と略す。辞書符号化や値符号化と組み合わせて使われる。効き方はデータの並び順に依存し、同じ値が散らばっているとまとめられない。VertiPaq は取り込み時に圧縮率が最大になる並び順を自動探索するが、制限時間があるため大きなテーブルでは最適解に届かないことがある。",
+   "lesson": "L1401",
+   "tags": [
+    "エンジン"
+   ],
+   "aliases": [
+    "RLE",
+    "ランレングス圧縮",
+    "run-length encoding"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "VertiPaqの仕組み — なぜ速いのか"
+  },
+  {
    "term": "リレーションシップ",
    "en": "Relationship",
    "reading": "りれーしょんしっぷ",
@@ -455,6 +1041,27 @@
    "source": "M00"
   },
   {
+   "term": "述語プッシュダウン",
+   "en": "predicate pushdown",
+   "reading": "じゅつごぷっしゅだうん",
+   "short": "フィルター条件をデータに最も近い層まで押し下げる最適化。",
+   "desc": "読み取り量と転送量を減らすための、データベースの古典的な最適化手法。Spark、BigQuery、Snowflake など現代の分散処理エンジンも同じ最適化を持つ。「計算をデータのある場所へ動かす」というデータ処理の基本原則を体現している。",
+   "lesson": "L1103",
+   "tags": [
+    "データサイエンス",
+    "性能"
+   ],
+   "aliases": [
+    "predicate pushdown",
+    "プッシュダウン"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "クエリ フォールディング — 更新時間を決める仕組み"
+  },
+  {
    "term": "COALESCE",
    "en": "COALESCE",
    "reading": "こあれす",
@@ -470,6 +1077,27 @@
    "tier": "T2",
    "moduleTitle": "DAX基礎",
    "lessonTitle": "条件分岐と安全な割り算 — IF・SWITCH・DIVIDE"
+  },
+  {
+   "term": "JoinKind",
+   "en": "JoinKind",
+   "reading": "じょいんかいんど",
+   "short": "結合の種類を指定するMの列挙値。どの行が残るかを決める。",
+   "desc": "LeftOuter（既定）、Inner、LeftAnti、RightAnti、FullOuter、RightOuter の6種類。特に LeftAnti は「左にあって右にないもの」を返すため、マスタ未登録キーの検出というデータ品質チェックに使える。",
+   "lesson": "L1102",
+   "tags": [
+    "結合",
+    "データ品質"
+   ],
+   "aliases": [
+    "JoinKind.LeftAnti",
+    "結合の種類"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
   },
   {
    "term": "TOTALYTD",
@@ -490,6 +1118,27 @@
    "tier": "T2",
    "moduleTitle": "DAXコンテキスト",
    "lessonTitle": "タイムインテリジェンス — 前年比・YTD・移動平均"
+  },
+  {
+   "term": "VertiPaq",
+   "en": "VertiPaq",
+   "reading": "ばーてぃぱっく",
+   "short": "Power BI が使うインメモリ列指向ストレージエンジン。",
+   "desc": "データをディスクではなくメモリに、行単位ではなく列単位で、圧縮して保持する。辞書符号化・値符号化・ランレングス符号化を列ごとに自動で選び、セグメント単位で並列にスキャンする。数億行の集計が1秒以内で終わる理由がこの構造にある。Analysis Services Tabular や Excel のパワーピボットも同じエンジンを使う。",
+   "lesson": "L1401",
+   "tags": [
+    "エンジン"
+   ],
+   "aliases": [
+    "ヴァーティパック",
+    "vertipaq",
+    "xVelocity"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "VertiPaqの仕組み — なぜ速いのか"
   },
   {
    "term": "アクセシビリティ",
@@ -654,6 +1303,47 @@
    "lessonTitle": "書式・命名・整理 — 実務で通用するDAXの作法"
   },
   {
+   "term": "仮想リレーション",
+   "en": "Virtual relationship",
+   "reading": "かそうりれーしょん",
+   "short": "モデルにリレーションを作らず、DAXの式の中だけでフィルターを伝播させる手法。",
+   "desc": "TREATAS を使って実現するのが現在の標準である。式が評価される瞬間だけ有効になるため、他の指標やビジュアルに影響しない。古い手法である FILTER + CONTAINS や INTERSECT を使う書き方は、性能と可読性の両面で TREATAS に置き換えられる。",
+   "lesson": "L1304",
+   "tags": [
+    "DAX",
+    "モデリング"
+   ],
+   "aliases": [
+    "バーチャルリレーションシップ"
+   ],
+   "source": "M13",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "集合演算と仮想リレーション — UNION・EXCEPT・TREATAS"
+  },
+  {
+   "term": "列指向ストレージ",
+   "en": "columnar storage",
+   "reading": "れつしこうすとれーじ",
+   "short": "データを行単位ではなく列単位に並べて保存・圧縮する方式。",
+   "desc": "Power BI のインポートモデルが採用している。同じ値が繰り返される列ほど強く圧縮されるため、伝票番号やGUIDのような高カーディナリティ列がモデルサイズの大半を占めることが多い。分析に使わない識別子列をモデルから外すのが最も確実な軽量化になる。",
+   "lesson": "L1103",
+   "tags": [
+    "データサイエンス",
+    "性能"
+   ],
+   "aliases": [
+    "columnar",
+    "列ストア"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "クエリ フォールディング — 更新時間を決める仕組み"
+  },
+  {
    "term": "積み上げ棒グラフ",
    "en": "Stacked bar chart",
    "reading": "つみあげぼうぐらふ",
@@ -667,6 +1357,25 @@
     "積み上げ棒"
    ],
    "source": "M00"
+  },
+  {
+   "term": "計算エンティティ",
+   "en": "computed entity",
+   "reading": "けいさんえんてぃてぃ",
+   "short": "取り込み済みデータをさらに変換した結果を保存するデータフローのテーブル。",
+   "desc": "拡張コンピューティング エンジンによって、データフロー内で完結した変換が実行される。ソースへ再アクセスせずに層を積めるのが利点。Premium / Fabric 容量が必要となる。",
+   "lesson": "L1105",
+   "tags": [
+    "データフロー"
+   ],
+   "aliases": [
+    "computed entity"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "データフローとETL設計 — 変換をどこに置くか"
   },
   {
    "term": "評価コンテキスト",
@@ -684,6 +1393,26 @@
    "tier": "T2",
    "moduleTitle": "DAX基礎",
    "lessonTitle": "DAXとは何か — Excelの数式と何が違うのか"
+  },
+  {
+   "term": "適用したステップ",
+   "en": "Applied Steps",
+   "reading": "てきようしたすてっぷ",
+   "short": "Power Query エディターの右ペインに並ぶ、変換1つ1つの記録。",
+   "desc": "Mコードの1ステップ（名前付きの変数定義）に1対1で対応する。ステップ名の変更はコード上の変数名の変更と同じで、参照している後続ステップも自動的に書き換わる。削除するとステップ参照が切れ、更新時にエラーとなることがある。",
+   "lesson": "L1101",
+   "tags": [
+    "Power Query"
+   ],
+   "aliases": [
+    "ステップ",
+    "Applied Steps"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "M言語の構造 — let ... in を読み書きする"
   },
   {
    "term": "DATEADD",
@@ -737,6 +1466,85 @@
    "lessonTitle": "行コンテキストとは何か — 2つの文脈を区別する"
   },
   {
+   "term": "SEキャッシュ",
+   "en": "Storage Engine cache",
+   "reading": "えすいーきゃっしゅ",
+   "short": "ストレージエンジンが実行結果を保持し、同じ内部クエリに再利用する仕組み。",
+   "desc": "同じ xmSQL が再度発行されるとスキャンせずに結果を返すため、ユーザーが同じ組み合わせを再表示したときの体感が大きく改善する。データ更新で全キャッシュが破棄される。CallbackDataID が発生している場合はキャッシュされないため、何度実行しても速くならない。",
+   "lesson": "L1403",
+   "tags": [
+    "エンジン"
+   ],
+   "aliases": [
+    "ストレージエンジンキャッシュ",
+    "SE cache"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "ストレージエンジンと数式エンジン — 遅さの正体"
+  },
+  {
+   "term": "TREATAS",
+   "en": "TREATAS",
+   "reading": "とりーとあず",
+   "short": "あるテーブルの値を、別の列へのフィルターとして扱わせる関数。",
+   "desc": "TREATAS( テーブル, 対象列 ) の形で使い、モデルにリレーションがなくてもフィルターを橋渡しできる。予算と実績のように粒度が違うテーブルの突合や、共通ディメンションを用意できない場面で使う。恒久的なレポートでは、可能なら物理リレーションを優先する。",
+   "lesson": "L1304",
+   "tags": [
+    "DAX",
+    "モデリング"
+   ],
+   "aliases": [
+    "treatas"
+   ],
+   "source": "M13",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "集合演算と仮想リレーション — UNION・EXCEPT・TREATAS"
+  },
+  {
+   "term": "アーカイブ期間",
+   "en": "archive period",
+   "reading": "あーかいぶきかん",
+   "short": "増分更新でモデルに保持するデータ全体の期間。",
+   "desc": "「データをアーカイブする期間」として設定する。これより古いパーティションはモデルから自動的に削除される（ソース側のデータは消えない）。初回更新ではこの全期間を取得するため、長すぎるとタイムアウトや容量上限に当たる。",
+   "lesson": "L1104",
+   "tags": [
+    "増分更新"
+   ],
+   "aliases": [
+    "保持期間"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "増分更新 — 大規模ファクトを現実的に運用する"
+  },
+  {
+   "term": "イテレータ関数",
+   "en": "Iterator function",
+   "reading": "いてれーたかんすう",
+   "short": "テーブルを1行ずつ走査し、各行で式を評価してから集計する関数。",
+   "desc": "第1引数にテーブル、第2引数に式を取り、テーブルの各行に行コンテキストを設定して式を評価し、その結果をまとめて集計する。名前の末尾に X が付くのが目印で、SUMX・AVERAGEX・MAXX・RANKX・CONCATENATEX などがある。列同士の演算や行ごとの条件分岐が必要な集計では必須になる。",
+   "lesson": "L1301",
+   "tags": [
+    "DAX"
+   ],
+   "aliases": [
+    "イテレーター関数",
+    "反復関数"
+   ],
+   "source": "M13",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "イテレータ関数 — SUMX・AVERAGEX・RANKX"
+  },
+  {
    "term": "クラスタリング",
    "en": "Clustering",
    "reading": "くらすたりんぐ",
@@ -750,6 +1558,26 @@
     "クラスター分析"
    ],
    "source": "M00"
+  },
+  {
+   "term": "サロゲートキー",
+   "en": "Surrogate key",
+   "reading": "さろげーときー",
+   "short": "業務上の意味を持たない、連番の整数で振り直したキー列。",
+   "desc": "文字列の注文番号や顧客コードを整数の連番に置き換えることで、値符号化が効き、辞書サイズも小さくなる。リレーションのコストも下がる。Power Query のインデックス列やマージで作成する。表示が必要な元のコードは、ディメンション側にのみ保持する。",
+   "lesson": "L1402",
+   "tags": [
+    "モデリング"
+   ],
+   "aliases": [
+    "代理キー",
+    "代替キー"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "カーディナリティとモデルサイズ — 何が容量を食うのか"
   },
   {
    "term": "ダッシュボード",
@@ -846,6 +1674,27 @@
    "source": "M00"
   },
   {
+   "term": "パーティション",
+   "en": "partition",
+   "reading": "ぱーてぃしょん",
+   "short": "テーブルを期間などで分割した、更新の単位となる保存区画。",
+   "desc": "増分更新では日・月・四半期・年の階層で自動生成され、時間の経過とともに細かい単位から粗い単位へマージされる。更新時にはパーティション単位で丸ごと置き換えられるため、途中で失敗して再実行しても二重に積み上がらない（冪等）。",
+   "lesson": "L1104",
+   "tags": [
+    "増分更新",
+    "データエンジニアリング"
+   ],
+   "aliases": [
+    "partition",
+    "区画"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "増分更新 — 大規模ファクトを現実的に運用する"
+  },
+  {
    "term": "フィルター引数",
    "en": "Filter argument",
    "reading": "ふぃるたーひきすう",
@@ -861,6 +1710,46 @@
    "tier": "T2",
    "moduleTitle": "DAXコンテキスト",
    "lessonTitle": "CALCULATE — フィルターを変更する唯一の関数"
+  },
+  {
+   "term": "リテンション率",
+   "en": "Retention rate",
+   "reading": "りてんしょんりつ",
+   "short": "獲得時点の顧客数に対して、一定期間後に残っている顧客の割合。",
+   "desc": "コホート表の値を経過0か月目の顧客数で割ると求まる。経過月数を横軸に取ったリテンションカーブは、最初の1か月で大きく落ち、その後なだらかになるのが典型的である。カーブが水平に近づく水準がサービスの定着率を表す。",
+   "lesson": "L1305",
+   "tags": [
+    "分析手法"
+   ],
+   "aliases": [
+    "継続率",
+    "定着率"
+   ],
+   "source": "M13",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "実務パターン集 — 構成比・累計・ランキング・ABC分析・コホート"
+  },
+  {
+   "term": "既定の相互作用",
+   "en": "Default interaction",
+   "reading": "きていのそうごさよう",
+   "short": "あるビジュアルを操作したときに、同じページの他のビジュアルが連動する既定の挙動。",
+   "desc": "書式タブの「相互作用の編集」から、ビジュアルごとに「フィルター」「強調表示」「なし」を選べる。既定では全ビジュアルが連動して再計算されるため、不要な連動を「なし」にするだけで1操作あたりのクエリ数が大きく減る。強調表示は選択部分と全体の両方を計算するため、フィルターより重いことがある。",
+   "lesson": "L1405",
+   "tags": [
+    "レポート"
+   ],
+   "aliases": [
+    "相互作用の編集",
+    "クロスフィルター動作"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "レポート最適化 — ビジュアル・クエリ・更新"
   },
   {
    "term": "生存者バイアス",
@@ -913,6 +1802,25 @@
    "tier": "T2",
    "moduleTitle": "DAX基礎",
    "lessonTitle": "書式・命名・整理 — 実務で通用するDAXの作法"
+  },
+  {
+   "term": "詳細エディター",
+   "en": "Advanced Editor",
+   "reading": "しょうさいえでぃたー",
+   "short": "クエリのMコード全体をテキストとして編集する画面。",
+   "desc": "ホームタブから開く。GUIで作った変換がどんなコードになっているかを確認でき、手でステップを追加・並べ替えできる。デバッグ時に in の値を途中のステップ名に書き換えて中間結果を確認する使い方が最も実用的。",
+   "lesson": "L1101",
+   "tags": [
+    "Power Query"
+   ],
+   "aliases": [
+    "Advanced Editor"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "M言語の構造 — let ... in を読み書きする"
   },
   {
    "term": "A/Bテスト",
@@ -1017,6 +1925,27 @@
    "lessonTitle": "ALL・ALLSELECTED・REMOVEFILTERS — フィルターを外す"
   },
   {
+   "term": "カスタム関数",
+   "en": "custom function",
+   "reading": "かすたむかんすう",
+   "short": "引数を受け取って値を返す、再利用可能なMの処理単位。",
+   "desc": "(x as text) => ... の形で定義し、クエリとして保存する。同じ変換を複数のファイルやテーブルに適用するときに使い、仕様変更を1箇所の修正で全体へ反映できる。引数に型を宣言しておくと、呼び出し側の型の間違いを早期に検出できる。",
+   "lesson": "L1102",
+   "tags": [
+    "M言語",
+    "再利用"
+   ],
+   "aliases": [
+    "ユーザー定義関数",
+    "fn"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
+  },
+  {
    "term": "コホート分析",
    "en": "Cohort analysis",
    "reading": "こほーとぶんせき",
@@ -1045,6 +1974,27 @@
     "標本抽出"
    ],
    "source": "M00"
+  },
+  {
+   "term": "ステージング",
+   "en": "staging",
+   "reading": "すてーじんぐ",
+   "short": "ソースからそのまま取り込み、型付け程度にとどめた中間層。",
+   "desc": "許されるのは型付け・明らかに不要な列の削除・取り込み日時の付与の3つだけで、業務ロジックを入れてはいけない。ここを持つと、定義変更のたびにソースへ取りに戻る必要がなくなり、パイプラインの柔軟性が大きく上がる。",
+   "lesson": "L1105",
+   "tags": [
+    "データエンジニアリング",
+    "設計"
+   ],
+   "aliases": [
+    "ステージング層",
+    "stg"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "データフローとETL設計 — 変換をどこに置くか"
   },
   {
    "term": "ツリーマップ",
@@ -1107,6 +2057,27 @@
     "接続元"
    ],
    "source": "M00"
+  },
+  {
+   "term": "データフロー",
+   "en": "dataflow",
+   "reading": "でーたふろー",
+   "short": "Power BI Service 上で動き、整形結果をクラウドに保存して共有する Power Query。",
+   "desc": "複数のセマンティックモデルが同じ整形結果を参照できるため、定義のずれを構造的に防げる。ただしメジャーもリレーションシップも持たないため、セマンティックモデルの代わりにはならない。更新順序（データフロー→モデル）は自分で制御する必要がある。",
+   "lesson": "L1105",
+   "tags": [
+    "データフロー",
+    "運用"
+   ],
+   "aliases": [
+    "Dataflow",
+    "データフロー Gen2"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "データフローとETL設計 — 変換をどこに置くか"
   },
   {
    "term": "データマート",
@@ -1308,6 +2279,67 @@
    "source": "M00"
   },
   {
+   "term": "仮想テーブル",
+   "en": "Virtual table",
+   "reading": "かそうてーぶる",
+   "short": "式の評価中だけメモリ上に存在し、モデルには保存されない一時的な表。",
+   "desc": "テーブル関数が返す表のこと。クエリのたびに作られ、クエリが終われば消えるためモデルサイズには影響しない。ただし行数が多いと数式エンジンがメモリ上に展開するコストが大きくなるため、必要な粒度まで落として組み立てる必要がある。",
+   "lesson": "L1303",
+   "tags": [
+    "DAX"
+   ],
+   "aliases": [
+    "仮想的なテーブル",
+    "中間テーブル"
+   ],
+   "source": "M13",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "テーブル関数 — VALUES・SUMMARIZE・ADDCOLUMNS・SELECTCOLUMNS"
+  },
+  {
+   "term": "切断テーブル",
+   "en": "Disconnected table",
+   "reading": "せつだんてーぶる",
+   "short": "どのテーブルともリレーションを張らない、パラメーター入力用のテーブル。",
+   "desc": "ユーザーがスライサーで値を選ぶための入力欄として使い、メジャーの中で SELECTEDVALUE などで値を取り出して計算に反映させる。併売率の比較対象商品を選ばせる、シナリオ分析の変数を切り替えるといった用途で使われる。",
+   "lesson": "L1305",
+   "tags": [
+    "モデリング",
+    "DAX"
+   ],
+   "aliases": [
+    "ディスコネクテッドテーブル",
+    "独立テーブル"
+   ],
+   "source": "M13",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "実務パターン集 — 構成比・累計・ランキング・ABC分析・コホート"
+  },
+  {
+   "term": "固定小数点数",
+   "en": "Fixed decimal number / Currency.Type",
+   "reading": "こていしょうすうてんすう",
+   "short": "小数点以下4桁を正確に保持する数値型。金額に使う。",
+   "desc": "Mでは Currency.Type、Power BI では「固定小数点数」と表示される。type number（倍精度浮動小数点）は10進小数を正確に表現できず、合計で微小な誤差が現れるため、金額列には必ず固定小数点数を使う。",
+   "lesson": "L1101",
+   "tags": [
+    "データ型"
+   ],
+   "aliases": [
+    "Currency.Type",
+    "通貨型"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "M言語の構造 — let ... in を読み書きする"
+  },
+  {
    "term": "折れ線グラフ",
    "en": "Line chart",
    "reading": "おれせんぐらふ",
@@ -1321,6 +2353,26 @@
     "ラインチャート"
    ],
    "source": "M00"
+  },
+  {
+   "term": "数式エンジン",
+   "en": "Formula Engine",
+   "reading": "すうしきえんじん",
+   "short": "DAXを解釈し実行計画を立てる、シングルスレッドの実行層。",
+   "desc": "FE と略す。DAXのすべての関数を実行できるが、シングルスレッドで動き結果をキャッシュしない。条件分岐・除算・日付演算・文字列操作・ランキング・複雑なイテレータはすべて FE が処理する。FE の仕事が増えるほどクエリは遅くなる。",
+   "lesson": "L1403",
+   "tags": [
+    "エンジン"
+   ],
+   "aliases": [
+    "FE",
+    "formula engine"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "ストレージエンジンと数式エンジン — 遅さの正体"
   },
   {
    "term": "日付テーブル",
@@ -1405,6 +2457,48 @@
    "source": "M00"
   },
   {
+   "term": "集計テーブル",
+   "en": "Aggregation table",
+   "reading": "しゅうけいてーぶる",
+   "short": "明細テーブルの上に重ねる、粒度を上げた小さなテーブル。",
+   "desc": "モデリングビューの「集計の管理」で、集計テーブルの各列が明細のどの列に対応するかを定義する。エンジンはクエリの粒度を見て、集計テーブルで答えられるなら自動的にそちらを使う。ユーザーは存在を意識しない。ほとんどの分析が集約粒度で足りる場合に効果が大きい。",
+   "lesson": "L1405",
+   "tags": [
+    "モデリング"
+   ],
+   "aliases": [
+    "集約テーブル",
+    "Aggregations",
+    "アグリゲーション"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "レポート最適化 — ビジュアル・クエリ・更新"
+  },
+  {
+   "term": "非加法的指標",
+   "en": "Non-additive measure",
+   "reading": "ひかほうてきしひょう",
+   "short": "明細の値を足しても総計にならない性質を持つ指標。",
+   "desc": "DISTINCTCOUNT による顧客数や平均値が代表例である。同じ顧客が複数の地域で購入していれば、各行では1人ずつ数えられ総計では1人になるため、行の合計と総計が一致しない。バグではないので、レポートに注記を添えてユーザーに説明するのが正しい対応である。",
+   "lesson": "L1306",
+   "tags": [
+    "分析手法",
+    "DAX"
+   ],
+   "aliases": [
+    "非加算的指標",
+    "非加法的メジャー"
+   ],
+   "source": "M13",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "DAXのよくある間違い20選"
+  },
+  {
    "term": "ABC分析",
    "en": "ABC analysis",
    "reading": "えーびーしーぶんせき",
@@ -1440,6 +2534,27 @@
    "lessonTitle": "条件分岐と安全な割り算 — IF・SWITCH・DIVIDE"
   },
   {
+   "term": "DRY原則",
+   "en": "Don't Repeat Yourself",
+   "reading": "どらいげんそく",
+   "short": "同じ知識をシステム内の1箇所にだけ置くという設計原則。",
+   "desc": "ソフトウェア工学の基本原則で、データパイプラインにも同じく当てはまる。「売上」の定義が30本のクエリに散らばっている状態は、定義が30通りに分裂する未来を予約しているのと同じ。単一の情報源（Single Source of Truth）を作ることが部品化の目的である。",
+   "lesson": "L1102",
+   "tags": [
+    "設計",
+    "データサイエンス"
+   ],
+   "aliases": [
+    "DRY",
+    "Don't Repeat Yourself"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
+  },
+  {
    "term": "RANKX",
    "en": "RANKX",
    "reading": "らんくえっくす",
@@ -1472,6 +2587,26 @@
    "source": "M00"
   },
   {
+   "term": "xmSQL",
+   "en": "xmSQL",
+   "reading": "えっくすえむえすきゅーえる",
+   "short": "数式エンジンがストレージエンジンに発行する、SQL に似た表記の内部クエリ。",
+   "desc": "実際のSQLではなく、SE への依頼内容を人間が読める形で表現したものである。DAX Studio の Server Timings タブで確認でき、どの列がスキャンされているか、フィルターが SE 側に降りているか、CallbackDataID が発生していないかを読み取れる。性能診断の中心となる情報源である。",
+   "lesson": "L1403",
+   "tags": [
+    "エンジン",
+    "ツール"
+   ],
+   "aliases": [
+    "xmsql"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "ストレージエンジンと数式エンジン — 遅さの正体"
+  },
+  {
    "term": "インサイト",
    "en": "Insight",
    "reading": "いんさいと",
@@ -1500,6 +2635,26 @@
     "取り込み"
    ],
    "source": "M00"
+  },
+  {
+   "term": "クエリ診断",
+   "en": "Query Diagnostics",
+   "reading": "くえりしんだん",
+   "short": "ステップごとの所要時間と発行されたクエリを記録するPower Queryの機能。",
+   "desc": "表示タブから「診断の開始」→ 更新 →「診断の停止」で取得する。どのステップが全体の時間の大半を占めているかが分かるため、改善に着手する前に必ず1回取っておく。",
+   "lesson": "L1103",
+   "tags": [
+    "診断",
+    "性能"
+   ],
+   "aliases": [
+    "Query Diagnostics"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "クエリ フォールディング — 更新時間を決める仕組み"
   },
   {
    "term": "クロス集計",
@@ -1531,6 +2686,25 @@
     "絞り込みボタン"
    ],
    "source": "M00"
+  },
+  {
+   "term": "セグメント",
+   "en": "Segment",
+   "reading": "せぐめんと",
+   "short": "VertiPaq がテーブルを分割して管理する単位。既定は100万行。",
+   "desc": "セグメントごとに符号化と並べ替え最適化が独立して行われ、クエリ時には別スレッドが並列にスキャンする。CPUコア数が多いほど速くなるのはこのためである。数十万行のテーブルはセグメントが1つしかなく並列化されないが、そもそもスキャン量が小さいため問題にならない。",
+   "lesson": "L1401",
+   "tags": [
+    "エンジン"
+   ],
+   "aliases": [
+    "セグメンテーション"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "VertiPaqの仕組み — なぜ速いのか"
   },
   {
    "term": "チャーン率",
@@ -1580,6 +2754,27 @@
    "source": "M00"
   },
   {
+   "term": "データ系列",
+   "en": "Data lineage",
+   "reading": "でーたけいれつ",
+   "short": "仮想テーブルの各列が、モデルのどの列に由来するかを示す情報。",
+   "desc": "データリネージとも呼ぶ。VALUES( Dim_商品[Category] ) の列は Dim_商品[Category] という系列を持ち、CALCULATE のフィルター引数として渡すとその列にフィルターが効く。式を挟んで作り直した列は系列を失い、フィルターとして機能しなくなる。エラーにならないため発見が遅れやすい。",
+   "lesson": "L1304",
+   "tags": [
+    "DAX"
+   ],
+   "aliases": [
+    "データリネージ",
+    "リネージ",
+    "data lineage"
+   ],
+   "source": "M13",
+   "module": "M13",
+   "tier": "T3",
+   "moduleTitle": "DAX上級",
+   "lessonTitle": "集合演算と仮想リレーション — UNION・EXCEPT・TREATAS"
+  },
+  {
    "term": "バッチ処理",
    "en": "Batch processing",
    "reading": "ばっちしょり",
@@ -1593,6 +2788,27 @@
     "バッチ"
    ],
    "source": "M00"
+  },
+  {
+   "term": "パラメータ",
+   "en": "parameter",
+   "reading": "ぱらめーた",
+   "short": "クエリの外から値を差し替えられる名前付きの箱。",
+   "desc": "サーバー名・フォルダパス・対象年度などをパラメータに切り出すと、開発環境と本番環境の切り替えが1箇所で済む。発行後は Power BI Service のセマンティックモデル設定からも変更できる。資格情報を入れてはいけない（pbix内に平文で保存されるため）。",
+   "lesson": "L1102",
+   "tags": [
+    "Power Query",
+    "運用"
+   ],
+   "aliases": [
+    "クエリ パラメーター",
+    "パラメーター"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
   },
   {
    "term": "ビジュアル",
@@ -1656,6 +2872,27 @@
     "縦持ちデータ"
    ],
    "source": "M00"
+  },
+  {
+   "term": "辞書符号化",
+   "en": "Dictionary encoding",
+   "reading": "じしょふごうか",
+   "short": "一意な値を辞書に登録し、本体には辞書のインデックス番号だけを保持する圧縮方式。",
+   "desc": "文字列列では必ずこの方式が使われる。辞書のサイズは一意な値の数（カーディナリティ）に比例し、行数には依存しない。100万行あってもカテゴリが8種類なら辞書は8エントリで済む。逆に一意な識別子列では辞書が巨大化し、モデルサイズの主犯になる。",
+   "lesson": "L1401",
+   "tags": [
+    "エンジン"
+   ],
+   "aliases": [
+    "ディクショナリエンコーディング",
+    "ハッシュエンコーディング",
+    "HASH"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "VertiPaqの仕組み — なぜ速いのか"
   },
   {
    "term": "CAGR",
@@ -1744,6 +2981,45 @@
    "tier": "T2",
    "moduleTitle": "DAX基礎",
    "lessonTitle": "集計関数を使いこなす — SUM・COUNT・DISTINCTCOUNT"
+  },
+  {
+   "term": "each",
+   "en": "each keyword",
+   "reading": "いーち",
+   "short": "引数を1つ取る無名関数の省略記法で、その引数は _ で参照される。",
+   "desc": "each [金額] > 0 は (_) => _[金額] > 0 と同じ意味。_ が1つだけのときは省略できる。ただし each を入れ子にすると内側の _ が外側を隠すため、外側の値を参照できなくなる。入れ子になったら (row) => のように引数へ名前を付けて書き換える。",
+   "lesson": "L1101",
+   "tags": [
+    "M言語"
+   ],
+   "aliases": [
+    "each _"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "M言語の構造 — let ... in を読み書きする"
+  },
+  {
+   "term": "let式",
+   "en": "let expression",
+   "reading": "れっとしき",
+   "short": "名前付きの中間ステップを並べ、in の後に返す値を1つ指定するMの基本構造。",
+   "desc": "let の後にカンマ区切りでステップを列挙し、in の後にクエリの結果となる値を書く。各ステップは変数であり、前のステップを引数として受け取ることで依存関係が作られる。最後のステップの後にカンマを付けるのが最も多い構文エラーの原因。",
+   "lesson": "L1101",
+   "tags": [
+    "M言語"
+   ],
+   "aliases": [
+    "let ... in",
+    "let in"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "M言語の構造 — let ... in を読み書きする"
   },
   {
    "term": "スカラー",
@@ -1890,6 +3166,47 @@
    "source": "M00"
   },
   {
+   "term": "リネージ",
+   "en": "data lineage",
+   "reading": "りねーじ",
+   "short": "データがどこから来て、どこで使われているかという出自と流れの追跡。",
+   "desc": "Power BI Service のワークスペースにはリネージ ビューがあり、データソース→データフロー→セマンティックモデル→レポート→アプリの依存関係を図で確認できる。ソース変更の影響範囲の把握や、使われていない資産の特定に使う。取込元ファイル名などの由来列を残すのも同じ考え方。",
+   "lesson": "L1105",
+   "tags": [
+    "ガバナンス",
+    "データエンジニアリング"
+   ],
+   "aliases": [
+    "データリネージ",
+    "系統",
+    "lineage"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "データフローとETL設計 — 変換をどこに置くか"
+  },
+  {
+   "term": "レコード",
+   "en": "record",
+   "reading": "れこーど",
+   "short": "項目名と値の組を持つMの値。[名前=\"佐藤\", 年齢=30] のように書く。",
+   "desc": "角かっこで囲み、[項目名] で値を取り出す。テーブルの1行はレコードであり、each の _ が指しているのもレコードである。try が返す [HasError, Value, Error] もレコード。",
+   "lesson": "L1101",
+   "tags": [
+    "M言語"
+   ],
+   "aliases": [
+    "record"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "M言語の構造 — let ... in を読み書きする"
+  },
+  {
    "term": "レポート",
    "en": "Report",
    "reading": "れぽーと",
@@ -1967,6 +3284,26 @@
     "95%信頼区間"
    ],
    "source": "M00"
+  },
+  {
+   "term": "値符号化",
+   "en": "Value encoding",
+   "reading": "あたいふごうか",
+   "short": "最小値を引くなどの数学的変換で、必要なビット数を減らす圧縮方式。",
+   "desc": "整数列でのみ使える。たとえば 2023〜2025 という値は 11 ビット必要だが、2023 を引けば 0〜2 となり 2 ビットで済む。辞書を持たないためメモリ消費が小さく、演算も速い。数値を文字列型で保持すると値符号化が使えなくなるため、型の指定が性能に直結する。",
+   "lesson": "L1401",
+   "tags": [
+    "エンジン"
+   ],
+   "aliases": [
+    "バリューエンコーディング",
+    "VALUE"
+   ],
+   "source": "M14",
+   "module": "M14",
+   "tier": "T3",
+   "moduleTitle": "パフォーマンス",
+   "lessonTitle": "VertiPaqの仕組み — なぜ速いのか"
   },
   {
    "term": "円グラフ",
@@ -2087,6 +3424,27 @@
     "因果"
    ],
    "source": "M00"
+  },
+  {
+   "term": "増分更新",
+   "en": "incremental refresh",
+   "reading": "ぞうぶんこうしん",
+   "short": "テーブルを期間で分割して保持し、変わり得る範囲だけを再取得する仕組み。",
+   "desc": "アーカイブ期間と増分範囲を指定すると、Power BI が年・四半期・月・日の階層でパーティションを自動管理する。クエリ フォールディングが成立していることが絶対条件で、成立していないと毎回全件取得となり効果がゼロになる。",
+   "lesson": "L1104",
+   "tags": [
+    "性能",
+    "運用"
+   ],
+   "aliases": [
+    "インクリメンタル更新",
+    "incremental refresh"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "増分更新 — 大規模ファクトを現実的に運用する"
   },
   {
    "term": "外部キー",
@@ -2306,6 +3664,26 @@
    "source": "M00"
   },
   {
+   "term": "遅延評価",
+   "en": "lazy evaluation",
+   "reading": "ちえんひょうか",
+   "short": "必要になった値だけを、必要になった時点で計算する評価方式。",
+   "desc": "Mは in で要求された値から依存関係を逆にたどり、その計算に必要なステップだけを評価する。どこからも参照されないステップは実行されない。この宣言型の性質が、Mの式をSQLへ翻訳するクエリ フォールディングを可能にしている。",
+   "lesson": "L1101",
+   "tags": [
+    "M言語",
+    "データサイエンス"
+   ],
+   "aliases": [
+    "lazy evaluation"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "M言語の構造 — let ... in を読み書きする"
+  },
+  {
    "term": "集計関数",
    "en": "Aggregate function",
    "reading": "しゅうけいかんすう",
@@ -2480,6 +3858,28 @@
    "source": "M00"
   },
   {
+   "term": "M言語",
+   "en": "Power Query M formula language",
+   "reading": "えむげんご",
+   "short": "Power Query が内部で使う、データ変換のための関数型言語。",
+   "desc": "Power Query エディターでボタンを押すたびに生成されるコードの正体。大文字と小文字を厳密に区別し、let ... in という式の形でステップを並べて記述する。GUIでは表現できない変換を書くときや、他人のクエリを読み解くときに必須となる。",
+   "lesson": "L1101",
+   "tags": [
+    "Power Query",
+    "M言語"
+   ],
+   "aliases": [
+    "M",
+    "Power Query M",
+    "Mコード"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "M言語の構造 — let ... in を読み書きする"
+  },
+  {
    "term": "SQL",
    "en": "Structured Query Language",
    "reading": "えすきゅーえる",
@@ -2586,6 +3986,25 @@
    "source": "M00"
   },
   {
+   "term": "リスト",
+   "en": "list",
+   "reading": "りすと",
+   "short": "順序のある値の並びを表すMの値。{1, 2, 3} のように波かっこで書く。",
+   "desc": "0から始まる位置で {0} のように取り出す。テーブルは「同じ項目名を持つレコードのリスト」であり、列名の一覧や結合キーの指定などMの至るところで使われる。List.Transform でリストの各要素に関数を適用するのが一括処理の基本形。",
+   "lesson": "L1101",
+   "tags": [
+    "M言語"
+   ],
+   "aliases": [
+    "list"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "M言語の構造 — let ... in を読み書きする"
+  },
+  {
    "term": "中央値",
    "en": "Median",
    "reading": "ちゅうおうち",
@@ -2614,6 +4033,27 @@
     "プライマリキー"
    ],
    "source": "M00"
+  },
+  {
+   "term": "冪等性",
+   "en": "idempotency",
+   "reading": "べきとうせい",
+   "short": "同じ入力で何度実行しても、結果が同じになる性質。",
+   "desc": "データパイプラインが備えるべき基本性質。冪等であれば、途中で失敗しても安心して再実行できる。「実行するたびに行が追加される」設計や、DateTime.LocalNow() をフィルター条件に使って実行時刻で結果が変わる設計は冪等ではない。",
+   "lesson": "L1102",
+   "tags": [
+    "データエンジニアリング",
+    "データサイエンス"
+   ],
+   "aliases": [
+    "べき等性",
+    "idempotent"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
   },
   {
    "term": "前処理",
@@ -2809,6 +4249,25 @@
     "モード"
    ],
    "source": "M00"
+  },
+  {
+   "term": "検出列",
+   "en": "detect data changes column",
+   "reading": "けんしゅつれつ",
+   "short": "増分範囲外のパーティションが変更されたかを判定するための列。",
+   "desc": "「リアルタイムでデータの変更を検出する」で指定する、最終更新日時のような列。パーティションごとの最大値を比較し、変わったものだけを再取得する。ただし物理削除には反応しないため、論理削除の運用が前提となる。",
+   "lesson": "L1104",
+   "tags": [
+    "増分更新"
+   ],
+   "aliases": [
+    "データの変更を検出"
+   ],
+   "source": "M11",
+   "module": "M11",
+   "tier": "T3",
+   "moduleTitle": "高度なデータ整形",
+   "lessonTitle": "増分更新 — 大規模ファクトを現実的に運用する"
   },
   {
    "term": "構成比",

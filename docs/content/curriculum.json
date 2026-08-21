@@ -10,8 +10,8 @@
       "modules": 22,
       "lessons": 118,
       "labs": 6,
-      "figures": 1276,
-      "lessonsWritten": 104,
+      "figures": 1335,
+      "lessonsWritten": 108,
       "modulesPlanned": 22,
       "lessonsPlanned": 118
     },
@@ -1287,8 +1287,8 @@
       "tier": "T1",
       "level": "T1",
       "order": 16,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 13
     },
     {
       "id": "L0402",
@@ -1327,8 +1327,8 @@
       "tier": "T1",
       "level": "T1",
       "order": 17,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 13
     },
     {
       "id": "L0403",
@@ -3590,7 +3590,7 @@
       "level": "T3",
       "order": 71,
       "hasBody": true,
-      "figures": 13
+      "figures": 14
     },
     {
       "id": "L1306",
@@ -3635,7 +3635,7 @@
       "level": "T3",
       "order": 72,
       "hasBody": true,
-      "figures": 9
+      "figures": 10
     },
     {
       "id": "L1401",
@@ -4365,7 +4365,7 @@
       "level": "T3",
       "order": 88,
       "hasBody": true,
-      "figures": 10
+      "figures": 11
     },
     {
       "id": "L1701",
@@ -4824,7 +4824,7 @@
       "level": "T4",
       "order": 98,
       "hasBody": true,
-      "figures": 9
+      "figures": 11
     },
     {
       "id": "L1901",
@@ -4868,8 +4868,8 @@
       "tier": "T4",
       "level": "T4",
       "order": 99,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 11
     },
     {
       "id": "L1902",
@@ -5584,8 +5584,8 @@
       "tier": "T4",
       "level": "T4",
       "order": 115,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 17
     },
     {
       "id": "L2203",
