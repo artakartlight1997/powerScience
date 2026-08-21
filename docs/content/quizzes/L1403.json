@@ -1,0 +1,89 @@
+{
+  "id": "L1403",
+  "lesson": "L1403",
+  "title": "ストレージエンジンと数式エンジン",
+  "questions": [
+    {
+      "id": "L1403-q1",
+      "type": "single",
+      "stem": "Server Timings で SE 12ms、FE 3,400ms、SE が返した行数 4,800,000 と表示されました。何が起きていますか。",
+      "choices": [
+        "マテリアライゼーション。SE が巨大な中間結果を返し、シングルスレッドの FE が処理しきれていない",
+        "CallbackDataID が発生している",
+        "SE キャッシュがヒットしている",
+        "モデルサイズが大きすぎてスキャンに時間がかかっている"
+      ],
+      "answer": 0,
+      "explain": "SE は12msで仕事を終えており、スキャン自体は速いことが分かります。問題は480万行という中間結果を FE がシングルスレッドで処理している点です。イテレートする粒度が細かすぎる（ファクトを直接走査している）可能性が高く、ディメンションの粒度に落とせないかを検討します。CallbackDataID なら SE 側の時間も伸びます。",
+      "area": "データのモデル化",
+      "ref": "L1403",
+      "difficulty": 4
+    },
+    {
+      "id": "L1403-q2",
+      "type": "single",
+      "stem": "同じメジャーを2回実行しても2回目が速くなりません。最も可能性が高い原因はどれですか。",
+      "choices": [
+        "CallbackDataID が発生しており、SE キャッシュが使われていない",
+        "モデルが DirectQuery になっている",
+        "セグメント数が少なく並列化されていない",
+        "メジャーが計算列を参照している"
+      ],
+      "answer": 0,
+      "explain": "SE がスキャン中に FE を呼び出す CallbackDataID が発生すると、その結果は SE キャッシュに保存されません。そのため何度実行しても同じ時間がかかります。「何度見ても遅いレポート」の典型的な原因です。xmSQL を確認し、イテレータ内の IF や DIVIDE を CALCULATE によるフィルター分割で書き換えます。",
+      "area": "データのモデル化",
+      "ref": "L1403",
+      "difficulty": 4
+    },
+    {
+      "id": "L1403-q3",
+      "type": "single",
+      "stem": "ストレージエンジン（SE）と数式エンジン（FE）の性質として正しい説明はどれですか。",
+      "choices": [
+        "SE はマルチスレッドで動くが処理できる演算が限られ、FE は何でもできるがシングルスレッドである",
+        "SE はシングルスレッド、FE はマルチスレッドである",
+        "両方ともマルチスレッドで、性能差はない",
+        "FE が VertiPaq を直接スキャンする"
+      ],
+      "answer": 0,
+      "explain": "SE は VertiPaq を並列スキャンし、フィルター・GROUP BY・SUM/COUNT/MIN/MAX/DISTINCTCOUNT といった単純な集約を高速に処理します。FE は DAX の全関数を実行できますがシングルスレッドです。したがって最適化の基本方針は「SE にできるだけ多くの仕事を任せ、FE の仕事を減らす」になります。",
+      "area": "データのモデル化",
+      "ref": "L1403",
+      "difficulty": 3
+    },
+    {
+      "id": "L1403-q4",
+      "type": "single",
+      "stem": "次の式で CallbackDataID が発生しています。これを解消する書き換えとして適切なものはどれですか。",
+      "code": "SUMX( Fact_売上, IF( Fact_売上[Quantity] > 10, Fact_売上[SalesAmount] * 0.9, Fact_売上[SalesAmount] ) )",
+      "codeLang": "dax",
+      "choices": [
+        "CALCULATE( SUM( SalesAmount ) * 0.9, Quantity > 10 ) + CALCULATE( SUM( SalesAmount ), Quantity <= 10 ) に分割する",
+        "SUMX を AVERAGEX に変える",
+        "IF を SWITCH に変える",
+        "FILTER で Fact_売上 を包む"
+      ],
+      "answer": 0,
+      "explain": "行ごとの条件分岐を、フィルターによる2つの純粋な集計に分割します。それぞれの CALCULATE 内は SUM だけなのでストレージエンジンだけで完結し、CallbackDataID が消えます。SWITCH も IF と同様に FE の関数なので解消しません。FILTER で包むとむしろ走査が増えます。",
+      "area": "データのモデル化",
+      "ref": "L1403",
+      "difficulty": 4
+    },
+    {
+      "id": "L1403-q5",
+      "type": "multi",
+      "stem": "ストレージエンジン（SE）だけで処理できるものをすべて選んでください。",
+      "choices": [
+        "列のスキャンと等値・範囲フィルター",
+        "GROUP BY による集約",
+        "SUM / MIN / MAX / COUNT / DISTINCTCOUNT",
+        "IF や SWITCH による条件分岐"
+      ],
+      "answer": [0, 1, 2],
+      "explain": "SE ができるのは単純な集約に限られます。列スキャン、フィルター、GROUP BY、基本的な集約関数、単純な列同士の四則演算までです。IF や SWITCH のような条件分岐、除算、日付演算、文字列操作、ランキングはすべて FE の仕事になります。イテレータの第2引数にこれらが入ると CallbackDataID が発生します。",
+      "area": "データのモデル化",
+      "ref": "L1403",
+      "difficulty": 3
+    }
+  ]
+}

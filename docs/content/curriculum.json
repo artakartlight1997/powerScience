@@ -10,8 +10,8 @@
       "modules": 22,
       "lessons": 118,
       "labs": 6,
-      "figures": 1024,
-      "lessonsWritten": 83,
+      "figures": 1276,
+      "lessonsWritten": 104,
       "modulesPlanned": 22,
       "lessonsPlanned": 118
     },
@@ -1119,8 +1119,8 @@
       "tier": "T1",
       "level": "T1",
       "order": 12,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 12
     },
     {
       "id": "L0303",
@@ -1161,8 +1161,8 @@
       "tier": "T1",
       "level": "T1",
       "order": 13,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 12
     },
     {
       "id": "L0304",
@@ -1205,8 +1205,8 @@
       "tier": "T1",
       "level": "T1",
       "order": 14,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 14
     },
     {
       "id": "L0305",
@@ -1245,8 +1245,8 @@
       "tier": "T1",
       "level": "T1",
       "order": 15,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 14
     },
     {
       "id": "L0401",
@@ -1872,7 +1872,7 @@
       "level": "T2",
       "order": 30,
       "hasBody": true,
-      "figures": 9
+      "figures": 12
     },
     {
       "id": "L0605",
@@ -1913,8 +1913,8 @@
       "tier": "T2",
       "level": "T2",
       "order": 31,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 9
     },
     {
       "id": "L0606",
@@ -1956,8 +1956,8 @@
       "tier": "T2",
       "level": "T2",
       "order": 32,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 10
     },
     {
       "id": "L0701",
@@ -2783,7 +2783,7 @@
       "level": "T2",
       "order": 53,
       "hasBody": true,
-      "figures": 12
+      "figures": 14
     },
     {
       "id": "L1004",
@@ -2822,8 +2822,8 @@
       "tier": "T2",
       "level": "T2",
       "order": 54,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 15
     },
     {
       "id": "L1005",
@@ -2863,8 +2863,8 @@
       "tier": "T2",
       "level": "T2",
       "order": 55,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 16
     },
     {
       "id": "L1101",
@@ -3317,8 +3317,8 @@
       "tier": "T3",
       "level": "T3",
       "order": 65,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 8
     },
     {
       "id": "L1206",
@@ -3366,8 +3366,8 @@
       "tier": "T3",
       "level": "T3",
       "order": 66,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 7
     },
     {
       "id": "L1301",
@@ -3813,7 +3813,7 @@
       "level": "T3",
       "order": 76,
       "hasBody": true,
-      "figures": 16
+      "figures": 17
     },
     {
       "id": "L1405",
@@ -3858,8 +3858,8 @@
       "tier": "T3",
       "level": "T3",
       "order": 77,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 17
     },
     {
       "id": "L1501",
@@ -4230,8 +4230,8 @@
       "tier": "T3",
       "level": "T3",
       "order": 85,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 10
     },
     {
       "id": "L1603",
@@ -4281,8 +4281,8 @@
       "tier": "T3",
       "level": "T3",
       "order": 86,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 9
     },
     {
       "id": "L1604",
@@ -4327,8 +4327,8 @@
       "tier": "T3",
       "level": "T3",
       "order": 87,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 7
     },
     {
       "id": "L1605",
@@ -4364,8 +4364,8 @@
       "tier": "T3",
       "level": "T3",
       "order": 88,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 10
     },
     {
       "id": "L1701",
@@ -4684,7 +4684,7 @@
       "level": "T4",
       "order": 95,
       "hasBody": true,
-      "figures": 11
+      "figures": 12
     },
     {
       "id": "L1803",
@@ -4729,8 +4729,8 @@
       "tier": "T4",
       "level": "T4",
       "order": 96,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 11
     },
     {
       "id": "L1804",
@@ -4776,8 +4776,8 @@
       "tier": "T4",
       "level": "T4",
       "order": 97,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 12
     },
     {
       "id": "L1805",
@@ -4823,8 +4823,8 @@
       "tier": "T4",
       "level": "T4",
       "order": 98,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 9
     },
     {
       "id": "L1901",
@@ -5408,7 +5408,7 @@
       "level": "T4",
       "order": 111,
       "hasBody": true,
-      "figures": 12
+      "figures": 15
     },
     {
       "id": "L2104",
@@ -5450,8 +5450,8 @@
       "tier": "T4",
       "level": "T4",
       "order": 112,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 14
     },
     {
       "id": "L2105",
@@ -5492,8 +5492,8 @@
       "tier": "T4",
       "level": "T4",
       "order": 113,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 15
     },
     {
       "id": "L2201",
@@ -5537,8 +5537,8 @@
       "tier": "T4",
       "level": "T4",
       "order": 114,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 11
     },
     {
       "id": "L2202",

@@ -1,0 +1,89 @@
+{
+  "id": "L1303",
+  "lesson": "L1303",
+  "title": "テーブル関数",
+  "questions": [
+    {
+      "id": "L1303-q1",
+      "type": "single",
+      "stem": "次の式がすべてのカテゴリで同じ値（総売上）を返してしまいます。原因はどれですか。",
+      "code": "ADDCOLUMNS(\n    SUMMARIZE( Fact_売上, Dim_商品[Category] ),\n    \"売上\", SUM( Fact_売上[SalesAmount] )\n)",
+      "codeLang": "dax",
+      "choices": [
+        "SUM を直接書いているためコンテキスト遷移が起きていない",
+        "SUMMARIZE の第1引数が Fact_売上 になっている",
+        "ADDCOLUMNS はコンテキストを作らないため",
+        "列名をダブルクォートで囲んでいるため"
+      ],
+      "answer": 0,
+      "explain": "ADDCOLUMNS は行コンテキストを作りますが、行コンテキストは集計関数のフィルターになりません。メジャー参照 [売上合計] にするか CALCULATE( SUM( ... ) ) と包むことで遷移が起き、カテゴリごとの値になります。SUMMARIZE の起点テーブルは正しく、ADDCOLUMNS は確かに行コンテキストを作ります。列名のダブルクォートは必須の構文です。",
+      "area": "データのモデル化",
+      "ref": "L1303",
+      "difficulty": 3
+    },
+    {
+      "id": "L1303-q2",
+      "type": "single",
+      "stem": "SUMMARIZE で集計列を直接追加する書き方が推奨されない理由として、最も適切なものはどれですか。",
+      "choices": [
+        "入れ子のフィルターコンテキストの扱いが直感に反する挙動をすることがあり、公式に ADDCOLUMNS との併用が推奨されているため",
+        "構文エラーになるため",
+        "SUMMARIZE がテーブルを返さなくなるため",
+        "グループ化キーを1つしか指定できなくなるため"
+      ],
+      "answer": 0,
+      "explain": "SUMMARIZE の集計列は特定の条件下でフィルターコンテキストの扱いが予期しない結果を生み、性能面でも最適化されません。グループ化は SUMMARIZE、列の追加は ADDCOLUMNS と責務を分けるのが公式の推奨形です。構文としては有効ですし、返り値は依然としてテーブルです。",
+      "area": "データのモデル化",
+      "ref": "L1303",
+      "difficulty": 3
+    },
+    {
+      "id": "L1303-q3",
+      "type": "single",
+      "stem": "VALUES( Dim_商品[ProductName] ) と DISTINCT( Dim_商品[ProductName] ) で行数が1行異なりました。何が起きていますか。",
+      "choices": [
+        "Fact_売上 に Dim_商品 に存在しない商品IDがあり、不明メンバーの空白行が VALUES にのみ含まれている",
+        "DISTINCT は大文字小文字を区別するため",
+        "VALUES は重複を削除しないため",
+        "DISTINCT はフィルターコンテキストを無視するため"
+      ],
+      "answer": 0,
+      "explain": "参照整合性が崩れていると、Power BI はディメンションに不明メンバーの空白行を自動追加します。VALUES はこれを含め、DISTINCT は含めません。VALUES を使うと明細の合計と総計が一致します。VALUES も重複は削除しますし、両者ともフィルターコンテキストの影響を受けます。根本的にはデータ品質の問題なので Power Query で対処すべきです。",
+      "area": "データのモデル化",
+      "ref": "L1303",
+      "difficulty": 4
+    },
+    {
+      "id": "L1303-q4",
+      "type": "single",
+      "stem": "メジャーの中で SUMMARIZECOLUMNS を使おうとしてエラーになりました。代替として適切な書き方はどれですか。",
+      "choices": [
+        "ADDCOLUMNS( SUMMARIZE( 起点テーブル, グループ化列 ), \"名前\", メジャー )",
+        "CALCULATETABLE( SUMMARIZECOLUMNS( ... ) )",
+        "EVALUATE を先頭に付ける",
+        "SELECTCOLUMNS に置き換える"
+      ],
+      "answer": 0,
+      "explain": "SUMMARIZECOLUMNS はフィルターコンテキストが既に存在する状態での呼び出しに制約があり、メジャー内では避けるのが安全です。ADDCOLUMNS + SUMMARIZE の組み合わせが標準的な代替です。CALCULATETABLE で包んでも制約は解消しません。EVALUATE はDAXクエリの構文でメジャー定義には使えず、SELECTCOLUMNS はグループ化を行いません。",
+      "area": "データのモデル化",
+      "ref": "L1303",
+      "difficulty": 3
+    },
+    {
+      "id": "L1303-q5",
+      "type": "multi",
+      "stem": "テーブル関数の使い方として正しいものをすべて選んでください。",
+      "choices": [
+        "イテレータ関数の第1引数として渡す",
+        "CALCULATE のフィルター引数として渡す",
+        "VAR に格納して複数回参照する",
+        "メジャーの最終的な返り値としてそのまま返す"
+      ],
+      "answer": [0, 1, 2],
+      "explain": "テーブル関数の返り値はイテレータの第1引数、CALCULATE のフィルター引数、VAR への格納のいずれにも使えます。しかしメジャーの最終返り値はスカラーでなければならず、テーブルを返したままにすると「メジャーの結果はスカラーである必要があります」というエラーになります。COUNTROWS や SUMX で包む必要があります。",
+      "area": "データのモデル化",
+      "ref": "L1303",
+      "difficulty": 2
+    }
+  ]
+}

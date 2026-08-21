@@ -1,19 +1,20 @@
 {
- "totalQuestions": 67,
- "lessonQuestions": 0,
+ "totalQuestions": 237,
+ "lessonQuestions": 170,
  "examQuestions": 67,
  "byArea": {
-  "データの準備": 15,
-  "データのモデル化": 22,
-  "視覚化と分析": 16,
-  "資産の管理とセキュリティ": 14
+  "データの準備": 37,
+  "データのモデル化": 130,
+  "視覚化と分析": 40,
+  "資産の管理とセキュリティ": 18,
+  "データサイエンス": 12
  },
  "bySkill": {},
  "byDifficulty": {
-  "2": 34,
+  "2": 72,
   "1": 6,
-  "3": 25,
-  "4": 2
+  "3": 118,
+  "4": 41
  },
  "quizzes": {
   "EXAM-PL300": {
@@ -21,6 +22,210 @@
    "count": 67,
    "lesson": null,
    "isExam": true
+  },
+  "L0701": {
+   "title": "DAXとは何か",
+   "count": 5,
+   "lesson": "L0701",
+   "isExam": false
+  },
+  "L0702": {
+   "title": "計算列とメジャー",
+   "count": 5,
+   "lesson": "L0702",
+   "isExam": false
+  },
+  "L0703": {
+   "title": "集計関数",
+   "count": 5,
+   "lesson": "L0703",
+   "isExam": false
+  },
+  "L0704": {
+   "title": "条件分岐と安全な割り算",
+   "count": 5,
+   "lesson": "L0704",
+   "isExam": false
+  },
+  "L0705": {
+   "title": "VAR と RETURN",
+   "count": 5,
+   "lesson": "L0705",
+   "isExam": false
+  },
+  "L0706": {
+   "title": "DAXの作法",
+   "count": 5,
+   "lesson": "L0706",
+   "isExam": false
+  },
+  "L0801": {
+   "title": "フィルターコンテキスト",
+   "count": 5,
+   "lesson": "L0801",
+   "isExam": false
+  },
+  "L0802": {
+   "title": "行コンテキスト",
+   "count": 5,
+   "lesson": "L0802",
+   "isExam": false
+  },
+  "L0803": {
+   "title": "CALCULATE",
+   "count": 5,
+   "lesson": "L0803",
+   "isExam": false
+  },
+  "L0804": {
+   "title": "フィルターを外す",
+   "count": 5,
+   "lesson": "L0804",
+   "isExam": false
+  },
+  "L0805": {
+   "title": "KEEPFILTERS と FILTER",
+   "count": 5,
+   "lesson": "L0805",
+   "isExam": false
+  },
+  "L0806": {
+   "title": "タイムインテリジェンス",
+   "count": 5,
+   "lesson": "L0806",
+   "isExam": false
+  },
+  "L0901": {
+   "title": "ビジュアルの選び方",
+   "count": 5,
+   "lesson": "L0901",
+   "isExam": false
+  },
+  "L0902": {
+   "title": "レポートのレイアウトと視線導線",
+   "count": 5,
+   "lesson": "L0902",
+   "isExam": false
+  },
+  "L0903": {
+   "title": "色とテーマ",
+   "count": 5,
+   "lesson": "L0903",
+   "isExam": false
+  },
+  "L0904": {
+   "title": "相互作用・ドリルダウン・ドリルスルー",
+   "count": 5,
+   "lesson": "L0904",
+   "isExam": false
+  },
+  "L1101": {
+   "title": "M言語の構造",
+   "count": 5,
+   "lesson": "L1101",
+   "isExam": false
+  },
+  "L1102": {
+   "title": "カスタム関数とパラメータ",
+   "count": 5,
+   "lesson": "L1102",
+   "isExam": false
+  },
+  "L1103": {
+   "title": "クエリ フォールディング",
+   "count": 5,
+   "lesson": "L1103",
+   "isExam": false
+  },
+  "L1104": {
+   "title": "増分更新",
+   "count": 5,
+   "lesson": "L1104",
+   "isExam": false
+  },
+  "L1105": {
+   "title": "データフローとETL設計",
+   "count": 5,
+   "lesson": "L1105",
+   "isExam": false
+  },
+  "L1201": {
+   "title": "多対多とブリッジテーブル",
+   "count": 5,
+   "lesson": "L1201",
+   "isExam": false
+  },
+  "L1202": {
+   "title": "双方向リレーションシップの罠",
+   "count": 5,
+   "lesson": "L1202",
+   "isExam": false
+  },
+  "L1301": {
+   "title": "イテレータ関数",
+   "count": 5,
+   "lesson": "L1301",
+   "isExam": false
+  },
+  "L1302": {
+   "title": "コンテキスト遷移",
+   "count": 5,
+   "lesson": "L1302",
+   "isExam": false
+  },
+  "L1303": {
+   "title": "テーブル関数",
+   "count": 5,
+   "lesson": "L1303",
+   "isExam": false
+  },
+  "L1304": {
+   "title": "集合演算と仮想リレーション",
+   "count": 5,
+   "lesson": "L1304",
+   "isExam": false
+  },
+  "L1305": {
+   "title": "実務パターン集",
+   "count": 5,
+   "lesson": "L1305",
+   "isExam": false
+  },
+  "L1306": {
+   "title": "DAXのよくある間違い20選",
+   "count": 5,
+   "lesson": "L1306",
+   "isExam": false
+  },
+  "L1401": {
+   "title": "VertiPaqの仕組み",
+   "count": 5,
+   "lesson": "L1401",
+   "isExam": false
+  },
+  "L1402": {
+   "title": "カーディナリティとモデルサイズ",
+   "count": 5,
+   "lesson": "L1402",
+   "isExam": false
+  },
+  "L1403": {
+   "title": "ストレージエンジンと数式エンジン",
+   "count": 5,
+   "lesson": "L1403",
+   "isExam": false
+  },
+  "L1404": {
+   "title": "計測する",
+   "count": 5,
+   "lesson": "L1404",
+   "isExam": false
+  },
+  "L1405": {
+   "title": "レポート最適化",
+   "count": 5,
+   "lesson": "L1405",
+   "isExam": false
   }
  }
 }

@@ -225,7 +225,6 @@
      2. 各図のレンダラ（HTML文字列を返す）
      ========================================================= */
   var R = {};
-  var AX = 16;   /* 軸ラベルの標準サイズ */
   var VAL = 16;  /* 値ラベルの標準サイズ */
 
   /* ---------- 5.1 flow ---------- */
@@ -455,7 +454,7 @@
     var eTone = "gray";
     var tones = ["gray"];
     dims.forEach(function (d, i) { tones.push(cyc(d.tone, i)); });
-    var body = "", H;
+    var body = "", H, needLegend = false;
     var factTone = tone(fact.tone, "amber");
     var edgeLabel = str(cfg.edgeLabel);
     var wide = W >= 700;
@@ -491,7 +490,12 @@
           var d = "M" + n(sx) + "," + n(sy) + " C" + n(c1) + "," + n(sy) + " " + n(c2) + "," + n(ty) + " " + n(tx) + "," + n(ty);
           edges += drawEdge(d, t, id + "-ar-" + t);
           tones.push(t);
-          if (edgeLabel) labels += drawEdgeLabel((sx + tx) / 2, (sy + ty) / 2 - 2, edgeLabel, 15);
+          if (edgeLabel) {
+            var pw = textW(edgeLabel, 15) + 16;
+            if (Math.abs(tx - sx) >= pw + 6) {
+              labels += drawEdgeLabel(sx + (tx - sx) * 0.55, sy + (ty - sy) * 0.55, edgeLabel, 15);
+            } else { needLegend = true; }
+          }
           y += b.h + vg;
         });
       };
@@ -543,7 +547,7 @@
       body = edges2 + body + drawNode(fbN, fx2, factY, fw, factTone, "is-strong");
     }
     var svg = svgOpen(W, H, "スタースキーマの図") + markerDefs(id, tones) + body;
-    var legend = (!wide && edgeLabel)
+    var legend = ((!wide || needLegend) && edgeLabel)
       ? '<div class="fig-legend"><span>&#8594; リレーションシップ：' + esc(edgeLabel) + "</span></div>" : "";
     return svgWrap(svg) + legend;
   };
@@ -606,17 +610,44 @@
     var edgesIn = arr(cfg.edges);
     var index = {};
     nodesIn.forEach(function (nd, i) { index[str(nd.id) || String(i)] = i; });
-    var rank = nodesIn.map(function () { return 0; });
-    for (var it = 0; it < nodesIn.length; it++) {
-      var moved = false;
-      edgesIn.forEach(function (e) {
-        var a = index[str(e.from)], b = index[str(e.to)];
-        if (a == null || b == null || a === b) return;
-        if (rank[b] < rank[a] + 1) { rank[b] = rank[a] + 1; moved = true; }
-      });
-      if (!moved) break;
+
+    /* ランク付け。フィードバックループ（循環）があっても発散しないよう、
+       幅優先で1回だけ到達順にランクを与え、戻り矢印は無視する。          */
+    var N = nodesIn.length;
+    var rank = [], seen = [], indeg = [];
+    for (var z = 0; z < N; z++) { rank[z] = 0; seen[z] = false; indeg[z] = 0; }
+    var links = [];
+    edgesIn.forEach(function (e) {
+      var a = index[str(e.from)], b = index[str(e.to)];
+      if (a == null || b == null || a === b) return;
+      links.push([a, b]);
+      indeg[b]++;
+    });
+    var queue = [];
+    for (var z2 = 0; z2 < N; z2++) if (indeg[z2] === 0) { queue.push(z2); seen[z2] = true; }
+    if (!queue.length) { queue.push(0); seen[0] = true; }   // 全体が循環している場合
+    while (queue.length) {
+      var cur = queue.shift();
+      for (var li = 0; li < links.length; li++) {
+        if (links[li][0] !== cur) continue;
+        var nx = links[li][1];
+        if (seen[nx]) continue;                              // 戻り矢印は無視する
+        seen[nx] = true;
+        rank[nx] = Math.min(rank[cur] + 1, N - 1);
+        queue.push(nx);
+      }
     }
-    var maxRank = Math.max.apply(null, rank);
+    for (var z3 = 0; z3 < N; z3++) if (!seen[z3]) { rank[z3] = 0; seen[z3] = true; }
+
+    /* 空のランクを詰めて、列が痩せないようにする */
+    var used = [];
+    rank.forEach(function (rk) { if (used.indexOf(rk) < 0) used.push(rk); });
+    used.sort(function (a, b) { return a - b; });
+    var remap = {};
+    used.forEach(function (rk, i) { remap[rk] = i; });
+    rank = rank.map(function (rk) { return remap[rk]; });
+
+    var maxRank = used.length - 1;
     var groups = [];
     for (var r0 = 0; r0 <= maxRank; r0++) groups.push([]);
     rank.forEach(function (rk, i) { groups[rk].push(i); });
@@ -650,10 +681,19 @@
       });
     } else {
       var gapYn = 54, rowGapX = 12;
-      var y2 = 4;
+      /* 戻り矢印（下位ランク→上位ランク）があるときは、
+         本文を横切らないよう右側に折り返し用のレーンを空ける */
+      var hasBack = edgesIn.some(function (e) {
+        var a = index[str(e.from)], b = index[str(e.to)];
+        return a != null && b != null && a !== b && rank[b] < rank[a];
+      });
+      var lane = hasBack ? 46 : 0;
+      var Wn = W - lane;
+      /* 戻り矢印のラベルを最上段のノードの上に置くための余白 */
+      var y2 = hasBack ? 34 : 4;
       H = 0;
       groups.forEach(function (g) {
-        var cw = g.length > 1 ? Math.floor((W - rowGapX * (g.length - 1)) / g.length) : W;
+        var cw = g.length > 1 ? Math.floor((Wn - rowGapX * (g.length - 1)) / g.length) : Wn;
         var bs = g.map(function (i) { return nodeBox(nodesIn[i].label, nodesIn[i].sub ? [nodesIn[i].sub] : [], cw, { labelSize: 17.5, subSize: 16 }); });
         var rh = Math.max.apply(null, bs.map(function (b) { return b.h; }));
         g.forEach(function (i, ci) {
@@ -676,9 +716,17 @@
         var cx = Math.max(28, Math.abs(x2 - x1) * 0.45);
         d = "M" + n(x1) + "," + n(y1) + " C" + n(x1 + cx) + "," + n(y1) + " " + n(x2 - cx) + "," + n(y2b) + " " + n(x2) + "," + n(y2b);
         mx = (x1 + x2) / 2; my = (y1 + y2b) / 2 - 2;
+      } else if (pb.y < pa.y) {
+        /* 戻り矢印：右のレーンを縦に回して対象ノードの右辺に入る */
+        var lx = pa.x + pa.w + 26;
+        var ry1 = pa.y + pa.h / 2, ry2 = pb.y + pb.h / 2;
+        d = "M" + n(pa.x + pa.w) + "," + n(ry1) +
+            " C" + n(lx) + "," + n(ry1) + " " + n(lx) + "," + n(ry1) + " " + n(lx) + "," + n(ry1 - 14) +
+            " L" + n(lx) + "," + n(ry2 + 14) +
+            " C" + n(lx) + "," + n(ry2) + " " + n(lx) + "," + n(ry2) + " " + n(pb.x + pb.w) + "," + n(ry2);
+        mx = pb.x + pb.w / 2; my = Math.max(13, pb.y - 15);
       } else {
         var sx = pa.x + pa.w / 2, sy = pa.y + pa.h, tx = pb.x + pb.w / 2, ty = pb.y;
-        if (ty < sy) { sy = pa.y; ty = pb.y + pb.h; }
         var cy = Math.max(16, Math.abs(ty - sy) * 0.4);
         d = "M" + n(sx) + "," + n(sy) + " C" + n(sx) + "," + n(sy + cy) + " " + n(tx) + "," + n(ty - cy) + " " + n(tx) + "," + n(ty);
         mx = (sx + tx) / 2; my = (sy + ty) / 2;
