@@ -191,7 +191,9 @@
       "</div>";
     document.body.insertBefore(header, document.body.firstChild);
 
-    const mq = matchMedia("(max-width: 859px)");
+    /* ナビ項目が9つあるため、デスクトップ表示は 1080px 以上に限定する
+       （style.css のブレークポイントと一致させること） */
+    const mq = matchMedia("(max-width: 1079.98px)");
     const menuBtn = header.querySelector("#pbm-menu");
     const applyMq = () => { menuBtn.style.display = mq.matches ? "grid" : "none"; };
     applyMq(); mq.addEventListener("change", applyMq);

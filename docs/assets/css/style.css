@@ -131,7 +131,7 @@ a:hover { opacity: .82; }
 /* Mobile drawer */
 .drawer { display: none; border-top: 1px solid var(--border); background: var(--bg-elevated); }
 .drawer.open { display: block; }
-@media (min-width: 860px) { .drawer, .drawer.open { display: none; } }
+@media (min-width: 1080px) { .drawer, .drawer.open { display: none; } }
 .drawer a { display: block; padding: 13px 16px; color: var(--fg); text-decoration: none;
             border-bottom: 1px solid var(--border); font-weight: 600; font-size: 15px; }
 
@@ -657,3 +657,11 @@ a.tier-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); opac
 
 /* ---------- 横スクロール防止 ---------- */
 html, body { max-width: 100%; overflow-x: hidden; }
+
+/* ---------- ヘッダーのナビゲーション（v2で項目が9つに増えたための調整） ----------
+   860px では項目が折り返して崩れるため、デスクトップ表示は 1080px 以上に限定し、
+   それ未満はハンバーガーメニューに切り替える。                                  */
+.nav { display: none; }
+@media (min-width: 860px) and (max-width: 1079.98px) { .nav { display: none; } }
+@media (min-width: 1080px) { .nav { display: flex; } }
+.nav a { white-space: nowrap; }

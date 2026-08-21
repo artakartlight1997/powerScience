@@ -1,13 +1,14 @@
 {
- "totalQuestions": 555,
- "lessonQuestions": 315,
+ "totalQuestions": 580,
+ "lessonQuestions": 340,
  "examQuestions": 240,
  "byArea": {
-  "データの準備": 114,
-  "データのモデル化": 228,
-  "視覚化と分析": 107,
-  "資産の管理とセキュリティ": 72,
-  "データサイエンス": 34
+  "データの準備": 120,
+  "データのモデル化": 231,
+  "視覚化と分析": 109,
+  "資産の管理とセキュリティ": 77,
+  "データサイエンス": 34,
+  "基礎": 9
  },
  "bySkill": {
   "1.1 データソースへの接続": 11,
@@ -36,10 +37,10 @@
   "4.5 ガバナンスとライフサイクル": 8
  },
  "byDifficulty": {
-  "2": 171,
-  "4": 88,
-  "3": 264,
-  "1": 32
+  "2": 172,
+  "4": 99,
+  "3": 267,
+  "1": 42
  },
  "quizzes": {
   "EXAM-PL300": {
@@ -424,6 +425,36 @@
    "title": "効果検証の基礎",
    "count": 5,
    "lesson": "L1506",
+   "isExam": false
+  },
+  "L1601": {
+   "title": "PL-300の全体像",
+   "count": 5,
+   "lesson": "L1601",
+   "isExam": false
+  },
+  "L1602": {
+   "title": "領域1・2 総復習",
+   "count": 5,
+   "lesson": "L1602",
+   "isExam": false
+  },
+  "L1603": {
+   "title": "領域3・4 総復習",
+   "count": 5,
+   "lesson": "L1603",
+   "isExam": false
+  },
+  "L1604": {
+   "title": "頻出パターン30",
+   "count": 5,
+   "lesson": "L1604",
+   "isExam": false
+  },
+  "L1605": {
+   "title": "学習計画と当日戦略",
+   "count": 5,
+   "lesson": "L1605",
    "isExam": false
   }
  }

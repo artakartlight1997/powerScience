@@ -10,8 +10,8 @@
       "modules": 22,
       "lessons": 118,
       "labs": 6,
-      "figures": 1335,
-      "lessonsWritten": 108,
+      "figures": 1396,
+      "lessonsWritten": 113,
       "modulesPlanned": 22,
       "lessonsPlanned": 118
     },
@@ -1372,8 +1372,8 @@
       "tier": "T1",
       "level": "T1",
       "order": 18,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 12
     },
     {
       "id": "L0404",
@@ -1417,8 +1417,8 @@
       "tier": "T1",
       "level": "T1",
       "order": 19,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 14
     },
     {
       "id": "L0405",
@@ -4914,8 +4914,8 @@
       "tier": "T4",
       "level": "T4",
       "order": 100,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 11
     },
     {
       "id": "L1903",
@@ -5633,8 +5633,8 @@
       "tier": "T4",
       "level": "T4",
       "order": 116,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 11
     },
     {
       "id": "L2204",
@@ -5677,8 +5677,8 @@
       "tier": "T4",
       "level": "T4",
       "order": 117,
-      "hasBody": false,
-      "figures": 0
+      "hasBody": true,
+      "figures": 13
     },
     {
       "id": "L2205",
