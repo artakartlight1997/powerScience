@@ -1,84 +1,76 @@
-# Power BI Mastery — 学習サイト
+# Power BI Mastery
 
-Power BI の初学者が **PL-300（Microsoft Power BI Data Analyst）** 認定レベルまで到達するための、
-図解 × ハンズオン × クイズ の学習サイトです。GitHub Pages で公開でき、スマートフォンからも学習できます。
+Power BI を **初級 → 中級 → 上級 → プロ** の4段階で学び、
+**PL-300（Microsoft Power BI Data Analyst）合格**と**現場で通用する実力**の両方に届くための学習サイトです。
 
+GitHub Pages で公開でき、スマートフォンからも学習できます。
 閲覧統計（どの地域の人が、いつ、どのページを見たか）は、一般には見えない管理画面で確認できます。
-管理画面のパスワードは、あなたが自分で設定します。
+管理画面のパスワードはあなた自身が設定します。
 
 ---
 
-## 中身
+## このサイトの中身
 
 | 区分 | 内容 |
 |---|---|
-| 学習ロードマップ | 6レベル（Lv.0〜Lv.5）、想定学習時間 80時間 |
-| レッスン | 39本（すべて日本語・図解つき） |
-| ハンズオンラボ | 6本（サンプルデータ同梱） |
-| 演習問題 | 223問（レッスン別クイズ156問 + 模擬試験バンク67問） |
-| 用語集 | 72語（検索可能） |
-| サンプルデータ | 架空の小売企業「Northstar Retail」の売上データ 約7,000行 |
+| ティア | 4段階（初級 / 中級 / 上級 / プロ） |
+| モジュール | 22 |
+| レッスン | 118 |
+| 図解 | 1,000枚以上（すべて自前のSVG/HTML。**Mermaidは使っていません**） |
+| 操作できる図解 | 10種類（フィルターコンテキスト体験、結合ラボ、RLSシミュレータほか） |
+| ハンズオンラボ | 12（サンプルデータ同梱） |
+| 演習問題 | レッスン別クイズ + PL-300 模擬試験バンク |
+| 用語集 | 検索・索引つき。本文中の用語から自動でリンク |
+| 想定学習時間 | 約230時間 |
 
-### 学習ロードマップ
+### 4つのティア
 
-| レベル | テーマ | PL-300 出題領域 |
+| ティア | 到達点 | モジュール |
 |---|---|---|
-| Lv.0 | はじめの一歩（全体像・環境構築） | — |
-| Lv.1 | データの取得と整形（Power Query / M） | データの準備 25-30% |
-| Lv.2 | データモデリング（スタースキーマ） | データのモデル化 25-30% |
-| Lv.3 | DAX（フィルターコンテキスト・CALCULATE） | 領域1〜3にまたがる中核 |
-| Lv.4 | 可視化とレポート設計 | 視覚化と分析 25-30% |
-| Lv.5 | 運用・ガバナンス・試験対策 | 資産の管理とセキュリティ 15-20% |
+| **初級** Beginner | BIの考え方を理解し、自分でレポートを1枚作れる | データ分析とBIの基礎 / Power BIの全体像 / はじめてのレポート / データの読み込み入門 |
+| **中級** Intermediate | 実務データを整形し正しいモデルを組み、必要な指標をDAXで書ける | Power Query実践 / データモデリング / DAX基礎 / DAXコンテキスト / 可視化の設計 / 共有と運用 |
+| **上級** Advanced | 性能・複雑要件・組織展開を扱え、PL-300に合格できる | 高度なデータ整形 / 高度なモデリング / DAX上級 / パフォーマンス / 分析手法とデータサイエンス / PL-300完全対策 |
+| **プロ** Professional | 設計をリードし、データから事業価値を出せる | エンタープライズ アーキテクチャ / ガバナンスとライフサイクル / Microsoft Fabric / 高度な分析とAI / デザインとストーリーテリング / 現場で価値を出す |
+
+### 設計方針
+
+**1. なぜ学ぶのかを毎回明示する**
+全レッスンの冒頭に「なぜ学ぶのか」「このレッスンで身につく力」「到達目標」「次に開けること」を表示します。
+前提レッスンが未完了なら警告が出ます。学習が積み上がっている実感が持てる作りです。
+
+**2. 図で理解させる**
+Mermaid は使っていません。図は `figure` ブロックに書いた設定から、専用エンジンが大きなSVG/HTMLとして描画します。
+13種類（工程図・比較・スタースキーマ・データ変換の前後・DAXの解剖図・グラフ・階層図ほか）を使い分けます。
+
+**3. 操作して覚える**
+フィルターコンテキストや結合の挙動は、読むより触るほうが速く身につきます。
+本文中に埋め込まれた10種類のウィジェットで、実際にクリックして挙動を確かめられます。
+
+**4. 用語で迷わせない**
+本文中の専門用語は自動的に用語集にリンクされ、ホバーで1文の定義が出ます。
+「バイブル」として、分からない語が出てきたらその場で解決できます。
+
+**5. Power BI だけでは足りない知識も入れる**
+統計・指標設計・可視化理論・データマネジメントを `データサイエンス視点` として各所に組み込んでいます。
+ツールの操作だけ覚えても現場では使えないためです。
+
+**6. PL-300 を1項目も落とさない**
+公式の出題範囲24スキル項目すべてにレッスンを対応づけ、
+`pl300.html` でカバレッジ表として可視化しています。模擬試験はスキル項目別に採点され、弱点だけを再出題できます。
 
 ---
 
-## ディレクトリ構成
+## GitHub で公開する
 
-```
-docs/                      GitHub Pages で公開されるサイト本体
-├── index.html             トップページ
-├── roadmap.html           学習ロードマップ
-├── lesson.html            レッスン表示（?id=L001）
-├── labs.html / lab.html   ハンズオン一覧・本文
-├── quizzes.html / quiz.html  クイズ一覧・出題
-├── exam.html              PL-300 模擬試験（時間制限つき）
-├── glossary.html          用語集
-├── progress.html          学習記録（端末内に保存）
-├── admin.html             管理ダッシュボード（要パスワード）
-├── assets/
-│   ├── css/style.css      デザインシステム
-│   └── js/
-│       ├── config.js      ★ サイト設定（計測サーバのURLなど）
-│       ├── app.js         共通処理・進捗管理
-│       ├── render.js      Markdown / Mermaid図 / DAXハイライト
-│       ├── quiz.js        クイズ・試験エンジン
-│       └── analytics.js   計測クライアント
-├── content/
-│   ├── curriculum.json    ★ カリキュラム定義（レベル・レッスン・ラボ）
-│   ├── lessons/*.md       レッスン本文
-│   ├── labs/*.md          ハンズオン手順
-│   ├── quizzes/*.json     設問
-│   └── glossary.json      用語集
-└── data/*.csv             ハンズオン用サンプルデータ
+### よくある質問：GitHub の Web 画面で見られますか？
 
-worker/                    アクセス統計バックエンド（Cloudflare Workers + D1）
-├── src/index.js           API 本体
-├── schema.sql             D1 のテーブル定義
-├── wrangler.toml          デプロイ設定
-└── README.md              セットアップ手順
+- **リポジトリのファイル一覧（github.com）で `.html` を開いても、ソースコードが表示されるだけです。**
+  GitHub のファイルビューアは HTML を実行しません。
+- **サイトとして表示するには GitHub Pages を有効にする必要があります。** 下の手順で数分です。
+  有効にすると `https://<ユーザー名>.github.io/<リポジトリ名>/` で誰でも閲覧できます。
+- Markdown（`README.md` など）は github.com 上でそのまま読めます。
 
-scripts/
-├── generate_sample_data.py  サンプルデータ生成
-└── validate_content.py      コンテンツ整合性チェック
-```
-
----
-
-## 公開の手順
-
-### 1. GitHub Pages で公開する（5分）
-
-このリポジトリを GitHub に置いたうえで、次のどちらかを選びます。
+### 公開手順（5分）
 
 **方法A：ブランチから公開（もっとも簡単）**
 
@@ -86,22 +78,30 @@ scripts/
 2. Source を **Deploy from a branch**
 3. Branch を `main`、フォルダを **`/docs`** に設定して Save
 
-数分後、`https://<ユーザー名>.github.io/<リポジトリ名>/` で公開されます。
+数分後に `https://<ユーザー名>.github.io/<リポジトリ名>/` で公開されます。
 
-**方法B：GitHub Actions で公開（コンテンツ検証つき）**
+**方法B：GitHub Actions で公開（検証つき・推奨）**
 
 1. **Settings → Pages** の Source を **GitHub Actions** に設定
-2. `main` へ push すると `.github/workflows/pages.yml` が動き、
-   コンテンツの整合性チェック（`scripts/validate_content.py`）に通ってからデプロイされます
+2. `main` へ push すると `.github/workflows/pages.yml` が動きます
 
-> この時点で、学習サイトとしては完全に動作します。アクセス統計が不要ならここで完了です。
+Actions では、デプロイ前に次を実行します。
 
-### 2. アクセス統計を有効にする（10分・任意）
+- カリキュラム・用語集・クイズのインデックス生成
+- 図(figure)のJSON検査
+- コンテンツ整合性チェック（リンク切れ・クイズの正解範囲・PL-300コードなど）
+- 計測APIの単体テスト
+- Mermaid が混入していないかの確認
 
-統計を取るにはサーバが必要です。GitHub Pages は静的サイトのみのため、
-**Cloudflare Workers + D1**（無料枠で十分）を使います。
+> 注意：`docs/content/curriculum.json` などは生成物です。
+> コンテンツを編集したら `python3 scripts/build_all.py` を実行してからコミットしてください。
 
-手順の詳細は [`worker/README.md`](worker/README.md) を参照してください。要約すると：
+---
+
+## アクセス統計を有効にする（任意・10分）
+
+統計にはサーバが必要です。GitHub Pages は静的サイトのみのため、**Cloudflare Workers + D1**（無料枠で十分）を使います。
+詳細は [`worker/README.md`](worker/README.md) を参照してください。
 
 ```bash
 npm install -g wrangler
@@ -114,103 +114,117 @@ wrangler secret put ADMIN_PASSWORD        # ← ここで管理画面のパス�
 wrangler deploy
 ```
 
-デプロイ後に表示されるURL（例：`https://pbm-analytics.xxxx.workers.dev`）を、
-`docs/assets/js/config.js` の `analyticsEndpoint` に貼り付けて push します。
+デプロイ後のURLを `docs/assets/js/config.js` の `analyticsEndpoint` に設定し、
+`worker/wrangler.toml` の `ALLOWED_ORIGINS` を自分のサイトのオリジンに変更して push します。
 
-```js
-window.PBM_CONFIG = {
-  analyticsEndpoint: "https://pbm-analytics.xxxx.workers.dev",
-  ...
-};
-```
+管理画面は `https://<あなたのサイト>/admin.html` です。
 
-あわせて `worker/wrangler.toml` の `ALLOWED_ORIGINS` を、自分のサイトのオリジンに変更してください。
+### 管理画面で見られるもの
 
-```toml
-ALLOWED_ORIGINS = "https://<ユーザー名>.github.io"
-```
+ページビュー / ユニーク訪問者 / セッション / 平均滞在時間、日別推移、時間帯（UTC基準）、
+**国・地方（州や都道府県）・都市**、ページ別、流入元、デバイス・ブラウザ・OS、利用者のタイムゾーン、
+完了されたレッスン、**クイズ平均点が低い順（＝つまずき箇所）**、直近のアクセス、CSVエクスポート。
 
-### 3. 管理画面を開く
+### プライバシー
 
-`https://<あなたのサイト>/admin.html` にアクセスし、
-計測サーバのURLと、手順2で設定したパスワードを入力します。
+- **IPアドレスは保存しません。** 国・地域・都市は Cloudflare がリクエストに付与する位置情報メタデータから取得しています
+- 訪問者の識別は個人情報を含まないランダムIDのみ
+- リファラはオリジンだけを保存し、パスやクエリは保存しません
+- 利用者は「学習記録」ページから自分の端末での計測を停止できます
+- 保持期間は `RETENTION_DAYS`（既定400日）で、日次のcronで自動削除されます
+- 管理画面のURLは公開されますが、パスワードなしではデータは一切表示されません
+
+> 公開サイトで計測する場合、所在地の法令に応じてプライバシーポリシーの掲示や同意取得が必要になることがあります。
 
 ---
 
-## 管理ダッシュボードで見られるもの
+## ディレクトリ構成
 
-| 指標 | 内容 |
-|---|---|
-| ページビュー / 訪問者 / セッション | 期間別（今日・7日・30日・90日・1年） |
-| 日別の推移 | 棒グラフ |
-| 時間帯 | UTC基準の24時間分布（日本時間 = UTC+9） |
-| 国・地域 | 国コード別 |
-| 地方 | 州・都道府県レベル |
-| 都市 | 市区町村レベル |
-| ページ別 | よく見られたページ |
-| 流入元 | リファラのオリジン別 |
-| デバイス / ブラウザ / OS | スマホ・PCの内訳 |
-| タイムゾーン | 利用者の設定タイムゾーン |
-| 完了レッスン | どのレッスンが完了されているか |
-| クイズ平均点 | 平均点が低い順＝つまずき箇所 |
-| 直近のアクセス | 最新120件のイベント |
-| CSVエクスポート | 生データのダウンロード |
+```
+docs/                       GitHub Pages で公開されるサイト本体
+├── index.html              トップ（4ティアの全体像）
+├── tiers.html              学習の全体像（ティア × モジュール）
+├── roadmap.html            詳細ロードマップ（3階層アコーディオン）
+├── lesson.html             レッスン表示（?id=L0601）
+├── labs.html / lab.html    ハンズオン
+├── quizzes.html / quiz.html 理解度クイズ
+├── exam.html               PL-300 模擬試験（領域・スキル項目別採点）
+├── pl300.html              PL-300 出題範囲カバレッジ表
+├── glossary.html           用語集（検索・索引・タグ絞り込み）
+├── progress.html           学習記録
+├── admin.html              管理ダッシュボード（要パスワード）
+├── assets/
+│   ├── css/                style / figure / interactive / glossary / lesson
+│   └── js/
+│       ├── config.js       ★ サイト設定（計測サーバのURLなど）
+│       ├── app.js          共通処理・進捗管理・カリキュラム取得
+│       ├── render.js       Markdown → HTML（図ブロック・コードハイライト）
+│       ├── figure.js       図解エンジン（13種類）
+│       ├── interactive.js  操作できる図解（10種類）
+│       ├── glossary.js     用語の自動リンクとポップオーバー
+│       ├── quiz.js         クイズ・試験エンジン
+│       └── analytics.js    計測クライアント
+├── content/
+│   ├── modules/M01〜M22.json   ★ モジュールとレッスンの定義
+│   ├── lessons/*.md            レッスン本文
+│   ├── labs/*.md               ハンズオン手順
+│   ├── quizzes/*.json          設問
+│   ├── glossary/*.json         用語集（モジュール別）
+│   ├── curriculum.json         生成物（build_all.py が作る）
+│   └── pl300.json              生成物（スキル項目 → レッスンの逆引き）
+└── data/*.csv              ハンズオン用サンプルデータ
 
-### プライバシーへの配慮
-
-- **IPアドレスは保存しません。** 国・地域・都市は、Cloudflare がリクエストに付与する位置情報メタデータ（`request.cf`）から取得しています
-- 訪問者の識別は、個人情報を含まないランダムなIDのみです
-- リファラはオリジン（`https://example.com`）だけを保存し、パスやクエリは保存しません
-- 利用者は「学習記録」ページから、自分の端末での計測を停止できます
-- ログの保持期間は `wrangler.toml` の `RETENTION_DAYS`（既定400日）で設定でき、日次のcronで自動削除されます
-- 管理画面のURL自体は公開されますが、パスワードなしではデータは一切表示されません
-
-> 公開サイトで計測を行う場合、所在地の法令（日本の個人情報保護法、EU向けならGDPR等）に応じて
-> プライバシーポリシーの掲示や同意取得が必要になることがあります。運用前にご確認ください。
+worker/                     アクセス統計バックエンド（Cloudflare Workers + D1）
+scripts/                    ビルドと検証
+tests/                      ブラウザテスト
+AUTHORING_SPEC.md           ★ 執筆・実装の仕様（図の書き方はここ）
+```
 
 ---
 
 ## ローカルで動かす
 
 ```bash
-cd docs
-python3 -m http.server 8000
+python3 scripts/build_all.py       # データ生成 + 検証
+cd docs && python3 -m http.server 8000
 ```
 
-ブラウザで `http://localhost:8000/` を開きます。
-`file://` で直接開くと、`fetch` によるコンテンツ読み込みがブラウザにブロックされるため動きません。
-
-コンテンツを編集したら、次のコマンドで確認できます。
-
-```bash
-python3 scripts/validate_content.py      # コンテンツの整合性
-node worker/test/worker.test.mjs         # 計測APIの単体テスト（依存なし）
-```
-
-ブラウザでの表示確認まで含めたテストの一覧は [`tests/README.md`](tests/README.md) を参照してください。
+`http://localhost:8000/` を開きます。
+`file://` で直接開くとコンテンツの読み込みがブラウザにブロックされるため動きません。
 
 ---
 
 ## コンテンツを追加・編集する
 
-執筆のルールとMarkdown記法は [`CONTENT_GUIDE.md`](CONTENT_GUIDE.md) にまとめています。
+執筆ルール・図の書き方・クイズの形式はすべて [`AUTHORING_SPEC.md`](AUTHORING_SPEC.md) にまとめています。
 
-- レッスンを追加：`docs/content/curriculum.json` に項目を足し、`docs/content/lessons/<ID>.md` を作る
-- クイズを追加：`docs/content/quizzes/<ID>.json` を作り、`index.json` を更新する
-- サンプルデータを作り直す：`python3 scripts/generate_sample_data.py`
+```bash
+# レッスンを追加する
+#   1. docs/content/modules/M06.json の lessons に項目を足す
+#   2. docs/content/lessons/L0607.md を書く（図は ```figure ブロック）
+#   3. docs/content/quizzes/L0607.json に5問書く
+#   4. 新出用語を docs/content/glossary/M06.json に登録する
+python3 scripts/build_all.py
+```
+
+| コマンド | 内容 |
+|---|---|
+| `python3 scripts/build_all.py` | すべて生成して検証する（これだけ覚えれば十分） |
+| `python3 scripts/build_curriculum.py` | モジュール定義 → curriculum.json / pl300.json |
+| `python3 scripts/build_glossary_index.py` | 用語集の統合インデックス |
+| `python3 scripts/build_quiz_index.py` | クイズのインデックス |
+| `python3 scripts/fix_figures.py --write` | 図のJSONの機械的な誤りを自動修正 |
+| `python3 scripts/validate_content.py` | 整合性チェック |
+| `python3 scripts/generate_sample_data.py` | サンプルデータの再生成 |
+
+テストは [`tests/README.md`](tests/README.md) を参照してください。
 
 ---
 
 ## 外部依存
 
-サイトは静的HTML/CSS/JSのみで、ビルド不要です。CDNから次の2つだけを読み込みます。
-
-| ライブラリ | 用途 | 読み込めない場合 |
-|---|---|---|
-| [marked](https://marked.js.org/) 12 | Markdown → HTML | 本文がプレーンテキスト表示になります |
-| [mermaid](https://mermaid.js.org/) 10 | 図の描画 | 図の位置に案内文が表示されます |
-
-どちらも読み込みに失敗してもサイト自体は動作します。
+サイトは静的HTML/CSS/JSのみで、ビルド不要・CDN不要です。
+Markdownパーサ（marked, MIT）はリポジトリに同梱しています。**外部への通信は発生しません**（計測を有効にした場合を除く）。
 
 ---
 

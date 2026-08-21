@@ -7,7 +7,7 @@
 a.gl-term {
   color: inherit;
   text-decoration: none;
-  border-bottom: 1px dotted var(--border-strong);
+  border-bottom: 1px dotted color-mix(in srgb, var(--brand) 55%, var(--border-strong));
   padding-bottom: 1px;
   cursor: help;
   transition: border-color .12s ease, background .12s ease;
@@ -109,7 +109,12 @@ a.gl-term::after {
 .gl-index button[aria-pressed="true"] { background: var(--brand); border-color: transparent; color: #fff; }
 .gl-index button:disabled { opacity: .3; cursor: default; }
 
-.gl-filters { margin-top: 10px; }
+.gl-filters { margin-top: 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+              background: var(--bg-elevated); padding: 4px 14px 12px; }
+.gl-filters > summary { cursor: pointer; font-size: 13.5px; font-weight: 700; color: var(--fg-muted);
+                        padding: 9px 2px; min-height: 40px; display: list-item; list-style-position: inside; }
+.gl-filters > summary:hover { color: var(--fg); }
+.gl-filters[open] > summary { border-bottom: 1px solid var(--border); margin-bottom: 4px; }
 .gl-filter-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 8px; }
 .gl-filter-label { font-size: 12px; font-weight: 800; color: var(--fg-subtle); letter-spacing: .04em; margin-right: 2px; }
 .gl-chip {
@@ -161,7 +166,11 @@ a.gl-term::after {
 
 @media (max-width: 640px) {
   .gl-toolbar { top: 58px; padding-top: 10px; }
+  .gl-index { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
+              scrollbar-width: none; padding-bottom: 2px; }
+  .gl-index::-webkit-scrollbar { display: none; }
+  .gl-index button { flex: none; }
   .gl-index button { min-width: 32px; min-height: 32px; font-size: 13px; }
-  .gl-group-head { scroll-margin-top: 206px; }
-  .gl-card { scroll-margin-top: 212px; padding: 14px 15px; }
+  .gl-group-head { scroll-margin-top: 156px; }
+  .gl-card { scroll-margin-top: 162px; padding: 14px 15px; }
 }
