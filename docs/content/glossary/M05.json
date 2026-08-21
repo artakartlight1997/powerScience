@@ -660,5 +660,455 @@
       "Table.Distinct",
       "Remove Duplicates"
     ]
+  },
+  {
+    "term": "Table.SelectRows",
+    "en": "Table.SelectRows",
+    "reading": "てーぶるせれくとろうず",
+    "short": "条件に合う行だけを残す。",
+    "desc": "画面でフィルターを掛けると自動で作られる関数で、第2引数の条件が true になった行だけを返す。`Table.SelectRows(変更された型, each [SalesAmount] > 0)` のように書き、`each` は「1行ごとに評価する式」を作る印、`[列名]` はその行の値を指す。`each` の代わりに `(r) => r[列名] > 0` と名前を付けた書き方もでき、入れ子にして外側の行を参照したいときはこちらが必要になる。条件に null が混ざる列を比較すると、その行は true にならず消えてしまうため、`each [金額] <> null and [金額] > 0` のように null を先に確かめる。M言語は大文字小文字を区別するので `table.selectrows` と書くとエラーになる。",
+    "lesson": "L0405",
+    "tags": [
+      "Power Query",
+      "M言語"
+    ],
+    "aliases": [
+      "table.selectrows"
+    ]
+  },
+  {
+    "term": "Table.AddColumn",
+    "en": "Table.AddColumn",
+    "reading": "てーぶるあどからむ",
+    "short": "計算した値を入れた新しい列を1本追加する。",
+    "desc": "「カスタム列の追加」がこの関数になる。`Table.AddColumn(前のステップ, \"ドメイン\", each Text.AfterDelimiter([ManagerEmail], \"@\"), type text)` のように、追加先の表・新しい列名・1行ごとの計算式・型の4つを渡す。第3引数の中では `each` と `[列名]` でその行の値を参照でき、行そのものを使いたいときは `_` と書く。第4引数の型を省くと any 型の列になり、後で並べ替えや集計が思うように動かなかったり、モデル側で型を付け直す手間が増える。同じ名前の列がすでにあると追加に失敗するため、列名は既存と重ならないものにする。",
+    "lesson": "L0502",
+    "tags": [
+      "Power Query",
+      "M言語"
+    ],
+    "aliases": [
+      "table.addcolumn"
+    ]
+  },
+  {
+    "term": "Table.TransformColumnTypes",
+    "en": "Table.TransformColumnTypes",
+    "reading": "てーぶるとらんすふぉーむからむたいぷす",
+    "short": "指定した列の型をまとめて変える。",
+    "desc": "「データ型の変更」を行うと作られる関数で、`Table.TransformColumnTypes(ソース, {{\"Quantity\", Int64.Type}, {\"受注日\", type date}})` のように「列名と型」の組を並べて渡す。第3引数にロケールを指定でき、`Table.TransformColumnTypes(前のステップ, {{\"受注日\", type date}}, \"ja-JP\")` と書くと、その表記のルールで文字列を日付として読む。ロケールを省くとファイル作成者と読み手の環境の違いで 03/04 のような日付が月日と日月で入れ替わったり、変換に失敗して エラー値 になる。型変換は取り込みの早い段階に1回だけ置き、後から列名を変えた場合はこのステップの列名も直す必要がある。",
+    "lesson": "L0405",
+    "tags": [
+      "Power Query",
+      "データ品質"
+    ],
+    "aliases": [
+      "table.transformcolumntypes"
+    ]
+  },
+  {
+    "term": "Table.SelectColumns",
+    "en": "Table.SelectColumns",
+    "reading": "てーぶるせれくとからむず",
+    "short": "指定した列だけを残し、順番もそのとおりに並べる。",
+    "desc": "`Table.SelectColumns(売上, {\"StoreID\", \"OrderDate\", \"SalesAmount\"})` のように残したい列を並べて書く。列挙した順に並ぶので、列の並べ替えも同時にできる。使わない列を早い段階で落とすとモデルが軽くなるため、取り込み直後に置くのが定石。指定した列が元の表に無いとステップ全体がエラーになるので、月ごとに列が増減するファイルでは `Table.SelectColumns(表, {\"金額\"}, MissingField.Ignore)` のように無い列を無視させる。列を「残す」書き方なので、将来増える列を自動で捨てたいときはこちら、既知の列だけを捨てたいときは Table.RemoveColumns を使う。",
+    "lesson": "L0506",
+    "tags": [
+      "Power Query",
+      "整形"
+    ],
+    "aliases": [
+      "table.selectcolumns"
+    ]
+  },
+  {
+    "term": "Table.PromoteHeaders",
+    "en": "Table.PromoteHeaders",
+    "reading": "てーぶるぷろもーとへっだーず",
+    "short": "先頭行の値を列名として使う。",
+    "desc": "CSV や Excel を読むと列名が Column1、Column2 になることがあり、`Table.PromoteHeaders(ソース, [PromoteAllScalars=true])` で1行目を列名に昇格させる。`PromoteAllScalars=true` は数値や日付が入った見出し行も文字列の列名として扱う指定で、これが無いと数字だけの見出しが昇格されない。見出しの上にタイトル行や空行があると、そのゴミが列名になってしまうため、先に 上位の行の削除 で不要な行を消してから昇格させる。昇格の直後には型が付いていないので、続けて Table.TransformColumnTypes で型を決めるのが通常の流れ。",
+    "lesson": "L0501",
+    "tags": [
+      "Power Query",
+      "整形"
+    ],
+    "aliases": [
+      "table.promoteheaders"
+    ]
+  },
+  {
+    "term": "Table.ExpandTableColumn",
+    "en": "Table.ExpandTableColumn",
+    "reading": "てーぶるえくすぱんどてーぶるからむ",
+    "short": "入れ子になった表の列から、必要な項目を取り出して普通の列にする。",
+    "desc": "Table.NestedJoin で結合した直後は、相手の表が丸ごと1つの列に入っただけの状態で、その中身はまだ使えない。`Table.ExpandTableColumn(マージ, \"商品\", {\"ProductName\", \"Category\"}, {\"ProductName\", \"Category\"})` のように、展開する列名・取り出す項目・付ける列名を渡して初めて値が表に出る。第4引数を省くと `商品.ProductName` のような長い列名になり、後続のステップや DAX 側の参照名が変わってしまう。取り出す項目を絞らずに全部展開すると不要な列でモデルが太るので、必要な列だけを挙げる。相手側に一致する行が複数あると行数が増える（ファンアウト）点にも注意する。",
+    "lesson": "L0505",
+    "tags": [
+      "Power Query",
+      "結合"
+    ],
+    "aliases": [
+      "table.expandtablecolumn"
+    ]
+  },
+  {
+    "term": "Table.TransformColumns",
+    "en": "Table.TransformColumns",
+    "reading": "てーぶるとらんすふぉーむからむず",
+    "short": "既存の列の値を、決めたルールで一括して書き換える。",
+    "desc": "新しい列を足さずに中身だけを直す関数で、`Table.TransformColumns(前のステップ, {{\"金額\", each Text.Replace(Text.From(_), \",\", \"\"), type text}})` のように「列名・変換式・変換後の型」の組を渡す。変換式の中の `_` はその列のセルの値そのものを指す（Table.AddColumn の `_` が行を指すのとは違う）。値に null が混じると Text 系の関数がエラーになるので、`each if _ = null then null else Text.Trim(_)` のように null を先に逃がす。指定した列が無いとエラーになるため、列構成が変わりうる場合は第4引数に MissingField.Ignore を渡す。",
+    "lesson": "L0502",
+    "tags": [
+      "Power Query",
+      "データ品質"
+    ],
+    "aliases": [
+      "table.transformcolumns"
+    ]
+  },
+  {
+    "term": "Table.RenameColumns",
+    "en": "Table.RenameColumns",
+    "reading": "てーぶるりねーむからむず",
+    "short": "列の名前を変える。",
+    "desc": "`Table.RenameColumns(Typed, {{\"Sales Amount\", \"売上金額\"}})` のように「元の名前・新しい名前」の組を並べて渡す。元の名前は空白や大文字小文字まで完全に一致している必要があり、一致しないとステップがエラーになる（`MissingField.Ignore` を第3引数に渡すと無視できる）。列名の前後に空白が入るファイルでは、`Table.RenameColumns(Typed, List.Transform(Table.ColumnNames(Typed), (c) => {c, Text.Trim(c)}))` のように対応表を組み立てると、列が増えても直さずに済む。ここで付けた名前は後続のステップや ビジュアル の項目名にそのまま出るので、名前を変えると参照側も直す必要がある。",
+    "lesson": "L1101",
+    "tags": [
+      "Power Query",
+      "整形"
+    ],
+    "aliases": [
+      "table.renamecolumns"
+    ]
+  },
+  {
+    "term": "Table.RowCount",
+    "en": "Table.RowCount",
+    "reading": "てーぶるろうかうんと",
+    "short": "表の行数を数える。",
+    "desc": "`Table.RowCount(前のステップ)` で行数が1つの数値として返る。件数の集計や、取り込み前後で行が減っていないかの確認に使う。グループ化の中では `each Table.RowCount(_)` と書き、この `_` はそのグループに属する行だけを集めた小さな表を指す。重複を除いた件数が欲しいときは行数ではなく `List.Count(List.Distinct([OrderID]))` のように一意な値を数える。全行を実際に読まないと数えられないため、データベース接続では クエリの折りたたみ が止まり、取り込みが遅くなることがある。",
+    "lesson": "L0506",
+    "tags": [
+      "Power Query",
+      "集計"
+    ],
+    "aliases": [
+      "table.rowcount"
+    ]
+  },
+  {
+    "term": "Table.ExpandRecordColumn",
+    "en": "Table.ExpandRecordColumn",
+    "reading": "てーぶるえくすぱんどれこーどからむ",
+    "short": "1行分のまとまりが入った列から、項目を取り出して列にする。",
+    "desc": "Table.Max のように1行を返す関数を使うと、その結果は レコード として1つの列に入る。`Table.ExpandRecordColumn(最新, \"最新\", {\"OrderID\", \"OrderDate\"}, {\"最新受注ID\", \"最終受注日\"})` のように、取り出す項目名と付ける列名を渡して展開する。第3引数の項目名はレコードの中の名前と完全に一致している必要があり、綴りが違うとエラーになる。表が入った列を開く Table.ExpandTableColumn と違い、こちらは行数が増えない。展開後は元の入れ子列が残るので、Table.RemoveColumns で片付ける。",
+    "lesson": "L0506",
+    "tags": [
+      "Power Query",
+      "データ構造"
+    ],
+    "aliases": [
+      "table.expandrecordcolumn"
+    ]
+  },
+  {
+    "term": "Table.ReplaceValue",
+    "en": "Table.ReplaceValue",
+    "reading": "てーぶるりぷれいすばりゅー",
+    "short": "指定した列の中の、ある値を別の値に置き換える。",
+    "desc": "「値の置換」がこの関数になる。`Table.ReplaceValue(カンマ除去, \"N/A\", null, Replacer.ReplaceValue, {\"金額\"})` は、金額列の \"N/A\" を null に置き換える。第4引数の指定が要点で、`Replacer.ReplaceValue` はセルの値がまるごと一致したときだけ置き換え、`Replacer.ReplaceText` は文字列の一部を置き換える。この2つを取り違えると、置換されない、あるいは意図しない部分まで書き換わる。最後の引数は対象の列のリストなので、列を挙げ忘れると何も変わらない。数値列に対して文字列の置換を行うとエラーになる点にも注意する。",
+    "lesson": "L0502",
+    "tags": [
+      "Power Query",
+      "データ品質"
+    ],
+    "aliases": [
+      "table.replacevalue"
+    ]
+  },
+  {
+    "term": "Table.RemoveColumns",
+    "en": "Table.RemoveColumns",
+    "reading": "てーぶるりむーぶからむず",
+    "short": "指定した列を削除する。",
+    "desc": "`Table.RemoveColumns(展開, {\"明細\"})` のように、消したい列名を並べて渡す。展開に使った作業用の列や、モデルで使わない列を落とすのに使う。指定した列が無いとエラーになるので、列が増減するファイルでは `Table.RemoveColumns(表, {\"メモ\"}, MissingField.Ignore)` とする。将来増える列も含めて捨てたい場合は、残す列を挙げる Table.SelectColumns のほうが壊れにくい。列を消すと後続のステップや ビジュアル の参照も切れるため、削除は取り込みの早い段階でまとめて行う。",
+    "lesson": "L0506",
+    "tags": [
+      "Power Query",
+      "整形"
+    ],
+    "aliases": [
+      "table.removecolumns"
+    ]
+  },
+  {
+    "term": "Table.AddIndexColumn",
+    "en": "Table.AddIndexColumn",
+    "reading": "てーぶるあどいんでっくすからむ",
+    "short": "1、2、3…と続く連番の列を追加する。",
+    "desc": "`Table.AddIndexColumn(Dim_商品, \"商品SK\", 1, 1, Int64.Type)` は、開始値1・増分1の連番列「商品SK」を足す。ディメンションに人工的なキーを振るときの定番。開始値を0にすれば `Table.AddIndexColumn(表, \"i\", 0, 1, Int64.Type)` となり、1つ前の行と比べる処理で扱いやすい。連番はそのときの行の並び順で振られるため、先に Table.Sort で順序を決めておかないと、更新のたびに違う番号が付く可能性がある。第5引数の型を省くと any 型になるので、Int64.Type を明示する。",
+    "lesson": "L0602",
+    "tags": [
+      "Power Query",
+      "モデリング"
+    ],
+    "aliases": [
+      "table.addindexcolumn"
+    ]
+  },
+  {
+    "term": "Table.IsEmpty",
+    "en": "Table.IsEmpty",
+    "reading": "てーぶるいずえんぷてぃ",
+    "short": "表に行が1つも無いかどうかを true / false で返す。",
+    "desc": "`Table.IsEmpty(前) or 前{0}[顧客ID] <> r[顧客ID]` のように、行を取り出す前に「そもそも行があるか」を確かめるために使う。`表{0}` は先頭行を取り出す書き方だが、行が0件のときはエラーになるため、必ず先にこの関数で確認してから参照する。`Table.RowCount(表) = 0` でも同じ判定はできるが、全行を数えないぶんこちらのほうが速い。戻り値は表ではなく true / false なので、条件式の中で使う。",
+    "lesson": "L1206",
+    "tags": [
+      "Power Query",
+      "M言語"
+    ],
+    "aliases": [
+      "table.isempty"
+    ]
+  },
+  {
+    "term": "Table.Unpivot",
+    "en": "Table.Unpivot",
+    "reading": "てーぶるあんぴぼっと",
+    "short": "横に並んだ複数の列を、2列の縦並びに畳む。",
+    "desc": "`Table.Unpivot(前のステップ, {\"2025年1月\", \"2025年2月\", \"2025年3月\"}, \"属性\", \"値\")` のように、畳む列を名指しし、列名が入る列と値が入る列の名前を決める。月ごとに列が増える表を、日付と金額の2列に直して 整然データ にするのが典型的な使い道。名指しした列が無いとエラーになるので、翌月に列が増える表では、残す列だけを挙げる Table.UnpivotOtherColumns（画面では「その他の列のピボット解除」）のほうが壊れにくい。この関数を使うのは、畳む対象が固定で決まっていて、残る列のほうが増えていく場合に限るとよい。",
+    "lesson": "L0504",
+    "tags": [
+      "Power Query",
+      "整形"
+    ],
+    "aliases": [
+      "table.unpivot"
+    ]
+  },
+  {
+    "term": "Table.Max",
+    "en": "Table.Max",
+    "reading": "てーぶるまっくす",
+    "short": "指定した列の値が最も大きい行を1つ取り出す。",
+    "desc": "`Table.Max([明細], \"OrderDate\")` は、入れ子の表の中から受注日が最新の行を返す。グループ化と組み合わせると「顧客ごとの最新の注文」が取り出せる。返るのは表ではなく1行分のまとまり（レコード）なので、続けて Table.ExpandRecordColumn で必要な項目を列に取り出す。最大値が同じ行が複数あってもどれか1行しか返らないため、順位を決める列を追加するなどして同点を避ける。対象の表が0行だと null が返るので、後続で項目を参照する前に確認する。",
+    "lesson": "L0506",
+    "tags": [
+      "Power Query",
+      "集計"
+    ],
+    "aliases": [
+      "table.max"
+    ]
+  },
+  {
+    "term": "Table.FromList",
+    "en": "Table.FromList",
+    "reading": "てーぶるふろむりすと",
+    "short": "1列に並んだ値の集まりを、表に変える。",
+    "desc": "日付や連番をまず値の並びとして作り、`Table.FromList(日付リスト, Splitter.SplitByNothing(), {\"Date\"})` で1列の表にする、という流れで使う。第2引数の `Splitter.SplitByNothing()` は「値をそれ以上分割しない」という指定で、これを省くと文字列がカンマなどで勝手に分かれて列が増えることがある。第3引数で列名を決めないと Column1 という名前になり、後のステップが読みにくくなる。作った直後は型が付いていないため、Table.TransformColumnTypes で日付型などを指定する。",
+    "lesson": "L0605",
+    "tags": [
+      "Power Query",
+      "データ構造"
+    ],
+    "aliases": [
+      "table.fromlist"
+    ]
+  },
+  {
+    "term": "Table.ColumnNames",
+    "en": "Table.ColumnNames",
+    "reading": "てーぶるからむねーむず",
+    "short": "表の列名を一覧として取り出す。",
+    "desc": "`Table.ColumnNames(Typed)` は `{\"顧客ID\", \"金額\"}` のような名前の並びを返す。列名そのものを加工したいときの出発点になる。List.Transform と組み合わせると、`List.Transform(Table.ColumnNames(Typed), (c) => {c, Text.Trim(c)})` のように名前の対応表を機械的に作れ、Table.RenameColumns にそのまま渡せる。こうしておくと、列が増減しても列名を1つずつ書き直さずに済む。返るのは表ではなく値の並びなので、表として扱いたいときは Table.FromList を通す。名前は元の表記のまま返り、大文字小文字も区別される。",
+    "lesson": "L1101",
+    "tags": [
+      "Power Query",
+      "M言語"
+    ],
+    "aliases": [
+      "table.columnnames"
+    ]
+  },
+  {
+    "term": "Table.ExpandListColumn",
+    "en": "Table.ExpandListColumn",
+    "reading": "てーぶるえくすぱんどりすとからむ",
+    "short": "1つのセルに複数の値が入った列を、複数の行に分ける。",
+    "desc": "`Text.Split([タグ], \";\")` などで作った値の並びは1つのセルに収まったままなので、`Table.ExpandListColumn(分割, \"タグ\")` で1値1行に開く。「A;B;C」という1行は3行になり、他の列の値はそのまま複製される。多対多を ブリッジテーブル に直す下ごしらえでよく使う。行数が一気に増えるので、開く前に不要な行や列を減らしておく。空文字や余分な区切り文字があると空の行ができるため、展開後に空白行を取り除く。表が入った列を開く Table.ExpandTableColumn とは別の関数である点に注意する。",
+    "lesson": "L1201",
+    "tags": [
+      "Power Query",
+      "データ構造"
+    ],
+    "aliases": [
+      "table.expandlistcolumn"
+    ]
+  },
+  {
+    "term": "Table.Sort",
+    "en": "Table.Sort",
+    "reading": "てーぶるそーと",
+    "short": "指定した列の順に行を並べ替える。",
+    "desc": "`Table.Sort(スナップショット履歴, {{\"顧客ID\", Order.Ascending}, {\"日付\", Order.Ascending}})` のように、列名と昇順・降順の組を優先順位の高い順に並べて渡す。並べ替え自体はモデルの表示順には影響しない。Power BI の表示順は ビジュアル 側や 並べ替え列 で決まるので、ここで並べるのは連番を振る前や前後の行を比べる処理のためだと考える。Table.AddIndexColumn の直前に置くのが典型的な使い方で、これが無いと更新のたびに番号がずれる恐れがある。大きな表の並べ替えは重い処理なので、行や列を絞ってから行う。",
+    "lesson": "L1206",
+    "tags": [
+      "Power Query",
+      "整形"
+    ],
+    "aliases": [
+      "table.sort"
+    ]
+  },
+  {
+    "term": "Table.SelectRowsWithErrors",
+    "en": "Table.SelectRowsWithErrors",
+    "reading": "てーぶるせれくとろうずうぃずえらーず",
+    "short": "どこかのセルがエラーになっている行だけを抜き出す。",
+    "desc": "型変換に失敗した行を捨てる前に数えておくと、取り込みの品質を記録できる。`Table.RowCount(Table.SelectRowsWithErrors(型変換))` でエラー行の件数が得られる。エラーは発生した時点のステップにしか現れないため、エラーを取り除くステップより後ろに置いても0件になる。型変換の直後に置く。第2引数で列名を指定すると、その列だけを対象に調べられる。行を残す側の関数なので、除去したいときは「エラーの削除」（Table.RemoveRowsWithErrors）を使う。",
+    "lesson": "L2203",
+    "tags": [
+      "Power Query",
+      "データ品質"
+    ],
+    "aliases": [
+      "table.selectrowswitherrors"
+    ]
+  },
+  {
+    "term": "Table.FromRecords",
+    "en": "Table.FromRecords",
+    "reading": "てーぶるふろむれこーず",
+    "short": "項目名と値の組を並べたものから、表を作る。",
+    "desc": "`Table.FromRecords({[ 検査日時 = DateTime.LocalNow(), 元行数 = 行数_元, エラー行数 = 行数_エラー ]})` のように書くと、1行の記録用の表が作られる。取り込みの結果を残す監査用の表を作るのに向く。波かっこの中に複数のまとまりを並べれば複数行になるが、各まとまりの項目名は揃えておく。揃っていないと欠けた項目でエラーになる。できた表には型が付いていないので、Table.TransformColumnTypes で型を決める。項目名がそのまま列名になるため、日本語の項目名を付ければそのまま読める列名になる。",
+    "lesson": "L2203",
+    "tags": [
+      "Power Query",
+      "データ品質"
+    ],
+    "aliases": [
+      "table.fromrecords"
+    ]
+  },
+  {
+    "term": "List.Distinct",
+    "en": "List.Distinct",
+    "reading": "りすとでぃすてぃんくと",
+    "short": "値の並びから重複を取り除く。",
+    "desc": "`List.Count(List.Distinct([OrderID]))` のように、種類数を数えるときによく使う。ピボットの見出しを作る `List.Distinct(前のステップ[区分])` のような使い方もある。`表[列名]` と書くと、その列の値だけを取り出した並びになる。既定の比較は厳密で、大文字小文字や前後の空白が違う値は別のものとして残る。名寄せしたいときは先に トリミング や小文字化をするか、第2引数に `Comparer.OrdinalIgnoreCase` を渡す。null も1つの値として扱われ、残る点に注意する。",
+    "lesson": "L0504",
+    "tags": [
+      "Power Query",
+      "データ品質"
+    ],
+    "aliases": [
+      "list.distinct"
+    ]
+  },
+  {
+    "term": "List.Sum",
+    "en": "List.Sum",
+    "reading": "りすとさむ",
+    "short": "値の並びを合計する。",
+    "desc": "グループ化の中で `each List.Sum([SalesAmount])` と書くと、そのグループの売上合計になる。`[列名]` はグループに属する行のその列の値を集めた並びを指す。null は無視して足されるため、欠測のある列でも合計は求まるが、0 と欠測の違いは結果に現れない。対象が1件も無いときは 0 ではなく null が返るので、`each List.Sum([金額]) ?? 0` のように既定値を用意しておくと後段が安全になる。文字列が混ざった列を渡すとエラーになるため、先に型を数値に直しておく。",
+    "lesson": "L0506",
+    "tags": [
+      "Power Query",
+      "集計"
+    ],
+    "aliases": [
+      "list.sum"
+    ]
+  },
+  {
+    "term": "List.RemoveMatchingItems",
+    "en": "List.RemoveMatchingItems",
+    "reading": "りすとりむーぶまっちんぐあいてむず",
+    "short": "値の並びから、指定した値をすべて取り除く。",
+    "desc": "`List.RemoveMatchingItems(Record.FieldValues(_), {\"\", null})` は、1行分の値の中から空文字と null を取り除く。残りが0件なら中身が空の行だと判定できる。第1引数が元の並び、第2引数が取り除きたい値の並びで、一致するものはすべて消える。比較は既定では厳密なので、全角空白や前後の空白が残っていると「空」と見なされない。先に トリミング や クリーン を掛けておく。元の並びは変わらず、取り除いた結果が新しい並びとして返る。",
+    "lesson": "L1101",
+    "tags": [
+      "Power Query",
+      "データ品質"
+    ],
+    "aliases": [
+      "list.removematchingitems"
+    ]
+  },
+  {
+    "term": "List.IsEmpty",
+    "en": "List.IsEmpty",
+    "reading": "りすといずえんぷてぃ",
+    "short": "値の並びが空かどうかを true / false で返す。",
+    "desc": "`each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {\"\", null}))` のように、Table.SelectRows の条件の中で「中身のある行だけ残す」判定に使う。`List.Count(並び) = 0` と同じ意味だが、全部を数えずに済むぶん速い。空でないことを確かめてから `並び{0}` で先頭の値を取り出すのが安全な書き方で、空の並びに対して先頭を取るとエラーになる。対象が表のときは Table.IsEmpty を使う。",
+    "lesson": "L1101",
+    "tags": [
+      "Power Query",
+      "M言語"
+    ],
+    "aliases": [
+      "list.isempty"
+    ]
+  },
+  {
+    "term": "List.Count",
+    "en": "List.Count",
+    "reading": "りすとかうんと",
+    "short": "値の並びに何個入っているかを数える。",
+    "desc": "`List.Count(List.Distinct([OrderID]))` は、そのグループに含まれる受注番号の種類数、つまり重複を除いた件数になる。`List.Count([OrderID])` だと重複したまま数えるので、明細の行数と同じ意味になる。何を数えているのかを毎回意識する。null も1件として数えられるため、欠測を除きたいときは先に取り除く。表の行数を数えたいときは Table.RowCount を使う。",
+    "lesson": "L0506",
+    "tags": [
+      "Power Query",
+      "集計"
+    ],
+    "aliases": [
+      "list.count"
+    ]
+  },
+  {
+    "term": "List.Dates",
+    "en": "List.Dates",
+    "reading": "りすとでいつ",
+    "short": "開始日から一定の間隔で並ぶ日付の列を作る。",
+    "desc": "`List.Dates(開始日, 日数, #duration(1, 0, 0, 0))` は、開始日から1日刻みで指定した個数ぶんの日付を作る。日付テーブル を式だけで組み立てるときの土台になる。第2引数は終了日ではなく「個数」なので、終了日まで埋めたいときは `Duration.Days(終了日 - 開始日) + 1` のように日数を計算して渡す。`#duration(1, 0, 0, 0)` は日・時・分・秒の順で、1日ぶんの間隔を意味する。返るのは値の並びなので、`Table.FromList(日付リスト, Splitter.SplitByNothing(), {\"Date\"})` で表にしてから型を date にする。会計年度の途中で切れないよう、年の初めから年末までを丸ごと作る。",
+    "lesson": "L0605",
+    "tags": [
+      "Power Query",
+      "時系列"
+    ],
+    "aliases": [
+      "list.dates"
+    ]
+  },
+  {
+    "term": "List.Transform",
+    "en": "List.Transform",
+    "reading": "りすととらんすふぉーむ",
+    "short": "値の並びの1つ1つに同じ加工をして、新しい並びを返す。",
+    "desc": "`List.Transform(列名リスト, (c) => {c, Text.Trim(c)})` は、列名のリストから「元の名前と、空白を取った名前」の組を並べた対応表を作る。そのまま `Table.RenameColumns(Typed, 対応表)` に渡せば、列が何本あっても1つのステップで名前を整えられる。`(c) => …` は引数に名前を付けた書き方で、`each` と `_` を使っても同じ意味になる。入れ子にするときは名前を付けたほうが読み違えにくい。対象は表ではなく値の並びなので、表の列に対して加工したいときは Table.TransformColumns を使う。",
+    "lesson": "L1101",
+    "tags": [
+      "Power Query",
+      "M言語"
+    ],
+    "aliases": [
+      "list.transform"
+    ]
+  },
+  {
+    "term": "List.Min",
+    "en": "List.Min",
+    "reading": "りすとみん",
+    "short": "値の並びの中でいちばん小さい値を返す。",
+    "desc": "グループ化と組み合わせて `{{\"初回購入日\", each List.Min([購入日]), type date}}` と書くと、顧客ごとの最初の購入日、つまり コホート の起点が求まる。日付にも文字列にも使え、日付なら最も古い日、文字列なら並び順が最初のものが返る。null は既定で無視され、対象が1件も無い場合や全部 null の場合は null が返るので、後続で日付として計算する前に確認する。最大値が欲しいときは List.Max を、表から1行ごと取り出したいときは Table.Max を使う。",
+    "lesson": "L1504",
+    "tags": [
+      "Power Query",
+      "集計"
+    ],
+    "aliases": [
+      "list.min"
+    ]
   }
 ]
