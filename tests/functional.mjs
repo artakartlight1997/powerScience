@@ -104,6 +104,18 @@ await page.waitForTimeout(250);
 const after = await page.$$eval('.gl-card', e => e.length);
 ok('glossary search filters', after > 0 && after < before, `${before} -> ${after}`);
 
+// --- 10b. 用語集の図解（統計・データサイエンス用語に付く図） ---
+await page.fill('#q', '中央値');
+await page.waitForTimeout(300);
+// 図は画面に入ったものから描くので、実際にスクロールして通過させる
+for (let i = 0; i < 8; i++) { await page.mouse.wheel(0, 1200); await page.waitForTimeout(200); }
+await page.waitForTimeout(600);
+const glFigs = await page.$$eval('.gl-card .gl-fig[data-rendered]', e => e.length);
+const glFigErr = await page.$$eval('.gl-card .fig-error, .gl-card .pbm-figure-error', e => e.length);
+const glPlain = await page.$$eval('.gl-card .plain', e => e.length);
+ok('glossary figures + plain render', glFigs > 0 && glFigErr === 0 && glPlain > 0,
+   `figures=${glFigs} errors=${glFigErr} plain=${glPlain}`);
+
 // --- 11. 進捗のエクスポート/リセット ---
 await page.goto(`${BASE}/progress.html`, { waitUntil: 'networkidle' });
 await page.click('#btn-export');

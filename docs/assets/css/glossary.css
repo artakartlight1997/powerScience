@@ -221,7 +221,9 @@ a.gl-term::after {
   margin: .7rem 0 .2rem;
   overflow-x: auto;
 }
-.gl-card .gl-fig:empty { display: none; }
+/* 描画前は空だが display:none にはしない。
+   非表示の要素は画面に入ったと判定されず、遅延描画が始まらないため。 */
+.gl-card .gl-fig:empty { margin: 0; min-height: 1px; }
 .gl-card .gl-fig .pbm-fig { margin: 0; }
 
 /* ダークモード（サイトの明示切替と OS 設定の両方に対応する） */
