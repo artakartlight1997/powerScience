@@ -1,0 +1,35 @@
+# ============================================================
+#  Power BI Mastery — 計測バックエンド (Cloudflare Workers + D1)
+#
+#  セットアップ:
+#    npm install -g wrangler
+#    wrangler login
+#    wrangler d1 create pbm-analytics          # 出力された database_id を下に貼る
+#    wrangler d1 execute pbm-analytics --remote --file=./schema.sql
+#    wrangler secret put ADMIN_PASSWORD        # ← 管理画面のパスワードを対話的に設定
+#    wrangler deploy
+# ============================================================
+name = "pbm-analytics"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "pbm-analytics"
+database_id = "PASTE_YOUR_DATABASE_ID_HERE"
+
+[vars]
+# 計測を受け付けるサイトのオリジン。カンマ区切りで複数指定可。
+# 例: "https://artakartlight1997.github.io"
+# "*" にすると全オリジンから受け付けます（検証用途のみ推奨）。
+ALLOWED_ORIGINS = "*"
+
+# ログの保持日数。cron で自動削除します。
+RETENTION_DAYS = "400"
+
+# 管理画面ログインの有効時間（時間）
+SESSION_HOURS = "12"
+
+# 日次で古いログを削除
+[triggers]
+crons = ["17 3 * * *"]

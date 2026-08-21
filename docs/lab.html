@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ハンズオン | Power BI Mastery</title>
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/config.js"></script>
+</head>
+<body>
+<main id="main" class="wrap" style="padding-top:26px">
+  <div id="head"></div>
+  <div class="lesson-layout">
+    <article>
+      <div id="prose" class="prose"><div class="spinner"></div></div>
+      <div id="foot"></div>
+    </article>
+    <aside class="toc-box"><nav class="toc" id="toc"></nav></aside>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/analytics.js"></script>
+<script src="assets/js/render.js"></script>
+<script>
+(async function () {
+  PBM.renderChrome();
+  const id = PBM.qs("id");
+  const c = await PBM.curriculum();
+  const lab = c.labById[id];
+  const prose = document.getElementById("prose");
+  if (!lab) {
+    document.getElementById("head").innerHTML = '<div class="card"><h1>ラボが見つかりません</h1><a class="btn btn-brand btn-sm" href="labs.html">一覧へ</a></div>';
+    prose.innerHTML = ""; return;
+  }
+  const lv = c.levelById[lab.level];
+  document.title = lab.title + " | Power BI Mastery";
+  document.getElementById("head").innerHTML =
+    '<p class="small muted"><a href="labs.html">ハンズオンラボ</a></p>' +
+    '<div class="row" style="margin:8px 0">' +
+      '<span class="badge badge-lv lv-' + lv.id + '">' + PBM.esc(lv.title) + "</span>" +
+      '<span class="badge">' + lab.id + '</span><span class="badge">難易度 ' + "★".repeat(lab.difficulty) + "</span>" +
+      '<span class="badge">⏱ ' + lab.minutes + "分</span></div>" +
+    '<h1 style="margin:6px 0 14px;font-size:26px;line-height:1.45">' + PBM.esc(lab.title) + "</h1>" +
+    '<div class="card" style="margin-bottom:24px;background:var(--bg-sunken)">' +
+      '<div class="small" style="font-weight:800;margin-bottom:6px">達成目標</div><p style="margin:0 0 10px">' + PBM.esc(lab.goal) + "</p>" +
+      '<div class="small" style="font-weight:800;margin-bottom:6px">使用データ</div>' +
+      '<div class="tag-list">' + lab.dataset.map(function (f) { return '<a class="badge" href="data/' + f + '" download>⬇ ' + f + "</a>"; }).join("") + "</div>" +
+    "</div>";
+
+  let md = null;
+  try { const r = await fetch("content/labs/" + id + ".md", { cache: "no-cache" }); if (r.ok) md = await r.text(); } catch (e) {}
+  if (md == null) {
+    prose.innerHTML = '<div class="callout warn"><div class="callout-title">執筆中</div><p>この実習手順はまだ用意されていません。</p></div>';
+  } else {
+    prose.innerHTML = PBM.markdown(md);
+    PBM.renderMermaid(prose);
+    PBM.buildToc(prose, document.getElementById("toc"));
+  }
+
+  function drawFoot() {
+    const done = PBM.progress.isLabDone(id);
+    document.getElementById("foot").innerHTML = "<hr>" +
+      '<div class="row"><button class="btn btn-sm ' + (done ? "btn-ghost" : "btn-primary") + '" id="btn-done">' +
+      (done ? "✓ 完了済み（取り消す）" : "このラボを完了にする") + "</button>" +
+      '<a class="btn btn-ghost btn-sm" href="labs.html">ラボ一覧へ</a></div>";
+    document.getElementById("btn-done").addEventListener("click", function () {
+      PBM.progress.setLabDone(id, !PBM.progress.isLabDone(id)); drawFoot();
+    });
+  }
+  drawFoot();
+})();
+</script>
+</body>
+</html>

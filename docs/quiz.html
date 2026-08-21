@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>クイズ | Power BI Mastery</title>
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/config.js"></script>
+</head>
+<body>
+<main id="main" class="wrap-narrow" style="padding-top:26px">
+  <div id="head"></div>
+  <div id="quiz"></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/analytics.js"></script>
+<script src="assets/js/render.js"></script>
+<script src="assets/js/quiz.js"></script>
+<script>
+(async function () {
+  PBM.renderChrome();
+  const id = PBM.qs("id");
+  const c = await PBM.curriculum();
+  const quiz = await PBM.loadQuiz(id);
+  const head = document.getElementById("head");
+  if (!quiz) {
+    head.innerHTML = '<div class="card"><h1>クイズが見つかりません</h1>' +
+      '<p class="muted">このレッスンのクイズはまだ準備中です。</p>' +
+      '<a class="btn btn-brand btn-sm" href="quizzes.html">クイズ一覧へ</a></div>';
+    return;
+  }
+  const lesson = quiz.lesson ? c.lessonById[quiz.lesson] : null;
+  document.title = quiz.title + " | Power BI Mastery";
+  head.innerHTML =
+    (lesson ? '<p class="small muted"><a href="lesson.html?id=' + lesson.id + '">← ' + PBM.esc(lesson.title) + "</a></p>" : "") +
+    '<h1 style="font-size:22px;margin:8px 0 4px">' + PBM.esc(quiz.title) + "</h1>" +
+    '<p class="small muted">選択肢はキーボードの A / B / C / D、次へは Enter でも操作できます。</p>';
+
+  PBM.mountQuiz(document.getElementById("quiz"), quiz, {
+    mode: "practice",
+    shuffle: true,
+    onFinish: function (r) { PBM.progress.setQuizResult(quiz.id, r.correct, r.total); }
+  });
+})();
+</script>
+</body>
+</html>

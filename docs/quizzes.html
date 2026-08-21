@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>クイズ一覧 | Power BI Mastery</title>
+<meta name="description" content="レッスンごとの確認クイズ。スマホで隙間時間に演習できます。">
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/config.js"></script>
+</head>
+<body>
+<main id="main" class="wrap" style="padding-top:34px">
+  <p class="eyebrow">Quizzes</p>
+  <h1 style="margin:8px 0 6px">確認クイズ</h1>
+  <p class="muted">レッスンごとの理解度チェックです。通勤中でもスマホで解けます。80%以上で合格扱いになります。</p>
+  <div class="row" style="margin:18px 0">
+    <a class="btn btn-primary btn-sm" href="exam.html">本番形式の模擬試験へ</a>
+    <a class="btn btn-ghost btn-sm" href="quiz.html?id=EXAM-PL300&amp;mode=practice">全問題を1問ずつ解説付きで解く</a>
+  </div>
+  <div id="list" class="stack"></div>
+</main>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/analytics.js"></script>
+<script>
+(async function () {
+  PBM.renderChrome();
+  const c = await PBM.curriculum();
+  let idx = {};
+  try { const r = await fetch("content/quizzes/index.json", { cache: "no-cache" }); if (r.ok) idx = (await r.json()).quizzes || {}; } catch (e) {}
+  document.getElementById("list").innerHTML = c.levels.map(function (lv) {
+    const rows = PBM.lessonsOfLevel(c, lv.id).filter(function (l) { return l.quiz; }).map(function (l) {
+      const meta = idx[l.quiz];
+      const res = PBM.progress.quizResult(l.quiz);
+      if (!meta) {
+        return '<div class="lesson-row" style="opacity:.5"><span class="t">' + PBM.esc(l.title) + '</span><span class="badge">準備中</span></div>';
+      }
+      return '<a class="lesson-row" href="quiz.html?id=' + l.quiz + '">' +
+        '<span class="t">' + PBM.esc(l.title) + "</span>" +
+        '<span class="badge">' + meta.count + "問</span>" +
+        (res ? '<span class="badge ' + (res.best >= 80 ? "badge-ok" : "badge-warn") + '">最高 ' + res.best + "%</span>" : '<span class="badge">未挑戦</span>') +
+        "</a>";
+    }).join("");
+    return '<section><h2 style="font-size:19px;margin:26px 0 6px">' +
+      '<span class="badge badge-lv lv-' + lv.id + '">' + PBM.esc(lv.title) + "</span> " + PBM.esc(lv.subtitle) + "</h2>" + rows + "</section>";
+  }).join("");
+})();
+</script>
+</body>
+</html>

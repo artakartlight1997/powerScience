@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>レッスン | Power BI Mastery</title>
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/config.js"></script>
+</head>
+<body>
+<main id="main" class="wrap" style="padding-top:26px">
+  <div id="head"></div>
+  <div class="lesson-layout">
+    <article>
+      <div id="prose" class="prose"><div class="spinner"></div></div>
+      <div id="foot"></div>
+    </article>
+    <aside class="toc-box"><nav class="toc" id="toc"></nav></aside>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/analytics.js"></script>
+<script src="assets/js/render.js"></script>
+<script>
+(async function () {
+  PBM.renderChrome();
+  const id = PBM.qs("id");
+  const c = await PBM.curriculum();
+  const l = c.lessonById[id];
+  const prose = document.getElementById("prose");
+
+  if (!l) {
+    document.getElementById("head").innerHTML =
+      '<div class="card"><h1>レッスンが見つかりません</h1><p class="muted">URLをご確認ください。</p>' +
+      '<a class="btn btn-brand btn-sm" href="roadmap.html">ロードマップへ</a></div>';
+    prose.innerHTML = "";
+    return;
+  }
+
+  const lv = c.levelById[l.level];
+  document.title = l.title + " | Power BI Mastery";
+  const idx = c.lessons.findIndex(function (x) { return x.id === id; });
+  const prev = c.lessons[idx - 1], next = c.lessons[idx + 1];
+
+  document.getElementById("head").innerHTML =
+    '<p class="small muted"><a href="roadmap.html">ロードマップ</a> ／ <a href="roadmap.html#' + lv.id + '">' + PBM.esc(lv.title) + "</a></p>" +
+    '<div class="row" style="margin:8px 0">' +
+      '<span class="badge badge-lv lv-' + lv.id + '">' + PBM.esc(lv.title) + "</span>" +
+      '<span class="badge">' + l.id + "</span>" +
+      '<span class="badge">⏱ ' + l.minutes + "分</span>" +
+      (l.type === "hands-on" ? '<span class="badge badge-ok">ハンズオンあり</span>' : "") +
+      (l.type === "exam" ? '<span class="badge badge-warn">模擬試験</span>' : "") +
+    "</div>" +
+    '<h1 style="margin:6px 0 14px;font-size:26px;line-height:1.45">' + PBM.esc(l.title) + "</h1>" +
+    '<div class="card" style="margin-bottom:26px;background:var(--bg-sunken)">' +
+      '<div class="small" style="font-weight:800;margin-bottom:6px">このレッスンのゴール</div>' +
+      "<ul style=\"margin:0;padding-left:1.2em\">" + l.objectives.map(function (o) { return "<li>" + PBM.esc(o) + "</li>"; }).join("") + "</ul>" +
+    "</div>";
+
+  // 本文の読み込み
+  let md = null;
+  try {
+    const res = await fetch("content/lessons/" + id + ".md", { cache: "no-cache" });
+    if (res.ok) md = await res.text();
+  } catch (e) { /* noop */ }
+
+  if (md == null) {
+    prose.innerHTML =
+      '<div class="callout warn"><div class="callout-title">執筆中</div>' +
+      "<p>このレッスンの本文はまだ用意されていません。カリキュラム上の位置づけと学習目標は上に表示されています。</p>" +
+      "<p class=\"small\">執筆の手順は <code>CONTENT_GUIDE.md</code> を参照してください。</p></div>";
+  } else {
+    prose.innerHTML = PBM.markdown(md);
+    PBM.renderMermaid(prose);
+    PBM.buildToc(prose, document.getElementById("toc"));
+  }
+
+  // フッター：完了 / クイズ / 前後移動
+  function drawFoot() {
+    const done = PBM.progress.isLessonDone(id);
+    const q = l.quiz ? PBM.progress.quizResult(l.quiz) : null;
+    document.getElementById("foot").innerHTML =
+      "<hr>" +
+      '<div class="card" style="margin-bottom:18px">' +
+        '<h3 style="margin-top:0">理解度チェック</h3>' +
+        (l.lab ? '<p class="small">🧪 このレッスンに対応するハンズオン：<a href="lab.html?id=' + l.lab + '">' + PBM.esc(c.labById[l.lab].title) + "</a></p>" : "") +
+        (l.quiz ? '<p class="small">📝 確認クイズ' + (q ? "（最高スコア " + q.best + "% ・ " + q.tries + "回挑戦）" : "（未挑戦）") + "</p>" : "") +
+        '<div class="row" style="margin-top:10px">' +
+          (l.quiz ? '<a class="btn btn-brand btn-sm" href="quiz.html?id=' + l.quiz + '">クイズに挑戦</a>' : "") +
+          '<button class="btn btn-sm ' + (done ? "btn-ghost" : "btn-primary") + '" id="btn-done">' +
+            (done ? "✓ 完了済み（取り消す）" : "このレッスンを完了にする") + "</button>" +
+        "</div>" +
+      "</div>" +
+      '<div class="row" style="justify-content:space-between">' +
+        (prev ? '<a class="btn btn-ghost btn-sm" href="lesson.html?id=' + prev.id + '">← ' + PBM.esc(prev.id) + "</a>" : "<span></span>") +
+        (next ? '<a class="btn btn-ghost btn-sm" href="lesson.html?id=' + next.id + '">' + PBM.esc(next.id) + " →</a>" : '<a class="btn btn-primary btn-sm" href="exam.html">模擬試験へ →</a>') +
+      "</div>";
+    document.getElementById("btn-done").addEventListener("click", function () {
+      PBM.progress.setLessonDone(id, !PBM.progress.isLessonDone(id));
+      drawFoot();
+      if (PBM.progress.isLessonDone(id) && next) {
+        setTimeout(function () { location.href = "lesson.html?id=" + next.id; }, 450);
+      }
+    });
+  }
+  drawFoot();
+})();
+</script>
+</body>
+</html>

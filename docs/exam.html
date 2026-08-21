@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>模擬試験 | Power BI Mastery</title>
+<meta name="description" content="PL-300形式の模擬試験。時間制限つき・領域別スコア分析つき。">
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/config.js"></script>
+</head>
+<body>
+<main id="main" class="wrap-narrow" style="padding-top:30px">
+  <div id="intro">
+    <p class="eyebrow">Mock Exam</p>
+    <h1 style="margin:8px 0 10px">PL-300 模擬試験</h1>
+    <div class="card">
+      <p>本番同様、問題ごとの正誤はその場では表示されません。終了後に領域別のスコアと復習リストが出ます。</p>
+      <div class="grid grid-3" style="margin:16px 0">
+        <div class="kpi"><div class="v" id="cfg-q">30</div><div class="l">問題数</div></div>
+        <div class="kpi"><div class="v" id="cfg-m">45</div><div class="l">制限時間(分)</div></div>
+        <div class="kpi"><div class="v" id="cfg-p">70</div><div class="l">合格ライン(%)</div></div>
+      </div>
+      <div class="row">
+        <label class="field" style="margin:0">
+          出題数
+          <select id="sel-count" style="width:auto;min-width:120px">
+            <option value="10">10問（腕試し）</option>
+            <option value="30" selected>30問（標準）</option>
+            <option value="50">50問（本番想定）</option>
+          </select>
+        </label>
+      </div>
+      <div class="row" style="margin-top:16px">
+        <button class="btn btn-primary" id="start">試験を開始する</button>
+        <a class="btn btn-ghost" href="quiz.html?id=EXAM-PL300">解説を見ながら解く（練習モード）</a>
+      </div>
+      <p class="small muted" style="margin-top:14px">
+        ※ 本サイトの問題は学習用のオリジナル問題です。実際の試験問題ではありません。
+        出題範囲は <a href="https://learn.microsoft.com/ja-jp/credentials/certifications/exams/pl-300/" target="_blank" rel="noopener">公式のスキル測定ページ</a> をご確認ください。
+      </p>
+    </div>
+    <div class="card" style="margin-top:18px" id="history-box">
+      <h3 style="margin-top:0">過去の受験結果</h3>
+      <div id="history"></div>
+    </div>
+  </div>
+  <div id="quiz"></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/analytics.js"></script>
+<script src="assets/js/render.js"></script>
+<script src="assets/js/quiz.js"></script>
+<script>
+(async function () {
+  PBM.renderChrome();
+  const CFG = window.PBM_CONFIG.exam;
+  document.getElementById("cfg-q").textContent = CFG.questions;
+  document.getElementById("cfg-m").textContent = CFG.minutes;
+  document.getElementById("cfg-p").textContent = CFG.passLine;
+  document.getElementById("sel-count").value = String(CFG.questions);
+
+  function drawHistory() {
+    const ex = PBM.progress.exams();
+    const box = document.getElementById("history");
+    if (!ex.length) { box.innerHTML = '<p class="muted small">まだ受験記録がありません。</p>'; return; }
+    box.innerHTML = ex.slice().reverse().slice(0, 10).map(function (e) {
+      const d = new Date(e.at);
+      const pass = e.score >= CFG.passLine;
+      return '<div class="row" style="justify-content:space-between;border-bottom:1px solid var(--border);padding:8px 0">' +
+        '<span class="small">' + d.toLocaleDateString("ja-JP") + " " + d.toLocaleTimeString("ja-JP", { hour: "2-digit", minute: "2-digit" }) + "</span>" +
+        '<span class="small muted">' + e.total + "問 / " + e.minutes + "分</span>" +
+        '<span class="badge ' + (pass ? "badge-ok" : "badge-ng") + '">' + e.score + "%</span></div>";
+    }).join("");
+  }
+  drawHistory();
+
+  document.getElementById("start").addEventListener("click", async function () {
+    const n = parseInt(document.getElementById("sel-count").value, 10);
+    const quiz = await PBM.loadQuiz("EXAM-PL300");
+    if (!quiz) { alert("問題データを読み込めませんでした。"); return; }
+    document.getElementById("intro").classList.add("hidden");
+    const minutes = Math.max(5, Math.round(CFG.minutes * (n / CFG.questions)));
+    PBM.track("exam_start", { count: n });
+    PBM.mountQuiz(document.getElementById("quiz"), quiz, {
+      mode: "exam", shuffle: true, limit: n, minutes: minutes,
+      onFinish: function (r) {
+        PBM.progress.addExam({ score: r.pct, total: r.total, minutes: r.minutes, byArea: r.byArea });
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

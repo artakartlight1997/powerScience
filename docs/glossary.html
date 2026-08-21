@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>用語集 | Power BI Mastery</title>
+<meta name="description" content="Power BI / DAX / Power Query の重要用語をまとめた検索できる用語集。">
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/config.js"></script>
+</head>
+<body>
+<main id="main" class="wrap" style="padding-top:34px">
+  <p class="eyebrow">Glossary</p>
+  <h1 style="margin:8px 0 6px">用語集</h1>
+  <p class="muted">用語が分からなくなったらここへ。インクリメンタル検索できます。</p>
+  <input type="search" id="q" placeholder="用語を検索（例: CALCULATE, スタースキーマ, RLS）" style="margin:18px 0" autocomplete="off">
+  <div id="list" class="stack"></div>
+</main>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/analytics.js"></script>
+<script>
+(async function () {
+  PBM.renderChrome();
+  let terms = [];
+  try { const r = await fetch("content/glossary.json", { cache: "no-cache" }); if (r.ok) terms = await r.json(); } catch (e) {}
+  const list = document.getElementById("list");
+  function draw(f) {
+    const kw = (f || "").trim().toLowerCase();
+    const hit = terms.filter(function (t) {
+      if (!kw) return true;
+      return (t.term + " " + (t.en || "") + " " + t.desc + " " + (t.tags || []).join(" ")).toLowerCase().indexOf(kw) >= 0;
+    });
+    if (!hit.length) { list.innerHTML = '<p class="muted">該当する用語がありません。</p>'; return; }
+    list.innerHTML = hit.map(function (t) {
+      return '<div class="card"><div class="row" style="justify-content:space-between">' +
+        '<h3 style="margin:0">' + PBM.esc(t.term) + (t.en ? ' <span class="small muted">' + PBM.esc(t.en) + "</span>" : "") + "</h3>" +
+        (t.lesson ? '<a class="badge" href="lesson.html?id=' + t.lesson + '">' + t.lesson + " で学ぶ</a>" : "") + "</div>" +
+        '<p style="margin-top:8px">' + PBM.esc(t.desc) + "</p>" +
+        (t.tags ? '<div class="tag-list" style="margin-top:8px">' + t.tags.map(function (x) { return '<span class="badge">' + PBM.esc(x) + "</span>"; }).join("") + "</div>" : "") +
+        "</div>";
+    }).join("");
+  }
+  draw("");
+  document.getElementById("q").addEventListener("input", function (e) { draw(e.target.value); });
+})();
+</script>
+</body>
+</html>

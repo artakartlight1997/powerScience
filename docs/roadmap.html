@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>学習ロードマップ | Power BI Mastery</title>
+<meta name="description" content="Power BI初学者からPL-300合格までの学習ロードマップ。6レベル・39レッスンを順番に進めるだけ。">
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/config.js"></script>
+</head>
+<body>
+<main id="main" class="wrap" style="padding-top:34px">
+  <p class="eyebrow">Roadmap</p>
+  <h1 style="margin:8px 0 6px">学習ロードマップ</h1>
+  <p class="muted">上から順に進めてください。チェックを付けると進捗が保存されます（この端末のブラウザ内に保存されます）。</p>
+
+  <div class="card" style="margin:20px 0 30px">
+    <div class="row" style="gap:18px;flex-wrap:nowrap">
+      <div class="ring" id="ring"><div id="ring-pct">0%</div></div>
+      <div style="flex:1 1 auto;min-width:0">
+        <div class="row" style="gap:20px">
+          <div><div style="font-size:20px;font-weight:800" id="st-lessons">0/0</div><div class="small muted">レッスン</div></div>
+          <div><div style="font-size:20px;font-weight:800" id="st-labs">0/0</div><div class="small muted">ラボ</div></div>
+          <div><div style="font-size:20px;font-weight:800" id="st-quiz">0</div><div class="small muted">合格クイズ</div></div>
+          <div><div style="font-size:20px;font-weight:800" id="st-time">0分</div><div class="small muted">学習量</div></div>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <a class="btn btn-brand btn-sm" id="next-link" href="#">次のレッスンへ →</a>
+          <a class="btn btn-ghost btn-sm" href="progress.html">学習記録を見る</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="road" class="road"></div>
+</main>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/analytics.js"></script>
+<script>
+(async function () {
+  PBM.renderChrome();
+  const c = await PBM.curriculum();
+
+  function drawSummary() {
+    const s = PBM.stats(c);
+    document.getElementById("ring").style.setProperty("--p", s.pct);
+    document.getElementById("ring-pct").textContent = s.pct + "%";
+    document.getElementById("st-lessons").textContent = s.lessonsDone + "/" + s.lessonsTotal;
+    document.getElementById("st-labs").textContent = s.labsDone + "/" + s.labsTotal;
+    document.getElementById("st-quiz").textContent = s.quizPassed;
+    document.getElementById("st-time").textContent = PBM.fmtMin(s.minutes);
+    const n = PBM.nextLesson(c);
+    document.getElementById("next-link").href = n ? "lesson.html?id=" + n.id : "exam.html";
+    document.getElementById("next-link").textContent = n ? "次： " + n.id + " →" : "模擬試験に挑戦 →";
+  }
+
+  function draw() {
+    document.getElementById("road").innerHTML = c.levels.map(function (lv) {
+      const ls = PBM.lessonsOfLevel(c, lv.id);
+      const st = PBM.levelStats(c, lv.id);
+      const labs = c.labs.filter(function (l) { return l.level === lv.id; });
+      return '<section class="road-node dot-' + lv.id + (st.pct === 100 ? " done" : "") + '" id="' + lv.id + '">' +
+        '<div class="row" style="gap:8px">' +
+          '<span class="badge badge-lv lv-' + lv.id + '">' + PBM.esc(lv.title) + "</span>" +
+          '<span class="badge">目安 ' + lv.estimatedHours + "時間</span>" +
+          (lv.examWeight ? '<span class="badge badge-warn">' + PBM.esc(lv.examWeight) + "</span>" : "") +
+        "</div>" +
+        '<h2 style="margin:10px 0 4px;font-size:20px">' + PBM.esc(lv.subtitle) + "</h2>" +
+        '<p class="muted small" style="margin:0 0 8px">🎯 ' + PBM.esc(lv.goal) + "</p>" +
+        '<div class="bar" style="max-width:280px"><span style="width:' + st.pct + "%;background:var(--lv" + lv.order + ')"></span></div>' +
+        ls.map(function (l) {
+          const done = PBM.progress.isLessonDone(l.id);
+          const q = PBM.progress.quizResult(l.quiz);
+          return '<a class="lesson-row" href="lesson.html?id=' + l.id + '">' +
+            '<span class="check' + (done ? " on" : "") + '">✓</span>' +
+            '<span class="t">' + PBM.esc(l.title) + "</span>" +
+            (l.lab ? '<span class="badge">🧪 ' + l.lab + "</span>" : "") +
+            (q ? '<span class="badge ' + (q.best >= 80 ? "badge-ok" : "badge-warn") + '">' + q.best + "%</span>" : "") +
+            '<span class="m">' + l.minutes + "分</span>" +
+            "</a>";
+        }).join("") +
+        (labs.length ? '<div style="margin-top:10px">' + labs.map(function (lb) {
+          return '<a class="lesson-row" href="lab.html?id=' + lb.id + '" style="border-style:dashed">' +
+            '<span class="check' + (PBM.progress.isLabDone(lb.id) ? " on" : "") + '">✓</span>' +
+            '<span class="t">🧪 ' + PBM.esc(lb.title) + "</span>" +
+            '<span class="m">' + lb.minutes + "分</span></a>";
+        }).join("") + "</div>" : "") +
+        "</section>";
+    }).join("") +
+    '<section class="road-node dot-L5"><div class="card" style="border-color:var(--accent)">' +
+      '<span class="badge badge-warn">GOAL</span>' +
+      '<h2 style="margin:10px 0 6px;font-size:20px">PL-300 受験</h2>' +
+      '<p class="muted small">全レッスン完了 + 模擬試験80%以上を2回連続で達成できたら、受験申込の目安です。</p>' +
+      '<a class="btn btn-primary btn-sm" href="exam.html" style="margin-top:8px">模擬試験を受ける</a>' +
+    "</div></section>";
+  }
+
+  drawSummary(); draw();
+  if (location.hash) { const t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
+})();
+</script>
+</body>
+</html>

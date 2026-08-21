@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>管理ダッシュボード | Power BI Mastery</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/config.js"></script>
+<style>
+  .adm-grid { display: grid; gap: 14px; }
+  @media (min-width: 780px)  { .adm-grid.c2 { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px) { .adm-grid.c3 { grid-template-columns: repeat(3, 1fr); } }
+  .hbar { display: grid; grid-template-columns: minmax(90px, 34%) 1fr 58px; gap: 10px; align-items: center;
+          padding: 5px 0; font-size: 13.5px; }
+  .hbar .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .hbar .vl { text-align: right; font-variant-numeric: tabular-nums; color: var(--fg-muted); }
+  .spark { display: flex; align-items: flex-end; gap: 2px; height: 120px; }
+  .spark > div { flex: 1; background: var(--brand); border-radius: 3px 3px 0 0; min-height: 2px; position: relative; }
+  .spark > div:hover { background: var(--accent); }
+  .hours { display: grid; grid-template-columns: repeat(24, 1fr); gap: 2px; align-items: end; height: 90px; }
+  .hours > div { background: var(--lv4); border-radius: 2px 2px 0 0; min-height: 2px; }
+  .scrollbox { max-height: 360px; overflow: auto; }
+</style>
+</head>
+<body>
+<main id="main" class="wrap" style="padding-top:30px">
+
+  <!-- ログイン -->
+  <section id="login" class="wrap-narrow" style="padding:0">
+    <p class="eyebrow">Admin</p>
+    <h1 style="margin:8px 0 8px">管理ダッシュボード</h1>
+    <p class="muted small">閲覧統計を表示します。パスワードはサーバ側（Cloudflare Workers のシークレット）で管理されています。</p>
+    <div class="card" style="margin-top:20px">
+      <label class="field" for="ep">計測サーバのURL</label>
+      <input type="text" id="ep" placeholder="https://pbm-analytics.xxx.workers.dev" autocomplete="off">
+      <div style="height:14px"></div>
+      <label class="field" for="pw">パスワード</label>
+      <input type="password" id="pw" placeholder="••••••••" autocomplete="current-password">
+      <div style="height:16px"></div>
+      <button class="btn btn-primary btn-block" id="btn-login">ログイン</button>
+      <p id="login-msg" class="small" style="color:var(--ng);margin-top:12px"></p>
+      <p class="small muted" style="margin-top:14px">
+        まだサーバを用意していない場合は <code>worker/README.md</code> の手順（5分程度）を実行してください。
+      </p>
+    </div>
+  </section>
+
+  <!-- ダッシュボード -->
+  <section id="dash" class="hidden">
+    <div class="row" style="justify-content:space-between;margin-bottom:6px">
+      <div>
+        <p class="eyebrow" style="margin:0">Admin Dashboard</p>
+        <h1 style="margin:4px 0 0;font-size:24px">閲覧統計</h1>
+      </div>
+      <div class="row">
+        <select id="range" style="width:auto">
+          <option value="1">今日</option>
+          <option value="7">直近7日</option>
+          <option value="30" selected>直近30日</option>
+          <option value="90">直近90日</option>
+          <option value="365">直近1年</option>
+        </select>
+        <button class="btn btn-sm" id="btn-refresh">更新</button>
+        <button class="btn btn-sm btn-ghost" id="btn-csv">CSV</button>
+        <button class="btn btn-sm btn-ghost" id="btn-logout">ログアウト</button>
+      </div>
+    </div>
+    <p class="small muted" id="meta"></p>
+
+    <div class="grid grid-4" style="margin:16px 0">
+      <div class="card kpi"><div class="v" id="m-pv">—</div><div class="l">ページビュー</div></div>
+      <div class="card kpi"><div class="v" id="m-uv">—</div><div class="l">ユニーク訪問者</div></div>
+      <div class="card kpi"><div class="v" id="m-ss">—</div><div class="l">セッション</div></div>
+      <div class="card kpi"><div class="v" id="m-tm">—</div><div class="l">平均滞在時間</div></div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">日別の推移</h3>
+      <div class="spark" id="c-day"></div>
+      <div class="row small muted" style="justify-content:space-between;margin-top:6px">
+        <span id="c-day-from"></span><span id="c-day-to"></span>
+      </div>
+    </div>
+
+    <div class="adm-grid c2" style="margin-top:14px">
+      <div class="card">
+        <h3 style="margin-top:0">時間帯（UTC基準）</h3>
+        <div class="hours" id="c-hour"></div>
+        <p class="small muted" style="margin-top:8px">日本時間 = UTC + 9時間。0が並ぶ列は閲覧のない時間帯です。</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">デバイス</h3>
+        <div id="c-device"></div>
+        <h3 style="margin-top:18px">ブラウザ / OS</h3>
+        <div id="c-browser"></div>
+      </div>
+    </div>
+
+    <div class="adm-grid c3" style="margin-top:14px">
+      <div class="card"><h3 style="margin-top:0">国・地域</h3><div id="c-country"></div></div>
+      <div class="card"><h3 style="margin-top:0">地方（州・都道府県）</h3><div class="scrollbox" id="c-region"></div></div>
+      <div class="card"><h3 style="margin-top:0">都市</h3><div class="scrollbox" id="c-city"></div></div>
+    </div>
+
+    <div class="adm-grid c2" style="margin-top:14px">
+      <div class="card"><h3 style="margin-top:0">よく見られたページ</h3><div class="scrollbox" id="c-page"></div></div>
+      <div class="card"><h3 style="margin-top:0">流入元</h3><div id="c-ref"></div>
+        <h3 style="margin-top:18px">利用者のタイムゾーン</h3><div id="c-tz"></div></div>
+    </div>
+
+    <div class="adm-grid c2" style="margin-top:14px">
+      <div class="card">
+        <h3 style="margin-top:0">完了されたレッスン</h3>
+        <div class="scrollbox" id="c-lesson"></div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">クイズ平均点が低い順（＝つまずき箇所）</h3>
+        <div class="scrollbox" id="c-quiz"></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3 style="margin-top:0">直近のアクセス</h3>
+      <div class="scrollbox">
+        <table class="dtable"><thead><tr>
+          <th>時刻</th><th>イベント</th><th>ページ</th><th>地域</th><th>端末</th><th class="num">秒</th>
+        </tr></thead><tbody id="c-recent"></tbody></table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  PBM.renderChrome();
+  const EP_KEY = "pbm.admin.ep", TK_KEY = "pbm.admin.token";
+  const $ = (s) => document.querySelector(s);
+  const fmt = (n) => (n == null ? "—" : Number(n).toLocaleString("ja-JP"));
+
+  const epInput = $("#ep");
+  epInput.value = localStorage.getItem(EP_KEY) || (window.PBM_CONFIG.analyticsEndpoint || "");
+
+  function endpoint() { return (localStorage.getItem(EP_KEY) || "").replace(/\/$/, ""); }
+  function token() { return sessionStorage.getItem(TK_KEY) || ""; }
+
+  async function api(path, opts) {
+    const res = await fetch(endpoint() + path, Object.assign({
+      headers: { Authorization: "Bearer " + token() }
+    }, opts || {}));
+    if (res.status === 401) { logout(); throw new Error("セッションが切れました。再度ログインしてください。"); }
+    if (!res.ok) throw new Error("サーバエラー (" + res.status + ")");
+    return res.json();
+  }
+
+  function logout() {
+    sessionStorage.removeItem(TK_KEY);
+    $("#dash").classList.add("hidden");
+    $("#login").classList.remove("hidden");
+  }
+
+  $("#btn-login").addEventListener("click", async function () {
+    const ep = epInput.value.trim().replace(/\/$/, "");
+    const pw = $("#pw").value;
+    const msg = $("#login-msg");
+    msg.textContent = "";
+    if (!ep) { msg.textContent = "計測サーバのURLを入力してください。"; return; }
+    localStorage.setItem(EP_KEY, ep);
+    this.disabled = true; this.textContent = "確認中…";
+    try {
+      const res = await fetch(ep + "/admin/login", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: pw })
+      });
+      const j = await res.json().catch(function () { return {}; });
+      if (!res.ok) throw new Error(j.error || "ログインできませんでした");
+      sessionStorage.setItem(TK_KEY, j.token);
+      $("#pw").value = "";
+      start();
+    } catch (e) {
+      msg.textContent = e.message + "（URLが正しいか、サーバが起動しているかもご確認ください）";
+    } finally { this.disabled = false; this.textContent = "ログイン"; }
+  });
+  $("#pw").addEventListener("keydown", function (e) { if (e.key === "Enter") $("#btn-login").click(); });
+  $("#btn-logout").addEventListener("click", logout);
+  $("#btn-refresh").addEventListener("click", load);
+  $("#range").addEventListener("change", load);
+  $("#btn-csv").addEventListener("click", function () {
+    location.href = endpoint() + "/admin/export.csv?days=" + $("#range").value + "&t=" + encodeURIComponent(token());
+  });
+
+  /* ---- 描画ヘルパ ---- */
+  function hbars(el, rows, keyField, valField, unit) {
+    const max = Math.max.apply(null, rows.map(function (r) { return r[valField] || 0; }).concat([1]));
+    el.innerHTML = rows.length ? rows.map(function (r) {
+      const v = r[valField] || 0;
+      return '<div class="hbar"><div class="nm" title="' + PBM.esc(r[keyField]) + '">' + PBM.esc(r[keyField]) + "</div>" +
+        '<div class="mini-bar" style="width:' + Math.max(2, (v / max) * 100) + '%"></div>' +
+        '<div class="vl">' + fmt(v) + (unit || "") + "</div></div>";
+    }).join("") : '<p class="small muted">データがありません。</p>';
+  }
+
+  function start() {
+    $("#login").classList.add("hidden");
+    $("#dash").classList.remove("hidden");
+    load();
+  }
+
+  async function load() {
+    const days = $("#range").value;
+    $("#meta").textContent = "読み込み中…";
+    try {
+      const d = await api("/admin/summary?days=" + days);
+      const o = d.overview || {};
+      $("#m-pv").textContent = fmt(o.pageviews);
+      $("#m-uv").textContent = fmt(o.visitors);
+      $("#m-ss").textContent = fmt(o.sessions);
+      const sec = d.avgSeconds || 0;
+      $("#m-tm").textContent = sec >= 60 ? Math.floor(sec / 60) + "分" + (sec % 60) + "秒" : sec + "秒";
+      $("#meta").textContent = "対象期間: 直近" + d.days + "日 ／ 総イベント " + fmt(o.events) +
+        " ／ " + fmt(o.countries) + "の国・地域から ／ 生成 " + new Date(d.generatedAt).toLocaleString("ja-JP");
+
+      // 日別
+      const day = d.byDay || [];
+      const dmax = Math.max.apply(null, day.map(function (r) { return r.pageviews || 0; }).concat([1]));
+      $("#c-day").innerHTML = day.map(function (r) {
+        return '<div style="height:' + Math.max(2, (r.pageviews / dmax) * 100) + '%" title="' +
+          r.day + "：" + r.pageviews + "PV / " + r.visitors + '人"></div>';
+      }).join("") || '<p class="small muted">データがありません。</p>';
+      $("#c-day-from").textContent = day.length ? day[0].day : "";
+      $("#c-day-to").textContent = day.length ? day[day.length - 1].day : "";
+
+      // 時間帯
+      const hmap = {}; (d.byHour || []).forEach(function (r) { hmap[r.hour] = r.n; });
+      const hmax = Math.max.apply(null, Object.values(hmap).concat([1]));
+      let hh = "";
+      for (let i = 0; i < 24; i++) {
+        const v = hmap[i] || 0;
+        hh += '<div style="height:' + Math.max(2, (v / hmax) * 100) + '%" title="UTC ' + i + "時（JST " + ((i + 9) % 24) + "時）：" + v + '"></div>';
+      }
+      $("#c-hour").innerHTML = hh;
+
+      hbars($("#c-device"),  d.byDevice  || [], "k", "visitors", "人");
+      hbars($("#c-browser"), d.byBrowser || [], "k", "visitors", "人");
+      hbars($("#c-country"), d.byCountry || [], "k", "pageviews");
+      hbars($("#c-region"),  d.byRegion  || [], "k", "pageviews");
+      hbars($("#c-city"),    d.byCity    || [], "k", "pageviews");
+      hbars($("#c-page"),    d.byPage    || [], "k", "pageviews");
+      hbars($("#c-ref"),     d.byRef     || [], "k", "sessions");
+      hbars($("#c-tz"),      d.byTz      || [], "k", "visitors", "人");
+      hbars($("#c-lesson"),  d.byLesson  || [], "k", "n", "回");
+
+      const qz = d.quizzes || [];
+      $("#c-quiz").innerHTML = qz.length ? qz.map(function (r) {
+        const col = r.avg_score >= 80 ? "ok" : r.avg_score >= 60 ? "warn" : "ng";
+        return '<div class="hbar"><div class="nm">' + PBM.esc(r.k) + "</div>" +
+          '<div class="mini-bar" style="width:' + Math.max(2, r.avg_score) + "%;background:var(--" + col + ')"></div>' +
+          '<div class="vl">' + r.avg_score + "%</div></div>" +
+          '<div class="small muted" style="margin:-4px 0 6px">' + r.attempts + "回挑戦</div>";
+      }).join("") : '<p class="small muted">まだクイズの受験記録がありません。</p>';
+
+      const rec = await api("/admin/recent?limit=120");
+      $("#c-recent").innerHTML = (rec.rows || []).map(function (r) {
+        const t = new Date(r.ts);
+        return "<tr><td>" + t.toLocaleString("ja-JP", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }) + "</td>" +
+          "<td>" + PBM.esc(r.event) + "</td>" +
+          "<td>" + PBM.esc(r.page || "") + "</td>" +
+          "<td>" + PBM.esc([r.country, r.region, r.city].filter(Boolean).join(" / ") || "不明") + "</td>" +
+          "<td>" + (r.mobile ? "スマホ" : "PC") + " " + PBM.esc(r.os || "") + "</td>" +
+          '<td class="num">' + (r.seconds == null ? "" : r.seconds) + "</td></tr>";
+      }).join("");
+    } catch (e) {
+      $("#meta").textContent = "";
+      alert(e.message);
+    }
+  }
+
+  if (token()) start();
+})();
+</script>
+</body>
+</html>

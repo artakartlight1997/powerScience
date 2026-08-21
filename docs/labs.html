@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ハンズオンラボ | Power BI Mastery</title>
+<meta name="description" content="サンプルデータ付きのPower BIハンズオンラボ。手を動かして覚える6つの実習。">
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/config.js"></script>
+</head>
+<body>
+<main id="main" class="wrap" style="padding-top:34px">
+  <p class="eyebrow">Hands-on Labs</p>
+  <h1 style="margin:8px 0 6px">ハンズオンラボ</h1>
+  <p class="muted">サンプルデータをダウンロードして、Power BI Desktopで実際に手を動かします。各ラボには「詰まったときの答え」が付いています。</p>
+  <div class="card" style="margin:20px 0">
+    <h3 style="margin-top:0">📦 サンプルデータ</h3>
+    <p class="small muted">架空の小売企業「Northstar Retail」の売上データです。すべてこのリポジトリに含まれています。</p>
+    <div class="tag-list" id="datasets"></div>
+  </div>
+  <div class="grid grid-2" id="labs"></div>
+</main>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/analytics.js"></script>
+<script>
+(async function () {
+  PBM.renderChrome();
+  const c = await PBM.curriculum();
+  const FILES = ["sales.csv", "sales_dirty.csv", "products.csv", "customers.csv", "stores.csv", "security_users.csv"];
+  document.getElementById("datasets").innerHTML = FILES.map(function (f) {
+    return '<a class="badge" href="data/' + f + '" download>⬇ ' + f + "</a>";
+  }).join("");
+  document.getElementById("labs").innerHTML = c.labs.map(function (l) {
+    const lv = c.levelById[l.level];
+    const done = PBM.progress.isLabDone(l.id);
+    return '<a class="card card-link" href="lab.html?id=' + l.id + '">' +
+      '<div class="row"><span class="badge badge-lv lv-' + lv.id + '">' + PBM.esc(lv.title) + "</span>" +
+      '<span class="badge">難易度 ' + "★".repeat(l.difficulty) + "</span>" +
+      '<span class="badge">⏱ ' + l.minutes + "分</span>" +
+      (done ? '<span class="badge badge-ok">✓ 完了</span>' : "") + "</div>" +
+      '<h3 style="margin-top:12px">' + PBM.esc(l.id) + " " + PBM.esc(l.title) + "</h3>" +
+      "<p>" + PBM.esc(l.goal) + "</p></a>";
+  }).join("");
+})();
+</script>
+</body>
+</html>
