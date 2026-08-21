@@ -131,3 +131,17 @@
 .lesson-layout > article { min-width: 0; }
 .prose pre, .prose .table-scroll, .prose .pbm-figure { max-width: 100%; }
 .prose pre { overflow-x: auto; }
+
+/* ---------- クイズ内のコード（.prose の外なので個別に指定） ---------- */
+.q-card pre, .explain pre, #q-review pre {
+  background: var(--bg-sunken); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 14px 16px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  font-size: 15px; line-height: 1.75; margin: 14px 0; max-width: 100%;
+}
+.q-card pre code, .explain pre code { font-family: var(--mono); background: none; border: 0; padding: 0; }
+.q-card { overflow: hidden; }
+.explain code, #q-review code {
+  font-family: var(--mono); font-size: .9em; background: var(--bg-sunken);
+  padding: 2px 6px; border-radius: 5px; border: 1px solid var(--border);
+}
+.explain p, #q-review p { font-size: 16px; line-height: 1.9; }

@@ -118,11 +118,14 @@
       });
 
       if (locked && opt.mode === "practice" && q.explain) {
-        body.querySelector("#q-explain").innerHTML =
+        const ex = body.querySelector("#q-explain");
+        ex.innerHTML =
           '<div class="explain"><h4>' + (isCorrect(q, ans) ? "✅ 正解" : "❌ 不正解") + " — 解説</h4>" +
           (window.marked ? PBM.markdown(q.explain) : "<p>" + PBM.esc(q.explain) + "</p>") +
           (q.ref ? '<p class="small"><a href="' + PBM.url("lesson.html?id=" + encodeURIComponent(q.ref)) + '">→ 関連レッスンを読む</a></p>' : "") +
           "</div>";
+        /* 解説の中の専門用語も用語集にリンクする */
+        if (PBM.enhance) PBM.enhance(ex);
       }
 
       prevBtn.disabled = state.i === 0;
@@ -249,6 +252,7 @@
           "</div></details>";
       }).join("");
 
+      if (PBM.enhance) PBM.enhance(rv);
       el.querySelector("#q-retry").addEventListener("click", function () { location.reload(); });
 
       if (opt.onFinish) opt.onFinish({ correct: correct, total: qs.length, pct: pct, byArea: byArea, bySkill: bySkill, minutes: minutes });
