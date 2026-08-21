@@ -37,6 +37,9 @@ LIM = {
 LAB_LIM = dict(LIM, read=2800, prose=800, code_lines=110,
                figs=6, lines_min=100, lines_max=260, h2_max=14)
 FENCE = re.compile(r"```.*?```", re.S)
+# <details> は既定で折りたたまれている＝読者が「読まされる」文字ではない。
+# 解答例などをここに置くぶんには文字量の基準に数えない。
+DETAILS = re.compile(r"<details>.*?</details>", re.S)
 
 
 def split_fences(src):
@@ -65,6 +68,8 @@ def split_fences(src):
 def analyze(path):
     src = io.open(path, encoding="utf-8").read()
     figs, code, body = split_fences(src)
+    hidden = sum(len(m) for m in DETAILS.findall(body))
+    body = DETAILS.sub("", body)
 
     prose = bullets = tables = quotes = 0
     paragraphs, run, max_run = [], 0, 0
@@ -93,7 +98,8 @@ def analyze(path):
         "figs": len(figs),
         "para": max((len(p) for p in paragraphs), default=0),
         "run": max_run,
-        "lines": len(src.split("\n")),
+        "hidden": hidden,
+        "lines": len(DETAILS.sub("", src).split("\n")),
         "h2": len(re.findall(r"^## ", src, re.M)),
         "h1": len(re.findall(r"^# ", src, re.M)),
     }

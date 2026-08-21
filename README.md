@@ -98,6 +98,14 @@ python3 scripts/check_density.py --top 20 # 読む文字が多い順
 1. **Settings → Pages** の Source を **GitHub Actions** に設定
 2. `main` へ push すると `.github/workflows/pages.yml` が動きます
 
+> **最初の1回だけ、あなたの操作が必要です。**
+> ワークフローには `configure-pages` の `enablement: true` を入れてあり、
+> 可能な場合は Pages を自動で有効化します。
+> ただし GitHub Pages の有効化は**リポジトリ管理者の権限**が必要で、
+> ワークフローの `GITHUB_TOKEN` では実行できません
+> （`Resource not accessible by integration` で失敗します）。
+> **Settings → Pages で Source を一度設定すれば、以降の公開は全自動です。**
+
 Actions では、デプロイ前に次を実行します。
 
 - カリキュラム・用語集・クイズのインデックス生成

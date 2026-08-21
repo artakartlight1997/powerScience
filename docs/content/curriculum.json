@@ -10,7 +10,7 @@
       "modules": 22,
       "lessons": 118,
       "labs": 12,
-      "figures": 1597,
+      "figures": 1641,
       "lessonsWritten": 118,
       "modulesPlanned": 22,
       "lessonsPlanned": 118
@@ -3093,7 +3093,7 @@
       "level": "T3",
       "order": 60,
       "hasBody": true,
-      "figures": 9
+      "figures": 11
     },
     {
       "id": "L1201",
@@ -3542,7 +3542,7 @@
       "level": "T3",
       "order": 70,
       "hasBody": true,
-      "figures": 14
+      "figures": 15
     },
     {
       "id": "L1305",
@@ -3635,7 +3635,7 @@
       "level": "T3",
       "order": 72,
       "hasBody": true,
-      "figures": 10
+      "figures": 14
     },
     {
       "id": "L1401",
@@ -3951,7 +3951,7 @@
       "level": "T3",
       "order": 79,
       "hasBody": true,
-      "figures": 13
+      "figures": 21
     },
     {
       "id": "L1503",
@@ -4000,7 +4000,7 @@
       "level": "T3",
       "order": 80,
       "hasBody": true,
-      "figures": 12
+      "figures": 20
     },
     {
       "id": "L1504",
@@ -4328,7 +4328,7 @@
       "level": "T3",
       "order": 87,
       "hasBody": true,
-      "figures": 7
+      "figures": 11
     },
     {
       "id": "L1605",
@@ -4869,7 +4869,7 @@
       "level": "T4",
       "order": 99,
       "hasBody": true,
-      "figures": 11
+      "figures": 14
     },
     {
       "id": "L1902",
@@ -4915,7 +4915,7 @@
       "level": "T4",
       "order": 100,
       "hasBody": true,
-      "figures": 11
+      "figures": 14
     },
     {
       "id": "L1903",
@@ -4962,7 +4962,7 @@
       "level": "T4",
       "order": 101,
       "hasBody": true,
-      "figures": 11
+      "figures": 13
     },
     {
       "id": "L1904",
@@ -5142,7 +5142,7 @@
       "level": "T4",
       "order": 105,
       "hasBody": true,
-      "figures": 14
+      "figures": 16
     },
     {
       "id": "L2003",
@@ -5185,7 +5185,7 @@
       "level": "T4",
       "order": 106,
       "hasBody": true,
-      "figures": 14
+      "figures": 15
     },
     {
       "id": "L2004",
@@ -5678,7 +5678,7 @@
       "level": "T4",
       "order": 117,
       "hasBody": true,
-      "figures": 14
+      "figures": 18
     },
     {
       "id": "L2205",
@@ -5723,7 +5723,7 @@
       "level": "T4",
       "order": 118,
       "hasBody": true,
-      "figures": 14
+      "figures": 16
     }
   ],
   "labs": [
