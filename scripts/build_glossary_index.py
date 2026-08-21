@@ -48,9 +48,19 @@ for path in sorted(glob.glob(os.path.join(GDIR, "*.json"))):
         if not name:
             continue
         if name in seen:
-            dupes.append((name, seen[name], src))
-            continue
-        seen[name] = src
+            # 同じ用語が複数のモジュールにある場合の優先順位:
+            #   1. モジュール固有の定義（M01〜）を、汎用の M00 より優先する
+            #   2. それ以外は先に出てきた方（＝最初に導入したモジュール）を採用する
+            prev = seen[name]
+            if prev == "M00" and src != "M00":
+                terms[:] = [t for t in terms if t.get("term") != name]
+                dupes.append((name, prev, src))
+                seen[name] = src
+            else:
+                dupes.append((name, prev, src))
+                continue
+        else:
+            seen[name] = src
         t["source"] = src
         les = t.get("lesson")
         if les and les in lesson_meta:
@@ -79,7 +89,7 @@ print("  用語数   : %d" % len(terms))
 print("  ソース   : %d ファイル (%s)" % (len(out["sources"]), ", ".join(out["sources"])))
 print("  タグ     : %d 種類" % len(tag_counts))
 if dupes:
-    print("  重複     : %d 件（先に読み込んだ方を採用）" % len(dupes))
+    print("  重複     : %d 件（モジュール固有 > M00、それ以外は先勝ち）" % len(dupes))
     for name, a, b in dupes[:10]:
         print("      %s : %s / %s" % (name, a, b))
 sys.exit(0)

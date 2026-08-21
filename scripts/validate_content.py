@@ -208,7 +208,7 @@ for path in sorted(glob.glob(os.path.join(C, "quizzes", "*.json"))):
 
 
 # ---------------------------------------------------------------- 用語集
-terms, term_seen = 0, {}
+terms, term_seen, dup_terms = 0, {}, []
 for path in sorted(glob.glob(os.path.join(C, "glossary", "*.json"))):
     if os.path.basename(path) == "index.json":
         continue
@@ -224,7 +224,7 @@ for path in sorted(glob.glob(os.path.join(C, "glossary", "*.json"))):
             err("%s: term がない用語があります" % os.path.basename(path))
             continue
         if name in term_seen:
-            warn("用語'%s' が %s と %s で重複しています" % (name, term_seen[name], os.path.basename(path)))
+            dup_terms.append(name)
         term_seen[name] = os.path.basename(path)
         for k in ("short", "desc"):
             if not t.get(k):
@@ -234,6 +234,10 @@ for path in sorted(glob.glob(os.path.join(C, "glossary", "*.json"))):
 
 
 # ---------------------------------------------------------------- 出力
+if dup_terms:
+    warn("複数モジュールで定義が重複している用語が %d 件あります（ビルド時にモジュール固有の定義を採用します）: %s ほか"
+         % (len(dup_terms), "、".join(sorted(set(dup_terms))[:6])))
+
 tier_counts = Counter(l.get("_tier") for l in lessons)
 short_lessons = {k: v for k, v in lesson_lines.items() if k in lesson_ids and v < 250}
 

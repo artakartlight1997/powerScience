@@ -1,14 +1,14 @@
 {
- "totalQuestions": 640,
- "lessonQuestions": 400,
+ "totalQuestions": 830,
+ "lessonQuestions": 590,
  "examQuestions": 240,
  "byArea": {
-  "データの準備": 121,
-  "データのモデル化": 237,
-  "視覚化と分析": 138,
-  "資産の管理とセキュリティ": 81,
-  "基礎": 16,
-  "データサイエンス": 47
+  "データの準備": 171,
+  "データのモデル化": 269,
+  "視覚化と分析": 149,
+  "資産の管理とセキュリティ": 145,
+  "基礎": 35,
+  "データサイエンス": 61
  },
  "bySkill": {
   "1.1 データソースへの接続": 11,
@@ -37,10 +37,10 @@
   "4.5 ガバナンスとライフサイクル": 8
  },
  "byDifficulty": {
-  "2": 203,
-  "4": 102,
-  "3": 290,
-  "1": 45
+  "2": 265,
+  "4": 125,
+  "3": 385,
+  "1": 55
  },
  "quizzes": {
   "EXAM-PL300": {
@@ -59,6 +59,114 @@
    "title": "データ・情報・知識・意思決定の階段",
    "count": 5,
    "lesson": "L0102",
+   "isExam": false
+  },
+  "L0103": {
+   "title": "指標(KPI)の設計",
+   "count": 5,
+   "lesson": "L0103",
+   "isExam": false
+  },
+  "L0104": {
+   "title": "数字の読み方の基礎",
+   "count": 5,
+   "lesson": "L0104",
+   "isExam": false
+  },
+  "L0105": {
+   "title": "分析の5つの型",
+   "count": 5,
+   "lesson": "L0105",
+   "isExam": false
+  },
+  "L0201": {
+   "title": "Power BIとは何か — 5つの工程",
+   "count": 5,
+   "lesson": "L0201",
+   "isExam": false
+  },
+  "L0202": {
+   "title": "Desktop・Service・Mobile の役割分担",
+   "count": 5,
+   "lesson": "L0202",
+   "isExam": false
+  },
+  "L0203": {
+   "title": "Excelとの使い分け",
+   "count": 5,
+   "lesson": "L0203",
+   "isExam": false
+  },
+  "L0204": {
+   "title": "ライセンスと組織での使われ方",
+   "count": 5,
+   "lesson": "L0204",
+   "isExam": false
+  },
+  "L0205": {
+   "title": "ファイル形式と用語の整理",
+   "count": 5,
+   "lesson": "L0205",
+   "isExam": false
+  },
+  "L0301": {
+   "title": "環境構築とPower BI Desktopの起動",
+   "count": 5,
+   "lesson": "L0301",
+   "isExam": false
+  },
+  "L0302": {
+   "title": "画面の地図 — 3つのビューと3つのペイン",
+   "count": 5,
+   "lesson": "L0302",
+   "isExam": false
+  },
+  "L0303": {
+   "title": "最初のデータを読み込む",
+   "count": 5,
+   "lesson": "L0303",
+   "isExam": false
+  },
+  "L0304": {
+   "title": "最初のグラフを作る",
+   "count": 5,
+   "lesson": "L0304",
+   "isExam": false
+  },
+  "L0305": {
+   "title": "保存・発行・共有の第一歩",
+   "count": 5,
+   "lesson": "L0305",
+   "isExam": false
+  },
+  "L0401": {
+   "title": "接続方式の三択",
+   "count": 5,
+   "lesson": "L0401",
+   "isExam": false
+  },
+  "L0402": {
+   "title": "Excel・CSV・Web・データベースへの接続",
+   "count": 5,
+   "lesson": "L0402",
+   "isExam": false
+  },
+  "L0403": {
+   "title": "データ型を制する",
+   "count": 5,
+   "lesson": "L0403",
+   "isExam": false
+  },
+  "L0404": {
+   "title": "列プロファイルでデータを健康診断する",
+   "count": 5,
+   "lesson": "L0404",
+   "isExam": false
+  },
+  "L0405": {
+   "title": "Power Queryエディタ初めの一歩",
+   "count": 5,
+   "lesson": "L0405",
    "isExam": false
   },
   "L0501": {
@@ -469,6 +577,96 @@
    "lesson": "L1605",
    "isExam": false
   },
+  "L1701": {
+   "title": "BIアーキテクチャの全体像",
+   "count": 5,
+   "lesson": "L1701",
+   "isExam": false
+  },
+  "L1702": {
+   "title": "セマンティックモデルの分割戦略",
+   "count": 5,
+   "lesson": "L1702",
+   "isExam": false
+  },
+  "L1703": {
+   "title": "データフローとレイクハウス",
+   "count": 5,
+   "lesson": "L1703",
+   "isExam": false
+  },
+  "L1704": {
+   "title": "命名規則と標準化",
+   "count": 5,
+   "lesson": "L1704",
+   "isExam": false
+  },
+  "L1705": {
+   "title": "スケールする設計",
+   "count": 5,
+   "lesson": "L1705",
+   "isExam": false
+  },
+  "L1801": {
+   "title": "デプロイメントパイプラインと環境分離",
+   "count": 5,
+   "lesson": "L1801",
+   "isExam": false
+  },
+  "L1802": {
+   "title": "PBIP と Git",
+   "count": 5,
+   "lesson": "L1802",
+   "isExam": false
+  },
+  "L1803": {
+   "title": "テストと品質保証",
+   "count": 5,
+   "lesson": "L1803",
+   "isExam": false
+  },
+  "L1804": {
+   "title": "監査・秘密度ラベル・データ保護",
+   "count": 5,
+   "lesson": "L1804",
+   "isExam": false
+  },
+  "L1805": {
+   "title": "エンドースメントとデータカタログ",
+   "count": 5,
+   "lesson": "L1805",
+   "isExam": false
+  },
+  "L1901": {
+   "title": "Fabric の全体像",
+   "count": 5,
+   "lesson": "L1901",
+   "isExam": false
+  },
+  "L1902": {
+   "title": "OneLake と Lakehouse",
+   "count": 5,
+   "lesson": "L1902",
+   "isExam": false
+  },
+  "L1903": {
+   "title": "Warehouse・Notebook・パイプライン",
+   "count": 5,
+   "lesson": "L1903",
+   "isExam": false
+  },
+  "L1904": {
+   "title": "Direct Lake",
+   "count": 5,
+   "lesson": "L1904",
+   "isExam": false
+  },
+  "L1905": {
+   "title": "容量管理とコスト",
+   "count": 5,
+   "lesson": "L1905",
+   "isExam": false
+  },
   "L2001": {
    "title": "AIビジュアルを正しく使う",
    "count": 5,
@@ -527,6 +725,36 @@
    "title": "レビューと改善",
    "count": 5,
    "lesson": "L2105",
+   "isExam": false
+  },
+  "L2201": {
+   "title": "要件定義",
+   "count": 5,
+   "lesson": "L2201",
+   "isExam": false
+  },
+  "L2202": {
+   "title": "KPIツリーの設計",
+   "count": 5,
+   "lesson": "L2202",
+   "isExam": false
+  },
+  "L2203": {
+   "title": "データ品質とデータ契約",
+   "count": 5,
+   "lesson": "L2203",
+   "isExam": false
+  },
+  "L2204": {
+   "title": "導入と定着",
+   "count": 5,
+   "lesson": "L2204",
+   "isExam": false
+  },
+  "L2205": {
+   "title": "効果測定とキャリア",
+   "count": 5,
+   "lesson": "L2205",
    "isExam": false
   }
  }
