@@ -1,5 +1,5 @@
 /**
- * Power BI Mastery — アクセス/学習ログ収集 API
+ * Aki’s Power BI 道場 — アクセス/学習ログ収集 API
  * Cloudflare Workers + D1
  *
  *  POST /collect          … サイトからのイベント受信（認証不要・公開）

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>クイズ | Power BI Mastery</title>
+<title>クイズ | Aki’s Power BI 道場</title>
 <link rel="icon" href="assets/img/favicon.svg">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/search.css">
@@ -41,7 +41,7 @@
     return;
   }
   const lesson = quiz.lesson ? c.lessonById[quiz.lesson] : null;
-  document.title = quiz.title + " | Power BI Mastery";
+  document.title = quiz.title + " | Aki’s Power BI 道場";
   head.innerHTML =
     (lesson ? '<p class="small muted"><a href="lesson.html?id=' + lesson.id + '">← ' + PBM.esc(lesson.title) + "</a></p>" : "") +
     '<h1 style="font-size:22px;margin:8px 0 4px">' + PBM.esc(quiz.title) + "</h1>" +

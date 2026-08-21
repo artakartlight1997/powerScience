@@ -2,7 +2,7 @@
    サイト設定 — ここだけ編集すれば動作を切り替えられます
    ============================================================ */
 window.PBM_CONFIG = {
-  siteName: "Power BI Mastery",
+  siteName: "Aki’s Power BI 道場",
 
   /* 学習ログ / アクセス統計の収集先（Cloudflare Worker のURL）
      空文字のままなら計測は完全に無効（何も送信しません）。

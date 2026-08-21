@@ -1,5 +1,5 @@
 # ============================================================
-#  Power BI Mastery — 計測バックエンド (Cloudflare Workers + D1)
+#  Aki’s Power BI 道場 — 計測バックエンド (Cloudflare Workers + D1)
 #
 #  セットアップ:
 #    npm install -g wrangler

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Power BI Mastery — Design System
+   Aki’s Power BI 道場 — Design System
    モバイルファースト / ライト・ダーク両対応
    ========================================================================== */
 
@@ -110,7 +110,8 @@ a:hover { opacity: .82; }
 .brand-mark {
   width: 26px; height: 26px; border-radius: 7px; flex: none;
   background: linear-gradient(135deg, var(--accent), #f7a800);
-  display: grid; place-items: center; color: #3d3200; font-weight: 900; font-size: 13px;
+  display: grid; place-items: center; color: #3d3200; font-weight: 900; font-size: 15px;
+  line-height: 1;  /* 漢字1文字を中央に置くため */
 }
 .nav { display: none; gap: 2px; }
 @media (min-width: 860px) { .nav { display: flex; } }

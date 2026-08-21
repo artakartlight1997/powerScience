@@ -177,7 +177,7 @@
     header.innerHTML =
       '<div class="wrap">' +
         '<a class="brand" href="' + PBM.url("index.html") + '">' +
-          '<span class="brand-mark">P</span><span>' + (CFG.siteName || "Power BI Mastery") + "</span>" +
+          '<span class="brand-mark">道</span><span>' + (CFG.siteName || "Aki’s Power BI 道場") + "</span>" +
         "</a>" +
         '<nav class="nav">' +
           NAV.map(([h, t]) => '<a href="' + PBM.url(h) + '"' + (h === here ? ' aria-current="page"' : "") + ">" + t + "</a>").join("") +
@@ -209,7 +209,7 @@
     footer.className = "site-footer";
     footer.innerHTML =
       '<div class="wrap">' +
-        "<p>" + (CFG.siteName || "Power BI Mastery") +
+        "<p>" + (CFG.siteName || "Aki’s Power BI 道場") +
         " — PL-300 合格までの学習ロードマップ。学習進捗はお使いのブラウザ内(localStorage)に保存されます。</p>" +
         '<p class="small">Power BI は Microsoft Corporation の商標です。本サイトは非公式の学習教材です。' +
         ' 内容は学習用に要約しています。仕様は変わるため、受験前に必ず ' +

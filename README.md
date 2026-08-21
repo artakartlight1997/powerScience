@@ -1,4 +1,4 @@
-# Power BI Mastery
+# Aki’s Power BI 道場
 
 Power BI を **初級 → 中級 → 上級 → プロ** の4段階で学び、
 **PL-300（Microsoft Power BI Data Analyst）合格**と**現場で通用する実力**の両方に届くための学習サイトです。

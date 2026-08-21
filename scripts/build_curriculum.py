@@ -344,7 +344,7 @@ def build():
     today = datetime.date.today().isoformat()
     curriculum = {
         "meta": {
-            "title": "Power BI Mastery",
+            "title": "Aki’s Power BI 道場",
             "subtitle": "初学者からPL-300認定合格・実務のプロへ",
             "version": VERSION,
             "targetExam": "PL-300",
