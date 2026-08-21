@@ -128,6 +128,10 @@ for path in sorted(glob.glob(os.path.join(C, "lessons", "*.md"))):
         fig_types[t] += 1
         if t not in FIGURE_TYPES:
             err("%s: 未知の図の種類 '%s'" % (name, t))
+        # 図の中の文字はエスケープして描画するため Markdown が効かない。
+        # ** を書くとそのまま画面に出てしまう。
+        if "**" in raw:
+            err("%s: 図の中に ** があります。太字は効かないので「」で強調してください" % name)
         if t == "interactive":
             w = cfg.get("widget")
             if w not in WIDGETS:
@@ -152,8 +156,12 @@ for path in sorted(glob.glob(os.path.join(C, "labs", "LAB*.md"))):
     s = io.open(path, encoding="utf-8").read()
     if "```mermaid" in s:
         err("%s: Mermaid は廃止されました" % name)
+    if s.lstrip().startswith("# "):
+        err("%s: 本文に H1 を書かないでください（タイトルは自動表示）" % name)
     for raw in re.findall(r"```figure\s*\n(.*?)```", s, re.S):
         fig_count += 1
+        if "**" in raw:
+            err("%s: 図の中に ** があります。太字は効かないので「」で強調してください" % name)
         try:
             cfg = json.loads(raw)
             fig_types[cfg.get("type")] += 1

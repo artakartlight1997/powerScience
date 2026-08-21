@@ -28,9 +28,7 @@ jobs:
       - name: Test analytics worker
         run: node worker/test/worker.test.mjs
 
-      # 圧縮作業が完了するまでは結果を表示するだけ（デプロイは止めない）
       - name: Check reading volume (v3 density rules)
-        continue-on-error: true
         run: |
           python3 scripts/check_density.py
           python3 scripts/check_density.py --labs
