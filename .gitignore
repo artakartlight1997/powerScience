@@ -2,3 +2,6 @@ node_modules/
 .preview/
 *.log
 .DS_Store
+
+# 動作確認用の一時ページ（docs/ に置くと GitHub Pages に公開されてしまう）
+docs/_*.html

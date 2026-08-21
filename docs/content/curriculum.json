@@ -10,7 +10,7 @@
       "modules": 22,
       "lessons": 118,
       "labs": 12,
-      "figures": 1706,
+      "figures": 1715,
       "lessonsWritten": 118,
       "modulesPlanned": 22,
       "lessonsPlanned": 118
@@ -4593,7 +4593,7 @@
       "level": "T4",
       "order": 93,
       "hasBody": true,
-      "figures": 13
+      "figures": 20
     },
     {
       "id": "L1801",
@@ -5451,7 +5451,7 @@
       "level": "T4",
       "order": 112,
       "hasBody": true,
-      "figures": 14
+      "figures": 16
     },
     {
       "id": "L2105",
