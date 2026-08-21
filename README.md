@@ -91,37 +91,40 @@ python3 scripts/check_density.py --top 20 # 読む文字が多い順
   有効にすると `https://<ユーザー名>.github.io/<リポジトリ名>/` で誰でも閲覧できます。
 - Markdown（`README.md` など）は github.com 上でそのまま読めます。
 
-### 公開手順（5分）
+### 公開手順（3分）
 
-**方法A：ブランチから公開（もっとも簡単）**
-
-1. リポジトリの **Settings → Pages**
-2. Source を **Deploy from a branch**
-3. Branch を `main`、フォルダを **`/docs`** に設定して Save
+1. リポジトリの **Settings → Pages** を開く
+2. Source を **Deploy from a branch** にする
+3. Branch を **`main`**、フォルダを **`/docs`** に設定して **Save**
 
 数分後に `https://<ユーザー名>.github.io/<リポジトリ名>/` で公開されます。
+以降は `main` に push するだけで自動的に反映されます。
 
-**方法B：GitHub Actions で公開（検証つき・推奨）**
-
-1. **Settings → Pages** の Source を **GitHub Actions** に設定
-2. `main` へ push すると `.github/workflows/pages.yml` が動きます
-
-> **最初の1回だけ、あなたの操作が必要です。**
-> ワークフローには `configure-pages` の `enablement: true` を入れてあり、
-> 可能な場合は Pages を自動で有効化します。
-> ただし GitHub Pages の有効化は**リポジトリ管理者の権限**が必要で、
+> **この設定だけは、あなたの操作が必要です。**
+> GitHub Pages の有効化はリポジトリ管理者の権限が必要で、
 > ワークフローの `GITHUB_TOKEN` では実行できません
-> （`Resource not accessible by integration` で失敗します）。
-> **Settings → Pages で Source を一度設定すれば、以降の公開は全自動です。**
+> （`Resource not accessible by integration` で拒否されます）。
 
-Actions では、デプロイ前に次を実行します。
+`docs/.nojekyll` を置いてあるため、Jekyll による変換は行われず、
+HTML / CSS / JS / JSON はそのまま配信されます。
 
-- カリキュラム・用語集・クイズのインデックス生成
+### 検証ワークフローについて（任意）
+
+`.github/workflows/pages.yml` は**公開処理をしません**。
+`main` への push 時に、壊れたまま公開されていないかを検査するだけです。
+
+- カリキュラム・用語集・クイズ・検索インデックスの生成
 - 図(figure)のJSON検査
 - コンテンツ整合性チェック（リンク切れ・クイズの正解範囲・PL-300コードなど）
-- **本文の文字量チェック**（読む文字が多すぎる／図が少なすぎるレッスンを弾く）
+- 本文の文字量チェック（読む文字が多すぎる／図が少なすぎるレッスンを弾く）
 - 計測APIの単体テスト
 - Mermaid が混入していないかの確認
+- **生成物のコミット漏れの検出**（`docs/` をそのまま配信するため重要）
+
+> このリポジトリが public であれば **GitHub Actions は無料**です
+> （実行時間が課金されるのは private リポジトリのみ）。
+> それでも動かしたくない場合は、Actions タブでこのワークフローを Disable してください。
+> **公開はワークフローに依存していないので、止めてもサイトは出ます。**
 
 > 注意：`docs/content/curriculum.json` などは生成物です。
 > コンテンツを編集したら `python3 scripts/build_all.py` を実行してからコミットしてください。

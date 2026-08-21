@@ -1,20 +1,30 @@
-name: Deploy GitHub Pages
+name: Validate content
+
+# 公開は GitHub Pages の「Deploy from a branch」で行います
+#   Settings → Pages → Source: Deploy from a branch → Branch: main / フォルダ: /docs
+# main に push すれば GitHub が docs/ をそのまま配信します。
+# このワークフローは公開処理をせず、壊れたまま公開されていないかを検査するだけです。
+#
+# 注意: このリポジトリは public なので GitHub Actions の利用は無料です
+#       （実行時間の課金は private リポジトリのみ）。
+#       それでも動かしたくない場合は Actions タブでこのワークフローを Disable してください。
+#       公開はワークフローに依存していないので、止めてもサイトは出ます。
 
 on:
   push:
     branches: [main]
     paths:
       - 'docs/**'
+      - 'scripts/**'
+      - 'worker/**'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: validate-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -22,16 +32,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Build data files and validate content
         run: python3 scripts/build_all.py
 
       - name: Test analytics worker
         run: node worker/test/worker.test.mjs
-
-      - name: Check reading volume (v3 density rules)
-        run: |
-          python3 scripts/check_density.py
-          python3 scripts/check_density.py --labs
 
       - name: Check no Mermaid remains
         run: |
@@ -40,48 +46,14 @@ jobs:
           fi
           echo "OK: Mermaid は使われていません"
 
-      - name: Upload generated data
-        uses: actions/upload-artifact@v4
-        with:
-          name: generated-content
-          path: |
-            docs/content/curriculum.json
-            docs/content/pl300.json
-            docs/content/glossary/index.json
-            docs/content/quizzes/index.json
-          retention-days: 7
-
-  deploy:
-    needs: validate
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build data files
-        run: python3 scripts/build_all.py || true
-      # enablement: true を付けると、Settings → Pages を手で設定していなくても
-      # このワークフローが GitHub Pages を有効化しようとします。
-      # ただし GITHUB_TOKEN に administration 権限がない場合は
-      # 「Resource not accessible by integration」で失敗します。
-      # そのときは下の案内のとおり、一度だけ手で有効化してください。
-      - id: pages
-        uses: actions/configure-pages@v5
-        continue-on-error: true
-        with:
-          enablement: true
-
-      - name: GitHub Pages が有効になっているか確認する
-        if: steps.pages.outcome == 'failure'
+      - name: Check generated files are committed
         run: |
-          echo "::error title=GitHub Pages が有効になっていません::"
-          echo "リポジトリの Settings -> Pages を開き、Source を 'GitHub Actions' に設定してください。"
-          echo "この操作はリポジトリの管理者のみが実行できます（ワークフローの権限では変更できません）。"
-          echo "設定後、このワークフローを再実行すれば公開されます。"
-          exit 1
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          # docs/ をそのまま配信するため、生成物がコミット漏れだと
+          # 古いカリキュラムが公開されてしまう
+          if ! git diff --quiet -- docs/content; then
+            echo "::error::生成物がコミットされていません。"
+            echo "ローカルで python3 scripts/build_all.py を実行し、docs/content の差分をコミットしてください。"
+            git diff --stat -- docs/content
+            exit 1
+          fi
+          echo "OK: 生成物は最新です"
