@@ -39,11 +39,32 @@ LAB_LIM = dict(LIM, read=2800, prose=800, code_lines=110,
 FENCE = re.compile(r"```.*?```", re.S)
 
 
+def split_fences(src):
+    """行単位でフェンスを走査し、(図の中身, コードの中身, フェンス外の本文) に分ける。
+
+    正規表現でフェンスを取ると、図ブロックの閉じフェンスから
+    次の開きフェンスまでを「コード」と誤認してしまうため、行で数える。
+    """
+    figs, code, body = [], [], []
+    lang, buf = None, []
+    for ln in src.split("\n"):
+        if ln.lstrip().startswith("```"):
+            if lang is None:                      # 開き
+                lang = ln.lstrip()[3:].strip().lower()
+                buf = []
+            else:                                 # 閉じ
+                (figs if lang == "figure" else code).append("\n".join(buf))
+                lang, buf = None, []
+            continue
+        (buf if lang is not None else body).append(ln)
+    if lang is not None:                          # 閉じ忘れ
+        (figs if lang == "figure" else code).append("\n".join(buf))
+    return figs, code, "\n".join(body)
+
+
 def analyze(path):
     src = io.open(path, encoding="utf-8").read()
-    figs = re.findall(r"```figure\s*\n.*?```", src, re.S)
-    code = re.findall(r"```(?!figure)[\s\S]*?```", src)
-    body = FENCE.sub("", src)
+    figs, code, body = split_fences(src)
 
     prose = bullets = tables = quotes = 0
     paragraphs, run, max_run = [], 0, 0
@@ -68,7 +89,7 @@ def analyze(path):
         "read": prose + bullets + tables + quotes,
         "prose": prose, "bullets": bullets, "tables": tables, "quotes": quotes,
         "callouts": len(re.findall(r"^>\s*\[!", body, re.M)),
-        "code_lines": sum(len(c.split("\n")) for c in code),
+        "code_lines": sum(len(c.split("\n")) for c in code if c.strip()),
         "figs": len(figs),
         "para": max((len(p) for p in paragraphs), default=0),
         "run": max_run,

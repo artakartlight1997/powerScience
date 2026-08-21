@@ -420,8 +420,12 @@
     if (!code) throw new Error("formula には code が必要です");
     var parts = arr(cfg.parts);
     var sp = splitFormula(code, parts);
-    var out = '<div class="fm">';
-    if (cfg.lang) out += '<div class="fm-lang">' + esc(cfg.lang) + "</div>";
+    // 図に注釈番号を振ると本文がそのままコピーできなくなるため、
+    // 元の式を data 属性に持たせて「コピー」ボタンから取り出せるようにする。
+    var out = '<div class="fm" data-code="' + esc(code) + '">';
+    out += '<div class="fm-bar">' +
+      (cfg.lang ? '<span class="fm-lang">' + esc(cfg.lang) + "</span>" : "<span></span>") +
+      '<button type="button" class="fm-copy">コピー</button></div>';
     out += '<div class="fm-code"><code>';
     sp.segs.forEach(function (s) {
       if (s.part < 0) { out += esc(s.text); return; }
@@ -1130,6 +1134,39 @@
       fig.classList.add("is-in");
     }
     bindFormula(el);
+    bindFormulaCopy(el);
+  }
+
+  /* ---------- formula：式をそのままコピーできるようにする ---------- */
+  function bindFormulaCopy(el) {
+    el.querySelectorAll(".fm-copy").forEach(function (btn) {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = "1";
+      btn.addEventListener("click", function () {
+        var fm = btn.closest(".fm");
+        var code = fm ? fm.getAttribute("data-code") || "" : "";
+        if (!code) return;
+        var done = function (ok) {
+          btn.textContent = ok ? "コピーしました" : "コピーできません";
+          setTimeout(function () { btn.textContent = "コピー"; }, 1400);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(function () { done(true); }, function () { done(false); });
+          return;
+        }
+        /* clipboard API が使えない環境（古いブラウザ / http）向けの代替 */
+        var ta = document.createElement("textarea");
+        ta.value = code;
+        ta.setAttribute("readonly", "");
+        ta.style.cssText = "position:fixed;top:-1000px;left:0;opacity:0";
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+        document.body.removeChild(ta);
+        done(ok);
+      });
+    });
   }
 
   /* ---------- formula：ホバー連動 + 連結線 ---------- */

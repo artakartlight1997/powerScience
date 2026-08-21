@@ -54,6 +54,10 @@
       en: raw.en ? String(raw.en) : "",
       reading: String(raw.reading || raw.yomi || term).trim(),
       short: raw.short ? String(raw.short) : "",
+      // plain: 予備知識ゼロの人向けの、たとえ話まじりの説明（統計・データサイエンス用語に付ける）
+      plain: raw.plain ? String(raw.plain) : "",
+      // figure: 用語集カードに描画する図（AUTHORING_SPEC の figure と同じ形式）
+      figure: raw.figure && typeof raw.figure === "object" ? raw.figure : null,
       desc: raw.desc ? String(raw.desc) : "",
       lesson: raw.lesson || null,
       tags: tags,
@@ -339,7 +343,9 @@
       '<div class="gl-pop-head"><span class="gl-pop-term">' + esc(entry.term) + "</span>" +
       (entry.en ? '<span class="gl-pop-en">' + esc(entry.en) + "</span>" : "") + "</div>" +
       (entry.short ? '<p class="gl-pop-short">' + esc(entry.short) + "</p>" : "") +
+      (entry.plain ? '<p class="gl-pop-plain"><span class="k">かんたんに言うと</span>' + esc(entry.plain) + "</p>" : "") +
       (entry.desc ? '<p class="gl-pop-desc">' + esc(entry.desc) + "</p>" : "") +
+      (entry.figure ? '<p class="gl-pop-hasfig">図で見る → 用語集ページへ</p>' : "") +
       (entry.tags.length
         ? '<div class="gl-pop-tags">' + entry.tags.map((t) => '<span class="gl-tag">' + esc(t) + "</span>").join("") + "</div>"
         : "") +

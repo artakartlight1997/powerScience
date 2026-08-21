@@ -1,5 +1,5 @@
 {
- "count": 623,
+ "count": 663,
  "sources": [
   "M00",
   "M01",
@@ -19,6 +19,8 @@
   "M15",
   "M16",
   "M17",
+  "M18",
+  "M19",
   "M20",
   "M21",
   "M22"
@@ -31,17 +33,19 @@
   "運用",
   "可視化",
   "データ品質",
+  "データ基盤",
   "分析",
   "基礎",
-  "データ基盤",
+  "ガバナンス",
   "Power Query",
   "実務",
+  "Fabric",
   "性能",
-  "ガバナンス",
   "コンテキスト",
   "整形",
   "時系列",
   "AI",
+  "セキュリティ",
   "エンジン",
   "設計",
   "指標",
@@ -49,14 +53,13 @@
   "機械学習",
   "データエンジニアリング",
   "資格",
-  "セキュリティ",
   "ツール",
-  "要件定義",
   "結合",
   "集計",
   "予測",
   "配色",
   "可視化理論",
+  "要件定義",
   "権限",
   "対話",
   "画面",
@@ -65,22 +68,26 @@
   "理論",
   "増分更新",
   "導入",
+  "データマネジメント",
   "伝達",
   "レポート",
   "効果測定",
   "レイアウト",
   "階層",
   "タイムインテリジェンス",
+  "品質保証",
   "組織",
   "経営",
   "分析手法",
   "顧客分析",
+  "開発",
+  "ソース管理",
+  "接続方式",
   "製品",
   "ライセンス",
   "データフロー",
   "UX",
   "品質",
-  "データマネジメント",
   "ストレージ",
   "KPI",
   "レビュー",
@@ -100,6 +107,7 @@
   "診断",
   "再利用",
   "プロジェクト",
+  "最適化",
   "計算",
   "配布",
   "異常検知",
@@ -191,6 +199,27 @@
    "tier": "T3",
    "moduleTitle": "高度なデータ整形",
    "lessonTitle": "増分更新 — 大規模ファクトを現実的に運用する"
+  },
+  {
+   "term": "DirectQueryフォールバック",
+   "en": "DirectQuery fallback",
+   "reading": "だいれくとくえりふぉーるばっく",
+   "short": "Direct Lakeで読めない条件のとき、自動的にDirectQueryへ切り替わる挙動。",
+   "desc": "主な原因は容量のメモリ上限超過、Deltaテーブル側の制約、ビューの参照など。エラーも警告も出ず結果も正しいため「なんとなく遅い」としか認識されない。開発中は禁止設定にして問題を表面化させ、本番では許可に戻す運用が実務的。",
+   "lesson": "L1904",
+   "tags": [
+    "Fabric",
+    "接続方式"
+   ],
+   "aliases": [
+    "フォールバック",
+    "fallback"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "Direct Lake — インポートとDirectQueryの第三の道"
   },
   {
    "term": "SAMEPERIODLASTYEAR",
@@ -331,6 +360,27 @@
    "tier": "T4",
    "moduleTitle": "高度な分析とAI",
    "lessonTitle": "予測モデルをBIに載せる — スコアリング結果の運用"
+  },
+  {
+   "term": "Fabric Warehouse",
+   "en": "Fabric Warehouse",
+   "reading": "ふぁぶりっくうぇあはうす",
+   "short": "T-SQLで読み書きできるFabricのウェアハウス。OneLake上にDeltaで保存される。",
+   "desc": "INSERT/UPDATE/DELETE、マルチテーブルトランザクション、ストアドプロシージャ、ビューが使える。既存のSQL資産と人材をそのまま活かせるため、SQL中心のチームではLakehouseより保守しやすい。保存先はLakehouseと同じOneLakeのDeltaテーブルであり、Power BIからはどちらもDirect Lakeで読める。",
+   "lesson": "L1903",
+   "tags": [
+    "Fabric",
+    "データ基盤"
+   ],
+   "aliases": [
+    "Warehouse",
+    "ウェアハウス"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "Warehouse・Notebook・パイプライン"
   },
   {
    "term": "Microsoft Fabric",
@@ -873,6 +923,27 @@
    "lessonTitle": "集計関数を使いこなす — SUM・COUNT・DISTINCTCOUNT"
   },
   {
+   "term": "Data Pipeline",
+   "en": "Data Pipeline",
+   "reading": "でーたぱいぷらいん",
+   "short": "いつ・何を・どの順で動かすかを制御するFabricのオーケストレーション機能。",
+   "desc": "変換そのものではなく制御を担当し、Notebook・Dataflow Gen2・ストアドプロシージャを起動する。冪等性・失敗時の挙動の明示・パラメータによる環境切替・失敗通知・実行ログの5点を設計する。階層に分けると部分的な再実行ができる。",
+   "lesson": "L1903",
+   "tags": [
+    "Fabric",
+    "データ基盤"
+   ],
+   "aliases": [
+    "パイプライン",
+    "pipeline"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "Warehouse・Notebook・パイプライン"
+  },
+  {
    "term": "Dataflow Gen2",
    "en": "Dataflow Gen2",
    "reading": "でーたふろーじぇんつー",
@@ -1126,6 +1197,26 @@
    "tier": "T2",
    "moduleTitle": "DAXコンテキスト",
    "lessonTitle": "行コンテキストとは何か — 2つの文脈を区別する"
+  },
+  {
+   "term": "SQL分析エンドポイント",
+   "en": "SQL analytics endpoint",
+   "reading": "えすきゅーえるぶんせきえんどぽいんと",
+   "short": "LakehouseのTablesに対して自動提供される読み取り専用のT-SQLインターフェース。",
+   "desc": "SQLしか書けない人でもLakehouseのデータを読める。ただし書き込みはできないため、T-SQLで更新したい場合はWarehouseを使う。またこの経路で保管層に直接到達できるため、セマンティックモデルのRLSとは別に、保管層側のアクセス制御を設計する必要がある。",
+   "lesson": "L1902",
+   "tags": [
+    "Fabric"
+   ],
+   "aliases": [
+    "SQLエンドポイント",
+    "SQL analytics endpoint"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "OneLake と Lakehouse — データを1か所に置く"
   },
   {
    "term": "Table.Buffer",
@@ -1423,6 +1514,27 @@
    "lessonTitle": "フィルターはどう流れるか — 伝播を図で追う"
   },
   {
+   "term": "Direct Lake",
+   "en": "Direct Lake",
+   "reading": "だいれくとれいく",
+   "short": "OneLake上のDeltaテーブルを直接読む、インポートとDirectQueryに次ぐ第三の接続方式。",
+   "desc": "データのコピーを持たず、クエリが使う列だけをメモリに載せる。一度載れば以降はインポート相当の速度になる。Parquetの列指向構造がVertiPaqが読める形に近いため、変換コストが小さいことが速さの理由。Fabric容量とOneLake上のDeltaテーブルが前提となる。",
+   "lesson": "L1904",
+   "tags": [
+    "Fabric",
+    "接続方式"
+   ],
+   "aliases": [
+    "ダイレクトレイク",
+    "Direct Lake モード"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "Direct Lake — インポートとDirectQueryの第三の道"
+  },
+  {
    "term": "DirectQuery",
    "en": "DirectQuery",
    "reading": "だいれくとくえり",
@@ -1582,6 +1694,26 @@
    "tier": "T1",
    "moduleTitle": "データの読み込み入門",
    "lessonTitle": "Excel・CSV・Web・データベースへの接続"
+  },
+  {
+   "term": "ゴールデンデータセット",
+   "en": "Golden dataset",
+   "reading": "ごーるでんでーたせっと",
+   "short": "計算テストのために固定した、手計算可能な規模の検証用データ。",
+   "desc": "数十行程度の変更しないデータと、人が計算した期待値をセットで用意する。データがない期間・ゼロ除算・マイナス値・キー欠損・期間境界・総計行といった境界条件を必ず含める。リリースのたびに再実行することで回帰テストとして機能する。",
+   "lesson": "L1803",
+   "tags": [
+    "品質保証"
+   ],
+   "aliases": [
+    "golden dataset",
+    "検証用データセット"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "テストと品質保証 — BIにおけるテストとは何か"
   },
   {
    "term": "シーケンシャルパレット",
@@ -1928,6 +2060,27 @@
    "lessonTitle": "計測する — パフォーマンスアナライザーとDAX Studio"
   },
   {
+   "term": "Delta Lake",
+   "en": "Delta Lake",
+   "reading": "でるたれいく",
+   "short": "Parquetにトランザクションログを添えたオープンテーブルフォーマット。",
+   "desc": "素のParquetが持つ列指向・高圧縮に加え、ACIDトランザクション、UPDATE/DELETE/MERGE、過去バージョンの参照（time travel）、スキーマ変更履歴を提供する。更新中の読み取りで不整合が起きず、冪等な取り込みが自然に書け、障害調査で「昨日は正しかった」を実際に確認できる。",
+   "lesson": "L1902",
+   "tags": [
+    "データ基盤"
+   ],
+   "aliases": [
+    "Delta",
+    "デルタレイク",
+    "Deltaテーブル"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "OneLake と Lakehouse — データを1か所に置く"
+  },
+  {
    "term": "ウォーターフォール図",
    "en": "Waterfall chart",
    "reading": "うぉーたーふぉーるず",
@@ -1963,6 +2116,26 @@
    "tier": "T3",
    "moduleTitle": "高度なデータ整形",
    "lessonTitle": "増分更新 — 大規模ファクトを現実的に運用する"
+  },
+  {
+   "term": "オーケストレーション",
+   "en": "Orchestration",
+   "reading": "おーけすとれーしょん",
+   "short": "複数の処理の実行順序と依存関係を制御すること。",
+   "desc": "時刻をずらすのは制御ではなく祈りであり、上流が遅延した日に下流が前日のデータで更新される。完了イベントで次を起動する形にする。設計原則はDAGで依存を表現する・タスクを小さく保つ・状態を外部に持つ・リトライは冪等性とセットにする、の4点。",
+   "lesson": "L1903",
+   "tags": [
+    "データ基盤"
+   ],
+   "aliases": [
+    "orchestration",
+    "処理の順序制御"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "Warehouse・Notebook・パイプライン"
   },
   {
    "term": "カテゴリカルパレット",
@@ -2233,6 +2406,26 @@
    "lessonTitle": "レビューと改善 — 使われるレポートにする"
   },
   {
+   "term": "リコンシリエーション",
+   "en": "Reconciliation",
+   "reading": "りこんしりえーしょん",
+   "short": "BIの数字と他システムの数字を突合し、差異の原因を層ごとに切り分ける作業。",
+   "desc": "差異が出たときBI側が疑われがちだが、実際には両者の定義が違う（会計は計上日、販売は出荷日など）ことが最も多い。ソース・取り込み・変換・モデル・メジャーの各層で件数と合計を確認し、どこでずれたかを特定してから議論する。",
+   "lesson": "L1803",
+   "tags": [
+    "品質保証"
+   ],
+   "aliases": [
+    "突合",
+    "reconciliation"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "テストと品質保証 — BIにおけるテストとは何か"
+  },
+  {
    "term": "ワークスペースロール",
    "en": "Workspace role",
    "reading": "わーくすぺーすろーる",
@@ -2251,6 +2444,27 @@
    "tier": "T2",
    "moduleTitle": "共有と運用",
    "lessonTitle": "ワークスペースとロール — 権限設計の基本"
+  },
+  {
+   "term": "容量メトリックアプリ",
+   "en": "Fabric Capacity Metrics app",
+   "reading": "ようりょうめとりっくあぷり",
+   "short": "容量の使用状況とスロットリングを可視化する公式アプリ。",
+   "desc": "タイムラインで全体を見て、該当時刻の内訳からどのワークスペース・どのアイテムが消費しているかを降順で確認し、操作の種類と実行者を特定する。その場の停止だけでなく、同じことが起きない配置へ是正するところまでが調査の完了となる。",
+   "lesson": "L1905",
+   "tags": [
+    "Fabric",
+    "運用"
+   ],
+   "aliases": [
+    "Capacity Metrics",
+    "キャパシティメトリック"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "容量管理とコスト — CU・スロットリング・監視"
   },
   {
    "term": "行レベルセキュリティ",
@@ -2386,6 +2600,27 @@
    "lessonTitle": "役割の異なる日付（USERELATIONSHIP）と複数ファクト"
   },
   {
+   "term": "Lakehouse",
+   "en": "Lakehouse",
+   "reading": "れいくはうす",
+   "short": "OneLake上にデータを置くアイテム。FilesとTablesの2領域を持つ。",
+   "desc": "Filesには任意形式の生ファイル（ブロンズ層相当）、TablesにはDeltaテーブル（シルバー・ゴールド層相当）を置く。TablesにはSQL分析エンドポイントが自動で提供されるが読み取り専用で、書き込みにはNotebook・パイプライン・Warehouseを使う。Sparkが主役でPython/Scala/SQLが扱える。",
+   "lesson": "L1902",
+   "tags": [
+    "Fabric",
+    "データ基盤"
+   ],
+   "aliases": [
+    "レイクハウス",
+    "Fabric Lakehouse"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "OneLake と Lakehouse — データを1か所に置く"
+  },
+  {
    "term": "Q&Aセットアップ",
    "en": "Q&A setup",
    "reading": "きゅーあんどえーせっとあっぷ",
@@ -2445,6 +2680,27 @@
    "tier": "T4",
    "moduleTitle": "デザインとストーリーテリング",
    "lessonTitle": "データストーリーテリング — 数字を物語にする"
+  },
+  {
+   "term": "アクティビティログ",
+   "en": "Activity log",
+   "reading": "あくてぃびてぃろぐ",
+   "short": "テナント全体の操作記録。誰が・いつ・何を・どこからしたかを残す。",
+   "desc": "閲覧・共有・削除・エクスポート・設定変更などを記録する。保持期間に上限があるため、日次で取得して自前で長期保存する仕組みが必要。事故が起きてから遡ろうとしても取得できないため、保険と同様、必要になる前に用意しておかなければならない。",
+   "lesson": "L1804",
+   "tags": [
+    "セキュリティ",
+    "ガバナンス"
+   ],
+   "aliases": [
+    "監査ログ",
+    "activity log"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "監査・秘密度ラベル・データ保護"
   },
   {
    "term": "アンスコムの四重奏",
@@ -2733,6 +2989,27 @@
     "データ洗浄"
    ],
    "source": "M00"
+  },
+  {
+   "term": "データスチュワード",
+   "en": "Data steward",
+   "reading": "でーたすちゅわーど",
+   "short": "自ドメインの指標定義・品質・認定・廃止に責任を持つ役割。",
+   "desc": "専任である必要はなく、業務部門の担当者が兼務するのが一般的。定義の管理、品質の監視、問い合わせの一次対応、認定の推薦、廃止の判断、変更の周知を担う。特に廃止の判断はBIチームには下せないため、この役割が不可欠になる。",
+   "lesson": "L1805",
+   "tags": [
+    "データマネジメント",
+    "ガバナンス"
+   ],
+   "aliases": [
+    "data steward",
+    "データ管理責任者"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "エンドースメントとデータカタログ — 信頼できる数字を1つにする"
   },
   {
    "term": "データパイプライン",
@@ -3148,6 +3425,27 @@
    "tier": "T3",
    "moduleTitle": "高度なデータ整形",
    "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
+  },
+  {
+   "term": "Notebook",
+   "en": "Notebook",
+   "reading": "のーとぶっく",
+   "short": "Python・Scala・Spark SQLで変換処理を書くFabricのアイテム。",
+   "desc": "数億行の結合、複雑な履歴化、半構造化データの展開、外部API取得、機械学習の前処理といった、他の手段では書きにくい処理に向く。ただしSparkはセッション起動に時間がかかるため、小さい処理を多数に分けると起動待ちが支配的になり、かえって遅くCU消費も増える。",
+   "lesson": "L1903",
+   "tags": [
+    "Fabric",
+    "データ基盤"
+   ],
+   "aliases": [
+    "ノートブック",
+    "Fabric Notebook"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "Warehouse・Notebook・パイプライン"
   },
   {
    "term": "PATHITEM",
@@ -4184,6 +4482,26 @@
    "lessonTitle": "データ・情報・知識・意思決定の階段"
   },
   {
+   "term": "DLPポリシー",
+   "en": "Data Loss Prevention policy",
+   "reading": "でぃーえるぴーぽりしー",
+   "short": "機密情報の検出条件と、検出時のアクションを定めた規則。",
+   "desc": "秘密度ラベルや機密情報の種類（カード番号のパターンなど）を条件に、通知・アラート・共有のブロックといったアクションを自動で実行する。パターンで見つかる機密には強いが、文脈依存の機密は検出できないため、自動検出とデータスチュワードによる確定の2段階が現実解となる。",
+   "lesson": "L1804",
+   "tags": [
+    "セキュリティ"
+   ],
+   "aliases": [
+    "データ損失防止",
+    "DLP"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "監査・秘密度ラベル・データ保護"
+  },
+  {
    "term": "EARLIER",
    "en": "EARLIER",
    "reading": "あーりあ",
@@ -4199,6 +4517,27 @@
    "tier": "T2",
    "moduleTitle": "DAXコンテキスト",
    "lessonTitle": "行コンテキストとは何か — 2つの文脈を区別する"
+  },
+  {
+   "term": "OneLake",
+   "en": "OneLake",
+   "reading": "わんれいく",
+   "short": "Fabricテナントに1つだけ存在するデータレイク。全ワークロードが同じ場所を読み書きする。",
+   "desc": "「OneDrive for data」と説明される。作成も削除もせず最初から存在し、ワークスペースがフォルダー、アイテムがサブフォルダーに対応する。データはDelta Lake形式のオープンな形で保存されるため、Sparkからも T-SQL からも Power BI からも同じファイルを読める。",
+   "lesson": "L1902",
+   "tags": [
+    "Fabric",
+    "データ基盤"
+   ],
+   "aliases": [
+    "One Lake",
+    "ワンレイク"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "OneLake と Lakehouse — データを1か所に置く"
   },
   {
    "term": "RELATED",
@@ -4256,6 +4595,27 @@
    "tier": "T3",
    "moduleTitle": "高度なモデリング",
    "lessonTitle": "多対多とブリッジテーブル"
+  },
+  {
+   "term": "V-Order",
+   "en": "V-Order",
+   "reading": "ぶいおーだー",
+   "short": "Power BIのエンジンが読みやすい順序と圧縮でParquetを書くFabricの最適化。",
+   "desc": "Delta テーブルの書き込み時に適用され、Direct Lakeでのトランスコードを軽くする。既定では有効だが、大量書き込みでは書き込み速度を優先して無効化されている場合があり、Direct Lakeの性能が出ないときに確認すべき項目の1つになる。",
+   "lesson": "L1902",
+   "tags": [
+    "最適化",
+    "Fabric"
+   ],
+   "aliases": [
+    "V Order",
+    "Vオーダー"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "OneLake と Lakehouse — データを1か所に置く"
   },
   {
    "term": "Web に公開",
@@ -4454,6 +4814,27 @@
    "lessonTitle": "ファクトとディメンション — どう見分けるか"
   },
   {
+   "term": "ショートカット",
+   "en": "Shortcut",
+   "reading": "しょーとかっと",
+   "short": "データをコピーせず、別の場所のデータを自分のLakehouse内にあるかのように見せる仕組み。",
+   "desc": "参照先は他ワークスペースのLakehouse、ADLS Gen2、Amazon S3、Google Cloud Storageなど。保管費用が二重にならず、常に元データと一致する。共有ディメンションの配布に特に有効。ただし権限の委譲ではないため、参照先への権限がなければ読めない点に注意する。",
+   "lesson": "L1902",
+   "tags": [
+    "Fabric",
+    "データ基盤"
+   ],
+   "aliases": [
+    "OneLakeショートカット",
+    "shortcut"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "OneLake と Lakehouse — データを1か所に置く"
+  },
+  {
    "term": "スケールスコア",
    "en": "Scaled score",
    "reading": "すけーるすこあ",
@@ -4515,6 +4896,27 @@
    "lessonTitle": "条件付き書式・ツールチップ・スモールマルチプル"
   },
   {
+   "term": "スロットリング",
+   "en": "Throttling",
+   "reading": "すろっとりんぐ",
+   "short": "容量を使いすぎたときに段階的にかかる制限。",
+   "desc": "第1段階は対話操作の遅延、第2段階は対話操作の拒否、第3段階はバックグラウンド処理の拒否と進む。第1段階は「なんとなく遅い」だけで報告されないため、自動検知の仕組みを作ることが投資対効果として最も高い。",
+   "lesson": "L1905",
+   "tags": [
+    "Fabric",
+    "運用"
+   ],
+   "aliases": [
+    "throttling",
+    "調整"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "容量管理とコスト — CU・スロットリング・監視"
+  },
+  {
    "term": "ダッシュボード",
    "en": "Dashboard",
    "reading": "だっしゅぼーど",
@@ -4532,6 +4934,26 @@
    "tier": "T1",
    "moduleTitle": "Power BIの全体像",
    "lessonTitle": "ファイル形式と用語の整理"
+  },
+  {
+   "term": "チャージバック",
+   "en": "Chargeback",
+   "reading": "ちゃーじばっく",
+   "short": "容量の消費をワークスペース単位で部門に費用配賦すること。",
+   "desc": "実際に請求しなくても、「もし配賦したらいくらか」を示すだけで消費行動は変わる。使われていないレポートの整理や更新頻度の見直しが自発的に進むため、数字を見せることは指示するより強い効果を持つ。",
+   "lesson": "L1905",
+   "tags": [
+    "運用"
+   ],
+   "aliases": [
+    "chargeback",
+    "費用配賦"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "容量管理とコスト — CU・スロットリング・監視"
   },
   {
    "term": "テストセンター",
@@ -4744,6 +5166,27 @@
    "tier": "T4",
    "moduleTitle": "エンタープライズ アーキテクチャ",
    "lessonTitle": "データフローとレイクハウス — 変換をどこで行うか"
+  },
+  {
+   "term": "トランスコード",
+   "en": "Transcoding",
+   "reading": "とらんすこーど",
+   "short": "OneLake上のParquetを、Power BIのエンジンが扱える形へ変換してメモリに載せる処理。",
+   "desc": "Direct Lakeで列が初めて必要になったときに実行される。ParquetとVertiPaqがどちらも列指向で構造が近いため変換が軽く、V-Orderが適用されているとさらに軽くなる。逆に小ファイルが多いとオーバーヘッドが増え、初回応答が遅くなる。",
+   "lesson": "L1904",
+   "tags": [
+    "Fabric",
+    "最適化"
+   ],
+   "aliases": [
+    "transcoding",
+    "トランスコーディング"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "Direct Lake — インポートとDirectQueryの第三の道"
   },
   {
    "term": "ナチュラルキー",
@@ -5756,6 +6199,27 @@
    "lessonTitle": "データフローとETL設計 — 変換をどこに置くか"
   },
   {
+   "term": "スムージング",
+   "en": "Smoothing",
+   "reading": "すむーじんぐ",
+   "short": "CU消費を一定時間にわたって平準化して計上する仕組み。",
+   "desc": "バックグラウンド処理は長い期間に、対話操作は短い期間にならされる。瞬間的な超過で即座に止まらない利点がある一方、重い処理の影響が長時間続くため、原因と結果に時間差が生じる。夕方の1回の実行が翌朝の更新失敗を招く構図はここから生まれる。",
+   "lesson": "L1905",
+   "tags": [
+    "Fabric",
+    "運用"
+   ],
+   "aliases": [
+    "smoothing",
+    "平準化"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "容量管理とコスト — CU・スロットリング・監視"
+  },
+  {
    "term": "チャンピオン",
    "en": "Champion",
    "reading": "ちゃんぴおん",
@@ -5821,6 +6285,27 @@
    "tier": "T2",
    "moduleTitle": "DAX基礎",
    "lessonTitle": "DAXとは何か — Excelの数式と何が違うのか"
+  },
+  {
+   "term": "デプロイ規則",
+   "en": "Deployment rule",
+   "reading": "でぷろいきそく",
+   "short": "デプロイ時に接続先やパラメータ値を環境に応じて置換する設定。",
+   "desc": "データソース規則は接続先そのものを置換し、パラメータ規則はPower Queryのパラメータ値を置換する。規則はデプロイ先のステージに設定する。設定せずにデプロイすると開発環境の接続先のまま本番が動くため、エラーにならないまま誤ったデータが配信される最も危険な誤設定になる。",
+   "lesson": "L1801",
+   "tags": [
+    "運用"
+   ],
+   "aliases": [
+    "データソース規則",
+    "パラメータ規則",
+    "deployment rule"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "デプロイメントパイプラインと環境分離"
   },
   {
    "term": "データソース",
@@ -6122,6 +6607,27 @@
    "lessonTitle": "マージと追加 — 結合の種類を図で理解する"
   },
   {
+   "term": "フレーミング",
+   "en": "Framing",
+   "reading": "ふれーみんぐ",
+   "short": "Direct Lakeモデルが参照するDeltaのバージョンを確定させる操作。",
+   "desc": "Direct Lakeにおける「更新」の実体。データをコピーしないため数秒で終わり、容量の消費も小さい。ただし実行しなければ古いバージョンを見続けるため、「更新が不要」という理解は誤り。パイプラインのデータ更新完了後に明示的に実行する構成が確実である。",
+   "lesson": "L1904",
+   "tags": [
+    "Fabric",
+    "接続方式"
+   ],
+   "aliases": [
+    "framing",
+    "再フレーミング"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "Direct Lake — インポートとDirectQueryの第三の道"
+  },
+  {
    "term": "ブックマーク",
    "en": "Bookmark",
    "reading": "ぶっくまーく",
@@ -6230,6 +6736,27 @@
    "tier": "T2",
    "moduleTitle": "可視化の設計",
    "lessonTitle": "条件付き書式・ツールチップ・スモールマルチプル"
+  },
+  {
+   "term": "ミラーリング",
+   "en": "Mirroring",
+   "reading": "みらーりんぐ",
+   "short": "外部データベースの内容をOneLake上にほぼリアルタイムで複製し続ける機能。",
+   "desc": "SQL Database や Cosmos DB などの運用データベースを対象とし、基幹システムに分析クエリの負荷をかけずに済ませる。従来はDirectQueryで基幹を直接叩くか夜間バッチでコピーするかの2択だったところに、第3の選択肢を与える。",
+   "lesson": "L1902",
+   "tags": [
+    "Fabric",
+    "データ基盤"
+   ],
+   "aliases": [
+    "Fabric mirroring",
+    "データベースミラーリング"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "OneLake と Lakehouse — データを1か所に置く"
   },
   {
    "term": "モデルビュー",
@@ -6480,21 +7007,21 @@
    "term": "受け入れ基準",
    "en": "Acceptance criteria",
    "reading": "うけいれきじゅん",
-   "short": "要件が満たされたかを誰でも判定できる形で書いた条件。",
-   "desc": "性能要件（3秒以内）、鮮度要件（月曜8:00時点で前週日曜まで反映）、セキュリティ要件（RLSで担当分のみ）を必ず含める。この3つは後から追加するとモデル設計のやり直しになる。",
-   "lesson": "L2201",
+   "short": "何が満たされたら完成かを、誰が見ても同じ合否になる形で定義したもの。",
+   "desc": "要件定義の時点で書く。「正確であること」ではなく「経理課の担当者が会計システムの月次帳票と突合して差異0.5%以内であることを確認する」のように、誰が・何を・どうやって確認するかを含める。ここまで書くとテストの実施者と手順が自動的に決まる。",
+   "lesson": "L1803",
    "tags": [
-    "要件定義"
+    "品質保証"
    ],
    "aliases": [
-    "完了の定義",
-    "acceptance criteria"
+    "acceptance criteria",
+    "受入基準"
    ],
-   "source": "M22",
-   "module": "M22",
+   "source": "M18",
+   "module": "M18",
    "tier": "T4",
-   "moduleTitle": "現場で価値を出す",
-   "lessonTitle": "要件定義 — 「ダッシュボードが欲しい」の裏を聞く"
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "テストと品質保証 — BIにおけるテストとは何か"
   },
   {
    "term": "固定小数点数",
@@ -6711,6 +7238,27 @@
    "lessonTitle": "なぜデータ分析が必要なのか — 勘と経験の限界"
   },
   {
+   "term": "秘密度ラベル",
+   "en": "Sensitivity label",
+   "reading": "ひみつどらべる",
+   "short": "資産に付与する機密度の分類。暗号化とアクセス制御の設定を伴う。",
+   "desc": "Microsoft Purview 情報保護で定義され、ソースからモデル、レポート、エクスポートしたExcelやPDFへと継承される。基盤の外に出た後も保護が続くのが最大の価値。ただしアクセス制御の代替ではなく、ラベルを付けてもワークスペース閲覧権限を持つ人は見られる。",
+   "lesson": "L1804",
+   "tags": [
+    "セキュリティ"
+   ],
+   "aliases": [
+    "sensitivity label",
+    "機密ラベル",
+    "情報保護ラベル"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "監査・秘密度ラベル・データ保護"
+  },
+  {
    "term": "視覚化ペイン",
    "en": "Visualizations pane",
    "reading": "しかくかぺいん",
@@ -6902,6 +7450,26 @@
    "lessonTitle": "条件分岐と安全な割り算 — IF・SWITCH・DIVIDE"
   },
   {
+   "term": "DMBOK",
+   "en": "Data Management Body of Knowledge",
+   "reading": "でぃーえむぼっく",
+   "short": "データマネジメントの知識体系。中心にデータガバナンスを置く。",
+   "desc": "11の知識領域を定義し、その中核に「ガバナンスは技術ではなく、意思決定の権限と責任の配置である」という主張を置く。誰がデータの定義を決め、誰が品質に責任を持ち、誰が公開を承認するのか。この配置が決まっていなければ、どんなツールを導入しても状況は改善しない。",
+   "lesson": "L1805",
+   "tags": [
+    "データマネジメント"
+   ],
+   "aliases": [
+    "DAMA-DMBOK",
+    "データマネジメント知識体系"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "エンドースメントとデータカタログ — 信頼できる数字を1つにする"
+  },
+  {
    "term": "DRY原則",
    "en": "Don't Repeat Yourself",
    "reading": "どらいげんそく",
@@ -6921,6 +7489,27 @@
    "tier": "T3",
    "moduleTitle": "高度なデータ整形",
    "lessonTitle": "カスタム関数とパラメータ — 処理を再利用する"
+  },
+  {
+   "term": "Git統合",
+   "en": "Git integration",
+   "reading": "ぎっとうごう",
+   "short": "Fabricのワークスペースとリポジトリのブランチを接続し、変更を同期する機能。",
+   "desc": "ワークスペースの変更をコミットしたり、リポジトリの内容をワークスペースへ反映したりできる。1つのワークスペースは1つのブランチに接続されるため、3人を超える開発では開発者ごとのワークスペースを用意する。デプロイメントパイプラインが環境間の移動を担うのに対し、Gitは変更の記録とレビューを担う。",
+   "lesson": "L1802",
+   "tags": [
+    "開発",
+    "ソース管理"
+   ],
+   "aliases": [
+    "Git integration",
+    "ソース管理"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "PBIP と Git — BIをソース管理する"
   },
   {
    "term": "RANKX",
@@ -7805,6 +8394,25 @@
    "lessonTitle": "数字の読み方の基礎 — 平均のウソと分布"
   },
   {
+   "term": "回帰テスト",
+   "en": "Regression test",
+   "reading": "かいきてすと",
+   "short": "変更によって既存の動作が壊れていないかを、前回の結果と比較して確認するテスト。",
+   "desc": "BIでは期待値を「手計算した正しい値」ではなく「前回リリース時の値」にすることで、複雑な指標でも手計算なしにテストが作れる。値が変わったこと自体を検知し、変わってよい変更だったかを人が判断する。ただし初期状態が誤っていればその誤りは検出できない。",
+   "lesson": "L1803",
+   "tags": [
+    "品質保証"
+   ],
+   "aliases": [
+    "regression test"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "テストと品質保証 — BIにおけるテストとは何か"
+  },
+  {
    "term": "大数の法則",
    "en": "Law of large numbers",
    "reading": "たいすうのほうそく",
@@ -8383,6 +8991,48 @@
    "lessonTitle": "行レベルセキュリティ(RLS) — 静的・動的・階層"
   },
   {
+   "term": "PBIP",
+   "en": "Power BI Project",
+   "reading": "ぴーびーあいぴー",
+   "short": "モデルとレポートを複数のテキストファイルに分解して保存するプロジェクト形式。",
+   "desc": "従来のPBIXが1つのZIPバイナリで差分もマージも取れなかったのに対し、PBIPはフォルダーとテキストファイルの集合になる。モデルはTMDL、レポートはPBIRとして保存されるため、Gitで版管理でき、行単位の差分レビューとプルリクエストが可能になる。",
+   "lesson": "L1802",
+   "tags": [
+    "開発",
+    "ソース管理"
+   ],
+   "aliases": [
+    "Power BI Project",
+    "pbip"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "PBIP と Git — BIをソース管理する"
+  },
+  {
+   "term": "PBIR",
+   "en": "Power BI Enhanced Report Format",
+   "reading": "ぴーびーあいあーる",
+   "short": "レポート定義をページ・ビジュアル単位のJSONファイルに分割した形式。",
+   "desc": "従来は1つのreport.jsonに全ページが入っていたため、別ページの編集でも競合した。PBIRではページごとにファイルが分かれるため、別ページの編集は競合しない。差分レビューでは座標や書式ではなく、フィルターとフィールド参照の変更に注目する。",
+   "lesson": "L1802",
+   "tags": [
+    "開発",
+    "ソース管理"
+   ],
+   "aliases": [
+    "Enhanced Report Format",
+    "pbir"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "PBIP と Git — BIをソース管理する"
+  },
+  {
    "term": "RMSE",
    "en": "Root mean squared error",
    "reading": "あーるえむえすいー",
@@ -8418,6 +9068,27 @@
    "tier": "T2",
    "moduleTitle": "DAX基礎",
    "lessonTitle": "集計関数を使いこなす — SUM・COUNT・DISTINCTCOUNT"
+  },
+  {
+   "term": "TMDL",
+   "en": "Tabular Model Definition Language",
+   "reading": "てぃーえむでぃーえる",
+   "short": "テーブルモデルの定義を人が読める形で記述する言語。テーブル1つが1ファイル。",
+   "desc": "メジャーの式・書式・表示フォルダー・説明、列の型や非表示設定などをテキストで表現する。差分が読め、スクリプトによる一括編集ができ、プルリクエストのコメントで議論できる。100個のメジャーへ説明を一括付与するといった作業が現実的になる。",
+   "lesson": "L1802",
+   "tags": [
+    "開発",
+    "ソース管理"
+   ],
+   "aliases": [
+    "Tabular Model Definition Language",
+    "tmdl"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "PBIP と Git — BIをソース管理する"
   },
   {
    "term": "Zスコア",
@@ -8558,6 +9229,26 @@
    "tier": "T1",
    "moduleTitle": "Power BIの全体像",
    "lessonTitle": "ファイル形式と用語の整理"
+  },
+  {
+   "term": "アイテム",
+   "en": "Item",
+   "reading": "あいてむ",
+   "short": "Fabricのワークスペースに置かれる成果物の総称。",
+   "desc": "Lakehouse・Warehouse・Notebook・Pipeline・Dataflow Gen2・Semantic Model・Report などがすべてアイテムとして同じワークスペースに入り、同じ権限体系で管理され、同じGit統合の対象になる。データ基盤の変更管理とBIの変更管理が同じ仕組みに乗ることが、Fabricの実務上の大きな利点である。",
+   "lesson": "L1901",
+   "tags": [
+    "Fabric"
+   ],
+   "aliases": [
+    "Fabric item",
+    "Fabricアイテム"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "Fabric の全体像 — Power BIはどこに位置するか"
   },
   {
    "term": "エラー値",
@@ -8724,6 +9415,26 @@
    "source": "M00"
   },
   {
+   "term": "ドメイン",
+   "en": "Domain",
+   "reading": "どめいん",
+   "short": "ワークスペースを業務領域単位でまとめるFabricの管理階層。",
+   "desc": "テナント → ドメイン → ワークスペース → アイテムという階層を構成する。ドメインごとに管理者を置き、ガバナンス設定を委任できるため、中央がすべてを見るのではなく各業務領域が自分の責任範囲を持つデータメッシュ的な組織設計を製品側で支える。",
+   "lesson": "L1901",
+   "tags": [
+    "Fabric",
+    "ガバナンス"
+   ],
+   "aliases": [
+    "Fabricドメイン"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "Fabric の全体像 — Power BIはどこに位置するか"
+  },
+  {
    "term": "バイアス",
    "en": "Bias",
    "reading": "ばいあす",
@@ -8738,6 +9449,27 @@
     "偏り"
    ],
    "source": "M00"
+  },
+  {
+   "term": "バースト",
+   "en": "Bursting",
+   "reading": "ばーすと",
+   "short": "一時的にSKUの上限を超えて処理を実行できる仕組み。借りた分は後で返す。",
+   "desc": "重い処理が待たされずに始まるため、短時間のピークを吸収できる。スムージングと組み合わさることで、消費が後の時間帯に計上される。この2つの仕組みが、容量トラブルの原因究明を難しくしている主因でもある。",
+   "lesson": "L1905",
+   "tags": [
+    "Fabric",
+    "運用"
+   ],
+   "aliases": [
+    "bursting",
+    "バースティング"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "容量管理とコスト — CU・スロットリング・監視"
   },
   {
    "term": "ファクト",
@@ -9411,6 +10143,26 @@
    "lessonTitle": "記述統計 — 分布を見ずに平均を語るな"
   },
   {
+   "term": "変更管理",
+   "en": "Change management",
+   "reading": "へんこうかんり",
+   "short": "変更の内容・理由・承認・影響範囲・巻き戻し手順を記録し、統制する仕組み。",
+   "desc": "すべての変更に同じ重さの手続きを課すと運用が止まるため、軽微・中・重で手続きを分ける。特に指標の定義変更は、過去に配信済みの数字と食い違うため、業務所有者の承認・変更日の記録・利用者への事前通知をセットにする。",
+   "lesson": "L1801",
+   "tags": [
+    "ガバナンス"
+   ],
+   "aliases": [
+    "change management",
+    "変更統制"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "デプロイメントパイプラインと環境分離"
+  },
+  {
    "term": "外部キー",
    "en": "Foreign key",
    "reading": "がいぶきー",
@@ -9565,6 +10317,25 @@
    "source": "M00"
   },
   {
+   "term": "影響分析",
+   "en": "Impact analysis",
+   "reading": "えいきょうぶんせき",
+   "short": "ある資産を変更したときに影響を受ける下流の資産を調べる機能。",
+   "desc": "変更前に下流のレポート数と名前、複合モデルからの参照、アプリへの含有を確認する。5件以上あれば通知と検証の計画を立て、他人が所有する資産が含まれていればその所有者にも連絡する。変更管理の必須ステップとして運用に組み込む。",
+   "lesson": "L1805",
+   "tags": [
+    "ガバナンス"
+   ],
+   "aliases": [
+    "impact analysis"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "エンドースメントとデータカタログ — 信頼できる数字を1つにする"
+  },
+  {
    "term": "情報設計",
    "en": "Information architecture",
    "reading": "じょうほうせっけい",
@@ -9657,6 +10428,26 @@
    "tier": "T3",
    "moduleTitle": "分析手法とデータサイエンス",
    "lessonTitle": "記述統計 — 分布を見ずに平均を語るな"
+  },
+  {
+   "term": "昇格済み",
+   "en": "Promoted",
+   "reading": "しょうかくずみ",
+   "short": "作成者自身が「共有に値する」と表明する自己申告のエンドースメント。",
+   "desc": "そのアイテムに書き込み権限があれば誰でも付与できる。第三者承認である認定済みとは、付与権限の点で決定的に異なる。この違いを設定で担保しないと、組織の「認定済み」という表示が信頼を失う。",
+   "lesson": "L1805",
+   "tags": [
+    "ガバナンス"
+   ],
+   "aliases": [
+    "Promoted",
+    "推奨済み"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "エンドースメントとデータカタログ — 信頼できる数字を1つにする"
   },
   {
    "term": "更新履歴",
@@ -9836,6 +10627,26 @@
    "tier": "T4",
    "moduleTitle": "高度な分析とAI",
    "lessonTitle": "予測モデルをBIに載せる — スコアリング結果の運用"
+  },
+  {
+   "term": "環境分離",
+   "en": "Environment separation",
+   "reading": "かんきょうぶんり",
+   "short": "開発・テスト・本番を別のワークスペースに分け、変更を検証してから配信する構成。",
+   "desc": "未検証の変更が本番に出ること、作りかけが利用者に見えること、上書き保存で戻せなくなることの3つを防ぐ。3環境はデータ・権限・役割がそれぞれ異なり、同じものを3つ作るのではない。開発環境はあえてデータを少なくし、性能問題はテスト環境で検出する。",
+   "lesson": "L1801",
+   "tags": [
+    "運用"
+   ],
+   "aliases": [
+    "環境の分離",
+    "Dev/Test/Prod"
+   ],
+   "source": "M18",
+   "module": "M18",
+   "tier": "T4",
+   "moduleTitle": "ガバナンスとライフサイクル",
+   "lessonTitle": "デプロイメントパイプラインと環境分離"
   },
   {
    "term": "異常検知",
@@ -11605,6 +12416,27 @@
    "tier": "T1",
    "moduleTitle": "データ分析とBIの基礎",
    "lessonTitle": "なぜデータ分析が必要なのか — 勘と経験の限界"
+  },
+  {
+   "term": "CU",
+   "en": "Capacity Unit",
+   "reading": "しーゆー",
+   "short": "Fabricの計算資源の単位。すべてのワークロードが同じCUプールを共有する。",
+   "desc": "Power BIのクエリも、Sparkの処理も、パイプラインも同じ財布から支払われるため、データエンジニアの重い処理が営業のレポート表示を遅くする。統合の利点は柔軟性、欠点は干渉であり、この構造を理解していないと原因不明の性能劣化に悩まされる。",
+   "lesson": "L1905",
+   "tags": [
+    "Fabric",
+    "運用"
+   ],
+   "aliases": [
+    "容量ユニット",
+    "Capacity Unit"
+   ],
+   "source": "M19",
+   "module": "M19",
+   "tier": "T4",
+   "moduleTitle": "Microsoft Fabric",
+   "lessonTitle": "容量管理とコスト — CU・スロットリング・監視"
   },
   {
    "term": "p値",

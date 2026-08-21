@@ -174,3 +174,69 @@ a.gl-term::after {
   .gl-group-head { scroll-margin-top: 156px; }
   .gl-card { scroll-margin-top: 162px; padding: 14px 15px; }
 }
+
+/* ---------- かんたん説明（予備知識ゼロの人向け） ---------- */
+/* 統計・データサイエンスの用語は、正式な定義の前に「たとえ話」を1つ置く。 */
+.gl-card .plain,
+.gl-pop-plain {
+  margin: .55rem 0;
+  padding: .7rem .85rem .7rem 2.9rem;
+  position: relative;
+  background: var(--plain-bg, #fff8e6);
+  border: 1px solid var(--plain-bd, #f0d9a0);
+  border-left: 5px solid var(--plain-ac, #e8a33d);
+  border-radius: .5rem;
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: var(--fg, #1c2430);
+}
+.gl-card .plain::before,
+.gl-pop-plain::before {
+  content: "\1F4A1";
+  position: absolute;
+  left: .8rem;
+  top: .6rem;
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+.gl-card .plain .k,
+.gl-pop-plain .k {
+  display: block;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: var(--plain-ac, #b3760f);
+  margin-bottom: .15rem;
+}
+.gl-pop-plain { font-size: .95rem; line-height: 1.7; padding: .55rem .7rem .55rem 2.5rem; }
+.gl-pop-plain::before { top: .45rem; font-size: 1.1rem; }
+.gl-pop-hasfig {
+  margin: .4rem 0 0;
+  font-size: .82rem;
+  color: var(--muted, #5b6673);
+}
+
+/* 用語カードに埋め込む図。本文中の図より少し小さくする。 */
+.gl-card .gl-fig {
+  margin: .7rem 0 .2rem;
+  overflow-x: auto;
+}
+.gl-card .gl-fig:empty { display: none; }
+.gl-card .gl-fig .pbm-fig { margin: 0; }
+
+/* ダークモード（サイトの明示切替と OS 設定の両方に対応する） */
+:root[data-theme="dark"] .gl-card .plain,
+:root[data-theme="dark"] .gl-pop-plain {
+  --plain-bg: #33280f; --plain-bd: #5c4718; --plain-ac: #e8b45c;
+}
+:root[data-theme="dark"] .gl-card .plain .k,
+:root[data-theme="dark"] .gl-pop-plain .k { color: #e8b45c; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .gl-card .plain,
+  :root:not([data-theme="light"]) .gl-pop-plain {
+    --plain-bg: #33280f; --plain-bd: #5c4718; --plain-ac: #e8b45c;
+  }
+  :root:not([data-theme="light"]) .gl-card .plain .k,
+  :root:not([data-theme="light"]) .gl-pop-plain .k { color: #e8b45c; }
+}

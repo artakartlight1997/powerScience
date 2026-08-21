@@ -208,7 +208,14 @@ for path in sorted(glob.glob(os.path.join(C, "quizzes", "*.json"))):
 
 
 # ---------------------------------------------------------------- 用語集
+FIG_TYPES = {"flow", "steps", "compare", "cards", "stack", "matrix", "tablediff",
+             "star", "tree", "timeline", "formula", "chart", "pipeline", "interactive"}
+# 予備知識ゼロの読者がつまずくのは統計・データサイエンス系の用語なので、
+# これらには「かんたんに言うと」(plain) と図(figure) を必須にする。
+PLAIN_TAGS = {"統計", "データサイエンス", "分析"}
+
 terms, term_seen, dup_terms = 0, {}, []
+no_plain, no_fig = [], []
 for path in sorted(glob.glob(os.path.join(C, "glossary", "*.json"))):
     if os.path.basename(path) == "index.json":
         continue
@@ -229,17 +236,36 @@ for path in sorted(glob.glob(os.path.join(C, "glossary", "*.json"))):
         for k in ("short", "desc"):
             if not t.get(k):
                 warn("用語'%s': %s がありません" % (name, k))
+        tags = set(t.get("tags") or [])
+        if tags & PLAIN_TAGS:
+            if not t.get("plain"):
+                no_plain.append(name)
+            if not t.get("figure"):
+                no_fig.append(name)
+        fig = t.get("figure")
+        if fig is not None:
+            if not isinstance(fig, dict):
+                err("用語'%s': figure はオブジェクトである必要があります" % name)
+            elif fig.get("type") not in FIG_TYPES:
+                err("用語'%s': figure の type が不正です (%s)" % (name, fig.get("type")))
         if t.get("lesson") and lesson_ids and t["lesson"] not in lesson_ids:
             warn("用語'%s': レッスン %s が見つかりません" % (name, t["lesson"]))
 
 
 # ---------------------------------------------------------------- 出力
+if no_plain:
+    warn("統計・データサイエンス系の用語 %d 件に plain（かんたんな説明）がありません: %s ほか"
+         % (len(no_plain), "、".join(sorted(set(no_plain))[:6])))
+if no_fig:
+    warn("統計・データサイエンス系の用語 %d 件に figure（図解）がありません: %s ほか"
+         % (len(no_fig), "、".join(sorted(set(no_fig))[:6])))
 if dup_terms:
     warn("複数モジュールで定義が重複している用語が %d 件あります（ビルド時にモジュール固有の定義を採用します）: %s ほか"
          % (len(dup_terms), "、".join(sorted(set(dup_terms))[:6])))
 
 tier_counts = Counter(l.get("_tier") for l in lessons)
-short_lessons = {k: v for k, v in lesson_lines.items() if k in lesson_ids and v < 250}
+# v3 では本文を 100〜210 行に圧縮する方針なので、極端に短いものだけ警告する
+short_lessons = {k: v for k, v in lesson_lines.items() if k in lesson_ids and v < 100}
 
 print("=" * 62)
 print(" コンテンツ サマリ")

@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/search.css">
 <link rel="stylesheet" href="assets/css/glossary.css">
+<link rel="stylesheet" href="assets/css/figure.css">
 <script src="assets/js/config.js"></script>
 </head>
 <body>
@@ -39,6 +40,7 @@
 <script src="assets/js/app.js"></script>
 <script src="assets/js/search.js"></script>
 <script src="assets/js/analytics.js"></script>
+<script src="assets/js/figure.js"></script>
 <script src="assets/js/glossary.js"></script>
 <script>
 (async function () {
@@ -216,7 +218,7 @@
   /* ---------- 検索・描画 ---------- */
   function haystack(t) {
     if (t._h) return t._h;
-    t._h = [t.term, t.en || "", t.reading || "", t.short || "", t.desc || "", (t.tags || []).join(" "), (t.aliases || []).join(" ")]
+    t._h = [t.term, t.en || "", t.reading || "", t.short || "", t.plain || "", t.desc || "", (t.tags || []).join(" "), (t.aliases || []).join(" ")]
       .join(" ").toLowerCase();
     return t._h;
   }
@@ -243,6 +245,8 @@
       (t.reading ? '<span class="reading">' + esc(t.reading) + "</span>" : "") +
       "</div>" +
       (t.short ? '<p class="short">' + hl(t.short, kw) + "</p>" : "") +
+      (t.plain ? '<p class="plain"><span class="k">かんたんに言うと</span>' + hl(t.plain, kw) + "</p>" : "") +
+      (t.figure ? '<div class="pbm-figure gl-fig" data-figure="' + esc(JSON.stringify(t.figure)) + '"></div>' : "") +
       (t.desc ? '<p class="desc">' + hl(t.desc, kw) + "</p>" : "") +
       '<div class="gl-card-foot">' +
       (t.lesson ? '<a class="gl-lesson" href="' + PBM.url("lesson.html?id=" + encodeURIComponent(t.lesson)) + '">' + esc(t.lesson) + " で学ぶ →</a>" : "") +
@@ -285,6 +289,7 @@
 
     if (kw) {
       listEl.innerHTML = '<div class="gl-cards">' + hits.map(function (t) { return cardHtml(t, kw); }).join("") + "</div>";
+      drawFigures();
       return;
     }
 
@@ -301,6 +306,28 @@
     });
     if (cur !== null) out.push("</div>");
     listEl.innerHTML = out.join("");
+    drawFigures();
+  }
+
+  // 用語カードに埋め込んだ図を描画する。図は数が多いので、
+  // 画面に入ったものから順に描く（初期表示を軽くするため）。
+  var figObserver = null;
+  function drawFigures() {
+    if (typeof PBM.renderFigures !== "function") return;
+    var pending = listEl.querySelectorAll(".gl-fig:not([data-drawn])");
+    if (!pending.length) return;
+    if (!("IntersectionObserver" in window)) { PBM.renderFigures(listEl); return; }
+    if (!figObserver) {
+      figObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          figObserver.unobserve(en.target);
+          en.target.setAttribute("data-drawn", "1");
+          try { PBM.renderFigures(en.target.parentNode); } catch (err) { /* 1枚壊れても他は描く */ }
+        });
+      }, { rootMargin: "400px 0px" });
+    }
+    pending.forEach(function (el) { figObserver.observe(el); });
   }
 
   listEl.addEventListener("click", function (e) {

@@ -132,7 +132,7 @@ if os.path.exists(gpath):
             "t": "term", "id": t["term"], "url": "glossary.html#" + t["term"],
             "title": t["term"], "tier": t.get("tier"), "module": t.get("module"),
             "mod": "用語集", "h": t.get("en", ""),
-            "x": clean(t.get("short", "") + " " + t.get("desc", ""))[:MAX_TERM],
+            "x": clean(t.get("short", "") + " " + t.get("plain", "") + " " + t.get("desc", ""))[:MAX_TERM],
             "k": (t.get("tags") or []) + (t.get("aliases") or []) + ([t["reading"]] if t.get("reading") else []),
             "c": [],
         })
