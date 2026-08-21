@@ -3,6 +3,9 @@
 Power BI を **初級 → 中級 → 上級 → プロ** の4段階で学び、
 **PL-300（Microsoft Power BI Data Analyst）合格**と**現場で通用する実力**の両方に届くための学習サイトです。
 
+**公開サイト → https://artakartlight1997.github.io/powerScience/**
+（URLは大文字小文字を区別します。`powerScience` の `S` は大文字です）
+
 GitHub Pages で公開でき、スマートフォンからも学習できます。
 閲覧統計（どの地域の人が、いつ、どのページを見たか）は、一般には見えない管理画面で確認できます。
 管理画面のパスワードはあなた自身が設定します。
