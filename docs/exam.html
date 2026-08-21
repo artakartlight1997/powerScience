@@ -3,50 +3,94 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>模擬試験 | Power BI Mastery</title>
-<meta name="description" content="PL-300形式の模擬試験。時間制限つき・領域別スコア分析つき。">
+<title>PL-300 模擬試験 | Power BI Mastery</title>
+<meta name="description" content="PL-300の出題範囲を網羅した模擬試験。時間制限つき、領域別・スキル項目別のスコア分析で弱点が分かります。">
 <link rel="icon" href="assets/img/favicon.svg">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/lesson.css">
 <script src="assets/js/config.js"></script>
+<style>
+  .mode-grid { display: grid; gap: 12px; margin: 18px 0; }
+  @media (min-width: 720px) { .mode-grid { grid-template-columns: repeat(3, 1fr); } }
+  .mode {
+    text-align: left; padding: 18px; border-radius: var(--radius);
+    border: 2px solid var(--border); background: var(--bg-elevated); cursor: pointer;
+    font: inherit; color: inherit; transition: border-color .12s ease, transform .12s ease;
+  }
+  .mode:hover { border-color: var(--brand); transform: translateY(-2px); }
+  .mode.on { border-color: var(--brand); background: var(--brand-soft); }
+  .mode .m-t { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
+  .mode .m-n { font-size: 26px; font-weight: 900; line-height: 1.1; }
+  .mode .m-s { font-size: 13.5px; color: var(--fg-muted); margin-top: 6px; line-height: 1.7; }
+  .area-toggle { display: flex; flex-wrap: wrap; gap: 8px; }
+  .area-toggle button {
+    font: inherit; font-size: 14px; font-weight: 700; padding: 9px 15px; border-radius: 999px;
+    border: 1.5px solid var(--border-strong); background: var(--bg-elevated); color: var(--fg-muted); cursor: pointer;
+  }
+  .area-toggle button.on { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .weak-list { display: grid; gap: 8px; }
+</style>
 </head>
 <body>
-<main id="main" class="wrap-narrow" style="padding-top:30px">
+<main id="main" class="wrap-narrow" style="padding-top:32px">
   <div id="intro">
     <p class="eyebrow">Mock Exam</p>
-    <h1 style="margin:8px 0 10px">PL-300 模擬試験</h1>
-    <div class="card">
-      <p>本番同様、問題ごとの正誤はその場では表示されません。終了後に領域別のスコアと復習リストが出ます。</p>
-      <div class="grid grid-3" style="margin:16px 0">
-        <div class="kpi"><div class="v" id="cfg-q">30</div><div class="l">問題数</div></div>
-        <div class="kpi"><div class="v" id="cfg-m">45</div><div class="l">制限時間(分)</div></div>
-        <div class="kpi"><div class="v" id="cfg-p">70</div><div class="l">合格ライン(%)</div></div>
+    <h1 style="margin:8px 0 10px;font-size:32px">PL-300 模擬試験</h1>
+    <p class="muted" style="font-size:17px">
+      本番と同じく、解答中は正誤が表示されません。終了後に<strong>領域別</strong>と
+      <strong>スキル項目別</strong>のスコアが出るので、どこを復習すべきかがはっきりします。
+    </p>
+
+    <div class="card" style="margin-top:22px">
+      <div class="row" style="justify-content:space-between">
+        <h3 style="margin:0">出題範囲のカバー状況</h3>
+        <a class="btn btn-sm btn-ghost" href="pl300.html">カバレッジ表を見る</a>
       </div>
-      <div class="row">
-        <label class="field" style="margin:0">
-          出題数
-          <select id="sel-count" style="width:auto;min-width:120px">
-            <option value="10">10問（腕試し）</option>
-            <option value="30" selected>30問（標準）</option>
-            <option value="50">50問（本番想定）</option>
-          </select>
-        </label>
+      <div class="grid grid-4" style="margin-top:14px">
+        <div class="kpi"><div class="v" id="k-total">—</div><div class="l">収録問題数</div></div>
+        <div class="kpi"><div class="v" id="k-skills">—</div><div class="l">スキル項目</div></div>
+        <div class="kpi"><div class="v" id="k-best">—</div><div class="l">自己ベスト</div></div>
+        <div class="kpi"><div class="v" id="k-tries">—</div><div class="l">受験回数</div></div>
       </div>
-      <div class="row" style="margin-top:16px">
-        <button class="btn btn-primary" id="start">試験を開始する</button>
-        <a class="btn btn-ghost" href="quiz.html?id=EXAM-PL300">解説を見ながら解く（練習モード）</a>
-      </div>
-      <p class="small muted" style="margin-top:14px">
-        ※ 本サイトの問題は学習用のオリジナル問題です。実際の試験問題ではありません。
-        出題範囲は <a href="https://learn.microsoft.com/ja-jp/credentials/certifications/exams/pl-300/" target="_blank" rel="noopener">公式のスキル測定ページ</a> をご確認ください。
-      </p>
     </div>
-    <div class="card" style="margin-top:18px" id="history-box">
-      <h3 style="margin-top:0">過去の受験結果</h3>
+
+    <h3 style="margin:30px 0 4px">1. 形式を選ぶ</h3>
+    <div class="mode-grid" id="modes"></div>
+
+    <h3 style="margin:26px 0 10px">2. 出題範囲（任意）</h3>
+    <div class="area-toggle" id="areas"></div>
+    <p class="small muted" style="margin-top:10px">
+      何も選ばなければ全範囲から出題します。特定の領域だけ鍛えたいときに使ってください。
+    </p>
+
+    <div id="weak-box" class="card hidden" style="margin-top:22px">
+      <h3 style="margin-top:0">前回の弱点</h3>
+      <div class="weak-list" id="weak"></div>
+      <button class="btn btn-brand btn-sm" id="btn-weak" style="margin-top:14px">弱点だけ出題する</button>
+    </div>
+
+    <div class="actionbar" style="margin-top:26px">
+      <button class="btn btn-primary" id="start">試験を開始する</button>
+      <span class="spacer"></span>
+      <a class="btn btn-ghost btn-sm" href="quiz.html?id=EXAM-PL300">解説を読みながら解く</a>
+    </div>
+
+    <p class="small muted" style="margin-top:18px">
+      本サイトの設問はすべて学習用のオリジナル問題であり、実際の試験問題ではありません。
+      出題範囲・合格点・試験時間は変更されることがあります。受験前に必ず
+      <a href="https://learn.microsoft.com/ja-jp/credentials/certifications/exams/pl-300/" target="_blank" rel="noopener">公式のスキル測定ページ</a>
+      をご確認ください。
+    </p>
+
+    <div class="card" style="margin-top:20px">
+      <h3 style="margin-top:0">受験履歴</h3>
       <div id="history"></div>
     </div>
   </div>
+
   <div id="quiz"></div>
 </main>
+
 <script src="assets/vendor/marked.umd.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/analytics.js"></script>
@@ -55,41 +99,114 @@
 <script>
 (async function () {
   PBM.renderChrome();
-  const CFG = window.PBM_CONFIG.exam;
-  document.getElementById("cfg-q").textContent = CFG.questions;
-  document.getElementById("cfg-m").textContent = CFG.minutes;
-  document.getElementById("cfg-p").textContent = CFG.passLine;
-  document.getElementById("sel-count").value = String(CFG.questions);
+  const CFG = window.PBM_CONFIG.exam || { questions: 30, minutes: 45, passLine: 70 };
+  const AREAS = ["データの準備", "データのモデル化", "視覚化と分析", "資産の管理とセキュリティ"];
 
+  const bank = await PBM.loadQuiz("EXAM-PL300");
+  if (!bank) {
+    document.getElementById("intro").innerHTML =
+      '<div class="card"><h1>問題データを読み込めませんでした</h1></div>';
+    return;
+  }
+  const skills = new Set(bank.questions.map(function (q) { return q.skill; }).filter(Boolean));
+
+  document.getElementById("k-total").textContent = bank.questions.length;
+  document.getElementById("k-skills").textContent = skills.size + " / 24";
+  const exams = PBM.progress.exams();
+  document.getElementById("k-best").textContent = exams.length ? Math.max.apply(null, exams.map(function (e) { return e.score; })) + "%" : "—";
+  document.getElementById("k-tries").textContent = exams.length;
+
+  /* ---- 形式の選択 ---- */
+  const MODES = [
+    { n: 15, min: 20, t: "腕試し", s: "通勤中でも終わる短時間セット。今の実力をざっくり測る。" },
+    { n: 40, min: 60, t: "標準", s: "本番に近い分量。弱点を洗い出すならこれ。", def: true },
+    { n: 60, min: 100, t: "本番想定", s: "時間配分まで含めて本番の負荷を再現する。" }
+  ];
+  let mode = MODES.find(function (m) { return m.def; });
+  const modesEl = document.getElementById("modes");
+  function drawModes() {
+    modesEl.innerHTML = MODES.map(function (m, i) {
+      return '<button class="mode' + (m === mode ? " on" : "") + '" data-i="' + i + '">' +
+        '<div class="m-t">' + m.t + '</div><div class="m-n">' + m.n + '<span style="font-size:15px"> 問</span></div>' +
+        '<div class="m-s">制限 ' + m.min + " 分<br>" + m.s + "</div></button>";
+    }).join("");
+    modesEl.querySelectorAll(".mode").forEach(function (b) {
+      b.addEventListener("click", function () { mode = MODES[+b.dataset.i]; drawModes(); });
+    });
+  }
+  drawModes();
+
+  /* ---- 範囲の選択 ---- */
+  let selectedAreas = [];
+  const areasEl = document.getElementById("areas");
+  function drawAreas() {
+    areasEl.innerHTML = AREAS.map(function (a) {
+      const n = bank.questions.filter(function (q) { return q.area === a; }).length;
+      return '<button class="' + (selectedAreas.indexOf(a) >= 0 ? "on" : "") + '" data-a="' + a + '">' +
+             a + ' <span style="opacity:.7">' + n + "</span></button>";
+    }).join("");
+    areasEl.querySelectorAll("button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        const a = b.dataset.a, i = selectedAreas.indexOf(a);
+        if (i >= 0) selectedAreas.splice(i, 1); else selectedAreas.push(a);
+        drawAreas();
+      });
+    });
+  }
+  drawAreas();
+
+  /* ---- 前回の弱点 ---- */
+  const last = exams.length ? exams[exams.length - 1] : null;
+  let weakSkills = [];
+  if (last && last.bySkill) {
+    weakSkills = Object.keys(last.bySkill)
+      .map(function (k) { const r = last.bySkill[k]; return { k: k, p: Math.round((r.c / r.t) * 100), r: r }; })
+      .filter(function (x) { return x.p < 80; })
+      .sort(function (a, b) { return a.p - b.p; }).slice(0, 8);
+  }
+  if (weakSkills.length) {
+    document.getElementById("weak-box").classList.remove("hidden");
+    document.getElementById("weak").innerHTML = weakSkills.map(function (x) {
+      return '<div class="area-row"><div><div class="nm">' + PBM.esc(x.k) + "</div>" +
+        '<div class="bar"><span style="width:' + x.p + "%;background:var(--" + (x.p >= 60 ? "warn" : "ng") + ')"></span></div></div>' +
+        '<div class="small" style="text-align:right">' + x.r.c + "/" + x.r.t + "</div></div>";
+    }).join("");
+    document.getElementById("btn-weak").addEventListener("click", function () {
+      start({ skills: weakSkills.map(function (x) { return x.k; }), limit: 20, minutes: 30 });
+    });
+  }
+
+  /* ---- 履歴 ---- */
   function drawHistory() {
     const ex = PBM.progress.exams();
     const box = document.getElementById("history");
     if (!ex.length) { box.innerHTML = '<p class="muted small">まだ受験記録がありません。</p>'; return; }
-    box.innerHTML = ex.slice().reverse().slice(0, 10).map(function (e) {
+    box.innerHTML = ex.slice().reverse().slice(0, 12).map(function (e) {
       const d = new Date(e.at);
       const pass = e.score >= CFG.passLine;
-      return '<div class="row" style="justify-content:space-between;border-bottom:1px solid var(--border);padding:8px 0">' +
-        '<span class="small">' + d.toLocaleDateString("ja-JP") + " " + d.toLocaleTimeString("ja-JP", { hour: "2-digit", minute: "2-digit" }) + "</span>" +
+      return '<div class="row" style="justify-content:space-between;border-bottom:1px solid var(--border);padding:10px 0">' +
+        '<span class="small">' + d.toLocaleDateString("ja-JP") + " " +
+          d.toLocaleTimeString("ja-JP", { hour: "2-digit", minute: "2-digit" }) + "</span>" +
         '<span class="small muted">' + e.total + "問 / " + e.minutes + "分</span>" +
         '<span class="badge ' + (pass ? "badge-ok" : "badge-ng") + '">' + e.score + "%</span></div>";
     }).join("");
   }
   drawHistory();
 
-  document.getElementById("start").addEventListener("click", async function () {
-    const n = parseInt(document.getElementById("sel-count").value, 10);
-    const quiz = await PBM.loadQuiz("EXAM-PL300");
-    if (!quiz) { alert("問題データを読み込めませんでした。"); return; }
+  /* ---- 開始 ---- */
+  function start(overrides) {
+    const o = Object.assign({ limit: mode.n, minutes: mode.min, areas: selectedAreas }, overrides || {});
     document.getElementById("intro").classList.add("hidden");
-    const minutes = Math.max(5, Math.round(CFG.minutes * (n / CFG.questions)));
-    PBM.track("exam_start", { count: n });
-    PBM.mountQuiz(document.getElementById("quiz"), quiz, {
-      mode: "exam", shuffle: true, limit: n, minutes: minutes,
+    PBM.track("exam_start", { count: o.limit, areas: (o.areas || []).join(",") });
+    PBM.mountQuiz(document.getElementById("quiz"), bank, {
+      mode: "exam", shuffle: true, limit: o.limit, minutes: o.minutes,
+      areas: o.areas, skills: o.skills,
       onFinish: function (r) {
-        PBM.progress.addExam({ score: r.pct, total: r.total, minutes: r.minutes, byArea: r.byArea });
+        PBM.progress.addExam({ score: r.pct, total: r.total, minutes: r.minutes, byArea: r.byArea, bySkill: r.bySkill });
       }
     });
-  });
+  }
+  document.getElementById("start").addEventListener("click", function () { start(); });
 })();
 </script>
 </body>

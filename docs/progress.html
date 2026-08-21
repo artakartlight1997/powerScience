@@ -6,13 +6,39 @@
 <title>学習記録 | Power BI Mastery</title>
 <link rel="icon" href="assets/img/favicon.svg">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/lesson.css">
 <script src="assets/js/config.js"></script>
+<style>
+  .tier-prog { display: grid; gap: 14px; }
+  @media (min-width: 780px) { .tier-prog { grid-template-columns: repeat(4, 1fr); } }
+  .tier-card { padding: 18px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-elevated); }
+  .tier-card .tt { font-size: 16px; font-weight: 800; margin-bottom: 2px; }
+  .tier-card .tn { font-size: 30px; font-weight: 900; line-height: 1.15; }
+  .tier-card .ts { font-size: 13px; color: var(--fg-subtle); }
+  .streak { display: flex; gap: 4px; flex-wrap: wrap; }
+  .streak i { width: 13px; height: 13px; border-radius: 3px; background: var(--bg-sunken); display: block; }
+  .next-card { border: 2px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--bg-elevated)); }
+</style>
 </head>
 <body>
-<main id="main" class="wrap" style="padding-top:34px">
+<main id="main" class="wrap" style="padding-top:32px">
   <p class="eyebrow">My Progress</p>
-  <h1 style="margin:8px 0 6px">学習記録</h1>
-  <p class="muted small">記録はこの端末のブラウザ内（localStorage）にのみ保存されます。端末を変える場合は下のエクスポート機能をお使いください。</p>
+  <h1 style="margin:8px 0 8px;font-size:32px">学習記録</h1>
+  <p class="muted small">
+    記録はこの端末のブラウザ内（localStorage）にのみ保存されます。端末を変える場合は下のエクスポートをお使いください。
+  </p>
+
+  <div class="card next-card" id="next-card" style="margin:22px 0;display:none">
+    <div class="row" style="gap:18px;flex-wrap:nowrap;align-items:center">
+      <div class="ring" id="ring"><div id="ring-pct">0%</div></div>
+      <div style="flex:1 1 auto;min-width:0">
+        <p class="small muted" style="margin:0 0 4px">次に学ぶレッスン</p>
+        <h3 id="next-title" style="margin:0 0 4px;font-size:19px"></h3>
+        <p class="small muted" id="next-why" style="margin:0 0 10px"></p>
+        <a class="btn btn-primary btn-sm" id="next-link" href="#">続きから学習する →</a>
+      </div>
+    </div>
+  </div>
 
   <div class="grid grid-4" style="margin:22px 0">
     <div class="card kpi"><div class="v" id="k1">0%</div><div class="l">全体の進捗</div></div>
@@ -21,29 +47,35 @@
     <div class="card kpi"><div class="v" id="k4">0分</div><div class="l">学習時間</div></div>
   </div>
 
-  <div class="card"><h3 style="margin-top:0">レベル別の到達度</h3><div id="levels"></div></div>
+  <h2 style="font-size:22px;margin:34px 0 12px">ティア別の到達度</h2>
+  <div class="tier-prog" id="tiers"></div>
 
-  <div class="card" style="margin-top:16px"><h3 style="margin-top:0">クイズの成績</h3><div id="quizzes"></div></div>
+  <h2 style="font-size:22px;margin:34px 0 12px">モジュール別の進み具合</h2>
+  <div class="card"><div id="modules"></div></div>
 
-  <div class="card" style="margin-top:16px">
-    <h3 style="margin-top:0">模擬試験の推移</h3>
-    <div id="examchart"></div>
-  </div>
+  <h2 style="font-size:22px;margin:34px 0 12px">クイズの成績（弱い順）</h2>
+  <div class="card"><div id="quizzes"></div></div>
 
-  <div class="card" style="margin-top:16px">
-    <h3 style="margin-top:0">データの管理</h3>
+  <h2 style="font-size:22px;margin:34px 0 12px">模擬試験の推移</h2>
+  <div class="card"><div id="examchart"></div></div>
+
+  <h2 style="font-size:22px;margin:34px 0 12px">データの管理</h2>
+  <div class="card">
     <p class="small muted">別の端末に引き継ぐときは、エクスポートしたテキストをコピーして、移行先でインポートしてください。</p>
     <div class="row">
       <button class="btn btn-sm" id="btn-export">エクスポート</button>
       <button class="btn btn-sm" id="btn-import">インポート</button>
       <button class="btn btn-sm btn-ghost" id="btn-reset" style="color:var(--ng)">すべてリセット</button>
     </div>
-    <textarea id="io" rows="6" style="margin-top:12px;display:none;font-family:var(--mono);font-size:12px"></textarea>
+    <textarea id="io" rows="6" style="margin-top:12px;display:none;font-family:var(--mono);font-size:12.5px"></textarea>
   </div>
 
-  <div class="card" style="margin-top:16px">
-    <h3 style="margin-top:0">アクセス解析について</h3>
-    <p class="small muted">サイト改善のため、どのページがどの地域からいつ閲覧されたかを匿名で集計しています（IPアドレスは保存しません）。集計を止めたい場合は下のボタンを押してください。</p>
+  <h2 style="font-size:22px;margin:34px 0 12px">アクセス解析について</h2>
+  <div class="card">
+    <p class="small muted">
+      サイト改善のため、どのページがどの地域からいつ閲覧されたかを匿名で集計しています（IPアドレスは保存しません）。
+      集計を止めたい場合は下のボタンを押してください。
+    </p>
     <button class="btn btn-sm" id="btn-optout"></button>
   </div>
 </main>
@@ -54,51 +86,92 @@
   PBM.renderChrome();
   const c = await PBM.curriculum();
   const s = PBM.stats(c);
+
   document.getElementById("k1").textContent = s.pct + "%";
   document.getElementById("k2").textContent = s.lessonsDone + "/" + s.lessonsTotal;
   document.getElementById("k3").textContent = s.labsDone + "/" + s.labsTotal;
   document.getElementById("k4").textContent = PBM.fmtMin(s.minutes);
 
-  document.getElementById("levels").innerHTML = c.levels.map(function (lv) {
-    const st = PBM.levelStats(c, lv.id);
-    return '<div class="area-row"><div><div class="nm">' + PBM.esc(lv.title) + " " + PBM.esc(lv.subtitle) + "</div>" +
-      '<div class="bar"><span style="width:' + st.pct + "%;background:var(--lv" + lv.order + ')"></span></div></div>' +
-      '<div class="small" style="text-align:right">' + st.done + "/" + st.total + "</div></div>";
+  /* 次のレッスン */
+  const next = PBM.nextLesson(c);
+  if (next) {
+    const box = document.getElementById("next-card");
+    box.style.display = "block";
+    document.getElementById("ring").style.setProperty("--p", s.pct);
+    document.getElementById("ring-pct").textContent = s.pct + "%";
+    document.getElementById("next-title").textContent = next.title;
+    document.getElementById("next-why").textContent = next.gain || next.why || "";
+    document.getElementById("next-link").href = "lesson.html?id=" + next.id;
+  }
+
+  /* ティア別 */
+  const tiers = c.tiers.length ? c.tiers : c.levels;
+  document.getElementById("tiers").innerHTML = tiers.map(function (t) {
+    const st = c.tiers.length ? PBM.tierStats(c, t.id) : PBM.levelStats(c, t.id);
+    return '<div class="tier-card">' +
+      '<div class="tt" style="color:' + (t.color || "var(--brand)") + '">' + PBM.esc(t.title) + "</div>" +
+      '<div class="ts">' + PBM.esc(t.subtitle || t.en || "") + "</div>" +
+      '<div class="tn">' + st.pct + "%</div>" +
+      '<div class="bar" style="margin:8px 0 6px"><span style="width:' + st.pct + "%;background:" + (t.color || "var(--brand)") + '"></span></div>' +
+      '<div class="ts">' + st.done + " / " + st.total + " レッスン</div></div>";
   }).join("");
 
+  /* モジュール別 */
+  const mods = c.modules.length ? c.modules : [];
+  document.getElementById("modules").innerHTML = mods.length
+    ? mods.map(function (m) {
+        const st = PBM.moduleStats(c, m.id);
+        const t = c.tierById[m.tier] || {};
+        return '<div class="area-row"><div><div class="nm">' +
+          '<a href="roadmap.html#' + m.id + '" style="text-decoration:none;color:inherit">' +
+          PBM.esc(m.title) + "</a></div>" +
+          '<div class="bar"><span style="width:' + st.pct + "%;background:" + (t.color || "var(--brand)") + '"></span></div></div>' +
+          '<div class="small" style="text-align:right">' + st.done + "/" + st.total + "</div></div>";
+      }).join("")
+    : '<p class="muted small">モジュールを準備中です。</p>';
+
+  /* クイズ成績 */
   const p = PBM.progress.all();
   const qz = Object.entries(p.quizzes || {});
   document.getElementById("quizzes").innerHTML = qz.length
-    ? qz.sort(function (a, b) { return a[1].best - b[1].best; }).map(function (e) {
+    ? qz.sort(function (a, b) { return a[1].best - b[1].best; }).slice(0, 30).map(function (e) {
         const l = c.lessons.find(function (x) { return x.quiz === e[0]; });
-        return '<div class="area-row"><div><div class="nm">' + PBM.esc(l ? l.title : e[0]) + "</div>" +
-          '<div class="bar"><span style="width:' + e[1].best + "%;background:var(--" + (e[1].best >= 80 ? "ok" : e[1].best >= 60 ? "warn" : "ng") + ')"></span></div></div>' +
+        const col = e[1].best >= 80 ? "ok" : e[1].best >= 60 ? "warn" : "ng";
+        return '<div class="area-row"><div><div class="nm">' +
+          (l ? '<a href="lesson.html?id=' + l.id + '" style="text-decoration:none;color:inherit">' + PBM.esc(l.title) + "</a>" : PBM.esc(e[0])) +
+          "</div>" +
+          '<div class="bar"><span style="width:' + e[1].best + "%;background:var(--" + col + ')"></span></div></div>' +
           '<div class="small" style="text-align:right">' + e[1].best + "%</div></div>";
       }).join("")
     : '<p class="muted small">まだクイズに挑戦していません。</p>';
 
+  /* 模擬試験の推移 */
   const ex = PBM.progress.exams();
   const chart = document.getElementById("examchart");
-  if (!ex.length) chart.innerHTML = '<p class="muted small">まだ模擬試験の記録がありません。<a href="exam.html">受けてみる →</a></p>';
-  else {
-    const w = 100 / Math.max(ex.length, 6);
-    chart.innerHTML = '<div style="display:flex;align-items:flex-end;gap:6px;height:140px;padding-top:10px">' +
-      ex.slice(-12).map(function (e) {
+  if (!ex.length) {
+    chart.innerHTML = '<p class="muted small">まだ記録がありません。<a href="exam.html">模擬試験を受けてみる →</a></p>';
+  } else {
+    chart.innerHTML = '<div style="display:flex;align-items:flex-end;gap:6px;height:160px;padding-top:10px">' +
+      ex.slice(-14).map(function (e) {
         const col = e.score >= 80 ? "ok" : e.score >= 70 ? "warn" : "ng";
-        return '<div style="flex:1;text-align:center">' +
-          '<div style="height:' + Math.max(4, e.score) + '%;background:var(--' + col + ');border-radius:5px 5px 0 0"></div>' +
-          '<div class="small" style="font-size:11px;margin-top:4px">' + e.score + "%</div></div>";
+        return '<div style="flex:1;text-align:center;display:flex;flex-direction:column;justify-content:flex-end;height:100%">' +
+          '<div style="height:' + Math.max(4, e.score) + '%;background:var(--' + col + ');border-radius:6px 6px 0 0"></div>' +
+          '<div class="small" style="font-size:11.5px;margin-top:5px">' + e.score + "%</div></div>";
       }).join("") + "</div>" +
-      '<p class="small muted">直近' + Math.min(ex.length, 12) + "回。70%が合格ライン、80%以上が安全圏の目安です。</p>";
+      '<p class="small muted" style="margin-top:10px">直近' + Math.min(ex.length, 14) +
+      "回。70%が合格ライン、80%以上を2回続けられたら受験の目安です。</p>";
   }
 
+  /* データ管理 */
   const io = document.getElementById("io");
   document.getElementById("btn-export").addEventListener("click", function () {
     io.style.display = "block"; io.value = PBM.progress.export(); io.select();
   });
   document.getElementById("btn-import").addEventListener("click", function () {
     if (io.style.display === "none" || !io.value.trim()) {
-      io.style.display = "block"; io.value = ""; io.placeholder = "ここにエクスポートしたテキストを貼り付けて、もう一度「インポート」を押してください"; io.focus(); return;
+      io.style.display = "block"; io.value = "";
+      io.placeholder = "ここにエクスポートしたテキストを貼り付けて、もう一度「インポート」を押してください";
+      io.focus(); return;
     }
     try { PBM.progress.import(io.value); alert("インポートしました。"); location.reload(); }
     catch (e) { alert("読み込めませんでした：" + e.message); }

@@ -1,205 +1,26 @@
 {
-  "totalQuestions": 223,
-  "quizzes": {
-    "EXAM-PL300": {
-      "title": "PL-300 模擬試験 問題バンク",
-      "count": 67,
-      "lesson": null
-    },
-    "L001": {
-      "title": "Power BIとは何か",
-      "count": 4,
-      "lesson": "L001"
-    },
-    "L002": {
-      "title": "3つのPower BI",
-      "count": 4,
-      "lesson": "L002"
-    },
-    "L003": {
-      "title": "環境構築と、はじめてのレポート",
-      "count": 4,
-      "lesson": "L003"
-    },
-    "L004": {
-      "title": "分析の共通言語",
-      "count": 4,
-      "lesson": "L004"
-    },
-    "L101": {
-      "title": "データソースへの接続",
-      "count": 4,
-      "lesson": "L101"
-    },
-    "L102": {
-      "title": "Power Queryエディタの歩き方",
-      "count": 4,
-      "lesson": "L102"
-    },
-    "L103": {
-      "title": "データ型・クレンジング・エラー処理",
-      "count": 4,
-      "lesson": "L103"
-    },
-    "L104": {
-      "title": "整然データへの変換",
-      "count": 4,
-      "lesson": "L104"
-    },
-    "L105": {
-      "title": "クエリのマージと追加",
-      "count": 4,
-      "lesson": "L105"
-    },
-    "L106": {
-      "title": "パラメータ・関数・フォールディング",
-      "count": 4,
-      "lesson": "L106"
-    },
-    "L107": {
-      "title": "M言語入門",
-      "count": 4,
-      "lesson": "L107"
-    },
-    "L201": {
-      "title": "スタースキーマ",
-      "count": 4,
-      "lesson": "L201"
-    },
-    "L202": {
-      "title": "リレーションシップ",
-      "count": 4,
-      "lesson": "L202"
-    },
-    "L203": {
-      "title": "日付テーブル",
-      "count": 4,
-      "lesson": "L203"
-    },
-    "L204": {
-      "title": "双方向リレーションと多対多",
-      "count": 4,
-      "lesson": "L204"
-    },
-    "L205": {
-      "title": "階層・並べ替え・書式",
-      "count": 4,
-      "lesson": "L205"
-    },
-    "L206": {
-      "title": "行レベルセキュリティ(RLS)",
-      "count": 4,
-      "lesson": "L206"
-    },
-    "L207": {
-      "title": "モデル最適化",
-      "count": 4,
-      "lesson": "L207"
-    },
-    "L301": {
-      "title": "DAXの第一歩",
-      "count": 4,
-      "lesson": "L301"
-    },
-    "L302": {
-      "title": "フィルターコンテキストと行コンテキスト",
-      "count": 4,
-      "lesson": "L302"
-    },
-    "L303": {
-      "title": "CALCULATE",
-      "count": 4,
-      "lesson": "L303"
-    },
-    "L304": {
-      "title": "イテレータとコンテキスト遷移",
-      "count": 4,
-      "lesson": "L304"
-    },
-    "L305": {
-      "title": "タイムインテリジェンス",
-      "count": 4,
-      "lesson": "L305"
-    },
-    "L306": {
-      "title": "VAR / RETURN",
-      "count": 4,
-      "lesson": "L306"
-    },
-    "L307": {
-      "title": "実務パターン集",
-      "count": 4,
-      "lesson": "L307"
-    },
-    "L308": {
-      "title": "DAXパフォーマンス",
-      "count": 4,
-      "lesson": "L308"
-    },
-    "L401": {
-      "title": "ビジュアルの選び方",
-      "count": 4,
-      "lesson": "L401"
-    },
-    "L402": {
-      "title": "レイアウトとモバイルビュー",
-      "count": 4,
-      "lesson": "L402"
-    },
-    "L403": {
-      "title": "インタラクション・ドリルスルー・ブックマーク",
-      "count": 4,
-      "lesson": "L403"
-    },
-    "L404": {
-      "title": "条件付き書式とツールチップ",
-      "count": 4,
-      "lesson": "L404"
-    },
-    "L405": {
-      "title": "AIビジュアルと分析機能",
-      "count": 4,
-      "lesson": "L405"
-    },
-    "L406": {
-      "title": "アクセシビリティと性能",
-      "count": 4,
-      "lesson": "L406"
-    },
-    "L501": {
-      "title": "ワークスペースとロール",
-      "count": 4,
-      "lesson": "L501"
-    },
-    "L502": {
-      "title": "発行・アプリ配布・共有",
-      "count": 4,
-      "lesson": "L502"
-    },
-    "L503": {
-      "title": "ゲートウェイと更新",
-      "count": 4,
-      "lesson": "L503"
-    },
-    "L504": {
-      "title": "デプロイメントパイプライン",
-      "count": 4,
-      "lesson": "L504"
-    },
-    "L505": {
-      "title": "ガバナンス",
-      "count": 4,
-      "lesson": "L505"
-    },
-    "L506": {
-      "title": "PL-300 攻略",
-      "count": 4,
-      "lesson": "L506"
-    },
-    "L507": {
-      "title": "模擬試験と弱点分析",
-      "count": 4,
-      "lesson": "L507"
-    }
+ "totalQuestions": 67,
+ "lessonQuestions": 0,
+ "examQuestions": 67,
+ "byArea": {
+  "データの準備": 15,
+  "データのモデル化": 22,
+  "視覚化と分析": 16,
+  "資産の管理とセキュリティ": 14
+ },
+ "bySkill": {},
+ "byDifficulty": {
+  "2": 34,
+  "1": 6,
+  "3": 25,
+  "4": 2
+ },
+ "quizzes": {
+  "EXAM-PL300": {
+   "title": "PL-300 模擬試験 問題バンク",
+   "count": 67,
+   "lesson": null,
+   "isExam": true
   }
+ }
 }

@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>学習の全体像 | Power BI Mastery</title>
+<meta name="description" content="Power BI Mastery の学習全体像。初級・中級・上級・プロの4ティアと22モジュールの俯瞰図。各モジュールのゴール・レッスン数・所要時間・進捗が一覧できます。">
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/config.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">本文へスキップ</a>
+<main id="main" class="wrap" style="padding-top:34px">
+  <p class="eyebrow">Overview</p>
+  <h1 style="margin:8px 0 8px;font-size:30px;line-height:1.4">学習の全体像</h1>
+  <p class="muted" style="max-width:44em;margin:0 0 24px">
+    このサイトは <strong>4つのティア</strong> と <strong>22のモジュール</strong> でできています。
+    ティアは登る段、モジュールはその段に置かれた踏み台です。
+    下の段から順に踏んでいけば、Power BI を「知っている」から「設計できる」に変えられます。
+  </p>
+
+  <!-- 全体サマリー -->
+  <div class="card" style="margin-bottom:30px">
+    <div class="row sumrow">
+      <div class="ring" id="ring"><div id="ring-pct">0%</div></div>
+      <div style="flex:1 1 auto;min-width:0">
+        <div class="row" style="gap:22px">
+          <div><div style="font-size:22px;font-weight:800" id="st-lessons">0/0</div><div class="small muted">レッスン</div></div>
+          <div><div style="font-size:22px;font-weight:800" id="st-mods">0/0</div><div class="small muted">モジュール完了</div></div>
+          <div><div style="font-size:22px;font-weight:800" id="st-labs">0/0</div><div class="small muted">ラボ</div></div>
+          <div><div style="font-size:22px;font-weight:800" id="st-time">0分</div><div class="small muted">学習量</div></div>
+        </div>
+        <div class="row" style="margin-top:14px">
+          <a class="btn btn-brand btn-sm" id="next-link" href="#">次のレッスンへ →</a>
+          <a class="btn btn-ghost btn-sm" href="roadmap.html">詳細ロードマップ</a>
+          <a class="btn btn-ghost btn-sm" href="pl300.html">PL-300 カバレッジ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ティア間の関係（図） -->
+  <h2 style="font-size:24px;margin:0 0 6px">ティアはこう積み上がる</h2>
+  <p class="muted small" style="margin:0 0 14px">下の段が上の段の土台です。段を飛ばすと、上の段で必ず戻ることになります。</p>
+  <div id="stack" class="ladder" style="margin-bottom:8px"></div>
+  <p class="small muted" id="stack-note" style="margin:0 0 40px"></p>
+
+  <!-- ティア詳細 -->
+  <div id="tiers"></div>
+</main>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/analytics.js"></script>
+<script>
+function pbmExtraNav() {
+  var add = [["tiers.html", "学習の全体像", "index.html"], ["pl300.html", "PL-300", "exam.html"]];
+  [".nav", ".drawer"].forEach(function (sel) {
+    var box = document.querySelector(".site-header " + sel);
+    if (!box) return;
+    add.forEach(function (it) {
+      var href = PBM.url(it[0]);
+      if (box.querySelector('a[href="' + href + '"]')) return;
+      var a = document.createElement("a");
+      a.href = href; a.textContent = it[1];
+      var after = box.querySelector('a[href="' + PBM.url(it[2]) + '"]');
+      if (after && after.nextSibling) box.insertBefore(a, after.nextSibling);
+      else box.appendChild(a);
+    });
+    if (box.classList.contains("nav")) {
+      var here = location.pathname.split("/").pop() || "index.html";
+      var cur = box.querySelector('a[href="' + PBM.url(here) + '"]');
+      if (cur) cur.setAttribute("aria-current", "page");
+    }
+  });
+}
+</script>
+<script>
+(async function () {
+  PBM.renderChrome();
+  pbmExtraNav();
+
+  var c;
+  try { c = await PBM.curriculum(); }
+  catch (e) {
+    document.getElementById("tiers").innerHTML =
+      '<div class="empty"><strong>カリキュラムを読み込めませんでした</strong>ページを再読み込みしてください。</div>';
+    return;
+  }
+
+  var tiers = (c.tiers && c.tiers.length ? c.tiers : (c.levels || []));
+  var modules = c.modules || [];
+  var lessons = c.lessons || [];
+  var labs = c.labs || [];
+
+  function lessonsOfModule(m) {
+    return lessons.filter(function (l) { return l.module === m.id; });
+  }
+  function statsOf(ls) {
+    var done = ls.filter(function (l) { return PBM.progress.isLessonDone(l.id); }).length;
+    return { done: done, total: ls.length, pct: ls.length ? Math.round(done / ls.length * 100) : 0 };
+  }
+  function tierLessons(t) {
+    return lessons.filter(function (l) { return l.tier === t.id || l.level === t.id; });
+  }
+  function tierModules(t) {
+    if (t.moduleIds && t.moduleIds.length) {
+      return t.moduleIds.map(function (id) { return modules.filter(function (m) { return m.id === id; })[0]; })
+        .filter(Boolean);
+    }
+    return modules.filter(function (m) { return m.tier === t.id; });
+  }
+  function hrs(min) { return Math.max(1, Math.round(min / 60)); }
+
+  /* ---------- サマリー ---------- */
+  var s = PBM.stats(c);
+  var modsDone = modules.filter(function (m) { var st = statsOf(lessonsOfModule(m)); return st.total && st.pct === 100; }).length;
+  document.getElementById("ring").style.setProperty("--p", s.pct);
+  document.getElementById("ring-pct").textContent = s.pct + "%";
+  document.getElementById("st-lessons").textContent = s.lessonsDone + "/" + s.lessonsTotal;
+  document.getElementById("st-mods").textContent = modsDone + "/" + modules.length;
+  document.getElementById("st-labs").textContent = s.labsDone + "/" + s.labsTotal;
+  document.getElementById("st-time").textContent = PBM.fmtMin(s.minutes);
+  var n = PBM.nextLesson(c);
+  var nl = document.getElementById("next-link");
+  nl.href = n ? "lesson.html?id=" + n.id : "exam.html";
+  nl.textContent = n ? "次： " + n.id + " " + String(n.title || "").slice(0, 14) + "… →" : "模擬試験に挑戦 →";
+
+  /* ---------- 積み上げ図 ---------- */
+  var stack = document.getElementById("stack");
+  if (!tiers.length) {
+    stack.innerHTML = '<div class="empty"><strong>カリキュラムを準備中です</strong>モジュールが登録されるとここに表示されます。</div>';
+  } else {
+    stack.innerHTML = tiers.map(function (t, i) {
+      var st = statsOf(tierLessons(t));
+      var h = t.hours || t.estimatedHours || 0;
+      return '<a class="ladder-step tone-' + t.id + '" href="#' + t.id + '" style="--indent:' + (i * 18) + 'px">' +
+        '<span class="no">' + (t.order || i + 1) + "</span>" +
+        '<span style="min-width:0">' +
+          '<span class="nm">' + PBM.esc(t.title) + " " +
+            '<span class="muted" style="font-weight:600;font-size:14px">' + PBM.esc(t.en || "") + "</span></span>" +
+          '<span class="ds" style="display:block">' + PBM.esc(t.goal || t.subtitle || "") + "</span>" +
+        "</span>" +
+        '<span class="rt">' + st.total + "レッスン ・ " + h + "h ・ " + st.pct + "%</span>" +
+        "</a>";
+    }).join("");
+    document.getElementById("stack-note").textContent =
+      "合計 " + modules.length + " モジュール ・ " + lessons.length + " レッスン ・ 目安 " +
+      tiers.reduce(function (a, t) { return a + (t.hours || t.estimatedHours || 0); }, 0) + " 時間。";
+  }
+
+  /* ---------- ティアごとのモジュール一覧 ---------- */
+  var host = document.getElementById("tiers");
+  if (!tiers.length) { host.innerHTML = ""; return; }
+
+  host.innerHTML = tiers.map(function (t, i) {
+    var mods = tierModules(t);
+    var st = statsOf(tierLessons(t));
+    var h = t.hours || t.estimatedHours || 0;
+    var tLabs = labs.filter(function (lb) { return lb.tier === t.id || lb.level === t.id; });
+
+    var cards = mods.length
+      ? mods.map(function (m) {
+          var ls = lessonsOfModule(m);
+          var ms = statsOf(ls);
+          var mh = m.estimatedHours || hrs(m.minutes || 0);
+          return '<a class="mod-card tone-' + t.id + '" href="roadmap.html#' + m.id + '">' +
+            '<div class="mid">' + PBM.esc(m.id) + "</div>" +
+            "<h4>" + PBM.esc(m.title || m.id) + "</h4>" +
+            '<p class="goal">🎯 ' + PBM.esc(m.goal || m.subtitle || "") + "</p>" +
+            '<div class="bar"><span style="width:' + ms.pct + '%"></span></div>' +
+            '<div class="meta">' +
+              "<span>" + ms.done + " / " + (ms.total || m.lessonCount || 0) + " レッスン</span>" +
+              "<span>目安 " + mh + "時間</span>" +
+              (ms.pct === 100 && ms.total ? '<span class="badge badge-ok">✓ 完了</span>' : "") +
+            "</div></a>";
+        }).join("")
+      : '<div class="empty" style="grid-column:1/-1"><strong>このティアは準備中です</strong>' +
+        'モジュールが登録されると、ここにゴールとレッスン数が並びます。</div>';
+
+    return '<section class="tone-' + t.id + '" id="' + t.id + '" style="scroll-margin-top:76px">' +
+      '<div class="tier-head">' +
+        '<span class="badge badge-lv lv-' + t.id + '" style="font-size:13px">' + PBM.esc(t.title) + "</span>" +
+        "<h2>" + PBM.esc(t.subtitle || t.title) + "</h2>" +
+        '<span class="badge">' + PBM.esc(t.en || "") + "</span>" +
+        '<span class="badge">' + mods.length + " モジュール</span>" +
+        '<span class="badge">' + st.total + " レッスン</span>" +
+        '<span class="badge">目安 ' + h + " 時間</span>" +
+        (tLabs.length ? '<span class="badge">🧪 ラボ ' + tLabs.length + "</span>" : "") +
+        '<p class="g">🎯 ' + PBM.esc(t.goal || "") + "</p>" +
+      "</div>" +
+      '<div class="row" style="margin:12px 0 16px;gap:12px;flex-wrap:nowrap">' +
+        '<div class="bar" style="flex:1 1 auto"><span style="width:' + st.pct + '%;background:var(--tier)"></span></div>' +
+        '<span class="small muted" style="white-space:nowrap">' + st.done + " / " + st.total + " （" + st.pct + "%）</span>" +
+      "</div>" +
+      '<div class="grid grid-3">' + cards + "</div>" +
+      (tLabs.length
+        ? '<div style="margin-top:14px">' + tLabs.map(function (lb) {
+            return '<a class="lesson-row" href="lab.html?id=' + lb.id + '" style="border-style:dashed">' +
+              '<span class="check' + (PBM.progress.isLabDone(lb.id) ? " on" : "") + '">✓</span>' +
+              '<span class="lid">' + PBM.esc(lb.id) + "</span>" +
+              '<span class="t">🧪 ' + PBM.esc(lb.title) + "</span>" +
+              '<span class="m">' + lb.minutes + "分</span></a>";
+          }).join("") + "</div>"
+        : "") +
+      "</section>";
+  }).join("") +
+  '<section class="card" style="margin-top:40px;border-color:var(--accent)">' +
+    '<span class="badge badge-warn">GOAL</span>' +
+    '<h2 style="margin:12px 0 8px;font-size:22px">登りきったら</h2>' +
+    '<p class="muted" style="margin:0 0 14px">' +
+      '上級までを終えれば PL-300 の出題範囲は網羅できます。プロのティアは、資格の先で価値を出すための段です。</p>' +
+    '<div class="row"><a class="btn btn-brand btn-sm" href="pl300.html">カバレッジを確認する</a>' +
+    '<a class="btn btn-ghost btn-sm" href="exam.html">模擬試験を受ける</a></div>' +
+  "</section>";
+
+  if (location.hash) {
+    var target = document.querySelector(location.hash);
+    if (target) target.scrollIntoView();
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用語自動リンクのテスト</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/glossary.css">
+<script src="/assets/js/config.js"></script>
+</head>
+<body>
+<main class="wrap" style="padding-top:30px">
+<article id="body" class="testprose">
+  <h1>スタースキーマと中央値の話（h1は除外）</h1>
+  <h2>相関と因果関係（h2は除外）</h2>
+  <p id="p1">売上データを見るときは、平均だけでなく中央値も確認します。外れ値が1件あるだけで平均は大きく動くからです。標準偏差を添えると、ばらつきの大きさが伝わります。</p>
+  <p id="p2">ETL の工程でデータクレンジングを行い、データウェアハウスに格納します。ETL は何度出てきても、ETL は3回目以降リンクされません。ETL、ETL。</p>
+  <p id="p3">ALLSELECTED は ALL とは違う関数です。ALL 単体なら用語ですが ALLSELECTED の一部にはリンクしません。</p>
+  <p id="p4">データソースとデータマートは別物です。移動平均と前年比を並べるとトレンドが読めます。</p>
+  <p id="p5">A/Bテストの結果はp値と有意水準で判断します。KPIツリーで分解しましょう。</p>
+  <p id="p6"><a href="#">既存リンクの中の中央値はリンクしない</a> / <code>コード内の中央値もリンクしない</code></p>
+  <pre id="p7">pre の中の 標準偏差 はリンクしない</pre>
+  <figure id="p8"><figcaption>figure の中の 分散 はリンクしない</figcaption></figure>
+  <div class="callout tip"><div class="callout-title">callout-title 内の 欠損値 はリンクしない</div><p>本文の欠損値はリンクされます。</p></div>
+  <p id="p9" style="text-align:right">右端に置いた用語：コホート分析</p>
+  <div id="bulk"></div>
+</article>
+</main>
+<script src="/assets/js/app.js"></script>
+<script src="/assets/js/analytics.js"></script>
+<script src="/assets/js/glossary.js"></script>
+<script>
+window.__ready = (async function(){
+  var params = new URLSearchParams(location.search);
+
+  /* 長文ページを再現する */
+  if (params.has("bulk")) {
+    var base = "この章では実務データの粒度をそろえ、集計の前に欠損値と外れ値を確認します。" +
+      "ダッシュボードでは前年比とトレンドを並べ、KPIの達成率を確認します。" +
+      "データウェアハウスに蓄えた時系列を移動平均でならすと季節性が見えてきます。" +
+      "相関があっても因果関係とは限らないため、仮説検定で確かめます。";
+    var h = "";
+    for (var i = 0; i < 60; i++) h += "<p>" + base + "</p>";
+    document.getElementById("bulk").innerHTML = h;
+  }
+
+  /* 用語500語での性能測定 */
+  var warm = await PBM.glossaryData();
+  if (params.has("big")) {
+    var terms = warm.terms.slice();
+    var byTerm = new Map(warm.byTerm);
+    for (var j = terms.length; j < 500; j++) {
+      var t = { term: "ダミー用語" + j, en: "Dummy" + j, reading: "だみー", short: "テスト用の用語です。",
+                desc: "テスト用。", lesson: null, tags: ["テスト"], aliases: ["だみー" + j], autolink: true, module: "M99", tier: null };
+      terms.push(t); byTerm.set(t.term.toLowerCase(), t);
+    }
+    PBM.glossaryData = function () { return Promise.resolve({ terms: terms, byTerm: byTerm, modules: [] }); };
+  }
+
+  var t0 = performance.now();
+  var n = await PBM.linkGlossary(document.getElementById("body"));
+  window.__ms = performance.now() - t0;
+  window.__links = n;
+  window.__terms = warm.terms.length;
+  return n;
+})();
+</script>
+</body>
+</html>

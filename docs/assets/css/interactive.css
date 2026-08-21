@@ -1,0 +1,484 @@
+/* ==========================================================================
+   PBM Interactive — 操作できる図解ウィジェットのスタイル
+   ・既存の CSS 変数のみ使用（ライト/ダーク自動対応）
+   ・最小文字サイズ 15px / タップ領域 44px / 360px 幅で操作可能
+   ========================================================================== */
+
+.pbmw {
+  --pbmw-gap: 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 16px 14px 14px;
+  margin: 22px 0;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--fg);
+}
+@media (min-width: 700px) { .pbmw { padding: 20px 20px 16px; } }
+
+.pbmw *, .pbmw *::before, .pbmw *::after { box-sizing: border-box; }
+
+/* ---------- ヘッダー / 操作ガイド / 解説 ---------- */
+.pbmw-head { margin-bottom: 12px; }
+.pbmw-title {
+  margin: 0 0 6px; font-size: 17px; line-height: 1.5; font-weight: 800;
+  display: flex; align-items: center; gap: 8px;
+}
+.pbmw-title::before {
+  content: ""; width: 4px; height: 18px; border-radius: 2px;
+  background: var(--brand); flex: none;
+}
+.pbmw-guide {
+  margin: 0; font-size: 15px; color: var(--fg-muted);
+  background: var(--bg-sunken); border-radius: var(--radius-sm);
+  padding: 9px 12px; display: flex; gap: 8px; align-items: flex-start;
+}
+.pbmw-guide .ic { flex: none; }
+
+.pbmw-body > * + * { margin-top: var(--pbmw-gap); }
+
+.pbmw-note {
+  margin-top: 14px; padding: 12px 14px; font-size: 15px; line-height: 1.8;
+  border-radius: var(--radius-sm);
+  background: var(--bg-sunken); border-left: 4px solid var(--border-strong);
+  transition: background-color .2s ease, border-color .2s ease;
+}
+.pbmw-note.t-brand { background: var(--brand-soft); border-left-color: var(--brand); }
+.pbmw-note.t-ok    { background: var(--ok-soft);    border-left-color: var(--ok); }
+.pbmw-note.t-warn  { background: var(--warn-soft);  border-left-color: var(--warn); }
+.pbmw-note.t-ng    { background: var(--ng-soft);    border-left-color: var(--ng); }
+.pbmw-note b { font-weight: 800; }
+
+.pbmw-muted { color: var(--fg-muted); }
+.pbmw-sub { font-size: 15px; color: var(--fg-muted); line-height: 1.7; }
+.pbmw-lbl { font-size: 15px; font-weight: 700; color: var(--fg-muted); }
+
+/* ---------- パネル ---------- */
+.pbmw-panel {
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 12px; background: var(--bg);
+}
+.pbmw-panel > * + * { margin-top: 10px; }
+.pbmw-panel-h {
+  font-size: 15px; font-weight: 800; color: var(--fg);
+  display: flex; align-items: center; gap: 8px;
+}
+.pbmw-2col { display: grid; gap: var(--pbmw-gap); }
+@media (min-width: 720px) { .pbmw-2col { grid-template-columns: 1fr 1fr; } }
+
+.pbmw-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pbmw-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+/* グリッド/フレックスの子が中身の最小幅で膨らまないようにする（横スクロールは .pbmw-scroll の中だけ） */
+.pbmw-2col > *, .pbmw-panel > *, .pbmw-scroll, .pbmw-body > * { min-width: 0; max-width: 100%; }
+
+/* ---------- ボタン類 ---------- */
+.pbmw-btn, .pbmw-segbtn, .pbmw-chipbtn, .pbmw-goal, .pbmw-opt, .pbmw-tab, .pbmw-node {
+  font-family: inherit; font-size: 15px; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.pbmw-btn {
+  min-height: 44px; padding: 10px 16px; border-radius: 10px;
+  border: 1px solid var(--border-strong); background: var(--bg-elevated); color: var(--fg);
+  font-weight: 700; transition: background-color .15s ease, border-color .15s ease, transform .1s ease;
+}
+.pbmw-btn:hover { border-color: var(--brand); }
+.pbmw-btn:active { transform: translateY(1px); }
+.pbmw-btn.primary { background: var(--brand); border-color: transparent; color: #fff; }
+.pbmw-btn:disabled { opacity: .45; cursor: not-allowed; }
+.pbmw-disabled-wrap { display: inline-flex; cursor: not-allowed; }
+.pbmw-disabled-wrap > .pbmw-btn:disabled { pointer-events: none; }
+
+.pbmw-seg { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.pbmw-segbtn {
+  min-height: 44px; padding: 9px 14px; border-radius: 10px;
+  border: 1px solid var(--border-strong); background: var(--bg-elevated); color: var(--fg-muted);
+  font-weight: 700; transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+.pbmw-segbtn:hover { border-color: var(--brand); color: var(--fg); }
+.pbmw-segbtn[aria-pressed="true"] {
+  background: var(--brand); border-color: transparent; color: #fff;
+}
+.pbmw-chipbtn {
+  min-height: 44px; padding: 8px 13px; border-radius: 999px;
+  border: 1px dashed var(--border-strong); background: transparent; color: var(--fg);
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.pbmw-chipbtn:hover { background: var(--brand-soft); border-color: var(--brand); }
+
+.pbmw :is(button, [tabindex]):focus-visible {
+  outline: 3px solid var(--brand); outline-offset: 2px; border-radius: 8px;
+}
+
+/* ---------- チップ / カウンタ ---------- */
+.pbmw-chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; min-height: 34px; }
+.pbmw-chip {
+  display: inline-block; padding: 4px 11px; border-radius: 999px;
+  font-size: 15px; font-weight: 700; border: 1px solid var(--border);
+  background: var(--bg-sunken); color: var(--fg-muted);
+}
+.pbmw-chip.on   { background: var(--brand-soft); color: var(--brand); border-color: transparent; }
+.pbmw-chip.none { background: var(--warn-soft);  color: var(--warn);  border-color: transparent; }
+
+.pbmw-counters { display: flex; flex-wrap: wrap; gap: 6px; }
+.pbmw-count {
+  display: inline-block; padding: 5px 11px; border-radius: 8px; font-size: 15px;
+  background: var(--bg-sunken); color: var(--fg-muted); border: 1px solid var(--border);
+}
+.pbmw-count.strong { background: var(--brand-soft); color: var(--brand); border-color: transparent; font-weight: 800; }
+.pbmw-count.warn   { background: var(--warn-soft);  color: var(--warn);  border-color: transparent; font-weight: 700; }
+.pbmw-count.ng     { background: var(--ng-soft);    color: var(--ng);    border-color: transparent; font-weight: 700; }
+
+.pbmw-bignum {
+  font-size: 22px; font-weight: 800; line-height: 1.4;
+  font-variant-numeric: tabular-nums; transition: color .2s ease;
+}
+.pbmw-bignum .pbmw-unit { font-size: 16px; font-weight: 700; color: var(--fg-muted); }
+.pbmw-tagline { font-size: 15px; font-weight: 700; color: var(--brand); }
+
+/* ---------- 表 ---------- */
+.pbmw-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.pbmw-table th, .pbmw-table td {
+  border-bottom: 1px solid var(--border); padding: 7px 10px; text-align: left;
+  white-space: nowrap;
+}
+.pbmw-table thead th {
+  background: var(--bg-sunken); color: var(--fg-muted); font-size: 15px; font-weight: 800;
+  border-bottom: 1px solid var(--border-strong);
+}
+.pbmw-table td.num, .pbmw-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.pbmw-table tbody tr { transition: background-color .2s ease, opacity .2s ease; }
+
+/* マトリックス（filter-context） */
+.pbmw-matrix tbody th { font-weight: 700; background: var(--bg-sunken); }
+.pbmw-matrix td { padding: 4px; }
+.pbmw-cell {
+  width: 100%; min-height: 44px; padding: 8px 12px;
+  border: 1px solid transparent; border-radius: 8px;
+  background: var(--bg-elevated); color: var(--brand);
+  font: inherit; font-size: 15px; font-weight: 700; text-align: right;
+  font-variant-numeric: tabular-nums; cursor: pointer;
+  transition: background-color .15s ease, color .15s ease, box-shadow .15s ease;
+}
+.pbmw-cell:hover { background: var(--brand-soft); }
+.pbmw-cell[aria-pressed="true"] {
+  background: var(--brand); color: #fff; box-shadow: var(--shadow-sm);
+}
+.pbmw-trtotal th, .pbmw-trtotal td { background: var(--bg-sunken); font-weight: 800; }
+.pbmw-trtotal .pbmw-cell { background: transparent; }
+.pbmw-trtotal .pbmw-cell[aria-pressed="true"] { background: var(--brand); }
+
+.pbmw-data tbody tr.hit { background: var(--ok-soft); }
+.pbmw-data tbody tr.hit td:first-child { box-shadow: inset 3px 0 0 var(--ok); }
+.pbmw-data tbody tr.out { opacity: .38; }
+.pbmw-data tbody tr.dropped { background: var(--ng-soft); text-decoration: line-through; opacity: .75; }
+.pbmw-data tbody tr.newrow td { animation: pbmw-fadein .3s ease both; }
+.pbmw-data tbody tr.warnrow { background: var(--warn-soft); }
+.pbmw-data tbody tr.hidden-row { opacity: .18; filter: blur(2.5px); }
+.pbmw-data tbody tr.cur { background: var(--brand-soft); font-weight: 700; }
+.pbmw-data tbody tr.done { color: var(--fg-muted); }
+.pbmw-null { color: var(--fg-subtle); font-style: italic; }
+
+@keyframes pbmw-fadein { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+
+/* ---------- コード表示 ---------- */
+.pbmw-code {
+  font-family: var(--mono); font-size: 15px; line-height: 1.8;
+  background: var(--bg-sunken); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px; overflow-x: auto;
+}
+.pbmw-tok-f { color: var(--brand); font-weight: 700; }
+.pbmw-tok-col { color: var(--lv3); }
+.pbmw-tok-m { color: var(--lv4); font-weight: 700; }
+.pbmw-cmt { color: var(--fg-subtle); font-style: italic; }
+
+/* ---------- 1. filter-context ---------- */
+.pbmw[data-widget="filter-context"] .pbmw-bignum { color: var(--brand); }
+
+/* ---------- 2. star-explorer ---------- */
+.pbmw-star {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr minmax(28px, .5fr) 1fr;
+  grid-template-rows: auto minmax(64px, auto) auto;
+  gap: 14px;
+  padding: 4px 0;
+}
+.pbmw-star-svg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.pbmw-node {
+  position: relative; z-index: 1;
+  border: 2px solid var(--border-strong); border-radius: 10px;
+  background: var(--bg-elevated); color: var(--fg);
+  padding: 8px 6px; min-height: 60px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  text-align: center; font: inherit; font-size: 15px;
+  transition: border-color .25s ease, background-color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+.pbmw-node .nm { font-weight: 800; font-size: 15px; line-height: 1.3; }
+.pbmw-node .sub { font-size: 15px; color: var(--fg-muted); line-height: 1.3; }
+.pbmw-node .cnt { font-size: 15px; color: var(--fg-muted); font-variant-numeric: tabular-nums; }
+.pbmw-dim { cursor: pointer; }
+.pbmw-dim:hover { border-color: var(--brand); }
+.pbmw-dim.sel {
+  border-color: var(--brand); background: var(--brand-soft); box-shadow: var(--shadow-sm);
+  transform: scale(1.02);
+}
+.pbmw-dim.sel .cnt, .pbmw-dim.sel .nm { color: var(--brand); font-weight: 800; }
+.pbmw-dim.ripple { border-color: var(--warn); background: var(--warn-soft); }
+.pbmw-dim.ripple .cnt { color: var(--warn); font-weight: 700; }
+.pbmw-fact {
+  grid-column: 2; grid-row: 2; justify-self: center; min-width: 104px;
+  border-color: var(--fg-muted); background: var(--bg-sunken);
+  padding: 8px 4px; min-height: 56px;
+}
+.pbmw-fact .nm { font-size: 15px; white-space: nowrap; }
+.pbmw-fact.hit { border-color: var(--ok); background: var(--ok-soft); }
+.pbmw-fact.hit .cnt { color: var(--ok); font-weight: 800; }
+.pos-tl { grid-column: 1; grid-row: 1; }
+.pos-tr { grid-column: 3; grid-row: 1; }
+.pos-bl { grid-column: 1; grid-row: 3; }
+.pos-br { grid-column: 3; grid-row: 3; }
+
+.pbmw-edge { stroke: var(--border-strong); stroke-width: 2; }
+.pbmw-edge-flow, .pbmw-edge-back {
+  stroke-width: 4; stroke-linecap: round; opacity: 0;
+  stroke-dasharray: 10 14; stroke-dashoffset: 0;
+  transition: opacity .2s ease;
+}
+.pbmw-edge-flow { stroke: var(--brand); }
+.pbmw-edge-back { stroke: var(--warn); }
+.pbmw-edge-flow.on, .pbmw-edge-back.on { opacity: 1; animation: pbmw-dash 1s linear infinite; }
+@keyframes pbmw-dash { to { stroke-dashoffset: -48; } }
+
+.pbmw-steps { margin: 0; padding-left: 1.4em; font-size: 15px; }
+.pbmw-steps li { margin: 4px 0; animation: pbmw-fadein .25s ease both; }
+.pbmw-steps li.warn { color: var(--warn); font-weight: 700; }
+.pbmw-steps code { font-family: var(--mono); background: var(--bg-sunken); padding: 1px 5px; border-radius: 5px; }
+
+/* ---------- 3. visual-picker ---------- */
+.pbmw-goals { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+.pbmw-goal {
+  min-height: 52px; padding: 10px 12px; border-radius: 10px;
+  border: 1px solid var(--border-strong); background: var(--bg-elevated); color: var(--fg);
+  font-weight: 700; text-align: left; display: flex; align-items: center; gap: 8px;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.pbmw-goal .ic { font-size: 19px; }
+.pbmw-goal:hover { border-color: var(--brand); background: var(--brand-soft); }
+.pbmw-goal[aria-pressed="true"] { background: var(--brand); border-color: transparent; color: #fff; }
+
+.pbmw-q { font-size: 15px; }
+.pbmw-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.pbmw-opt {
+  min-height: 44px; padding: 9px 14px; border-radius: 999px;
+  border: 1px solid var(--border-strong); background: var(--bg-elevated); color: var(--fg);
+  font-weight: 700; transition: background-color .15s ease, border-color .15s ease;
+}
+.pbmw-opt:hover { border-color: var(--ok); background: var(--ok-soft); }
+.pbmw-opt[aria-pressed="true"] { background: var(--ok); border-color: transparent; color: #fff; }
+
+.pbmw-rec-name { font-size: 19px; font-weight: 800; color: var(--brand); }
+.pbmw-rec-cols { display: grid; gap: 12px; margin-top: 8px; }
+@media (min-width: 640px) { .pbmw-rec-cols { grid-template-columns: 220px 1fr; align-items: start; } }
+.pbmw-rec-prev {
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-elevated); padding: 8px;
+}
+.pbmw-preview { width: 100%; height: auto; display: block; }
+.pbmw-rec-why p, .pbmw-rec-why ul { margin: 4px 0 10px; font-size: 15px; }
+.pbmw-rec-why ul { padding-left: 1.3em; }
+.pbmw-rec-lbl { font-size: 15px; font-weight: 800; letter-spacing: .04em; }
+.pbmw-rec-lbl.ok { color: var(--ok); }
+.pbmw-rec-lbl.ng { color: var(--ng); }
+
+/* ---------- 4. dax-anatomy ---------- */
+.pbmw-tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.pbmw-tab {
+  min-height: 44px; padding: 9px 14px; border-radius: 10px 10px 0 0;
+  border: 1px solid var(--border-strong); border-bottom-width: 0;
+  background: var(--bg-sunken); color: var(--fg-muted); font-weight: 800;
+  font-family: var(--mono); font-size: 15px;
+  transition: background-color .15s ease, color .15s ease;
+}
+.pbmw-tab[aria-selected="true"] { background: var(--brand); border-color: transparent; color: #fff; }
+.pbmw-daxcode { white-space: pre; }
+/* トークンは指でも押せるよう、行の高さを 46px 確保する */
+.pbmw-cl { min-height: 46px; line-height: 46px; }
+.pbmw-tok {
+  font-family: var(--mono); font-size: 15px; line-height: 1.6;
+  border: 0; background: transparent; margin: 0;
+  border-radius: 5px; cursor: pointer; color: var(--fg);
+  text-decoration: underline dotted 2px; text-underline-offset: 4px;
+  padding: 11px 5px; /* タップ領域 46px */
+  transition: background-color .15s ease, color .15s ease;
+}
+.pbmw-tok.r-func    { color: var(--brand); font-weight: 700; }
+.pbmw-tok.r-column  { color: var(--lv3); }
+.pbmw-tok.r-measure { color: var(--lv4); font-weight: 700; }
+.pbmw-tok.r-table   { color: var(--lv5); }
+.pbmw-tok.r-filter  { color: var(--warn); }
+.pbmw-tok:hover, .pbmw-tok.on { background: var(--brand-soft); }
+.pbmw-tok.on { box-shadow: inset 0 0 0 2px var(--brand); }
+.pbmw-pop {
+  border: 1px solid var(--border); border-left: 4px solid var(--brand);
+  border-radius: var(--radius-sm); background: var(--bg-sunken);
+  padding: 10px 12px; font-size: 15px; min-height: 62px;
+}
+.pbmw-pop code { font-family: var(--mono); background: var(--bg-elevated); padding: 1px 6px; border-radius: 5px; }
+.pbmw-pop p { margin: 6px 0 0; }
+.pbmw-rolebadge {
+  display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 15px; font-weight: 800;
+  background: var(--brand-soft); color: var(--brand); margin-right: 8px;
+}
+.pbmw-rolebadge.r-column  { background: var(--bg-elevated); color: var(--lv3); }
+.pbmw-rolebadge.r-measure { background: var(--bg-elevated); color: var(--lv4); }
+.pbmw-rolebadge.r-table   { background: var(--bg-elevated); color: var(--lv5); }
+.pbmw-rolebadge.r-filter  { background: var(--warn-soft); color: var(--warn); }
+
+/* ---------- 5. calc-vs-measure / バー ---------- */
+.pbmw-side .pbmw-panel-h { font-size: 15px; }
+.pbmw-stagelist { display: flex; flex-direction: column; gap: 6px; min-height: 120px; }
+.pbmw-stage {
+  padding: 7px 11px; border-radius: 8px; font-size: 15px;
+  background: var(--bg-sunken); color: var(--fg-muted);
+  border: 1px solid var(--border);
+  opacity: .25; transform: translateX(-6px);
+  transition: opacity .35s ease, transform .35s ease, background-color .35s ease, color .35s ease;
+}
+.pbmw-stage.on { opacity: 1; transform: none; background: var(--brand-soft); color: var(--fg); border-color: transparent; }
+.pbmw-state {
+  font-size: 15px; font-weight: 800; padding: 7px 11px; border-radius: 8px;
+  background: var(--bg-sunken); color: var(--fg-muted); text-align: center;
+  transition: background-color .25s ease, color .25s ease;
+}
+.pbmw-state.busy { background: var(--warn-soft); color: var(--warn); }
+.pbmw-state.done { background: var(--ok-soft); color: var(--ok); }
+.pbmw-state.idle { background: var(--bg-sunken); color: var(--fg-subtle); }
+
+.pbmw-bars { display: flex; flex-direction: column; gap: 8px; }
+.pbmw-barrow { display: grid; grid-template-columns: 112px 1fr 92px; gap: 8px; align-items: center; font-size: 15px; }
+.pbmw-barrow .l { color: var(--fg-muted); font-weight: 700; }
+.pbmw-barrow .v { text-align: right; font-variant-numeric: tabular-nums; font-weight: 800; }
+.pbmw-bar { display: block; height: 14px; border-radius: 999px; background: var(--bg-sunken); overflow: hidden; }
+.pbmw-bar > i { display: block; height: 100%; border-radius: 999px; background: var(--brand); transition: width .5s ease; }
+
+/* ---------- 7. cardinality-lab ---------- */
+.pbmw-slider {
+  -webkit-appearance: none; appearance: none; width: 100%; height: 44px;
+  background: transparent; cursor: pointer; margin: 0;
+}
+.pbmw-slider::-webkit-slider-runnable-track {
+  height: 10px; border-radius: 999px;
+  background: linear-gradient(90deg, var(--ok), var(--warn), var(--ng));
+}
+.pbmw-slider::-moz-range-track {
+  height: 10px; border-radius: 999px;
+  background: linear-gradient(90deg, var(--ok), var(--warn), var(--ng));
+}
+.pbmw-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 28px; height: 28px; border-radius: 50%; margin-top: -9px;
+  background: var(--bg-elevated); border: 3px solid var(--brand); box-shadow: var(--shadow-sm);
+}
+.pbmw-slider::-moz-range-thumb {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--bg-elevated); border: 3px solid var(--brand);
+}
+.pbmw-curve { width: 100%; height: auto; display: block; }
+.pbmw-axis { stroke: var(--border-strong); stroke-width: 1.5; }
+.pbmw-axistext { fill: var(--fg-muted); font-size: 15px; font-family: var(--font); }
+.pbmw-curveline { fill: none; stroke: var(--brand); stroke-width: 3; stroke-linejoin: round; }
+.pbmw-marker { fill: var(--ng); stroke: var(--bg-elevated); stroke-width: 2.5; transition: cx .25s ease, cy .25s ease; }
+.pbmw-vline { stroke: var(--border-strong); stroke-width: 1; stroke-dasharray: 3 4; transition: x1 .25s ease, x2 .25s ease; }
+
+/* ---------- 8. context-transition ---------- */
+.pbmw-side.bad  { border-color: var(--ng); }
+.pbmw-side.bad  .pbmw-panel-h { color: var(--ng); }
+.pbmw-side.good { border-color: var(--ok); }
+.pbmw-side.good .pbmw-panel-h { color: var(--ok); }
+.pbmw-side.bad  .pbmw-bignum { color: var(--ng); }
+.pbmw-side.good .pbmw-bignum { color: var(--ok); }
+.pbmw-table td.f { white-space: normal; }
+
+/* ---------- 9. rls-simulator ---------- */
+.pbmw-who {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: var(--radius-sm);
+  background: var(--brand-soft); border: 1px solid transparent;
+}
+.pbmw-avatar {
+  width: 38px; height: 38px; border-radius: 50%; flex: none;
+  display: grid; place-items: center; background: var(--bg-elevated); font-size: 20px;
+}
+.pbmw-who code { font-family: var(--mono); font-size: 15px; }
+.pbmw-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.pbmw-kpi {
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg); padding: 10px 6px; text-align: center;
+}
+.pbmw-kpi .v {
+  font-size: 22px; font-weight: 800; line-height: 1.3; color: var(--brand);
+  font-variant-numeric: tabular-nums; transition: color .2s ease;
+}
+.pbmw-kpi .l { font-size: 15px; color: var(--fg-muted); }
+.pbmw-empty {
+  padding: 14px; text-align: center; font-weight: 800; font-size: 15px;
+  color: var(--ng); background: var(--ng-soft); border-radius: var(--radius-sm);
+}
+
+/* ---------- 10. granularity-lab ---------- */
+.pbmw-levels { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.pbmw-level {
+  padding: 7px 13px; border-radius: 999px; font-size: 15px; font-weight: 700;
+  background: var(--bg-sunken); color: var(--fg-muted); border: 1px solid var(--border);
+  transition: background-color .25s ease, color .25s ease;
+}
+.pbmw-level.on { background: var(--brand); color: #fff; border-color: transparent; }
+.pbmw-level.past { background: var(--bg); color: var(--fg-subtle); text-decoration: line-through; }
+.pbmw-arrow { color: var(--fg-subtle); }
+.pbmw-qlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+.pbmw-qlist li {
+  display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+  padding: 7px 11px; border-radius: 8px; font-size: 15px;
+  transition: background-color .3s ease, color .3s ease;
+}
+.pbmw-qlist li.ok { background: var(--ok-soft); color: var(--fg); }
+.pbmw-qlist li.ok .ic { color: var(--ok); font-weight: 800; }
+.pbmw-qlist li.ng { background: var(--ng-soft); color: var(--ng); text-decoration: line-through; }
+.pbmw-qlist li.ng .ic { color: var(--ng); font-weight: 800; }
+.pbmw-qlist li .tx { flex: 1 1 auto; }
+.pbmw-qlist li .rs { font-size: 15px; text-decoration: none; opacity: .85; white-space: nowrap; }
+
+/* ---------- 未実装 ---------- */
+.pbmw-unimpl {
+  padding: 14px; border-radius: var(--radius-sm);
+  background: var(--warn-soft); color: var(--warn); font-size: 15px;
+}
+.pbmw-unimpl .pbmw-sub { color: inherit; opacity: .9; }
+.pbmw-unimpl code {
+  font-family: var(--mono); background: var(--bg-elevated); color: var(--fg);
+  padding: 1px 6px; border-radius: 5px; font-size: 15px;
+}
+
+/* ---------- 狭い画面の調整 ---------- */
+@media (max-width: 420px) {
+  .pbmw { padding: 14px 10px 12px; }
+  .pbmw-panel { padding: 10px 8px; }
+  .pbmw-kpis { grid-template-columns: 1fr; }
+  .pbmw-barrow { grid-template-columns: 96px 1fr 84px; }
+  .pbmw-node .sub { display: none; }
+  .pbmw-bignum { font-size: 18px; }
+  .pbmw-table th, .pbmw-table td { padding: 6px 7px; }
+}
+
+/* ---------- 動きを減らす設定 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .pbmw *, .pbmw *::before, .pbmw *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .pbmw-edge-flow.on, .pbmw-edge-back.on { animation: none; stroke-dasharray: none; }
+  .pbmw-stage { opacity: 1; transform: none; }
+}

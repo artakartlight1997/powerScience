@@ -17,6 +17,14 @@
   PBM.mountQuiz = function (root, quiz, options) {
     const opt = Object.assign({ mode: "practice", shuffle: true, limit: 0, minutes: 0 }, options || {});
     let qs = quiz.questions.slice();
+    if (typeof opt.filter === "function") qs = qs.filter(opt.filter);
+    if (opt.areas && opt.areas.length) qs = qs.filter(function (q) { return opt.areas.indexOf(q.area) >= 0; });
+    if (opt.skills && opt.skills.length) qs = qs.filter(function (q) { return opt.skills.indexOf(q.skill) >= 0; });
+    if (!qs.length) {
+      root.innerHTML = '<div class="card"><h3>該当する設問がありません</h3>' +
+        '<p class="muted">条件を緩めてもう一度お試しください。</p></div>';
+      return;
+    }
     if (opt.shuffle) qs = PBM.shuffle(qs);
     if (opt.limit > 0) qs = qs.slice(0, opt.limit);
 
@@ -172,13 +180,17 @@
       const pct = Math.round((correct / qs.length) * 100);
       const minutes = Math.round((Date.now() - state.startedAt) / 60000);
 
-      /* 領域別スコア */
-      const byArea = {};
+      /* 領域別・スキル項目別スコア */
+      const byArea = {}, bySkill = {};
       qs.forEach(function (q, i) {
+        const ok = isCorrect(q, state.answers[i]);
         const a = q.area || "その他";
         byArea[a] = byArea[a] || { c: 0, t: 0 };
-        byArea[a].t++;
-        if (isCorrect(q, state.answers[i])) byArea[a].c++;
+        byArea[a].t++; if (ok) byArea[a].c++;
+        if (q.skill) {
+          bySkill[q.skill] = bySkill[q.skill] || { c: 0, t: 0 };
+          bySkill[q.skill].t++; if (ok) bySkill[q.skill].c++;
+        }
       });
 
       const pass = pct >= ((window.PBM_CONFIG && window.PBM_CONFIG.quizPassLine) || 80);
@@ -204,6 +216,20 @@
               '<div class="small" style="text-align:right">' + r.c + "/" + r.t + "</div></div>";
           }).join("") +
         "</div>" +
+        (Object.keys(bySkill).length
+          ? '<div class="card" style="margin-top:14px"><h3>PL-300 スキル項目別（弱い順）</h3>' +
+            Object.keys(bySkill).map(function (k) {
+              const r = bySkill[k], pp = Math.round((r.c / r.t) * 100);
+              return { k: k, r: r, p: pp };
+            }).sort(function (a, b) { return a.p - b.p; }).map(function (x) {
+              return '<div class="area-row"><div><div class="nm">' + PBM.esc(x.k) + "</div>" +
+                '<div class="bar"><span style="width:' + x.p + "%;background:var(--" +
+                (x.p >= 80 ? "ok" : x.p >= 60 ? "warn" : "ng") + ')"></span></div></div>' +
+                '<div class="small" style="text-align:right">' + x.r.c + "/" + x.r.t + "</div></div>";
+            }).join("") +
+            '<p class="small muted" style="margin-top:10px">正答率の低い項目から復習すると、もっとも効率よく点が伸びます。</p>' +
+            "</div>"
+          : "") +
         '<div class="card" style="margin-top:14px"><h3>復習リスト（間違えた問題）</h3><div id="q-review"></div></div>' +
         '<div class="row" style="margin-top:16px">' +
           '<button class="btn btn-brand" id="q-retry">もう一度挑戦</button>' +
@@ -225,7 +251,7 @@
 
       el.querySelector("#q-retry").addEventListener("click", function () { location.reload(); });
 
-      if (opt.onFinish) opt.onFinish({ correct: correct, total: qs.length, pct: pct, byArea: byArea, minutes: minutes });
+      if (opt.onFinish) opt.onFinish({ correct: correct, total: qs.length, pct: pct, byArea: byArea, bySkill: bySkill, minutes: minutes });
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 

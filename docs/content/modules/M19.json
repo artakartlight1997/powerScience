@@ -1,0 +1,111 @@
+{
+  "id": "M19",
+  "tier": "T4",
+  "order": 19,
+  "title": "Microsoft Fabric",
+  "subtitle": "Power BIの先にある基盤",
+  "goal": "Fabricの構成要素を理解し、Power BIとの接続点を設計できる",
+  "estimatedHours": 15,
+  "lessons": [
+    {
+      "id": "L1901",
+      "title": "Fabric の全体像 — Power BIはどこに位置するか",
+      "minutes": 50,
+      "type": "concept",
+      "why": "Power BI は単体製品からFabricの1ワークロードになった。この地図を持たないと、目の前の課題をPower BIの中だけで無理に解こうとして遠回りする。",
+      "gain": "Fabricの主要ワークロードと共通基盤を説明し、Power BIの担当範囲を線引きできる。",
+      "objectives": [
+        "Fabricの共通基盤（OneLake・容量・ワークスペース）を説明できる",
+        "主要ワークロードの用途を区別できる",
+        "Power BI単体で足りる案件とFabricが要る案件を判別できる"
+      ],
+      "prereq": ["L1805"],
+      "unlocks": "データエンジニアと同じ地図の上で会話でき、基盤側の設計に踏み込める。",
+      "keywords": ["Microsoft Fabric", "ワークロード", "OneLake", "Fabric容量", "SaaS", "Data Factory", "Data Engineering", "Real-Time Intelligence", "アイテム"],
+      "pl300": ["4.1 ワークスペースの管理"],
+      "ds": ["データプラットフォーム", "レイクハウスアーキテクチャ", "統合分析基盤"],
+      "quiz": "L1901",
+      "lab": null
+    },
+    {
+      "id": "L1902",
+      "title": "OneLake と Lakehouse — データを1か所に置く",
+      "minutes": 50,
+      "type": "concept",
+      "why": "分析基盤のコストの大半は、同じデータを何度もコピーすることで生まれる。コピーせずに参照する設計を知っているかどうかで、構成は根本的に変わる。",
+      "gain": "OneLakeとLakehouseの構造を理解し、コピーとショートカットを使い分けられる。",
+      "objectives": [
+        "OneLakeの論理構造とDeltaフォーマットの役割を説明できる",
+        "ショートカットとミラーリングの適用条件を判定できる",
+        "LakehouseのFilesとTablesの使い分けができる"
+      ],
+      "prereq": ["L1901"],
+      "unlocks": "Direct Lakeの前提が揃い、コピーを増やさない基盤設計ができる。",
+      "keywords": ["OneLake", "Lakehouse", "Delta Lake", "Parquet", "ショートカット", "ミラーリング", "SQL分析エンドポイント", "Files", "Tables"],
+      "pl300": ["1.1 データソースへの接続"],
+      "ds": ["データレイク", "オープンテーブルフォーマット", "ゼロコピー", "スキーマオンリード"],
+      "quiz": "L1902",
+      "lab": null
+    },
+    {
+      "id": "L1903",
+      "title": "Warehouse・Notebook・パイプライン",
+      "minutes": 50,
+      "type": "concept",
+      "why": "同じ変換を書く手段がFabricには4つある。選択理由を言えないままどれかを選ぶと、後任者が読めない基盤ができあがる。",
+      "gain": "Warehouse・Lakehouse・Notebook・パイプライン・Dataflow Gen2を、チームのスキルと要件から選べる。",
+      "objectives": [
+        "WarehouseとLakehouseの違いを4観点で説明できる",
+        "パイプラインとDataflow Gen2の役割分担を説明できる",
+        "オーケストレーションの設計原則を挙げられる"
+      ],
+      "prereq": ["L1902"],
+      "unlocks": "BI担当としてデータ基盤側の実装方針をレビューでき、手戻りを防げる。",
+      "keywords": ["Fabric Warehouse", "Notebook", "Spark", "Data Pipeline", "Dataflow Gen2", "オーケストレーション", "T-SQL", "medallion", "冪等性"],
+      "pl300": ["1.2 データの取得と変換", "1.6 パフォーマンスを考慮した取り込み"],
+      "ds": ["ELTオーケストレーション", "分散処理", "ワークフロー管理", "べき等な再実行"],
+      "quiz": "L1903",
+      "lab": null
+    },
+    {
+      "id": "L1904",
+      "title": "Direct Lake — インポートとDirectQueryの第三の道",
+      "minutes": 55,
+      "type": "concept",
+      "why": "インポートの速さとDirectQueryの鮮度は長年トレードオフだった。Direct Lakeはその前提を変えるが、無条件に速いわけではない。条件を知らないと期待外れになる。",
+      "gain": "Direct Lakeの仕組みとフォールバック条件を理解し、3つの接続方式から根拠つきで選べる。",
+      "objectives": [
+        "Direct Lakeが読むファイルと常駐の仕組みを説明できる",
+        "DirectQueryへフォールバックする条件を挙げられる",
+        "3方式の選択基準をフローで示せる"
+      ],
+      "prereq": ["L1903"],
+      "unlocks": "鮮度と性能を両立する構成を提案でき、大規模データの案件で選択肢が増える。",
+      "keywords": ["Direct Lake", "トランスコード", "フレーミング", "ウォームアップ", "DirectQueryフォールバック", "V-Order", "常駐メモリ", "Direct Lake on OneLake"],
+      "pl300": ["1.1 データソースへの接続", "2.5 モデルの最適化"],
+      "ds": ["列指向ストレージ", "メモリ階層", "遅延読み込み"],
+      "quiz": "L1904",
+      "lab": null
+    },
+    {
+      "id": "L1905",
+      "title": "容量管理とコスト — CU・スロットリング・監視",
+      "minutes": 50,
+      "type": "concept",
+      "why": "容量が逼迫すると、まず更新が失敗し、次に画面が固まる。そして原因は「昨日誰かが回した重い処理」であることが多い。見える化していない容量は必ず溢れる。",
+      "gain": "CUの消費モデルとスロットリングの段階を理解し、容量を監視・是正・配賦できる。",
+      "objectives": [
+        "CU・スムージング・バーストの関係を説明できる",
+        "スロットリングの3段階と利用者への影響を言える",
+        "容量メトリックから犯人アイテムを特定する手順を作れる"
+      ],
+      "prereq": ["L1904"],
+      "unlocks": "コストと性能を数字で語れるようになり、基盤の意思決定を任される立場になる。",
+      "keywords": ["容量ユニット", "CU", "SKU", "スムージング", "バースト", "スロットリング", "容量メトリックアプリ", "自動スケール", "チャージバック"],
+      "pl300": ["4.3 データ更新の管理", "4.1 ワークスペースの管理"],
+      "ds": ["リソース管理", "コスト配賦", "キャパシティプランニング", "監視とアラート"],
+      "quiz": "L1905",
+      "lab": null
+    }
+  ]
+}

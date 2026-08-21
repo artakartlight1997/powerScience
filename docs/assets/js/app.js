@@ -93,19 +93,32 @@
     }
   };
 
-  /* ---------- カリキュラム取得（キャッシュ付き） ---------- */
+  /* ---------- カリキュラム取得（キャッシュ付き） ----------
+     v2（tiers / modules / lessons）と v1（levels / lessons）の両方に対応する。 */
   let _curriculum = null;
   PBM.curriculum = async function () {
     if (_curriculum) return _curriculum;
     const res = await fetch(PBM.url("content/curriculum.json"), { cache: "no-cache" });
     if (!res.ok) throw new Error("カリキュラムを読み込めませんでした (" + res.status + ")");
-    _curriculum = await res.json();
-    _curriculum.lessonById = Object.fromEntries(_curriculum.lessons.map((l) => [l.id, l]));
-    _curriculum.levelById = Object.fromEntries(_curriculum.levels.map((l) => [l.id, l]));
-    _curriculum.labById = Object.fromEntries(_curriculum.labs.map((l) => [l.id, l]));
-    return _curriculum;
+    const c = await res.json();
+    c.lessons = c.lessons || [];
+    c.labs = c.labs || [];
+    c.tiers = c.tiers || [];
+    c.modules = c.modules || [];
+    c.levels = c.levels || [];
+    c.lessonById = Object.fromEntries(c.lessons.map((l) => [l.id, l]));
+    c.labById = Object.fromEntries(c.labs.map((l) => [l.id, l]));
+    c.tierById = Object.fromEntries(c.tiers.map((t) => [t.id, t]));
+    c.moduleById = Object.fromEntries(c.modules.map((m) => [m.id, m]));
+    c.levelById = Object.fromEntries(c.levels.map((l) => [l.id, l]));
+    c.isV2 = c.tiers.length > 0;
+    _curriculum = c;
+    return c;
   };
   PBM.lessonsOfLevel = (c, levelId) => c.lessons.filter((l) => l.level === levelId);
+  PBM.lessonsOfModule = (c, moduleId) => c.lessons.filter((l) => l.module === moduleId);
+  PBM.lessonsOfTier = (c, tierId) => c.lessons.filter((l) => l.tier === tierId);
+  PBM.modulesOfTier = (c, tierId) => c.modules.filter((m) => m.tier === tierId);
 
   /* ---------- 進捗集計 ---------- */
   PBM.stats = function (c) {
@@ -123,11 +136,20 @@
       minutes: minutes
     };
   };
-  PBM.levelStats = function (c, levelId) {
+  function countDone(lessons) {
     const p = loadProgress();
-    const ls = PBM.lessonsOfLevel(c, levelId);
-    const done = ls.filter((l) => p.lessons && p.lessons[l.id] && p.lessons[l.id].done).length;
-    return { done, total: ls.length, pct: ls.length ? Math.round((done / ls.length) * 100) : 0 };
+    const done = lessons.filter((l) => p.lessons && p.lessons[l.id] && p.lessons[l.id].done).length;
+    return { done, total: lessons.length, pct: lessons.length ? Math.round((done / lessons.length) * 100) : 0 };
+  }
+  PBM.levelStats  = (c, levelId)  => countDone(PBM.lessonsOfLevel(c, levelId));
+  PBM.moduleStats = (c, moduleId) => countDone(PBM.lessonsOfModule(c, moduleId));
+  PBM.tierStats   = (c, tierId)   => countDone(PBM.lessonsOfTier(c, tierId));
+
+  /* あるレッスンの前提が満たされているか */
+  PBM.prereqStatus = function (c, lesson) {
+    const req = (lesson && lesson.prereq) || [];
+    const missing = req.filter((id) => !PBM.progress.isLessonDone(id));
+    return { ok: missing.length === 0, missing: missing, total: req.length };
   };
 
   /* ---------- 次にやるべきレッスン ---------- */
@@ -139,10 +161,12 @@
   /* ---------- 共通ヘッダー / フッター ---------- */
   const NAV = [
     ["index.html", "ホーム"],
+    ["tiers.html", "学習の全体像"],
     ["roadmap.html", "ロードマップ"],
     ["labs.html", "ハンズオン"],
     ["quizzes.html", "クイズ"],
     ["exam.html", "模擬試験"],
+    ["pl300.html", "PL-300"],
     ["glossary.html", "用語集"],
     ["progress.html", "学習記録"]
   ];

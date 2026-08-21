@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PL-300 出題範囲カバレッジ | Power BI Mastery</title>
+<meta name="description" content="PL-300（Microsoft Power BI Data Analyst）の4領域24スキル項目それぞれについて、対応レッスンと自分の学習済み割合を確認できます。すべて緑になれば出題範囲を網羅した合図です。">
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/config.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">本文へスキップ</a>
+<main id="main" class="wrap" style="padding-top:34px">
+  <p class="eyebrow">PL-300 Coverage</p>
+  <h1 style="margin:8px 0 8px;font-size:30px;line-height:1.4">PL-300 出題範囲カバレッジ</h1>
+  <p class="muted" style="max-width:44em;margin:0 0 20px">
+    PL-300 は4つの領域・24のスキル項目から出題されます。ここでは項目ごとに
+    <strong>対応するレッスン</strong>と<strong>自分の学習済み割合</strong>を並べています。
+    <strong>この表がすべて緑になれば、出題範囲を網羅した</strong>ということです。
+    赤やオレンジの項目が、いま埋めるべき穴です。
+  </p>
+
+  <div class="card" style="margin:0 0 26px">
+    <div class="row sumrow">
+      <div class="ring" id="ring"><div id="ring-pct">0%</div></div>
+      <div style="flex:1 1 auto;min-width:0">
+        <div class="row" style="gap:22px">
+          <div><div style="font-size:22px;font-weight:800" id="st-full">0</div><div class="small muted">網羅した項目</div></div>
+          <div><div style="font-size:22px;font-weight:800" id="st-part">0</div><div class="small muted">学習中</div></div>
+          <div><div style="font-size:22px;font-weight:800" id="st-none">0</div><div class="small muted">未着手</div></div>
+          <div><div style="font-size:22px;font-weight:800" id="st-gap">0</div><div class="small muted">教材未整備</div></div>
+        </div>
+        <div class="row" style="margin-top:14px">
+          <a class="btn btn-brand btn-sm" id="weak-link" href="#">いちばん弱い項目へ →</a>
+          <a class="btn btn-ghost btn-sm" href="exam.html">模擬試験を受ける</a>
+          <button class="btn btn-ghost btn-sm" id="only-todo" type="button">未学習だけ表示</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="areas"></div>
+
+  <section class="card" style="margin-top:36px">
+    <h2 style="margin:0 0 8px;font-size:20px">出題範囲の一次情報</h2>
+    <p class="muted" style="margin:0 0 14px">
+      本サイトの対応づけは学習用の整理です。出題比率やスキル項目は改訂されることがあるため、
+      受験前に必ず Microsoft の公式ページで最新のスキル測定資料をご確認ください。
+    </p>
+    <a class="btn btn-ghost btn-sm" href="https://learn.microsoft.com/ja-jp/credentials/certifications/exams/pl-300/" target="_blank" rel="noopener">
+      PL-300 公式ページ（Microsoft Learn） ↗
+    </a>
+  </section>
+</main>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/analytics.js"></script>
+<script>
+function pbmExtraNav() {
+  var add = [["tiers.html", "学習の全体像", "index.html"], ["pl300.html", "PL-300", "exam.html"]];
+  [".nav", ".drawer"].forEach(function (sel) {
+    var box = document.querySelector(".site-header " + sel);
+    if (!box) return;
+    add.forEach(function (it) {
+      var href = PBM.url(it[0]);
+      if (box.querySelector('a[href="' + href + '"]')) return;
+      var a = document.createElement("a");
+      a.href = href; a.textContent = it[1];
+      var after = box.querySelector('a[href="' + PBM.url(it[2]) + '"]');
+      if (after && after.nextSibling) box.insertBefore(a, after.nextSibling);
+      else box.appendChild(a);
+    });
+    if (box.classList.contains("nav")) {
+      var here = location.pathname.split("/").pop() || "index.html";
+      var cur = box.querySelector('a[href="' + PBM.url(here) + '"]');
+      if (cur) cur.setAttribute("aria-current", "page");
+    }
+  });
+}
+</script>
+<script>
+(async function () {
+  PBM.renderChrome();
+  pbmExtraNav();
+
+  var host = document.getElementById("areas");
+  var pl = null, c = null;
+
+  try {
+    var r = await fetch("content/pl300.json", { cache: "no-cache" });
+    if (r.ok) pl = await r.json();
+  } catch (e) { /* noop */ }
+  try { c = await PBM.curriculum(); } catch (e) { /* noop */ }
+
+  if (!pl || !pl.areas || !pl.areas.length) {
+    host.innerHTML = '<div class="empty"><strong>カバレッジ表を準備中です</strong>' +
+      'scripts/build_curriculum.py を実行すると content/pl300.json が生成され、ここに表示されます。</div>';
+    return;
+  }
+
+  var tierById = (c && c.tierById) || {};
+  if (!Object.keys(tierById).length && c) {
+    (c.tiers || c.levels || []).forEach(function (t) { tierById[t.id] = t; });
+  }
+
+  /* ---------- 集計 ---------- */
+  var rows = [];
+  pl.areas.forEach(function (a) {
+    a.skills.forEach(function (sk) {
+      var ls = sk.lessons || [];
+      var done = ls.filter(function (l) { return PBM.progress.isLessonDone(l.id); }).length;
+      rows.push({
+        area: a, sk: sk, lessons: ls,
+        done: done, total: ls.length,
+        pct: ls.length ? Math.round(done / ls.length * 100) : 0,
+        state: !ls.length ? "gap" : (done === ls.length ? "full" : (done ? "part" : "none"))
+      });
+    });
+  });
+
+  var nFull = rows.filter(function (x) { return x.state === "full"; }).length;
+  var nPart = rows.filter(function (x) { return x.state === "part"; }).length;
+  var nNone = rows.filter(function (x) { return x.state === "none"; }).length;
+  var nGap = rows.filter(function (x) { return x.state === "gap"; }).length;
+  var overall = Math.round(nFull / rows.length * 100);
+
+  document.getElementById("ring").style.setProperty("--p", overall);
+  document.getElementById("ring-pct").textContent = overall + "%";
+  document.getElementById("st-full").textContent = nFull + " / " + rows.length;
+  document.getElementById("st-part").textContent = nPart;
+  document.getElementById("st-none").textContent = nNone;
+  document.getElementById("st-gap").textContent = nGap;
+
+  var weak = rows.filter(function (x) { return x.state === "none"; })[0] ||
+             rows.filter(function (x) { return x.state === "part"; })[0];
+  var wl = document.getElementById("weak-link");
+  if (weak && weak.lessons.length) {
+    var target = weak.lessons.filter(function (l) { return !PBM.progress.isLessonDone(l.id); })[0] || weak.lessons[0];
+    wl.href = "lesson.html?id=" + target.id;
+    wl.textContent = "弱点へ： " + weak.sk.code + " " + weak.sk.title + " →";
+  } else {
+    wl.href = "exam.html";
+    wl.textContent = "全項目クリア。模擬試験へ →";
+  }
+
+  /* ---------- 描画 ---------- */
+  var STATE_BADGE = {
+    full: ['badge-ok', '✓ 網羅'],
+    part: ['badge-warn', '学習中'],
+    none: ['badge-ng', '未学習'],
+    gap:  ['', '教材準備中']
+  };
+
+  host.innerHTML = pl.areas.map(function (a) {
+    var mine = rows.filter(function (x) { return x.area === a; });
+    var full = mine.filter(function (x) { return x.state === "full"; }).length;
+    var apct = Math.round(full / mine.length * 100);
+
+    var skills = mine.map(function (x) {
+      var b = STATE_BADGE[x.state];
+      var lessonList = x.lessons.length
+        ? x.lessons.map(function (l) {
+            var d = PBM.progress.isLessonDone(l.id);
+            var t = tierById[l.tier];
+            return '<a class="lesson-row" href="lesson.html?id=' + l.id + '">' +
+              '<span class="check' + (d ? " on" : "") + '" aria-hidden="true">✓</span>' +
+              '<span class="lid">' + PBM.esc(l.id) + "</span>" +
+              '<span class="t">' + PBM.esc(l.title) + "</span>" +
+              (t ? '<span class="badge badge-lv lv-' + t.id + '">' + PBM.esc(t.title) + "</span>" : "") +
+              '<span class="badge">' + PBM.esc(l.module || "") + "</span>" +
+              '<span class="m">' + (l.minutes || 0) + "分</span></a>";
+          }).join("")
+        : '<div class="empty" style="padding:18px"><strong>対応レッスンがまだありません</strong>' +
+          'この項目の教材は準備中です。模擬試験の該当領域で補ってください。</div>';
+
+      return '<details class="pl-skill ' + x.state + '" data-state="' + x.state + '" id="s' + x.sk.code.replace(".", "-") + '">' +
+        "<summary>" +
+          '<span class="code">' + PBM.esc(x.sk.code) + "</span>" +
+          '<span class="nm">' + PBM.esc(x.sk.title) + "</span>" +
+          '<span class="st">' +
+            '<span class="small muted" style="white-space:nowrap">' + x.done + "/" + x.total + "</span>" +
+            '<span class="mini"><span style="width:' + x.pct + '%"></span></span>' +
+            '<span class="badge ' + b[0] + '">' + b[1] + "</span>" +
+          "</span>" +
+        "</summary>" +
+        '<div class="pl-body">' + lessonList + "</div>" +
+      "</details>";
+    }).join("");
+
+    return '<section class="pl-area" id="' + a.id + '" style="scroll-margin-top:76px">' +
+      "<header>" +
+        "<h2>" + PBM.esc(a.title) + "</h2>" +
+        '<span class="badge badge-warn">出題比率 ' + PBM.esc(a.weight) + "</span>" +
+        '<span class="badge ' + (apct === 100 ? "badge-ok" : "") + '">' + full + " / " + mine.length + " 項目を網羅</span>" +
+      "</header>" +
+      '<div class="row" style="gap:12px;flex-wrap:nowrap;margin-bottom:6px">' +
+        '<div class="bar" style="flex:1 1 auto"><span style="width:' + apct + '%;background:' +
+          (apct === 100 ? "var(--ok)" : "var(--warn)") + '"></span></div>' +
+        '<span class="small muted" style="white-space:nowrap">' + apct + "%</span>" +
+      "</div>" +
+      skills +
+      "</section>";
+  }).join("");
+
+  /* 未学習だけ表示 */
+  var only = false;
+  var btn = document.getElementById("only-todo");
+  btn.addEventListener("click", function () {
+    only = !only;
+    btn.textContent = only ? "すべて表示" : "未学習だけ表示";
+    host.querySelectorAll(".pl-skill").forEach(function (el) {
+      var st = el.getAttribute("data-state");
+      el.classList.toggle("hidden", only && (st === "full"));
+      if (only && st !== "full") el.open = true;
+    });
+  });
+
+  if (location.hash) {
+    var el = document.querySelector(location.hash);
+    if (el) { if (el.tagName === "DETAILS") el.open = true; el.scrollIntoView(); }
+  }
+})();
+</script>
+</body>
+</html>

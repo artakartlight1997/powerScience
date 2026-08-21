@@ -4,45 +4,353 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>用語集 | Power BI Mastery</title>
-<meta name="description" content="Power BI / DAX / Power Query の重要用語をまとめた検索できる用語集。">
+<meta name="description" content="Power BI / BI / データ分析 / 統計の重要用語を、検索・五十音インデックス・タグで引ける用語集。">
 <link rel="icon" href="assets/img/favicon.svg">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/glossary.css">
 <script src="assets/js/config.js"></script>
 </head>
 <body>
-<main id="main" class="wrap" style="padding-top:34px">
+<a class="skip-link" href="#list">本文へスキップ</a>
+<main id="main" class="wrap" style="padding-top:26px">
   <p class="eyebrow">Glossary</p>
   <h1 style="margin:8px 0 6px">用語集</h1>
-  <p class="muted">用語が分からなくなったらここへ。インクリメンタル検索できます。</p>
-  <input type="search" id="q" placeholder="用語を検索（例: CALCULATE, スタースキーマ, RLS）" style="margin:18px 0" autocomplete="off">
-  <div id="list" class="stack"></div>
+  <p class="muted" style="margin:0 0 4px">
+    分からない言葉が出てきたらここへ。本文中の用語は自動でこのページにリンクされ、マウスを乗せるだけで意味が読めます。
+  </p>
+
+  <div class="gl-toolbar">
+    <div class="gl-search-row">
+      <input type="search" id="q" autocomplete="off" placeholder="用語・英語名・説明・タグを検索（例: 中央値, star, 統計）" aria-label="用語を検索">
+      <span class="gl-count" id="count" aria-live="polite"></span>
+    </div>
+    <nav class="gl-index" id="index" aria-label="五十音・アルファベット索引"></nav>
+  </div>
+
+  <details class="gl-filters" id="filters-box">
+    <summary id="filters-summary">絞り込み（タグ・ティア・モジュール）</summary>
+    <div id="filters"></div>
+  </details>
+
+  <div id="list" class="stack" style="margin-top:14px"><div class="spinner" role="status" aria-label="読み込み中"></div></div>
 </main>
+
 <script src="assets/js/app.js"></script>
 <script src="assets/js/analytics.js"></script>
+<script src="assets/js/glossary.js"></script>
 <script>
 (async function () {
+  "use strict";
   PBM.renderChrome();
-  let terms = [];
-  try { const r = await fetch("content/glossary.json", { cache: "no-cache" }); if (r.ok) terms = await r.json(); } catch (e) {}
-  const list = document.getElementById("list");
-  function draw(f) {
-    const kw = (f || "").trim().toLowerCase();
-    const hit = terms.filter(function (t) {
-      if (!kw) return true;
-      return (t.term + " " + (t.en || "") + " " + t.desc + " " + (t.tags || []).join(" ")).toLowerCase().indexOf(kw) >= 0;
+
+  var esc = PBM.esc;
+  var listEl = document.getElementById("list");
+  var countEl = document.getElementById("count");
+  var indexEl = document.getElementById("index");
+  var filtersEl = document.getElementById("filters");
+  var qEl = document.getElementById("q");
+
+  /* ---------- 五十音の行分け ---------- */
+  var ROWS = [
+    ["あ", "あいうえおぁぃぅぇぉ"],
+    ["か", "かきくけこがぎぐげご"],
+    ["さ", "さしすせそざじずぜぞ"],
+    ["た", "たちつてとだぢづでどっ"],
+    ["な", "なにぬねの"],
+    ["は", "はひふへほばびぶべぼぱぴぷぺぽ"],
+    ["ま", "まみむめも"],
+    ["や", "やゆよゃゅょ"],
+    ["ら", "らりるれろ"],
+    ["わ", "わをんゎ"]
+  ];
+  var TIER_LABEL = { T0: "共通", T1: "初級", T2: "中級", T3: "上級", T4: "プロ" };
+
+  function toHira(s) {
+    return String(s || "").replace(/[ァ-ヶ]/g, function (c) {
+      return String.fromCharCode(c.charCodeAt(0) - 0x60);
     });
-    if (!hit.length) { list.innerHTML = '<p class="muted">該当する用語がありません。</p>'; return; }
-    list.innerHTML = hit.map(function (t) {
-      return '<div class="card"><div class="row" style="justify-content:space-between">' +
-        '<h3 style="margin:0">' + PBM.esc(t.term) + (t.en ? ' <span class="small muted">' + PBM.esc(t.en) + "</span>" : "") + "</h3>" +
-        (t.lesson ? '<a class="badge" href="lesson.html?id=' + t.lesson + '">' + t.lesson + " で学ぶ</a>" : "") + "</div>" +
-        '<p style="margin-top:8px">' + PBM.esc(t.desc) + "</p>" +
-        (t.tags ? '<div class="tag-list" style="margin-top:8px">' + t.tags.map(function (x) { return '<span class="badge">' + PBM.esc(x) + "</span>"; }).join("") + "</div>" : "") +
-        "</div>";
-    }).join("");
   }
-  draw("");
-  document.getElementById("q").addEventListener("input", function (e) { draw(e.target.value); });
+  function bucketOf(t) {
+    var head = String(t.term || "").charAt(0);
+    if (/[A-Za-z]/.test(head)) return head.toUpperCase();   /* ETL, KPI, p値 などは英字索引へ */
+    var r = toHira(t.reading || t.term).replace(/[\s・ー]/g, "");
+    var c = r.charAt(0);
+    if (!c) return "#";
+    if (/[A-Za-z]/.test(c)) return c.toUpperCase();
+    if (/[0-9]/.test(c)) return "#";
+    for (var i = 0; i < ROWS.length; i++) if (ROWS[i][1].indexOf(c) >= 0) return ROWS[i][0];
+    return "#";
+  }
+  var BUCKET_ORDER = {};
+  ROWS.forEach(function (r, i) { BUCKET_ORDER[r[0]] = i; });
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(function (l, i) { BUCKET_ORDER[l] = 100 + i; });
+  BUCKET_ORDER["#"] = 900;
+  function sortKey(t) { return toHira(t.reading || t.term); }
+
+  /* ---------- データ ---------- */
+  var data;
+  try {
+    data = await PBM.glossaryData();
+  } catch (e) {
+    data = null;
+  }
+  var TERMS = (data && data.terms) || [];
+  if (!TERMS.length) {
+    listEl.innerHTML = '<div class="card"><p class="muted">用語データを読み込めませんでした。ページを再読み込みしてください。</p></div>';
+    countEl.textContent = "";
+    return;
+  }
+  TERMS.forEach(function (t) { t._b = bucketOf(t); t._k = sortKey(t); });
+  TERMS.sort(function (a, b) {
+    var d = (BUCKET_ORDER[a._b] == null ? 950 : BUCKET_ORDER[a._b]) - (BUCKET_ORDER[b._b] == null ? 950 : BUCKET_ORDER[b._b]);
+    if (d) return d;
+    return a._k.localeCompare(b._k, "ja") || a.term.localeCompare(b.term, "ja");
+  });
+
+  /* モジュール定義があればティア・モジュール名を補う */
+  var modInfo = {};
+  try {
+    (await PBM.glossaryModules()).forEach(function (m) { modInfo[m.id] = m; });
+    TERMS.forEach(function (t) {
+      var m = modInfo[t.module];
+      if (m && m.tier) t.tier = m.tier;
+    });
+  } catch (e) { /* モジュール定義が無くても用語集は動く */ }
+
+  /* タグ / モジュール / ティアの一覧 */
+  var tagCount = {}, modCount = {}, tierCount = {};
+  TERMS.forEach(function (t) {
+    (t.tags || []).forEach(function (g) { tagCount[g] = (tagCount[g] || 0) + 1; });
+    if (t.module) modCount[t.module] = (modCount[t.module] || 0) + 1;
+    if (t.tier) tierCount[t.tier] = (tierCount[t.tier] || 0) + 1;
+  });
+  var TAGS = Object.keys(tagCount).sort(function (a, b) { return tagCount[b] - tagCount[a] || a.localeCompare(b, "ja"); });
+  var MODS = Object.keys(modCount).sort();
+  var TIERS = Object.keys(tierCount).sort();
+  var modTitle = {};
+  ((data && data.modules) || []).forEach(function (m) { modTitle[m.id] = m.title; });
+  Object.keys(modInfo).forEach(function (k) { if (modInfo[k].title) modTitle[k] = modInfo[k].title; });
+
+  /* ---------- 状態 ---------- */
+  var state = { q: "", tags: [], mods: [], tiers: [] };
+
+  /* ---------- 絞り込みUI ---------- */
+  function chip(kind, value, label, n) {
+    return '<button type="button" class="gl-chip" data-kind="' + kind + '" data-value="' + esc(value) + '" aria-pressed="false">' +
+      esc(label) + (n ? '<span class="n">' + n + "</span>" : "") + "</button>";
+  }
+  var html = '<div class="gl-filter-row"><span class="gl-filter-label">タグ</span>' +
+    TAGS.map(function (g) { return chip("tag", g, g, tagCount[g]); }).join("") + "</div>";
+  if (TIERS.length) {
+    html += '<div class="gl-filter-row"><span class="gl-filter-label">ティア</span>' +
+      TIERS.map(function (x) { return chip("tier", x, TIER_LABEL[x] || x, tierCount[x]); }).join("") + "</div>";
+  }
+  if (MODS.length) {
+    html += '<div class="gl-filter-row"><span class="gl-filter-label">モジュール</span>' +
+      MODS.map(function (m) { return chip("mod", m, (modTitle[m] || m) + "（" + m + "）", modCount[m]); }).join("") + "</div>";
+  }
+  html += '<div class="gl-filter-row"><button type="button" class="gl-reset" id="reset">絞り込みをすべて解除</button></div>';
+  filtersEl.innerHTML = html;
+  var filtersBox = document.getElementById("filters-box");
+  if (matchMedia("(min-width: 700px)").matches) filtersBox.open = true;
+
+  function updateSummary() {
+    var n = state.tags.length + state.tiers.length + state.mods.length;
+    document.getElementById("filters-summary").textContent =
+      n ? "絞り込み中：" + state.tags.concat(state.tiers.map(function (x) { return TIER_LABEL[x] || x; }))
+            .concat(state.mods).join("・") + "（" + n + "件）"
+        : "絞り込み（タグ・ティア・モジュール）";
+  }
+
+  filtersEl.addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    if (b.id === "reset") {
+      state = { q: "", tags: [], mods: [], tiers: [] };
+      qEl.value = "";
+      filtersEl.querySelectorAll(".gl-chip").forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
+      updateSummary();
+      draw();
+      return;
+    }
+    if (!b.classList.contains("gl-chip")) return;
+    var key = { tag: "tags", mod: "mods", tier: "tiers" }[b.dataset.kind];
+    var v = b.dataset.value;
+    var i = state[key].indexOf(v);
+    if (i >= 0) { state[key].splice(i, 1); b.setAttribute("aria-pressed", "false"); }
+    else { state[key].push(v); b.setAttribute("aria-pressed", "true"); }
+    updateSummary();
+    draw();
+  });
+
+  /* ---------- 索引 ---------- */
+  var presentBuckets = {};
+  TERMS.forEach(function (t) { presentBuckets[t._b] = true; });
+  var letters = Object.keys(presentBuckets).filter(function (b) { return /^[A-Z]$/.test(b); }).sort();
+  var idxHtml = ROWS.map(function (r) {
+    return '<button type="button" data-b="' + r[0] + '"' + (presentBuckets[r[0]] ? "" : " disabled") +
+      ' aria-pressed="false">' + r[0] + "</button>";
+  }).join("");
+  idxHtml += letters.map(function (l) { return '<button type="button" data-b="' + l + '" aria-pressed="false">' + l + "</button>"; }).join("");
+  if (presentBuckets["#"]) idxHtml += '<button type="button" data-b="#" aria-pressed="false">#</button>';
+  indexEl.innerHTML = idxHtml;
+
+  indexEl.addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-b]");
+    if (!b || b.disabled) return;
+    indexEl.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+    var head = document.getElementById("grp-" + b.dataset.b);
+    if (head) head.scrollIntoView({ behavior: "smooth", block: "start" });
+    else {
+      /* 絞り込み中で見つからない場合は絞り込みを解除してから移動 */
+      document.getElementById("reset").click();
+      setTimeout(function () {
+        var h = document.getElementById("grp-" + b.dataset.b);
+        if (h) h.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 30);
+    }
+  });
+
+  /* ---------- 検索・描画 ---------- */
+  function haystack(t) {
+    if (t._h) return t._h;
+    t._h = [t.term, t.en || "", t.reading || "", t.short || "", t.desc || "", (t.tags || []).join(" "), (t.aliases || []).join(" ")]
+      .join(" ").toLowerCase();
+    return t._h;
+  }
+  function reEsc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+  function hl(text, kw) {
+    var s = esc(text == null ? "" : text);
+    if (!kw) return s;
+    try {
+      return s.replace(new RegExp(reEsc(esc(kw)), "gi"), function (m) { return "<mark>" + m + "</mark>"; });
+    } catch (e) { return s; }
+  }
+  function match(t) {
+    if (state.tags.length && !(t.tags || []).some(function (g) { return state.tags.indexOf(g) >= 0; })) return false;
+    if (state.mods.length && state.mods.indexOf(t.module) < 0) return false;
+    if (state.tiers.length && state.tiers.indexOf(t.tier) < 0) return false;
+    if (state.q && haystack(t).indexOf(state.q) < 0) return false;
+    return true;
+  }
+
+  function cardHtml(t, kw) {
+    return '<article class="gl-card" id="' + esc(t.term) + '" data-term="' + esc(t.term) + '">' +
+      '<div class="gl-card-head"><h3>' + hl(t.term, kw) + "</h3>" +
+      (t.en ? '<span class="en">' + hl(t.en, kw) + "</span>" : "") +
+      (t.reading ? '<span class="reading">' + esc(t.reading) + "</span>" : "") +
+      "</div>" +
+      (t.short ? '<p class="short">' + hl(t.short, kw) + "</p>" : "") +
+      (t.desc ? '<p class="desc">' + hl(t.desc, kw) + "</p>" : "") +
+      '<div class="gl-card-foot">' +
+      (t.lesson ? '<a class="gl-lesson" href="' + PBM.url("lesson.html?id=" + encodeURIComponent(t.lesson)) + '">' + esc(t.lesson) + " で学ぶ →</a>" : "") +
+      (t.tags || []).map(function (g) { return '<span class="gl-tag">' + esc(g) + "</span>"; }).join("") +
+      "</div></article>";
+  }
+
+  function rank(t, kw) {
+    if (!kw) return 0;
+    var term = t.term.toLowerCase(), en = (t.en || "").toLowerCase(), rd = toHira(t.reading || "");
+    if (term === kw || en === kw) return 0;
+    if (term.indexOf(kw) === 0 || en.indexOf(kw) === 0 || rd.indexOf(kw) === 0) return 1;
+    if (term.indexOf(kw) >= 0 || en.indexOf(kw) >= 0 || rd.indexOf(kw) >= 0) return 2;
+    if ((t.aliases || []).some(function (x) { return x.toLowerCase().indexOf(kw) >= 0; })) return 3;
+    if ((t.tags || []).some(function (x) { return x.toLowerCase().indexOf(kw) >= 0; })) return 4;
+    return 5;
+  }
+
+  function draw() {
+    var kw = state.q;
+    var hits = TERMS.filter(match);
+    if (kw) {
+      hits = hits.map(function (t, i) { return { t: t, r: rank(t, kw), i: i }; })
+        .sort(function (a, b) { return a.r - b.r || a.i - b.i; })
+        .map(function (x) { return x.t; });
+    }
+    countEl.textContent = hits.length + " / " + TERMS.length + " 語";
+
+    if (!hits.length) {
+      var picks = PBM.shuffle(TERMS).slice(0, 5);
+      listEl.innerHTML =
+        '<div class="gl-empty"><div class="big">🔍</div>' +
+        "<p><strong>「" + esc(qEl.value) + "」に一致する用語は見つかりませんでした。</strong></p>" +
+        '<p class="small">別の言い方や英語名で試すか、タグの絞り込みを解除してみてください。</p>' +
+        '<div class="gl-suggest">' +
+        picks.map(function (t) { return '<button type="button" class="gl-chip" data-jump="' + esc(t.term) + '">' + esc(t.term) + "</button>"; }).join("") +
+        "</div></div>";
+      return;
+    }
+
+    if (kw) {
+      listEl.innerHTML = '<div class="gl-cards">' + hits.map(function (t) { return cardHtml(t, kw); }).join("") + "</div>";
+      return;
+    }
+
+    var out = [], cur = null;
+    hits.forEach(function (t) {
+      if (t._b !== cur) {
+        if (cur !== null) out.push("</div>");
+        cur = t._b;
+        out.push('<h2 class="gl-group-head" id="grp-' + esc(cur) + '"><span class="k">' + esc(cur) + '</span>' +
+          '<span class="l">' + hits.filter(function (x) { return x._b === cur; }).length + " 語</span><hr></h2>");
+        out.push('<div class="gl-cards">');
+      }
+      out.push(cardHtml(t, kw));
+    });
+    if (cur !== null) out.push("</div>");
+    listEl.innerHTML = out.join("");
+  }
+
+  listEl.addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-jump]");
+    if (!b) return;
+    document.getElementById("reset").click();
+    qEl.value = b.dataset.jump;
+    state.q = b.dataset.jump.toLowerCase();
+    draw();
+    focusTerm(b.dataset.jump);
+  });
+
+  var timer = null;
+  qEl.addEventListener("input", function (e) {
+    clearTimeout(timer);
+    var v = e.target.value;
+    timer = setTimeout(function () {
+      state.q = v.trim().toLowerCase();
+      draw();
+      if (state.q && typeof PBM.track === "function") PBM.track("glossary_search", { q: state.q.slice(0, 40) });
+    }, 90);
+  });
+
+  /* ---------- ハッシュでのジャンプとハイライト ---------- */
+  function focusTerm(term) {
+    if (!term) return;
+    var el = document.getElementById(term);
+    if (!el) {
+      /* 絞り込みで隠れている場合は解除してからもう一度 */
+      var known = TERMS.some(function (t) { return t.term === term; });
+      if (!known) return;
+      document.getElementById("reset").click();
+      el = document.getElementById(term);
+      if (!el) return;
+    }
+    document.querySelectorAll(".gl-card.hit").forEach(function (x) { x.classList.remove("hit"); });
+    el.classList.add("hit");
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    el.setAttribute("tabindex", "-1");
+    el.focus({ preventScroll: true });
+  }
+  function fromHash() {
+    var h = location.hash.slice(1);
+    if (!h) return;
+    var term;
+    try { term = decodeURIComponent(h); } catch (e) { term = h; }
+    focusTerm(term);
+  }
+  window.addEventListener("hashchange", fromHash);
+
+  draw();
+  setTimeout(fromHash, 40);
 })();
 </script>
 </body>

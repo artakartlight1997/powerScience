@@ -6,10 +6,18 @@
 <title>レッスン | Power BI Mastery</title>
 <link rel="icon" href="assets/img/favicon.svg">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/figure.css">
+<link rel="stylesheet" href="assets/css/interactive.css">
+<link rel="stylesheet" href="assets/css/glossary.css">
+<link rel="stylesheet" href="assets/css/lesson.css">
 <script src="assets/js/config.js"></script>
 </head>
 <body>
-<main id="main" class="wrap" style="padding-top:26px">
+<a class="skip-link" href="#prose">本文へスキップ</a>
+
+<div class="read-progress" id="read-progress" aria-hidden="true"><span></span></div>
+
+<main id="main" class="wrap" style="padding-top:22px">
   <div id="head"></div>
   <div class="lesson-layout">
     <article>
@@ -24,6 +32,9 @@
 <script src="assets/js/app.js"></script>
 <script src="assets/js/analytics.js"></script>
 <script src="assets/js/render.js"></script>
+<script src="assets/js/figure.js"></script>
+<script src="assets/js/interactive.js"></script>
+<script src="assets/js/glossary.js"></script>
 <script>
 (async function () {
   PBM.renderChrome();
@@ -31,36 +42,94 @@
   const c = await PBM.curriculum();
   const l = c.lessonById[id];
   const prose = document.getElementById("prose");
+  const head = document.getElementById("head");
 
   if (!l) {
-    document.getElementById("head").innerHTML =
-      '<div class="card"><h1>レッスンが見つかりません</h1><p class="muted">URLをご確認ください。</p>' +
+    head.innerHTML =
+      '<div class="card"><h1>レッスンが見つかりません</h1>' +
+      '<p class="muted">URLをご確認ください。カリキュラムが更新された可能性もあります。</p>' +
       '<a class="btn btn-brand btn-sm" href="roadmap.html">ロードマップへ</a></div>';
     prose.innerHTML = "";
     return;
   }
 
-  const lv = c.levelById[l.level];
+  /* ---------- 位置づけの解決（v2: tier/module、v1: level にフォールバック） ---------- */
+  const tier = l.tier ? c.tierById[l.tier] : null;
+  const mod  = l.module ? c.moduleById[l.module] : null;
+  const level = l.level ? c.levelById[l.level] : null;
+  const groupColor = (tier && tier.color) || (level && level.color) || "var(--brand)";
+  const groupName  = (tier ? tier.title + (tier.en ? " " + tier.en : "") : (level ? level.title : ""));
+
   document.title = l.title + " | Power BI Mastery";
-  const idx = c.lessons.findIndex(function (x) { return x.id === id; });
-  const prev = c.lessons[idx - 1], next = c.lessons[idx + 1];
 
-  document.getElementById("head").innerHTML =
-    '<p class="small muted"><a href="roadmap.html">ロードマップ</a> ／ <a href="roadmap.html#' + lv.id + '">' + PBM.esc(lv.title) + "</a></p>" +
-    '<div class="row" style="margin:8px 0">' +
-      '<span class="badge badge-lv lv-' + lv.id + '">' + PBM.esc(lv.title) + "</span>" +
-      '<span class="badge">' + l.id + "</span>" +
-      '<span class="badge">⏱ ' + l.minutes + "分</span>" +
-      (l.type === "hands-on" ? '<span class="badge badge-ok">ハンズオンあり</span>' : "") +
-      (l.type === "exam" ? '<span class="badge badge-warn">模擬試験</span>' : "") +
+  /* 同じモジュール内の並び、および全体の並び */
+  const all = c.lessons;
+  const idx = all.findIndex((x) => x.id === id);
+  const prev = all[idx - 1], next = all[idx + 1];
+  const siblings = mod ? PBM.lessonsOfModule(c, mod.id) : (level ? PBM.lessonsOfLevel(c, level.id) : []);
+  const posInMod = siblings.findIndex((x) => x.id === id) + 1;
+
+  const chip = (txt, cls) => '<span class="badge ' + (cls || "") + '">' + PBM.esc(txt) + "</span>";
+
+  /* ---------- ヘッダー ---------- */
+  const crumbs = [];
+  crumbs.push('<a href="tiers.html">学習の全体像</a>');
+  if (tier) crumbs.push('<a href="roadmap.html#' + tier.id + '">' + PBM.esc(tier.title) + "</a>");
+  if (mod)  crumbs.push('<a href="roadmap.html#' + mod.id + '">' + PBM.esc(mod.title) + "</a>");
+  if (!tier && level) crumbs.push('<a href="roadmap.html#' + level.id + '">' + PBM.esc(level.title) + "</a>");
+
+  const pr = PBM.prereqStatus(c, l);
+
+  head.innerHTML =
+    '<nav class="crumbs">' + crumbs.join('<span class="sep">›</span>') + "</nav>" +
+    '<div class="row lesson-chips" style="margin:10px 0 4px">' +
+      (groupName ? '<span class="badge badge-tier" style="background:' + groupColor + '">' + PBM.esc(groupName) + "</span>" : "") +
+      (mod ? chip(mod.title) : "") +
+      chip(l.id) +
+      chip("⏱ " + l.minutes + "分") +
+      (posInMod ? chip(posInMod + " / " + siblings.length + " 本目") : "") +
+      (l.type === "hands-on" ? chip("ハンズオン", "badge-ok") : "") +
+      (l.type === "drill" ? chip("演習中心", "badge-ok") : "") +
+      (l.type === "exam" ? chip("試験対策", "badge-warn") : "") +
     "</div>" +
-    '<h1 style="margin:6px 0 14px;font-size:26px;line-height:1.45">' + PBM.esc(l.title) + "</h1>" +
-    '<div class="card" style="margin-bottom:26px;background:var(--bg-sunken)">' +
-      '<div class="small" style="font-weight:800;margin-bottom:6px">このレッスンのゴール</div>' +
-      "<ul style=\"margin:0;padding-left:1.2em\">" + l.objectives.map(function (o) { return "<li>" + PBM.esc(o) + "</li>"; }).join("") + "</ul>" +
-    "</div>";
+    '<h1 class="lesson-title">' + PBM.esc(l.title) + "</h1>" +
 
-  // 本文の読み込み
+    /* なぜ学ぶのか → 何ができるようになるか → 次に何が開けるか */
+    '<div class="growth-card">' +
+      (l.why ? '<div class="growth-row"><div class="growth-k">なぜ学ぶのか</div><div class="growth-v">' + PBM.esc(l.why) + "</div></div>" : "") +
+      (l.gain ? '<div class="growth-row growth-gain"><div class="growth-k">このレッスンで身につく力</div><div class="growth-v">' + PBM.esc(l.gain) + "</div></div>" : "") +
+      (l.objectives && l.objectives.length
+        ? '<div class="growth-row"><div class="growth-k">到達目標</div><div class="growth-v"><ul class="obj">' +
+          l.objectives.map((o) => "<li>" + PBM.esc(o) + "</li>").join("") + "</ul></div></div>"
+        : "") +
+      (l.unlocks ? '<div class="growth-row growth-unlock"><div class="growth-k">次に開けること</div><div class="growth-v">' + PBM.esc(l.unlocks) + "</div></div>" : "") +
+    "</div>" +
+
+    /* 前提レッスンが未了なら警告 */
+    (pr.total && !pr.ok
+      ? '<div class="callout warn"><div class="callout-title"><span class="callout-icon">⚠</span>前提レッスンが未完了です</div>' +
+        "<p>先に読むと理解が速くなります：" +
+        pr.missing.map((mid) => {
+          const t = c.lessonById[mid];
+          return '<a href="lesson.html?id=' + mid + '">' + PBM.esc(t ? t.title : mid) + "</a>";
+        }).join(" ／ ") + "</p></div>"
+      : "") +
+
+    /* PL-300 / データサイエンス のタグ */
+    ((l.pl300 && l.pl300.length) || (l.ds && l.ds.length)
+      ? '<div class="meta-tags">' +
+        (l.pl300 && l.pl300.length
+          ? '<div class="meta-tag-row"><span class="meta-tag-k">PL-300</span>' +
+            l.pl300.map((x) => '<a class="badge badge-exam" href="pl300.html#' + encodeURIComponent(x) + '">' + PBM.esc(x) + "</a>").join("") + "</div>"
+          : "") +
+        (l.ds && l.ds.length
+          ? '<div class="meta-tag-row"><span class="meta-tag-k">同時に学ぶ</span>' +
+            l.ds.map((x) => '<span class="badge badge-ds">' + PBM.esc(x) + "</span>").join("") + "</div>"
+          : "") +
+        "</div>"
+      : "");
+
+  /* ---------- 本文 ---------- */
   let md = null;
   try {
     const res = await fetch("content/lessons/" + id + ".md", { cache: "no-cache" });
@@ -69,44 +138,75 @@
 
   if (md == null) {
     prose.innerHTML =
-      '<div class="callout warn"><div class="callout-title">執筆中</div>' +
-      "<p>このレッスンの本文はまだ用意されていません。カリキュラム上の位置づけと学習目標は上に表示されています。</p>" +
-      "<p class=\"small\">執筆の手順は <code>CONTENT_GUIDE.md</code> を参照してください。</p></div>";
+      '<div class="callout warn"><div class="callout-title"><span class="callout-icon">⚠</span>執筆中</div>' +
+      "<p>このレッスンの本文はまだ用意されていません。学習目標は上に表示されています。</p></div>";
   } else {
     prose.innerHTML = PBM.markdown(md);
-    PBM.renderMermaid(prose);
+    await PBM.enhance(prose);
     PBM.buildToc(prose, document.getElementById("toc"));
   }
 
-  // フッター：完了 / クイズ / 前後移動
+  /* ---------- フッター ---------- */
   function drawFoot() {
     const done = PBM.progress.isLessonDone(id);
     const q = l.quiz ? PBM.progress.quizResult(l.quiz) : null;
+    const lab = l.lab ? c.labById[l.lab] : null;
+    const ms = mod ? PBM.moduleStats(c, mod.id) : null;
+
     document.getElementById("foot").innerHTML =
-      "<hr>" +
-      '<div class="card" style="margin-bottom:18px">' +
-        '<h3 style="margin-top:0">理解度チェック</h3>' +
-        (l.lab ? '<p class="small">🧪 このレッスンに対応するハンズオン：<a href="lab.html?id=' + l.lab + '">' + PBM.esc(c.labById[l.lab].title) + "</a></p>" : "") +
-        (l.quiz ? '<p class="small">📝 確認クイズ' + (q ? "（最高スコア " + q.best + "% ・ " + q.tries + "回挑戦）" : "（未挑戦）") + "</p>" : "") +
-        '<div class="row" style="margin-top:10px">' +
-          (l.quiz ? '<a class="btn btn-brand btn-sm" href="quiz.html?id=' + l.quiz + '">クイズに挑戦</a>' : "") +
-          '<button class="btn btn-sm ' + (done ? "btn-ghost" : "btn-primary") + '" id="btn-done">' +
+      '<div class="finish-card">' +
+        "<h3>ここまでで身についたこと</h3>" +
+        (l.gain ? '<p class="finish-gain">' + PBM.esc(l.gain) + "</p>" : "") +
+        (l.unlocks ? '<p class="small muted">次に開けること：' + PBM.esc(l.unlocks) + "</p>" : "") +
+        '<div class="finish-actions">' +
+          '<button class="btn ' + (done ? "btn-ghost" : "btn-primary") + '" id="btn-done">' +
             (done ? "✓ 完了済み（取り消す）" : "このレッスンを完了にする") + "</button>" +
+          (l.quiz ? '<a class="btn btn-brand" href="quiz.html?id=' + l.quiz + '">理解度クイズに挑戦' +
+                    (q ? "（最高 " + q.best + "%）" : "") + "</a>" : "") +
+          (lab ? '<a class="btn btn-ghost" href="lab.html?id=' + lab.id + '">ハンズオン：' + PBM.esc(lab.title) + "</a>" : "") +
         "</div>" +
+        (ms ? '<div class="mod-progress"><div class="small muted">' + PBM.esc(mod.title) + " の進捗 " +
+              ms.done + " / " + ms.total + '</div><div class="bar"><span style="width:' + ms.pct +
+              "%;background:" + groupColor + '"></span></div></div>' : "") +
       "</div>" +
-      '<div class="row" style="justify-content:space-between">' +
-        (prev ? '<a class="btn btn-ghost btn-sm" href="lesson.html?id=' + prev.id + '">← ' + PBM.esc(prev.id) + "</a>" : "<span></span>") +
-        (next ? '<a class="btn btn-ghost btn-sm" href="lesson.html?id=' + next.id + '">' + PBM.esc(next.id) + " →</a>" : '<a class="btn btn-primary btn-sm" href="exam.html">模擬試験へ →</a>') +
-      "</div>";
+      '<nav class="pager">' +
+        (prev ? '<a class="pager-item" href="lesson.html?id=' + prev.id + '"><span class="pager-k">← 前のレッスン</span>' +
+                '<span class="pager-t">' + PBM.esc(prev.title) + "</span></a>" : "<span></span>") +
+        (next ? '<a class="pager-item pager-next" href="lesson.html?id=' + next.id + '"><span class="pager-k">次のレッスン →</span>' +
+                '<span class="pager-t">' + PBM.esc(next.title) + "</span></a>"
+              : '<a class="pager-item pager-next" href="exam.html"><span class="pager-k">仕上げ →</span><span class="pager-t">模擬試験に挑戦する</span></a>') +
+      "</nav>";
+
     document.getElementById("btn-done").addEventListener("click", function () {
-      PBM.progress.setLessonDone(id, !PBM.progress.isLessonDone(id));
+      const nowDone = !PBM.progress.isLessonDone(id);
+      PBM.progress.setLessonDone(id, nowDone);
       drawFoot();
-      if (PBM.progress.isLessonDone(id) && next) {
-        setTimeout(function () { location.href = "lesson.html?id=" + next.id; }, 450);
+      if (nowDone) {
+        celebrate();
+        if (next) setTimeout(function () { location.href = "lesson.html?id=" + next.id; }, 900);
       }
     });
   }
   drawFoot();
+
+  /* 完了時の小さな演出 */
+  function celebrate() {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = document.createElement("div");
+    t.className = "toast";
+    t.textContent = "完了しました。次のレッスンへ進みます。";
+    document.body.appendChild(t);
+    setTimeout(function () { t.classList.add("show"); }, 10);
+    setTimeout(function () { t.remove(); }, 2400);
+  }
+
+  /* 読み進みバー */
+  const bar = document.querySelector("#read-progress > span");
+  addEventListener("scroll", function () {
+    const h = document.documentElement;
+    const pct = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
+    bar.style.width = Math.min(100, Math.max(0, pct * 100)) + "%";
+  }, { passive: true });
 })();
 </script>
 </body>

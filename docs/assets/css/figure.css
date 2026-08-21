@@ -1,0 +1,632 @@
+/* ==========================================================================
+   PBM Figure — 図解エンジン（Mermaid 代替）
+   図は「大きく・読みやすく・スマホでも崩れない」ことを最優先にする。
+   ライト / ダーク 両対応。色は style.css のトークンを土台にする。
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. トーン（tone）トークン
+   -------------------------------------------------------------------------- */
+:root {
+  --fig-blue:        #2f6fed;  --fig-blue-soft:   #e7efff;
+  --fig-green:       #14926b;  --fig-green-soft:  #e0f5ee;
+  --fig-amber:       #b96f00;  --fig-amber-soft:  #fdf0dc;
+  --fig-pink:        #d3457a;  --fig-pink-soft:   #fde7ef;
+  --fig-violet:      #6d43e8;  --fig-violet-soft: #eee9ff;
+  --fig-cyan:        #0d8298;  --fig-cyan-soft:   #e0f4f8;
+  --fig-gray:        #5b6478;  --fig-gray-soft:   #eef1f7;
+  --fig-red:         #d33a4b;  --fig-red-soft:    #fce8ea;
+
+  --fig-ink:         var(--fg);
+  --fig-line:        var(--border-strong);
+  --fig-face:        var(--bg-elevated);
+}
+
+:root[data-theme="dark"] {
+  --fig-blue:        #7fb2ff;  --fig-blue-soft:   #1b2942;
+  --fig-green:       #4fdcab;  --fig-green-soft:  #10352a;
+  --fig-amber:       #ffb454;  --fig-amber-soft:  #3a2b12;
+  --fig-pink:        #ff8fa6;  --fig-pink-soft:   #3a1a24;
+  --fig-violet:      #b18cff;  --fig-violet-soft: #241d3d;
+  --fig-cyan:        #4dd0e1;  --fig-cyan-soft:   #0e2f36;
+  --fig-gray:        #a3adc2;  --fig-gray-soft:   #1d2432;
+  --fig-red:         #ff7b8b;  --fig-red-soft:    #3a1a20;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --fig-blue:      #7fb2ff;  --fig-blue-soft:   #1b2942;
+    --fig-green:     #4fdcab;  --fig-green-soft:  #10352a;
+    --fig-amber:     #ffb454;  --fig-amber-soft:  #3a2b12;
+    --fig-pink:      #ff8fa6;  --fig-pink-soft:   #3a1a24;
+    --fig-violet:    #b18cff;  --fig-violet-soft: #241d3d;
+    --fig-cyan:      #4dd0e1;  --fig-cyan-soft:   #0e2f36;
+    --fig-gray:      #a3adc2;  --fig-gray-soft:   #1d2432;
+    --fig-red:       #ff7b8b;  --fig-red-soft:    #3a1a20;
+  }
+}
+
+/* data-tone="…" が付いた要素とその子孫で --tone / --tone-soft が使える */
+.pbm-figure [data-tone="blue"]   { --tone: var(--fig-blue);   --tone-soft: var(--fig-blue-soft); }
+.pbm-figure [data-tone="green"]  { --tone: var(--fig-green);  --tone-soft: var(--fig-green-soft); }
+.pbm-figure [data-tone="amber"]  { --tone: var(--fig-amber);  --tone-soft: var(--fig-amber-soft); }
+.pbm-figure [data-tone="pink"]   { --tone: var(--fig-pink);   --tone-soft: var(--fig-pink-soft); }
+.pbm-figure [data-tone="violet"] { --tone: var(--fig-violet); --tone-soft: var(--fig-violet-soft); }
+.pbm-figure [data-tone="cyan"]   { --tone: var(--fig-cyan);   --tone-soft: var(--fig-cyan-soft); }
+.pbm-figure [data-tone="gray"]   { --tone: var(--fig-gray);   --tone-soft: var(--fig-gray-soft); }
+.pbm-figure [data-tone="red"]    { --tone: var(--fig-red);    --tone-soft: var(--fig-red-soft); }
+
+/* --------------------------------------------------------------------------
+   2. 図の外枠（figure / 見出し / キャプション）
+   -------------------------------------------------------------------------- */
+.pbm-figure { margin: 30px 0; }
+
+.pbm-figure .fig {
+  --tone: var(--fig-gray);
+  --tone-soft: var(--fig-gray-soft);
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--fg);
+}
+
+.pbm-figure .fig-head {
+  display: block;
+  font-size: 19px;
+  line-height: 1.5;
+  font-weight: 800;
+  letter-spacing: .01em;
+  margin: 0 0 14px;
+  padding: 0 0 0 14px;
+  border-left: 5px solid var(--brand);
+  color: var(--fg);
+}
+
+.pbm-figure .fig-no {
+  display: inline-block; margin-right: 10px; padding: 1px 10px; border-radius: 999px;
+  background: var(--brand-soft); color: var(--brand);
+  font-size: 14px; font-weight: 800; letter-spacing: .04em; vertical-align: 2px;
+}
+.pbm-figure .fig-head--bare { border-left-color: var(--border-strong); }
+
+.pbm-figure .fig-cap {
+  margin: 12px 2px 0;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--fg-muted);
+}
+
+.pbm-figure .fig-body { position: relative; }
+
+@media (max-width: 520px) {
+  .pbm-figure { margin: 24px 0; }
+  .pbm-figure .fig-head { font-size: 17.5px; padding-left: 11px; border-left-width: 4px; }
+  .pbm-figure .fig-cap { font-size: 13.5px; }
+}
+
+/* エラー表示（本文を壊さない） */
+.pbm-figure .fig-error {
+  border: 2px solid var(--ng);
+  background: var(--ng-soft);
+  border-radius: var(--radius, 14px);
+  padding: 14px 16px;
+  color: var(--fg);
+}
+.pbm-figure .fig-error-t { font-weight: 800; font-size: 16px; margin-bottom: 6px; color: var(--ng); }
+.pbm-figure .fig-error p { margin: 0 0 10px; font-size: 15px; line-height: 1.7; }
+.pbm-figure .fig-error pre {
+  margin: 0; padding: 10px 12px; overflow-x: auto;
+  background: var(--bg-sunken); border: 1px solid var(--border);
+  border-radius: 9px; font-family: var(--mono, monospace); font-size: 13px; line-height: 1.6;
+  white-space: pre-wrap; word-break: break-all;
+}
+
+/* Markdown 変換の時点で JSON が壊れていた場合（render.js が出す枠） */
+.pbm-figure.pbm-figure-error {
+  border: 2px solid var(--ng);
+  background: var(--ng-soft);
+  border-radius: var(--radius, 14px);
+  padding: 14px 16px;
+  color: var(--fg);
+  font-size: 15px; line-height: 1.7;
+}
+.pbm-figure.pbm-figure-error strong { display: block; font-size: 16px; color: var(--ng); margin-bottom: 6px; }
+.pbm-figure.pbm-figure-error p { margin: 0 0 10px; }
+.pbm-figure.pbm-figure-error pre {
+  margin: 0; padding: 10px 12px; overflow-x: auto;
+  background: var(--bg-sunken); border: 1px solid var(--border); border-radius: 9px;
+  font-family: var(--mono, monospace); font-size: 13px; line-height: 1.6;
+  white-space: pre-wrap; word-break: break-all;
+}
+
+/* interactive の未実装フォールバック */
+.pbm-figure .fig-todo {
+  border: 2px dashed var(--border-strong);
+  background: var(--bg-sunken);
+  border-radius: var(--radius, 14px);
+  padding: 26px 18px;
+  text-align: center;
+  color: var(--fg-muted);
+  font-size: 16px;
+  line-height: 1.8;
+}
+.pbm-figure .fig-todo b { display: block; font-size: 17px; color: var(--fg); margin-bottom: 4px; }
+.pbm-figure .fig-todo .fig-todo-tag {
+  display: inline-block; margin-top: 10px; padding: 3px 10px; border-radius: 999px;
+  background: var(--brand-soft); color: var(--brand); font-size: 13.5px; font-weight: 700;
+  font-family: var(--mono, monospace);
+}
+
+/* --------------------------------------------------------------------------
+   3. 共通パーツ
+   -------------------------------------------------------------------------- */
+.pbm-figure .fig-svgwrap { width: 100%; }
+.pbm-figure .fig-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.pbm-figure .fig-svg text {
+  font-family: var(--font, sans-serif);
+  fill: var(--fg);
+  dominant-baseline: middle;
+}
+.pbm-figure .fig-svg .n-rect { fill: var(--tone-soft); stroke: var(--tone); stroke-width: 2; }
+.pbm-figure .fig-svg .n-rect.is-strong { stroke-width: 3; }
+.pbm-figure .fig-svg .n-label { font-weight: 800; fill: var(--fg); }
+.pbm-figure .fig-svg .n-sub { fill: var(--fg-muted); }
+.pbm-figure .fig-svg .n-accent { fill: var(--tone); }
+.pbm-figure .fig-svg .edge { fill: none; stroke: var(--tone); stroke-width: 2.4; stroke-linecap: round; }
+.pbm-figure .fig-svg .edge-flow { fill: none; stroke: var(--tone); stroke-width: 2.4; stroke-linecap: round; opacity: 0; }
+.pbm-figure .fig-svg .mk { fill: var(--tone); }
+.pbm-figure .fig-svg .edge-label { fill: var(--fg-muted); font-weight: 700; }
+.pbm-figure .fig-svg .edge-label-bg { fill: var(--bg); stroke: var(--border); stroke-width: 1; }
+
+.pbm-figure .fig-legend {
+  margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px 16px;
+  font-size: 15px; color: var(--fg-muted);
+}
+.pbm-figure .fig-legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+/* --------------------------------------------------------------------------
+   4. flow — 工程・流れ
+   -------------------------------------------------------------------------- */
+.pbm-figure .fl { display: flex; align-items: stretch; gap: 6px; flex-wrap: nowrap; }
+.pbm-figure .fl-item {
+  flex: 1 1 0;
+  min-width: 0;
+  background: var(--tone-soft);
+  border: 2px solid var(--tone);
+  border-radius: var(--radius, 14px);
+  padding: 16px 11px;
+  text-align: center;
+  display: flex; flex-direction: column; justify-content: center; gap: 4px;
+}
+.pbm-figure .fl-icon { font-size: 26px; line-height: 1.2; }
+.pbm-figure .fl-label { font-size: 17px; font-weight: 800; line-height: 1.45; color: var(--fg); }
+.pbm-figure .fl-sub { font-size: 15px; line-height: 1.6; color: var(--fg-muted); }
+.pbm-figure .fl-arrow {
+  flex: 0 0 auto; align-self: center;
+  display: grid; place-items: center;
+  width: 30px; color: var(--fg-subtle);
+  font-size: 26px; line-height: 1;
+}
+.pbm-figure .fl-arrow i { font-style: normal; display: block; }
+
+/* 縦並び（指定 or 狭い画面） */
+.pbm-figure .fl[data-dir="col"] { flex-direction: column; align-items: stretch; }
+.pbm-figure .fl[data-dir="col"] .fl-arrow { width: 100%; height: 26px; transform: none; }
+.pbm-figure .fl[data-dir="col"] .fl-arrow i { transform: rotate(90deg); }
+
+@media (max-width: 700px) {
+  .pbm-figure .fl { flex-direction: column; align-items: stretch; }
+  .pbm-figure .fl .fl-arrow { width: 100%; height: 26px; }
+  .pbm-figure .fl .fl-arrow i { transform: rotate(90deg); }
+  .pbm-figure .fl-item { text-align: left; padding: 14px 15px; }
+  .pbm-figure .fl-icon { font-size: 23px; }
+}
+
+/* --------------------------------------------------------------------------
+   5. steps — 手順
+   -------------------------------------------------------------------------- */
+.pbm-figure .st { list-style: none; margin: 0; padding: 0; }
+.pbm-figure .st-item {
+  position: relative;
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 0 0 18px 0;
+}
+.pbm-figure .st-item::before {
+  content: ""; position: absolute; left: 23px; top: 46px; bottom: 0;
+  width: 3px; border-radius: 2px; background: var(--border);
+}
+.pbm-figure .st-item:last-child { padding-bottom: 0; }
+.pbm-figure .st-item:last-child::before { display: none; }
+.pbm-figure .st-num {
+  flex: 0 0 auto;
+  width: 48px; height: 48px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--tone-soft); border: 2.5px solid var(--tone); color: var(--tone);
+  font-size: 21px; font-weight: 900; line-height: 1;
+}
+.pbm-figure .st-body {
+  flex: 1 1 auto; min-width: 0;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--tone);
+  border-radius: var(--radius-sm, 9px);
+  padding: 12px 15px;
+}
+.pbm-figure .st-title { font-size: 17.5px; font-weight: 800; line-height: 1.55; color: var(--fg); }
+.pbm-figure .st-text { font-size: 16px; line-height: 1.8; color: var(--fg-muted); margin-top: 4px; }
+@media (max-width: 520px) {
+  .pbm-figure .st-item { gap: 11px; }
+  .pbm-figure .st-num { width: 42px; height: 42px; font-size: 19px; }
+  .pbm-figure .st-item::before { left: 20px; top: 40px; }
+  .pbm-figure .st-title { font-size: 17px; }
+  .pbm-figure .st-text { font-size: 15.5px; }
+}
+
+/* --------------------------------------------------------------------------
+   6. compare — 比較
+   -------------------------------------------------------------------------- */
+.pbm-figure .cmp { display: grid; gap: 14px; grid-template-columns: 1fr; }
+@media (min-width: 700px) {
+  .pbm-figure .cmp[data-n="2"] { grid-template-columns: repeat(2, 1fr); }
+  .pbm-figure .cmp[data-n="3"] { grid-template-columns: repeat(3, 1fr); }
+}
+.pbm-figure .cmp-panel {
+  background: var(--bg-elevated);
+  border: 2px solid var(--tone);
+  border-radius: var(--radius, 14px);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.pbm-figure .cmp-head {
+  display: flex; align-items: center; gap: 9px;
+  background: var(--tone-soft);
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--tone);
+}
+.pbm-figure .cmp-mark {
+  flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--tone); color: var(--bg-elevated);
+  font-size: 16px; font-weight: 900; line-height: 1;
+}
+.pbm-figure .cmp-title { font-size: 17.5px; font-weight: 800; line-height: 1.45; color: var(--fg); }
+.pbm-figure .cmp-list { list-style: none; margin: 0; padding: 12px 15px; flex: 1 1 auto; }
+.pbm-figure .cmp-list li {
+  position: relative; padding-left: 22px; margin: 0 0 9px;
+  font-size: 16px; line-height: 1.75; color: var(--fg);
+}
+.pbm-figure .cmp-list li:last-child { margin-bottom: 0; }
+.pbm-figure .cmp-list li::before {
+  content: ""; position: absolute; left: 4px; top: .68em;
+  width: 8px; height: 8px; border-radius: 50%; background: var(--tone);
+}
+.pbm-figure .cmp-note {
+  margin: 0 15px 14px; padding: 8px 12px;
+  background: var(--tone-soft); color: var(--fg);
+  border-radius: var(--radius-sm, 9px);
+  font-size: 15px; font-weight: 700; line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   7. cards — 並列な概念
+   -------------------------------------------------------------------------- */
+.pbm-figure .cds { display: grid; gap: 14px; grid-template-columns: 1fr; }
+@media (min-width: 620px) {
+  .pbm-figure .cds { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 940px) {
+  .pbm-figure .cds[data-cols="3"] { grid-template-columns: repeat(3, 1fr); }
+  .pbm-figure .cds[data-cols="4"] { grid-template-columns: repeat(4, 1fr); }
+  .pbm-figure .cds[data-cols="5"] { grid-template-columns: repeat(3, 1fr); }
+  .pbm-figure .cds[data-cols="6"] { grid-template-columns: repeat(3, 1fr); }
+}
+.pbm-figure .cd {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-top: 5px solid var(--tone);
+  border-radius: var(--radius, 14px);
+  padding: 16px 16px 18px;
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,.08));
+}
+.pbm-figure .cd-icon {
+  font-size: 30px; line-height: 1.2; margin-bottom: 6px;
+  display: inline-grid; place-items: center;
+  min-width: 46px; height: 46px; border-radius: 12px;
+  background: var(--tone-soft);
+}
+.pbm-figure .cd-title { font-size: 17.5px; font-weight: 800; line-height: 1.5; color: var(--fg); }
+.pbm-figure .cd-text { font-size: 16px; line-height: 1.8; color: var(--fg-muted); margin-top: 5px; }
+
+/* --------------------------------------------------------------------------
+   8. stack — 階層・レイヤー
+   -------------------------------------------------------------------------- */
+.pbm-figure .stk { display: flex; flex-direction: column; gap: 10px; }
+.pbm-figure .stk-layer {
+  position: relative;
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 14px;
+  background: var(--tone-soft);
+  border: 2px solid var(--tone);
+  border-radius: var(--radius, 14px);
+  padding: 15px 18px 15px 20px;
+}
+.pbm-figure .stk-layer::before {
+  content: ""; position: absolute; left: 0; top: 12px; bottom: 12px;
+  width: 6px; border-radius: 0 6px 6px 0; background: var(--tone);
+}
+.pbm-figure .stk-label { font-size: 17.5px; font-weight: 800; color: var(--fg); line-height: 1.5; }
+.pbm-figure .stk-sub { font-size: 15.5px; color: var(--fg-muted); line-height: 1.7; }
+.pbm-figure .stk-sep {
+  text-align: center; color: var(--fg-subtle); font-size: 20px; line-height: 1; margin: -4px 0;
+}
+
+/* --------------------------------------------------------------------------
+   9. matrix — 2×2
+   -------------------------------------------------------------------------- */
+.pbm-figure .mx {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  grid-template-rows: auto 1fr 1fr auto auto;
+  gap: 6px 8px;
+  align-items: stretch;
+}
+.pbm-figure .mx-ylab {
+  grid-column: 1 / span 3; grid-row: 1;
+  font-size: 15.5px; font-weight: 800; color: var(--fg-muted); letter-spacing: .04em;
+  padding-bottom: 2px;
+}
+.pbm-figure .mx-ytick {
+  grid-column: 1; display: grid; place-items: center;
+  font-size: 15px; font-weight: 800; color: var(--fg-subtle);
+  min-width: 1.6em;
+}
+.pbm-figure .mx-ytick.is-high { grid-row: 2; }
+.pbm-figure .mx-ytick.is-low  { grid-row: 3; }
+.pbm-figure .mx-cell {
+  background: var(--tone-soft);
+  border: 2px solid var(--tone);
+  border-radius: var(--radius, 14px);
+  padding: 13px 14px;
+  min-height: 104px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.pbm-figure .mx-title { font-size: 16.5px; font-weight: 800; color: var(--fg); line-height: 1.45; }
+.pbm-figure .mx-text { font-size: 15px; color: var(--fg-muted); line-height: 1.65; }
+.pbm-figure .mx-xtick {
+  grid-row: 4; text-align: center;
+  font-size: 15px; font-weight: 800; color: var(--fg-subtle); padding-top: 2px;
+}
+.pbm-figure .mx-xlab {
+  grid-row: 5; grid-column: 2 / span 2; text-align: center;
+  font-size: 15.5px; font-weight: 800; color: var(--fg-muted); letter-spacing: .04em;
+}
+@media (max-width: 420px) {
+  .pbm-figure .mx { gap: 5px 5px; }
+  .pbm-figure .mx-cell { padding: 10px 10px; min-height: 96px; }
+  .pbm-figure .mx-title { font-size: 15.5px; }
+  .pbm-figure .mx-text { font-size: 15px; }
+  .pbm-figure .mx-ylab, .pbm-figure .mx-xlab { font-size: 14.5px; }
+  .pbm-figure .mx-ytick, .pbm-figure .mx-xtick { font-size: 14px; }
+}
+
+/* --------------------------------------------------------------------------
+   10. tablediff — 変換前後
+   -------------------------------------------------------------------------- */
+.pbm-figure .td { display: grid; gap: 12px; grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 780px) {
+  .pbm-figure .td { grid-template-columns: 1fr auto 1fr; gap: 14px; }
+}
+.pbm-figure .td-side {
+  border: 2px solid var(--tone);
+  border-radius: var(--radius, 14px);
+  background: var(--bg-elevated);
+  overflow: hidden;
+}
+.pbm-figure .td-title {
+  background: var(--tone-soft); color: var(--fg);
+  padding: 11px 14px; font-size: 16.5px; font-weight: 800; line-height: 1.45;
+  border-bottom: 1px solid var(--tone);
+}
+.pbm-figure .td-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.pbm-figure .td-table { border-collapse: collapse; width: 100%; font-size: 15.5px; }
+.pbm-figure .td-table th, .pbm-figure .td-table td {
+  border: 1px solid var(--border);
+  padding: 9px 12px; text-align: left; white-space: nowrap; line-height: 1.6; color: var(--fg);
+}
+.pbm-figure .td-table th { background: var(--bg-sunken); font-weight: 800; }
+.pbm-figure .td-table td.hl {
+  background: var(--tone-soft); font-weight: 800; color: var(--fg);
+  box-shadow: inset 0 0 0 2px var(--tone);
+}
+.pbm-figure .td-arrow {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  color: var(--brand); align-self: center; padding: 4px 0;
+}
+.pbm-figure .td-arrow-glyph { font-size: 40px; line-height: 1; transform: rotate(90deg); }
+@media (min-width: 780px) {
+  .pbm-figure .td-arrow-glyph { transform: none; }
+  .pbm-figure .td-arrow { padding: 0 2px; }
+}
+.pbm-figure .td-arrow-label {
+  font-size: 15px; font-weight: 800; color: var(--fg); text-align: center;
+  background: var(--brand-soft); border-radius: 999px; padding: 4px 12px; line-height: 1.5;
+  max-width: 12em;
+}
+
+/* --------------------------------------------------------------------------
+   11. formula — 数式の分解
+   -------------------------------------------------------------------------- */
+.pbm-figure .fm { position: relative; }
+.pbm-figure .fm-code {
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius, 14px);
+  padding: 16px 18px;
+  overflow-x: auto;
+  font-family: var(--mono, monospace);
+  font-size: 16px; line-height: 2.1;
+  color: var(--fg);
+  white-space: pre-wrap; word-break: break-word;
+}
+.pbm-figure .fm-lang {
+  display: inline-block; margin-bottom: 8px; padding: 2px 10px; border-radius: 999px;
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  font-size: 13px; font-weight: 800; color: var(--fg-muted);
+  font-family: var(--font, sans-serif); text-transform: uppercase; letter-spacing: .08em;
+}
+.pbm-figure .fm-part {
+  position: relative;
+  background: var(--tone-soft);
+  color: var(--fg);
+  border-bottom: 3px solid var(--tone);
+  border-radius: 6px 6px 3px 3px;
+  padding: 2px 4px;
+  font-weight: 700;
+  cursor: default;
+  transition: background-color .18s ease, box-shadow .18s ease;
+}
+.pbm-figure .fm-idx {
+  font-family: var(--font, sans-serif);
+  font-size: 12px; font-weight: 900; color: var(--tone);
+  vertical-align: super; margin-left: 2px; line-height: 1;
+}
+.pbm-figure .fm-part.is-on,
+.pbm-figure .fm-part:hover { box-shadow: 0 0 0 3px var(--tone-soft), 0 0 0 4.5px var(--tone); }
+.pbm-figure .fm-notes { display: grid; gap: 10px; margin-top: 16px; }
+@media (min-width: 780px) {
+  .pbm-figure .fm-notes[data-n="2"] { grid-template-columns: repeat(2, 1fr); }
+  .pbm-figure .fm-notes[data-n="3"] { grid-template-columns: repeat(3, 1fr); }
+  .pbm-figure .fm-notes[data-n="4"] { grid-template-columns: repeat(4, 1fr); }
+}
+.pbm-figure .fm-note {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--tone);
+  border-radius: var(--radius-sm, 9px);
+  padding: 11px 13px;
+  transition: box-shadow .18s ease, transform .18s ease;
+}
+.pbm-figure .fm-note.is-on { box-shadow: 0 0 0 2px var(--tone); }
+.pbm-figure .fm-badge {
+  flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--tone); color: var(--bg-elevated);
+  font-size: 14px; font-weight: 900; line-height: 1;
+}
+.pbm-figure .fm-note-b { min-width: 0; }
+.pbm-figure .fm-note-c {
+  font-family: var(--mono, monospace); font-size: 14px; font-weight: 800;
+  color: var(--tone); line-height: 1.5; word-break: break-all; display: block;
+}
+.pbm-figure .fm-note-t { font-size: 15.5px; line-height: 1.7; color: var(--fg); display: block; margin-top: 2px; }
+.pbm-figure .fm-links {
+  position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+  pointer-events: none; overflow: visible;
+}
+.pbm-figure .fm-links path { fill: none; stroke: var(--tone); stroke-width: 2; opacity: .5; }
+.pbm-figure .fm-links path.is-on { opacity: 1; stroke-width: 2.6; }
+
+/* --------------------------------------------------------------------------
+   12. timeline — 時系列
+   -------------------------------------------------------------------------- */
+.pbm-figure .tl { list-style: none; margin: 0; padding: 0 0 0 4px; }
+.pbm-figure .tl-item { position: relative; padding: 0 0 20px 30px; }
+.pbm-figure .tl-item::before {
+  content: ""; position: absolute; left: 8px; top: 10px; bottom: -4px;
+  width: 3px; background: var(--border); border-radius: 2px;
+}
+.pbm-figure .tl-item:last-child { padding-bottom: 0; }
+.pbm-figure .tl-item:last-child::before { display: none; }
+.pbm-figure .tl-dot {
+  position: absolute; left: 0; top: 6px;
+  width: 19px; height: 19px; border-radius: 50%;
+  background: var(--bg-elevated); border: 5px solid var(--tone);
+}
+.pbm-figure .tl-label {
+  display: inline-block; margin-bottom: 5px; padding: 3px 12px; border-radius: 999px;
+  background: var(--tone-soft); color: var(--fg); border: 1px solid var(--tone);
+  font-size: 14.5px; font-weight: 800; line-height: 1.6;
+}
+.pbm-figure .tl-title { font-size: 17.5px; font-weight: 800; line-height: 1.5; color: var(--fg); }
+.pbm-figure .tl-text { font-size: 16px; line-height: 1.8; color: var(--fg-muted); margin-top: 3px; }
+
+/* --------------------------------------------------------------------------
+   13. アニメーション（控えめ・reduce では無効）
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .pbm-figure .fig.fig-anim .fig-body > *,
+  .pbm-figure .fig.fig-anim .fig-head,
+  .pbm-figure .fig.fig-anim .fig-cap {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .pbm-figure .fig.fig-anim.is-in .fig-body > *,
+  .pbm-figure .fig.fig-anim.is-in .fig-head,
+  .pbm-figure .fig.fig-anim.is-in .fig-cap {
+    opacity: 1;
+    transform: none;
+    transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.3,1);
+  }
+  .pbm-figure .fig.fig-anim.is-in .fig-body > * { transition-delay: .06s; }
+  .pbm-figure .fig.fig-anim.is-in .fig-cap { transition-delay: .12s; }
+
+  /* 矢印が流れる（HTML） */
+  .pbm-figure .fig.is-in .fl-arrow i { animation: pbm-fig-slide 2.6s ease-in-out infinite; }
+  .pbm-figure .fig.is-in .fl[data-dir="col"] .fl-arrow i,
+  .pbm-figure .fig.is-in .fl-arrow i.is-down { animation-name: pbm-fig-slide-down; }
+  @media (max-width: 700px) {
+    .pbm-figure .fig.is-in .fl-arrow i { animation-name: pbm-fig-slide-down; }
+  }
+  .pbm-figure .fig.is-in .td-arrow-glyph { animation: pbm-fig-pulse 2.8s ease-in-out infinite; }
+
+  /* 矢印が流れる（SVG） */
+  .pbm-figure .fig.is-in .fig-svg .edge-flow {
+    opacity: .85;
+    stroke-dasharray: 9 15;
+    animation: pbm-fig-dash 2.4s linear infinite;
+  }
+}
+
+@keyframes pbm-fig-slide {
+  0%, 100% { transform: translateX(-3px); }
+  50%      { transform: translateX(3px); }
+}
+@keyframes pbm-fig-slide-down {
+  0%, 100% { transform: rotate(90deg) translateX(-3px); }
+  50%      { transform: rotate(90deg) translateX(3px); }
+}
+@keyframes pbm-fig-pulse {
+  0%, 100% { opacity: .75; }
+  50%      { opacity: 1; }
+}
+@keyframes pbm-fig-dash {
+  from { stroke-dashoffset: 24; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pbm-figure .fig,
+  .pbm-figure .fig * { animation: none !important; transition: none !important; }
+  .pbm-figure .fig .fig-body > *,
+  .pbm-figure .fig .fig-head,
+  .pbm-figure .fig .fig-cap { opacity: 1 !important; transform: none !important; }
+}
+
+/* --------------------------------------------------------------------------
+   14. 印刷
+   -------------------------------------------------------------------------- */
+@media print {
+  .pbm-figure { break-inside: avoid; page-break-inside: avoid; margin: 18px 0; }
+  .pbm-figure .fig,
+  .pbm-figure .fig * {
+    animation: none !important; transition: none !important;
+    opacity: 1 !important; transform: none !important;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .pbm-figure .fl { flex-direction: row; }
+  .pbm-figure .td-scroll { overflow: visible; }
+  .pbm-figure .fm-code { overflow: visible; }
+  .pbm-figure .fig-svg .edge-flow { display: none; }
+}

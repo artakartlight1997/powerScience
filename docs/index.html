@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Power BI Mastery — 初学者からPL-300合格まで</title>
-<meta name="description" content="Power BIを図解と演習で学ぶ無料トレーニングサイト。ロードマップに沿って進めるだけで、初学者からPL-300認定レベルまで到達できます。スマホ対応。">
+<title>Power BI Mastery — 初級から プロ まで、4ティア・22モジュール</title>
+<meta name="description" content="Power BIを図解とハンズオンで学ぶ無料トレーニング。初級→中級→上級→プロの4ティア・22モジュール・約118レッスン。PL-300の出題範囲を全部カバーします。スマホ対応。">
 <meta property="og:title" content="Power BI Mastery">
-<meta property="og:description" content="図解 × ハンズオン × クイズ。ロードマップに沿って学べばPower BIのプロになれる。">
+<meta property="og:description" content="初級 → 中級 → 上級 → プロ。4ティア22モジュールを登りきれば、Power BIのプロになれる。">
 <meta property="og:type" content="website">
 <link rel="icon" href="assets/img/favicon.svg">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -16,26 +16,33 @@
 <a class="skip-link" href="#main">本文へスキップ</a>
 <main id="main">
 
+  <!-- ================= ヒーロー ================= -->
   <section class="hero">
     <div class="wrap">
-      <p class="eyebrow">Power BI Learning Roadmap</p>
-      <h1>図解とハンズオンで、<br>Power BI を「使える」に変える。</h1>
+      <p class="eyebrow">Power BI Learning Path</p>
+      <h1>初級から プロ まで、<br>4段階で登りきる。</h1>
       <p class="lead">
-        6つのレベル・39レッスン・6つのハンズオンラボ。ロードマップに沿って進めるだけで、
-        はじめての人が <strong>PL-300（Microsoft Power BI Data Analyst）</strong> に挑戦できるレベルまで到達します。
-        スマホでも演習とクイズができます。
+        図解とハンズオンで学ぶ Power BI の学習サイトです。
+        <strong>初級 → 中級 → 上級 → プロ</strong> の4ティアを順に登るだけで、
+        はじめての人が <strong>PL-300（Microsoft Power BI Data Analyst）</strong> の出題範囲を網羅し、
+        実務で設計をリードできるところまで到達します。
       </p>
       <div class="row">
-        <a class="btn btn-primary" id="cta-start" href="roadmap.html">学習をはじめる</a>
-        <a class="btn btn-ghost" href="roadmap.html">ロードマップを見る</a>
+        <a class="btn btn-primary" id="cta-start" href="tiers.html">学習をはじめる</a>
+        <a class="btn btn-ghost" href="tiers.html">学習の全体像を見る</a>
       </div>
 
+      <!-- 4ティアのはしご -->
+      <div class="ladder" id="ladder" style="margin-top:28px"></div>
+
+      <!-- 続きから -->
       <div class="card" id="resume" style="margin-top:26px;display:none">
         <div class="row" style="gap:16px;flex-wrap:nowrap">
           <div class="ring" id="resume-ring"><div id="resume-pct">0%</div></div>
           <div style="flex:1 1 auto;min-width:0">
             <p class="small muted" style="margin:0 0 4px">続きから学習する</p>
-            <h3 id="resume-title" style="margin:0 0 8px"></h3>
+            <h3 id="resume-title" style="margin:0 0 4px"></h3>
+            <p class="small muted" id="resume-where" style="margin:0 0 10px"></p>
             <a class="btn btn-brand btn-sm" id="resume-link" href="#">続きを読む →</a>
           </div>
         </div>
@@ -43,101 +50,223 @@
     </div>
   </section>
 
+  <!-- ================= KPI ================= -->
   <section class="wrap">
-    <div class="grid grid-4">
+    <div class="grid" id="kpis" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
       <div class="card kpi"><div class="v" id="kpi-lessons">—</div><div class="l">レッスン</div></div>
-      <div class="card kpi"><div class="v" id="kpi-labs">—</div><div class="l">ハンズオンラボ</div></div>
+      <div class="card kpi"><div class="v" id="kpi-modules">—</div><div class="l">モジュール</div></div>
+      <div class="card kpi"><div class="v" id="kpi-figures">—</div><div class="l">図解</div></div>
       <div class="card kpi"><div class="v" id="kpi-quiz">—</div><div class="l">演習問題</div></div>
       <div class="card kpi"><div class="v" id="kpi-hours">—</div><div class="l">想定学習時間</div></div>
     </div>
   </section>
 
-  <section class="wrap" style="margin-top:56px">
-    <h2>6ステップの学習ロードマップ</h2>
-    <p class="muted">下から順に積み上げる設計です。前のレベルが土台になるので、飛ばさず進むのが最短ルートです。</p>
-    <div class="grid grid-3" id="levels" style="margin-top:18px"></div>
-    <p style="margin-top:20px"><a class="btn btn-ghost" href="roadmap.html">詳しいロードマップを開く →</a></p>
+  <!-- ================= 4ティア ================= -->
+  <section class="wrap" style="margin-top:60px">
+    <h2 style="font-size:26px;margin:0 0 6px">4つのティアを、下から積み上げる</h2>
+    <p class="muted" style="margin:0">
+      前のティアが次のティアの土台になります。飛ばさずに登るのが、結局いちばんの近道です。
+    </p>
+    <div class="grid grid-4" id="tiers" style="margin-top:20px"></div>
+    <p style="margin-top:22px">
+      <a class="btn btn-ghost" href="tiers.html">22モジュールの一覧を見る →</a>
+      <a class="btn btn-ghost" href="roadmap.html">レッスン単位のロードマップ →</a>
+    </p>
   </section>
 
-  <section class="wrap" style="margin-top:56px">
-    <h2>このサイトの学び方</h2>
-    <div class="grid grid-3" style="margin-top:18px">
+  <!-- ================= 学び方 ================= -->
+  <section class="wrap" style="margin-top:60px">
+    <h2 style="font-size:26px;margin:0 0 6px">4ステップで身につける</h2>
+    <p class="muted" style="margin:0">1レッスンは「読む → 作る → 解く」で完結します。最後に本番形式の模試で仕上げます。</p>
+    <div class="grid grid-4" style="margin-top:20px">
       <div class="card">
-        <h3>1. 図でイメージを掴む</h3>
-        <p>スタースキーマもフィルターコンテキストも、文章より図のほうが速く腹落ちします。全レッスンに図解を入れています。</p>
+        <div style="font-size:13px;font-weight:800;color:var(--t1);letter-spacing:.06em">STEP 1</div>
+        <h3>図解でイメージを掴む</h3>
+        <p>スタースキーマもフィルターコンテキストも、文章より図のほうが速く腹落ちします。全レッスンに複数の図を入れています。触って動かせる図もあります。</p>
       </div>
       <div class="card">
-        <h3>2. 手を動かす</h3>
-        <p>サンプルデータ付きのハンズオンラボで、実際にPower BI Desktopを操作します。詰まったときの答えも用意しています。</p>
+        <div style="font-size:13px;font-weight:800;color:var(--t2);letter-spacing:.06em">STEP 2</div>
+        <h3>ハンズオンで手を動かす</h3>
+        <p>サンプルデータ付きのラボで、実際に Power BI Desktop を操作します。詰まったときの答えも用意しています。</p>
       </div>
       <div class="card">
-        <h3>3. クイズで定着させる</h3>
-        <p>レッスンごとの確認クイズと、本番形式の模擬試験。間違えた問題は自動で復習リストになります。</p>
+        <div style="font-size:13px;font-weight:800;color:var(--t3);letter-spacing:.06em">STEP 3</div>
+        <h3>クイズで定着させる</h3>
+        <p>レッスンごとに5問の確認クイズ。丸暗記では解けない実務シナリオ問題で、分かったつもりを潰します。</p>
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:800;color:var(--t4);letter-spacing:.06em">STEP 4</div>
+        <h3>模擬試験で仕上げる</h3>
+        <p>本番形式の PL-300 模擬試験。領域ごとの正答率が出るので、弱点のレッスンに戻れます。</p>
       </div>
     </div>
   </section>
 
-  <section class="wrap" style="margin-top:56px">
+  <!-- ================= PL-300 ================= -->
+  <section class="wrap" style="margin-top:60px">
     <div class="card" style="background:linear-gradient(135deg,var(--brand-soft),transparent)">
-      <h2 style="margin-top:0">ゴールは PL-300 合格</h2>
-      <p class="muted">
-        PL-300 は「データの準備」「データのモデル化」「視覚化と分析」「資産の管理とセキュリティ」の4領域から出題されます。
-        本サイトのLv.1〜Lv.5はこの4領域に対応づけて構成しています。
+      <p class="eyebrow" style="margin:0">Certification</p>
+      <h2 style="margin:8px 0 10px;font-size:26px">ゴールのひとつは PL-300 合格</h2>
+      <p class="muted" style="margin:0 0 16px;max-width:44em">
+        PL-300 は「データの準備」「データのモデル化」「視覚化と分析」「資産の管理とセキュリティ」の4領域・
+        24のスキル項目から出題されます。本サイトは全レッスンにスキル項目を紐づけているので、
+        <strong>カバレッジ表がすべて緑になれば出題範囲を網羅した</strong>と分かります。
       </p>
-      <div class="row" style="margin-top:14px">
-        <a class="btn btn-brand" href="exam.html">模擬試験を受ける</a>
-        <a class="btn btn-ghost" href="lesson.html?id=L506">試験の全体像を知る</a>
+      <div class="row" id="pl-mini" style="margin-bottom:16px"></div>
+      <div class="row">
+        <a class="btn btn-brand" href="pl300.html">PL-300 カバレッジ表を見る</a>
+        <a class="btn btn-ghost" href="exam.html">模擬試験を受ける</a>
       </div>
     </div>
   </section>
 
 </main>
 
-<script src="assets/vendor/marked.umd.js" defer></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/analytics.js"></script>
-<script src="assets/js/render.js"></script>
+<script>
+/* ナビに「学習の全体像」「PL-300」を足す（app.js を変更せずに済むように） */
+function pbmExtraNav() {
+  var add = [["tiers.html", "学習の全体像", "index.html"], ["pl300.html", "PL-300", "exam.html"]];
+  [".nav", ".drawer"].forEach(function (sel) {
+    var box = document.querySelector(".site-header " + sel);
+    if (!box) return;
+    add.forEach(function (it) {
+      var href = PBM.url(it[0]);
+      if (box.querySelector('a[href="' + href + '"]')) return;
+      var a = document.createElement("a");
+      a.href = href; a.textContent = it[1];
+      var after = box.querySelector('a[href="' + PBM.url(it[2]) + '"]');
+      if (after && after.nextSibling) box.insertBefore(a, after.nextSibling);
+      else if (after) box.appendChild(a);
+      else box.appendChild(a);
+    });
+    if (box.classList.contains("nav")) {
+      var here = location.pathname.split("/").pop() || "index.html";
+      var cur = box.querySelector('a[href="' + PBM.url(here) + '"]');
+      if (cur) cur.setAttribute("aria-current", "page");
+    }
+  });
+}
+</script>
 <script>
 (async function () {
   PBM.renderChrome();
-  const c = await PBM.curriculum();
-  const s = PBM.stats(c);
+  pbmExtraNav();
 
-  document.getElementById("kpi-lessons").textContent = c.lessons.length;
-  document.getElementById("kpi-labs").textContent = c.labs.length;
-  document.getElementById("kpi-hours").textContent = c.levels.reduce((a, l) => a + l.estimatedHours, 0) + "h";
+  var c;
+  try { c = await PBM.curriculum(); }
+  catch (e) {
+    document.getElementById("tiers").innerHTML =
+      '<div class="empty"><strong>カリキュラムを読み込めませんでした</strong>' +
+      'ページを再読み込みしてください。</div>';
+    return;
+  }
+
+  /* --- 新形式(tiers) / 旧形式(levels) 両対応 --- */
+  var tiers = (c.tiers && c.tiers.length ? c.tiers : (c.levels || []));
+  var modules = c.modules || [];
+  var lessons = c.lessons || [];
+  var counts = (c.meta && c.meta.counts) || {};
+  var s = PBM.stats(c);
+
+  function tierLessons(t) {
+    return lessons.filter(function (l) { return l.tier === t.id || l.level === t.id; });
+  }
+  function tierStats(t) {
+    var ls = tierLessons(t);
+    var done = ls.filter(function (l) { return PBM.progress.isLessonDone(l.id); }).length;
+    return { done: done, total: ls.length, pct: ls.length ? Math.round(done / ls.length * 100) : 0 };
+  }
+  function tierModules(t) {
+    if (t.moduleIds) return modules.filter(function (m) { return t.moduleIds.indexOf(m.id) >= 0; });
+    return modules.filter(function (m) { return m.tier === t.id; });
+  }
+
+  /* ---------- KPI ---------- */
+  var hours = tiers.reduce(function (a, t) { return a + (t.hours || t.estimatedHours || 0); }, 0);
+  document.getElementById("kpi-lessons").textContent = lessons.length || "—";
+  document.getElementById("kpi-modules").textContent = (counts.modules != null ? counts.modules : modules.length) || "—";
+  document.getElementById("kpi-figures").textContent = counts.figures ? counts.figures + "+" : "—";
+  document.getElementById("kpi-hours").textContent = hours ? hours + "h" : "—";
 
   fetch("content/quizzes/index.json", { cache: "no-cache" })
-    .then(r => r.ok ? r.json() : null)
-    .then(j => { document.getElementById("kpi-quiz").textContent = j ? j.totalQuestions + "問" : "—"; })
-    .catch(() => { document.getElementById("kpi-quiz").textContent = "—"; });
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) { document.getElementById("kpi-quiz").textContent = j ? j.totalQuestions + "問" : "—"; })
+    .catch(function () { document.getElementById("kpi-quiz").textContent = "—"; });
 
-  // レベルカード
-  document.getElementById("levels").innerHTML = c.levels.map(function (lv) {
-    const st = PBM.levelStats(c, lv.id);
-    return '<a class="card card-link" href="roadmap.html#' + lv.id + '">' +
-      '<span class="badge badge-lv lv-' + lv.id + '">' + PBM.esc(lv.title) + "</span>" +
-      "<h3 style=\"margin-top:10px\">" + PBM.esc(lv.subtitle) + "</h3>" +
-      "<p>" + PBM.esc(lv.goal) + "</p>" +
-      '<div class="bar" style="margin-top:12px"><span style="width:' + st.pct + "%;background:var(--lv" + lv.order + ')"></span></div>' +
-      '<p class="small muted" style="margin-top:6px">' + st.done + " / " + st.total + " レッスン ・ 目安 " + lv.estimatedHours + "時間</p>" +
-      "</a>";
-  }).join("");
+  /* ---------- はしご ---------- */
+  var ladder = document.getElementById("ladder");
+  if (!tiers.length) {
+    ladder.innerHTML = '<div class="empty"><strong>カリキュラムを準備中です</strong>まもなく公開します。</div>';
+  } else {
+    ladder.innerHTML = tiers.map(function (t, i) {
+      var st = tierStats(t);
+      return '<a class="ladder-step tone-' + t.id + '" href="tiers.html#' + t.id + '" style="--indent:' + (i * 14) + 'px">' +
+        '<span class="no">' + (t.order || i + 1) + "</span>" +
+        '<span style="min-width:0">' +
+          '<span class="nm">' + PBM.esc(t.title) + '<span class="muted" style="font-weight:600;font-size:13.5px"> ' + PBM.esc(t.en || "") + "</span></span>" +
+          '<span class="ds" style="display:block">' + PBM.esc(t.subtitle || "") + "</span>" +
+        "</span>" +
+        '<span class="rt">' + st.done + " / " + st.total + " レッスン</span>" +
+        "</a>";
+    }).join("");
+  }
 
-  // 続きから
-  const next = PBM.nextLesson(c);
+  /* ---------- ティアカード ---------- */
+  var box = document.getElementById("tiers");
+  if (!tiers.length) {
+    box.innerHTML = '<div class="empty"><strong>準備中</strong>モジュールが登録されるとここに表示されます。</div>';
+  } else {
+    box.innerHTML = tiers.map(function (t, i) {
+      var st = tierStats(t);
+      var mods = tierModules(t);
+      var h = t.hours || t.estimatedHours || 0;
+      return '<a class="tier-card tone-' + t.id + '" href="tiers.html#' + t.id + '">' +
+        '<span class="step"><b>' + (t.order || i + 1) + "</b>" + PBM.esc(t.en || "") + "</span>" +
+        "<h3>" + PBM.esc(t.title) + " — " + PBM.esc(t.subtitle || "") + "</h3>" +
+        '<p class="goal">🎯 ' + PBM.esc(t.goal || "") + "</p>" +
+        '<div class="bar"><span style="width:' + st.pct + '%"></span></div>' +
+        '<div class="facts">' +
+          "<span><b>" + mods.length + "</b> モジュール</span>" +
+          "<span><b>" + st.total + "</b> レッスン</span>" +
+          "<span>目安 <b>" + h + "</b> 時間</span>" +
+          "<span>進捗 <b>" + st.pct + "%</b></span>" +
+        "</div></a>";
+    }).join("");
+  }
+
+  /* ---------- 続きから ---------- */
+  var next = PBM.nextLesson(c);
   if (s.lessonsDone > 0 && next) {
-    const box = document.getElementById("resume");
-    box.style.display = "block";
+    var r = document.getElementById("resume");
+    r.style.display = "block";
     document.getElementById("resume-ring").style.setProperty("--p", s.pct);
     document.getElementById("resume-pct").textContent = s.pct + "%";
-    document.getElementById("resume-title").textContent = next.id + " " + next.title;
+    document.getElementById("resume-title").textContent = next.title || next.id;
+    document.getElementById("resume-where").textContent =
+      (next.module ? next.module + " " + (next.moduleTitle || "") + " ・ " : "") + next.id + " ・ " + (next.minutes || 0) + "分";
     document.getElementById("resume-link").href = "lesson.html?id=" + next.id;
     document.getElementById("cta-start").textContent = "学習を続ける";
     document.getElementById("cta-start").href = "lesson.html?id=" + next.id;
   } else if (next) {
     document.getElementById("cta-start").href = "lesson.html?id=" + next.id;
   }
+
+  /* ---------- PL-300 ミニ集計 ---------- */
+  try {
+    var res = await fetch("content/pl300.json", { cache: "no-cache" });
+    if (res.ok) {
+      var p = await res.json();
+      var el = document.getElementById("pl-mini");
+      el.innerHTML = (p.areas || []).map(function (a) {
+        var total = a.skills.length;
+        var cov = a.skills.filter(function (sk) { return (sk.lessons || []).length; }).length;
+        return '<span class="badge ' + (cov === total ? "badge-ok" : "badge-warn") + '">' +
+          PBM.esc(a.title) + " " + a.weight + " ・ " + cov + "/" + total + " 項目</span>";
+      }).join("");
+    }
+  } catch (e) { /* カバレッジ表は任意表示 */ }
 })();
 </script>
 </body>

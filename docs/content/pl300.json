@@ -1,0 +1,4800 @@
+{
+  "meta": {
+    "exam": "PL-300",
+    "name": "Microsoft Power BI Data Analyst",
+    "updated": "2026-08-21",
+    "official": "https://learn.microsoft.com/ja-jp/credentials/certifications/exams/pl-300/",
+    "skillCount": 24,
+    "coveredCount": 24
+  },
+  "areas": [
+    {
+      "id": "A1",
+      "title": "データの準備",
+      "weight": "25-30%",
+      "skills": [
+        {
+          "code": "1.1",
+          "title": "データソースへの接続",
+          "skill": "1.1 データソースへの接続",
+          "lessons": [
+            {
+              "id": "L0303",
+              "title": "最初のデータを読み込む",
+              "module": "M03",
+              "moduleTitle": "はじめてのレポート",
+              "tier": "T1",
+              "minutes": 35,
+              "order": 13
+            },
+            {
+              "id": "L0401",
+              "title": "接続方式の三択 — インポート / DirectQuery / ライブ接続",
+              "module": "M04",
+              "moduleTitle": "データの読み込み入門",
+              "tier": "T1",
+              "minutes": 35,
+              "order": 16
+            },
+            {
+              "id": "L0402",
+              "title": "Excel・CSV・Web・データベースへの接続",
+              "module": "M04",
+              "moduleTitle": "データの読み込み入門",
+              "tier": "T1",
+              "minutes": 40,
+              "order": 17
+            },
+            {
+              "id": "L1103",
+              "title": "クエリ フォールディング — 更新時間を決める仕組み",
+              "module": "M11",
+              "moduleTitle": "高度なデータ整形",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 58
+            },
+            {
+              "id": "L1105",
+              "title": "データフローとETL設計 — 変換をどこに置くか",
+              "module": "M11",
+              "moduleTitle": "高度なデータ整形",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 60
+            },
+            {
+              "id": "L1205",
+              "title": "複合モデルと集計テーブル",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 65
+            },
+            {
+              "id": "L1601",
+              "title": "PL-300の全体像 — 4領域と採点の仕組み",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 35,
+              "order": 84
+            },
+            {
+              "id": "L1602",
+              "title": "領域1・2 総復習 — データの準備とモデル化",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 85
+            },
+            {
+              "id": "L1604",
+              "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 60,
+              "order": 87
+            },
+            {
+              "id": "L1902",
+              "title": "OneLake と Lakehouse — データを1か所に置く",
+              "module": "M19",
+              "moduleTitle": "Microsoft Fabric",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 100
+            },
+            {
+              "id": "L1904",
+              "title": "Direct Lake — インポートとDirectQueryの第三の道",
+              "module": "M19",
+              "moduleTitle": "Microsoft Fabric",
+              "tier": "T4",
+              "minutes": 55,
+              "order": 102
+            }
+          ],
+          "lessonCount": 11
+        },
+        {
+          "code": "1.2",
+          "title": "データの取得と変換",
+          "skill": "1.2 データの取得と変換",
+          "lessons": [
+            {
+              "id": "L0303",
+              "title": "最初のデータを読み込む",
+              "module": "M03",
+              "moduleTitle": "はじめてのレポート",
+              "tier": "T1",
+              "minutes": 35,
+              "order": 13
+            },
+            {
+              "id": "L0402",
+              "title": "Excel・CSV・Web・データベースへの接続",
+              "module": "M04",
+              "moduleTitle": "データの読み込み入門",
+              "tier": "T1",
+              "minutes": 40,
+              "order": 17
+            },
+            {
+              "id": "L0403",
+              "title": "データ型を制する — 型が違うと何が壊れるか",
+              "module": "M04",
+              "moduleTitle": "データの読み込み入門",
+              "tier": "T1",
+              "minutes": 40,
+              "order": 18
+            },
+            {
+              "id": "L0405",
+              "title": "Power Queryエディタ初めの一歩",
+              "module": "M04",
+              "moduleTitle": "データの読み込み入門",
+              "tier": "T1",
+              "minutes": 40,
+              "order": 20
+            },
+            {
+              "id": "L0501",
+              "title": "適用したステップという考え方 — 手順を記録する",
+              "module": "M05",
+              "moduleTitle": "Power Query 実践",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 21
+            },
+            {
+              "id": "L0504",
+              "title": "ピボット解除 — 横持ちを縦持ちにする最重要スキル",
+              "module": "M05",
+              "moduleTitle": "Power Query 実践",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 24
+            },
+            {
+              "id": "L0505",
+              "title": "マージと追加 — 結合の種類を図で理解する",
+              "module": "M05",
+              "moduleTitle": "Power Query 実践",
+              "tier": "T2",
+              "minutes": 45,
+              "order": 25
+            },
+            {
+              "id": "L0506",
+              "title": "グループ化・集計・行列の操作",
+              "module": "M05",
+              "moduleTitle": "Power Query 実践",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 26
+            },
+            {
+              "id": "L1101",
+              "title": "M言語の構造 — let ... in を読み書きする",
+              "module": "M11",
+              "moduleTitle": "高度なデータ整形",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 56
+            },
+            {
+              "id": "L1102",
+              "title": "カスタム関数とパラメータ — 処理を再利用する",
+              "module": "M11",
+              "moduleTitle": "高度なデータ整形",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 57
+            },
+            {
+              "id": "L1602",
+              "title": "領域1・2 総復習 — データの準備とモデル化",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 85
+            },
+            {
+              "id": "L1703",
+              "title": "データフローとレイクハウス — 変換をどこで行うか",
+              "module": "M17",
+              "moduleTitle": "エンタープライズ アーキテクチャ",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 91
+            },
+            {
+              "id": "L1903",
+              "title": "Warehouse・Notebook・パイプライン",
+              "module": "M19",
+              "moduleTitle": "Microsoft Fabric",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 101
+            },
+            {
+              "id": "L2004",
+              "title": "Python・R連携と外部機械学習",
+              "module": "M20",
+              "moduleTitle": "高度な分析とAI",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 107
+            }
+          ],
+          "lessonCount": 14
+        },
+        {
+          "code": "1.3",
+          "title": "データのプロファイリング",
+          "skill": "1.3 データのプロファイリング",
+          "lessons": [
+            {
+              "id": "L0404",
+              "title": "列プロファイルでデータを健康診断する",
+              "module": "M04",
+              "moduleTitle": "データの読み込み入門",
+              "tier": "T1",
+              "minutes": 40,
+              "order": 19
+            },
+            {
+              "id": "L0502",
+              "title": "データクレンジング実践 — 空白・表記ゆれ・エラー",
+              "module": "M05",
+              "moduleTitle": "Power Query 実践",
+              "tier": "T2",
+              "minutes": 45,
+              "order": 22
+            },
+            {
+              "id": "L1602",
+              "title": "領域1・2 総復習 — データの準備とモデル化",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 85
+            },
+            {
+              "id": "L2203",
+              "title": "データ品質とデータ契約 — 信頼できる数字を作る",
+              "module": "M22",
+              "moduleTitle": "現場で価値を出す",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 116
+            }
+          ],
+          "lessonCount": 4
+        },
+        {
+          "code": "1.4",
+          "title": "データのクリーニング",
+          "skill": "1.4 データのクリーニング",
+          "lessons": [
+            {
+              "id": "L0403",
+              "title": "データ型を制する — 型が違うと何が壊れるか",
+              "module": "M04",
+              "moduleTitle": "データの読み込み入門",
+              "tier": "T1",
+              "minutes": 40,
+              "order": 18
+            },
+            {
+              "id": "L0404",
+              "title": "列プロファイルでデータを健康診断する",
+              "module": "M04",
+              "moduleTitle": "データの読み込み入門",
+              "tier": "T1",
+              "minutes": 40,
+              "order": 19
+            },
+            {
+              "id": "L0405",
+              "title": "Power Queryエディタ初めの一歩",
+              "module": "M04",
+              "moduleTitle": "データの読み込み入門",
+              "tier": "T1",
+              "minutes": 40,
+              "order": 20
+            },
+            {
+              "id": "L0502",
+              "title": "データクレンジング実践 — 空白・表記ゆれ・エラー",
+              "module": "M05",
+              "moduleTitle": "Power Query 実践",
+              "tier": "T2",
+              "minutes": 45,
+              "order": 22
+            },
+            {
+              "id": "L1602",
+              "title": "領域1・2 総復習 — データの準備とモデル化",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 85
+            },
+            {
+              "id": "L2203",
+              "title": "データ品質とデータ契約 — 信頼できる数字を作る",
+              "module": "M22",
+              "moduleTitle": "現場で価値を出す",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 116
+            }
+          ],
+          "lessonCount": 6
+        },
+        {
+          "code": "1.5",
+          "title": "データの構造化",
+          "skill": "1.5 データの構造化",
+          "lessons": [
+            {
+              "id": "L0405",
+              "title": "Power Queryエディタ初めの一歩",
+              "module": "M04",
+              "moduleTitle": "データの読み込み入門",
+              "tier": "T1",
+              "minutes": 40,
+              "order": 20
+            },
+            {
+              "id": "L0503",
+              "title": "整然データ（tidy data）とは何か",
+              "module": "M05",
+              "moduleTitle": "Power Query 実践",
+              "tier": "T2",
+              "minutes": 30,
+              "order": 23
+            },
+            {
+              "id": "L0504",
+              "title": "ピボット解除 — 横持ちを縦持ちにする最重要スキル",
+              "module": "M05",
+              "moduleTitle": "Power Query 実践",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 24
+            },
+            {
+              "id": "L0505",
+              "title": "マージと追加 — 結合の種類を図で理解する",
+              "module": "M05",
+              "moduleTitle": "Power Query 実践",
+              "tier": "T2",
+              "minutes": 45,
+              "order": 25
+            },
+            {
+              "id": "L0602",
+              "title": "ファクトとディメンション — どう見分けるか",
+              "module": "M06",
+              "moduleTitle": "データモデリング",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 28
+            },
+            {
+              "id": "L1101",
+              "title": "M言語の構造 — let ... in を読み書きする",
+              "module": "M11",
+              "moduleTitle": "高度なデータ整形",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 56
+            },
+            {
+              "id": "L1102",
+              "title": "カスタム関数とパラメータ — 処理を再利用する",
+              "module": "M11",
+              "moduleTitle": "高度なデータ整形",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 57
+            },
+            {
+              "id": "L1206",
+              "title": "SCD（緩やかに変化する次元）と履歴管理",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 66
+            },
+            {
+              "id": "L1504",
+              "title": "顧客分析 — コホート・RFM・LTV・チャーン",
+              "module": "M15",
+              "moduleTitle": "分析手法とデータサイエンス",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 81
+            },
+            {
+              "id": "L1602",
+              "title": "領域1・2 総復習 — データの準備とモデル化",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 85
+            },
+            {
+              "id": "L1604",
+              "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 60,
+              "order": 87
+            }
+          ],
+          "lessonCount": 11
+        },
+        {
+          "code": "1.6",
+          "title": "パフォーマンスを考慮した取り込み",
+          "skill": "1.6 パフォーマンスを考慮した取り込み",
+          "lessons": [
+            {
+              "id": "L0401",
+              "title": "接続方式の三択 — インポート / DirectQuery / ライブ接続",
+              "module": "M04",
+              "moduleTitle": "データの読み込み入門",
+              "tier": "T1",
+              "minutes": 35,
+              "order": 16
+            },
+            {
+              "id": "L0501",
+              "title": "適用したステップという考え方 — 手順を記録する",
+              "module": "M05",
+              "moduleTitle": "Power Query 実践",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 21
+            },
+            {
+              "id": "L0506",
+              "title": "グループ化・集計・行列の操作",
+              "module": "M05",
+              "moduleTitle": "Power Query 実践",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 26
+            },
+            {
+              "id": "L1003",
+              "title": "データ更新の自動化とゲートウェイ",
+              "module": "M10",
+              "moduleTitle": "共有と運用",
+              "tier": "T2",
+              "minutes": 45,
+              "order": 53
+            },
+            {
+              "id": "L1102",
+              "title": "カスタム関数とパラメータ — 処理を再利用する",
+              "module": "M11",
+              "moduleTitle": "高度なデータ整形",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 57
+            },
+            {
+              "id": "L1103",
+              "title": "クエリ フォールディング — 更新時間を決める仕組み",
+              "module": "M11",
+              "moduleTitle": "高度なデータ整形",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 58
+            },
+            {
+              "id": "L1104",
+              "title": "増分更新 — 大規模ファクトを現実的に運用する",
+              "module": "M11",
+              "moduleTitle": "高度なデータ整形",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 59
+            },
+            {
+              "id": "L1105",
+              "title": "データフローとETL設計 — 変換をどこに置くか",
+              "module": "M11",
+              "moduleTitle": "高度なデータ整形",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 60
+            },
+            {
+              "id": "L1205",
+              "title": "複合モデルと集計テーブル",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 65
+            },
+            {
+              "id": "L1401",
+              "title": "VertiPaqの仕組み — なぜ速いのか",
+              "module": "M14",
+              "moduleTitle": "パフォーマンス",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 73
+            },
+            {
+              "id": "L1402",
+              "title": "カーディナリティとモデルサイズ — 何が容量を食うのか",
+              "module": "M14",
+              "moduleTitle": "パフォーマンス",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 74
+            },
+            {
+              "id": "L1602",
+              "title": "領域1・2 総復習 — データの準備とモデル化",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 85
+            },
+            {
+              "id": "L1604",
+              "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 60,
+              "order": 87
+            },
+            {
+              "id": "L1703",
+              "title": "データフローとレイクハウス — 変換をどこで行うか",
+              "module": "M17",
+              "moduleTitle": "エンタープライズ アーキテクチャ",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 91
+            },
+            {
+              "id": "L1903",
+              "title": "Warehouse・Notebook・パイプライン",
+              "module": "M19",
+              "moduleTitle": "Microsoft Fabric",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 101
+            }
+          ],
+          "lessonCount": 15
+        }
+      ]
+    },
+    {
+      "id": "A2",
+      "title": "データのモデル化",
+      "weight": "25-30%",
+      "skills": [
+        {
+          "code": "2.1",
+          "title": "データモデルの設計",
+          "skill": "2.1 データモデルの設計",
+          "lessons": [
+            {
+              "id": "L0601",
+              "title": "スタースキーマ — Power BI最重要の設計原則",
+              "module": "M06",
+              "moduleTitle": "データモデリング",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 27
+            },
+            {
+              "id": "L0602",
+              "title": "ファクトとディメンション — どう見分けるか",
+              "module": "M06",
+              "moduleTitle": "データモデリング",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 28
+            },
+            {
+              "id": "L0605",
+              "title": "日付テーブル — 時系列分析の土台",
+              "module": "M06",
+              "moduleTitle": "データモデリング",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 31
+            },
+            {
+              "id": "L0606",
+              "title": "モデルを磨く — 階層・並べ替え・書式・非表示",
+              "module": "M06",
+              "moduleTitle": "データモデリング",
+              "tier": "T2",
+              "minutes": 30,
+              "order": 32
+            },
+            {
+              "id": "L1201",
+              "title": "多対多とブリッジテーブル",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 61
+            },
+            {
+              "id": "L1206",
+              "title": "SCD（緩やかに変化する次元）と履歴管理",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 66
+            },
+            {
+              "id": "L1601",
+              "title": "PL-300の全体像 — 4領域と採点の仕組み",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 35,
+              "order": 84
+            },
+            {
+              "id": "L1602",
+              "title": "領域1・2 総復習 — データの準備とモデル化",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 85
+            },
+            {
+              "id": "L1702",
+              "title": "セマンティックモデルの分割戦略 — 何を1つにまとめるか",
+              "module": "M17",
+              "moduleTitle": "エンタープライズ アーキテクチャ",
+              "tier": "T4",
+              "minutes": 55,
+              "order": 90
+            },
+            {
+              "id": "L1704",
+              "title": "命名規則と標準化 — 100人が使えるモデルにする",
+              "module": "M17",
+              "moduleTitle": "エンタープライズ アーキテクチャ",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 92
+            },
+            {
+              "id": "L2005",
+              "title": "予測モデルをBIに載せる — スコアリング結果の運用",
+              "module": "M20",
+              "moduleTitle": "高度な分析とAI",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 108
+            }
+          ],
+          "lessonCount": 11
+        },
+        {
+          "code": "2.2",
+          "title": "リレーションシップの構成",
+          "skill": "2.2 リレーションシップの構成",
+          "lessons": [
+            {
+              "id": "L0603",
+              "title": "リレーションシップの3要素 — 基数・方向・アクティブ",
+              "module": "M06",
+              "moduleTitle": "データモデリング",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 29
+            },
+            {
+              "id": "L0604",
+              "title": "フィルターはどう流れるか — 伝播を図で追う",
+              "module": "M06",
+              "moduleTitle": "データモデリング",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 30
+            },
+            {
+              "id": "L0801",
+              "title": "フィルターコンテキストとは何か",
+              "module": "M08",
+              "moduleTitle": "DAXコンテキスト",
+              "tier": "T2",
+              "minutes": 45,
+              "order": 39
+            },
+            {
+              "id": "L1201",
+              "title": "多対多とブリッジテーブル",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 61
+            },
+            {
+              "id": "L1202",
+              "title": "双方向リレーションシップの罠と代替手段",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 62
+            },
+            {
+              "id": "L1203",
+              "title": "役割の異なる日付（USERELATIONSHIP）と複数ファクト",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 63
+            },
+            {
+              "id": "L1206",
+              "title": "SCD（緩やかに変化する次元）と履歴管理",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 66
+            },
+            {
+              "id": "L1304",
+              "title": "集合演算と仮想リレーション — UNION・EXCEPT・TREATAS",
+              "module": "M13",
+              "moduleTitle": "DAX上級",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 70
+            },
+            {
+              "id": "L1602",
+              "title": "領域1・2 総復習 — データの準備とモデル化",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 85
+            },
+            {
+              "id": "L1604",
+              "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 60,
+              "order": 87
+            }
+          ],
+          "lessonCount": 10
+        },
+        {
+          "code": "2.3",
+          "title": "計算列とメジャーの作成",
+          "skill": "2.3 計算列とメジャーの作成",
+          "lessons": [
+            {
+              "id": "L0701",
+              "title": "DAXとは何か — Excelの数式と何が違うのか",
+              "module": "M07",
+              "moduleTitle": "DAX基礎",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 33
+            },
+            {
+              "id": "L0702",
+              "title": "計算列とメジャー — 決定的な違い",
+              "module": "M07",
+              "moduleTitle": "DAX基礎",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 34
+            },
+            {
+              "id": "L0703",
+              "title": "集計関数を使いこなす — SUM・COUNT・DISTINCTCOUNT",
+              "module": "M07",
+              "moduleTitle": "DAX基礎",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 35
+            },
+            {
+              "id": "L0704",
+              "title": "条件分岐と安全な割り算 — IF・SWITCH・DIVIDE",
+              "module": "M07",
+              "moduleTitle": "DAX基礎",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 36
+            },
+            {
+              "id": "L0705",
+              "title": "VAR と RETURN — 読める・速いDAXを書く",
+              "module": "M07",
+              "moduleTitle": "DAX基礎",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 37
+            },
+            {
+              "id": "L0706",
+              "title": "書式・命名・整理 — 実務で通用するDAXの作法",
+              "module": "M07",
+              "moduleTitle": "DAX基礎",
+              "tier": "T2",
+              "minutes": 30,
+              "order": 38
+            },
+            {
+              "id": "L0801",
+              "title": "フィルターコンテキストとは何か",
+              "module": "M08",
+              "moduleTitle": "DAXコンテキスト",
+              "tier": "T2",
+              "minutes": 45,
+              "order": 39
+            },
+            {
+              "id": "L0802",
+              "title": "行コンテキストとは何か — 2つの文脈を区別する",
+              "module": "M08",
+              "moduleTitle": "DAXコンテキスト",
+              "tier": "T2",
+              "minutes": 45,
+              "order": 40
+            },
+            {
+              "id": "L0803",
+              "title": "CALCULATE — フィルターを変更する唯一の関数",
+              "module": "M08",
+              "moduleTitle": "DAXコンテキスト",
+              "tier": "T2",
+              "minutes": 50,
+              "order": 41
+            },
+            {
+              "id": "L0804",
+              "title": "ALL・ALLSELECTED・REMOVEFILTERS — フィルターを外す",
+              "module": "M08",
+              "moduleTitle": "DAXコンテキスト",
+              "tier": "T2",
+              "minutes": 45,
+              "order": 42
+            },
+            {
+              "id": "L0805",
+              "title": "KEEPFILTERS と FILTER — 条件の書き方を選ぶ",
+              "module": "M08",
+              "moduleTitle": "DAXコンテキスト",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 43
+            },
+            {
+              "id": "L0806",
+              "title": "タイムインテリジェンス — 前年比・YTD・移動平均",
+              "module": "M08",
+              "moduleTitle": "DAXコンテキスト",
+              "tier": "T2",
+              "minutes": 50,
+              "order": 44
+            },
+            {
+              "id": "L1203",
+              "title": "役割の異なる日付（USERELATIONSHIP）と複数ファクト",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 63
+            },
+            {
+              "id": "L1301",
+              "title": "イテレータ関数 — SUMX・AVERAGEX・RANKX",
+              "module": "M13",
+              "moduleTitle": "DAX上級",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 67
+            },
+            {
+              "id": "L1302",
+              "title": "コンテキスト遷移 — DAX最大の難関",
+              "module": "M13",
+              "moduleTitle": "DAX上級",
+              "tier": "T3",
+              "minutes": 55,
+              "order": 68
+            },
+            {
+              "id": "L1303",
+              "title": "テーブル関数 — VALUES・SUMMARIZE・ADDCOLUMNS・SELECTCOLUMNS",
+              "module": "M13",
+              "moduleTitle": "DAX上級",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 69
+            },
+            {
+              "id": "L1304",
+              "title": "集合演算と仮想リレーション — UNION・EXCEPT・TREATAS",
+              "module": "M13",
+              "moduleTitle": "DAX上級",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 70
+            },
+            {
+              "id": "L1305",
+              "title": "実務パターン集 — 構成比・累計・ランキング・ABC分析・コホート",
+              "module": "M13",
+              "moduleTitle": "DAX上級",
+              "tier": "T3",
+              "minutes": 60,
+              "order": 71
+            },
+            {
+              "id": "L1306",
+              "title": "DAXのよくある間違い20選",
+              "module": "M13",
+              "moduleTitle": "DAX上級",
+              "tier": "T3",
+              "minutes": 60,
+              "order": 72
+            },
+            {
+              "id": "L1501",
+              "title": "記述統計 — 分布を見ずに平均を語るな",
+              "module": "M15",
+              "moduleTitle": "分析手法とデータサイエンス",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 78
+            },
+            {
+              "id": "L1503",
+              "title": "時系列分析 — トレンド・季節性・移動平均・異常検知",
+              "module": "M15",
+              "moduleTitle": "分析手法とデータサイエンス",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 80
+            },
+            {
+              "id": "L1504",
+              "title": "顧客分析 — コホート・RFM・LTV・チャーン",
+              "module": "M15",
+              "moduleTitle": "分析手法とデータサイエンス",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 81
+            },
+            {
+              "id": "L1505",
+              "title": "予測と不確実性 — 予測値に幅を持たせる",
+              "module": "M15",
+              "moduleTitle": "分析手法とデータサイエンス",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 82
+            },
+            {
+              "id": "L1602",
+              "title": "領域1・2 総復習 — データの準備とモデル化",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 85
+            },
+            {
+              "id": "L2202",
+              "title": "KPIツリーの設計 — 事業構造を数式にする",
+              "module": "M22",
+              "moduleTitle": "現場で価値を出す",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 115
+            }
+          ],
+          "lessonCount": 25
+        },
+        {
+          "code": "2.4",
+          "title": "タイムインテリジェンス",
+          "skill": "2.4 タイムインテリジェンス",
+          "lessons": [
+            {
+              "id": "L0605",
+              "title": "日付テーブル — 時系列分析の土台",
+              "module": "M06",
+              "moduleTitle": "データモデリング",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 31
+            },
+            {
+              "id": "L0806",
+              "title": "タイムインテリジェンス — 前年比・YTD・移動平均",
+              "module": "M08",
+              "moduleTitle": "DAXコンテキスト",
+              "tier": "T2",
+              "minutes": 50,
+              "order": 44
+            },
+            {
+              "id": "L1203",
+              "title": "役割の異なる日付（USERELATIONSHIP）と複数ファクト",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 63
+            },
+            {
+              "id": "L1305",
+              "title": "実務パターン集 — 構成比・累計・ランキング・ABC分析・コホート",
+              "module": "M13",
+              "moduleTitle": "DAX上級",
+              "tier": "T3",
+              "minutes": 60,
+              "order": 71
+            },
+            {
+              "id": "L1503",
+              "title": "時系列分析 — トレンド・季節性・移動平均・異常検知",
+              "module": "M15",
+              "moduleTitle": "分析手法とデータサイエンス",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 80
+            },
+            {
+              "id": "L1602",
+              "title": "領域1・2 総復習 — データの準備とモデル化",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 85
+            },
+            {
+              "id": "L1604",
+              "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 60,
+              "order": 87
+            }
+          ],
+          "lessonCount": 7
+        },
+        {
+          "code": "2.5",
+          "title": "モデルの最適化",
+          "skill": "2.5 モデルの最適化",
+          "lessons": [
+            {
+              "id": "L0606",
+              "title": "モデルを磨く — 階層・並べ替え・書式・非表示",
+              "module": "M06",
+              "moduleTitle": "データモデリング",
+              "tier": "T2",
+              "minutes": 30,
+              "order": 32
+            },
+            {
+              "id": "L0702",
+              "title": "計算列とメジャー — 決定的な違い",
+              "module": "M07",
+              "moduleTitle": "DAX基礎",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 34
+            },
+            {
+              "id": "L0706",
+              "title": "書式・命名・整理 — 実務で通用するDAXの作法",
+              "module": "M07",
+              "moduleTitle": "DAX基礎",
+              "tier": "T2",
+              "minutes": 30,
+              "order": 38
+            },
+            {
+              "id": "L1202",
+              "title": "双方向リレーションシップの罠と代替手段",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 62
+            },
+            {
+              "id": "L1205",
+              "title": "複合モデルと集計テーブル",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 65
+            },
+            {
+              "id": "L1301",
+              "title": "イテレータ関数 — SUMX・AVERAGEX・RANKX",
+              "module": "M13",
+              "moduleTitle": "DAX上級",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 67
+            },
+            {
+              "id": "L1306",
+              "title": "DAXのよくある間違い20選",
+              "module": "M13",
+              "moduleTitle": "DAX上級",
+              "tier": "T3",
+              "minutes": 60,
+              "order": 72
+            },
+            {
+              "id": "L1401",
+              "title": "VertiPaqの仕組み — なぜ速いのか",
+              "module": "M14",
+              "moduleTitle": "パフォーマンス",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 73
+            },
+            {
+              "id": "L1402",
+              "title": "カーディナリティとモデルサイズ — 何が容量を食うのか",
+              "module": "M14",
+              "moduleTitle": "パフォーマンス",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 74
+            },
+            {
+              "id": "L1403",
+              "title": "ストレージエンジンと数式エンジン — 遅さの正体",
+              "module": "M14",
+              "moduleTitle": "パフォーマンス",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 75
+            },
+            {
+              "id": "L1404",
+              "title": "計測する — パフォーマンスアナライザーとDAX Studio",
+              "module": "M14",
+              "moduleTitle": "パフォーマンス",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 76
+            },
+            {
+              "id": "L1405",
+              "title": "レポート最適化 — ビジュアル・クエリ・更新",
+              "module": "M14",
+              "moduleTitle": "パフォーマンス",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 77
+            },
+            {
+              "id": "L1602",
+              "title": "領域1・2 総復習 — データの準備とモデル化",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 85
+            },
+            {
+              "id": "L1705",
+              "title": "スケールする設計 — 大規模データと多数の利用者",
+              "module": "M17",
+              "moduleTitle": "エンタープライズ アーキテクチャ",
+              "tier": "T4",
+              "minutes": 55,
+              "order": 93
+            },
+            {
+              "id": "L1803",
+              "title": "テストと品質保証 — BIにおけるテストとは何か",
+              "module": "M18",
+              "moduleTitle": "ガバナンスとライフサイクル",
+              "tier": "T4",
+              "minutes": 55,
+              "order": 96
+            },
+            {
+              "id": "L1904",
+              "title": "Direct Lake — インポートとDirectQueryの第三の道",
+              "module": "M19",
+              "moduleTitle": "Microsoft Fabric",
+              "tier": "T4",
+              "minutes": 55,
+              "order": 102
+            }
+          ],
+          "lessonCount": 16
+        },
+        {
+          "code": "2.6",
+          "title": "行レベルセキュリティ",
+          "skill": "2.6 行レベルセキュリティ",
+          "lessons": [
+            {
+              "id": "L1202",
+              "title": "双方向リレーションシップの罠と代替手段",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 62
+            },
+            {
+              "id": "L1204",
+              "title": "行レベルセキュリティ(RLS) — 静的・動的・階層",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 55,
+              "order": 64
+            },
+            {
+              "id": "L1602",
+              "title": "領域1・2 総復習 — データの準備とモデル化",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 85
+            },
+            {
+              "id": "L1604",
+              "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 60,
+              "order": 87
+            }
+          ],
+          "lessonCount": 4
+        }
+      ]
+    },
+    {
+      "id": "A3",
+      "title": "視覚化と分析",
+      "weight": "25-30%",
+      "skills": [
+        {
+          "code": "3.1",
+          "title": "レポートの作成",
+          "skill": "3.1 レポートの作成",
+          "lessons": [
+            {
+              "id": "L0302",
+              "title": "画面の地図 — 3つのビューと3つのペイン",
+              "module": "M03",
+              "moduleTitle": "はじめてのレポート",
+              "tier": "T1",
+              "minutes": 30,
+              "order": 12
+            },
+            {
+              "id": "L0304",
+              "title": "最初のグラフを作る — カード・棒・折れ線",
+              "module": "M03",
+              "moduleTitle": "はじめてのレポート",
+              "tier": "T1",
+              "minutes": 40,
+              "order": 14
+            },
+            {
+              "id": "L0606",
+              "title": "モデルを磨く — 階層・並べ替え・書式・非表示",
+              "module": "M06",
+              "moduleTitle": "データモデリング",
+              "tier": "T2",
+              "minutes": 30,
+              "order": 32
+            },
+            {
+              "id": "L0901",
+              "title": "ビジュアルの選び方 — 問いの型から決める",
+              "module": "M09",
+              "moduleTitle": "可視化の設計",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 45
+            },
+            {
+              "id": "L0902",
+              "title": "レポートのレイアウトと視線導線",
+              "module": "M09",
+              "moduleTitle": "可視化の設計",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 46
+            },
+            {
+              "id": "L1404",
+              "title": "計測する — パフォーマンスアナライザーとDAX Studio",
+              "module": "M14",
+              "moduleTitle": "パフォーマンス",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 76
+            },
+            {
+              "id": "L1405",
+              "title": "レポート最適化 — ビジュアル・クエリ・更新",
+              "module": "M14",
+              "moduleTitle": "パフォーマンス",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 77
+            },
+            {
+              "id": "L1601",
+              "title": "PL-300の全体像 — 4領域と採点の仕組み",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 35,
+              "order": 84
+            },
+            {
+              "id": "L1603",
+              "title": "領域3・4 総復習 — 視覚化と資産管理",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 86
+            },
+            {
+              "id": "L2002",
+              "title": "Q&Aとスマートナラティブ — 自然言語で使えるモデルにする",
+              "module": "M20",
+              "moduleTitle": "高度な分析とAI",
+              "tier": "T4",
+              "minutes": 40,
+              "order": 105
+            },
+            {
+              "id": "L2101",
+              "title": "情報設計 — 誰の何の意思決定を助けるのか",
+              "module": "M21",
+              "moduleTitle": "デザインとストーリーテリング",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 109
+            },
+            {
+              "id": "L2103",
+              "title": "ダッシュボード設計の原則 — 5秒・30秒・5分",
+              "module": "M21",
+              "moduleTitle": "デザインとストーリーテリング",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 111
+            },
+            {
+              "id": "L2104",
+              "title": "データストーリーテリング — 数字を物語にする",
+              "module": "M21",
+              "moduleTitle": "デザインとストーリーテリング",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 112
+            },
+            {
+              "id": "L2201",
+              "title": "要件定義 — 「ダッシュボードが欲しい」の裏を聞く",
+              "module": "M22",
+              "moduleTitle": "現場で価値を出す",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 114
+            }
+          ],
+          "lessonCount": 14
+        },
+        {
+          "code": "3.2",
+          "title": "ビジュアルの選択と構成",
+          "skill": "3.2 ビジュアルの選択と構成",
+          "lessons": [
+            {
+              "id": "L0105",
+              "title": "分析の5つの型 — 比較・推移・構成・分布・関係",
+              "module": "M01",
+              "moduleTitle": "データ分析とBIの基礎",
+              "tier": "T1",
+              "minutes": 35,
+              "order": 5
+            },
+            {
+              "id": "L0304",
+              "title": "最初のグラフを作る — カード・棒・折れ線",
+              "module": "M03",
+              "moduleTitle": "はじめてのレポート",
+              "tier": "T1",
+              "minutes": 40,
+              "order": 14
+            },
+            {
+              "id": "L0901",
+              "title": "ビジュアルの選び方 — 問いの型から決める",
+              "module": "M09",
+              "moduleTitle": "可視化の設計",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 45
+            },
+            {
+              "id": "L0903",
+              "title": "色とテーマ — 伝わる配色、伝わらない配色",
+              "module": "M09",
+              "moduleTitle": "可視化の設計",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 47
+            },
+            {
+              "id": "L0905",
+              "title": "条件付き書式・ツールチップ・スモールマルチプル",
+              "module": "M09",
+              "moduleTitle": "可視化の設計",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 49
+            },
+            {
+              "id": "L1603",
+              "title": "領域3・4 総復習 — 視覚化と資産管理",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 86
+            },
+            {
+              "id": "L2101",
+              "title": "情報設計 — 誰の何の意思決定を助けるのか",
+              "module": "M21",
+              "moduleTitle": "デザインとストーリーテリング",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 109
+            },
+            {
+              "id": "L2102",
+              "title": "可視化の理論 — 知覚・認知・ゲシュタルト",
+              "module": "M21",
+              "moduleTitle": "デザインとストーリーテリング",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 110
+            }
+          ],
+          "lessonCount": 8
+        },
+        {
+          "code": "3.3",
+          "title": "対話機能の設定",
+          "skill": "3.3 対話機能の設定",
+          "lessons": [
+            {
+              "id": "L0304",
+              "title": "最初のグラフを作る — カード・棒・折れ線",
+              "module": "M03",
+              "moduleTitle": "はじめてのレポート",
+              "tier": "T1",
+              "minutes": 40,
+              "order": 14
+            },
+            {
+              "id": "L0604",
+              "title": "フィルターはどう流れるか — 伝播を図で追う",
+              "module": "M06",
+              "moduleTitle": "データモデリング",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 30
+            },
+            {
+              "id": "L0904",
+              "title": "相互作用・ドリルダウン・ドリルスルー",
+              "module": "M09",
+              "moduleTitle": "可視化の設計",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 48
+            },
+            {
+              "id": "L1603",
+              "title": "領域3・4 総復習 — 視覚化と資産管理",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 86
+            },
+            {
+              "id": "L1604",
+              "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 60,
+              "order": 87
+            },
+            {
+              "id": "L2103",
+              "title": "ダッシュボード設計の原則 — 5秒・30秒・5分",
+              "module": "M21",
+              "moduleTitle": "デザインとストーリーテリング",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 111
+            }
+          ],
+          "lessonCount": 6
+        },
+        {
+          "code": "3.4",
+          "title": "レポートの書式とアクセシビリティ",
+          "skill": "3.4 レポートの書式とアクセシビリティ",
+          "lessons": [
+            {
+              "id": "L0902",
+              "title": "レポートのレイアウトと視線導線",
+              "module": "M09",
+              "moduleTitle": "可視化の設計",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 46
+            },
+            {
+              "id": "L0903",
+              "title": "色とテーマ — 伝わる配色、伝わらない配色",
+              "module": "M09",
+              "moduleTitle": "可視化の設計",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 47
+            },
+            {
+              "id": "L0905",
+              "title": "条件付き書式・ツールチップ・スモールマルチプル",
+              "module": "M09",
+              "moduleTitle": "可視化の設計",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 49
+            },
+            {
+              "id": "L0906",
+              "title": "モバイルレイアウトとアクセシビリティ",
+              "module": "M09",
+              "moduleTitle": "可視化の設計",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 50
+            },
+            {
+              "id": "L1603",
+              "title": "領域3・4 総復習 — 視覚化と資産管理",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 86
+            },
+            {
+              "id": "L2102",
+              "title": "可視化の理論 — 知覚・認知・ゲシュタルト",
+              "module": "M21",
+              "moduleTitle": "デザインとストーリーテリング",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 110
+            },
+            {
+              "id": "L2105",
+              "title": "レビューと改善 — 使われるレポートにする",
+              "module": "M21",
+              "moduleTitle": "デザインとストーリーテリング",
+              "tier": "T4",
+              "minutes": 40,
+              "order": 113
+            }
+          ],
+          "lessonCount": 7
+        },
+        {
+          "code": "3.5",
+          "title": "データの探索と分析",
+          "skill": "3.5 データの探索と分析",
+          "lessons": [
+            {
+              "id": "L0104",
+              "title": "数字の読み方の基礎 — 平均のウソと分布",
+              "module": "M01",
+              "moduleTitle": "データ分析とBIの基礎",
+              "tier": "T1",
+              "minutes": 40,
+              "order": 4
+            },
+            {
+              "id": "L0804",
+              "title": "ALL・ALLSELECTED・REMOVEFILTERS — フィルターを外す",
+              "module": "M08",
+              "moduleTitle": "DAXコンテキスト",
+              "tier": "T2",
+              "minutes": 45,
+              "order": 42
+            },
+            {
+              "id": "L0904",
+              "title": "相互作用・ドリルダウン・ドリルスルー",
+              "module": "M09",
+              "moduleTitle": "可視化の設計",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 48
+            },
+            {
+              "id": "L1303",
+              "title": "テーブル関数 — VALUES・SUMMARIZE・ADDCOLUMNS・SELECTCOLUMNS",
+              "module": "M13",
+              "moduleTitle": "DAX上級",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 69
+            },
+            {
+              "id": "L1305",
+              "title": "実務パターン集 — 構成比・累計・ランキング・ABC分析・コホート",
+              "module": "M13",
+              "moduleTitle": "DAX上級",
+              "tier": "T3",
+              "minutes": 60,
+              "order": 71
+            },
+            {
+              "id": "L1501",
+              "title": "記述統計 — 分布を見ずに平均を語るな",
+              "module": "M15",
+              "moduleTitle": "分析手法とデータサイエンス",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 78
+            },
+            {
+              "id": "L1502",
+              "title": "相関と因果 — 交絡・選択バイアス・シンプソンのパラドックス",
+              "module": "M15",
+              "moduleTitle": "分析手法とデータサイエンス",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 79
+            },
+            {
+              "id": "L1503",
+              "title": "時系列分析 — トレンド・季節性・移動平均・異常検知",
+              "module": "M15",
+              "moduleTitle": "分析手法とデータサイエンス",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 80
+            },
+            {
+              "id": "L1504",
+              "title": "顧客分析 — コホート・RFM・LTV・チャーン",
+              "module": "M15",
+              "moduleTitle": "分析手法とデータサイエンス",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 81
+            },
+            {
+              "id": "L1505",
+              "title": "予測と不確実性 — 予測値に幅を持たせる",
+              "module": "M15",
+              "moduleTitle": "分析手法とデータサイエンス",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 82
+            },
+            {
+              "id": "L1506",
+              "title": "効果検証の基礎 — A/Bテストと因果推論の入口",
+              "module": "M15",
+              "moduleTitle": "分析手法とデータサイエンス",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 83
+            },
+            {
+              "id": "L1603",
+              "title": "領域3・4 総復習 — 視覚化と資産管理",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 86
+            },
+            {
+              "id": "L2001",
+              "title": "AIビジュアルを正しく使う — 主要因・分解ツリー・異常検知",
+              "module": "M20",
+              "moduleTitle": "高度な分析とAI",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 104
+            },
+            {
+              "id": "L2004",
+              "title": "Python・R連携と外部機械学習",
+              "module": "M20",
+              "moduleTitle": "高度な分析とAI",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 107
+            },
+            {
+              "id": "L2005",
+              "title": "予測モデルをBIに載せる — スコアリング結果の運用",
+              "module": "M20",
+              "moduleTitle": "高度な分析とAI",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 108
+            },
+            {
+              "id": "L2104",
+              "title": "データストーリーテリング — 数字を物語にする",
+              "module": "M21",
+              "moduleTitle": "デザインとストーリーテリング",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 112
+            },
+            {
+              "id": "L2202",
+              "title": "KPIツリーの設計 — 事業構造を数式にする",
+              "module": "M22",
+              "moduleTitle": "現場で価値を出す",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 115
+            }
+          ],
+          "lessonCount": 17
+        },
+        {
+          "code": "3.6",
+          "title": "AI ビジュアルの活用",
+          "skill": "3.6 AI ビジュアルの活用",
+          "lessons": [
+            {
+              "id": "L1502",
+              "title": "相関と因果 — 交絡・選択バイアス・シンプソンのパラドックス",
+              "module": "M15",
+              "moduleTitle": "分析手法とデータサイエンス",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 79
+            },
+            {
+              "id": "L1505",
+              "title": "予測と不確実性 — 予測値に幅を持たせる",
+              "module": "M15",
+              "moduleTitle": "分析手法とデータサイエンス",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 82
+            },
+            {
+              "id": "L1603",
+              "title": "領域3・4 総復習 — 視覚化と資産管理",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 86
+            },
+            {
+              "id": "L2001",
+              "title": "AIビジュアルを正しく使う — 主要因・分解ツリー・異常検知",
+              "module": "M20",
+              "moduleTitle": "高度な分析とAI",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 104
+            },
+            {
+              "id": "L2002",
+              "title": "Q&Aとスマートナラティブ — 自然言語で使えるモデルにする",
+              "module": "M20",
+              "moduleTitle": "高度な分析とAI",
+              "tier": "T4",
+              "minutes": 40,
+              "order": 105
+            },
+            {
+              "id": "L2003",
+              "title": "Copilot と生成AI — 何を任せ、何を任せないか",
+              "module": "M20",
+              "moduleTitle": "高度な分析とAI",
+              "tier": "T4",
+              "minutes": 40,
+              "order": 106
+            }
+          ],
+          "lessonCount": 6
+        },
+        {
+          "code": "3.7",
+          "title": "モバイル対応",
+          "skill": "3.7 モバイル対応",
+          "lessons": [
+            {
+              "id": "L0906",
+              "title": "モバイルレイアウトとアクセシビリティ",
+              "module": "M09",
+              "moduleTitle": "可視化の設計",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 50
+            },
+            {
+              "id": "L1603",
+              "title": "領域3・4 総復習 — 視覚化と資産管理",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 86
+            },
+            {
+              "id": "L2103",
+              "title": "ダッシュボード設計の原則 — 5秒・30秒・5分",
+              "module": "M21",
+              "moduleTitle": "デザインとストーリーテリング",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 111
+            }
+          ],
+          "lessonCount": 3
+        }
+      ]
+    },
+    {
+      "id": "A4",
+      "title": "資産の管理とセキュリティ",
+      "weight": "15-20%",
+      "skills": [
+        {
+          "code": "4.1",
+          "title": "ワークスペースの管理",
+          "skill": "4.1 ワークスペースの管理",
+          "lessons": [
+            {
+              "id": "L0202",
+              "title": "Desktop・Service・Mobile の役割分担",
+              "module": "M02",
+              "moduleTitle": "Power BIの全体像",
+              "tier": "T1",
+              "minutes": 30,
+              "order": 7
+            },
+            {
+              "id": "L0204",
+              "title": "ライセンスと組織での使われ方",
+              "module": "M02",
+              "moduleTitle": "Power BIの全体像",
+              "tier": "T1",
+              "minutes": 30,
+              "order": 9
+            },
+            {
+              "id": "L0305",
+              "title": "保存・発行・共有の第一歩",
+              "module": "M03",
+              "moduleTitle": "はじめてのレポート",
+              "tier": "T1",
+              "minutes": 30,
+              "order": 15
+            },
+            {
+              "id": "L1001",
+              "title": "ワークスペースとロール — 権限設計の基本",
+              "module": "M10",
+              "moduleTitle": "共有と運用",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 51
+            },
+            {
+              "id": "L1002",
+              "title": "発行とアプリ配布 — 100人に届ける正しい方法",
+              "module": "M10",
+              "moduleTitle": "共有と運用",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 52
+            },
+            {
+              "id": "L1005",
+              "title": "レポートの運用 — 監視・サブスクリプション・使用状況",
+              "module": "M10",
+              "moduleTitle": "共有と運用",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 55
+            },
+            {
+              "id": "L1601",
+              "title": "PL-300の全体像 — 4領域と採点の仕組み",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 35,
+              "order": 84
+            },
+            {
+              "id": "L1603",
+              "title": "領域3・4 総復習 — 視覚化と資産管理",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 86
+            },
+            {
+              "id": "L1701",
+              "title": "BIアーキテクチャの全体像 — ソースから利用まで",
+              "module": "M17",
+              "moduleTitle": "エンタープライズ アーキテクチャ",
+              "tier": "T4",
+              "minutes": 55,
+              "order": 89
+            },
+            {
+              "id": "L1801",
+              "title": "デプロイメントパイプラインと環境分離",
+              "module": "M18",
+              "moduleTitle": "ガバナンスとライフサイクル",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 94
+            },
+            {
+              "id": "L1901",
+              "title": "Fabric の全体像 — Power BIはどこに位置するか",
+              "module": "M19",
+              "moduleTitle": "Microsoft Fabric",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 99
+            },
+            {
+              "id": "L1905",
+              "title": "容量管理とコスト — CU・スロットリング・監視",
+              "module": "M19",
+              "moduleTitle": "Microsoft Fabric",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 103
+            },
+            {
+              "id": "L2204",
+              "title": "導入と定着 — 使われないBIの原因を潰す",
+              "module": "M22",
+              "moduleTitle": "現場で価値を出す",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 117
+            }
+          ],
+          "lessonCount": 13
+        },
+        {
+          "code": "4.2",
+          "title": "セマンティックモデルの管理",
+          "skill": "4.2 セマンティックモデルの管理",
+          "lessons": [
+            {
+              "id": "L0205",
+              "title": "ファイル形式と用語の整理",
+              "module": "M02",
+              "moduleTitle": "Power BIの全体像",
+              "tier": "T1",
+              "minutes": 30,
+              "order": 10
+            },
+            {
+              "id": "L1003",
+              "title": "データ更新の自動化とゲートウェイ",
+              "module": "M10",
+              "moduleTitle": "共有と運用",
+              "tier": "T2",
+              "minutes": 45,
+              "order": 53
+            },
+            {
+              "id": "L1004",
+              "title": "セマンティックモデルの共有と再利用",
+              "module": "M10",
+              "moduleTitle": "共有と運用",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 54
+            },
+            {
+              "id": "L1105",
+              "title": "データフローとETL設計 — 変換をどこに置くか",
+              "module": "M11",
+              "moduleTitle": "高度なデータ整形",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 60
+            },
+            {
+              "id": "L1603",
+              "title": "領域3・4 総復習 — 視覚化と資産管理",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 86
+            },
+            {
+              "id": "L1702",
+              "title": "セマンティックモデルの分割戦略 — 何を1つにまとめるか",
+              "module": "M17",
+              "moduleTitle": "エンタープライズ アーキテクチャ",
+              "tier": "T4",
+              "minutes": 55,
+              "order": 90
+            },
+            {
+              "id": "L1802",
+              "title": "PBIP と Git — BIをソース管理する",
+              "module": "M18",
+              "moduleTitle": "ガバナンスとライフサイクル",
+              "tier": "T4",
+              "minutes": 55,
+              "order": 95
+            },
+            {
+              "id": "L1805",
+              "title": "エンドースメントとデータカタログ — 信頼できる数字を1つにする",
+              "module": "M18",
+              "moduleTitle": "ガバナンスとライフサイクル",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 98
+            }
+          ],
+          "lessonCount": 8
+        },
+        {
+          "code": "4.3",
+          "title": "データ更新の管理",
+          "skill": "4.3 データ更新の管理",
+          "lessons": [
+            {
+              "id": "L0305",
+              "title": "保存・発行・共有の第一歩",
+              "module": "M03",
+              "moduleTitle": "はじめてのレポート",
+              "tier": "T1",
+              "minutes": 30,
+              "order": 15
+            },
+            {
+              "id": "L1003",
+              "title": "データ更新の自動化とゲートウェイ",
+              "module": "M10",
+              "moduleTitle": "共有と運用",
+              "tier": "T2",
+              "minutes": 45,
+              "order": 53
+            },
+            {
+              "id": "L1005",
+              "title": "レポートの運用 — 監視・サブスクリプション・使用状況",
+              "module": "M10",
+              "moduleTitle": "共有と運用",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 55
+            },
+            {
+              "id": "L1104",
+              "title": "増分更新 — 大規模ファクトを現実的に運用する",
+              "module": "M11",
+              "moduleTitle": "高度なデータ整形",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 59
+            },
+            {
+              "id": "L1405",
+              "title": "レポート最適化 — ビジュアル・クエリ・更新",
+              "module": "M14",
+              "moduleTitle": "パフォーマンス",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 77
+            },
+            {
+              "id": "L1603",
+              "title": "領域3・4 総復習 — 視覚化と資産管理",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 86
+            },
+            {
+              "id": "L1705",
+              "title": "スケールする設計 — 大規模データと多数の利用者",
+              "module": "M17",
+              "moduleTitle": "エンタープライズ アーキテクチャ",
+              "tier": "T4",
+              "minutes": 55,
+              "order": 93
+            },
+            {
+              "id": "L1905",
+              "title": "容量管理とコスト — CU・スロットリング・監視",
+              "module": "M19",
+              "moduleTitle": "Microsoft Fabric",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 103
+            },
+            {
+              "id": "L2203",
+              "title": "データ品質とデータ契約 — 信頼できる数字を作る",
+              "module": "M22",
+              "moduleTitle": "現場で価値を出す",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 116
+            }
+          ],
+          "lessonCount": 9
+        },
+        {
+          "code": "4.4",
+          "title": "アクセス権とセキュリティ",
+          "skill": "4.4 アクセス権とセキュリティ",
+          "lessons": [
+            {
+              "id": "L0204",
+              "title": "ライセンスと組織での使われ方",
+              "module": "M02",
+              "moduleTitle": "Power BIの全体像",
+              "tier": "T1",
+              "minutes": 30,
+              "order": 9
+            },
+            {
+              "id": "L0305",
+              "title": "保存・発行・共有の第一歩",
+              "module": "M03",
+              "moduleTitle": "はじめてのレポート",
+              "tier": "T1",
+              "minutes": 30,
+              "order": 15
+            },
+            {
+              "id": "L1001",
+              "title": "ワークスペースとロール — 権限設計の基本",
+              "module": "M10",
+              "moduleTitle": "共有と運用",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 51
+            },
+            {
+              "id": "L1002",
+              "title": "発行とアプリ配布 — 100人に届ける正しい方法",
+              "module": "M10",
+              "moduleTitle": "共有と運用",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 52
+            },
+            {
+              "id": "L1004",
+              "title": "セマンティックモデルの共有と再利用",
+              "module": "M10",
+              "moduleTitle": "共有と運用",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 54
+            },
+            {
+              "id": "L1204",
+              "title": "行レベルセキュリティ(RLS) — 静的・動的・階層",
+              "module": "M12",
+              "moduleTitle": "高度なモデリング",
+              "tier": "T3",
+              "minutes": 55,
+              "order": 64
+            },
+            {
+              "id": "L1603",
+              "title": "領域3・4 総復習 — 視覚化と資産管理",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 86
+            },
+            {
+              "id": "L1604",
+              "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 60,
+              "order": 87
+            },
+            {
+              "id": "L1804",
+              "title": "監査・秘密度ラベル・データ保護",
+              "module": "M18",
+              "moduleTitle": "ガバナンスとライフサイクル",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 97
+            }
+          ],
+          "lessonCount": 9
+        },
+        {
+          "code": "4.5",
+          "title": "ガバナンスとライフサイクル",
+          "skill": "4.5 ガバナンスとライフサイクル",
+          "lessons": [
+            {
+              "id": "L1002",
+              "title": "発行とアプリ配布 — 100人に届ける正しい方法",
+              "module": "M10",
+              "moduleTitle": "共有と運用",
+              "tier": "T2",
+              "minutes": 40,
+              "order": 52
+            },
+            {
+              "id": "L1004",
+              "title": "セマンティックモデルの共有と再利用",
+              "module": "M10",
+              "moduleTitle": "共有と運用",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 54
+            },
+            {
+              "id": "L1005",
+              "title": "レポートの運用 — 監視・サブスクリプション・使用状況",
+              "module": "M10",
+              "moduleTitle": "共有と運用",
+              "tier": "T2",
+              "minutes": 35,
+              "order": 55
+            },
+            {
+              "id": "L1105",
+              "title": "データフローとETL設計 — 変換をどこに置くか",
+              "module": "M11",
+              "moduleTitle": "高度なデータ整形",
+              "tier": "T3",
+              "minutes": 45,
+              "order": 60
+            },
+            {
+              "id": "L1603",
+              "title": "領域3・4 総復習 — 視覚化と資産管理",
+              "module": "M16",
+              "moduleTitle": "PL-300 完全対策",
+              "tier": "T3",
+              "minutes": 50,
+              "order": 86
+            },
+            {
+              "id": "L1701",
+              "title": "BIアーキテクチャの全体像 — ソースから利用まで",
+              "module": "M17",
+              "moduleTitle": "エンタープライズ アーキテクチャ",
+              "tier": "T4",
+              "minutes": 55,
+              "order": 89
+            },
+            {
+              "id": "L1704",
+              "title": "命名規則と標準化 — 100人が使えるモデルにする",
+              "module": "M17",
+              "moduleTitle": "エンタープライズ アーキテクチャ",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 92
+            },
+            {
+              "id": "L1801",
+              "title": "デプロイメントパイプラインと環境分離",
+              "module": "M18",
+              "moduleTitle": "ガバナンスとライフサイクル",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 94
+            },
+            {
+              "id": "L1802",
+              "title": "PBIP と Git — BIをソース管理する",
+              "module": "M18",
+              "moduleTitle": "ガバナンスとライフサイクル",
+              "tier": "T4",
+              "minutes": 55,
+              "order": 95
+            },
+            {
+              "id": "L1803",
+              "title": "テストと品質保証 — BIにおけるテストとは何か",
+              "module": "M18",
+              "moduleTitle": "ガバナンスとライフサイクル",
+              "tier": "T4",
+              "minutes": 55,
+              "order": 96
+            },
+            {
+              "id": "L1804",
+              "title": "監査・秘密度ラベル・データ保護",
+              "module": "M18",
+              "moduleTitle": "ガバナンスとライフサイクル",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 97
+            },
+            {
+              "id": "L1805",
+              "title": "エンドースメントとデータカタログ — 信頼できる数字を1つにする",
+              "module": "M18",
+              "moduleTitle": "ガバナンスとライフサイクル",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 98
+            },
+            {
+              "id": "L2003",
+              "title": "Copilot と生成AI — 何を任せ、何を任せないか",
+              "module": "M20",
+              "moduleTitle": "高度な分析とAI",
+              "tier": "T4",
+              "minutes": 40,
+              "order": 106
+            },
+            {
+              "id": "L2105",
+              "title": "レビューと改善 — 使われるレポートにする",
+              "module": "M21",
+              "moduleTitle": "デザインとストーリーテリング",
+              "tier": "T4",
+              "minutes": 40,
+              "order": 113
+            },
+            {
+              "id": "L2201",
+              "title": "要件定義 — 「ダッシュボードが欲しい」の裏を聞く",
+              "module": "M22",
+              "moduleTitle": "現場で価値を出す",
+              "tier": "T4",
+              "minutes": 50,
+              "order": 114
+            },
+            {
+              "id": "L2204",
+              "title": "導入と定着 — 使われないBIの原因を潰す",
+              "module": "M22",
+              "moduleTitle": "現場で価値を出す",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 117
+            },
+            {
+              "id": "L2205",
+              "title": "効果測定とキャリア — BIの価値を証明する",
+              "module": "M22",
+              "moduleTitle": "現場で価値を出す",
+              "tier": "T4",
+              "minutes": 45,
+              "order": 118
+            }
+          ],
+          "lessonCount": 17
+        }
+      ]
+    }
+  ],
+  "index": {
+    "1.1 データソースへの接続": [
+      {
+        "id": "L0303",
+        "title": "最初のデータを読み込む",
+        "module": "M03",
+        "moduleTitle": "はじめてのレポート",
+        "tier": "T1",
+        "minutes": 35,
+        "order": 13
+      },
+      {
+        "id": "L0401",
+        "title": "接続方式の三択 — インポート / DirectQuery / ライブ接続",
+        "module": "M04",
+        "moduleTitle": "データの読み込み入門",
+        "tier": "T1",
+        "minutes": 35,
+        "order": 16
+      },
+      {
+        "id": "L0402",
+        "title": "Excel・CSV・Web・データベースへの接続",
+        "module": "M04",
+        "moduleTitle": "データの読み込み入門",
+        "tier": "T1",
+        "minutes": 40,
+        "order": 17
+      },
+      {
+        "id": "L1103",
+        "title": "クエリ フォールディング — 更新時間を決める仕組み",
+        "module": "M11",
+        "moduleTitle": "高度なデータ整形",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 58
+      },
+      {
+        "id": "L1105",
+        "title": "データフローとETL設計 — 変換をどこに置くか",
+        "module": "M11",
+        "moduleTitle": "高度なデータ整形",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 60
+      },
+      {
+        "id": "L1205",
+        "title": "複合モデルと集計テーブル",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 65
+      },
+      {
+        "id": "L1601",
+        "title": "PL-300の全体像 — 4領域と採点の仕組み",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 35,
+        "order": 84
+      },
+      {
+        "id": "L1602",
+        "title": "領域1・2 総復習 — データの準備とモデル化",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 85
+      },
+      {
+        "id": "L1604",
+        "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 60,
+        "order": 87
+      },
+      {
+        "id": "L1902",
+        "title": "OneLake と Lakehouse — データを1か所に置く",
+        "module": "M19",
+        "moduleTitle": "Microsoft Fabric",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 100
+      },
+      {
+        "id": "L1904",
+        "title": "Direct Lake — インポートとDirectQueryの第三の道",
+        "module": "M19",
+        "moduleTitle": "Microsoft Fabric",
+        "tier": "T4",
+        "minutes": 55,
+        "order": 102
+      }
+    ],
+    "1.2 データの取得と変換": [
+      {
+        "id": "L0303",
+        "title": "最初のデータを読み込む",
+        "module": "M03",
+        "moduleTitle": "はじめてのレポート",
+        "tier": "T1",
+        "minutes": 35,
+        "order": 13
+      },
+      {
+        "id": "L0402",
+        "title": "Excel・CSV・Web・データベースへの接続",
+        "module": "M04",
+        "moduleTitle": "データの読み込み入門",
+        "tier": "T1",
+        "minutes": 40,
+        "order": 17
+      },
+      {
+        "id": "L0403",
+        "title": "データ型を制する — 型が違うと何が壊れるか",
+        "module": "M04",
+        "moduleTitle": "データの読み込み入門",
+        "tier": "T1",
+        "minutes": 40,
+        "order": 18
+      },
+      {
+        "id": "L0405",
+        "title": "Power Queryエディタ初めの一歩",
+        "module": "M04",
+        "moduleTitle": "データの読み込み入門",
+        "tier": "T1",
+        "minutes": 40,
+        "order": 20
+      },
+      {
+        "id": "L0501",
+        "title": "適用したステップという考え方 — 手順を記録する",
+        "module": "M05",
+        "moduleTitle": "Power Query 実践",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 21
+      },
+      {
+        "id": "L0504",
+        "title": "ピボット解除 — 横持ちを縦持ちにする最重要スキル",
+        "module": "M05",
+        "moduleTitle": "Power Query 実践",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 24
+      },
+      {
+        "id": "L0505",
+        "title": "マージと追加 — 結合の種類を図で理解する",
+        "module": "M05",
+        "moduleTitle": "Power Query 実践",
+        "tier": "T2",
+        "minutes": 45,
+        "order": 25
+      },
+      {
+        "id": "L0506",
+        "title": "グループ化・集計・行列の操作",
+        "module": "M05",
+        "moduleTitle": "Power Query 実践",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 26
+      },
+      {
+        "id": "L1101",
+        "title": "M言語の構造 — let ... in を読み書きする",
+        "module": "M11",
+        "moduleTitle": "高度なデータ整形",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 56
+      },
+      {
+        "id": "L1102",
+        "title": "カスタム関数とパラメータ — 処理を再利用する",
+        "module": "M11",
+        "moduleTitle": "高度なデータ整形",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 57
+      },
+      {
+        "id": "L1602",
+        "title": "領域1・2 総復習 — データの準備とモデル化",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 85
+      },
+      {
+        "id": "L1703",
+        "title": "データフローとレイクハウス — 変換をどこで行うか",
+        "module": "M17",
+        "moduleTitle": "エンタープライズ アーキテクチャ",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 91
+      },
+      {
+        "id": "L1903",
+        "title": "Warehouse・Notebook・パイプライン",
+        "module": "M19",
+        "moduleTitle": "Microsoft Fabric",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 101
+      },
+      {
+        "id": "L2004",
+        "title": "Python・R連携と外部機械学習",
+        "module": "M20",
+        "moduleTitle": "高度な分析とAI",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 107
+      }
+    ],
+    "1.3 データのプロファイリング": [
+      {
+        "id": "L0404",
+        "title": "列プロファイルでデータを健康診断する",
+        "module": "M04",
+        "moduleTitle": "データの読み込み入門",
+        "tier": "T1",
+        "minutes": 40,
+        "order": 19
+      },
+      {
+        "id": "L0502",
+        "title": "データクレンジング実践 — 空白・表記ゆれ・エラー",
+        "module": "M05",
+        "moduleTitle": "Power Query 実践",
+        "tier": "T2",
+        "minutes": 45,
+        "order": 22
+      },
+      {
+        "id": "L1602",
+        "title": "領域1・2 総復習 — データの準備とモデル化",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 85
+      },
+      {
+        "id": "L2203",
+        "title": "データ品質とデータ契約 — 信頼できる数字を作る",
+        "module": "M22",
+        "moduleTitle": "現場で価値を出す",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 116
+      }
+    ],
+    "1.4 データのクリーニング": [
+      {
+        "id": "L0403",
+        "title": "データ型を制する — 型が違うと何が壊れるか",
+        "module": "M04",
+        "moduleTitle": "データの読み込み入門",
+        "tier": "T1",
+        "minutes": 40,
+        "order": 18
+      },
+      {
+        "id": "L0404",
+        "title": "列プロファイルでデータを健康診断する",
+        "module": "M04",
+        "moduleTitle": "データの読み込み入門",
+        "tier": "T1",
+        "minutes": 40,
+        "order": 19
+      },
+      {
+        "id": "L0405",
+        "title": "Power Queryエディタ初めの一歩",
+        "module": "M04",
+        "moduleTitle": "データの読み込み入門",
+        "tier": "T1",
+        "minutes": 40,
+        "order": 20
+      },
+      {
+        "id": "L0502",
+        "title": "データクレンジング実践 — 空白・表記ゆれ・エラー",
+        "module": "M05",
+        "moduleTitle": "Power Query 実践",
+        "tier": "T2",
+        "minutes": 45,
+        "order": 22
+      },
+      {
+        "id": "L1602",
+        "title": "領域1・2 総復習 — データの準備とモデル化",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 85
+      },
+      {
+        "id": "L2203",
+        "title": "データ品質とデータ契約 — 信頼できる数字を作る",
+        "module": "M22",
+        "moduleTitle": "現場で価値を出す",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 116
+      }
+    ],
+    "1.5 データの構造化": [
+      {
+        "id": "L0405",
+        "title": "Power Queryエディタ初めの一歩",
+        "module": "M04",
+        "moduleTitle": "データの読み込み入門",
+        "tier": "T1",
+        "minutes": 40,
+        "order": 20
+      },
+      {
+        "id": "L0503",
+        "title": "整然データ（tidy data）とは何か",
+        "module": "M05",
+        "moduleTitle": "Power Query 実践",
+        "tier": "T2",
+        "minutes": 30,
+        "order": 23
+      },
+      {
+        "id": "L0504",
+        "title": "ピボット解除 — 横持ちを縦持ちにする最重要スキル",
+        "module": "M05",
+        "moduleTitle": "Power Query 実践",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 24
+      },
+      {
+        "id": "L0505",
+        "title": "マージと追加 — 結合の種類を図で理解する",
+        "module": "M05",
+        "moduleTitle": "Power Query 実践",
+        "tier": "T2",
+        "minutes": 45,
+        "order": 25
+      },
+      {
+        "id": "L0602",
+        "title": "ファクトとディメンション — どう見分けるか",
+        "module": "M06",
+        "moduleTitle": "データモデリング",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 28
+      },
+      {
+        "id": "L1101",
+        "title": "M言語の構造 — let ... in を読み書きする",
+        "module": "M11",
+        "moduleTitle": "高度なデータ整形",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 56
+      },
+      {
+        "id": "L1102",
+        "title": "カスタム関数とパラメータ — 処理を再利用する",
+        "module": "M11",
+        "moduleTitle": "高度なデータ整形",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 57
+      },
+      {
+        "id": "L1206",
+        "title": "SCD（緩やかに変化する次元）と履歴管理",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 66
+      },
+      {
+        "id": "L1504",
+        "title": "顧客分析 — コホート・RFM・LTV・チャーン",
+        "module": "M15",
+        "moduleTitle": "分析手法とデータサイエンス",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 81
+      },
+      {
+        "id": "L1602",
+        "title": "領域1・2 総復習 — データの準備とモデル化",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 85
+      },
+      {
+        "id": "L1604",
+        "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 60,
+        "order": 87
+      }
+    ],
+    "1.6 パフォーマンスを考慮した取り込み": [
+      {
+        "id": "L0401",
+        "title": "接続方式の三択 — インポート / DirectQuery / ライブ接続",
+        "module": "M04",
+        "moduleTitle": "データの読み込み入門",
+        "tier": "T1",
+        "minutes": 35,
+        "order": 16
+      },
+      {
+        "id": "L0501",
+        "title": "適用したステップという考え方 — 手順を記録する",
+        "module": "M05",
+        "moduleTitle": "Power Query 実践",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 21
+      },
+      {
+        "id": "L0506",
+        "title": "グループ化・集計・行列の操作",
+        "module": "M05",
+        "moduleTitle": "Power Query 実践",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 26
+      },
+      {
+        "id": "L1003",
+        "title": "データ更新の自動化とゲートウェイ",
+        "module": "M10",
+        "moduleTitle": "共有と運用",
+        "tier": "T2",
+        "minutes": 45,
+        "order": 53
+      },
+      {
+        "id": "L1102",
+        "title": "カスタム関数とパラメータ — 処理を再利用する",
+        "module": "M11",
+        "moduleTitle": "高度なデータ整形",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 57
+      },
+      {
+        "id": "L1103",
+        "title": "クエリ フォールディング — 更新時間を決める仕組み",
+        "module": "M11",
+        "moduleTitle": "高度なデータ整形",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 58
+      },
+      {
+        "id": "L1104",
+        "title": "増分更新 — 大規模ファクトを現実的に運用する",
+        "module": "M11",
+        "moduleTitle": "高度なデータ整形",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 59
+      },
+      {
+        "id": "L1105",
+        "title": "データフローとETL設計 — 変換をどこに置くか",
+        "module": "M11",
+        "moduleTitle": "高度なデータ整形",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 60
+      },
+      {
+        "id": "L1205",
+        "title": "複合モデルと集計テーブル",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 65
+      },
+      {
+        "id": "L1401",
+        "title": "VertiPaqの仕組み — なぜ速いのか",
+        "module": "M14",
+        "moduleTitle": "パフォーマンス",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 73
+      },
+      {
+        "id": "L1402",
+        "title": "カーディナリティとモデルサイズ — 何が容量を食うのか",
+        "module": "M14",
+        "moduleTitle": "パフォーマンス",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 74
+      },
+      {
+        "id": "L1602",
+        "title": "領域1・2 総復習 — データの準備とモデル化",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 85
+      },
+      {
+        "id": "L1604",
+        "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 60,
+        "order": 87
+      },
+      {
+        "id": "L1703",
+        "title": "データフローとレイクハウス — 変換をどこで行うか",
+        "module": "M17",
+        "moduleTitle": "エンタープライズ アーキテクチャ",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 91
+      },
+      {
+        "id": "L1903",
+        "title": "Warehouse・Notebook・パイプライン",
+        "module": "M19",
+        "moduleTitle": "Microsoft Fabric",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 101
+      }
+    ],
+    "2.1 データモデルの設計": [
+      {
+        "id": "L0601",
+        "title": "スタースキーマ — Power BI最重要の設計原則",
+        "module": "M06",
+        "moduleTitle": "データモデリング",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 27
+      },
+      {
+        "id": "L0602",
+        "title": "ファクトとディメンション — どう見分けるか",
+        "module": "M06",
+        "moduleTitle": "データモデリング",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 28
+      },
+      {
+        "id": "L0605",
+        "title": "日付テーブル — 時系列分析の土台",
+        "module": "M06",
+        "moduleTitle": "データモデリング",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 31
+      },
+      {
+        "id": "L0606",
+        "title": "モデルを磨く — 階層・並べ替え・書式・非表示",
+        "module": "M06",
+        "moduleTitle": "データモデリング",
+        "tier": "T2",
+        "minutes": 30,
+        "order": 32
+      },
+      {
+        "id": "L1201",
+        "title": "多対多とブリッジテーブル",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 61
+      },
+      {
+        "id": "L1206",
+        "title": "SCD（緩やかに変化する次元）と履歴管理",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 66
+      },
+      {
+        "id": "L1601",
+        "title": "PL-300の全体像 — 4領域と採点の仕組み",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 35,
+        "order": 84
+      },
+      {
+        "id": "L1602",
+        "title": "領域1・2 総復習 — データの準備とモデル化",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 85
+      },
+      {
+        "id": "L1702",
+        "title": "セマンティックモデルの分割戦略 — 何を1つにまとめるか",
+        "module": "M17",
+        "moduleTitle": "エンタープライズ アーキテクチャ",
+        "tier": "T4",
+        "minutes": 55,
+        "order": 90
+      },
+      {
+        "id": "L1704",
+        "title": "命名規則と標準化 — 100人が使えるモデルにする",
+        "module": "M17",
+        "moduleTitle": "エンタープライズ アーキテクチャ",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 92
+      },
+      {
+        "id": "L2005",
+        "title": "予測モデルをBIに載せる — スコアリング結果の運用",
+        "module": "M20",
+        "moduleTitle": "高度な分析とAI",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 108
+      }
+    ],
+    "2.2 リレーションシップの構成": [
+      {
+        "id": "L0603",
+        "title": "リレーションシップの3要素 — 基数・方向・アクティブ",
+        "module": "M06",
+        "moduleTitle": "データモデリング",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 29
+      },
+      {
+        "id": "L0604",
+        "title": "フィルターはどう流れるか — 伝播を図で追う",
+        "module": "M06",
+        "moduleTitle": "データモデリング",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 30
+      },
+      {
+        "id": "L0801",
+        "title": "フィルターコンテキストとは何か",
+        "module": "M08",
+        "moduleTitle": "DAXコンテキスト",
+        "tier": "T2",
+        "minutes": 45,
+        "order": 39
+      },
+      {
+        "id": "L1201",
+        "title": "多対多とブリッジテーブル",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 61
+      },
+      {
+        "id": "L1202",
+        "title": "双方向リレーションシップの罠と代替手段",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 62
+      },
+      {
+        "id": "L1203",
+        "title": "役割の異なる日付（USERELATIONSHIP）と複数ファクト",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 63
+      },
+      {
+        "id": "L1206",
+        "title": "SCD（緩やかに変化する次元）と履歴管理",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 66
+      },
+      {
+        "id": "L1304",
+        "title": "集合演算と仮想リレーション — UNION・EXCEPT・TREATAS",
+        "module": "M13",
+        "moduleTitle": "DAX上級",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 70
+      },
+      {
+        "id": "L1602",
+        "title": "領域1・2 総復習 — データの準備とモデル化",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 85
+      },
+      {
+        "id": "L1604",
+        "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 60,
+        "order": 87
+      }
+    ],
+    "2.3 計算列とメジャーの作成": [
+      {
+        "id": "L0701",
+        "title": "DAXとは何か — Excelの数式と何が違うのか",
+        "module": "M07",
+        "moduleTitle": "DAX基礎",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 33
+      },
+      {
+        "id": "L0702",
+        "title": "計算列とメジャー — 決定的な違い",
+        "module": "M07",
+        "moduleTitle": "DAX基礎",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 34
+      },
+      {
+        "id": "L0703",
+        "title": "集計関数を使いこなす — SUM・COUNT・DISTINCTCOUNT",
+        "module": "M07",
+        "moduleTitle": "DAX基礎",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 35
+      },
+      {
+        "id": "L0704",
+        "title": "条件分岐と安全な割り算 — IF・SWITCH・DIVIDE",
+        "module": "M07",
+        "moduleTitle": "DAX基礎",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 36
+      },
+      {
+        "id": "L0705",
+        "title": "VAR と RETURN — 読める・速いDAXを書く",
+        "module": "M07",
+        "moduleTitle": "DAX基礎",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 37
+      },
+      {
+        "id": "L0706",
+        "title": "書式・命名・整理 — 実務で通用するDAXの作法",
+        "module": "M07",
+        "moduleTitle": "DAX基礎",
+        "tier": "T2",
+        "minutes": 30,
+        "order": 38
+      },
+      {
+        "id": "L0801",
+        "title": "フィルターコンテキストとは何か",
+        "module": "M08",
+        "moduleTitle": "DAXコンテキスト",
+        "tier": "T2",
+        "minutes": 45,
+        "order": 39
+      },
+      {
+        "id": "L0802",
+        "title": "行コンテキストとは何か — 2つの文脈を区別する",
+        "module": "M08",
+        "moduleTitle": "DAXコンテキスト",
+        "tier": "T2",
+        "minutes": 45,
+        "order": 40
+      },
+      {
+        "id": "L0803",
+        "title": "CALCULATE — フィルターを変更する唯一の関数",
+        "module": "M08",
+        "moduleTitle": "DAXコンテキスト",
+        "tier": "T2",
+        "minutes": 50,
+        "order": 41
+      },
+      {
+        "id": "L0804",
+        "title": "ALL・ALLSELECTED・REMOVEFILTERS — フィルターを外す",
+        "module": "M08",
+        "moduleTitle": "DAXコンテキスト",
+        "tier": "T2",
+        "minutes": 45,
+        "order": 42
+      },
+      {
+        "id": "L0805",
+        "title": "KEEPFILTERS と FILTER — 条件の書き方を選ぶ",
+        "module": "M08",
+        "moduleTitle": "DAXコンテキスト",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 43
+      },
+      {
+        "id": "L0806",
+        "title": "タイムインテリジェンス — 前年比・YTD・移動平均",
+        "module": "M08",
+        "moduleTitle": "DAXコンテキスト",
+        "tier": "T2",
+        "minutes": 50,
+        "order": 44
+      },
+      {
+        "id": "L1203",
+        "title": "役割の異なる日付（USERELATIONSHIP）と複数ファクト",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 63
+      },
+      {
+        "id": "L1301",
+        "title": "イテレータ関数 — SUMX・AVERAGEX・RANKX",
+        "module": "M13",
+        "moduleTitle": "DAX上級",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 67
+      },
+      {
+        "id": "L1302",
+        "title": "コンテキスト遷移 — DAX最大の難関",
+        "module": "M13",
+        "moduleTitle": "DAX上級",
+        "tier": "T3",
+        "minutes": 55,
+        "order": 68
+      },
+      {
+        "id": "L1303",
+        "title": "テーブル関数 — VALUES・SUMMARIZE・ADDCOLUMNS・SELECTCOLUMNS",
+        "module": "M13",
+        "moduleTitle": "DAX上級",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 69
+      },
+      {
+        "id": "L1304",
+        "title": "集合演算と仮想リレーション — UNION・EXCEPT・TREATAS",
+        "module": "M13",
+        "moduleTitle": "DAX上級",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 70
+      },
+      {
+        "id": "L1305",
+        "title": "実務パターン集 — 構成比・累計・ランキング・ABC分析・コホート",
+        "module": "M13",
+        "moduleTitle": "DAX上級",
+        "tier": "T3",
+        "minutes": 60,
+        "order": 71
+      },
+      {
+        "id": "L1306",
+        "title": "DAXのよくある間違い20選",
+        "module": "M13",
+        "moduleTitle": "DAX上級",
+        "tier": "T3",
+        "minutes": 60,
+        "order": 72
+      },
+      {
+        "id": "L1501",
+        "title": "記述統計 — 分布を見ずに平均を語るな",
+        "module": "M15",
+        "moduleTitle": "分析手法とデータサイエンス",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 78
+      },
+      {
+        "id": "L1503",
+        "title": "時系列分析 — トレンド・季節性・移動平均・異常検知",
+        "module": "M15",
+        "moduleTitle": "分析手法とデータサイエンス",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 80
+      },
+      {
+        "id": "L1504",
+        "title": "顧客分析 — コホート・RFM・LTV・チャーン",
+        "module": "M15",
+        "moduleTitle": "分析手法とデータサイエンス",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 81
+      },
+      {
+        "id": "L1505",
+        "title": "予測と不確実性 — 予測値に幅を持たせる",
+        "module": "M15",
+        "moduleTitle": "分析手法とデータサイエンス",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 82
+      },
+      {
+        "id": "L1602",
+        "title": "領域1・2 総復習 — データの準備とモデル化",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 85
+      },
+      {
+        "id": "L2202",
+        "title": "KPIツリーの設計 — 事業構造を数式にする",
+        "module": "M22",
+        "moduleTitle": "現場で価値を出す",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 115
+      }
+    ],
+    "2.4 タイムインテリジェンス": [
+      {
+        "id": "L0605",
+        "title": "日付テーブル — 時系列分析の土台",
+        "module": "M06",
+        "moduleTitle": "データモデリング",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 31
+      },
+      {
+        "id": "L0806",
+        "title": "タイムインテリジェンス — 前年比・YTD・移動平均",
+        "module": "M08",
+        "moduleTitle": "DAXコンテキスト",
+        "tier": "T2",
+        "minutes": 50,
+        "order": 44
+      },
+      {
+        "id": "L1203",
+        "title": "役割の異なる日付（USERELATIONSHIP）と複数ファクト",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 63
+      },
+      {
+        "id": "L1305",
+        "title": "実務パターン集 — 構成比・累計・ランキング・ABC分析・コホート",
+        "module": "M13",
+        "moduleTitle": "DAX上級",
+        "tier": "T3",
+        "minutes": 60,
+        "order": 71
+      },
+      {
+        "id": "L1503",
+        "title": "時系列分析 — トレンド・季節性・移動平均・異常検知",
+        "module": "M15",
+        "moduleTitle": "分析手法とデータサイエンス",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 80
+      },
+      {
+        "id": "L1602",
+        "title": "領域1・2 総復習 — データの準備とモデル化",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 85
+      },
+      {
+        "id": "L1604",
+        "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 60,
+        "order": 87
+      }
+    ],
+    "2.5 モデルの最適化": [
+      {
+        "id": "L0606",
+        "title": "モデルを磨く — 階層・並べ替え・書式・非表示",
+        "module": "M06",
+        "moduleTitle": "データモデリング",
+        "tier": "T2",
+        "minutes": 30,
+        "order": 32
+      },
+      {
+        "id": "L0702",
+        "title": "計算列とメジャー — 決定的な違い",
+        "module": "M07",
+        "moduleTitle": "DAX基礎",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 34
+      },
+      {
+        "id": "L0706",
+        "title": "書式・命名・整理 — 実務で通用するDAXの作法",
+        "module": "M07",
+        "moduleTitle": "DAX基礎",
+        "tier": "T2",
+        "minutes": 30,
+        "order": 38
+      },
+      {
+        "id": "L1202",
+        "title": "双方向リレーションシップの罠と代替手段",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 62
+      },
+      {
+        "id": "L1205",
+        "title": "複合モデルと集計テーブル",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 65
+      },
+      {
+        "id": "L1301",
+        "title": "イテレータ関数 — SUMX・AVERAGEX・RANKX",
+        "module": "M13",
+        "moduleTitle": "DAX上級",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 67
+      },
+      {
+        "id": "L1306",
+        "title": "DAXのよくある間違い20選",
+        "module": "M13",
+        "moduleTitle": "DAX上級",
+        "tier": "T3",
+        "minutes": 60,
+        "order": 72
+      },
+      {
+        "id": "L1401",
+        "title": "VertiPaqの仕組み — なぜ速いのか",
+        "module": "M14",
+        "moduleTitle": "パフォーマンス",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 73
+      },
+      {
+        "id": "L1402",
+        "title": "カーディナリティとモデルサイズ — 何が容量を食うのか",
+        "module": "M14",
+        "moduleTitle": "パフォーマンス",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 74
+      },
+      {
+        "id": "L1403",
+        "title": "ストレージエンジンと数式エンジン — 遅さの正体",
+        "module": "M14",
+        "moduleTitle": "パフォーマンス",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 75
+      },
+      {
+        "id": "L1404",
+        "title": "計測する — パフォーマンスアナライザーとDAX Studio",
+        "module": "M14",
+        "moduleTitle": "パフォーマンス",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 76
+      },
+      {
+        "id": "L1405",
+        "title": "レポート最適化 — ビジュアル・クエリ・更新",
+        "module": "M14",
+        "moduleTitle": "パフォーマンス",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 77
+      },
+      {
+        "id": "L1602",
+        "title": "領域1・2 総復習 — データの準備とモデル化",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 85
+      },
+      {
+        "id": "L1705",
+        "title": "スケールする設計 — 大規模データと多数の利用者",
+        "module": "M17",
+        "moduleTitle": "エンタープライズ アーキテクチャ",
+        "tier": "T4",
+        "minutes": 55,
+        "order": 93
+      },
+      {
+        "id": "L1803",
+        "title": "テストと品質保証 — BIにおけるテストとは何か",
+        "module": "M18",
+        "moduleTitle": "ガバナンスとライフサイクル",
+        "tier": "T4",
+        "minutes": 55,
+        "order": 96
+      },
+      {
+        "id": "L1904",
+        "title": "Direct Lake — インポートとDirectQueryの第三の道",
+        "module": "M19",
+        "moduleTitle": "Microsoft Fabric",
+        "tier": "T4",
+        "minutes": 55,
+        "order": 102
+      }
+    ],
+    "2.6 行レベルセキュリティ": [
+      {
+        "id": "L1202",
+        "title": "双方向リレーションシップの罠と代替手段",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 62
+      },
+      {
+        "id": "L1204",
+        "title": "行レベルセキュリティ(RLS) — 静的・動的・階層",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 55,
+        "order": 64
+      },
+      {
+        "id": "L1602",
+        "title": "領域1・2 総復習 — データの準備とモデル化",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 85
+      },
+      {
+        "id": "L1604",
+        "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 60,
+        "order": 87
+      }
+    ],
+    "3.1 レポートの作成": [
+      {
+        "id": "L0302",
+        "title": "画面の地図 — 3つのビューと3つのペイン",
+        "module": "M03",
+        "moduleTitle": "はじめてのレポート",
+        "tier": "T1",
+        "minutes": 30,
+        "order": 12
+      },
+      {
+        "id": "L0304",
+        "title": "最初のグラフを作る — カード・棒・折れ線",
+        "module": "M03",
+        "moduleTitle": "はじめてのレポート",
+        "tier": "T1",
+        "minutes": 40,
+        "order": 14
+      },
+      {
+        "id": "L0606",
+        "title": "モデルを磨く — 階層・並べ替え・書式・非表示",
+        "module": "M06",
+        "moduleTitle": "データモデリング",
+        "tier": "T2",
+        "minutes": 30,
+        "order": 32
+      },
+      {
+        "id": "L0901",
+        "title": "ビジュアルの選び方 — 問いの型から決める",
+        "module": "M09",
+        "moduleTitle": "可視化の設計",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 45
+      },
+      {
+        "id": "L0902",
+        "title": "レポートのレイアウトと視線導線",
+        "module": "M09",
+        "moduleTitle": "可視化の設計",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 46
+      },
+      {
+        "id": "L1404",
+        "title": "計測する — パフォーマンスアナライザーとDAX Studio",
+        "module": "M14",
+        "moduleTitle": "パフォーマンス",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 76
+      },
+      {
+        "id": "L1405",
+        "title": "レポート最適化 — ビジュアル・クエリ・更新",
+        "module": "M14",
+        "moduleTitle": "パフォーマンス",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 77
+      },
+      {
+        "id": "L1601",
+        "title": "PL-300の全体像 — 4領域と採点の仕組み",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 35,
+        "order": 84
+      },
+      {
+        "id": "L1603",
+        "title": "領域3・4 総復習 — 視覚化と資産管理",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 86
+      },
+      {
+        "id": "L2002",
+        "title": "Q&Aとスマートナラティブ — 自然言語で使えるモデルにする",
+        "module": "M20",
+        "moduleTitle": "高度な分析とAI",
+        "tier": "T4",
+        "minutes": 40,
+        "order": 105
+      },
+      {
+        "id": "L2101",
+        "title": "情報設計 — 誰の何の意思決定を助けるのか",
+        "module": "M21",
+        "moduleTitle": "デザインとストーリーテリング",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 109
+      },
+      {
+        "id": "L2103",
+        "title": "ダッシュボード設計の原則 — 5秒・30秒・5分",
+        "module": "M21",
+        "moduleTitle": "デザインとストーリーテリング",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 111
+      },
+      {
+        "id": "L2104",
+        "title": "データストーリーテリング — 数字を物語にする",
+        "module": "M21",
+        "moduleTitle": "デザインとストーリーテリング",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 112
+      },
+      {
+        "id": "L2201",
+        "title": "要件定義 — 「ダッシュボードが欲しい」の裏を聞く",
+        "module": "M22",
+        "moduleTitle": "現場で価値を出す",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 114
+      }
+    ],
+    "3.2 ビジュアルの選択と構成": [
+      {
+        "id": "L0105",
+        "title": "分析の5つの型 — 比較・推移・構成・分布・関係",
+        "module": "M01",
+        "moduleTitle": "データ分析とBIの基礎",
+        "tier": "T1",
+        "minutes": 35,
+        "order": 5
+      },
+      {
+        "id": "L0304",
+        "title": "最初のグラフを作る — カード・棒・折れ線",
+        "module": "M03",
+        "moduleTitle": "はじめてのレポート",
+        "tier": "T1",
+        "minutes": 40,
+        "order": 14
+      },
+      {
+        "id": "L0901",
+        "title": "ビジュアルの選び方 — 問いの型から決める",
+        "module": "M09",
+        "moduleTitle": "可視化の設計",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 45
+      },
+      {
+        "id": "L0903",
+        "title": "色とテーマ — 伝わる配色、伝わらない配色",
+        "module": "M09",
+        "moduleTitle": "可視化の設計",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 47
+      },
+      {
+        "id": "L0905",
+        "title": "条件付き書式・ツールチップ・スモールマルチプル",
+        "module": "M09",
+        "moduleTitle": "可視化の設計",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 49
+      },
+      {
+        "id": "L1603",
+        "title": "領域3・4 総復習 — 視覚化と資産管理",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 86
+      },
+      {
+        "id": "L2101",
+        "title": "情報設計 — 誰の何の意思決定を助けるのか",
+        "module": "M21",
+        "moduleTitle": "デザインとストーリーテリング",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 109
+      },
+      {
+        "id": "L2102",
+        "title": "可視化の理論 — 知覚・認知・ゲシュタルト",
+        "module": "M21",
+        "moduleTitle": "デザインとストーリーテリング",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 110
+      }
+    ],
+    "3.3 対話機能の設定": [
+      {
+        "id": "L0304",
+        "title": "最初のグラフを作る — カード・棒・折れ線",
+        "module": "M03",
+        "moduleTitle": "はじめてのレポート",
+        "tier": "T1",
+        "minutes": 40,
+        "order": 14
+      },
+      {
+        "id": "L0604",
+        "title": "フィルターはどう流れるか — 伝播を図で追う",
+        "module": "M06",
+        "moduleTitle": "データモデリング",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 30
+      },
+      {
+        "id": "L0904",
+        "title": "相互作用・ドリルダウン・ドリルスルー",
+        "module": "M09",
+        "moduleTitle": "可視化の設計",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 48
+      },
+      {
+        "id": "L1603",
+        "title": "領域3・4 総復習 — 視覚化と資産管理",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 86
+      },
+      {
+        "id": "L1604",
+        "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 60,
+        "order": 87
+      },
+      {
+        "id": "L2103",
+        "title": "ダッシュボード設計の原則 — 5秒・30秒・5分",
+        "module": "M21",
+        "moduleTitle": "デザインとストーリーテリング",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 111
+      }
+    ],
+    "3.4 レポートの書式とアクセシビリティ": [
+      {
+        "id": "L0902",
+        "title": "レポートのレイアウトと視線導線",
+        "module": "M09",
+        "moduleTitle": "可視化の設計",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 46
+      },
+      {
+        "id": "L0903",
+        "title": "色とテーマ — 伝わる配色、伝わらない配色",
+        "module": "M09",
+        "moduleTitle": "可視化の設計",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 47
+      },
+      {
+        "id": "L0905",
+        "title": "条件付き書式・ツールチップ・スモールマルチプル",
+        "module": "M09",
+        "moduleTitle": "可視化の設計",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 49
+      },
+      {
+        "id": "L0906",
+        "title": "モバイルレイアウトとアクセシビリティ",
+        "module": "M09",
+        "moduleTitle": "可視化の設計",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 50
+      },
+      {
+        "id": "L1603",
+        "title": "領域3・4 総復習 — 視覚化と資産管理",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 86
+      },
+      {
+        "id": "L2102",
+        "title": "可視化の理論 — 知覚・認知・ゲシュタルト",
+        "module": "M21",
+        "moduleTitle": "デザインとストーリーテリング",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 110
+      },
+      {
+        "id": "L2105",
+        "title": "レビューと改善 — 使われるレポートにする",
+        "module": "M21",
+        "moduleTitle": "デザインとストーリーテリング",
+        "tier": "T4",
+        "minutes": 40,
+        "order": 113
+      }
+    ],
+    "3.5 データの探索と分析": [
+      {
+        "id": "L0104",
+        "title": "数字の読み方の基礎 — 平均のウソと分布",
+        "module": "M01",
+        "moduleTitle": "データ分析とBIの基礎",
+        "tier": "T1",
+        "minutes": 40,
+        "order": 4
+      },
+      {
+        "id": "L0804",
+        "title": "ALL・ALLSELECTED・REMOVEFILTERS — フィルターを外す",
+        "module": "M08",
+        "moduleTitle": "DAXコンテキスト",
+        "tier": "T2",
+        "minutes": 45,
+        "order": 42
+      },
+      {
+        "id": "L0904",
+        "title": "相互作用・ドリルダウン・ドリルスルー",
+        "module": "M09",
+        "moduleTitle": "可視化の設計",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 48
+      },
+      {
+        "id": "L1303",
+        "title": "テーブル関数 — VALUES・SUMMARIZE・ADDCOLUMNS・SELECTCOLUMNS",
+        "module": "M13",
+        "moduleTitle": "DAX上級",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 69
+      },
+      {
+        "id": "L1305",
+        "title": "実務パターン集 — 構成比・累計・ランキング・ABC分析・コホート",
+        "module": "M13",
+        "moduleTitle": "DAX上級",
+        "tier": "T3",
+        "minutes": 60,
+        "order": 71
+      },
+      {
+        "id": "L1501",
+        "title": "記述統計 — 分布を見ずに平均を語るな",
+        "module": "M15",
+        "moduleTitle": "分析手法とデータサイエンス",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 78
+      },
+      {
+        "id": "L1502",
+        "title": "相関と因果 — 交絡・選択バイアス・シンプソンのパラドックス",
+        "module": "M15",
+        "moduleTitle": "分析手法とデータサイエンス",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 79
+      },
+      {
+        "id": "L1503",
+        "title": "時系列分析 — トレンド・季節性・移動平均・異常検知",
+        "module": "M15",
+        "moduleTitle": "分析手法とデータサイエンス",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 80
+      },
+      {
+        "id": "L1504",
+        "title": "顧客分析 — コホート・RFM・LTV・チャーン",
+        "module": "M15",
+        "moduleTitle": "分析手法とデータサイエンス",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 81
+      },
+      {
+        "id": "L1505",
+        "title": "予測と不確実性 — 予測値に幅を持たせる",
+        "module": "M15",
+        "moduleTitle": "分析手法とデータサイエンス",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 82
+      },
+      {
+        "id": "L1506",
+        "title": "効果検証の基礎 — A/Bテストと因果推論の入口",
+        "module": "M15",
+        "moduleTitle": "分析手法とデータサイエンス",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 83
+      },
+      {
+        "id": "L1603",
+        "title": "領域3・4 総復習 — 視覚化と資産管理",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 86
+      },
+      {
+        "id": "L2001",
+        "title": "AIビジュアルを正しく使う — 主要因・分解ツリー・異常検知",
+        "module": "M20",
+        "moduleTitle": "高度な分析とAI",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 104
+      },
+      {
+        "id": "L2004",
+        "title": "Python・R連携と外部機械学習",
+        "module": "M20",
+        "moduleTitle": "高度な分析とAI",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 107
+      },
+      {
+        "id": "L2005",
+        "title": "予測モデルをBIに載せる — スコアリング結果の運用",
+        "module": "M20",
+        "moduleTitle": "高度な分析とAI",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 108
+      },
+      {
+        "id": "L2104",
+        "title": "データストーリーテリング — 数字を物語にする",
+        "module": "M21",
+        "moduleTitle": "デザインとストーリーテリング",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 112
+      },
+      {
+        "id": "L2202",
+        "title": "KPIツリーの設計 — 事業構造を数式にする",
+        "module": "M22",
+        "moduleTitle": "現場で価値を出す",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 115
+      }
+    ],
+    "3.6 AI ビジュアルの活用": [
+      {
+        "id": "L1502",
+        "title": "相関と因果 — 交絡・選択バイアス・シンプソンのパラドックス",
+        "module": "M15",
+        "moduleTitle": "分析手法とデータサイエンス",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 79
+      },
+      {
+        "id": "L1505",
+        "title": "予測と不確実性 — 予測値に幅を持たせる",
+        "module": "M15",
+        "moduleTitle": "分析手法とデータサイエンス",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 82
+      },
+      {
+        "id": "L1603",
+        "title": "領域3・4 総復習 — 視覚化と資産管理",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 86
+      },
+      {
+        "id": "L2001",
+        "title": "AIビジュアルを正しく使う — 主要因・分解ツリー・異常検知",
+        "module": "M20",
+        "moduleTitle": "高度な分析とAI",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 104
+      },
+      {
+        "id": "L2002",
+        "title": "Q&Aとスマートナラティブ — 自然言語で使えるモデルにする",
+        "module": "M20",
+        "moduleTitle": "高度な分析とAI",
+        "tier": "T4",
+        "minutes": 40,
+        "order": 105
+      },
+      {
+        "id": "L2003",
+        "title": "Copilot と生成AI — 何を任せ、何を任せないか",
+        "module": "M20",
+        "moduleTitle": "高度な分析とAI",
+        "tier": "T4",
+        "minutes": 40,
+        "order": 106
+      }
+    ],
+    "3.7 モバイル対応": [
+      {
+        "id": "L0906",
+        "title": "モバイルレイアウトとアクセシビリティ",
+        "module": "M09",
+        "moduleTitle": "可視化の設計",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 50
+      },
+      {
+        "id": "L1603",
+        "title": "領域3・4 総復習 — 視覚化と資産管理",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 86
+      },
+      {
+        "id": "L2103",
+        "title": "ダッシュボード設計の原則 — 5秒・30秒・5分",
+        "module": "M21",
+        "moduleTitle": "デザインとストーリーテリング",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 111
+      }
+    ],
+    "4.1 ワークスペースの管理": [
+      {
+        "id": "L0202",
+        "title": "Desktop・Service・Mobile の役割分担",
+        "module": "M02",
+        "moduleTitle": "Power BIの全体像",
+        "tier": "T1",
+        "minutes": 30,
+        "order": 7
+      },
+      {
+        "id": "L0204",
+        "title": "ライセンスと組織での使われ方",
+        "module": "M02",
+        "moduleTitle": "Power BIの全体像",
+        "tier": "T1",
+        "minutes": 30,
+        "order": 9
+      },
+      {
+        "id": "L0305",
+        "title": "保存・発行・共有の第一歩",
+        "module": "M03",
+        "moduleTitle": "はじめてのレポート",
+        "tier": "T1",
+        "minutes": 30,
+        "order": 15
+      },
+      {
+        "id": "L1001",
+        "title": "ワークスペースとロール — 権限設計の基本",
+        "module": "M10",
+        "moduleTitle": "共有と運用",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 51
+      },
+      {
+        "id": "L1002",
+        "title": "発行とアプリ配布 — 100人に届ける正しい方法",
+        "module": "M10",
+        "moduleTitle": "共有と運用",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 52
+      },
+      {
+        "id": "L1005",
+        "title": "レポートの運用 — 監視・サブスクリプション・使用状況",
+        "module": "M10",
+        "moduleTitle": "共有と運用",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 55
+      },
+      {
+        "id": "L1601",
+        "title": "PL-300の全体像 — 4領域と採点の仕組み",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 35,
+        "order": 84
+      },
+      {
+        "id": "L1603",
+        "title": "領域3・4 総復習 — 視覚化と資産管理",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 86
+      },
+      {
+        "id": "L1701",
+        "title": "BIアーキテクチャの全体像 — ソースから利用まで",
+        "module": "M17",
+        "moduleTitle": "エンタープライズ アーキテクチャ",
+        "tier": "T4",
+        "minutes": 55,
+        "order": 89
+      },
+      {
+        "id": "L1801",
+        "title": "デプロイメントパイプラインと環境分離",
+        "module": "M18",
+        "moduleTitle": "ガバナンスとライフサイクル",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 94
+      },
+      {
+        "id": "L1901",
+        "title": "Fabric の全体像 — Power BIはどこに位置するか",
+        "module": "M19",
+        "moduleTitle": "Microsoft Fabric",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 99
+      },
+      {
+        "id": "L1905",
+        "title": "容量管理とコスト — CU・スロットリング・監視",
+        "module": "M19",
+        "moduleTitle": "Microsoft Fabric",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 103
+      },
+      {
+        "id": "L2204",
+        "title": "導入と定着 — 使われないBIの原因を潰す",
+        "module": "M22",
+        "moduleTitle": "現場で価値を出す",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 117
+      }
+    ],
+    "4.2 セマンティックモデルの管理": [
+      {
+        "id": "L0205",
+        "title": "ファイル形式と用語の整理",
+        "module": "M02",
+        "moduleTitle": "Power BIの全体像",
+        "tier": "T1",
+        "minutes": 30,
+        "order": 10
+      },
+      {
+        "id": "L1003",
+        "title": "データ更新の自動化とゲートウェイ",
+        "module": "M10",
+        "moduleTitle": "共有と運用",
+        "tier": "T2",
+        "minutes": 45,
+        "order": 53
+      },
+      {
+        "id": "L1004",
+        "title": "セマンティックモデルの共有と再利用",
+        "module": "M10",
+        "moduleTitle": "共有と運用",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 54
+      },
+      {
+        "id": "L1105",
+        "title": "データフローとETL設計 — 変換をどこに置くか",
+        "module": "M11",
+        "moduleTitle": "高度なデータ整形",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 60
+      },
+      {
+        "id": "L1603",
+        "title": "領域3・4 総復習 — 視覚化と資産管理",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 86
+      },
+      {
+        "id": "L1702",
+        "title": "セマンティックモデルの分割戦略 — 何を1つにまとめるか",
+        "module": "M17",
+        "moduleTitle": "エンタープライズ アーキテクチャ",
+        "tier": "T4",
+        "minutes": 55,
+        "order": 90
+      },
+      {
+        "id": "L1802",
+        "title": "PBIP と Git — BIをソース管理する",
+        "module": "M18",
+        "moduleTitle": "ガバナンスとライフサイクル",
+        "tier": "T4",
+        "minutes": 55,
+        "order": 95
+      },
+      {
+        "id": "L1805",
+        "title": "エンドースメントとデータカタログ — 信頼できる数字を1つにする",
+        "module": "M18",
+        "moduleTitle": "ガバナンスとライフサイクル",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 98
+      }
+    ],
+    "4.3 データ更新の管理": [
+      {
+        "id": "L0305",
+        "title": "保存・発行・共有の第一歩",
+        "module": "M03",
+        "moduleTitle": "はじめてのレポート",
+        "tier": "T1",
+        "minutes": 30,
+        "order": 15
+      },
+      {
+        "id": "L1003",
+        "title": "データ更新の自動化とゲートウェイ",
+        "module": "M10",
+        "moduleTitle": "共有と運用",
+        "tier": "T2",
+        "minutes": 45,
+        "order": 53
+      },
+      {
+        "id": "L1005",
+        "title": "レポートの運用 — 監視・サブスクリプション・使用状況",
+        "module": "M10",
+        "moduleTitle": "共有と運用",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 55
+      },
+      {
+        "id": "L1104",
+        "title": "増分更新 — 大規模ファクトを現実的に運用する",
+        "module": "M11",
+        "moduleTitle": "高度なデータ整形",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 59
+      },
+      {
+        "id": "L1405",
+        "title": "レポート最適化 — ビジュアル・クエリ・更新",
+        "module": "M14",
+        "moduleTitle": "パフォーマンス",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 77
+      },
+      {
+        "id": "L1603",
+        "title": "領域3・4 総復習 — 視覚化と資産管理",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 86
+      },
+      {
+        "id": "L1705",
+        "title": "スケールする設計 — 大規模データと多数の利用者",
+        "module": "M17",
+        "moduleTitle": "エンタープライズ アーキテクチャ",
+        "tier": "T4",
+        "minutes": 55,
+        "order": 93
+      },
+      {
+        "id": "L1905",
+        "title": "容量管理とコスト — CU・スロットリング・監視",
+        "module": "M19",
+        "moduleTitle": "Microsoft Fabric",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 103
+      },
+      {
+        "id": "L2203",
+        "title": "データ品質とデータ契約 — 信頼できる数字を作る",
+        "module": "M22",
+        "moduleTitle": "現場で価値を出す",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 116
+      }
+    ],
+    "4.4 アクセス権とセキュリティ": [
+      {
+        "id": "L0204",
+        "title": "ライセンスと組織での使われ方",
+        "module": "M02",
+        "moduleTitle": "Power BIの全体像",
+        "tier": "T1",
+        "minutes": 30,
+        "order": 9
+      },
+      {
+        "id": "L0305",
+        "title": "保存・発行・共有の第一歩",
+        "module": "M03",
+        "moduleTitle": "はじめてのレポート",
+        "tier": "T1",
+        "minutes": 30,
+        "order": 15
+      },
+      {
+        "id": "L1001",
+        "title": "ワークスペースとロール — 権限設計の基本",
+        "module": "M10",
+        "moduleTitle": "共有と運用",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 51
+      },
+      {
+        "id": "L1002",
+        "title": "発行とアプリ配布 — 100人に届ける正しい方法",
+        "module": "M10",
+        "moduleTitle": "共有と運用",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 52
+      },
+      {
+        "id": "L1004",
+        "title": "セマンティックモデルの共有と再利用",
+        "module": "M10",
+        "moduleTitle": "共有と運用",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 54
+      },
+      {
+        "id": "L1204",
+        "title": "行レベルセキュリティ(RLS) — 静的・動的・階層",
+        "module": "M12",
+        "moduleTitle": "高度なモデリング",
+        "tier": "T3",
+        "minutes": 55,
+        "order": 64
+      },
+      {
+        "id": "L1603",
+        "title": "領域3・4 総復習 — 視覚化と資産管理",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 86
+      },
+      {
+        "id": "L1604",
+        "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 60,
+        "order": 87
+      },
+      {
+        "id": "L1804",
+        "title": "監査・秘密度ラベル・データ保護",
+        "module": "M18",
+        "moduleTitle": "ガバナンスとライフサイクル",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 97
+      }
+    ],
+    "4.5 ガバナンスとライフサイクル": [
+      {
+        "id": "L1002",
+        "title": "発行とアプリ配布 — 100人に届ける正しい方法",
+        "module": "M10",
+        "moduleTitle": "共有と運用",
+        "tier": "T2",
+        "minutes": 40,
+        "order": 52
+      },
+      {
+        "id": "L1004",
+        "title": "セマンティックモデルの共有と再利用",
+        "module": "M10",
+        "moduleTitle": "共有と運用",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 54
+      },
+      {
+        "id": "L1005",
+        "title": "レポートの運用 — 監視・サブスクリプション・使用状況",
+        "module": "M10",
+        "moduleTitle": "共有と運用",
+        "tier": "T2",
+        "minutes": 35,
+        "order": 55
+      },
+      {
+        "id": "L1105",
+        "title": "データフローとETL設計 — 変換をどこに置くか",
+        "module": "M11",
+        "moduleTitle": "高度なデータ整形",
+        "tier": "T3",
+        "minutes": 45,
+        "order": 60
+      },
+      {
+        "id": "L1603",
+        "title": "領域3・4 総復習 — 視覚化と資産管理",
+        "module": "M16",
+        "moduleTitle": "PL-300 完全対策",
+        "tier": "T3",
+        "minutes": 50,
+        "order": 86
+      },
+      {
+        "id": "L1701",
+        "title": "BIアーキテクチャの全体像 — ソースから利用まで",
+        "module": "M17",
+        "moduleTitle": "エンタープライズ アーキテクチャ",
+        "tier": "T4",
+        "minutes": 55,
+        "order": 89
+      },
+      {
+        "id": "L1704",
+        "title": "命名規則と標準化 — 100人が使えるモデルにする",
+        "module": "M17",
+        "moduleTitle": "エンタープライズ アーキテクチャ",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 92
+      },
+      {
+        "id": "L1801",
+        "title": "デプロイメントパイプラインと環境分離",
+        "module": "M18",
+        "moduleTitle": "ガバナンスとライフサイクル",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 94
+      },
+      {
+        "id": "L1802",
+        "title": "PBIP と Git — BIをソース管理する",
+        "module": "M18",
+        "moduleTitle": "ガバナンスとライフサイクル",
+        "tier": "T4",
+        "minutes": 55,
+        "order": 95
+      },
+      {
+        "id": "L1803",
+        "title": "テストと品質保証 — BIにおけるテストとは何か",
+        "module": "M18",
+        "moduleTitle": "ガバナンスとライフサイクル",
+        "tier": "T4",
+        "minutes": 55,
+        "order": 96
+      },
+      {
+        "id": "L1804",
+        "title": "監査・秘密度ラベル・データ保護",
+        "module": "M18",
+        "moduleTitle": "ガバナンスとライフサイクル",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 97
+      },
+      {
+        "id": "L1805",
+        "title": "エンドースメントとデータカタログ — 信頼できる数字を1つにする",
+        "module": "M18",
+        "moduleTitle": "ガバナンスとライフサイクル",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 98
+      },
+      {
+        "id": "L2003",
+        "title": "Copilot と生成AI — 何を任せ、何を任せないか",
+        "module": "M20",
+        "moduleTitle": "高度な分析とAI",
+        "tier": "T4",
+        "minutes": 40,
+        "order": 106
+      },
+      {
+        "id": "L2105",
+        "title": "レビューと改善 — 使われるレポートにする",
+        "module": "M21",
+        "moduleTitle": "デザインとストーリーテリング",
+        "tier": "T4",
+        "minutes": 40,
+        "order": 113
+      },
+      {
+        "id": "L2201",
+        "title": "要件定義 — 「ダッシュボードが欲しい」の裏を聞く",
+        "module": "M22",
+        "moduleTitle": "現場で価値を出す",
+        "tier": "T4",
+        "minutes": 50,
+        "order": 114
+      },
+      {
+        "id": "L2204",
+        "title": "導入と定着 — 使われないBIの原因を潰す",
+        "module": "M22",
+        "moduleTitle": "現場で価値を出す",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 117
+      },
+      {
+        "id": "L2205",
+        "title": "効果測定とキャリア — BIの価値を証明する",
+        "module": "M22",
+        "moduleTitle": "現場で価値を出す",
+        "tier": "T4",
+        "minutes": 45,
+        "order": 118
+      }
+    ]
+  }
+}

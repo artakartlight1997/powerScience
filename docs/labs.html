@@ -4,22 +4,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ハンズオンラボ | Power BI Mastery</title>
-<meta name="description" content="サンプルデータ付きのPower BIハンズオンラボ。手を動かして覚える6つの実習。">
+<meta name="description" content="サンプルデータ付きのPower BIハンズオン。初級から実務レベルまで、手を動かして覚える実習集。">
 <link rel="icon" href="assets/img/favicon.svg">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/lesson.css">
 <script src="assets/js/config.js"></script>
+<style>
+  .lab-card { display: flex; flex-direction: column; gap: 10px; }
+  .lab-card .goal { font-size: 15.5px; line-height: 1.8; color: var(--fg-muted); }
+  .diff { letter-spacing: 1px; }
+  .data-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .tier-head { display: flex; align-items: center; gap: 12px; margin: 40px 0 14px; }
+  .tier-dot { width: 14px; height: 14px; border-radius: 50%; flex: none; }
+</style>
 </head>
 <body>
-<main id="main" class="wrap" style="padding-top:34px">
+<main id="main" class="wrap" style="padding-top:32px">
   <p class="eyebrow">Hands-on Labs</p>
-  <h1 style="margin:8px 0 6px">ハンズオンラボ</h1>
-  <p class="muted">サンプルデータをダウンロードして、Power BI Desktopで実際に手を動かします。各ラボには「詰まったときの答え」が付いています。</p>
-  <div class="card" style="margin:20px 0">
-    <h3 style="margin-top:0">📦 サンプルデータ</h3>
-    <p class="small muted">架空の小売企業「Northstar Retail」の売上データです。すべてこのリポジトリに含まれています。</p>
-    <div class="tag-list" id="datasets"></div>
+  <h1 style="margin:8px 0 8px;font-size:32px">ハンズオンラボ</h1>
+  <p class="muted" style="font-size:17px;max-width:60ch">
+    読むだけでは身につきません。サンプルデータをダウンロードして、実際に Power BI Desktop を動かしてください。
+    各ラボには完成チェックリストと「詰まったときの答え」が付いています。
+  </p>
+
+  <div class="card" style="margin:24px 0">
+    <h3 style="margin-top:0">サンプルデータ</h3>
+    <p class="small muted" style="margin-bottom:12px">
+      架空の小売企業「Northstar Retail」の2年分の売上データです。すべてこのサイトに含まれています。
+    </p>
+    <div class="data-chips" id="datasets"></div>
   </div>
-  <div class="grid grid-2" id="labs"></div>
+
+  <div id="labs"></div>
 </main>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/analytics.js"></script>
@@ -27,20 +43,71 @@
 (async function () {
   PBM.renderChrome();
   const c = await PBM.curriculum();
-  const FILES = ["sales.csv", "sales_dirty.csv", "products.csv", "customers.csv", "stores.csv", "security_users.csv"];
+
+  const FILES = [
+    ["sales.csv", "売上明細 約7,000行"],
+    ["products.csv", "商品マスタ 32件"],
+    ["customers.csv", "顧客マスタ 600件"],
+    ["stores.csv", "店舗マスタ 14件"],
+    ["security_users.csv", "RLS用の権限表"],
+    ["sales_dirty.csv", "意図的に汚したデータ"]
+  ];
   document.getElementById("datasets").innerHTML = FILES.map(function (f) {
-    return '<a class="badge" href="data/' + f + '" download>⬇ ' + f + "</a>";
+    return '<a class="badge" href="data/' + f[0] + '" download title="' + f[1] + '">⬇ ' + f[0] +
+           ' <span class="muted">' + f[1] + "</span></a>";
   }).join("");
-  document.getElementById("labs").innerHTML = c.labs.map(function (l) {
-    const lv = c.levelById[l.level];
-    const done = PBM.progress.isLabDone(l.id);
-    return '<a class="card card-link" href="lab.html?id=' + l.id + '">' +
-      '<div class="row"><span class="badge badge-lv lv-' + lv.id + '">' + PBM.esc(lv.title) + "</span>" +
-      '<span class="badge">難易度 ' + "★".repeat(l.difficulty) + "</span>" +
-      '<span class="badge">⏱ ' + l.minutes + "分</span>" +
-      (done ? '<span class="badge badge-ok">✓ 完了</span>' : "") + "</div>" +
-      '<h3 style="margin-top:12px">' + PBM.esc(l.id) + " " + PBM.esc(l.title) + "</h3>" +
-      "<p>" + PBM.esc(l.goal) + "</p></a>";
+
+  /* ラボ一覧：labs/index.json があればそれを、無ければ curriculum.json の labs を使う */
+  let labs = null;
+  try {
+    const r = await fetch("content/labs/index.json", { cache: "no-cache" });
+    if (r.ok) labs = (await r.json()).labs;
+  } catch (e) { /* noop */ }
+  if (!labs || !labs.length) labs = c.labs || [];
+
+  if (!labs.length) {
+    document.getElementById("labs").innerHTML = '<p class="muted">ハンズオンを準備中です。</p>';
+    return;
+  }
+
+  const TIER_ORDER = ["T1", "T2", "T3", "T4"];
+  const byTier = {};
+  labs.forEach(function (l) {
+    const t = l.tier || (c.lessonById[(l.lessons || [])[0]] || {}).tier || "T1";
+    (byTier[t] = byTier[t] || []).push(l);
+  });
+
+  document.getElementById("labs").innerHTML = TIER_ORDER.filter(function (t) { return byTier[t]; }).map(function (t) {
+    const tier = c.tierById[t] || { title: t, color: "var(--brand)" };
+    return '<section id="' + t + '">' +
+      '<div class="tier-head"><span class="tier-dot" style="background:' + tier.color + '"></span>' +
+        '<h2 style="margin:0;font-size:22px">' + PBM.esc(tier.title) +
+        (tier.en ? ' <span class="muted small">' + PBM.esc(tier.en) + "</span>" : "") + "</h2>" +
+        '<span class="badge">' + byTier[t].length + " 本</span></div>" +
+      '<div class="grid grid-2">' + byTier[t].map(function (l) {
+        const done = PBM.progress.isLabDone(l.id);
+        const rel = (l.lessons || []).map(function (id) {
+          const les = c.lessonById[id];
+          return les ? '<a class="badge" href="lesson.html?id=' + id + '">' + PBM.esc(les.title) + "</a>" : "";
+        }).join("");
+        return '<div class="card lab-card">' +
+          '<div class="row">' +
+            '<span class="badge">' + l.id + "</span>" +
+            '<span class="badge diff">難易度 ' + "★".repeat(l.difficulty || 1) + "</span>" +
+            '<span class="badge">⏱ ' + (l.minutes || 30) + "分</span>" +
+            (done ? '<span class="badge badge-ok">✓ 完了</span>' : "") +
+          "</div>" +
+          '<h3 style="margin:0;font-size:18px;line-height:1.5">' + PBM.esc(l.title) + "</h3>" +
+          '<p class="goal">' + PBM.esc(l.goal || "") + "</p>" +
+          (l.dataset && l.dataset.length
+            ? '<div class="data-chips">' + l.dataset.map(function (d) {
+                return '<span class="badge">' + PBM.esc(d) + "</span>"; }).join("") + "</div>"
+            : "") +
+          (rel ? '<div class="data-chips"><span class="small muted" style="align-self:center">関連：</span>' + rel + "</div>" : "") +
+          '<div style="margin-top:auto;padding-top:6px">' +
+            '<a class="btn btn-brand btn-sm" href="lab.html?id=' + l.id + '">実習を開く →</a></div>' +
+          "</div>";
+      }).join("") + "</div></section>";
   }).join("");
 })();
 </script>

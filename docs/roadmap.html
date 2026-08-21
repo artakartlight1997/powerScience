@@ -3,102 +3,249 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>学習ロードマップ | Power BI Mastery</title>
-<meta name="description" content="Power BI初学者からPL-300合格までの学習ロードマップ。6レベル・39レッスンを順番に進めるだけ。">
+<title>詳細ロードマップ | Power BI Mastery</title>
+<meta name="description" content="ティア → モジュール → レッスンの3階層ロードマップ。完了チェック・所要時間・クイズ最高得点・ラボの有無を一覧できます。">
 <link rel="icon" href="assets/img/favicon.svg">
 <link rel="stylesheet" href="assets/css/style.css">
 <script src="assets/js/config.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#main">本文へスキップ</a>
 <main id="main" class="wrap" style="padding-top:34px">
   <p class="eyebrow">Roadmap</p>
-  <h1 style="margin:8px 0 6px">学習ロードマップ</h1>
-  <p class="muted">上から順に進めてください。チェックを付けると進捗が保存されます（この端末のブラウザ内に保存されます）。</p>
+  <h1 style="margin:8px 0 8px;font-size:30px;line-height:1.4">詳細ロードマップ</h1>
+  <p class="muted" style="max-width:44em;margin:0 0 24px">
+    ティア → モジュール → レッスンの3階層です。モジュールの見出しをクリックすると開閉します。
+    チェックはレッスンページで付けると、この一覧に反映されます（この端末のブラウザ内に保存されます）。
+    全体像から見たいときは <a href="tiers.html">学習の全体像</a> へ。
+  </p>
 
-  <div class="card" style="margin:20px 0 30px">
-    <div class="row" style="gap:18px;flex-wrap:nowrap">
+  <div class="card" style="margin:0 0 24px">
+    <div class="row sumrow">
       <div class="ring" id="ring"><div id="ring-pct">0%</div></div>
       <div style="flex:1 1 auto;min-width:0">
         <div class="row" style="gap:20px">
-          <div><div style="font-size:20px;font-weight:800" id="st-lessons">0/0</div><div class="small muted">レッスン</div></div>
-          <div><div style="font-size:20px;font-weight:800" id="st-labs">0/0</div><div class="small muted">ラボ</div></div>
-          <div><div style="font-size:20px;font-weight:800" id="st-quiz">0</div><div class="small muted">合格クイズ</div></div>
-          <div><div style="font-size:20px;font-weight:800" id="st-time">0分</div><div class="small muted">学習量</div></div>
+          <div><div style="font-size:22px;font-weight:800" id="st-lessons">0/0</div><div class="small muted">レッスン</div></div>
+          <div><div style="font-size:22px;font-weight:800" id="st-labs">0/0</div><div class="small muted">ラボ</div></div>
+          <div><div style="font-size:22px;font-weight:800" id="st-quiz">0</div><div class="small muted">合格クイズ</div></div>
+          <div><div style="font-size:22px;font-weight:800" id="st-time">0分</div><div class="small muted">学習量</div></div>
         </div>
         <div class="row" style="margin-top:12px">
           <a class="btn btn-brand btn-sm" id="next-link" href="#">次のレッスンへ →</a>
+          <button class="btn btn-ghost btn-sm" id="toggle-all" type="button">すべて開く</button>
           <a class="btn btn-ghost btn-sm" href="progress.html">学習記録を見る</a>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="road" class="road"></div>
+  <div id="road"></div>
 </main>
 
 <script src="assets/js/app.js"></script>
 <script src="assets/js/analytics.js"></script>
 <script>
+function pbmExtraNav() {
+  var add = [["tiers.html", "学習の全体像", "index.html"], ["pl300.html", "PL-300", "exam.html"]];
+  [".nav", ".drawer"].forEach(function (sel) {
+    var box = document.querySelector(".site-header " + sel);
+    if (!box) return;
+    add.forEach(function (it) {
+      var href = PBM.url(it[0]);
+      if (box.querySelector('a[href="' + href + '"]')) return;
+      var a = document.createElement("a");
+      a.href = href; a.textContent = it[1];
+      var after = box.querySelector('a[href="' + PBM.url(it[2]) + '"]');
+      if (after && after.nextSibling) box.insertBefore(a, after.nextSibling);
+      else box.appendChild(a);
+    });
+    if (box.classList.contains("nav")) {
+      var here = location.pathname.split("/").pop() || "index.html";
+      var cur = box.querySelector('a[href="' + PBM.url(here) + '"]');
+      if (cur) cur.setAttribute("aria-current", "page");
+    }
+  });
+}
+</script>
+<script>
 (async function () {
   PBM.renderChrome();
-  const c = await PBM.curriculum();
+  pbmExtraNav();
+
+  var road = document.getElementById("road");
+  var c;
+  try { c = await PBM.curriculum(); }
+  catch (e) {
+    road.innerHTML = '<div class="empty"><strong>カリキュラムを読み込めませんでした</strong>ページを再読み込みしてください。</div>';
+    return;
+  }
+
+  var tiers = (c.tiers && c.tiers.length ? c.tiers : (c.levels || []));
+  var lessons = c.lessons || [];
+  var labs = c.labs || [];
+  var modules = c.modules || [];
+
+  /* モジュール定義が無い旧形式でも動くよう、レッスンから仮のモジュールを組み立てる */
+  if (!modules.length && lessons.length) {
+    var seen = {};
+    lessons.forEach(function (l) {
+      var mid = l.module || l.tier || l.level || "M--";
+      if (!seen[mid]) {
+        seen[mid] = { id: mid, tier: l.tier || l.level, title: l.moduleTitle || mid, goal: "", lessonCount: 0 };
+        modules.push(seen[mid]);
+      }
+      seen[mid].lessonCount++;
+    });
+  }
+
+  var nextLesson = PBM.nextLesson(c);
+
+  function lessonsOfModule(m) { return lessons.filter(function (l) { return (l.module || l.tier || l.level) === m.id; }); }
+  function statsOf(ls) {
+    var done = ls.filter(function (l) { return PBM.progress.isLessonDone(l.id); }).length;
+    return { done: done, total: ls.length, pct: ls.length ? Math.round(done / ls.length * 100) : 0 };
+  }
+  function tierLessons(t) { return lessons.filter(function (l) { return (l.tier || l.level) === t.id; }); }
+  function tierModules(t) {
+    if (t.moduleIds && t.moduleIds.length) {
+      return t.moduleIds.map(function (id) {
+        for (var i = 0; i < modules.length; i++) if (modules[i].id === id) return modules[i];
+        return null;
+      }).filter(Boolean);
+    }
+    return modules.filter(function (m) { return m.tier === t.id; });
+  }
+  var TYPE_LABEL = { "concept": "", "hands-on": "🛠 実習", "drill": "✏️ ドリル", "exam": "📝 試験対策" };
+
+  function lessonRow(l) {
+    var done = PBM.progress.isLessonDone(l.id);
+    var q = l.quiz ? PBM.progress.quizResult(l.quiz) : null;
+    var isNext = nextLesson && nextLesson.id === l.id;
+    return '<a class="lesson-row' + (isNext ? " is-next" : "") + '" href="lesson.html?id=' + l.id + '">' +
+      '<span class="check' + (done ? " on" : "") + '" aria-hidden="true">✓</span>' +
+      '<span class="lid">' + PBM.esc(l.id) + "</span>" +
+      '<span class="t">' + PBM.esc(l.title || l.id) + "</span>" +
+      (TYPE_LABEL[l.type] ? '<span class="badge">' + TYPE_LABEL[l.type] + "</span>" : "") +
+      (l.lab ? '<span class="badge">🧪 ' + PBM.esc(l.lab) + "</span>" : "") +
+      (q ? '<span class="badge ' + (q.best >= 80 ? "badge-ok" : "badge-warn") + '">クイズ ' + q.best + "%</span>"
+         : (l.quiz ? '<span class="badge">クイズ未挑戦</span>' : "")) +
+      '<span class="m">' + (l.minutes || 0) + "分</span>" +
+      "</a>";
+  }
+
+  function moduleBlock(m, t) {
+    var ls = lessonsOfModule(m);
+    var st = statsOf(ls);
+    var open = !!(nextLesson && ls.some(function (l) { return l.id === nextLesson.id; }));
+    var body = ls.length
+      ? ls.map(lessonRow).join("")
+      : '<div class="empty" style="padding:20px"><strong>このモジュールは準備中です</strong>' +
+        'レッスンが登録されるとここに並びます。</div>';
+    var mLabs = labs.filter(function (lb) {
+      return ls.some(function (l) { return l.lab === lb.id; });
+    });
+    return '<details class="acc tone-' + (t ? t.id : "T1") + '" id="' + PBM.esc(m.id) + '"' + (open ? " open" : "") + '>' +
+      "<summary>" +
+        '<span class="caret" aria-hidden="true">▶</span>' +
+        '<span class="mid">' + PBM.esc(m.id) + "</span>" +
+        '<span class="ttl">' + PBM.esc(m.title || m.id) +
+          (m.subtitle ? '<span class="muted" style="font-weight:600;font-size:14px"> — ' + PBM.esc(m.subtitle) + "</span>" : "") +
+        "</span>" +
+        '<span class="pc">' + st.done + "/" + (st.total || m.lessonCount || 0) +
+          (st.total && st.pct === 100 ? " ✓" : "") + "</span>" +
+      "</summary>" +
+      '<div class="acc-bar-row"><div class="bar"><span style="width:' + st.pct + '%"></span></div>' +
+        '<span class="small muted" style="white-space:nowrap">' + st.pct + "%</span></div>" +
+      '<div class="acc-body">' +
+        (m.goal ? '<p class="acc-goal">🎯 ' + PBM.esc(m.goal) + "</p>" : "") +
+        body +
+        (mLabs.length ? mLabs.map(function (lb) {
+          return '<a class="lesson-row" href="lab.html?id=' + lb.id + '" style="border-style:dashed;margin-top:10px">' +
+            '<span class="check' + (PBM.progress.isLabDone(lb.id) ? " on" : "") + '" aria-hidden="true">✓</span>' +
+            '<span class="lid">' + PBM.esc(lb.id) + "</span>" +
+            '<span class="t">🧪 ' + PBM.esc(lb.title) + "</span>" +
+            '<span class="m">' + lb.minutes + "分</span></a>";
+        }).join("") : "") +
+      "</div></details>";
+  }
+
+  function draw() {
+    if (!tiers.length || !lessons.length) {
+      road.innerHTML = '<div class="empty"><strong>カリキュラムを準備中です</strong>' +
+        'モジュールが登録されると、ティア → モジュール → レッスンの一覧がここに表示されます。</div>';
+      return;
+    }
+    road.innerHTML = tiers.map(function (t, i) {
+      var mods = tierModules(t);
+      var st = statsOf(tierLessons(t));
+      var h = t.hours || t.estimatedHours || 0;
+      return '<section class="tone-' + t.id + '" id="' + t.id + '" style="scroll-margin-top:76px">' +
+        '<div class="tier-head">' +
+          '<span class="badge badge-lv lv-' + t.id + '" style="font-size:13px">' +
+            (t.order || i + 1) + ". " + PBM.esc(t.title) + "</span>" +
+          "<h2>" + PBM.esc(t.subtitle || t.title) + "</h2>" +
+          '<span class="badge">' + mods.length + " モジュール</span>" +
+          '<span class="badge">' + st.total + " レッスン</span>" +
+          '<span class="badge">目安 ' + h + " 時間</span>" +
+          (t.examWeight ? '<span class="badge badge-warn">' + PBM.esc(t.examWeight) + "</span>" : "") +
+          '<p class="g">🎯 ' + PBM.esc(t.goal || "") + "</p>" +
+        "</div>" +
+        '<div class="row" style="margin:12px 0 14px;gap:12px;flex-wrap:nowrap">' +
+          '<div class="bar" style="flex:1 1 auto"><span style="width:' + st.pct + '%;background:var(--tier)"></span></div>' +
+          '<span class="small muted" style="white-space:nowrap">' + st.done + " / " + st.total + "</span>" +
+        "</div>" +
+        (mods.length
+          ? mods.map(function (m) { return moduleBlock(m, t); }).join("")
+          : '<div class="empty"><strong>このティアは準備中です</strong>モジュールが登録されるとここに並びます。</div>') +
+        "</section>";
+    }).join("") +
+    '<section class="card" style="margin-top:36px;border-color:var(--accent)">' +
+      '<span class="badge badge-warn">GOAL</span>' +
+      '<h2 style="margin:12px 0 8px;font-size:22px">PL-300 受験</h2>' +
+      '<p class="muted" style="margin:0 0 14px">上級までのレッスンを終え、模擬試験で80%以上を2回連続で取れたら、受験申込の目安です。</p>' +
+      '<div class="row"><a class="btn btn-primary btn-sm" href="exam.html">模擬試験を受ける</a>' +
+      '<a class="btn btn-ghost btn-sm" href="pl300.html">カバレッジ表で確認する</a></div>' +
+    "</section>";
+  }
 
   function drawSummary() {
-    const s = PBM.stats(c);
+    var s = PBM.stats(c);
     document.getElementById("ring").style.setProperty("--p", s.pct);
     document.getElementById("ring-pct").textContent = s.pct + "%";
     document.getElementById("st-lessons").textContent = s.lessonsDone + "/" + s.lessonsTotal;
     document.getElementById("st-labs").textContent = s.labsDone + "/" + s.labsTotal;
     document.getElementById("st-quiz").textContent = s.quizPassed;
     document.getElementById("st-time").textContent = PBM.fmtMin(s.minutes);
-    const n = PBM.nextLesson(c);
-    document.getElementById("next-link").href = n ? "lesson.html?id=" + n.id : "exam.html";
-    document.getElementById("next-link").textContent = n ? "次： " + n.id + " →" : "模擬試験に挑戦 →";
+    var nl = document.getElementById("next-link");
+    nl.href = nextLesson ? "lesson.html?id=" + nextLesson.id : "exam.html";
+    nl.textContent = nextLesson ? "次： " + nextLesson.id + " →" : "模擬試験に挑戦 →";
   }
 
-  function draw() {
-    document.getElementById("road").innerHTML = c.levels.map(function (lv) {
-      const ls = PBM.lessonsOfLevel(c, lv.id);
-      const st = PBM.levelStats(c, lv.id);
-      const labs = c.labs.filter(function (l) { return l.level === lv.id; });
-      return '<section class="road-node dot-' + lv.id + (st.pct === 100 ? " done" : "") + '" id="' + lv.id + '">' +
-        '<div class="row" style="gap:8px">' +
-          '<span class="badge badge-lv lv-' + lv.id + '">' + PBM.esc(lv.title) + "</span>" +
-          '<span class="badge">目安 ' + lv.estimatedHours + "時間</span>" +
-          (lv.examWeight ? '<span class="badge badge-warn">' + PBM.esc(lv.examWeight) + "</span>" : "") +
-        "</div>" +
-        '<h2 style="margin:10px 0 4px;font-size:20px">' + PBM.esc(lv.subtitle) + "</h2>" +
-        '<p class="muted small" style="margin:0 0 8px">🎯 ' + PBM.esc(lv.goal) + "</p>" +
-        '<div class="bar" style="max-width:280px"><span style="width:' + st.pct + "%;background:var(--lv" + lv.order + ')"></span></div>' +
-        ls.map(function (l) {
-          const done = PBM.progress.isLessonDone(l.id);
-          const q = PBM.progress.quizResult(l.quiz);
-          return '<a class="lesson-row" href="lesson.html?id=' + l.id + '">' +
-            '<span class="check' + (done ? " on" : "") + '">✓</span>' +
-            '<span class="t">' + PBM.esc(l.title) + "</span>" +
-            (l.lab ? '<span class="badge">🧪 ' + l.lab + "</span>" : "") +
-            (q ? '<span class="badge ' + (q.best >= 80 ? "badge-ok" : "badge-warn") + '">' + q.best + "%</span>" : "") +
-            '<span class="m">' + l.minutes + "分</span>" +
-            "</a>";
-        }).join("") +
-        (labs.length ? '<div style="margin-top:10px">' + labs.map(function (lb) {
-          return '<a class="lesson-row" href="lab.html?id=' + lb.id + '" style="border-style:dashed">' +
-            '<span class="check' + (PBM.progress.isLabDone(lb.id) ? " on" : "") + '">✓</span>' +
-            '<span class="t">🧪 ' + PBM.esc(lb.title) + "</span>" +
-            '<span class="m">' + lb.minutes + "分</span></a>";
-        }).join("") + "</div>" : "") +
-        "</section>";
-    }).join("") +
-    '<section class="road-node dot-L5"><div class="card" style="border-color:var(--accent)">' +
-      '<span class="badge badge-warn">GOAL</span>' +
-      '<h2 style="margin:10px 0 6px;font-size:20px">PL-300 受験</h2>' +
-      '<p class="muted small">全レッスン完了 + 模擬試験80%以上を2回連続で達成できたら、受験申込の目安です。</p>' +
-      '<a class="btn btn-primary btn-sm" href="exam.html" style="margin-top:8px">模擬試験を受ける</a>' +
-    "</div></section>";
-  }
+  drawSummary();
+  draw();
 
-  drawSummary(); draw();
-  if (location.hash) { const t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
+  /* すべて開く / 閉じる */
+  var btn = document.getElementById("toggle-all");
+  btn.addEventListener("click", function () {
+    var accs = road.querySelectorAll("details.acc");
+    var open = btn.textContent.indexOf("開く") >= 0;
+    accs.forEach(function (d) { d.open = open; });
+    btn.textContent = open ? "すべて閉じる" : "すべて開く";
+  });
+
+  /* URLハッシュで特定のティア／モジュールを開く */
+  function openFromHash() {
+    var h = location.hash.replace(/^#/, "");
+    if (!h) return;
+    var el = document.getElementById(h);
+    if (!el) return;
+    if (el.tagName === "DETAILS") el.open = true;
+    var d = el.closest ? el.closest("details.acc") : null;
+    if (d) d.open = true;
+    el.scrollIntoView();
+  }
+  openFromHash();
+  window.addEventListener("hashchange", openFromHash);
 })();
 </script>
 </body>

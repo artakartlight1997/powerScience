@@ -22,11 +22,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate content
-        run: python3 scripts/validate_content.py
+      - name: Build data files and validate content
+        run: python3 scripts/build_all.py
 
       - name: Test analytics worker
         run: node worker/test/worker.test.mjs
+
+      - name: Check no Mermaid remains
+        run: |
+          if grep -rl '```mermaid' docs/content/ 2>/dev/null; then
+            echo "Mermaid は廃止されました。figure ブロックを使ってください。"; exit 1
+          fi
+          echo "OK: Mermaid は使われていません"
+
+      - name: Upload generated data
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-content
+          path: |
+            docs/content/curriculum.json
+            docs/content/pl300.json
+            docs/content/glossary/index.json
+            docs/content/quizzes/index.json
+          retention-days: 7
 
   deploy:
     needs: validate
@@ -36,6 +54,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Build data files
+        run: python3 scripts/build_all.py || true
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -13,12 +13,12 @@ const errs = [];
 page.on('pageerror', e => errs.push('PAGEERROR ' + e.message));
 const ok = (label, cond, extra='') => console.log(`${cond ? ' OK ' : 'FAIL'} ${label} ${extra}`);
 
-// --- 1. mermaid フォールバック ---
-await page.goto(`${BASE}/lesson.html?id=L201`, { waitUntil: 'networkidle' });
+// --- 1. 図解の描画（Mermaidは廃止済み） ---
+await page.goto(`${BASE}/lesson.html?id=L0601`, { waitUntil: 'networkidle' });
 await page.waitForTimeout(1500);
-const fb = await page.$$eval('.mermaid-wrap .callout.warn', e => e.length);
-const details = await page.$$eval('.mermaid-wrap details pre', e => e.length);
-ok('mermaid fallback shown', fb > 0, `blocks=${fb} sources=${details}`);
+const figs = await page.$$eval('.pbm-figure[data-rendered]', e => e.length);
+const figErr = await page.$$eval('.pbm-figure-error', e => e.length);
+ok('figures rendered (no mermaid)', figs > 0 && figErr === 0, `figures=${figs} errors=${figErr}`);
 const codeTok = await page.$$eval('.prose .tok-f', e => e.length);
 ok('markdown + callouts render', (await page.$$eval('.prose .callout', e=>e.length)) > 0,
    `callouts=${await page.$$eval('.prose .callout', e=>e.length)} tables=${await page.$$eval('.prose table', e=>e.length)}`);
@@ -38,7 +38,7 @@ ok('no horizontal overflow (390px)', overflow <= 1, `overflow=${overflow}px`);
 await page.click('#btn-done');
 await page.waitForTimeout(700);
 const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('pbm.progress.v1') || '{}'));
-ok('lesson completion persisted', !!(stored.lessons && stored.lessons.L201 && stored.lessons.L201.done));
+ok('lesson completion persisted', !!(stored.lessons && stored.lessons.L0601 && stored.lessons.L0601.done));
 
 // --- 5. ロードマップに反映 ---
 await page.goto(`${BASE}/roadmap.html`, { waitUntil: 'networkidle' });
@@ -47,7 +47,7 @@ const pct = await page.textContent('#ring-pct');
 ok('roadmap reflects progress', checked === 1, `checked=${checked} ring=${pct}`);
 
 // --- 6. クイズを1問解く ---
-await page.goto(`${BASE}/quiz.html?id=L302`, { waitUntil: 'networkidle' });
+await page.goto(`${BASE}/quiz.html?id=L0801`, { waitUntil: 'networkidle' });
 await page.waitForSelector('.choice');
 const stem = (await page.textContent('.q-stem')).slice(0, 30);
 await page.click('.choice >> nth=0');
@@ -71,7 +71,7 @@ const scoreTxt = await page.textContent('.result-hero .score').catch(() => null)
 const areas = await page.$$eval('#q-result .area-row', e => e.length).catch(() => 0);
 ok('quiz result screen', !!scoreTxt && areas > 0, `score=${scoreTxt} areaRows=${areas}`);
 const qres = await page.evaluate(() => JSON.parse(localStorage.getItem('pbm.progress.v1')||'{}').quizzes);
-ok('quiz result persisted', !!(qres && qres.L302), JSON.stringify(qres || {}));
+ok('quiz result persisted', !!(qres && qres.L0801), JSON.stringify(qres || {}));
 
 // --- 8. 模擬試験（タイマー動作） ---
 await page.goto(`${BASE}/exam.html`, { waitUntil: 'networkidle' });

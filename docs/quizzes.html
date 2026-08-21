@@ -4,21 +4,50 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>クイズ一覧 | Power BI Mastery</title>
-<meta name="description" content="レッスンごとの確認クイズ。スマホで隙間時間に演習できます。">
+<meta name="description" content="レッスンごとの理解度クイズ。スマホで隙間時間に演習できます。">
 <link rel="icon" href="assets/img/favicon.svg">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/lesson.css">
 <script src="assets/js/config.js"></script>
+<style>
+  .mod-block { border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-elevated); margin: 12px 0; overflow: hidden; }
+  .mod-head { display: flex; align-items: center; gap: 12px; padding: 15px 18px; cursor: pointer; width: 100%;
+              background: none; border: 0; font: inherit; color: inherit; text-align: left; }
+  .mod-head:hover { background: var(--bg-sunken); }
+  .mod-head .t { flex: 1 1 auto; font-size: 17px; font-weight: 700; }
+  .mod-head .caret { transition: transform .18s ease; color: var(--fg-subtle); font-size: 15px; }
+  .mod-block.open .caret { transform: rotate(90deg); }
+  .mod-body { display: none; padding: 0 12px 12px; }
+  .mod-block.open .mod-body { display: block; }
+  .tier-head { display: flex; align-items: center; gap: 12px; margin: 38px 0 8px; }
+  .tier-dot { width: 14px; height: 14px; border-radius: 50%; flex: none; }
+  .q-summary { display: grid; gap: 12px; }
+  @media (min-width: 700px) { .q-summary { grid-template-columns: repeat(4, 1fr); } }
+</style>
 </head>
 <body>
-<main id="main" class="wrap" style="padding-top:34px">
+<main id="main" class="wrap" style="padding-top:32px">
   <p class="eyebrow">Quizzes</p>
-  <h1 style="margin:8px 0 6px">確認クイズ</h1>
-  <p class="muted">レッスンごとの理解度チェックです。通勤中でもスマホで解けます。80%以上で合格扱いになります。</p>
-  <div class="row" style="margin:18px 0">
-    <a class="btn btn-primary btn-sm" href="exam.html">本番形式の模擬試験へ</a>
-    <a class="btn btn-ghost btn-sm" href="quiz.html?id=EXAM-PL300&amp;mode=practice">全問題を1問ずつ解説付きで解く</a>
+  <h1 style="margin:8px 0 8px;font-size:32px">理解度クイズ</h1>
+  <p class="muted" style="font-size:17px;max-width:62ch">
+    レッスンごとの確認問題です。1問ずつ解説が出るので、間違えた瞬間に理解を直せます。
+    80%以上で合格扱いになります。
+  </p>
+
+  <div class="q-summary" style="margin:24px 0">
+    <div class="card kpi"><div class="v" id="k-q">—</div><div class="l">総設問数</div></div>
+    <div class="card kpi"><div class="v" id="k-taken">—</div><div class="l">挑戦済み</div></div>
+    <div class="card kpi"><div class="v" id="k-pass">—</div><div class="l">合格（80%以上）</div></div>
+    <div class="card kpi"><div class="v" id="k-avg">—</div><div class="l">平均スコア</div></div>
   </div>
-  <div id="list" class="stack"></div>
+
+  <div class="row" style="margin:18px 0 6px">
+    <a class="btn btn-primary" href="exam.html">PL-300 模擬試験へ</a>
+    <a class="btn btn-ghost" href="quiz.html?id=EXAM-PL300">試験問題を解説つきで解く</a>
+    <button class="btn btn-ghost btn-sm" id="btn-expand">すべて開く</button>
+  </div>
+
+  <div id="list"></div>
 </main>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/analytics.js"></script>
@@ -27,23 +56,86 @@
   PBM.renderChrome();
   const c = await PBM.curriculum();
   let idx = {};
-  try { const r = await fetch("content/quizzes/index.json", { cache: "no-cache" }); if (r.ok) idx = (await r.json()).quizzes || {}; } catch (e) {}
-  document.getElementById("list").innerHTML = c.levels.map(function (lv) {
-    const rows = PBM.lessonsOfLevel(c, lv.id).filter(function (l) { return l.quiz; }).map(function (l) {
-      const meta = idx[l.quiz];
-      const res = PBM.progress.quizResult(l.quiz);
-      if (!meta) {
-        return '<div class="lesson-row" style="opacity:.5"><span class="t">' + PBM.esc(l.title) + '</span><span class="badge">準備中</span></div>';
-      }
-      return '<a class="lesson-row" href="quiz.html?id=' + l.quiz + '">' +
-        '<span class="t">' + PBM.esc(l.title) + "</span>" +
-        '<span class="badge">' + meta.count + "問</span>" +
-        (res ? '<span class="badge ' + (res.best >= 80 ? "badge-ok" : "badge-warn") + '">最高 ' + res.best + "%</span>" : '<span class="badge">未挑戦</span>') +
-        "</a>";
+  try {
+    const r = await fetch("content/quizzes/index.json", { cache: "no-cache" });
+    if (r.ok) idx = (await r.json()).quizzes || {};
+  } catch (e) { /* noop */ }
+
+  /* サマリ */
+  const results = [];
+  c.lessons.forEach(function (l) {
+    if (!l.quiz) return;
+    const r = PBM.progress.quizResult(l.quiz);
+    if (r) results.push(r);
+  });
+  let totalQ = 0;
+  Object.keys(idx).forEach(function (k) { if (k.indexOf("EXAM") !== 0) totalQ += idx[k].count || 0; });
+  document.getElementById("k-q").textContent = totalQ || "—";
+  document.getElementById("k-taken").textContent = results.length;
+  document.getElementById("k-pass").textContent = results.filter(function (r) { return r.best >= 80; }).length;
+  document.getElementById("k-avg").textContent = results.length
+    ? Math.round(results.reduce(function (a, r) { return a + r.best; }, 0) / results.length) + "%" : "—";
+
+  /* ティア → モジュール → レッスン */
+  const tiers = c.tiers.length ? c.tiers : [{ id: "_", title: "レッスン", color: "var(--brand)" }];
+  document.getElementById("list").innerHTML = tiers.map(function (t) {
+    const mods = c.modules.length ? PBM.modulesOfTier(c, t.id) : [];
+    const blocks = (mods.length ? mods : [{ id: "_", title: "すべて" }]).map(function (m) {
+      const ls = m.id === "_" ? c.lessons : PBM.lessonsOfModule(c, m.id);
+      const withQuiz = ls.filter(function (l) { return l.quiz && idx[l.quiz]; });
+      if (!withQuiz.length) return "";
+      const done = withQuiz.filter(function (l) {
+        const r = PBM.progress.quizResult(l.quiz); return r && r.best >= 80;
+      }).length;
+      const rows = withQuiz.map(function (l) {
+        const meta = idx[l.quiz];
+        const res = PBM.progress.quizResult(l.quiz);
+        return '<a class="lesson-row" href="quiz.html?id=' + l.quiz + '">' +
+          '<span class="t">' + PBM.esc(l.title) + "</span>" +
+          '<span class="badge">' + meta.count + "問</span>" +
+          (res
+            ? '<span class="badge ' + (res.best >= 80 ? "badge-ok" : "badge-warn") + '">最高 ' + res.best + "%</span>"
+            : '<span class="badge">未挑戦</span>') +
+          "</a>";
+      }).join("");
+      return '<div class="mod-block" id="' + m.id + '">' +
+        '<button class="mod-head" aria-expanded="false">' +
+          '<span class="caret">▶</span>' +
+          '<span class="t">' + PBM.esc(m.title) + "</span>" +
+          '<span class="badge ' + (done === withQuiz.length ? "badge-ok" : "") + '">' + done + " / " + withQuiz.length + "</span>" +
+        "</button>" +
+        '<div class="mod-body">' + rows + "</div></div>";
     }).join("");
-    return '<section><h2 style="font-size:19px;margin:26px 0 6px">' +
-      '<span class="badge badge-lv lv-' + lv.id + '">' + PBM.esc(lv.title) + "</span> " + PBM.esc(lv.subtitle) + "</h2>" + rows + "</section>";
-  }).join("");
+    if (!blocks) return "";
+    return '<section id="' + t.id + '">' +
+      '<div class="tier-head"><span class="tier-dot" style="background:' + (t.color || "var(--brand)") + '"></span>' +
+      '<h2 style="margin:0;font-size:22px">' + PBM.esc(t.title) +
+      (t.en ? ' <span class="muted small">' + PBM.esc(t.en) + "</span>" : "") + "</h2></div>" + blocks + "</section>";
+  }).join("") || '<p class="muted">クイズを準備中です。</p>';
+
+  function bind() {
+    document.querySelectorAll(".mod-head").forEach(function (b) {
+      b.addEventListener("click", function () {
+        const blk = b.closest(".mod-block");
+        const open = blk.classList.toggle("open");
+        b.setAttribute("aria-expanded", String(open));
+      });
+    });
+  }
+  bind();
+
+  let expanded = false;
+  document.getElementById("btn-expand").addEventListener("click", function () {
+    expanded = !expanded;
+    document.querySelectorAll(".mod-block").forEach(function (b) { b.classList.toggle("open", expanded); });
+    document.querySelectorAll(".mod-head").forEach(function (b) { b.setAttribute("aria-expanded", String(expanded)); });
+    this.textContent = expanded ? "すべて閉じる" : "すべて開く";
+  });
+
+  if (location.hash) {
+    const el = document.querySelector(location.hash);
+    if (el && el.classList.contains("mod-block")) { el.classList.add("open"); el.scrollIntoView(); }
+  }
 })();
 </script>
 </body>

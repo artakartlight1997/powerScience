@@ -1,0 +1,918 @@
+{
+  "meta": {
+    "title": "Power BI Mastery",
+    "subtitle": "初学者からPL-300認定合格・実務のプロへ",
+    "version": "0.1.0",
+    "targetExam": "PL-300: Microsoft Power BI Data Analyst",
+    "updated": "2026-08-21"
+  },
+  "levels": [
+    {
+      "id": "L0",
+      "order": 0,
+      "title": "Lv.0 はじめの一歩",
+      "subtitle": "Power BIの世界を俯瞰する",
+      "color": "#6ea8fe",
+      "icon": "compass",
+      "goal": "Power BIが何を解決する道具なのかを説明でき、自分のPCで最初のレポートを1枚作れる。",
+      "estimatedHours": 4,
+      "examWeight": null
+    },
+    {
+      "id": "L1",
+      "order": 1,
+      "title": "Lv.1 データの取得と整形",
+      "subtitle": "Power Query / M言語",
+      "color": "#5fd3a6",
+      "icon": "filter",
+      "goal": "現実の汚いデータを、分析可能な整然データ(tidy data)に変換できる。",
+      "estimatedHours": 12,
+      "examWeight": "PL-300 出題領域1：データの準備 (25-30%)"
+    },
+    {
+      "id": "L2",
+      "order": 2,
+      "title": "Lv.2 データモデリング",
+      "subtitle": "スタースキーマとリレーションシップ",
+      "color": "#ffb454",
+      "icon": "model",
+      "goal": "スタースキーマを設計でき、リレーションシップの挙動を図で説明できる。",
+      "estimatedHours": 14,
+      "examWeight": "PL-300 出題領域2：データのモデル化 (25-30%)"
+    },
+    {
+      "id": "L3",
+      "order": 3,
+      "title": "Lv.3 DAX",
+      "subtitle": "分析言語を使いこなす",
+      "color": "#f77f96",
+      "icon": "formula",
+      "goal": "フィルターコンテキストを理解し、CALCULATEを自在に操って実務の指標を実装できる。",
+      "estimatedHours": 20,
+      "examWeight": "PL-300 出題領域2・3にまたがる中核スキル"
+    },
+    {
+      "id": "L4",
+      "order": 4,
+      "title": "Lv.4 可視化とレポート設計",
+      "subtitle": "伝わるダッシュボードを作る",
+      "color": "#b18cff",
+      "icon": "chart",
+      "goal": "目的に合ったビジュアルを選び、PC・スマホ双方で機能するレポートを設計できる。",
+      "estimatedHours": 14,
+      "examWeight": "PL-300 出題領域3：視覚化と分析 (25-30%)"
+    },
+    {
+      "id": "L5",
+      "order": 5,
+      "title": "Lv.5 運用・ガバナンス・試験合格",
+      "subtitle": "共有、セキュリティ、そしてPL-300へ",
+      "color": "#4dd0e1",
+      "icon": "shield",
+      "goal": "組織にレポートを安全に展開・運用でき、PL-300に合格できる。",
+      "estimatedHours": 16,
+      "examWeight": "PL-300 出題領域4：資産の管理とセキュリティ (15-20%)"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "L001",
+      "level": "L0",
+      "title": "Power BIとは何か — 全体像を1枚の図で理解する",
+      "minutes": 20,
+      "type": "concept",
+      "objectives": [
+        "BIツールが解決する課題を説明できる",
+        "Excelとの役割の違いを説明できる",
+        "データ→モデル→ビジュアルの流れを図示できる"
+      ],
+      "keywords": [
+        "BI",
+        "セルフサービスBI",
+        "データパイプライン"
+      ],
+      "quiz": "L001",
+      "lab": null
+    },
+    {
+      "id": "L002",
+      "level": "L0",
+      "title": "3つのPower BI — Desktop / Service / Mobile",
+      "minutes": 20,
+      "type": "concept",
+      "objectives": [
+        "各製品の役割分担を説明できる",
+        "作成から共有までの流れを説明できる",
+        "ライセンス種別の違いを把握する"
+      ],
+      "keywords": [
+        "Desktop",
+        "Service",
+        "Mobile",
+        "ライセンス"
+      ],
+      "quiz": "L002",
+      "lab": null
+    },
+    {
+      "id": "L003",
+      "level": "L0",
+      "title": "環境構築と、はじめてのレポート",
+      "minutes": 40,
+      "type": "hands-on",
+      "objectives": [
+        "Power BI Desktopをインストールできる",
+        "CSVを読み込みグラフを1つ作れる",
+        "レポートを保存・発行できる"
+      ],
+      "keywords": [
+        "インストール",
+        "CSV",
+        "発行"
+      ],
+      "quiz": "L003",
+      "lab": "LAB01"
+    },
+    {
+      "id": "L004",
+      "level": "L0",
+      "title": "分析の共通言語 — テーブル・列・行・メジャー",
+      "minutes": 25,
+      "type": "concept",
+      "objectives": [
+        "ファクトとディメンションの違いを説明できる",
+        "列とメジャーの違いを説明できる",
+        "粒度(グレイン)の概念を理解する"
+      ],
+      "keywords": [
+        "ファクト",
+        "ディメンション",
+        "粒度",
+        "メジャー"
+      ],
+      "quiz": "L004",
+      "lab": null
+    },
+    {
+      "id": "L101",
+      "level": "L1",
+      "title": "データソースに接続する — Excel / CSV / Web / DB",
+      "minutes": 30,
+      "type": "concept",
+      "objectives": [
+        "主要コネクタの使い分けができる",
+        "インポートとDirectQueryの違いを説明できる",
+        "フォルダ接続で複数ファイルをまとめられる"
+      ],
+      "keywords": [
+        "コネクタ",
+        "インポート",
+        "DirectQuery",
+        "フォルダ接続"
+      ],
+      "quiz": "L101",
+      "lab": null
+    },
+    {
+      "id": "L102",
+      "level": "L1",
+      "title": "Power Queryエディタの歩き方",
+      "minutes": 30,
+      "type": "hands-on",
+      "objectives": [
+        "適用したステップの意味を理解する",
+        "ステップの並べ替え・削除ができる",
+        "UI操作がMコードに変換される様子を追える"
+      ],
+      "keywords": [
+        "適用したステップ",
+        "詳細エディタ",
+        "プレビュー"
+      ],
+      "quiz": "L102",
+      "lab": "LAB02"
+    },
+    {
+      "id": "L103",
+      "level": "L1",
+      "title": "データ型・クレンジング・エラー処理",
+      "minutes": 35,
+      "type": "hands-on",
+      "objectives": [
+        "データ型を正しく設定できる",
+        "エラー行と null を適切に処理できる",
+        "ロケール指定で日付を変換できる"
+      ],
+      "keywords": [
+        "データ型",
+        "エラー",
+        "null",
+        "ロケール"
+      ],
+      "quiz": "L103",
+      "lab": "LAB02"
+    },
+    {
+      "id": "L104",
+      "level": "L1",
+      "title": "列の分割・結合・ピボット解除で整然データへ",
+      "minutes": 35,
+      "type": "hands-on",
+      "objectives": [
+        "列の分割/結合ができる",
+        "ピボット解除で横持ちを縦持ちにできる",
+        "整然データの条件を説明できる"
+      ],
+      "keywords": [
+        "ピボット解除",
+        "整然データ",
+        "列の分割"
+      ],
+      "quiz": "L104",
+      "lab": "LAB02"
+    },
+    {
+      "id": "L105",
+      "level": "L1",
+      "title": "クエリのマージと追加 — JOINの考え方",
+      "minutes": 35,
+      "type": "concept",
+      "objectives": [
+        "マージ(横結合)と追加(縦結合)を使い分けられる",
+        "結合の種類を図で説明できる",
+        "展開時の行数増加に注意できる"
+      ],
+      "keywords": [
+        "マージ",
+        "追加",
+        "左外部結合",
+        "展開"
+      ],
+      "quiz": "L105",
+      "lab": null
+    },
+    {
+      "id": "L106",
+      "level": "L1",
+      "title": "パラメータ・関数・クエリ フォールディング",
+      "minutes": 30,
+      "type": "concept",
+      "objectives": [
+        "パラメータでクエリを可変にできる",
+        "カスタム関数で処理を再利用できる",
+        "フォールディングが効く操作を判断できる"
+      ],
+      "keywords": [
+        "パラメータ",
+        "カスタム関数",
+        "クエリフォールディング"
+      ],
+      "quiz": "L106",
+      "lab": null
+    },
+    {
+      "id": "L107",
+      "level": "L1",
+      "title": "M言語入門 — let ... in を読む",
+      "minutes": 30,
+      "type": "concept",
+      "objectives": [
+        "let/in構文を読める",
+        "ステップ名と変数の対応を理解する",
+        "簡単なMコードを手書きできる"
+      ],
+      "keywords": [
+        "M言語",
+        "let in",
+        "詳細エディタ"
+      ],
+      "quiz": "L107",
+      "lab": null
+    },
+    {
+      "id": "L201",
+      "level": "L2",
+      "title": "スタースキーマ — Power BI最重要の設計原則",
+      "minutes": 40,
+      "type": "concept",
+      "objectives": [
+        "スタースキーマの構造を図示できる",
+        "フラットテーブルの問題点を説明できる",
+        "既存データをファクト/ディメンションに分解できる"
+      ],
+      "keywords": [
+        "スタースキーマ",
+        "ファクト",
+        "ディメンション",
+        "スノーフレーク"
+      ],
+      "quiz": "L201",
+      "lab": "LAB03"
+    },
+    {
+      "id": "L202",
+      "level": "L2",
+      "title": "リレーションシップ — 基数とクロスフィルター方向",
+      "minutes": 40,
+      "type": "concept",
+      "objectives": [
+        "1対多/多対多の基数を判断できる",
+        "フィルターの流れる向きを図で説明できる",
+        "非アクティブなリレーションを理解する"
+      ],
+      "keywords": [
+        "基数",
+        "クロスフィルター",
+        "USERELATIONSHIP",
+        "曖昧性"
+      ],
+      "quiz": "L202",
+      "lab": "LAB03"
+    },
+    {
+      "id": "L203",
+      "level": "L2",
+      "title": "日付テーブルを作る — 時系列分析の土台",
+      "minutes": 35,
+      "type": "hands-on",
+      "objectives": [
+        "日付テーブルの必要性を説明できる",
+        "CALENDARで日付テーブルを生成できる",
+        "日付テーブルとしてマークできる"
+      ],
+      "keywords": [
+        "日付テーブル",
+        "CALENDAR",
+        "会計年度"
+      ],
+      "quiz": "L203",
+      "lab": "LAB03"
+    },
+    {
+      "id": "L204",
+      "level": "L2",
+      "title": "双方向リレーションと多対多の罠",
+      "minutes": 30,
+      "type": "concept",
+      "objectives": [
+        "双方向の副作用を説明できる",
+        "ブリッジテーブルを設計できる",
+        "曖昧なパスを回避できる"
+      ],
+      "keywords": [
+        "双方向",
+        "ブリッジテーブル",
+        "多対多"
+      ],
+      "quiz": "L204",
+      "lab": null
+    },
+    {
+      "id": "L205",
+      "level": "L2",
+      "title": "階層・並べ替え列・表示形式でモデルを磨く",
+      "minutes": 25,
+      "type": "hands-on",
+      "objectives": [
+        "階層を作成できる",
+        "列で並べ替えを設定できる",
+        "表示形式とデータカテゴリを設定できる"
+      ],
+      "keywords": [
+        "階層",
+        "列で並べ替え",
+        "データカテゴリ"
+      ],
+      "quiz": "L205",
+      "lab": null
+    },
+    {
+      "id": "L206",
+      "level": "L2",
+      "title": "行レベルセキュリティ(RLS)の設計",
+      "minutes": 35,
+      "type": "hands-on",
+      "objectives": [
+        "静的/動的RLSを実装できる",
+        "USERPRINCIPALNAMEを使える",
+        "ロールをテストできる"
+      ],
+      "keywords": [
+        "RLS",
+        "USERPRINCIPALNAME",
+        "ロール"
+      ],
+      "quiz": "L206",
+      "lab": "LAB06"
+    },
+    {
+      "id": "L207",
+      "level": "L2",
+      "title": "モデル最適化 — VertiPaqとカーディナリティ",
+      "minutes": 35,
+      "type": "concept",
+      "objectives": [
+        "列指向圧縮の仕組みを概説できる",
+        "不要列削除の効果を説明できる",
+        "モデルサイズを計測できる"
+      ],
+      "keywords": [
+        "VertiPaq",
+        "カーディナリティ",
+        "圧縮",
+        "DAX Studio"
+      ],
+      "quiz": "L207",
+      "lab": null
+    },
+    {
+      "id": "L301",
+      "level": "L3",
+      "title": "DAXの第一歩 — 計算列とメジャーの決定的な違い",
+      "minutes": 35,
+      "type": "concept",
+      "objectives": [
+        "計算列とメジャーの評価タイミングを説明できる",
+        "どちらを使うべきか判断できる",
+        "基本的な集計関数を書ける"
+      ],
+      "keywords": [
+        "メジャー",
+        "計算列",
+        "SUM",
+        "評価"
+      ],
+      "quiz": "L301",
+      "lab": "LAB04"
+    },
+    {
+      "id": "L302",
+      "level": "L3",
+      "title": "フィルターコンテキストと行コンテキスト",
+      "minutes": 45,
+      "type": "concept",
+      "objectives": [
+        "2つのコンテキストを図で説明できる",
+        "ビジュアルが生成するフィルターを説明できる",
+        "コンテキストの伝播を追える"
+      ],
+      "keywords": [
+        "フィルターコンテキスト",
+        "行コンテキスト",
+        "伝播"
+      ],
+      "quiz": "L302",
+      "lab": "LAB04"
+    },
+    {
+      "id": "L303",
+      "level": "L3",
+      "title": "CALCULATE — DAXの心臓部",
+      "minutes": 45,
+      "type": "concept",
+      "objectives": [
+        "CALCULATEの評価順序を説明できる",
+        "フィルター引数の上書きを理解する",
+        "ALL/KEEPFILTERSを使い分けられる"
+      ],
+      "keywords": [
+        "CALCULATE",
+        "ALL",
+        "KEEPFILTERS",
+        "FILTER"
+      ],
+      "quiz": "L303",
+      "lab": "LAB04"
+    },
+    {
+      "id": "L304",
+      "level": "L3",
+      "title": "イテレータとコンテキスト遷移",
+      "minutes": 40,
+      "type": "concept",
+      "objectives": [
+        "SUMX等のイテレータを使える",
+        "コンテキスト遷移を説明できる",
+        "メジャー参照の暗黙のCALCULATEを理解する"
+      ],
+      "keywords": [
+        "SUMX",
+        "コンテキスト遷移",
+        "イテレータ"
+      ],
+      "quiz": "L304",
+      "lab": "LAB04"
+    },
+    {
+      "id": "L305",
+      "level": "L3",
+      "title": "タイムインテリジェンス — YTD・前年比・移動平均",
+      "minutes": 40,
+      "type": "hands-on",
+      "objectives": [
+        "TOTALYTDで累計を出せる",
+        "SAMEPERIODLASTYEARで前年比を出せる",
+        "DATESINPERIODで移動平均を出せる"
+      ],
+      "keywords": [
+        "TOTALYTD",
+        "SAMEPERIODLASTYEAR",
+        "DATEADD"
+      ],
+      "quiz": "L305",
+      "lab": "LAB04"
+    },
+    {
+      "id": "L306",
+      "level": "L3",
+      "title": "VAR / RETURN — 読める・速いDAXを書く",
+      "minutes": 25,
+      "type": "concept",
+      "objectives": [
+        "VARで中間結果を保持できる",
+        "VARの評価タイミングを理解する",
+        "可読性の高い記述ができる"
+      ],
+      "keywords": [
+        "VAR",
+        "RETURN",
+        "可読性"
+      ],
+      "quiz": "L306",
+      "lab": null
+    },
+    {
+      "id": "L307",
+      "level": "L3",
+      "title": "実務パターン集 — 構成比・累計・ランキング・ABC分析",
+      "minutes": 45,
+      "type": "hands-on",
+      "objectives": [
+        "構成比(%)を実装できる",
+        "RANKXでランキングを出せる",
+        "ABC分析を実装できる"
+      ],
+      "keywords": [
+        "ALLSELECTED",
+        "RANKX",
+        "DIVIDE",
+        "ABC分析"
+      ],
+      "quiz": "L307",
+      "lab": "LAB04"
+    },
+    {
+      "id": "L308",
+      "level": "L3",
+      "title": "DAXパフォーマンスチューニング",
+      "minutes": 35,
+      "type": "concept",
+      "objectives": [
+        "ストレージエンジンと数式エンジンを区別できる",
+        "DAX Studioでクエリを計測できる",
+        "遅いパターンを回避できる"
+      ],
+      "keywords": [
+        "ストレージエンジン",
+        "数式エンジン",
+        "DAX Studio",
+        "CallbackDataID"
+      ],
+      "quiz": "L308",
+      "lab": null
+    },
+    {
+      "id": "L401",
+      "level": "L4",
+      "title": "ビジュアルの選び方 — 比較・推移・構成・分布・関係",
+      "minutes": 35,
+      "type": "concept",
+      "objectives": [
+        "問いの型からビジュアルを選べる",
+        "円グラフの適切な使いどころを判断できる",
+        "誤解を招く表現を避けられる"
+      ],
+      "keywords": [
+        "棒グラフ",
+        "折れ線",
+        "散布図",
+        "チャート選択"
+      ],
+      "quiz": "L401",
+      "lab": "LAB05"
+    },
+    {
+      "id": "L402",
+      "level": "L4",
+      "title": "レポートレイアウトとモバイルビュー",
+      "minutes": 35,
+      "type": "hands-on",
+      "objectives": [
+        "視線導線を設計できる",
+        "グリッドと配置を整えられる",
+        "モバイルレイアウトを作成できる"
+      ],
+      "keywords": [
+        "レイアウト",
+        "モバイルビュー",
+        "テーマ"
+      ],
+      "quiz": "L402",
+      "lab": "LAB05"
+    },
+    {
+      "id": "L403",
+      "level": "L4",
+      "title": "インタラクション・ドリルスルー・ブックマーク",
+      "minutes": 35,
+      "type": "hands-on",
+      "objectives": [
+        "ビジュアル間の相互作用を編集できる",
+        "ドリルスルーページを作れる",
+        "ブックマークでナビを作れる"
+      ],
+      "keywords": [
+        "相互作用",
+        "ドリルスルー",
+        "ブックマーク",
+        "選択ウィンドウ"
+      ],
+      "quiz": "L403",
+      "lab": "LAB05"
+    },
+    {
+      "id": "L404",
+      "level": "L4",
+      "title": "条件付き書式・カスタムツールチップ・小さな倍数",
+      "minutes": 30,
+      "type": "hands-on",
+      "objectives": [
+        "ルール/フィールド基準の書式を設定できる",
+        "ツールチップページを作れる",
+        "スモールマルチプルを使える"
+      ],
+      "keywords": [
+        "条件付き書式",
+        "ツールチップ",
+        "スモールマルチプル"
+      ],
+      "quiz": "L404",
+      "lab": null
+    },
+    {
+      "id": "L405",
+      "level": "L4",
+      "title": "AIビジュアルと分析機能",
+      "minutes": 30,
+      "type": "concept",
+      "objectives": [
+        "主要因/分解ツリーを読み解ける",
+        "Q&Aを設定できる",
+        "異常検知・予測を使える"
+      ],
+      "keywords": [
+        "主要な影響因子",
+        "分解ツリー",
+        "Q&A",
+        "スマートナラティブ"
+      ],
+      "quiz": "L405",
+      "lab": null
+    },
+    {
+      "id": "L406",
+      "level": "L4",
+      "title": "アクセシビリティとレポート性能",
+      "minutes": 30,
+      "type": "concept",
+      "objectives": [
+        "色覚多様性に配慮できる",
+        "代替テキスト・タブ順序を設定できる",
+        "パフォーマンスアナライザーで計測できる"
+      ],
+      "keywords": [
+        "アクセシビリティ",
+        "代替テキスト",
+        "パフォーマンスアナライザー"
+      ],
+      "quiz": "L406",
+      "lab": null
+    },
+    {
+      "id": "L501",
+      "level": "L5",
+      "title": "ワークスペースとロール設計",
+      "minutes": 30,
+      "type": "concept",
+      "objectives": [
+        "4つのワークスペースロールを説明できる",
+        "権限設計の考え方を理解する",
+        "個人用と共有の違いを説明できる"
+      ],
+      "keywords": [
+        "ワークスペース",
+        "管理者",
+        "メンバー",
+        "共同作成者",
+        "ビューアー"
+      ],
+      "quiz": "L501",
+      "lab": "LAB06"
+    },
+    {
+      "id": "L502",
+      "level": "L5",
+      "title": "発行・アプリ配布・セマンティックモデルの共有",
+      "minutes": 30,
+      "type": "hands-on",
+      "objectives": [
+        "アプリを作成・配布できる",
+        "共有とアプリの違いを説明できる",
+        "データセットの再利用ができる"
+      ],
+      "keywords": [
+        "アプリ",
+        "発行",
+        "セマンティックモデル",
+        "ライブ接続"
+      ],
+      "quiz": "L502",
+      "lab": "LAB06"
+    },
+    {
+      "id": "L503",
+      "level": "L5",
+      "title": "ゲートウェイと更新スケジュール",
+      "minutes": 30,
+      "type": "concept",
+      "objectives": [
+        "オンプレミスゲートウェイの役割を説明できる",
+        "更新スケジュールを設定できる",
+        "更新失敗の切り分けができる"
+      ],
+      "keywords": [
+        "ゲートウェイ",
+        "スケジュール更新",
+        "増分更新"
+      ],
+      "quiz": "L503",
+      "lab": null
+    },
+    {
+      "id": "L504",
+      "level": "L5",
+      "title": "デプロイメントパイプラインとライフサイクル管理",
+      "minutes": 30,
+      "type": "concept",
+      "objectives": [
+        "開発/テスト/本番の流れを説明できる",
+        "データソース規則を理解する",
+        "バージョン管理の方針を持てる"
+      ],
+      "keywords": [
+        "デプロイメントパイプライン",
+        "ライフサイクル",
+        "PBIP"
+      ],
+      "quiz": "L504",
+      "lab": null
+    },
+    {
+      "id": "L505",
+      "level": "L5",
+      "title": "ガバナンス — 秘密度ラベル・監査・容量",
+      "minutes": 30,
+      "type": "concept",
+      "objectives": [
+        "秘密度ラベルを説明できる",
+        "監査ログの活用法を知る",
+        "Fabric容量の考え方を理解する"
+      ],
+      "keywords": [
+        "秘密度ラベル",
+        "監査ログ",
+        "Fabric",
+        "容量"
+      ],
+      "quiz": "L505",
+      "lab": null
+    },
+    {
+      "id": "L506",
+      "level": "L5",
+      "title": "PL-300 攻略 — 出題範囲と学習戦略",
+      "minutes": 30,
+      "type": "concept",
+      "objectives": [
+        "4つの出題領域と配点を把握する",
+        "問題形式(ケーススタディ含む)を知る",
+        "2週間の直前計画を立てられる"
+      ],
+      "keywords": [
+        "PL-300",
+        "出題範囲",
+        "受験申込",
+        "スコア"
+      ],
+      "quiz": "L506",
+      "lab": null
+    },
+    {
+      "id": "L507",
+      "level": "L5",
+      "title": "模擬試験と弱点分析 — 合格へのラストマイル",
+      "minutes": 60,
+      "type": "exam",
+      "objectives": [
+        "模擬試験を時間内に解ける",
+        "誤答を領域別に分析できる",
+        "復習計画を立てられる"
+      ],
+      "keywords": [
+        "模擬試験",
+        "弱点分析",
+        "復習"
+      ],
+      "quiz": "L507",
+      "lab": null
+    }
+  ],
+  "labs": [
+    {
+      "id": "LAB01",
+      "title": "はじめてのレポート — 売上ダッシュボードを30分で作る",
+      "level": "L0",
+      "minutes": 30,
+      "difficulty": 1,
+      "dataset": [
+        "sales.csv"
+      ],
+      "goal": "CSVを読み込み、KPIカード・棒グラフ・折れ線を配置したレポートを完成させる。"
+    },
+    {
+      "id": "LAB02",
+      "title": "汚いデータを洗う — Power Query実践",
+      "level": "L1",
+      "minutes": 45,
+      "difficulty": 2,
+      "dataset": [
+        "sales_dirty.csv"
+      ],
+      "goal": "全角空白・型崩れ・横持ち・重複を含むデータを整然データに変換する。"
+    },
+    {
+      "id": "LAB03",
+      "title": "スタースキーマを組む",
+      "level": "L2",
+      "minutes": 45,
+      "difficulty": 3,
+      "dataset": [
+        "sales.csv",
+        "products.csv",
+        "customers.csv",
+        "stores.csv"
+      ],
+      "goal": "フラットな表を分解し、日付テーブルを含むスタースキーマを構築する。"
+    },
+    {
+      "id": "LAB04",
+      "title": "DAXメジャー10本ノック",
+      "level": "L3",
+      "minutes": 60,
+      "difficulty": 4,
+      "dataset": [
+        "sales.csv",
+        "products.csv",
+        "customers.csv",
+        "stores.csv"
+      ],
+      "goal": "売上・粗利・前年比・累計・構成比・ランキングなど10指標を実装する。"
+    },
+    {
+      "id": "LAB05",
+      "title": "伝わるダッシュボード設計 + モバイル対応",
+      "level": "L4",
+      "minutes": 60,
+      "difficulty": 3,
+      "dataset": [
+        "sales.csv",
+        "products.csv",
+        "customers.csv",
+        "stores.csv"
+      ],
+      "goal": "1画面で意思決定できるレポートを設計し、スマホビューまで作り込む。"
+    },
+    {
+      "id": "LAB06",
+      "title": "RLSを設定して安全に配布する",
+      "level": "L5",
+      "minutes": 45,
+      "difficulty": 4,
+      "dataset": [
+        "stores.csv",
+        "security_users.csv"
+      ],
+      "goal": "店舗別に閲覧範囲を絞る動的RLSを実装し、アプリとして配布する。"
+    }
+  ]
+}

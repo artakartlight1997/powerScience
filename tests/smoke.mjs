@@ -8,17 +8,15 @@ import { chromium } from 'playwright';
 
 const BASE = 'http://localhost:8123';
 const PAGES = [
-  ['index.html', '#levels a'],
-  ['roadmap.html', '.road-node .lesson-row'],
-  ['lesson.html?id=L201', '.prose h2'],
-  ['lesson.html?id=L303', '.prose pre code.language-dax'],
-  ['labs.html', '#labs a'],
-  ['lab.html?id=LAB04', '.prose h2'],
-  ['quizzes.html', '#list a.lesson-row'],
-  ['quiz.html?id=L302', '.choice'],
-  ['exam.html', '#start'],
-  ['glossary.html', '#list .card'],
-  ['progress.html', '#levels .area-row'],
+  ['index.html', 'main'],
+  ['tiers.html', 'main'],
+  ['roadmap.html', 'main'],
+  ['pl300.html', 'main'],
+  ['labs.html', '#labs'],
+  ['quizzes.html', '#list'],
+  ['exam.html', '#modes'],
+  ['glossary.html', 'main'],
+  ['progress.html', '#tiers'],
   ['admin.html', '#btn-login'],
   ['404.html', 'h1'],
 ];

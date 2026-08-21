@@ -6,6 +6,10 @@
 <title>ハンズオン | Power BI Mastery</title>
 <link rel="icon" href="assets/img/favicon.svg">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/figure.css">
+<link rel="stylesheet" href="assets/css/interactive.css">
+<link rel="stylesheet" href="assets/css/glossary.css">
+<link rel="stylesheet" href="assets/css/lesson.css">
 <script src="assets/js/config.js"></script>
 </head>
 <body>
@@ -23,6 +27,9 @@
 <script src="assets/js/app.js"></script>
 <script src="assets/js/analytics.js"></script>
 <script src="assets/js/render.js"></script>
+<script src="assets/js/figure.js"></script>
+<script src="assets/js/interactive.js"></script>
+<script src="assets/js/glossary.js"></script>
 <script>
 (async function () {
   PBM.renderChrome();
@@ -55,7 +62,7 @@
     prose.innerHTML = '<div class="callout warn"><div class="callout-title">執筆中</div><p>この実習手順はまだ用意されていません。</p></div>';
   } else {
     prose.innerHTML = PBM.markdown(md);
-    PBM.renderMermaid(prose);
+    await PBM.enhance(prose);
     PBM.buildToc(prose, document.getElementById("toc"));
   }
 

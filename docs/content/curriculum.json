@@ -2,214 +2,5818 @@
   "meta": {
     "title": "Power BI Mastery",
     "subtitle": "初学者からPL-300認定合格・実務のプロへ",
-    "version": "0.1.0",
-    "targetExam": "PL-300: Microsoft Power BI Data Analyst",
-    "updated": "2026-08-21"
+    "version": "2.0.0",
+    "targetExam": "PL-300",
+    "updated": "2026-08-21",
+    "counts": {
+      "tiers": 4,
+      "modules": 22,
+      "lessons": 118,
+      "labs": 6,
+      "figures": 1024,
+      "lessonsWritten": 83,
+      "modulesPlanned": 22,
+      "lessonsPlanned": 118
+    },
+    "planned": {
+      "tiers": 4,
+      "modules": 22,
+      "lessons": 118,
+      "labs": 6
+    }
   },
+  "tiers": [
+    {
+      "id": "T1",
+      "order": 1,
+      "title": "初級",
+      "en": "Beginner",
+      "subtitle": "土台を作る",
+      "goal": "BIの考え方を理解し、自分でレポートを1枚作れる",
+      "color": "#2f6fed",
+      "hours": 13,
+      "estimatedHours": 13,
+      "examWeight": null,
+      "moduleIds": [
+        "M01",
+        "M02",
+        "M03",
+        "M04"
+      ],
+      "moduleCount": 4,
+      "lessonCount": 20,
+      "minutes": 680
+    },
+    {
+      "id": "T2",
+      "order": 2,
+      "title": "中級",
+      "en": "Intermediate",
+      "subtitle": "実務で使えるようになる",
+      "goal": "実務データを整形し正しいモデルを組み、必要な指標をDAXで書ける",
+      "color": "#14926b",
+      "hours": 57,
+      "estimatedHours": 57,
+      "examWeight": "PL-300 出題領域 1・2 の中核",
+      "moduleIds": [
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10"
+      ],
+      "moduleCount": 6,
+      "lessonCount": 35,
+      "minutes": 1365
+    },
+    {
+      "id": "T3",
+      "order": 3,
+      "title": "上級",
+      "en": "Advanced",
+      "subtitle": "難しい要件と性能を扱う",
+      "goal": "性能・複雑要件・組織展開を扱え、PL-300に合格できる",
+      "color": "#c77700",
+      "hours": 76,
+      "estimatedHours": 76,
+      "examWeight": "PL-300 出題領域 3・4 と総仕上げ",
+      "moduleIds": [
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15",
+        "M16"
+      ],
+      "moduleCount": 6,
+      "lessonCount": 33,
+      "minutes": 1595
+    },
+    {
+      "id": "T4",
+      "order": 4,
+      "title": "プロ",
+      "en": "Professional",
+      "subtitle": "組織を動かし価値を出す",
+      "goal": "設計をリードし、データから事業価値を出せる",
+      "color": "#7c4dff",
+      "hours": 83,
+      "estimatedHours": 83,
+      "examWeight": null,
+      "moduleIds": [
+        "M17",
+        "M18",
+        "M19",
+        "M20",
+        "M21",
+        "M22"
+      ],
+      "moduleCount": 6,
+      "lessonCount": 30,
+      "minutes": 1450
+    }
+  ],
   "levels": [
     {
-      "id": "L0",
-      "order": 0,
-      "title": "Lv.0 はじめの一歩",
-      "subtitle": "Power BIの世界を俯瞰する",
-      "color": "#6ea8fe",
-      "icon": "compass",
-      "goal": "Power BIが何を解決する道具なのかを説明でき、自分のPCで最初のレポートを1枚作れる。",
-      "estimatedHours": 4,
-      "examWeight": null
-    },
-    {
-      "id": "L1",
+      "id": "T1",
       "order": 1,
-      "title": "Lv.1 データの取得と整形",
-      "subtitle": "Power Query / M言語",
-      "color": "#5fd3a6",
-      "icon": "filter",
-      "goal": "現実の汚いデータを、分析可能な整然データ(tidy data)に変換できる。",
-      "estimatedHours": 12,
-      "examWeight": "PL-300 出題領域1：データの準備 (25-30%)"
+      "title": "初級",
+      "en": "Beginner",
+      "subtitle": "土台を作る",
+      "goal": "BIの考え方を理解し、自分でレポートを1枚作れる",
+      "color": "#2f6fed",
+      "hours": 13,
+      "estimatedHours": 13,
+      "examWeight": null,
+      "moduleIds": [
+        "M01",
+        "M02",
+        "M03",
+        "M04"
+      ],
+      "moduleCount": 4,
+      "lessonCount": 20,
+      "minutes": 680
     },
     {
-      "id": "L2",
+      "id": "T2",
       "order": 2,
-      "title": "Lv.2 データモデリング",
-      "subtitle": "スタースキーマとリレーションシップ",
-      "color": "#ffb454",
-      "icon": "model",
-      "goal": "スタースキーマを設計でき、リレーションシップの挙動を図で説明できる。",
-      "estimatedHours": 14,
-      "examWeight": "PL-300 出題領域2：データのモデル化 (25-30%)"
+      "title": "中級",
+      "en": "Intermediate",
+      "subtitle": "実務で使えるようになる",
+      "goal": "実務データを整形し正しいモデルを組み、必要な指標をDAXで書ける",
+      "color": "#14926b",
+      "hours": 57,
+      "estimatedHours": 57,
+      "examWeight": "PL-300 出題領域 1・2 の中核",
+      "moduleIds": [
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10"
+      ],
+      "moduleCount": 6,
+      "lessonCount": 35,
+      "minutes": 1365
     },
     {
-      "id": "L3",
+      "id": "T3",
       "order": 3,
-      "title": "Lv.3 DAX",
-      "subtitle": "分析言語を使いこなす",
-      "color": "#f77f96",
-      "icon": "formula",
-      "goal": "フィルターコンテキストを理解し、CALCULATEを自在に操って実務の指標を実装できる。",
-      "estimatedHours": 20,
-      "examWeight": "PL-300 出題領域2・3にまたがる中核スキル"
+      "title": "上級",
+      "en": "Advanced",
+      "subtitle": "難しい要件と性能を扱う",
+      "goal": "性能・複雑要件・組織展開を扱え、PL-300に合格できる",
+      "color": "#c77700",
+      "hours": 76,
+      "estimatedHours": 76,
+      "examWeight": "PL-300 出題領域 3・4 と総仕上げ",
+      "moduleIds": [
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15",
+        "M16"
+      ],
+      "moduleCount": 6,
+      "lessonCount": 33,
+      "minutes": 1595
     },
     {
-      "id": "L4",
+      "id": "T4",
       "order": 4,
-      "title": "Lv.4 可視化とレポート設計",
-      "subtitle": "伝わるダッシュボードを作る",
-      "color": "#b18cff",
-      "icon": "chart",
-      "goal": "目的に合ったビジュアルを選び、PC・スマホ双方で機能するレポートを設計できる。",
-      "estimatedHours": 14,
-      "examWeight": "PL-300 出題領域3：視覚化と分析 (25-30%)"
+      "title": "プロ",
+      "en": "Professional",
+      "subtitle": "組織を動かし価値を出す",
+      "goal": "設計をリードし、データから事業価値を出せる",
+      "color": "#7c4dff",
+      "hours": 83,
+      "estimatedHours": 83,
+      "examWeight": null,
+      "moduleIds": [
+        "M17",
+        "M18",
+        "M19",
+        "M20",
+        "M21",
+        "M22"
+      ],
+      "moduleCount": 6,
+      "lessonCount": 30,
+      "minutes": 1450
+    }
+  ],
+  "modules": [
+    {
+      "id": "M01",
+      "tier": "T1",
+      "tierTitle": "初級",
+      "tierColor": "#2f6fed",
+      "order": 1,
+      "title": "データ分析とBIの基礎",
+      "subtitle": "「数字で意思決定する」とはどういうことか",
+      "goal": "BIが解決する課題を説明でき、良い指標と悪い指標を見分けられる",
+      "estimatedHours": 3,
+      "lessonCount": 5,
+      "minutes": 175,
+      "lessonIds": [
+        "L0101",
+        "L0102",
+        "L0103",
+        "L0104",
+        "L0105"
+      ]
     },
     {
-      "id": "L5",
+      "id": "M02",
+      "tier": "T1",
+      "tierTitle": "初級",
+      "tierColor": "#2f6fed",
+      "order": 2,
+      "title": "Power BIの全体像",
+      "subtitle": "道具の全体像を1枚の図で掴む",
+      "goal": "Power BIの5工程と3製品の役割を説明できる",
+      "estimatedHours": 3,
+      "lessonCount": 5,
+      "minutes": 150,
+      "lessonIds": [
+        "L0201",
+        "L0202",
+        "L0203",
+        "L0204",
+        "L0205"
+      ]
+    },
+    {
+      "id": "M03",
+      "tier": "T1",
+      "tierTitle": "初級",
+      "tierColor": "#2f6fed",
+      "order": 3,
+      "title": "はじめてのレポート",
+      "subtitle": "30分で「動くもの」を作る",
+      "goal": "CSVからKPIカードとグラフのあるレポートを作り保存できる",
+      "estimatedHours": 3,
+      "lessonCount": 5,
+      "minutes": 160,
+      "lessonIds": [
+        "L0301",
+        "L0302",
+        "L0303",
+        "L0304",
+        "L0305"
+      ]
+    },
+    {
+      "id": "M04",
+      "tier": "T1",
+      "tierTitle": "初級",
+      "tierColor": "#2f6fed",
+      "order": 4,
+      "title": "データの読み込み入門",
+      "subtitle": "データを「分析できる形」で取り込む",
+      "goal": "接続方式を選び、型を整えて取り込める",
+      "estimatedHours": 4,
+      "lessonCount": 5,
+      "minutes": 195,
+      "lessonIds": [
+        "L0401",
+        "L0402",
+        "L0403",
+        "L0404",
+        "L0405"
+      ]
+    },
+    {
+      "id": "M05",
+      "tier": "T2",
+      "tierTitle": "中級",
+      "tierColor": "#14926b",
       "order": 5,
-      "title": "Lv.5 運用・ガバナンス・試験合格",
-      "subtitle": "共有、セキュリティ、そしてPL-300へ",
-      "color": "#4dd0e1",
-      "icon": "shield",
-      "goal": "組織にレポートを安全に展開・運用でき、PL-300に合格できる。",
+      "title": "Power Query 実践",
+      "subtitle": "汚いデータを分析できる形にする",
+      "goal": "現実の崩れたデータを整然データに変換できる",
+      "estimatedHours": 11,
+      "lessonCount": 6,
+      "minutes": 230,
+      "lessonIds": [
+        "L0501",
+        "L0502",
+        "L0503",
+        "L0504",
+        "L0505",
+        "L0506"
+      ]
+    },
+    {
+      "id": "M06",
+      "tier": "T2",
+      "tierTitle": "中級",
+      "tierColor": "#14926b",
+      "order": 6,
+      "title": "データモデリング",
+      "subtitle": "スタースキーマで土台を作る",
+      "goal": "スタースキーマを設計し、フィルターの流れを説明できる",
+      "estimatedHours": 11,
+      "lessonCount": 6,
+      "minutes": 225,
+      "lessonIds": [
+        "L0601",
+        "L0602",
+        "L0603",
+        "L0604",
+        "L0605",
+        "L0606"
+      ]
+    },
+    {
+      "id": "M07",
+      "tier": "T2",
+      "tierTitle": "中級",
+      "tierColor": "#14926b",
+      "order": 7,
+      "title": "DAX基礎",
+      "subtitle": "分析の言語を書き始める",
+      "goal": "目的に応じて計算列とメジャーを使い分け、基本的な指標を実装できる",
+      "estimatedHours": 8,
+      "lessonCount": 6,
+      "minutes": 215,
+      "lessonIds": [
+        "L0701",
+        "L0702",
+        "L0703",
+        "L0704",
+        "L0705",
+        "L0706"
+      ]
+    },
+    {
+      "id": "M08",
+      "tier": "T2",
+      "tierTitle": "中級",
+      "tierColor": "#14926b",
+      "order": 8,
+      "title": "DAXコンテキスト",
+      "subtitle": "DAXの心臓部を理解する",
+      "goal": "フィルターコンテキストを操作して、実務で必要な指標を自在に実装できる",
+      "estimatedHours": 10,
+      "lessonCount": 6,
+      "minutes": 275,
+      "lessonIds": [
+        "L0801",
+        "L0802",
+        "L0803",
+        "L0804",
+        "L0805",
+        "L0806"
+      ]
+    },
+    {
+      "id": "M09",
+      "tier": "T2",
+      "tierTitle": "中級",
+      "tierColor": "#14926b",
+      "order": 9,
+      "title": "可視化の設計",
+      "subtitle": "伝わるレポートを設計する",
+      "goal": "目的に合ったビジュアルを選び、PCとスマホ両方で機能するレポートを作れる",
+      "estimatedHours": 9,
+      "lessonCount": 6,
+      "minutes": 225,
+      "lessonIds": [
+        "L0901",
+        "L0902",
+        "L0903",
+        "L0904",
+        "L0905",
+        "L0906"
+      ]
+    },
+    {
+      "id": "M10",
+      "tier": "T2",
+      "tierTitle": "中級",
+      "tierColor": "#14926b",
+      "order": 10,
+      "title": "共有と運用",
+      "subtitle": "作ったものを組織に届ける",
+      "goal": "ワークスペースとアプリで安全にレポートを配布し、更新を自動化できる",
+      "estimatedHours": 8,
+      "lessonCount": 5,
+      "minutes": 195,
+      "lessonIds": [
+        "L1001",
+        "L1002",
+        "L1003",
+        "L1004",
+        "L1005"
+      ]
+    },
+    {
+      "id": "M11",
+      "tier": "T3",
+      "tierTitle": "上級",
+      "tierColor": "#c77700",
+      "order": 11,
+      "title": "高度なデータ整形",
+      "subtitle": "M言語とパフォーマンスを支配する",
+      "goal": "M言語を読み書きし、フォールディングと増分更新で更新時間を桁で改善できる",
+      "estimatedHours": 12,
+      "lessonCount": 5,
+      "minutes": 235,
+      "lessonIds": [
+        "L1101",
+        "L1102",
+        "L1103",
+        "L1104",
+        "L1105"
+      ]
+    },
+    {
+      "id": "M12",
+      "tier": "T3",
+      "tierTitle": "上級",
+      "tierColor": "#c77700",
+      "order": 12,
+      "title": "高度なモデリング",
+      "subtitle": "複雑な現実をモデルに落とす",
+      "goal": "多対多・RLS・複合モデル・集計を使い分け、難しい要件を設計できる",
+      "estimatedHours": 14,
+      "lessonCount": 6,
+      "minutes": 300,
+      "lessonIds": [
+        "L1201",
+        "L1202",
+        "L1203",
+        "L1204",
+        "L1205",
+        "L1206"
+      ]
+    },
+    {
+      "id": "M13",
+      "tier": "T3",
+      "tierTitle": "上級",
+      "tierColor": "#c77700",
+      "order": 13,
+      "title": "DAX上級",
+      "subtitle": "DAXを完全に支配する",
+      "goal": "コンテキスト遷移とテーブル関数を理解し、どんな指標でも実装できる",
       "estimatedHours": 16,
-      "examWeight": "PL-300 出題領域4：資産の管理とセキュリティ (15-20%)"
+      "lessonCount": 6,
+      "minutes": 315,
+      "lessonIds": [
+        "L1301",
+        "L1302",
+        "L1303",
+        "L1304",
+        "L1305",
+        "L1306"
+      ]
+    },
+    {
+      "id": "M14",
+      "tier": "T3",
+      "tierTitle": "上級",
+      "tierColor": "#c77700",
+      "order": 14,
+      "title": "パフォーマンス",
+      "subtitle": "速いモデルとレポートを作る",
+      "goal": "ボトルネックを計測で特定し、根拠を持って改善できる",
+      "estimatedHours": 12,
+      "lessonCount": 5,
+      "minutes": 235,
+      "lessonIds": [
+        "L1401",
+        "L1402",
+        "L1403",
+        "L1404",
+        "L1405"
+      ]
+    },
+    {
+      "id": "M15",
+      "tier": "T3",
+      "tierTitle": "上級",
+      "tierColor": "#c77700",
+      "order": 15,
+      "title": "分析手法とデータサイエンス",
+      "subtitle": "Power BIを「集計ツール」で終わらせない",
+      "goal": "統計と分析手法を使い、データから示唆を出せる",
+      "estimatedHours": 12,
+      "lessonCount": 6,
+      "minutes": 280,
+      "lessonIds": [
+        "L1501",
+        "L1502",
+        "L1503",
+        "L1504",
+        "L1505",
+        "L1506"
+      ]
+    },
+    {
+      "id": "M16",
+      "tier": "T3",
+      "tierTitle": "上級",
+      "tierColor": "#c77700",
+      "order": 16,
+      "title": "PL-300 完全対策",
+      "subtitle": "出題範囲を1つも落とさない",
+      "goal": "PL-300の全スキル項目を自己診断し、確実に合格ラインを超える",
+      "estimatedHours": 10,
+      "lessonCount": 5,
+      "minutes": 230,
+      "lessonIds": [
+        "L1601",
+        "L1602",
+        "L1603",
+        "L1604",
+        "L1605"
+      ]
+    },
+    {
+      "id": "M17",
+      "tier": "T4",
+      "tierTitle": "プロ",
+      "tierColor": "#7c4dff",
+      "order": 17,
+      "title": "エンタープライズ アーキテクチャ",
+      "subtitle": "組織全体のBI基盤を設計する",
+      "goal": "要件からデータ基盤とセマンティックモデルの構成を設計できる",
+      "estimatedHours": 15,
+      "lessonCount": 5,
+      "minutes": 260,
+      "lessonIds": [
+        "L1701",
+        "L1702",
+        "L1703",
+        "L1704",
+        "L1705"
+      ]
+    },
+    {
+      "id": "M18",
+      "tier": "T4",
+      "tierTitle": "プロ",
+      "tierColor": "#7c4dff",
+      "order": 18,
+      "title": "ガバナンスとライフサイクル",
+      "subtitle": "壊れないBI運用を作る",
+      "goal": "変更管理・テスト・監査を仕組みにできる",
+      "estimatedHours": 15,
+      "lessonCount": 5,
+      "minutes": 255,
+      "lessonIds": [
+        "L1801",
+        "L1802",
+        "L1803",
+        "L1804",
+        "L1805"
+      ]
+    },
+    {
+      "id": "M19",
+      "tier": "T4",
+      "tierTitle": "プロ",
+      "tierColor": "#7c4dff",
+      "order": 19,
+      "title": "Microsoft Fabric",
+      "subtitle": "Power BIの先にある基盤",
+      "goal": "Fabricの構成要素を理解し、Power BIとの接続点を設計できる",
+      "estimatedHours": 15,
+      "lessonCount": 5,
+      "minutes": 255,
+      "lessonIds": [
+        "L1901",
+        "L1902",
+        "L1903",
+        "L1904",
+        "L1905"
+      ]
+    },
+    {
+      "id": "M20",
+      "tier": "T4",
+      "tierTitle": "プロ",
+      "tierColor": "#7c4dff",
+      "order": 20,
+      "title": "高度な分析とAI",
+      "subtitle": "Power BIに知能を持たせる",
+      "goal": "AI機能と外部分析を組み合わせ、示唆の質を上げられる",
+      "estimatedHours": 12,
+      "lessonCount": 5,
+      "minutes": 215,
+      "lessonIds": [
+        "L2001",
+        "L2002",
+        "L2003",
+        "L2004",
+        "L2005"
+      ]
+    },
+    {
+      "id": "M21",
+      "tier": "T4",
+      "tierTitle": "プロ",
+      "tierColor": "#7c4dff",
+      "order": 21,
+      "title": "デザインとストーリーテリング",
+      "subtitle": "人を動かすレポートを作る",
+      "goal": "意思決定を促すダッシュボードを設計し、説明できる",
+      "estimatedHours": 12,
+      "lessonCount": 5,
+      "minutes": 225,
+      "lessonIds": [
+        "L2101",
+        "L2102",
+        "L2103",
+        "L2104",
+        "L2105"
+      ]
+    },
+    {
+      "id": "M22",
+      "tier": "T4",
+      "tierTitle": "プロ",
+      "tierColor": "#7c4dff",
+      "order": 22,
+      "title": "現場で価値を出す",
+      "subtitle": "BIを事業成果につなげる",
+      "goal": "要件定義からKPI設計、定着、効果測定までを回せる",
+      "estimatedHours": 14,
+      "lessonCount": 5,
+      "minutes": 240,
+      "lessonIds": [
+        "L2201",
+        "L2202",
+        "L2203",
+        "L2204",
+        "L2205"
+      ]
     }
   ],
   "lessons": [
-    { "id": "L001", "level": "L0", "title": "Power BIとは何か — 全体像を1枚の図で理解する", "minutes": 20, "type": "concept",
-      "objectives": ["BIツールが解決する課題を説明できる", "Excelとの役割の違いを説明できる", "データ→モデル→ビジュアルの流れを図示できる"],
-      "keywords": ["BI", "セルフサービスBI", "データパイプライン"], "quiz": "L001", "lab": null },
-    { "id": "L002", "level": "L0", "title": "3つのPower BI — Desktop / Service / Mobile", "minutes": 20, "type": "concept",
-      "objectives": ["各製品の役割分担を説明できる", "作成から共有までの流れを説明できる", "ライセンス種別の違いを把握する"],
-      "keywords": ["Desktop", "Service", "Mobile", "ライセンス"], "quiz": "L002", "lab": null },
-    { "id": "L003", "level": "L0", "title": "環境構築と、はじめてのレポート", "minutes": 40, "type": "hands-on",
-      "objectives": ["Power BI Desktopをインストールできる", "CSVを読み込みグラフを1つ作れる", "レポートを保存・発行できる"],
-      "keywords": ["インストール", "CSV", "発行"], "quiz": "L003", "lab": "LAB01" },
-    { "id": "L004", "level": "L0", "title": "分析の共通言語 — テーブル・列・行・メジャー", "minutes": 25, "type": "concept",
-      "objectives": ["ファクトとディメンションの違いを説明できる", "列とメジャーの違いを説明できる", "粒度(グレイン)の概念を理解する"],
-      "keywords": ["ファクト", "ディメンション", "粒度", "メジャー"], "quiz": "L004", "lab": null },
-
-    { "id": "L101", "level": "L1", "title": "データソースに接続する — Excel / CSV / Web / DB", "minutes": 30, "type": "concept",
-      "objectives": ["主要コネクタの使い分けができる", "インポートとDirectQueryの違いを説明できる", "フォルダ接続で複数ファイルをまとめられる"],
-      "keywords": ["コネクタ", "インポート", "DirectQuery", "フォルダ接続"], "quiz": "L101", "lab": null },
-    { "id": "L102", "level": "L1", "title": "Power Queryエディタの歩き方", "minutes": 30, "type": "hands-on",
-      "objectives": ["適用したステップの意味を理解する", "ステップの並べ替え・削除ができる", "UI操作がMコードに変換される様子を追える"],
-      "keywords": ["適用したステップ", "詳細エディタ", "プレビュー"], "quiz": "L102", "lab": "LAB02" },
-    { "id": "L103", "level": "L1", "title": "データ型・クレンジング・エラー処理", "minutes": 35, "type": "hands-on",
-      "objectives": ["データ型を正しく設定できる", "エラー行と null を適切に処理できる", "ロケール指定で日付を変換できる"],
-      "keywords": ["データ型", "エラー", "null", "ロケール"], "quiz": "L103", "lab": "LAB02" },
-    { "id": "L104", "level": "L1", "title": "列の分割・結合・ピボット解除で整然データへ", "minutes": 35, "type": "hands-on",
-      "objectives": ["列の分割/結合ができる", "ピボット解除で横持ちを縦持ちにできる", "整然データの条件を説明できる"],
-      "keywords": ["ピボット解除", "整然データ", "列の分割"], "quiz": "L104", "lab": "LAB02" },
-    { "id": "L105", "level": "L1", "title": "クエリのマージと追加 — JOINの考え方", "minutes": 35, "type": "concept",
-      "objectives": ["マージ(横結合)と追加(縦結合)を使い分けられる", "結合の種類を図で説明できる", "展開時の行数増加に注意できる"],
-      "keywords": ["マージ", "追加", "左外部結合", "展開"], "quiz": "L105", "lab": null },
-    { "id": "L106", "level": "L1", "title": "パラメータ・関数・クエリ フォールディング", "minutes": 30, "type": "concept",
-      "objectives": ["パラメータでクエリを可変にできる", "カスタム関数で処理を再利用できる", "フォールディングが効く操作を判断できる"],
-      "keywords": ["パラメータ", "カスタム関数", "クエリフォールディング"], "quiz": "L106", "lab": null },
-    { "id": "L107", "level": "L1", "title": "M言語入門 — let ... in を読む", "minutes": 30, "type": "concept",
-      "objectives": ["let/in構文を読める", "ステップ名と変数の対応を理解する", "簡単なMコードを手書きできる"],
-      "keywords": ["M言語", "let in", "詳細エディタ"], "quiz": "L107", "lab": null },
-
-    { "id": "L201", "level": "L2", "title": "スタースキーマ — Power BI最重要の設計原則", "minutes": 40, "type": "concept",
-      "objectives": ["スタースキーマの構造を図示できる", "フラットテーブルの問題点を説明できる", "既存データをファクト/ディメンションに分解できる"],
-      "keywords": ["スタースキーマ", "ファクト", "ディメンション", "スノーフレーク"], "quiz": "L201", "lab": "LAB03" },
-    { "id": "L202", "level": "L2", "title": "リレーションシップ — 基数とクロスフィルター方向", "minutes": 40, "type": "concept",
-      "objectives": ["1対多/多対多の基数を判断できる", "フィルターの流れる向きを図で説明できる", "非アクティブなリレーションを理解する"],
-      "keywords": ["基数", "クロスフィルター", "USERELATIONSHIP", "曖昧性"], "quiz": "L202", "lab": "LAB03" },
-    { "id": "L203", "level": "L2", "title": "日付テーブルを作る — 時系列分析の土台", "minutes": 35, "type": "hands-on",
-      "objectives": ["日付テーブルの必要性を説明できる", "CALENDARで日付テーブルを生成できる", "日付テーブルとしてマークできる"],
-      "keywords": ["日付テーブル", "CALENDAR", "会計年度"], "quiz": "L203", "lab": "LAB03" },
-    { "id": "L204", "level": "L2", "title": "双方向リレーションと多対多の罠", "minutes": 30, "type": "concept",
-      "objectives": ["双方向の副作用を説明できる", "ブリッジテーブルを設計できる", "曖昧なパスを回避できる"],
-      "keywords": ["双方向", "ブリッジテーブル", "多対多"], "quiz": "L204", "lab": null },
-    { "id": "L205", "level": "L2", "title": "階層・並べ替え列・表示形式でモデルを磨く", "minutes": 25, "type": "hands-on",
-      "objectives": ["階層を作成できる", "列で並べ替えを設定できる", "表示形式とデータカテゴリを設定できる"],
-      "keywords": ["階層", "列で並べ替え", "データカテゴリ"], "quiz": "L205", "lab": null },
-    { "id": "L206", "level": "L2", "title": "行レベルセキュリティ(RLS)の設計", "minutes": 35, "type": "hands-on",
-      "objectives": ["静的/動的RLSを実装できる", "USERPRINCIPALNAMEを使える", "ロールをテストできる"],
-      "keywords": ["RLS", "USERPRINCIPALNAME", "ロール"], "quiz": "L206", "lab": "LAB06" },
-    { "id": "L207", "level": "L2", "title": "モデル最適化 — VertiPaqとカーディナリティ", "minutes": 35, "type": "concept",
-      "objectives": ["列指向圧縮の仕組みを概説できる", "不要列削除の効果を説明できる", "モデルサイズを計測できる"],
-      "keywords": ["VertiPaq", "カーディナリティ", "圧縮", "DAX Studio"], "quiz": "L207", "lab": null },
-
-    { "id": "L301", "level": "L3", "title": "DAXの第一歩 — 計算列とメジャーの決定的な違い", "minutes": 35, "type": "concept",
-      "objectives": ["計算列とメジャーの評価タイミングを説明できる", "どちらを使うべきか判断できる", "基本的な集計関数を書ける"],
-      "keywords": ["メジャー", "計算列", "SUM", "評価"], "quiz": "L301", "lab": "LAB04" },
-    { "id": "L302", "level": "L3", "title": "フィルターコンテキストと行コンテキスト", "minutes": 45, "type": "concept",
-      "objectives": ["2つのコンテキストを図で説明できる", "ビジュアルが生成するフィルターを説明できる", "コンテキストの伝播を追える"],
-      "keywords": ["フィルターコンテキスト", "行コンテキスト", "伝播"], "quiz": "L302", "lab": "LAB04" },
-    { "id": "L303", "level": "L3", "title": "CALCULATE — DAXの心臓部", "minutes": 45, "type": "concept",
-      "objectives": ["CALCULATEの評価順序を説明できる", "フィルター引数の上書きを理解する", "ALL/KEEPFILTERSを使い分けられる"],
-      "keywords": ["CALCULATE", "ALL", "KEEPFILTERS", "FILTER"], "quiz": "L303", "lab": "LAB04" },
-    { "id": "L304", "level": "L3", "title": "イテレータとコンテキスト遷移", "minutes": 40, "type": "concept",
-      "objectives": ["SUMX等のイテレータを使える", "コンテキスト遷移を説明できる", "メジャー参照の暗黙のCALCULATEを理解する"],
-      "keywords": ["SUMX", "コンテキスト遷移", "イテレータ"], "quiz": "L304", "lab": "LAB04" },
-    { "id": "L305", "level": "L3", "title": "タイムインテリジェンス — YTD・前年比・移動平均", "minutes": 40, "type": "hands-on",
-      "objectives": ["TOTALYTDで累計を出せる", "SAMEPERIODLASTYEARで前年比を出せる", "DATESINPERIODで移動平均を出せる"],
-      "keywords": ["TOTALYTD", "SAMEPERIODLASTYEAR", "DATEADD"], "quiz": "L305", "lab": "LAB04" },
-    { "id": "L306", "level": "L3", "title": "VAR / RETURN — 読める・速いDAXを書く", "minutes": 25, "type": "concept",
-      "objectives": ["VARで中間結果を保持できる", "VARの評価タイミングを理解する", "可読性の高い記述ができる"],
-      "keywords": ["VAR", "RETURN", "可読性"], "quiz": "L306", "lab": null },
-    { "id": "L307", "level": "L3", "title": "実務パターン集 — 構成比・累計・ランキング・ABC分析", "minutes": 45, "type": "hands-on",
-      "objectives": ["構成比(%)を実装できる", "RANKXでランキングを出せる", "ABC分析を実装できる"],
-      "keywords": ["ALLSELECTED", "RANKX", "DIVIDE", "ABC分析"], "quiz": "L307", "lab": "LAB04" },
-    { "id": "L308", "level": "L3", "title": "DAXパフォーマンスチューニング", "minutes": 35, "type": "concept",
-      "objectives": ["ストレージエンジンと数式エンジンを区別できる", "DAX Studioでクエリを計測できる", "遅いパターンを回避できる"],
-      "keywords": ["ストレージエンジン", "数式エンジン", "DAX Studio", "CallbackDataID"], "quiz": "L308", "lab": null },
-
-    { "id": "L401", "level": "L4", "title": "ビジュアルの選び方 — 比較・推移・構成・分布・関係", "minutes": 35, "type": "concept",
-      "objectives": ["問いの型からビジュアルを選べる", "円グラフの適切な使いどころを判断できる", "誤解を招く表現を避けられる"],
-      "keywords": ["棒グラフ", "折れ線", "散布図", "チャート選択"], "quiz": "L401", "lab": "LAB05" },
-    { "id": "L402", "level": "L4", "title": "レポートレイアウトとモバイルビュー", "minutes": 35, "type": "hands-on",
-      "objectives": ["視線導線を設計できる", "グリッドと配置を整えられる", "モバイルレイアウトを作成できる"],
-      "keywords": ["レイアウト", "モバイルビュー", "テーマ"], "quiz": "L402", "lab": "LAB05" },
-    { "id": "L403", "level": "L4", "title": "インタラクション・ドリルスルー・ブックマーク", "minutes": 35, "type": "hands-on",
-      "objectives": ["ビジュアル間の相互作用を編集できる", "ドリルスルーページを作れる", "ブックマークでナビを作れる"],
-      "keywords": ["相互作用", "ドリルスルー", "ブックマーク", "選択ウィンドウ"], "quiz": "L403", "lab": "LAB05" },
-    { "id": "L404", "level": "L4", "title": "条件付き書式・カスタムツールチップ・小さな倍数", "minutes": 30, "type": "hands-on",
-      "objectives": ["ルール/フィールド基準の書式を設定できる", "ツールチップページを作れる", "スモールマルチプルを使える"],
-      "keywords": ["条件付き書式", "ツールチップ", "スモールマルチプル"], "quiz": "L404", "lab": null },
-    { "id": "L405", "level": "L4", "title": "AIビジュアルと分析機能", "minutes": 30, "type": "concept",
-      "objectives": ["主要因/分解ツリーを読み解ける", "Q&Aを設定できる", "異常検知・予測を使える"],
-      "keywords": ["主要な影響因子", "分解ツリー", "Q&A", "スマートナラティブ"], "quiz": "L405", "lab": null },
-    { "id": "L406", "level": "L4", "title": "アクセシビリティとレポート性能", "minutes": 30, "type": "concept",
-      "objectives": ["色覚多様性に配慮できる", "代替テキスト・タブ順序を設定できる", "パフォーマンスアナライザーで計測できる"],
-      "keywords": ["アクセシビリティ", "代替テキスト", "パフォーマンスアナライザー"], "quiz": "L406", "lab": null },
-
-    { "id": "L501", "level": "L5", "title": "ワークスペースとロール設計", "minutes": 30, "type": "concept",
-      "objectives": ["4つのワークスペースロールを説明できる", "権限設計の考え方を理解する", "個人用と共有の違いを説明できる"],
-      "keywords": ["ワークスペース", "管理者", "メンバー", "共同作成者", "ビューアー"], "quiz": "L501", "lab": "LAB06" },
-    { "id": "L502", "level": "L5", "title": "発行・アプリ配布・セマンティックモデルの共有", "minutes": 30, "type": "hands-on",
-      "objectives": ["アプリを作成・配布できる", "共有とアプリの違いを説明できる", "データセットの再利用ができる"],
-      "keywords": ["アプリ", "発行", "セマンティックモデル", "ライブ接続"], "quiz": "L502", "lab": "LAB06" },
-    { "id": "L503", "level": "L5", "title": "ゲートウェイと更新スケジュール", "minutes": 30, "type": "concept",
-      "objectives": ["オンプレミスゲートウェイの役割を説明できる", "更新スケジュールを設定できる", "更新失敗の切り分けができる"],
-      "keywords": ["ゲートウェイ", "スケジュール更新", "増分更新"], "quiz": "L503", "lab": null },
-    { "id": "L504", "level": "L5", "title": "デプロイメントパイプラインとライフサイクル管理", "minutes": 30, "type": "concept",
-      "objectives": ["開発/テスト/本番の流れを説明できる", "データソース規則を理解する", "バージョン管理の方針を持てる"],
-      "keywords": ["デプロイメントパイプライン", "ライフサイクル", "PBIP"], "quiz": "L504", "lab": null },
-    { "id": "L505", "level": "L5", "title": "ガバナンス — 秘密度ラベル・監査・容量", "minutes": 30, "type": "concept",
-      "objectives": ["秘密度ラベルを説明できる", "監査ログの活用法を知る", "Fabric容量の考え方を理解する"],
-      "keywords": ["秘密度ラベル", "監査ログ", "Fabric", "容量"], "quiz": "L505", "lab": null },
-    { "id": "L506", "level": "L5", "title": "PL-300 攻略 — 出題範囲と学習戦略", "minutes": 30, "type": "concept",
-      "objectives": ["4つの出題領域と配点を把握する", "問題形式(ケーススタディ含む)を知る", "2週間の直前計画を立てられる"],
-      "keywords": ["PL-300", "出題範囲", "受験申込", "スコア"], "quiz": "L506", "lab": null },
-    { "id": "L507", "level": "L5", "title": "模擬試験と弱点分析 — 合格へのラストマイル", "minutes": 60, "type": "exam",
-      "objectives": ["模擬試験を時間内に解ける", "誤答を領域別に分析できる", "復習計画を立てられる"],
-      "keywords": ["模擬試験", "弱点分析", "復習"], "quiz": "L507", "lab": null }
+    {
+      "id": "L0101",
+      "title": "なぜデータ分析が必要なのか — 勘と経験の限界",
+      "minutes": 30,
+      "type": "concept",
+      "why": "ツールの操作を覚えても「何のために測るのか」が抜けていると、誰も見ないレポートを量産することになる。",
+      "gain": "勘と経験が外れる仕組みを3つ挙げ、データで補うべき場面を判断できる。",
+      "objectives": [
+        "経験則が外れる典型的な認知バイアスを説明できる",
+        "「意思決定に使われないデータ」が生まれる原因を指摘できる",
+        "データで補う場面と、経験を優先すべき場面を切り分けられる"
+      ],
+      "prereq": [],
+      "unlocks": "この判断ができると、次のレッスンで学ぶ「データ→意思決定」の階段のどこで詰まっているかを自分の職場で特定できる。",
+      "keywords": [
+        "BI",
+        "ビジネスインテリジェンス",
+        "確証バイアス",
+        "生存者バイアス",
+        "データドリブン"
+      ],
+      "pl300": [],
+      "ds": [
+        "認知バイアス",
+        "意思決定理論",
+        "標本と母集団"
+      ],
+      "quiz": "L0101",
+      "lab": null,
+      "module": "M01",
+      "moduleTitle": "データ分析とBIの基礎",
+      "tier": "T1",
+      "level": "T1",
+      "order": 1,
+      "hasBody": true,
+      "figures": 13
+    },
+    {
+      "id": "L0102",
+      "title": "データ・情報・知識・意思決定の階段",
+      "minutes": 30,
+      "type": "concept",
+      "why": "「データはあるのに何もわからない」という相談の正体は、階段のどこかが抜けていること。場所を特定できれば手当てできる。",
+      "gain": "手元の資料がデータ・情報・知識のどの段にあるかを判定し、次の段に上げる操作を選べる。",
+      "objectives": [
+        "DIKWの4段を具体例で区別できる",
+        "各段を上がるために必要な操作（集約・比較・文脈付け）を挙げられる",
+        "レポートが意思決定につながらない原因を階段の言葉で説明できる"
+      ],
+      "prereq": [
+        "L0101"
+      ],
+      "unlocks": "この地図があると、KPI設計のときに「測っただけで終わる指標」を事前に見抜ける。",
+      "keywords": [
+        "DIKWモデル",
+        "集約",
+        "文脈",
+        "アクショナブル"
+      ],
+      "pl300": [],
+      "ds": [
+        "データの尺度水準",
+        "記述統計",
+        "情報の粒度"
+      ],
+      "quiz": "L0102",
+      "lab": null,
+      "module": "M01",
+      "moduleTitle": "データ分析とBIの基礎",
+      "tier": "T1",
+      "level": "T1",
+      "order": 2,
+      "hasBody": true,
+      "figures": 14
+    },
+    {
+      "id": "L0103",
+      "title": "指標(KPI)の設計 — 何を測るかで組織は変わる",
+      "minutes": 40,
+      "type": "concept",
+      "why": "測った数字は必ず行動を変える。悪い指標を置くと、組織は真面目に間違った方向へ走る。",
+      "gain": "KGI・KPI・先行指標を区別し、SMART条件を満たす指標定義を自分で書ける。",
+      "objectives": [
+        "KGI・KPI・先行指標／遅行指標の関係を図で説明できる",
+        "指標定義に必要な5要素（分子・分母・粒度・期間・除外条件）を書き出せる",
+        "Goodhartの法則が起きる指標を見抜き、対の指標で防げる"
+      ],
+      "prereq": [
+        "L0102"
+      ],
+      "unlocks": "定義が固まっていれば、Power BIでメジャーを作るとき「この数字は何か」で迷わなくなる。",
+      "keywords": [
+        "KPI",
+        "KGI",
+        "先行指標",
+        "遅行指標",
+        "Goodhartの法則",
+        "SMART",
+        "ノーススターメトリック"
+      ],
+      "pl300": [],
+      "ds": [
+        "指標設計",
+        "測定の妥当性",
+        "代理指標"
+      ],
+      "quiz": "L0103",
+      "lab": null,
+      "module": "M01",
+      "moduleTitle": "データ分析とBIの基礎",
+      "tier": "T1",
+      "level": "T1",
+      "order": 3,
+      "hasBody": true,
+      "figures": 14
+    },
+    {
+      "id": "L0104",
+      "title": "数字の読み方の基礎 — 平均のウソと分布",
+      "minutes": 40,
+      "type": "concept",
+      "why": "平均だけを見て判断すると、実在しない「平均的な顧客」に向けた施策を打つことになる。",
+      "gain": "平均・中央値・分位数を使い分け、分布の形から意思決定を変えられる。",
+      "objectives": [
+        "平均と中央値が乖離する理由を分布の形で説明できる",
+        "四分位数と外れ値の扱いを決められる",
+        "シンプソンのパラドックスを具体例で説明できる"
+      ],
+      "prereq": [
+        "L0102"
+      ],
+      "unlocks": "分布を見る癖がつくと、Power BIでヒストグラムや箱ひげを最初に描くようになり、誤ったKPIに気づける。",
+      "keywords": [
+        "平均",
+        "中央値",
+        "最頻値",
+        "分位数",
+        "外れ値",
+        "分布",
+        "シンプソンのパラドックス",
+        "標準偏差"
+      ],
+      "pl300": [
+        "3.5 データの探索と分析"
+      ],
+      "ds": [
+        "記述統計",
+        "歪んだ分布",
+        "交絡",
+        "ロバスト統計"
+      ],
+      "quiz": "L0104",
+      "lab": null,
+      "module": "M01",
+      "moduleTitle": "データ分析とBIの基礎",
+      "tier": "T1",
+      "level": "T1",
+      "order": 4,
+      "hasBody": true,
+      "figures": 14
+    },
+    {
+      "id": "L0105",
+      "title": "分析の5つの型 — 比較・推移・構成・分布・関係",
+      "minutes": 35,
+      "type": "concept",
+      "why": "「とりあえずグラフにする」から抜け出すには、問いを5つの型のどれかに翻訳する技術がいる。",
+      "gain": "ビジネスの問いを5つの型に分類し、対応するグラフを自分で選べる。",
+      "objectives": [
+        "5つの分析型と代表的なグラフを対応づけられる",
+        "問いの文からどの型かを判定できる",
+        "型に合わないグラフ（円グラフの誤用など）を指摘できる"
+      ],
+      "prereq": [
+        "L0104"
+      ],
+      "unlocks": "この対応表があると、M03でビジュアルを選ぶときに迷いがなくなり、レポートの1枚目から意味のある画面になる。",
+      "keywords": [
+        "比較",
+        "推移",
+        "構成",
+        "分布",
+        "相関",
+        "散布図",
+        "ヒストグラム",
+        "疑似相関"
+      ],
+      "pl300": [
+        "3.2 ビジュアルの選択と構成"
+      ],
+      "ds": [
+        "探索的データ分析",
+        "相関と因果",
+        "可視化の文法"
+      ],
+      "quiz": "L0105",
+      "lab": null,
+      "module": "M01",
+      "moduleTitle": "データ分析とBIの基礎",
+      "tier": "T1",
+      "level": "T1",
+      "order": 5,
+      "hasBody": true,
+      "figures": 15
+    },
+    {
+      "id": "L0201",
+      "title": "Power BIとは何か — 5つの工程",
+      "minutes": 30,
+      "type": "concept",
+      "why": "機能を単品で覚えると混乱する。5工程の骨格を先に持てば、どの機能がどこの話かが一瞬でわかる。",
+      "gain": "取得・整形・モデル化・可視化・共有の5工程を、各工程の担当エンジン名まで含めて説明できる。",
+      "objectives": [
+        "5工程の順序と目的を図で説明できる",
+        "Power Query と DAX の担当範囲を区別できる",
+        "自分のつまずきがどの工程の問題かを切り分けられる"
+      ],
+      "prereq": [],
+      "unlocks": "工程の地図を持つと、以降のすべてのレッスンを「今どこの話か」で整理して覚えられる。",
+      "keywords": [
+        "Power BI",
+        "Power Query",
+        "DAX",
+        "VertiPaq",
+        "セマンティックモデル"
+      ],
+      "pl300": [],
+      "ds": [
+        "ETL",
+        "分析パイプライン"
+      ],
+      "quiz": "L0201",
+      "lab": null,
+      "module": "M02",
+      "moduleTitle": "Power BIの全体像",
+      "tier": "T1",
+      "level": "T1",
+      "order": 6,
+      "hasBody": true,
+      "figures": 14
+    },
+    {
+      "id": "L0202",
+      "title": "Desktop・Service・Mobile の役割分担",
+      "minutes": 30,
+      "type": "concept",
+      "why": "「Desktopでは動くのにWebだと更新できない」の大半は、どちらが何を担当するかを知らないことが原因。",
+      "gain": "3製品の担当範囲を切り分け、作業をどちらでやるべきか判断できる。",
+      "objectives": [
+        "Desktop・Service・Mobileの役割を表で説明できる",
+        "ワークスペースとアプリの違いを説明できる",
+        "作成から配布までの流れを図示できる"
+      ],
+      "prereq": [
+        "L0201"
+      ],
+      "unlocks": "配布の流れがわかると、M03の最後で自分のレポートを実際に発行できる。",
+      "keywords": [
+        "Power BI Desktop",
+        "Power BI Service",
+        "ワークスペース",
+        "アプリ",
+        "データゲートウェイ"
+      ],
+      "pl300": [
+        "4.1 ワークスペースの管理"
+      ],
+      "ds": [],
+      "quiz": "L0202",
+      "lab": null,
+      "module": "M02",
+      "moduleTitle": "Power BIの全体像",
+      "tier": "T1",
+      "level": "T1",
+      "order": 7,
+      "hasBody": true,
+      "figures": 11
+    },
+    {
+      "id": "L0203",
+      "title": "Excelとの使い分け — どちらをいつ使うか",
+      "minutes": 30,
+      "type": "concept",
+      "why": "Excelでできることを全部Power BIに移すのは失敗の元。逆にExcelで粘りすぎるのも破綻する。",
+      "gain": "作業の性質から Excel と Power BI のどちらを使うかを根拠つきで選べる。",
+      "objectives": [
+        "両者の設計思想の違い（セル指向と列指向）を説明できる",
+        "移行を検討すべきサインを4つ挙げられる",
+        "併用パターン（ExcelをソースにするPower BI）を説明できる"
+      ],
+      "prereq": [
+        "L0201"
+      ],
+      "unlocks": "この線引きができると、職場の既存Excel資産を捨てずにPower BI化を提案できる。",
+      "keywords": [
+        "列指向ストレージ",
+        "スプレッドシート",
+        "再現性",
+        "単一の真実"
+      ],
+      "pl300": [],
+      "ds": [
+        "再現可能な分析",
+        "データガバナンス"
+      ],
+      "quiz": "L0203",
+      "lab": null,
+      "module": "M02",
+      "moduleTitle": "Power BIの全体像",
+      "tier": "T1",
+      "level": "T1",
+      "order": 8,
+      "hasBody": true,
+      "figures": 12
+    },
+    {
+      "id": "L0204",
+      "title": "ライセンスと組織での使われ方",
+      "minutes": 30,
+      "type": "concept",
+      "why": "「作ったのに相手が見られない」の原因はほぼライセンス。先に知っておけば設計段階で回避できる。",
+      "gain": "無料・Pro・PPU・Fabric容量の違いを説明し、共有相手に必要なライセンスを判定できる。",
+      "objectives": [
+        "無料/Pro/PPU/容量の違いを表で説明できる",
+        "共有可否をライセンスの組み合わせで判定できる",
+        "組織展開でよくある落とし穴を指摘できる"
+      ],
+      "prereq": [
+        "L0202"
+      ],
+      "unlocks": "共有条件がわかれば、発行前に「誰に見せるか」から逆算して構成を決められる。",
+      "keywords": [
+        "Power BI Pro",
+        "Premium Per User",
+        "Fabric容量",
+        "共有",
+        "Microsoft Fabric"
+      ],
+      "pl300": [
+        "4.1 ワークスペースの管理",
+        "4.4 アクセス権とセキュリティ"
+      ],
+      "ds": [],
+      "quiz": "L0204",
+      "lab": null,
+      "module": "M02",
+      "moduleTitle": "Power BIの全体像",
+      "tier": "T1",
+      "level": "T1",
+      "order": 9,
+      "hasBody": true,
+      "figures": 13
+    },
+    {
+      "id": "L0205",
+      "title": "ファイル形式と用語の整理",
+      "minutes": 30,
+      "type": "concept",
+      "why": "レポートとダッシュボードを混同したまま話すと、要件定義から食い違う。用語は最初に固める。",
+      "gain": "pbix/pbit/pbip の違いと、レポート・ダッシュボード・セマンティックモデルの関係を説明できる。",
+      "objectives": [
+        "3つのファイル形式の中身と用途を区別できる",
+        "レポートとダッシュボードの違いを4点挙げられる",
+        "セマンティックモデルが何を保持しているか説明できる"
+      ],
+      "prereq": [
+        "L0202"
+      ],
+      "unlocks": "用語が固まると、以降のレッスンの説明が一意に読めるようになり、公式ドキュメントも読めるようになる。",
+      "keywords": [
+        "pbix",
+        "pbit",
+        "pbip",
+        "レポート",
+        "ダッシュボード",
+        "タイル",
+        "セマンティックモデル"
+      ],
+      "pl300": [
+        "4.2 セマンティックモデルの管理"
+      ],
+      "ds": [],
+      "quiz": "L0205",
+      "lab": null,
+      "module": "M02",
+      "moduleTitle": "Power BIの全体像",
+      "tier": "T1",
+      "level": "T1",
+      "order": 10,
+      "hasBody": true,
+      "figures": 12
+    },
+    {
+      "id": "L0301",
+      "title": "環境構築とPower BI Desktopの起動",
+      "minutes": 25,
+      "type": "hands-on",
+      "why": "入手経路とバージョンを間違えると、教材の画面と自分の画面が食い違って最初の30分を失う。",
+      "gain": "自分のPCにPower BI Desktopを導入し、更新方法と初期設定まで済ませられる。",
+      "objectives": [
+        "3つの入手経路の違いを説明できる",
+        "初回起動時に変更すべき設定を実施できる",
+        "自分の環境のバージョンと更新方法を確認できる"
+      ],
+      "prereq": [
+        "L0202"
+      ],
+      "unlocks": "環境が整えば、次のレッスンから実際に画面を触りながら学べる。",
+      "keywords": [
+        "Power BI Desktop",
+        "Microsoft Store",
+        "プレビュー機能",
+        "自動日付/時刻"
+      ],
+      "pl300": [],
+      "ds": [],
+      "quiz": "L0301",
+      "lab": null,
+      "module": "M03",
+      "moduleTitle": "はじめてのレポート",
+      "tier": "T1",
+      "level": "T1",
+      "order": 11,
+      "hasBody": true,
+      "figures": 13
+    },
+    {
+      "id": "L0302",
+      "title": "画面の地図 — 3つのビューと3つのペイン",
+      "minutes": 30,
+      "type": "hands-on",
+      "why": "画面のどこに何があるかを先に地図にしておくと、以降の手順書が一度で読めるようになる。",
+      "gain": "レポート・テーブル・モデルの3ビューと各ペインの役割を説明し、目的の場所へ迷わず行ける。",
+      "objectives": [
+        "3つのビューの用途を区別できる",
+        "データ・視覚化・フィルターペインの役割を説明できる",
+        "フィールドをどこに置くと何が起きるかを説明できる"
+      ],
+      "prereq": [
+        "L0301"
+      ],
+      "unlocks": "画面の地図があると、グラフ作成が「どのペインの何をどこへ」の作業に単純化される。",
+      "keywords": [
+        "レポートビュー",
+        "テーブルビュー",
+        "モデルビュー",
+        "データペイン",
+        "視覚化ペイン",
+        "フィルターペイン",
+        "リボン"
+      ],
+      "pl300": [
+        "3.1 レポートの作成"
+      ],
+      "ds": [],
+      "quiz": "L0302",
+      "lab": null,
+      "module": "M03",
+      "moduleTitle": "はじめてのレポート",
+      "tier": "T1",
+      "level": "T1",
+      "order": 12,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L0303",
+      "title": "最初のデータを読み込む",
+      "minutes": 35,
+      "type": "hands-on",
+      "why": "読み込み時の3つの確認（文字コード・区切り・型）を飛ばすと、後工程の全部が壊れる。",
+      "gain": "CSVをPower BI Desktopに取り込み、型と行数を検証したうえで読み込みを完了できる。",
+      "objectives": [
+        "テキスト/CSVコネクタのプレビュー画面で3項目を確認できる",
+        "「読み込み」と「データの変換」を使い分けられる",
+        "取り込み後に行数と合計で検算できる"
+      ],
+      "prereq": [
+        "L0302"
+      ],
+      "unlocks": "正しく取り込めていれば、次のレッスンのグラフは自動的に正しい数字になる。",
+      "keywords": [
+        "テキスト/CSV",
+        "文字コード",
+        "区切り記号",
+        "データ型",
+        "ナビゲーター",
+        "検算"
+      ],
+      "pl300": [
+        "1.1 データソースへの接続",
+        "1.2 データの取得と変換"
+      ],
+      "ds": [
+        "データ検証",
+        "整然データ"
+      ],
+      "quiz": "L0303",
+      "lab": null,
+      "module": "M03",
+      "moduleTitle": "はじめてのレポート",
+      "tier": "T1",
+      "level": "T1",
+      "order": 13,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L0304",
+      "title": "最初のグラフを作る — カード・棒・折れ線",
+      "minutes": 40,
+      "type": "hands-on",
+      "why": "最初の1枚で「作れた」という感覚を得ないと、学習は続かない。しかも作り方には正しい順序がある。",
+      "gain": "KPIカード・横棒・折れ線を作り、並べ替えと相互作用まで設定できる。",
+      "objectives": [
+        "カード・棒・折れ線を目的に応じて作り分けられる",
+        "軸と値のフィールドを正しく配置できる",
+        "クロスフィルターの挙動を説明できる"
+      ],
+      "prereq": [
+        "L0303"
+      ],
+      "unlocks": "3種類のビジュアルが作れれば、実務レポートの8割の画面は組める。",
+      "keywords": [
+        "カード",
+        "集合縦棒グラフ",
+        "折れ線グラフ",
+        "軸",
+        "凡例",
+        "クロスフィルター",
+        "スライサー"
+      ],
+      "pl300": [
+        "3.1 レポートの作成",
+        "3.2 ビジュアルの選択と構成",
+        "3.3 対話機能の設定"
+      ],
+      "ds": [
+        "可視化の原則",
+        "データインク比"
+      ],
+      "quiz": "L0304",
+      "lab": null,
+      "module": "M03",
+      "moduleTitle": "はじめてのレポート",
+      "tier": "T1",
+      "level": "T1",
+      "order": 14,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L0305",
+      "title": "保存・発行・共有の第一歩",
+      "minutes": 30,
+      "type": "hands-on",
+      "why": "発行して初めてレポートは仕事になる。ここでつまずく人が最も多い。",
+      "gain": "pbixを保存し、ワークスペースへ発行し、相手が見られる状態まで持っていける。",
+      "objectives": [
+        "保存と発行の違いを説明できる",
+        "ワークスペースへ発行し、Service側で確認できる",
+        "共有・アプリ・PDFエクスポートを使い分けられる"
+      ],
+      "prereq": [
+        "L0304"
+      ],
+      "unlocks": "発行できると、次のティアで学ぶ更新スケジュールや権限設計が自分ごとになる。",
+      "keywords": [
+        "発行",
+        "ワークスペース",
+        "共有リンク",
+        "アプリ",
+        "エクスポート",
+        "スケジュール更新"
+      ],
+      "pl300": [
+        "4.1 ワークスペースの管理",
+        "4.3 データ更新の管理",
+        "4.4 アクセス権とセキュリティ"
+      ],
+      "ds": [],
+      "quiz": "L0305",
+      "lab": null,
+      "module": "M03",
+      "moduleTitle": "はじめてのレポート",
+      "tier": "T1",
+      "level": "T1",
+      "order": 15,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L0401",
+      "title": "接続方式の三択 — インポート / DirectQuery / ライブ接続",
+      "minutes": 35,
+      "type": "concept",
+      "why": "最初に選ぶこの1つで、使えるDAX・速度・更新方法のすべてが決まる。後から変えるのは高くつく。",
+      "gain": "要件から3つの接続方式を選び、選んだ理由を性能とデータ鮮度の言葉で説明できる。",
+      "objectives": [
+        "3方式の違いを表で説明できる",
+        "要件から適切な方式を選択できる",
+        "インポートが既定である理由を圧縮の観点で説明できる"
+      ],
+      "prereq": [
+        "L0303"
+      ],
+      "unlocks": "方式の判断ができると、以降の整形・モデリングで「なぜこの制約があるのか」が理解できる。",
+      "keywords": [
+        "インポート",
+        "DirectQuery",
+        "ライブ接続",
+        "複合モデル",
+        "VertiPaq",
+        "データ鮮度"
+      ],
+      "pl300": [
+        "1.1 データソースへの接続",
+        "1.6 パフォーマンスを考慮した取り込み"
+      ],
+      "ds": [
+        "データ鮮度",
+        "クエリフェデレーション"
+      ],
+      "quiz": "L0401",
+      "lab": null,
+      "module": "M04",
+      "moduleTitle": "データの読み込み入門",
+      "tier": "T1",
+      "level": "T1",
+      "order": 16,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L0402",
+      "title": "Excel・CSV・Web・データベースへの接続",
+      "minutes": 40,
+      "type": "hands-on",
+      "why": "実務データはExcelとCSVとDBに散らばっている。ソースごとの落とし穴を知らないと初回から壊れる。",
+      "gain": "4種類のソースに接続でき、各ソース固有の注意点を回避できる。",
+      "objectives": [
+        "Excelはテーブルとして読み込むべき理由を説明できる",
+        "フォルダー接続で複数ファイルを一括取り込みできる",
+        "DBのネイティブクエリ直書きを避けるべき理由を説明できる"
+      ],
+      "prereq": [
+        "L0401"
+      ],
+      "unlocks": "接続の選択肢が広がると、社内のあらゆるデータを1つのレポートに集約できる。",
+      "keywords": [
+        "コネクタ",
+        "フォルダー接続",
+        "名前付きテーブル",
+        "ネイティブクエリ",
+        "クエリフォールディング",
+        "認証",
+        "プライバシーレベル"
+      ],
+      "pl300": [
+        "1.1 データソースへの接続",
+        "1.2 データの取得と変換"
+      ],
+      "ds": [],
+      "quiz": "L0402",
+      "lab": null,
+      "module": "M04",
+      "moduleTitle": "データの読み込み入門",
+      "tier": "T1",
+      "level": "T1",
+      "order": 17,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L0403",
+      "title": "データ型を制する — 型が違うと何が壊れるか",
+      "minutes": 40,
+      "type": "hands-on",
+      "why": "「合計が出ない」「日付でグループ化できない」の原因はほぼ型。型は後工程すべての前提になる。",
+      "gain": "全列に明示的な型を設定し、ロケールと丸めの罠を避けられる。",
+      "objectives": [
+        "主要なデータ型と、型が壊すものを対応づけられる",
+        "ロケール指定で日付・小数点の解釈を制御できる",
+        "10進数と固定小数点数の違いを説明できる"
+      ],
+      "prereq": [
+        "L0402"
+      ],
+      "unlocks": "型が正しいと、リレーションシップもタイムインテリジェンスも素直に動く。",
+      "keywords": [
+        "データ型",
+        "ロケール",
+        "整数",
+        "10進数",
+        "固定小数点数",
+        "テキスト型",
+        "日付/時刻",
+        "暗黙の型変換",
+        "尺度水準"
+      ],
+      "pl300": [
+        "1.2 データの取得と変換",
+        "1.4 データのクリーニング"
+      ],
+      "ds": [
+        "データの尺度水準",
+        "浮動小数点誤差"
+      ],
+      "quiz": "L0403",
+      "lab": null,
+      "module": "M04",
+      "moduleTitle": "データの読み込み入門",
+      "tier": "T1",
+      "level": "T1",
+      "order": 18,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L0404",
+      "title": "列プロファイルでデータを健康診断する",
+      "minutes": 40,
+      "type": "hands-on",
+      "why": "分析を始める前の5分の健康診断が、後日の「数字が合わない」という3日間の調査を防ぐ。",
+      "gain": "列の品質・分布・プロファイルを読み、欠損と異常値に対する処置を決められる。",
+      "objectives": [
+        "列の品質・分布・プロファイルの3機能を使い分けられる",
+        "1000行プレビューと全データセットの違いを説明できる",
+        "欠損値の3つの処置方針を選べる"
+      ],
+      "prereq": [
+        "L0403"
+      ],
+      "unlocks": "健康診断が習慣になると、どんな新しいデータでも最初の10分で信頼度を判定できる。",
+      "keywords": [
+        "列の品質",
+        "列の分布",
+        "列のプロファイル",
+        "エラー",
+        "空白",
+        "カーディナリティ",
+        "欠損値",
+        "外れ値"
+      ],
+      "pl300": [
+        "1.3 データのプロファイリング",
+        "1.4 データのクリーニング"
+      ],
+      "ds": [
+        "データ品質",
+        "欠損値処理",
+        "外れ値検出"
+      ],
+      "quiz": "L0404",
+      "lab": null,
+      "module": "M04",
+      "moduleTitle": "データの読み込み入門",
+      "tier": "T1",
+      "level": "T1",
+      "order": 19,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L0405",
+      "title": "Power Queryエディタ初めの一歩",
+      "minutes": 40,
+      "type": "hands-on",
+      "why": "整形をエディタでやるか手作業でやるかで、翌月の作業時間が0分と半日に分かれる。",
+      "gain": "適用したステップの意味を理解し、基本変換を組み合わせて再現可能な整形手順を作れる。",
+      "objectives": [
+        "適用したステップが手順の記録であることを説明できる",
+        "基本の変換（削除・フィルター・分割・置換）を実行できる",
+        "M言語の数式バーを読み、ステップ名を整備できる"
+      ],
+      "prereq": [
+        "L0404"
+      ],
+      "unlocks": "ここまでできれば、ティア2のデータ整形とモデリングへそのまま進める。",
+      "keywords": [
+        "Power Queryエディタ",
+        "適用したステップ",
+        "M言語",
+        "クエリ",
+        "列の分割",
+        "値の置換",
+        "ピボット解除",
+        "クエリフォールディング"
+      ],
+      "pl300": [
+        "1.2 データの取得と変換",
+        "1.4 データのクリーニング",
+        "1.5 データの構造化"
+      ],
+      "ds": [
+        "再現可能な前処理",
+        "整然データ"
+      ],
+      "quiz": "L0405",
+      "lab": null,
+      "module": "M04",
+      "moduleTitle": "データの読み込み入門",
+      "tier": "T1",
+      "level": "T1",
+      "order": 20,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L0501",
+      "title": "適用したステップという考え方 — 手順を記録する",
+      "minutes": 35,
+      "type": "concept",
+      "why": "Excelでの手作業は毎月やり直しになる。Power Queryは「手順そのもの」を保存するので、来月は更新ボタン1回で終わる。",
+      "gain": "適用したステップを読み書きし、他人の作ったクエリの意図を追えるようになる。",
+      "objectives": [
+        "適用したステップが手順の記録であることを説明できる",
+        "ステップの追加・削除・並べ替え・名前変更ができる",
+        "数式バーとMコードの対応を読み取れる"
+      ],
+      "prereq": [],
+      "unlocks": "手順が記録として残るので、以降のクレンジングや結合を安心して積み上げられる。",
+      "keywords": [
+        "適用したステップ",
+        "Power Query エディター",
+        "M言語",
+        "クエリの折りたたみ"
+      ],
+      "pl300": [
+        "1.2 データの取得と変換",
+        "1.6 パフォーマンスを考慮した取り込み"
+      ],
+      "ds": [
+        "再現可能性",
+        "ETLパイプライン",
+        "データリネージ"
+      ],
+      "quiz": "L0501",
+      "lab": "LAB02",
+      "module": "M05",
+      "moduleTitle": "Power Query 実践",
+      "tier": "T2",
+      "level": "T2",
+      "order": 21,
+      "hasBody": true,
+      "figures": 11
+    },
+    {
+      "id": "L0502",
+      "title": "データクレンジング実践 — 空白・表記ゆれ・エラー",
+      "minutes": 45,
+      "type": "hands-on",
+      "why": "「新宿本店」と「　新宿本店 」が別物として集計され、売上が二重に分かれる事故は現場で最も多い。",
+      "gain": "全角空白・表記ゆれ・null・エラー値を含むデータを、集計できる状態まで洗える。",
+      "objectives": [
+        "トリミングとクリーンの違いを説明できる",
+        "表記ゆれを置換や変換テーブルで統一できる",
+        "nullとエラーを区別し、適切に処理できる"
+      ],
+      "prereq": [
+        "L0501"
+      ],
+      "unlocks": "キーの表記が揃うので、後のマージが正しく一致するようになる。",
+      "keywords": [
+        "トリミング",
+        "クリーン",
+        "null",
+        "エラー",
+        "データプロファイリング"
+      ],
+      "pl300": [
+        "1.3 データのプロファイリング",
+        "1.4 データのクリーニング"
+      ],
+      "ds": [
+        "データ品質",
+        "欠測値の扱い",
+        "名寄せ"
+      ],
+      "quiz": "L0502",
+      "lab": "LAB02",
+      "module": "M05",
+      "moduleTitle": "Power Query 実践",
+      "tier": "T2",
+      "level": "T2",
+      "order": 22,
+      "hasBody": true,
+      "figures": 9
+    },
+    {
+      "id": "L0503",
+      "title": "整然データ（tidy data）とは何か",
+      "minutes": 30,
+      "type": "concept",
+      "why": "「なぜこの表はPower BIで扱いにくいのか」を言語化できないと、整形のたびに迷う。判断基準は3つのルールで決まる。",
+      "gain": "目の前の表が整然データかどうかを3つのルールで判定できる。",
+      "objectives": [
+        "整然データの3ルールを挙げられる",
+        "横持ちと縦持ちの違いを説明できる",
+        "人が読む表と機械が読む表を区別できる"
+      ],
+      "prereq": [
+        "L0502"
+      ],
+      "unlocks": "整形のゴールが明確になるので、ピボット解除やグループ化を目的から選べる。",
+      "keywords": [
+        "整然データ",
+        "横持ち",
+        "縦持ち",
+        "観測単位",
+        "粒度"
+      ],
+      "pl300": [
+        "1.5 データの構造化"
+      ],
+      "ds": [
+        "tidy data（Hadley Wickham）",
+        "正規化",
+        "観測と変数"
+      ],
+      "quiz": "L0503",
+      "lab": null,
+      "module": "M05",
+      "moduleTitle": "Power Query 実践",
+      "tier": "T2",
+      "level": "T2",
+      "order": 23,
+      "hasBody": true,
+      "figures": 12
+    },
+    {
+      "id": "L0504",
+      "title": "ピボット解除 — 横持ちを縦持ちにする最重要スキル",
+      "minutes": 40,
+      "type": "hands-on",
+      "why": "経理や営業から届くExcelは、ほぼ必ず月が列に並んだ横持ちである。これを直せないとモデルが作れない。",
+      "gain": "月別に横へ広がった表を、ピボット解除で分析できる縦持ちに変換できる。",
+      "objectives": [
+        "ピボット解除の3つのコマンドを使い分けられる",
+        "「その他の列のピボット解除」を選ぶ理由を説明できる",
+        "解除後の属性列を日付型に整えられる"
+      ],
+      "prereq": [
+        "L0503"
+      ],
+      "unlocks": "縦持ちになった売上をファクトテーブルとして扱えるようになる。",
+      "keywords": [
+        "ピボット解除",
+        "その他の列のピボット解除",
+        "選択した列のみのピボット解除",
+        "列のピボット"
+      ],
+      "pl300": [
+        "1.5 データの構造化",
+        "1.2 データの取得と変換"
+      ],
+      "ds": [
+        "ワイド形式とロング形式",
+        "melt / gather"
+      ],
+      "quiz": "L0504",
+      "lab": "LAB02",
+      "module": "M05",
+      "moduleTitle": "Power Query 実践",
+      "tier": "T2",
+      "level": "T2",
+      "order": 24,
+      "hasBody": true,
+      "figures": 10
+    },
+    {
+      "id": "L0505",
+      "title": "マージと追加 — 結合の種類を図で理解する",
+      "minutes": 45,
+      "type": "concept",
+      "why": "内部結合で行が静かに消える、マージで行が倍に増える。この2つは実務で最も高くつくミスである。",
+      "gain": "6種類の結合を使い分け、結合前後で行数が変わる理由を説明できる。",
+      "objectives": [
+        "マージ（横に増やす）と追加（縦に増やす）を区別できる",
+        "6種類の結合の残る行を図で示せる",
+        "結合前に行数とキーの一意性を検証できる"
+      ],
+      "prereq": [
+        "L0504"
+      ],
+      "unlocks": "複数ファイルを1つのモデルに統合でき、スタースキーマの材料が揃う。",
+      "keywords": [
+        "マージ",
+        "追加",
+        "内部結合",
+        "左外部結合",
+        "左反結合",
+        "ファジーマッチ"
+      ],
+      "pl300": [
+        "1.2 データの取得と変換",
+        "1.5 データの構造化"
+      ],
+      "ds": [
+        "リレーショナル代数",
+        "JOIN",
+        "参照整合性"
+      ],
+      "quiz": "L0505",
+      "lab": "LAB02",
+      "module": "M05",
+      "moduleTitle": "Power Query 実践",
+      "tier": "T2",
+      "level": "T2",
+      "order": 25,
+      "hasBody": true,
+      "figures": 12
+    },
+    {
+      "id": "L0506",
+      "title": "グループ化・集計・行列の操作",
+      "minutes": 35,
+      "type": "hands-on",
+      "why": "明細のまま全部モデルに入れると重い。読み込む前に粒度を決めるのがプロの仕事である。",
+      "gain": "グループ化で粒度を制御し、必要な列だけを残したクエリを作れる。",
+      "objectives": [
+        "グループ化の基本操作と集計関数を使い分けられる",
+        "「すべての行」オプションの用途を説明できる",
+        "列の削除・並べ替え・行のフィルターを折りたたみを意識して行える"
+      ],
+      "prereq": [
+        "L0505"
+      ],
+      "unlocks": "軽くて目的に合ったテーブルを作れるので、モデリングとDAXが速くなる。",
+      "keywords": [
+        "グループ化",
+        "すべての行",
+        "重複の削除",
+        "クエリの折りたたみ"
+      ],
+      "pl300": [
+        "1.2 データの取得と変換",
+        "1.6 パフォーマンスを考慮した取り込み"
+      ],
+      "ds": [
+        "集約と粒度",
+        "GROUP BY",
+        "集計テーブル"
+      ],
+      "quiz": "L0506",
+      "lab": "LAB02",
+      "module": "M05",
+      "moduleTitle": "Power Query 実践",
+      "tier": "T2",
+      "level": "T2",
+      "order": 26,
+      "hasBody": true,
+      "figures": 9
+    },
+    {
+      "id": "L0601",
+      "title": "スタースキーマ — Power BI最重要の設計原則",
+      "minutes": 40,
+      "type": "concept",
+      "why": "Power BIが遅い・数字が合わない・欲しい切り口が出ない原因の大半は、モデル設計にある。",
+      "gain": "フラットな1枚表をファクトとディメンションに分解して設計できる。",
+      "objectives": [
+        "スタースキーマの構造を図示できる",
+        "フラットテーブルの問題点を4つ挙げられる",
+        "既存のフラット表を分解する手順を説明できる"
+      ],
+      "prereq": [
+        "L0505"
+      ],
+      "unlocks": "この設計ができると、DAXが劇的に書きやすくなり、性能問題の多くが消える。",
+      "keywords": [
+        "スタースキーマ",
+        "ファクトテーブル",
+        "ディメンションテーブル",
+        "非正規化"
+      ],
+      "pl300": [
+        "2.1 データモデルの設計"
+      ],
+      "ds": [
+        "次元モデリング",
+        "データウェアハウス設計",
+        "Kimball"
+      ],
+      "quiz": "L0601",
+      "lab": "LAB03",
+      "module": "M06",
+      "moduleTitle": "データモデリング",
+      "tier": "T2",
+      "level": "T2",
+      "order": 27,
+      "hasBody": true,
+      "figures": 11
+    },
+    {
+      "id": "L0602",
+      "title": "ファクトとディメンション — どう見分けるか",
+      "minutes": 40,
+      "type": "concept",
+      "why": "「この表はファクトかディメンションか」を毎回迷うと、設計が進まない。見分け方には型がある。",
+      "gain": "任意のテーブルをファクト／ディメンションに分類し、粒度を1文で宣言できる。",
+      "objectives": [
+        "ファクトとディメンションの特徴を5観点で比較できる",
+        "テーブルの粒度を1文で宣言できる",
+        "粒度を上げると何が失われるかを説明できる"
+      ],
+      "prereq": [
+        "L0601"
+      ],
+      "unlocks": "粒度が定まると、必要な列と不要な列が自動的に決まる。",
+      "keywords": [
+        "ファクトテーブル",
+        "ディメンションテーブル",
+        "粒度",
+        "縮退ディメンション"
+      ],
+      "pl300": [
+        "2.1 データモデルの設計",
+        "1.5 データの構造化"
+      ],
+      "ds": [
+        "グレイン宣言",
+        "加法性",
+        "スノーフレークスキーマ"
+      ],
+      "quiz": "L0602",
+      "lab": "LAB03",
+      "module": "M06",
+      "moduleTitle": "データモデリング",
+      "tier": "T2",
+      "level": "T2",
+      "order": 28,
+      "hasBody": true,
+      "figures": 12
+    },
+    {
+      "id": "L0603",
+      "title": "リレーションシップの3要素 — 基数・方向・アクティブ",
+      "minutes": 40,
+      "type": "concept",
+      "why": "リレーションシップの線を引いただけで満足すると、多対多が黙って作られ、合計がずれる。",
+      "gain": "基数・クロスフィルター方向・アクティブ状態を意図して設定できる。",
+      "objectives": [
+        "4つの基数の意味と使いどころを説明できる",
+        "1側のキー重複が起こす問題を説明できる",
+        "非アクティブなリレーションシップの使い道を挙げられる"
+      ],
+      "prereq": [
+        "L0602"
+      ],
+      "unlocks": "モデルの挙動が予測できるようになり、DAXの結果を検算できる。",
+      "keywords": [
+        "基数",
+        "クロスフィルター方向",
+        "アクティブ",
+        "参照整合性",
+        "空白行"
+      ],
+      "pl300": [
+        "2.2 リレーションシップの構成"
+      ],
+      "ds": [
+        "カーディナリティ",
+        "外部キー制約",
+        "参照整合性"
+      ],
+      "quiz": "L0603",
+      "lab": "LAB03",
+      "module": "M06",
+      "moduleTitle": "データモデリング",
+      "tier": "T2",
+      "level": "T2",
+      "order": 29,
+      "hasBody": true,
+      "figures": 12
+    },
+    {
+      "id": "L0604",
+      "title": "フィルターはどう流れるか — 伝播を図で追う",
+      "minutes": 40,
+      "type": "concept",
+      "why": "「なぜこの数字になるのか」を説明できるかどうかは、フィルターの流れを追えるかどうかで決まる。",
+      "gain": "任意のビジュアルについて、どのテーブルにフィルターが届いているかを図で説明できる。",
+      "objectives": [
+        "フィルターが1側から多側へ流れる仕組みを図示できる",
+        "ディメンション間の間接的な伝播を追える",
+        "双方向クロスフィルターの副作用を説明できる"
+      ],
+      "prereq": [
+        "L0603"
+      ],
+      "unlocks": "フィルターコンテキストが見えるので、DAXのCALCULATEが理屈で理解できる。",
+      "keywords": [
+        "フィルター伝播",
+        "フィルターコンテキスト",
+        "双方向クロスフィルター",
+        "あいまいさ"
+      ],
+      "pl300": [
+        "2.2 リレーションシップの構成",
+        "3.3 対話機能の設定"
+      ],
+      "ds": [
+        "フィルター伝播",
+        "多対多の解決",
+        "ブリッジテーブル"
+      ],
+      "quiz": "L0604",
+      "lab": "LAB03",
+      "module": "M06",
+      "moduleTitle": "データモデリング",
+      "tier": "T2",
+      "level": "T2",
+      "order": 30,
+      "hasBody": true,
+      "figures": 9
+    },
+    {
+      "id": "L0605",
+      "title": "日付テーブル — 時系列分析の土台",
+      "minutes": 35,
+      "type": "hands-on",
+      "why": "前年比・累計・移動平均はすべて、連続した日付テーブルがないと正しく計算できない。",
+      "gain": "連続する日付テーブルを作り、日付テーブルとしてマークして時系列分析の土台を用意できる。",
+      "objectives": [
+        "日付テーブルの5つの要件を挙げられる",
+        "MまたはDAXで日付テーブルを生成できる",
+        "自動の日付/時刻を切るべき理由を説明できる"
+      ],
+      "prereq": [
+        "L0604"
+      ],
+      "unlocks": "タイムインテリジェンス関数がすべて正しく動くようになる。",
+      "keywords": [
+        "日付テーブル",
+        "日付テーブルとしてマーク",
+        "自動の日付/時刻",
+        "会計年度",
+        "役割を持つ次元"
+      ],
+      "pl300": [
+        "2.4 タイムインテリジェンス",
+        "2.1 データモデルの設計"
+      ],
+      "ds": [
+        "時系列分析",
+        "カレンダーディメンション",
+        "会計暦"
+      ],
+      "quiz": "L0605",
+      "lab": "LAB03",
+      "module": "M06",
+      "moduleTitle": "データモデリング",
+      "tier": "T2",
+      "level": "T2",
+      "order": 31,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L0606",
+      "title": "モデルを磨く — 階層・並べ替え・書式・非表示",
+      "minutes": 30,
+      "type": "hands-on",
+      "why": "モデルは自分以外の人も使う。月が「10月・11月・1月」と並ぶモデルは、それだけで信用を失う。",
+      "gain": "階層・並べ替え列・書式・非表示を整え、他人が迷わず使えるモデルに仕上げられる。",
+      "objectives": [
+        "階層を作り、ドリルダウンで使えるようにできる",
+        "列で並べ替えの1対1制約を説明できる",
+        "非表示・データカテゴリ・書式を適切に設定できる"
+      ],
+      "prereq": [
+        "L0605"
+      ],
+      "unlocks": "レポート作成の速度が上がり、モデルを他部署に渡せる品質になる。",
+      "keywords": [
+        "階層",
+        "列で並べ替え",
+        "データカテゴリ",
+        "非表示",
+        "書式設定"
+      ],
+      "pl300": [
+        "2.5 モデルの最適化",
+        "2.1 データモデルの設計",
+        "3.1 レポートの作成"
+      ],
+      "ds": [
+        "セマンティックレイヤー",
+        "メタデータ管理",
+        "ユーザビリティ"
+      ],
+      "quiz": "L0606",
+      "lab": "LAB03",
+      "module": "M06",
+      "moduleTitle": "データモデリング",
+      "tier": "T2",
+      "level": "T2",
+      "order": 32,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L0701",
+      "title": "DAXとは何か — Excelの数式と何が違うのか",
+      "minutes": 35,
+      "type": "concept",
+      "why": "Excelの感覚のままDAXを書くと、セル参照の代わりに列を書いてエラーになり、最初の30分で心が折れる。DAXが何を計算する言語なのかを先に掴めば、その事故は起きない。",
+      "gain": "DAXが「セル」ではなく「列と表とフィルター」を扱う言語であることを説明し、最初のメジャーを書ける。",
+      "objectives": [
+        "ExcelとDAXの計算単位の違いを説明できる",
+        "スカラーとテーブルの2つの戻り値を区別できる",
+        "最初のメジャーを書いて動かせる"
+      ],
+      "prereq": [
+        "L0601"
+      ],
+      "unlocks": "計算の単位が分かると、次の「計算列とメジャーの違い」が丸暗記ではなく理屈で理解できる。",
+      "keywords": [
+        "DAX",
+        "メジャー",
+        "スカラー",
+        "テーブル式",
+        "評価コンテキスト"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成"
+      ],
+      "ds": [
+        "宣言的な集計",
+        "集計の粒度"
+      ],
+      "quiz": "L0701",
+      "module": "M07",
+      "moduleTitle": "DAX基礎",
+      "tier": "T2",
+      "level": "T2",
+      "order": 33,
+      "hasBody": true,
+      "figures": 13
+    },
+    {
+      "id": "L0702",
+      "title": "計算列とメジャー — 決定的な違い",
+      "minutes": 40,
+      "type": "concept",
+      "why": "「計算列で書くべきか、メジャーで書くべきか」を間違えると、モデルが太り、数字が集計で狂い、後から直すのに何日もかかる。ここが実務で最初に効いてくる分岐点。",
+      "gain": "計算列とメジャーの評価タイミングと保存場所の違いを説明し、要件ごとに正しく選べる。",
+      "objectives": [
+        "計算列は行ごと・更新時に確定することを説明できる",
+        "メジャーは集計時・スライサーごとに再計算されることを説明できる",
+        "利益率を計算列で作ると壊れる理由を数値で示せる"
+      ],
+      "prereq": [
+        "L0701"
+      ],
+      "unlocks": "この使い分けができると、モデルサイズと数値の正しさを同時に守れるようになる。",
+      "keywords": [
+        "計算列",
+        "メジャー",
+        "実体化",
+        "評価タイミング"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成",
+        "2.5 モデルの最適化"
+      ],
+      "ds": [
+        "加法性",
+        "比率の平均は平均の比率ではない"
+      ],
+      "quiz": "L0702",
+      "module": "M07",
+      "moduleTitle": "DAX基礎",
+      "tier": "T2",
+      "level": "T2",
+      "order": 34,
+      "hasBody": true,
+      "figures": 12
+    },
+    {
+      "id": "L0703",
+      "title": "集計関数を使いこなす — SUM・COUNT・DISTINCTCOUNT",
+      "minutes": 40,
+      "type": "hands-on",
+      "why": "「件数」と言われたときにCOUNT・COUNTA・COUNTROWS・DISTINCTCOUNTのどれを使うかで数字が変わる。ここを曖昧にしたまま作った指標は、必ず会議で食い違う。",
+      "gain": "集計関数を目的別に選び分け、SUMXなどの反復関数を必要な場面だけで使える。",
+      "objectives": [
+        "COUNT系4種の違いを説明できる",
+        "SUMとSUMXを使い分けられる",
+        "DISTINCTCOUNTの合計が各行の和にならない理由を説明できる"
+      ],
+      "prereq": [
+        "L0702"
+      ],
+      "unlocks": "正しい集計関数を選べると、どんな指標定義にも安全に翻訳できるようになる。",
+      "keywords": [
+        "SUM",
+        "SUMX",
+        "COUNTROWS",
+        "DISTINCTCOUNT",
+        "反復関数"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成"
+      ],
+      "ds": [
+        "加法性・半加法性・非加法性",
+        "カーディナリティ"
+      ],
+      "quiz": "L0703",
+      "module": "M07",
+      "moduleTitle": "DAX基礎",
+      "tier": "T2",
+      "level": "T2",
+      "order": 35,
+      "hasBody": true,
+      "figures": 10
+    },
+    {
+      "id": "L0704",
+      "title": "条件分岐と安全な割り算 — IF・SWITCH・DIVIDE",
+      "minutes": 35,
+      "type": "hands-on",
+      "why": "実務の指標は条件分岐と割り算だらけ。ゼロ除算でレポート全体がエラー表示になる事故と、IFの入れ子で誰も読めなくなる事故は、どちらも初月に必ず起きる。",
+      "gain": "SWITCHで条件分岐を平らに書き、DIVIDEでゼロ除算に強い比率メジャーを実装できる。",
+      "objectives": [
+        "IFの入れ子をSWITCH(TRUE())に書き換えられる",
+        "DIVIDEと「/」の違いを説明できる",
+        "BLANKと0の違いを説明できる"
+      ],
+      "prereq": [
+        "L0703"
+      ],
+      "unlocks": "分岐と比率を安全に書けると、達成率・構成比・利益率といった実務指標を一気に実装できる。",
+      "keywords": [
+        "IF",
+        "SWITCH",
+        "DIVIDE",
+        "BLANK",
+        "ゼロ除算"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成"
+      ],
+      "ds": [
+        "欠測値の扱い",
+        "比率指標の設計"
+      ],
+      "quiz": "L0704",
+      "module": "M07",
+      "moduleTitle": "DAX基礎",
+      "tier": "T2",
+      "level": "T2",
+      "order": 36,
+      "hasBody": true,
+      "figures": 9
+    },
+    {
+      "id": "L0705",
+      "title": "VAR と RETURN — 読める・速いDAXを書く",
+      "minutes": 35,
+      "type": "concept",
+      "why": "同じ式を3回書いたDAXは、3回計算され、3回直す必要がある。VARを覚えるかどうかで、DAXの読みやすさと速度が別物になる。",
+      "gain": "VARで中間結果に名前をつけ、読みやすく速いメジャーを書ける。",
+      "objectives": [
+        "VARが1度だけ評価されることを説明できる",
+        "VARがコンテキストを固定する挙動を説明できる",
+        "IF内でVARを使うときの落とし穴を避けられる"
+      ],
+      "prereq": [
+        "L0704"
+      ],
+      "unlocks": "VARが使えると、この後のCALCULATEを含む複雑な式を、段階を追って安全に組み立てられる。",
+      "keywords": [
+        "VAR",
+        "RETURN",
+        "遅延評価",
+        "変数のスコープ"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成"
+      ],
+      "ds": [
+        "中間結果の再利用",
+        "計算量の削減"
+      ],
+      "quiz": "L0705",
+      "module": "M07",
+      "moduleTitle": "DAX基礎",
+      "tier": "T2",
+      "level": "T2",
+      "order": 37,
+      "hasBody": true,
+      "figures": 9
+    },
+    {
+      "id": "L0706",
+      "title": "書式・命名・整理 — 実務で通用するDAXの作法",
+      "minutes": 30,
+      "type": "concept",
+      "why": "半年後に自分が読めないDAXは、資産ではなく負債。命名と書式のルールを最初に決めておくだけで、レビューも引き継ぎも桁違いに楽になる。",
+      "gain": "チームで通用する命名規則・改行規則・メジャーテーブルの整理方法を適用できる。",
+      "objectives": [
+        "列参照とメジャー参照の書き分け規則を守れる",
+        "メジャー専用テーブルを作って整理できる",
+        "表示形式と説明を設定できる"
+      ],
+      "prereq": [
+        "L0705"
+      ],
+      "unlocks": "整った書き方が身につくと、中級以降の長いDAXでも自分と他人が迷子にならない。",
+      "keywords": [
+        "メジャーテーブル",
+        "命名規則",
+        "表示形式",
+        "説明フィールド"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成",
+        "2.5 モデルの最適化"
+      ],
+      "ds": [
+        "再現性",
+        "メトリクス定義の一元管理"
+      ],
+      "quiz": "L0706",
+      "module": "M07",
+      "moduleTitle": "DAX基礎",
+      "tier": "T2",
+      "level": "T2",
+      "order": 38,
+      "hasBody": true,
+      "figures": 12
+    },
+    {
+      "id": "L0801",
+      "title": "フィルターコンテキストとは何か",
+      "minutes": 45,
+      "type": "concept",
+      "why": "同じメジャーがセルごとに違う値を返す理由が分からないままだと、DAXは一生「なんとなく動く呪文」のままになる。ここがDAXの心臓部。",
+      "gain": "ビジュアルの各セルに何のフィルターが効いているかを言葉にでき、結果を予測できる。",
+      "objectives": [
+        "フィルターコンテキストの発生源を4つ挙げられる",
+        "セルごとの計算結果を手で予測できる",
+        "合計行が各行の和にならない現象を説明できる"
+      ],
+      "prereq": [
+        "L0706"
+      ],
+      "unlocks": "コンテキストが見えるようになると、CALCULATEが「何を書き換えているのか」が理解できる。",
+      "keywords": [
+        "フィルターコンテキスト",
+        "評価コンテキスト",
+        "合計行",
+        "フィルターの伝播"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成",
+        "2.2 リレーションシップの構成"
+      ],
+      "ds": [
+        "集計の順序が結果を変える",
+        "非加法的指標"
+      ],
+      "quiz": "L0801",
+      "module": "M08",
+      "moduleTitle": "DAXコンテキスト",
+      "tier": "T2",
+      "level": "T2",
+      "order": 39,
+      "hasBody": true,
+      "figures": 12
+    },
+    {
+      "id": "L0802",
+      "title": "行コンテキストとは何か — 2つの文脈を区別する",
+      "minutes": 45,
+      "type": "concept",
+      "why": "「メジャーの中で列を直接書いたらエラーになった」「計算列でSUMしたら全部同じ数字になった」——どちらも行コンテキストの誤解が原因。この2つの文脈を分けて理解すれば全部つながる。",
+      "gain": "行コンテキストとフィルターコンテキストを区別し、どちらが効いているかを判定できる。",
+      "objectives": [
+        "行コンテキストが発生する場所を3つ挙げられる",
+        "行コンテキストは自動でフィルターしないことを説明できる",
+        "コンテキスト遷移が起きる条件を説明できる"
+      ],
+      "prereq": [
+        "L0801"
+      ],
+      "unlocks": "2つの文脈を区別できると、SUMXやCALCULATEの挙動が例外なく説明できるようになる。",
+      "keywords": [
+        "行コンテキスト",
+        "コンテキスト遷移",
+        "RELATED",
+        "EARLIER"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成"
+      ],
+      "ds": [
+        "レコード単位の計算と集計単位の計算"
+      ],
+      "quiz": "L0802",
+      "module": "M08",
+      "moduleTitle": "DAXコンテキスト",
+      "tier": "T2",
+      "level": "T2",
+      "order": 40,
+      "hasBody": true,
+      "figures": 11
+    },
+    {
+      "id": "L0803",
+      "title": "CALCULATE — フィルターを変更する唯一の関数",
+      "minutes": 50,
+      "type": "concept",
+      "why": "実務のDAXの8割はCALCULATEでできている。評価順序を知らずに使うと「フィルターしたはずなのに効かない」が起き続ける。",
+      "gain": "CALCULATEの評価順序を段階で説明し、フィルター引数を意図どおりに効かせられる。",
+      "objectives": [
+        "CALCULATEの評価順序を5段階で説明できる",
+        "フィルター引数が上書きであることを説明できる",
+        "メジャー参照で暗黙のCALCULATEが起きることを説明できる"
+      ],
+      "prereq": [
+        "L0802"
+      ],
+      "unlocks": "CALCULATEを制御できると、構成比・前年比・条件付き指標がすべて同じ型で書けるようになる。",
+      "keywords": [
+        "CALCULATE",
+        "フィルター引数",
+        "上書き",
+        "暗黙のCALCULATE",
+        "コンテキスト遷移"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成"
+      ],
+      "ds": [
+        "条件付き集計",
+        "部分集団の比較"
+      ],
+      "quiz": "L0803",
+      "module": "M08",
+      "moduleTitle": "DAXコンテキスト",
+      "tier": "T2",
+      "level": "T2",
+      "order": 41,
+      "hasBody": true,
+      "figures": 10
+    },
+    {
+      "id": "L0804",
+      "title": "ALL・ALLSELECTED・REMOVEFILTERS — フィルターを外す",
+      "minutes": 45,
+      "type": "hands-on",
+      "why": "構成比・ランキング・全体比較は「フィルターを外す」ことなしには書けない。ALLとALLSELECTEDの選択を誤ると、スライサーを動かした瞬間に数字が壊れる。",
+      "gain": "構成比とランキングを、スライサーの意図に合ったフィルター除去で実装できる。",
+      "objectives": [
+        "ALLとALLSELECTEDの違いを数値で説明できる",
+        "構成比メジャーを正しく書ける",
+        "RANKXでALLを忘れる罠を回避できる"
+      ],
+      "prereq": [
+        "L0803"
+      ],
+      "unlocks": "全体を取り戻せるようになると、比率・順位・寄与度といった相対指標を自在に作れる。",
+      "keywords": [
+        "ALL",
+        "ALLSELECTED",
+        "REMOVEFILTERS",
+        "ALLEXCEPT",
+        "RANKX"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成",
+        "3.5 データの探索と分析"
+      ],
+      "ds": [
+        "構成比と寄与度",
+        "順位付けと同順位処理"
+      ],
+      "quiz": "L0804",
+      "module": "M08",
+      "moduleTitle": "DAXコンテキスト",
+      "tier": "T2",
+      "level": "T2",
+      "order": 42,
+      "hasBody": true,
+      "figures": 11
+    },
+    {
+      "id": "L0805",
+      "title": "KEEPFILTERS と FILTER — 条件の書き方を選ぶ",
+      "minutes": 40,
+      "type": "concept",
+      "why": "CALCULATEの条件は「上書き」が既定。既存の絞り込みを残したいのか消したいのかを意識しないと、スライサーと喧嘩する指標ができあがる。",
+      "gain": "上書き・交差・行単位条件を目的別に選び、意図どおりに絞り込める。",
+      "objectives": [
+        "KEEPFILTERSが交差に変えることを説明できる",
+        "FILTERが必要な条件の型を判別できる",
+        "テーブル全体をFILTERに渡す危険を説明できる"
+      ],
+      "prereq": [
+        "L0804"
+      ],
+      "unlocks": "条件の書き方を選べると、複雑な業務要件をそのままDAXに翻訳できるようになる。",
+      "keywords": [
+        "KEEPFILTERS",
+        "FILTER",
+        "述語",
+        "交差",
+        "反復"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成"
+      ],
+      "ds": [
+        "部分集団の定義",
+        "条件の合成"
+      ],
+      "quiz": "L0805",
+      "module": "M08",
+      "moduleTitle": "DAXコンテキスト",
+      "tier": "T2",
+      "level": "T2",
+      "order": 43,
+      "hasBody": true,
+      "figures": 10
+    },
+    {
+      "id": "L0806",
+      "title": "タイムインテリジェンス — 前年比・YTD・移動平均",
+      "minutes": 50,
+      "type": "hands-on",
+      "why": "経営が見たい数字はほぼ全部「前年と比べてどうか」「今年の累計はいくらか」。日付テーブルの作法とタイムインテリジェンス関数を押さえれば、ここが一気に片づく。",
+      "gain": "日付テーブルを正しくマークし、前年同期比・YTD・移動平均を実装できる。",
+      "objectives": [
+        "日付テーブルの3条件を挙げられる",
+        "SAMEPERIODLASTYEARとDATEADDを使い分けられる",
+        "移動平均をDATESINPERIODで書ける"
+      ],
+      "prereq": [
+        "L0805"
+      ],
+      "unlocks": "時間軸の指標が書けると、実務のダッシュボード要件の大半をひとりで満たせる。",
+      "keywords": [
+        "タイムインテリジェンス",
+        "日付テーブル",
+        "TOTALYTD",
+        "SAMEPERIODLASTYEAR",
+        "DATESINPERIOD"
+      ],
+      "pl300": [
+        "2.4 タイムインテリジェンス",
+        "2.3 計算列とメジャーの作成"
+      ],
+      "ds": [
+        "時系列の季節性",
+        "移動平均による平滑化",
+        "前年同期比"
+      ],
+      "quiz": "L0806",
+      "module": "M08",
+      "moduleTitle": "DAXコンテキスト",
+      "tier": "T2",
+      "level": "T2",
+      "order": 44,
+      "hasBody": true,
+      "figures": 13
+    },
+    {
+      "id": "L0901",
+      "title": "ビジュアルの選び方 — 問いの型から決める",
+      "minutes": 40,
+      "type": "concept",
+      "why": "「とりあえず円グラフ」で作られたレポートは、正しい数字を載せていても読み手に何も伝えない。ビジュアル選びは好みではなく、答えたい問いの型で決まる。",
+      "gain": "答えたい問いを7つの型に分類し、そこから最適なビジュアルを根拠つきで選べる。",
+      "objectives": [
+        "問いを比較・推移・構成・分布・関係・位置・単一値の7型に分類できる",
+        "Cleveland & McGill の知覚精度の順序を使ってビジュアルを比較できる",
+        "円グラフ・二重軸・3Dを避けるべき理由を説明できる"
+      ],
+      "prereq": [
+        "L0601"
+      ],
+      "unlocks": "ビジュアルを根拠で選べるようになると、レポート全体のレイアウト設計と配色設計が意味を持ちはじめる。",
+      "keywords": [
+        "ビジュアルの選択",
+        "知覚精度",
+        "前注意的処理",
+        "円グラフ"
+      ],
+      "pl300": [
+        "3.2 ビジュアルの選択と構成",
+        "3.1 レポートの作成"
+      ],
+      "ds": [
+        "データビジュアライゼーション理論",
+        "知覚心理学",
+        "Cleveland & McGill"
+      ],
+      "quiz": "L0901",
+      "module": "M09",
+      "moduleTitle": "可視化の設計",
+      "tier": "T2",
+      "level": "T2",
+      "order": 45,
+      "hasBody": true,
+      "figures": 15
+    },
+    {
+      "id": "L0902",
+      "title": "レポートのレイアウトと視線導線",
+      "minutes": 35,
+      "type": "concept",
+      "why": "同じビジュアルを並べても、置き場所が違うだけで「5秒で分かるレポート」と「読む気が失せるレポート」に分かれる。",
+      "gain": "グリッドと視線導線にもとづいて1ページの配置を設計し、5秒ルールを満たすレポートを組める。",
+      "objectives": [
+        "Zパターン／Fパターンを使って配置を説明できる",
+        "ゲシュタルト原則の5つを配置に応用できる",
+        "データインク比の観点で不要な装飾を削れる"
+      ],
+      "prereq": [
+        "L0901"
+      ],
+      "unlocks": "配置が決まると、色は「装飾」ではなく「導線の補助」として設計できるようになる。",
+      "keywords": [
+        "視線導線",
+        "グリッド",
+        "ゲシュタルト原則",
+        "データインク比"
+      ],
+      "pl300": [
+        "3.1 レポートの作成",
+        "3.4 レポートの書式とアクセシビリティ"
+      ],
+      "ds": [
+        "ゲシュタルト原則",
+        "データインク比",
+        "情報デザイン"
+      ],
+      "quiz": "L0902",
+      "module": "M09",
+      "moduleTitle": "可視化の設計",
+      "tier": "T2",
+      "level": "T2",
+      "order": 46,
+      "hasBody": true,
+      "figures": 15
+    },
+    {
+      "id": "L0903",
+      "title": "色とテーマ — 伝わる配色、伝わらない配色",
+      "minutes": 40,
+      "type": "concept",
+      "why": "色は最も強い視覚属性であり、最も誤用される。虹色のレポートは情報量ゼロで、色覚多様性のある読み手には読めないことすらある。",
+      "gain": "カテゴリ・連続・発散の3種類のパレットを使い分け、テーマJSONで組織全体に配色を統一できる。",
+      "objectives": [
+        "3種類のカラーパレットを目的別に選べる",
+        "色だけに依存しない符号化に直せる",
+        "テーマJSONを書いてレポートに適用できる"
+      ],
+      "prereq": [
+        "L0902"
+      ],
+      "unlocks": "配色が統一されると、相互作用やドリルダウンで色が変化しても意味が壊れなくなる。",
+      "keywords": [
+        "カラーパレット",
+        "色覚多様性",
+        "コントラスト比",
+        "テーマJSON"
+      ],
+      "pl300": [
+        "3.4 レポートの書式とアクセシビリティ",
+        "3.2 ビジュアルの選択と構成"
+      ],
+      "ds": [
+        "色彩理論",
+        "アクセシビリティ",
+        "知覚的均等カラーマップ"
+      ],
+      "quiz": "L0903",
+      "module": "M09",
+      "moduleTitle": "可視化の設計",
+      "tier": "T2",
+      "level": "T2",
+      "order": 47,
+      "hasBody": true,
+      "figures": 14
+    },
+    {
+      "id": "L0904",
+      "title": "相互作用・ドリルダウン・ドリルスルー",
+      "minutes": 40,
+      "type": "hands-on",
+      "why": "1ページに全部載せようとすると破綻する。階層を掘る仕掛けを設計すれば、1枚のページで概要と詳細の両方を届けられる。",
+      "gain": "相互作用の編集・ドリルダウン・ドリルスルー・ブックマークを使い分け、探索できるレポートを設計できる。",
+      "objectives": [
+        "フィルター／強調表示／なしを場面ごとに選べる",
+        "ドリルダウンとドリルスルーの違いを説明できる",
+        "ブックマークと選択ペインで表示を切り替えられる"
+      ],
+      "prereq": [
+        "L0902"
+      ],
+      "unlocks": "探索の導線ができると、詳細表示はツールチップやスモールマルチプルへ委ねられ、画面が静かになる。",
+      "keywords": [
+        "相互作用の編集",
+        "ドリルダウン",
+        "ドリルスルー",
+        "ブックマーク"
+      ],
+      "pl300": [
+        "3.3 対話機能の設定",
+        "3.5 データの探索と分析"
+      ],
+      "ds": [
+        "Shneiderman の情報探索マントラ",
+        "インタラクションデザイン"
+      ],
+      "quiz": "L0904",
+      "module": "M09",
+      "moduleTitle": "可視化の設計",
+      "tier": "T2",
+      "level": "T2",
+      "order": 48,
+      "hasBody": true,
+      "figures": 15
+    },
+    {
+      "id": "L0905",
+      "title": "条件付き書式・ツールチップ・スモールマルチプル",
+      "minutes": 35,
+      "type": "hands-on",
+      "why": "表は情報密度が高いが、そのままでは読み手が異常値を見つけられない。書式と小さな反復で、表を「読める」ものに変えられる。",
+      "gain": "条件付き書式・ツールチップページ・スモールマルチプルで、密度を保ったまま読みやすいレポートを作れる。",
+      "objectives": [
+        "背景色・データバー・アイコン・フィールド値の書式を使い分けられる",
+        "ツールチップページを作成して割り当てられる",
+        "スモールマルチプルの共通スケールの重要性を説明できる"
+      ],
+      "prereq": [
+        "L0903",
+        "L0904"
+      ],
+      "unlocks": "密度の設計ができると、小さなモバイル画面に何を残すかの判断ができるようになる。",
+      "keywords": [
+        "条件付き書式",
+        "ツールチップページ",
+        "スモールマルチプル",
+        "スパークライン"
+      ],
+      "pl300": [
+        "3.2 ビジュアルの選択と構成",
+        "3.4 レポートの書式とアクセシビリティ"
+      ],
+      "ds": [
+        "スモールマルチプル",
+        "Tufte",
+        "情報密度"
+      ],
+      "quiz": "L0905",
+      "module": "M09",
+      "moduleTitle": "可視化の設計",
+      "tier": "T2",
+      "level": "T2",
+      "order": 49,
+      "hasBody": true,
+      "figures": 15
+    },
+    {
+      "id": "L0906",
+      "title": "モバイルレイアウトとアクセシビリティ",
+      "minutes": 35,
+      "type": "concept",
+      "why": "実際にレポートを最も見る役員はスマホで見る。PC用レイアウトをそのまま出すと、指では操作できない画面が届く。",
+      "gain": "モバイルレイアウトを別途組み、代替テキストとタブ順序を整えて誰でも読めるレポートに仕上げられる。",
+      "objectives": [
+        "モバイルレイアウトビューで縦画面用の配置を作れる",
+        "代替テキストとタブ順序を設定できる",
+        "アクセシビリティのチェックリストで自作レポートを点検できる"
+      ],
+      "prereq": [
+        "L0905"
+      ],
+      "unlocks": "ここまでで「作れる」から「配ってよい品質」に到達し、共有と運用の工程へ進める。",
+      "keywords": [
+        "モバイルレイアウト",
+        "代替テキスト",
+        "タブ順序",
+        "アクセシビリティ"
+      ],
+      "pl300": [
+        "3.7 モバイル対応",
+        "3.4 レポートの書式とアクセシビリティ"
+      ],
+      "ds": [
+        "ユニバーサルデザイン",
+        "WCAG"
+      ],
+      "quiz": "L0906",
+      "module": "M09",
+      "moduleTitle": "可視化の設計",
+      "tier": "T2",
+      "level": "T2",
+      "order": 50,
+      "hasBody": true,
+      "figures": 16
+    },
+    {
+      "id": "L1001",
+      "title": "ワークスペースとロール — 権限設計の基本",
+      "minutes": 40,
+      "type": "concept",
+      "why": "個人用ワークスペースに置いたまま共有し、担当者の異動でレポートが消える事故は今も毎週どこかで起きている。",
+      "gain": "ワークスペースの4ロールとライセンスの関係を理解し、破綻しない権限設計を最初に決められる。",
+      "objectives": [
+        "管理者・メンバー・共同作成者・ビューアーの権限差を説明できる",
+        "個人用ワークスペースを使ってはいけない理由を3つ挙げられる",
+        "Pro／PPU／Fabric容量の必要条件を判断できる"
+      ],
+      "prereq": [
+        "L0906"
+      ],
+      "unlocks": "権限の器が決まると、アプリによる大規模配布を安全に設計できる。",
+      "keywords": [
+        "ワークスペース",
+        "ロール",
+        "Power BI Pro",
+        "Fabric容量"
+      ],
+      "pl300": [
+        "4.1 ワークスペースの管理",
+        "4.4 アクセス権とセキュリティ"
+      ],
+      "ds": [
+        "データガバナンス",
+        "最小権限の原則"
+      ],
+      "quiz": "L1001",
+      "module": "M10",
+      "moduleTitle": "共有と運用",
+      "tier": "T2",
+      "level": "T2",
+      "order": 51,
+      "hasBody": true,
+      "figures": 15
+    },
+    {
+      "id": "L1002",
+      "title": "発行とアプリ配布 — 100人に届ける正しい方法",
+      "minutes": 40,
+      "type": "hands-on",
+      "why": "1人ずつ共有リンクを送る運用は、20人を超えた時点で誰が何を見られるか誰にも分からなくなる。",
+      "gain": "アプリ・直接共有・リンク共有を場面で選び分け、100人規模へ安全に配布できる。",
+      "objectives": [
+        "発行からアプリ公開までの手順を実行できる",
+        "アプリの対象ユーザー機能で配布内容を出し分けられる",
+        "共有リンクの3種類のスコープを説明できる"
+      ],
+      "prereq": [
+        "L1001"
+      ],
+      "unlocks": "配布経路が固まると、データ更新の自動化がそのまま全読者への価値提供になる。",
+      "keywords": [
+        "アプリ",
+        "対象ユーザー",
+        "共有リンク",
+        "発行"
+      ],
+      "pl300": [
+        "4.1 ワークスペースの管理",
+        "4.4 アクセス権とセキュリティ",
+        "4.5 ガバナンスとライフサイクル"
+      ],
+      "ds": [
+        "配布設計",
+        "情報アクセス管理"
+      ],
+      "quiz": "L1002",
+      "module": "M10",
+      "moduleTitle": "共有と運用",
+      "tier": "T2",
+      "level": "T2",
+      "order": 52,
+      "hasBody": true,
+      "figures": 16
+    },
+    {
+      "id": "L1003",
+      "title": "データ更新の自動化とゲートウェイ",
+      "minutes": 45,
+      "type": "hands-on",
+      "why": "更新が止まったレポートは、間違ったレポートより危険である。古い数字が最新の顔をして意思決定に使われるからだ。",
+      "gain": "スケジュール更新とゲートウェイを構成し、更新失敗を体系的に切り分けられる。",
+      "objectives": [
+        "ゲートウェイが必要なケースを判断できる",
+        "スケジュール更新の回数上限とタイムアウトを説明できる",
+        "更新失敗を4つの層に切り分けて原因を特定できる"
+      ],
+      "prereq": [
+        "L1001"
+      ],
+      "unlocks": "更新が安定すると、モデルを共有資産として他チームに開放できるようになる。",
+      "keywords": [
+        "スケジュール更新",
+        "オンプレミスデータゲートウェイ",
+        "増分更新",
+        "資格情報"
+      ],
+      "pl300": [
+        "4.3 データ更新の管理",
+        "4.2 セマンティックモデルの管理",
+        "1.6 パフォーマンスを考慮した取り込み"
+      ],
+      "ds": [
+        "データパイプライン運用",
+        "SLA設計"
+      ],
+      "quiz": "L1003",
+      "module": "M10",
+      "moduleTitle": "共有と運用",
+      "tier": "T2",
+      "level": "T2",
+      "order": 53,
+      "hasBody": true,
+      "figures": 12
+    },
+    {
+      "id": "L1004",
+      "title": "セマンティックモデルの共有と再利用",
+      "minutes": 35,
+      "type": "concept",
+      "why": "部署ごとに同じ売上モデルを作ると、会議で3つの違う売上額が出てくる。数字の定義は1か所に集約しなければならない。",
+      "gain": "共有セマンティックモデルへライブ接続し、ビルド権限と推奨・認定で信頼できる資産として運用できる。",
+      "objectives": [
+        "ライブ接続でレポートを作成できる",
+        "ビルド権限が何を許可するか説明できる",
+        "推奨と認定の違いと運用ルールを説明できる"
+      ],
+      "prereq": [
+        "L1002"
+      ],
+      "unlocks": "モデルが1つに集約されると、運用の監視対象が絞られ、改善が全レポートに波及する。",
+      "keywords": [
+        "共有セマンティックモデル",
+        "ライブ接続",
+        "ビルド権限",
+        "認定"
+      ],
+      "pl300": [
+        "4.2 セマンティックモデルの管理",
+        "4.5 ガバナンスとライフサイクル",
+        "4.4 アクセス権とセキュリティ"
+      ],
+      "ds": [
+        "単一の真実の源",
+        "メトリクス層"
+      ],
+      "quiz": "L1004",
+      "module": "M10",
+      "moduleTitle": "共有と運用",
+      "tier": "T2",
+      "level": "T2",
+      "order": 54,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1005",
+      "title": "レポートの運用 — 監視・サブスクリプション・使用状況",
+      "minutes": 35,
+      "type": "concept",
+      "why": "公開して終わりにすると、半年後には誰も見ていないレポートが100本残り、本当に必要な1本が埋もれる。",
+      "gain": "使用状況メトリクスとサブスクリプションで運用を回し、廃止までを含めたライフサイクルを設計できる。",
+      "objectives": [
+        "使用状況メトリクスから改善・廃止の判断ができる",
+        "サブスクリプションとデータアラートを使い分けられる",
+        "デプロイメントパイプラインの3段階を説明できる"
+      ],
+      "prereq": [
+        "L1003",
+        "L1004"
+      ],
+      "unlocks": "運用のループが回ると、上級ティアの性能改善やガバナンス設計に取り組む土台が整う。",
+      "keywords": [
+        "使用状況メトリクス",
+        "サブスクリプション",
+        "データアラート",
+        "デプロイメントパイプライン"
+      ],
+      "pl300": [
+        "4.5 ガバナンスとライフサイクル",
+        "4.1 ワークスペースの管理",
+        "4.3 データ更新の管理"
+      ],
+      "ds": [
+        "プロダクト運用",
+        "利用ログ分析"
+      ],
+      "quiz": "L1005",
+      "module": "M10",
+      "moduleTitle": "共有と運用",
+      "tier": "T2",
+      "level": "T2",
+      "order": 55,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1101",
+      "title": "M言語の構造 — let ... in を読み書きする",
+      "minutes": 45,
+      "type": "concept",
+      "why": "GUIだけで作ったクエリは、要件が少し複雑になった瞬間に手が止まる。詳細エディターを開いて直せる人だけが、他人の作ったクエリを引き継ぎ、壊れた更新を直せる。",
+      "gain": "let ... in の構造を読み解き、ステップを手で追加・並べ替え・削除して意図した変換を組み立てられる。",
+      "objectives": [
+        "let ... in が「名前付きステップの束と、最後に返す1つの値」であることを説明できる",
+        "識別子のクォート記法 #\"...\" とステップ参照の関係を説明できる",
+        "each と _ が省略記法であることを理解し、明示的な関数に書き換えられる",
+        "型・値・エラーの扱い（try ... otherwise）を使い分けられる"
+      ],
+      "prereq": [
+        "L0505"
+      ],
+      "unlocks": "Mを読めるようになると、次のカスタム関数化とフォールディング診断が「コードを見れば分かる」作業になる。",
+      "keywords": [
+        "M言語",
+        "let式",
+        "ステップ",
+        "詳細エディター",
+        "each",
+        "レコード",
+        "リスト",
+        "テーブル"
+      ],
+      "pl300": [
+        "1.2 データの取得と変換",
+        "1.5 データの構造化"
+      ],
+      "ds": [
+        "宣言型と手続き型",
+        "イミュータブルなデータ変換",
+        "遅延評価"
+      ],
+      "quiz": "L1101",
+      "lab": null,
+      "module": "M11",
+      "moduleTitle": "高度なデータ整形",
+      "tier": "T3",
+      "level": "T3",
+      "order": 56,
+      "hasBody": true,
+      "figures": 8
+    },
+    {
+      "id": "L1102",
+      "title": "カスタム関数とパラメータ — 処理を再利用する",
+      "minutes": 45,
+      "type": "hands-on",
+      "why": "同じ整形を30個のファイルに適用する仕事を、コピペ30回でやると1箇所の仕様変更で30箇所直すことになる。関数化した人は1箇所直せば終わる。",
+      "gain": "パラメータとカスタム関数を作り、フォルダ内の全ファイルや全テーブルに同じ変換を安全に適用できる。",
+      "objectives": [
+        "(x as text) => ... の形でカスタム関数を定義できる",
+        "クエリからパラメータへ接続情報を切り出し、開発/本番を切り替えられる",
+        "フォルダからの取り込みで生成されるサンプルファイル関数の仕組みを説明できる",
+        "関数呼び出しの失敗を try ... otherwise で握りつぶさずに記録できる"
+      ],
+      "prereq": [
+        "L1101"
+      ],
+      "unlocks": "再利用できる部品を持つと、ETLの設計をレッスン単位ではなく「パイプライン単位」で考えられるようになる。",
+      "keywords": [
+        "カスタム関数",
+        "パラメータ",
+        "Table.AddColumn",
+        "Table.NestedJoin",
+        "サンプルファイル",
+        "呼び出し"
+      ],
+      "pl300": [
+        "1.2 データの取得と変換",
+        "1.5 データの構造化",
+        "1.6 パフォーマンスを考慮した取り込み"
+      ],
+      "ds": [
+        "DRY原則",
+        "冪等性",
+        "パラメータ化されたパイプライン"
+      ],
+      "quiz": "L1102",
+      "lab": null,
+      "module": "M11",
+      "moduleTitle": "高度なデータ整形",
+      "tier": "T3",
+      "level": "T3",
+      "order": 57,
+      "hasBody": true,
+      "figures": 8
+    },
+    {
+      "id": "L1103",
+      "title": "クエリ フォールディング — 更新時間を決める仕組み",
+      "minutes": 50,
+      "type": "concept",
+      "why": "「更新に3時間かかる」の原因のほとんどは、テーブル全体をPower BIに引っ張ってから加工していること。折りたたみが効いているかどうかで、同じ結果でも所要時間が桁で変わる。",
+      "gain": "フォールディングの有無を診断し、折りたたみが切れるステップを特定して並べ替え・書き換えできる。",
+      "objectives": [
+        "クエリ フォールディングの定義と、成立条件を説明できる",
+        "「ネイティブ クエリの表示」と「フォールディング インジケーター」で診断できる",
+        "折りたたみを壊す代表的なステップを5つ挙げられる",
+        "Table.Buffer / Value.NativeQuery の副作用を説明できる"
+      ],
+      "prereq": [
+        "L1101"
+      ],
+      "unlocks": "折りたたみを保てるクエリが書けると、増分更新が本当に効く前提条件が整う。",
+      "keywords": [
+        "クエリ フォールディング",
+        "ネイティブ クエリ",
+        "プッシュダウン",
+        "Table.Buffer",
+        "Value.NativeQuery",
+        "ステップフォールディング インジケーター"
+      ],
+      "pl300": [
+        "1.1 データソースへの接続",
+        "1.6 パフォーマンスを考慮した取り込み"
+      ],
+      "ds": [
+        "述語プッシュダウン",
+        "クエリ最適化",
+        "ELTとETL"
+      ],
+      "quiz": "L1103",
+      "lab": null,
+      "module": "M11",
+      "moduleTitle": "高度なデータ整形",
+      "tier": "T3",
+      "level": "T3",
+      "order": 58,
+      "hasBody": true,
+      "figures": 9
+    },
+    {
+      "id": "L1104",
+      "title": "増分更新 — 大規模ファクトを現実的に運用する",
+      "minutes": 50,
+      "type": "hands-on",
+      "why": "1億行のファクトを毎日全件読み直す運用は、いつか必ず時間切れになる。変わった範囲だけ取り直せば、更新は数分で終わる。",
+      "gain": "RangeStart / RangeEnd を使って増分更新ポリシーを設計し、パーティションがどう作られ再取得されるかを説明できる。",
+      "objectives": [
+        "RangeStart / RangeEnd パラメータの型と役割を説明できる",
+        "アーカイブ期間と増分範囲を要件から決められる",
+        "「リアルタイムでデータの変更を検出する」オプションの前提を説明できる",
+        "初回発行後の制約（.pbix の再発行でパーティションが失われる等）を回避できる"
+      ],
+      "prereq": [
+        "L1103"
+      ],
+      "unlocks": "大規模データを扱えるようになると、複合モデルや集計テーブルという次の武器が意味を持ってくる。",
+      "keywords": [
+        "増分更新",
+        "RangeStart",
+        "RangeEnd",
+        "パーティション",
+        "アーカイブ期間",
+        "検出列",
+        "更新ポリシー"
+      ],
+      "pl300": [
+        "1.6 パフォーマンスを考慮した取り込み",
+        "4.3 データ更新の管理"
+      ],
+      "ds": [
+        "パーティショニング",
+        "冪等性",
+        "ウォーターマーク方式の差分取得"
+      ],
+      "quiz": "L1104",
+      "lab": null,
+      "module": "M11",
+      "moduleTitle": "高度なデータ整形",
+      "tier": "T3",
+      "level": "T3",
+      "order": 59,
+      "hasBody": true,
+      "figures": 9
+    },
+    {
+      "id": "L1105",
+      "title": "データフローとETL設計 — 変換をどこに置くか",
+      "minutes": 45,
+      "type": "concept",
+      "why": "同じ整形を10個のpbixが別々に持っていると、定義が必ずずれる。どこで変換するかは、性能だけでなく組織の一貫性の問題である。",
+      "gain": "ソース側・データフロー・Power Query・DAX の4か所から、変換の置き場所を根拠を持って選べる。",
+      "objectives": [
+        "ETLとELTの違いを説明し、Power BIがどちらに寄っているか述べられる",
+        "データフローの役割（共通の整形結果を再利用する層）を説明できる",
+        "メダリオンアーキテクチャの3層を自分のプロジェクトに対応づけられる",
+        "変換の置き場所を決める判断基準を4つ挙げられる"
+      ],
+      "prereq": [
+        "L1103",
+        "L1104"
+      ],
+      "unlocks": "層の設計ができると、ティア4のガバナンスやデプロイ運用の話が具体的な作業に落ちる。",
+      "keywords": [
+        "データフロー",
+        "ETL",
+        "ELT",
+        "メダリオンアーキテクチャ",
+        "ステージング",
+        "拡張コンピューティングエンジン",
+        "リネージ"
+      ],
+      "pl300": [
+        "1.1 データソースへの接続",
+        "1.6 パフォーマンスを考慮した取り込み",
+        "4.2 セマンティックモデルの管理",
+        "4.5 ガバナンスとライフサイクル"
+      ],
+      "ds": [
+        "ETLとELT",
+        "メダリオンアーキテクチャ",
+        "データ品質のディメンション",
+        "データリネージ"
+      ],
+      "quiz": "L1105",
+      "lab": null,
+      "module": "M11",
+      "moduleTitle": "高度なデータ整形",
+      "tier": "T3",
+      "level": "T3",
+      "order": 60,
+      "hasBody": true,
+      "figures": 9
+    },
+    {
+      "id": "L1201",
+      "title": "多対多とブリッジテーブル",
+      "minutes": 50,
+      "type": "concept",
+      "why": "「1人の顧客が複数の口座を持ち、1つの口座を複数人で共有する」ような関係は現実に山ほどある。ここでモデルを間違えると、合計が水増しされたまま誰も気づかない。",
+      "gain": "多対多の要件をブリッジテーブルで正しくモデル化し、多対多リレーションシップとの使い分けを説明できる。",
+      "objectives": [
+        "多対多が発生する3つの型（属性の多重、粒度差、共有キー）を見分けられる",
+        "ブリッジテーブルを作るM/DAXの手順を実行できる",
+        "多対多カーディナリティの制約（空白行が作られない等）を説明できる",
+        "TREATAS で関係を張らずにフィルターを伝播できる"
+      ],
+      "prereq": [
+        "L0605",
+        "L0906"
+      ],
+      "unlocks": "多対多を扱えると、双方向フィルターに頼らずに済むようになり、モデルの副作用が激減する。",
+      "keywords": [
+        "多対多",
+        "ブリッジテーブル",
+        "ファクトレスファクト",
+        "カーディナリティ",
+        "TREATAS",
+        "空白行"
+      ],
+      "pl300": [
+        "2.1 データモデルの設計",
+        "2.2 リレーションシップの構成"
+      ],
+      "ds": [
+        "次元モデリング",
+        "関連エンティティ",
+        "サロゲートキー"
+      ],
+      "quiz": "L1201",
+      "lab": null,
+      "module": "M12",
+      "moduleTitle": "高度なモデリング",
+      "tier": "T3",
+      "level": "T3",
+      "order": 61,
+      "hasBody": true,
+      "figures": 7
+    },
+    {
+      "id": "L1202",
+      "title": "双方向リレーションシップの罠と代替手段",
+      "minutes": 45,
+      "type": "concept",
+      "why": "「フィルターが効かないので双方向にした」で解決した問題は、たいてい別の場所で数字を壊している。しかも壊れ方が静かなので、報告が出てから発覚する。",
+      "gain": "双方向フィルターの副作用を説明でき、CROSSFILTER・TREATAS・スター化のどれで代替するか選べる。",
+      "objectives": [
+        "双方向にしたときの曖昧経路とパフォーマンス劣化を説明できる",
+        "CROSSFILTER でメジャー単位に限定して双方向化できる",
+        "RLSと双方向フィルターを組み合わせたときの情報漏えい経路を説明できる",
+        "双方向が正当化される数少ないケースを挙げられる"
+      ],
+      "prereq": [
+        "L1201"
+      ],
+      "unlocks": "関係の向きを制御できると、RLSを安全に設計するための土台ができる。",
+      "keywords": [
+        "双方向フィルター",
+        "CROSSFILTER",
+        "曖昧なパス",
+        "セキュリティ フィルターの適用",
+        "スター化"
+      ],
+      "pl300": [
+        "2.2 リレーションシップの構成",
+        "2.5 モデルの最適化",
+        "2.6 行レベルセキュリティ"
+      ],
+      "ds": [
+        "グラフの循環",
+        "データモデルの正規化",
+        "最小権限の原則"
+      ],
+      "quiz": "L1202",
+      "lab": null,
+      "module": "M12",
+      "moduleTitle": "高度なモデリング",
+      "tier": "T3",
+      "level": "T3",
+      "order": 62,
+      "hasBody": true,
+      "figures": 9
+    },
+    {
+      "id": "L1203",
+      "title": "役割の異なる日付（USERELATIONSHIP）と複数ファクト",
+      "minutes": 50,
+      "type": "concept",
+      "why": "受注日・出荷日・請求日を全部見たいという要求は必ず来る。日付テーブルを3つ作ってしまうと、フィルターの整合が取れなくなる。",
+      "gain": "非アクティブなリレーションシップと USERELATIONSHIP で役割別日付を実装し、複数ファクトを1つの日付で串刺しできる。",
+      "objectives": [
+        "ロールプレイング ディメンションの意味を説明できる",
+        "非アクティブなリレーションシップを USERELATIONSHIP で有効化できる",
+        "日付テーブルの複製（役割別ディメンション）との使い分けを判断できる",
+        "複数ファクトを共有ディメンションで結ぶ設計を図示できる"
+      ],
+      "prereq": [
+        "L0906"
+      ],
+      "unlocks": "複数ファクトを扱えると、予実比較や在庫と売上の突き合わせといった実務要件が設計できる。",
+      "keywords": [
+        "ロールプレイング ディメンション",
+        "USERELATIONSHIP",
+        "非アクティブ リレーションシップ",
+        "共有ディメンション",
+        "コンフォームド ディメンション"
+      ],
+      "pl300": [
+        "2.2 リレーションシップの構成",
+        "2.3 計算列とメジャーの作成",
+        "2.4 タイムインテリジェンス"
+      ],
+      "ds": [
+        "コンフォームド ディメンション",
+        "次元モデリング",
+        "粒度の統一"
+      ],
+      "quiz": "L1203",
+      "lab": null,
+      "module": "M12",
+      "moduleTitle": "高度なモデリング",
+      "tier": "T3",
+      "level": "T3",
+      "order": 63,
+      "hasBody": true,
+      "figures": 8
+    },
+    {
+      "id": "L1204",
+      "title": "行レベルセキュリティ(RLS) — 静的・動的・階層",
+      "minutes": 55,
+      "type": "hands-on",
+      "why": "「支店長には自分の支店だけ見せたい」という要求に、レポートを支店の数だけ作って対応するのは破綻する。RLSは1つのモデルで見える範囲を分ける唯一の正攻法である。",
+      "gain": "静的・動的・組織階層の3方式でRLSを実装し、USERPRINCIPALNAME と PATH 系関数を使い分けられる。",
+      "objectives": [
+        "ロールとメンバーの関係、Serviceでの割り当て手順を説明できる",
+        "USERPRINCIPALNAME を使った動的RLSを実装できる",
+        "PATH / PATHCONTAINS で組織階層のRLSを実装できる",
+        "RLSが効かない経路（管理者、Analyze in Excel、複合モデル）を把握できる"
+      ],
+      "prereq": [
+        "L1202"
+      ],
+      "unlocks": "RLSが書けると、1つのセマンティックモデルを全社に配布するという運用が現実になる。",
+      "keywords": [
+        "行レベルセキュリティ",
+        "RLS",
+        "ロール",
+        "USERPRINCIPALNAME",
+        "USERNAME",
+        "PATH",
+        "PATHCONTAINS",
+        "オブジェクトレベルセキュリティ"
+      ],
+      "pl300": [
+        "2.6 行レベルセキュリティ",
+        "4.4 アクセス権とセキュリティ"
+      ],
+      "ds": [
+        "アクセス制御",
+        "最小権限の原則",
+        "階層データの表現"
+      ],
+      "quiz": "L1204",
+      "lab": null,
+      "module": "M12",
+      "moduleTitle": "高度なモデリング",
+      "tier": "T3",
+      "level": "T3",
+      "order": 64,
+      "hasBody": true,
+      "figures": 9
+    },
+    {
+      "id": "L1205",
+      "title": "複合モデルと集計テーブル",
+      "minutes": 50,
+      "type": "concept",
+      "why": "10億行を全部インポートするのは無理、DirectQueryだけでは遅い。この板挟みを解くのが複合モデルと集計テーブルである。",
+      "gain": "テーブルごとのストレージモードを設計し、集計テーブルのヒットとミスの条件を説明できる。",
+      "objectives": [
+        "インポート/DirectQuery/デュアルの3モードを使い分けられる",
+        "集計テーブルの管理（集計の管理ダイアログ）の設定項目を説明できる",
+        "集計がヒットする条件とミスする条件を判定できる",
+        "制限付きリレーションシップが発生する条件と影響を説明できる"
+      ],
+      "prereq": [
+        "L1104"
+      ],
+      "unlocks": "ストレージ設計ができると、データ量を理由に諦めていた要件を引き受けられるようになる。",
+      "keywords": [
+        "複合モデル",
+        "ストレージモード",
+        "デュアル",
+        "集計テーブル",
+        "集計の管理",
+        "制限付きリレーションシップ",
+        "アグリゲーション"
+      ],
+      "pl300": [
+        "1.1 データソースへの接続",
+        "2.5 モデルの最適化",
+        "1.6 パフォーマンスを考慮した取り込み"
+      ],
+      "ds": [
+        "OLAPキューブと事前集計",
+        "クエリ書き換え",
+        "コストベース最適化"
+      ],
+      "quiz": "L1205",
+      "lab": null,
+      "module": "M12",
+      "moduleTitle": "高度なモデリング",
+      "tier": "T3",
+      "level": "T3",
+      "order": 65,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1206",
+      "title": "SCD（緩やかに変化する次元）と履歴管理",
+      "minutes": 50,
+      "type": "concept",
+      "why": "顧客がランクAからBに落ちたとき、過去の売上はどちらのランクで集計すべきか。ここを決めずに作ると、去年の数字が毎年変わるレポートができあがる。",
+      "gain": "Type1 / Type2 / Type3 を要件から選び、サロゲートキーで履歴を正しく参照するモデルを設計できる。",
+      "objectives": [
+        "SCDの各タイプで行がどう増えるかを表で説明できる",
+        "サロゲートキーとナチュラルキーを区別し、ファクトがどちらを持つべきか判断できる",
+        "有効期間列を使った時点参照のDAXを書ける",
+        "SCDをPower Query側で組む方法と、ソース側に持つべき理由を説明できる"
+      ],
+      "prereq": [
+        "L1201",
+        "L1105"
+      ],
+      "unlocks": "履歴を扱えると、「過去はあのときの姿で、現在は今の姿で」という高度な分析要求に応えられる。",
+      "keywords": [
+        "SCD",
+        "Type1",
+        "Type2",
+        "Type3",
+        "サロゲートキー",
+        "ナチュラルキー",
+        "有効期間",
+        "スナップショット"
+      ],
+      "pl300": [
+        "2.1 データモデルの設計",
+        "2.2 リレーションシップの構成",
+        "1.5 データの構造化"
+      ],
+      "ds": [
+        "スロー チェンジング ディメンション",
+        "サロゲートキー",
+        "バイテンポラルモデル",
+        "監査証跡"
+      ],
+      "quiz": "L1206",
+      "lab": null,
+      "module": "M12",
+      "moduleTitle": "高度なモデリング",
+      "tier": "T3",
+      "level": "T3",
+      "order": 66,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1301",
+      "title": "イテレータ関数 — SUMX・AVERAGEX・RANKX",
+      "minutes": 45,
+      "type": "concept",
+      "why": "「単価×数量の合計」を SUM で書いて数字がずれる事故は、実務で最も多いDAXの誤りである。行ごとに計算してから足すには、イテレータが要る。",
+      "gain": "SUM系とSUMX系を目的から選び分け、行単位の計算を正しく集計できる。",
+      "objectives": [
+        "イテレータ関数の2引数（テーブルと式）の役割を説明できる",
+        "SUM と SUMX の結果が一致する条件と一致しない条件を判定できる",
+        "AVERAGEX・MAXX・RANKX を実務の指標に適用できる"
+      ],
+      "prereq": [
+        "L0704"
+      ],
+      "unlocks": "行コンテキストを自分で作れるようになり、次のコンテキスト遷移の話が理解できる土台になる。",
+      "keywords": [
+        "イテレータ関数",
+        "SUMX",
+        "AVERAGEX",
+        "RANKX",
+        "行コンテキスト",
+        "ネイティブ列"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成",
+        "2.5 モデルの最適化"
+      ],
+      "ds": [
+        "ベクトル化演算",
+        "集約の順序",
+        "map-reduce"
+      ],
+      "quiz": "L1301",
+      "lab": null,
+      "module": "M13",
+      "moduleTitle": "DAX上級",
+      "tier": "T3",
+      "level": "T3",
+      "order": 67,
+      "hasBody": true,
+      "figures": 14
+    },
+    {
+      "id": "L1302",
+      "title": "コンテキスト遷移 — DAX最大の難関",
+      "minutes": 55,
+      "type": "concept",
+      "why": "「メジャーをイテレータの中で呼んだら結果が変わった」という現象の正体がこれ。ここを越えられない人がDAXで止まる。",
+      "gain": "CALCULATE が行コンテキストをフィルターコンテキストに変える瞬間を、式のどこで起きるか指差して説明できる。",
+      "objectives": [
+        "コンテキスト遷移の定義を1文で言える",
+        "メジャー参照が暗黙のCALCULATEを伴うことを説明できる",
+        "遷移が起きた後のフィルターコンテキストの中身を列挙できる"
+      ],
+      "prereq": [
+        "L1301"
+      ],
+      "unlocks": "ランキング・構成比・顧客単位の判定など、上級指標のほぼ全部が書けるようになる。",
+      "keywords": [
+        "コンテキスト遷移",
+        "暗黙のCALCULATE",
+        "CALCULATE",
+        "行コンテキスト",
+        "フィルターコンテキスト",
+        "EARLIER"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成"
+      ],
+      "ds": [
+        "スコープと束縛",
+        "評価戦略",
+        "クロージャ"
+      ],
+      "quiz": "L1302",
+      "lab": null,
+      "module": "M13",
+      "moduleTitle": "DAX上級",
+      "tier": "T3",
+      "level": "T3",
+      "order": 68,
+      "hasBody": true,
+      "figures": 14
+    },
+    {
+      "id": "L1303",
+      "title": "テーブル関数 — VALUES・SUMMARIZE・ADDCOLUMNS・SELECTCOLUMNS",
+      "minutes": 50,
+      "type": "concept",
+      "why": "DAXの上級者は「テーブルを作ってから集計する」。この発想がないと、複雑な要件を1本のメジャーに押し込んで破綻する。",
+      "gain": "中間テーブルを自分で組み立て、その上で集計するメジャーを設計できる。",
+      "objectives": [
+        "スカラー関数とテーブル関数を区別できる",
+        "VALUES・DISTINCT・SUMMARIZE の返すテーブルを予測できる",
+        "SUMMARIZE + ADDCOLUMNS の推奨形を書ける"
+      ],
+      "prereq": [
+        "L1302"
+      ],
+      "unlocks": "仮想テーブルを扱えるようになり、集合演算・仮想リレーションへ進める。",
+      "keywords": [
+        "テーブル関数",
+        "VALUES",
+        "DISTINCT",
+        "SUMMARIZE",
+        "ADDCOLUMNS",
+        "SELECTCOLUMNS",
+        "SUMMARIZECOLUMNS",
+        "データ系列"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成",
+        "3.5 データの探索と分析"
+      ],
+      "ds": [
+        "リレーショナル代数",
+        "射影と選択",
+        "中間結果"
+      ],
+      "quiz": "L1303",
+      "lab": null,
+      "module": "M13",
+      "moduleTitle": "DAX上級",
+      "tier": "T3",
+      "level": "T3",
+      "order": 69,
+      "hasBody": true,
+      "figures": 14
+    },
+    {
+      "id": "L1304",
+      "title": "集合演算と仮想リレーション — UNION・EXCEPT・TREATAS",
+      "minutes": 45,
+      "type": "concept",
+      "why": "リレーションを張れない・張りたくない場面は実務に必ず出る。予算と実績、離脱顧客の抽出、粒度違いの突合はここで解決する。",
+      "gain": "モデルにリレーションを追加せずに、DAX側でフィルターを橋渡しできる。",
+      "objectives": [
+        "UNION・EXCEPT・INTERSECT の列対応ルールを説明できる",
+        "TREATAS が何をしているかを図で示せる",
+        "仮想リレーションと物理リレーションを使い分けられる"
+      ],
+      "prereq": [
+        "L1303"
+      ],
+      "unlocks": "予算実績比較・離脱分析・粒度違いの結合といった実務要件を、モデルを汚さずに実装できる。",
+      "keywords": [
+        "UNION",
+        "EXCEPT",
+        "INTERSECT",
+        "TREATAS",
+        "仮想リレーション",
+        "GENERATE",
+        "CROSSJOIN",
+        "NATURALINNERJOIN"
+      ],
+      "pl300": [
+        "2.2 リレーションシップの構成",
+        "2.3 計算列とメジャーの作成"
+      ],
+      "ds": [
+        "集合演算",
+        "直積",
+        "セミジョイン"
+      ],
+      "quiz": "L1304",
+      "lab": null,
+      "module": "M13",
+      "moduleTitle": "DAX上級",
+      "tier": "T3",
+      "level": "T3",
+      "order": 70,
+      "hasBody": true,
+      "figures": 15
+    },
+    {
+      "id": "L1305",
+      "title": "実務パターン集 — 構成比・累計・ランキング・ABC分析・コホート",
+      "minutes": 60,
+      "type": "hands-on",
+      "why": "現場で求められる指標は、実はパターンが決まっている。型を持っていれば、要件を聞いた瞬間に骨組みが浮かぶ。",
+      "gain": "構成比・累計・前年比・ランキング・ABC分析・新規既存・コホート・目標達成率を、コピーして使える形で実装できる。",
+      "objectives": [
+        "ALLSELECTED を使った構成比を正しく書ける",
+        "累計とランキングの定番形を暗記せず導出できる",
+        "顧客の初回購入日を使った新規／既存判定を実装できる"
+      ],
+      "prereq": [
+        "L1304"
+      ],
+      "unlocks": "指標の依頼に対して、設計を即答できるレベルの引き出しが手に入る。",
+      "keywords": [
+        "構成比",
+        "累計",
+        "ランキング",
+        "ABC分析",
+        "パレート",
+        "コホート分析",
+        "リテンション",
+        "動的タイトル",
+        "色メジャー"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成",
+        "2.4 タイムインテリジェンス",
+        "3.5 データの探索と分析"
+      ],
+      "ds": [
+        "パレートの法則",
+        "コホート分析",
+        "RFM分析",
+        "累積分布"
+      ],
+      "quiz": "L1305",
+      "lab": null,
+      "module": "M13",
+      "moduleTitle": "DAX上級",
+      "tier": "T3",
+      "level": "T3",
+      "order": 71,
+      "hasBody": true,
+      "figures": 13
+    },
+    {
+      "id": "L1306",
+      "title": "DAXのよくある間違い20選",
+      "minutes": 60,
+      "type": "drill",
+      "why": "上級者と初級者を分けるのは知識量ではなく、踏まない地雷の数である。ここに挙げた20個が実務の事故のほぼ全部を占める。",
+      "gain": "自分のDAXを見直して、20個の典型的な誤りを自力で検出・修正できる。",
+      "objectives": [
+        "症状から原因を逆引きできる",
+        "誤ったコードを正しい形に書き換えられる",
+        "なぜその挙動になるのかを評価順序で説明できる"
+      ],
+      "prereq": [
+        "L1305"
+      ],
+      "unlocks": "レビューする側に回れる。他人のDAXの問題点を根拠つきで指摘できる。",
+      "keywords": [
+        "FILTER",
+        "KEEPFILTERS",
+        "DIVIDE",
+        "BLANK",
+        "双方向フィルター",
+        "循環依存",
+        "データ系列",
+        "USERELATIONSHIP"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成",
+        "2.5 モデルの最適化"
+      ],
+      "ds": [
+        "ゼロ除算",
+        "欠測値の伝播",
+        "アンチパターン"
+      ],
+      "quiz": "L1306",
+      "lab": null,
+      "module": "M13",
+      "moduleTitle": "DAX上級",
+      "tier": "T3",
+      "level": "T3",
+      "order": 72,
+      "hasBody": true,
+      "figures": 9
+    },
+    {
+      "id": "L1401",
+      "title": "VertiPaqの仕組み — なぜ速いのか",
+      "minutes": 45,
+      "type": "concept",
+      "why": "「なぜ数億行が一瞬で集計できるのか」を知らないと、遅くなったときに何を直せばいいか分からない。速さの理由が、そのまま最適化の指針になる。",
+      "gain": "列指向ストレージと圧縮の仕組みを説明し、どんなデータが速くなるか予測できる。",
+      "objectives": [
+        "行指向と列指向の違いを図で説明できる",
+        "辞書符号化・値符号化・RLEの3つを区別できる",
+        "圧縮率がカーディナリティと並び順に依存する理由を言える"
+      ],
+      "prereq": [
+        "L0605"
+      ],
+      "unlocks": "モデルサイズを削る具体策が、原理から導けるようになる。",
+      "keywords": [
+        "VertiPaq",
+        "列指向ストレージ",
+        "辞書符号化",
+        "値符号化",
+        "ランレングス符号化",
+        "セグメント",
+        "圧縮率"
+      ],
+      "pl300": [
+        "2.5 モデルの最適化",
+        "1.6 パフォーマンスを考慮した取り込み"
+      ],
+      "ds": [
+        "列指向データベース",
+        "データ圧縮",
+        "エントロピー",
+        "OLAP"
+      ],
+      "quiz": "L1401",
+      "lab": null,
+      "module": "M14",
+      "moduleTitle": "パフォーマンス",
+      "tier": "T3",
+      "level": "T3",
+      "order": 73,
+      "hasBody": true,
+      "figures": 17
+    },
+    {
+      "id": "L1402",
+      "title": "カーディナリティとモデルサイズ — 何が容量を食うのか",
+      "minutes": 45,
+      "type": "concept",
+      "why": "モデルが1GBを超えて更新に失敗する。原因はたいてい1本か2本の列である。犯人の見つけ方には型がある。",
+      "gain": "どの列がモデルサイズを食っているかを特定し、根拠を持って削減できる。",
+      "objectives": [
+        "カーディナリティを1文で説明できる",
+        "サイズを食う列の典型5パターンを挙げられる",
+        "日時列の分割など具体的な削減策を実行できる"
+      ],
+      "prereq": [
+        "L1401"
+      ],
+      "unlocks": "モデルが軽くなり、更新時間・クエリ時間・メモリ消費が同時に改善する。",
+      "keywords": [
+        "カーディナリティ",
+        "一意な値の数",
+        "DAX Studio VertiPaq Analyzer",
+        "サロゲートキー",
+        "日時列の分割",
+        "計算列のコスト"
+      ],
+      "pl300": [
+        "2.5 モデルの最適化",
+        "1.6 パフォーマンスを考慮した取り込み"
+      ],
+      "ds": [
+        "カーディナリティ",
+        "情報量",
+        "次元削減",
+        "データ型とビット幅"
+      ],
+      "quiz": "L1402",
+      "lab": null,
+      "module": "M14",
+      "moduleTitle": "パフォーマンス",
+      "tier": "T3",
+      "level": "T3",
+      "order": 74,
+      "hasBody": true,
+      "figures": 17
+    },
+    {
+      "id": "L1403",
+      "title": "ストレージエンジンと数式エンジン — 遅さの正体",
+      "minutes": 50,
+      "type": "concept",
+      "why": "同じ結果を返す2つのメジャーで、実行時間が100倍違うことがある。差はSEとFEのどちらが働いているかで決まる。",
+      "gain": "クエリがSEとFEをどう往復するかを追い、遅さの原因をどちらかに切り分けられる。",
+      "objectives": [
+        "SEとFEの役割と得意不得意を説明できる",
+        "CallbackDataIDが出る条件と対処を言える",
+        "マテリアライゼーションが起きる場所を特定できる"
+      ],
+      "prereq": [
+        "L1402"
+      ],
+      "unlocks": "計測結果を読んで、書き換えるべき箇所を一点に絞れるようになる。",
+      "keywords": [
+        "ストレージエンジン",
+        "数式エンジン",
+        "xmSQL",
+        "CallbackDataID",
+        "マテリアライゼーション",
+        "SEキャッシュ",
+        "並列実行"
+      ],
+      "pl300": [
+        "2.5 モデルの最適化"
+      ],
+      "ds": [
+        "クエリ実行計画",
+        "ベクトル化",
+        "キャッシュ局所性",
+        "計算量"
+      ],
+      "quiz": "L1403",
+      "lab": null,
+      "module": "M14",
+      "moduleTitle": "パフォーマンス",
+      "tier": "T3",
+      "level": "T3",
+      "order": 75,
+      "hasBody": true,
+      "figures": 13
+    },
+    {
+      "id": "L1404",
+      "title": "計測する — パフォーマンスアナライザーとDAX Studio",
+      "minutes": 50,
+      "type": "hands-on",
+      "why": "推測で最適化すると、直っていないのに直った気になる。プロは必ず数字で前後を比べる。",
+      "gain": "遅いビジュアルを特定し、そのDAXクエリをDAX Studioで再現して計測できる。",
+      "objectives": [
+        "パフォーマンスアナライザーの3つの内訳を読める",
+        "Server Timings の SE/FE/行数を解釈できる",
+        "Clear Cache を使って再現性のある計測ができる"
+      ],
+      "prereq": [
+        "L1403"
+      ],
+      "unlocks": "改善の効果を数字で示せるので、チームに説明できる最適化ができる。",
+      "keywords": [
+        "パフォーマンスアナライザー",
+        "DAX Studio",
+        "Server Timings",
+        "Query Plan",
+        "Clear Cache",
+        "コールドキャッシュ",
+        "ウォームキャッシュ"
+      ],
+      "pl300": [
+        "2.5 モデルの最適化",
+        "3.1 レポートの作成"
+      ],
+      "ds": [
+        "ベンチマーク",
+        "プロファイリング",
+        "再現性",
+        "中央値と外れ値"
+      ],
+      "quiz": "L1404",
+      "lab": null,
+      "module": "M14",
+      "moduleTitle": "パフォーマンス",
+      "tier": "T3",
+      "level": "T3",
+      "order": 76,
+      "hasBody": true,
+      "figures": 16
+    },
+    {
+      "id": "L1405",
+      "title": "レポート最適化 — ビジュアル・クエリ・更新",
+      "minutes": 45,
+      "type": "hands-on",
+      "why": "モデルが軽くてもレポートは遅くなる。1ページに20個のビジュアルを置けば、20本のクエリが同時に走るからである。",
+      "gain": "ページ設計・ビジュアル数・スライサー・更新方式を、性能の観点から設計できる。",
+      "objectives": [
+        "1ページあたりのビジュアル数の目安と理由を言える",
+        "遅いビジュアルの典型と代替案を挙げられる",
+        "増分更新と集計テーブルの適用条件を判断できる"
+      ],
+      "prereq": [
+        "L1404"
+      ],
+      "unlocks": "モデルとレポートの両面から性能を設計でき、上級の到達点に届く。",
+      "keywords": [
+        "ビジュアル数",
+        "既定の相互作用",
+        "スライサーの選択",
+        "増分更新",
+        "集計テーブル",
+        "自動日付テーブル",
+        "クエリ削減オプション"
+      ],
+      "pl300": [
+        "2.5 モデルの最適化",
+        "3.1 レポートの作成",
+        "4.3 データ更新の管理"
+      ],
+      "ds": [
+        "並列度",
+        "レイテンシとスループット",
+        "パーティショニング",
+        "事前集計"
+      ],
+      "quiz": "L1405",
+      "lab": null,
+      "module": "M14",
+      "moduleTitle": "パフォーマンス",
+      "tier": "T3",
+      "level": "T3",
+      "order": 77,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1501",
+      "title": "記述統計 — 分布を見ずに平均を語るな",
+      "minutes": 45,
+      "type": "concept",
+      "why": "現場のレポートの9割は平均と合計しか載っていない。だが平均が同じでも中身がまったく違うデータは山ほどあり、平均だけを見た意思決定は静かに外れ続ける。",
+      "gain": "データを代表値・ばらつき・分布形の3点セットで説明でき、Power BIでヒストグラムと四分位を作れる。",
+      "objectives": [
+        "平均・中央値・最頻値を使い分ける基準を説明できる",
+        "標準偏差と四分位範囲の意味を数値例で説明できる",
+        "Power Queryとカスタムメジャーでヒストグラムを作れる",
+        "外れ値を「消す」のではなく「扱う」判断ができる"
+      ],
+      "prereq": [
+        "L0104",
+        "L0704"
+      ],
+      "unlocks": "分布を語れるようになると、相関・時系列・予測のすべてが「分布の変化」として読めるようになる。",
+      "keywords": [
+        "記述統計",
+        "中央値",
+        "標準偏差",
+        "四分位範囲",
+        "ヒストグラム",
+        "外れ値",
+        "歪度"
+      ],
+      "pl300": [
+        "3.5 データの探索と分析",
+        "2.3 計算列とメジャーの作成"
+      ],
+      "ds": [
+        "記述統計",
+        "分布",
+        "ロバスト統計",
+        "パーセンタイル"
+      ],
+      "quiz": "L1501",
+      "lab": null,
+      "module": "M15",
+      "moduleTitle": "分析手法とデータサイエンス",
+      "tier": "T3",
+      "level": "T3",
+      "order": 78,
+      "hasBody": true,
+      "figures": 14
+    },
+    {
+      "id": "L1502",
+      "title": "相関と因果 — 交絡・選択バイアス・シンプソンのパラドックス",
+      "minutes": 45,
+      "type": "concept",
+      "why": "「広告費と売上に相関がある」から「広告を増やせば売れる」へ飛ぶ資料が毎日どこかで作られている。その飛躍は交絡と選択バイアスで簡単に裏返る。",
+      "gain": "相関係数を正しく読み、因果を主張する前に交絡・選択バイアス・層別を点検できる。",
+      "objectives": [
+        "相関係数が捉えるもの／捉えないものを説明できる",
+        "交絡変数の存在を図で示し、層別で確認できる",
+        "シンプソンのパラドックスを数値例で再現できる",
+        "DAXで相関係数を計算し、散布図と分解ツリーで検証できる"
+      ],
+      "prereq": [
+        "L1501"
+      ],
+      "unlocks": "因果の点検ができると、効果検証（A/Bテスト）の設計とレビューができるようになる。",
+      "keywords": [
+        "相関係数",
+        "交絡",
+        "選択バイアス",
+        "シンプソンのパラドックス",
+        "層別",
+        "生存者バイアス"
+      ],
+      "pl300": [
+        "3.5 データの探索と分析",
+        "3.6 AI ビジュアルの活用"
+      ],
+      "ds": [
+        "相関と因果",
+        "交絡変数",
+        "層別解析",
+        "因果推論"
+      ],
+      "quiz": "L1502",
+      "lab": null,
+      "module": "M15",
+      "moduleTitle": "分析手法とデータサイエンス",
+      "tier": "T3",
+      "level": "T3",
+      "order": 79,
+      "hasBody": true,
+      "figures": 13
+    },
+    {
+      "id": "L1503",
+      "title": "時系列分析 — トレンド・季節性・移動平均・異常検知",
+      "minutes": 50,
+      "type": "concept",
+      "why": "「今月は売上が落ちた」の大半は季節性で説明がつく。分解せずに前月比だけを見ると、毎年同じ月に同じ間違った危機感を持つことになる。",
+      "gain": "時系列をトレンド・季節性・残差に分解し、移動平均とZスコアで異常を検知するメジャーを書ける。",
+      "objectives": [
+        "時系列の3成分（トレンド・季節性・残差）を説明できる",
+        "移動平均・前年同月比・指数平滑を使い分けられる",
+        "DAXで中心化移動平均と季節指数を計算できる",
+        "Zスコアと箱ひげ法で異常値を検知するメジャーを書ける"
+      ],
+      "prereq": [
+        "L0806",
+        "L1501"
+      ],
+      "unlocks": "分解できるようになると、予測モデルの前提（何が続き、何が繰り返すか）を自分で検証できる。",
+      "keywords": [
+        "トレンド",
+        "季節性",
+        "残差",
+        "移動平均",
+        "季節調整",
+        "指数平滑",
+        "Zスコア",
+        "異常検知"
+      ],
+      "pl300": [
+        "3.5 データの探索と分析",
+        "2.4 タイムインテリジェンス",
+        "2.3 計算列とメジャーの作成"
+      ],
+      "ds": [
+        "時系列分解",
+        "季節調整",
+        "スムージング",
+        "異常検知"
+      ],
+      "quiz": "L1503",
+      "lab": null,
+      "module": "M15",
+      "moduleTitle": "分析手法とデータサイエンス",
+      "tier": "T3",
+      "level": "T3",
+      "order": 80,
+      "hasBody": true,
+      "figures": 12
+    },
+    {
+      "id": "L1504",
+      "title": "顧客分析 — コホート・RFM・LTV・チャーン",
+      "minutes": 50,
+      "type": "hands-on",
+      "why": "「今月の新規顧客数」を追いかけても、離脱が同じ数だけ起きていれば事業は1ミリも伸びていない。顧客を集団（コホート）で追うと、それが一目で分かる。",
+      "gain": "コホート表・RFMセグメント・LTV・チャーン率をPower QueryとDAXで実装できる。",
+      "objectives": [
+        "コホート表を作り、リテンションカーブを読める",
+        "RFMの3軸を四分位でスコア化し、9セグメントに分類できる",
+        "LTVの単純式と割引付き式の違いを説明できる",
+        "打ち切りデータと生存者バイアスを避けた集計ができる"
+      ],
+      "prereq": [
+        "L1305",
+        "L1501"
+      ],
+      "unlocks": "顧客を集団で見られるようになると、施策の対象を「全員」ではなく「効く層」に絞れる。",
+      "keywords": [
+        "コホート分析",
+        "リテンション",
+        "RFM分析",
+        "LTV",
+        "チャーン率",
+        "打ち切りデータ"
+      ],
+      "pl300": [
+        "3.5 データの探索と分析",
+        "2.3 計算列とメジャーの作成",
+        "1.5 データの構造化"
+      ],
+      "ds": [
+        "コホート分析",
+        "顧客生涯価値",
+        "生存時間分析",
+        "セグメンテーション"
+      ],
+      "quiz": "L1504",
+      "lab": null,
+      "module": "M15",
+      "moduleTitle": "分析手法とデータサイエンス",
+      "tier": "T3",
+      "level": "T3",
+      "order": 81,
+      "hasBody": true,
+      "figures": 10
+    },
+    {
+      "id": "L1505",
+      "title": "予測と不確実性 — 予測値に幅を持たせる",
+      "minutes": 45,
+      "type": "concept",
+      "why": "予測を1本の線で出すと、外れた瞬間に「予測は当たらない」と切り捨てられる。幅で出した予測だけが、意思決定に使われ続ける。",
+      "gain": "Power BIの予測機能と誤差指標を使い、点予測ではなく区間予測とシナリオで意思決定を支えられる。",
+      "objectives": [
+        "点予測と区間予測の違いを説明できる",
+        "MAE・RMSE・MAPEを使い分けられる",
+        "分析ペインの予測とバックテストで精度を検証できる",
+        "What-ifパラメータで楽観・標準・悲観シナリオを作れる"
+      ],
+      "prereq": [
+        "L1503"
+      ],
+      "unlocks": "不確実性を出せるようになると、予測が「当てもの」ではなく「意思決定の道具」になる。",
+      "keywords": [
+        "点予測",
+        "予測区間",
+        "指数平滑",
+        "MAPE",
+        "RMSE",
+        "バックテスト",
+        "What-ifパラメータ"
+      ],
+      "pl300": [
+        "3.5 データの探索と分析",
+        "3.6 AI ビジュアルの活用",
+        "2.3 計算列とメジャーの作成"
+      ],
+      "ds": [
+        "予測モデル",
+        "不確実性の定量化",
+        "モデル評価指標",
+        "交差検証"
+      ],
+      "quiz": "L1505",
+      "lab": null,
+      "module": "M15",
+      "moduleTitle": "分析手法とデータサイエンス",
+      "tier": "T3",
+      "level": "T3",
+      "order": 82,
+      "hasBody": true,
+      "figures": 13
+    },
+    {
+      "id": "L1506",
+      "title": "効果検証の基礎 — A/Bテストと因果推論の入口",
+      "minutes": 45,
+      "type": "concept",
+      "why": "施策の前後で数字が上がったから成功、という報告は、季節性・平均への回帰・自己選択のどれか1つで簡単に崩れる。効果を主張するには設計がいる。",
+      "gain": "A/Bテストを設計・レビューでき、前後比較しかできない場面でも差分の差分で近似できる。",
+      "objectives": [
+        "ランダム化がなぜ因果を保証するのかを説明できる",
+        "p値と信頼区間の意味を正しく述べ、誤用を指摘できる",
+        "必要サンプルサイズの決まり方を説明できる",
+        "差分の差分法をPower BIのメジャーで実装できる"
+      ],
+      "prereq": [
+        "L1502",
+        "L1505"
+      ],
+      "unlocks": "効果検証ができると、レポート作成者から「意思決定に責任を持つ分析者」に立場が変わる。",
+      "keywords": [
+        "A/Bテスト",
+        "ランダム化",
+        "p値",
+        "信頼区間",
+        "検出力",
+        "差分の差分法",
+        "平均への回帰"
+      ],
+      "pl300": [
+        "3.5 データの探索と分析"
+      ],
+      "ds": [
+        "実験計画法",
+        "仮説検定",
+        "統計的有意性",
+        "因果推論"
+      ],
+      "quiz": "L1506",
+      "lab": null,
+      "module": "M15",
+      "moduleTitle": "分析手法とデータサイエンス",
+      "tier": "T3",
+      "level": "T3",
+      "order": 83,
+      "hasBody": true,
+      "figures": 13
+    },
+    {
+      "id": "L1601",
+      "title": "PL-300の全体像 — 4領域と採点の仕組み",
+      "minutes": 35,
+      "type": "exam",
+      "why": "試験は範囲が公開されている。どこが何％で、自分がどこを落としているかを知らないまま勉強するのは、地図なしで山に登るのと同じ。",
+      "gain": "4領域24スキル項目の全体像を把握し、各項目が本教材のどのレッスンに対応するかを自己診断表として使える。",
+      "objectives": [
+        "4領域の配点比率と出題の重心を説明できる",
+        "24スキル項目を一覧し、自分の弱点を特定できる",
+        "スケールスコア700という合格基準の意味を説明できる",
+        "問題形式（単一選択・複数選択・ドラッグ&ドロップ・ケーススタディ）を把握する"
+      ],
+      "prereq": [
+        "L1005"
+      ],
+      "unlocks": "自分の弱点が特定できると、残りの学習時間を最も点になる場所へ配分できる。",
+      "keywords": [
+        "PL-300",
+        "スキル項目",
+        "スケールスコア",
+        "ケーススタディ",
+        "出題範囲"
+      ],
+      "pl300": [
+        "1.1 データソースへの接続",
+        "2.1 データモデルの設計",
+        "3.1 レポートの作成",
+        "4.1 ワークスペースの管理"
+      ],
+      "ds": [],
+      "quiz": "L1601",
+      "lab": null,
+      "module": "M16",
+      "moduleTitle": "PL-300 完全対策",
+      "tier": "T3",
+      "level": "T3",
+      "order": 84,
+      "hasBody": true,
+      "figures": 12
+    },
+    {
+      "id": "L1602",
+      "title": "領域1・2 総復習 — データの準備とモデル化",
+      "minutes": 50,
+      "type": "exam",
+      "why": "領域1と2で合計50〜60％を占める。ここを固めずに合格した人はいない。しかも実務でも一番使う。",
+      "gain": "データの準備とモデル化の全12スキル項目について、迷う論点を比較表で即答できる。",
+      "objectives": [
+        "接続方式・フォールディング・増分更新の判断基準を即答できる",
+        "スタースキーマ・基数・双方向・多対多の使い分けを説明できる",
+        "計算列とメジャー、DAXとMの使い分けを判断できる",
+        "RLSの実装手順とロールの評価順序を説明できる"
+      ],
+      "prereq": [
+        "L1601"
+      ],
+      "unlocks": "領域1・2が安定すると、残り時間を領域3・4の暗記系に集中できる。",
+      "keywords": [
+        "接続方式",
+        "クエリフォールディング",
+        "スタースキーマ",
+        "双方向フィルター",
+        "RLS",
+        "計算グループ"
+      ],
+      "pl300": [
+        "1.1 データソースへの接続",
+        "1.2 データの取得と変換",
+        "1.3 データのプロファイリング",
+        "1.4 データのクリーニング",
+        "1.5 データの構造化",
+        "1.6 パフォーマンスを考慮した取り込み",
+        "2.1 データモデルの設計",
+        "2.2 リレーションシップの構成",
+        "2.3 計算列とメジャーの作成",
+        "2.4 タイムインテリジェンス",
+        "2.5 モデルの最適化",
+        "2.6 行レベルセキュリティ"
+      ],
+      "ds": [],
+      "quiz": "L1602",
+      "lab": null,
+      "module": "M16",
+      "moduleTitle": "PL-300 完全対策",
+      "tier": "T3",
+      "level": "T3",
+      "order": 85,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1603",
+      "title": "領域3・4 総復習 — 視覚化と資産管理",
+      "minutes": 50,
+      "type": "exam",
+      "why": "領域3・4は「知っていれば取れる」問題が多い。逆に、機能名を1つ知らないだけで確実に落とす。取りこぼしが一番もったいない領域。",
+      "gain": "視覚化と資産管理の全12スキル項目について、機能名と使いどころを対応づけて即答できる。",
+      "objectives": [
+        "ビジュアルの選択・対話機能・ドリルの違いを即答できる",
+        "アクセシビリティとモバイル対応の必須設定を挙げられる",
+        "ワークスペースの4ロールとアプリ配布の使い分けを説明できる",
+        "ゲートウェイ・更新・エンドースメント・秘密度ラベルを整理できる"
+      ],
+      "prereq": [
+        "L1602"
+      ],
+      "unlocks": "領域3・4を取りこぼさなくなると、領域1・2で多少落としても合格ラインを越えられる。",
+      "keywords": [
+        "ドリルスルー",
+        "相互作用の編集",
+        "アプリ",
+        "ワークスペースロール",
+        "ゲートウェイ",
+        "エンドースメント",
+        "秘密度ラベル"
+      ],
+      "pl300": [
+        "3.1 レポートの作成",
+        "3.2 ビジュアルの選択と構成",
+        "3.3 対話機能の設定",
+        "3.4 レポートの書式とアクセシビリティ",
+        "3.5 データの探索と分析",
+        "3.6 AI ビジュアルの活用",
+        "3.7 モバイル対応",
+        "4.1 ワークスペースの管理",
+        "4.2 セマンティックモデルの管理",
+        "4.3 データ更新の管理",
+        "4.4 アクセス権とセキュリティ",
+        "4.5 ガバナンスとライフサイクル"
+      ],
+      "ds": [],
+      "quiz": "L1603",
+      "lab": null,
+      "module": "M16",
+      "moduleTitle": "PL-300 完全対策",
+      "tier": "T3",
+      "level": "T3",
+      "order": 86,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1604",
+      "title": "頻出パターン30 — 問題文のキーワードから正解を導く",
+      "minutes": 60,
+      "type": "drill",
+      "why": "PL-300の問題文には決まった言い回しがある。「最小限の労力で」「常に最新の」「将来の列にも」——この表現を見た瞬間に選択肢が2つに絞れる。",
+      "gain": "問題文のキーワード30パターンから、正解の方向を即座に決められる。",
+      "objectives": [
+        "「最小限の労力」「常に最新」などの定型表現と正解の対応を暗記する",
+        "似た選択肢が並んだときの切り分け基準を持つ",
+        "ひっかけ選択肢の作られ方を理解する",
+        "30パターンの例題を自力で解ける"
+      ],
+      "prereq": [
+        "L1603"
+      ],
+      "unlocks": "パターンで解けるようになると、迷う時間が減り、ケーススタディに時間を回せる。",
+      "keywords": [
+        "最小限の労力",
+        "DirectQuery",
+        "その他の列のピボット解除",
+        "アプリ",
+        "RLS",
+        "デプロイパイプライン"
+      ],
+      "pl300": [
+        "1.1 データソースへの接続",
+        "1.5 データの構造化",
+        "1.6 パフォーマンスを考慮した取り込み",
+        "2.2 リレーションシップの構成",
+        "2.4 タイムインテリジェンス",
+        "2.6 行レベルセキュリティ",
+        "3.3 対話機能の設定",
+        "4.4 アクセス権とセキュリティ"
+      ],
+      "ds": [],
+      "quiz": "L1604",
+      "lab": null,
+      "module": "M16",
+      "moduleTitle": "PL-300 完全対策",
+      "tier": "T3",
+      "level": "T3",
+      "order": 87,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1605",
+      "title": "学習計画と当日戦略 — 直前2週間の使い方",
+      "minutes": 35,
+      "type": "exam",
+      "why": "実力があるのに落ちる人の理由は、時間配分の失敗とケーススタディの読み方にある。準備できることを準備してから受ける。",
+      "gain": "8週間／3週間の学習計画を立て、当日の時間配分と見直し手順を決めた状態で試験に臨める。",
+      "objectives": [
+        "8週間プランと3週間プランを自分の状況で選べる",
+        "直前2週間を日割りで消化できる",
+        "本番の時間配分とフラグ運用を決められる",
+        "ケーススタディの読み方の手順を説明できる"
+      ],
+      "prereq": [
+        "L1604"
+      ],
+      "unlocks": "計画が決まると、あとは実行するだけになる。合格後はティア4で設計をリードする側へ進む。",
+      "keywords": [
+        "学習計画",
+        "模擬試験",
+        "時間配分",
+        "見直し",
+        "ケーススタディ",
+        "再受験ポリシー"
+      ],
+      "pl300": [],
+      "ds": [],
+      "quiz": "L1605",
+      "lab": null,
+      "module": "M16",
+      "moduleTitle": "PL-300 完全対策",
+      "tier": "T3",
+      "level": "T3",
+      "order": 88,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1701",
+      "title": "BIアーキテクチャの全体像 — ソースから利用まで",
+      "minutes": 55,
+      "type": "concept",
+      "why": "レポート単位で場当たりに作り続けた組織は、必ず「同じ変換が50個のpbixに散らばり、誰も直せない」状態になる。全体像を持つ人がいないと、その日は必ず来る。",
+      "gain": "BI基盤を5つの層に分解し、どの処理をどの層に置くかを根拠つきで決められる。",
+      "objectives": [
+        "BIアーキテクチャの5層とそれぞれの責務を説明できる",
+        "集中型・分散型・ハブアンドスポークの適用条件を判定できる",
+        "処理の配置先を層の責務から導き出せる"
+      ],
+      "prereq": [
+        "L1605"
+      ],
+      "unlocks": "個別の技術選択（データフロー・モデル分割・Fabric）を、全体設計の中の一手として位置づけられるようになる。",
+      "keywords": [
+        "BIアーキテクチャ",
+        "レイヤー分離",
+        "ハブアンドスポーク",
+        "データメッシュ",
+        "データファブリック",
+        "SLO",
+        "セルフサービスBI",
+        "エンタープライズBI"
+      ],
+      "pl300": [
+        "4.1 ワークスペースの管理",
+        "4.5 ガバナンスとライフサイクル"
+      ],
+      "ds": [
+        "データアーキテクチャ",
+        "関心の分離",
+        "データメッシュ",
+        "SLA/SLO"
+      ],
+      "quiz": "L1701",
+      "lab": null,
+      "module": "M17",
+      "moduleTitle": "エンタープライズ アーキテクチャ",
+      "tier": "T4",
+      "level": "T4",
+      "order": 89,
+      "hasBody": true,
+      "figures": 14
+    },
+    {
+      "id": "L1702",
+      "title": "セマンティックモデルの分割戦略 — 何を1つにまとめるか",
+      "minutes": 55,
+      "type": "concept",
+      "why": "「売上」の数字が部署ごとに違う、という事故の原因はほぼ全部ここにある。モデルの境界をどこに引くかは、組織の数字の一貫性を決める設計判断である。",
+      "gain": "業務ドメイン・所有者・更新頻度・セキュリティ境界からモデルの分割単位を決定できる。",
+      "objectives": [
+        "1つのモデルにまとめるべき条件と分けるべき条件を5つずつ挙げられる",
+        "共有セマンティックモデルとレポート専用モデルを使い分けられる",
+        "コンフォームドディメンションの必要性を説明できる"
+      ],
+      "prereq": [
+        "L1701"
+      ],
+      "unlocks": "組織で「信頼できる1つの数字」を作る土台ができ、ガバナンスの議論が具体的になる。",
+      "keywords": [
+        "セマンティックモデル",
+        "モデル分割",
+        "共有セマンティックモデル",
+        "コンフォームドディメンション",
+        "バスマトリクス",
+        "複合モデル",
+        "DirectQuery for Power BI セマンティックモデル",
+        "シンレポート"
+      ],
+      "pl300": [
+        "2.1 データモデルの設計",
+        "4.2 セマンティックモデルの管理"
+      ],
+      "ds": [
+        "次元モデリング",
+        "マスターデータ管理",
+        "Single Source of Truth"
+      ],
+      "quiz": "L1702",
+      "lab": null,
+      "module": "M17",
+      "moduleTitle": "エンタープライズ アーキテクチャ",
+      "tier": "T4",
+      "level": "T4",
+      "order": 90,
+      "hasBody": true,
+      "figures": 12
+    },
+    {
+      "id": "L1703",
+      "title": "データフローとレイクハウス — 変換をどこで行うか",
+      "minutes": 50,
+      "type": "concept",
+      "why": "同じ「顧客マスタの整形」が20個のモデルに複製されている組織は珍しくない。変換の置き場所を決めないと、修正コストが利用者数に比例して増える。",
+      "gain": "1つの変換処理を、ソース・データフロー・レイクハウス・モデル内のどこに置くかを判断できる。",
+      "objectives": [
+        "変換の配置先5候補それぞれの長所と短所を挙げられる",
+        "メダリオンアーキテクチャの3層の役割を説明できる",
+        "再利用性・更新時間・所有者から配置を決められる"
+      ],
+      "prereq": [
+        "L1702"
+      ],
+      "unlocks": "変換ロジックが一箇所に集まり、モデルの更新時間とメンテナンス工数が同時に下がる。",
+      "keywords": [
+        "データフロー",
+        "Dataflow Gen2",
+        "ステージング",
+        "メダリオンアーキテクチャ",
+        "ブロンズ・シルバー・ゴールド",
+        "ELT",
+        "クエリフォールディング",
+        "拡張コンピューティングエンジン"
+      ],
+      "pl300": [
+        "1.2 データの取得と変換",
+        "1.6 パフォーマンスを考慮した取り込み"
+      ],
+      "ds": [
+        "ETLとELT",
+        "メダリオンアーキテクチャ",
+        "冪等性",
+        "データリネージ"
+      ],
+      "quiz": "L1703",
+      "lab": null,
+      "module": "M17",
+      "moduleTitle": "エンタープライズ アーキテクチャ",
+      "tier": "T4",
+      "level": "T4",
+      "order": 91,
+      "hasBody": true,
+      "figures": 13
+    },
+    {
+      "id": "L1704",
+      "title": "命名規則と標準化 — 100人が使えるモデルにする",
+      "minutes": 45,
+      "type": "concept",
+      "why": "作った本人だけが使えるモデルは、資産ではなく負債である。100人が迷わず使える状態にするのは、センスではなく規約の仕事だ。",
+      "gain": "命名規約・表示設計・メタデータ整備のルールを文書化し、モデルに適用できる。",
+      "objectives": [
+        "テーブル・列・メジャーの命名規約を設計できる",
+        "利用者から隠すべき要素を判断できる",
+        "データ品質の6次元でモデルの健全性を点検できる"
+      ],
+      "prereq": [
+        "L1703"
+      ],
+      "unlocks": "セルフサービス利用者が問い合わせなしに正しい列を選べるようになり、BIチームの工数が本来の設計に回せる。",
+      "keywords": [
+        "命名規約",
+        "表示フォルダー",
+        "メジャーテーブル",
+        "スタイルガイド",
+        "Power BI テンプレート",
+        "ベストプラクティスアナライザー",
+        "データディクショナリ",
+        "データ品質の6次元"
+      ],
+      "pl300": [
+        "2.1 データモデルの設計",
+        "4.5 ガバナンスとライフサイクル"
+      ],
+      "ds": [
+        "データ品質の6次元",
+        "メタデータ管理",
+        "データディクショナリ"
+      ],
+      "quiz": "L1704",
+      "lab": null,
+      "module": "M17",
+      "moduleTitle": "エンタープライズ アーキテクチャ",
+      "tier": "T4",
+      "level": "T4",
+      "order": 92,
+      "hasBody": true,
+      "figures": 13
+    },
+    {
+      "id": "L1705",
+      "title": "スケールする設計 — 大規模データと多数の利用者",
+      "minutes": 55,
+      "type": "concept",
+      "why": "「開発機では速かったのに本番で落ちる」の正体は、データ量と同時利用者数という2軸のスケールを設計していないことにある。",
+      "gain": "データ量軸と同時実行軸の両方に対して、取りうる打ち手を優先順位つきで選べる。",
+      "objectives": [
+        "データ量のスケール手段を4つ挙げ、適用条件を言える",
+        "同時利用者数が増えたときのボトルネックを説明できる",
+        "設計段階で容量消費を見積もる観点を挙げられる"
+      ],
+      "prereq": [
+        "L1704"
+      ],
+      "unlocks": "本番稼働後の性能事故を設計時点で潰せるようになり、容量計画の議論に参加できる。",
+      "keywords": [
+        "増分更新",
+        "ハイブリッドテーブル",
+        "集計テーブル",
+        "パーティション",
+        "クエリスケールアウト",
+        "カーディナリティ",
+        "同時実行",
+        "容量計画"
+      ],
+      "pl300": [
+        "2.5 モデルの最適化",
+        "4.3 データ更新の管理"
+      ],
+      "ds": [
+        "スケーラビリティ",
+        "パーティショニング",
+        "事前集計",
+        "待ち行列理論"
+      ],
+      "quiz": "L1705",
+      "lab": null,
+      "module": "M17",
+      "moduleTitle": "エンタープライズ アーキテクチャ",
+      "tier": "T4",
+      "level": "T4",
+      "order": 93,
+      "hasBody": true,
+      "figures": 13
+    },
+    {
+      "id": "L1801",
+      "title": "デプロイメントパイプラインと環境分離",
+      "minutes": 50,
+      "type": "concept",
+      "why": "本番のレポートを直接開いて直す運用は、必ずいつか全社に壊れた数字を配信する。環境を分けるのは臆病さではなく、変更を安全にする工学である。",
+      "gain": "開発・テスト・本番の3環境を設計し、デプロイ規則で接続先とパラメータを切り替えられる。",
+      "objectives": [
+        "環境分離が解決する具体的な事故を3つ挙げられる",
+        "デプロイメントパイプラインのデータソース規則とパラメータ規則を使い分けられる",
+        "承認ゲートを含む変更管理フローを設計できる"
+      ],
+      "prereq": [
+        "L1705"
+      ],
+      "unlocks": "変更を「試してから出す」流れが作れ、リリースが怖くなくなる。",
+      "keywords": [
+        "デプロイメントパイプライン",
+        "環境分離",
+        "デプロイ規則",
+        "データソース規則",
+        "パラメータ規則",
+        "変更管理",
+        "ロールバック",
+        "リリースノート"
+      ],
+      "pl300": [
+        "4.1 ワークスペースの管理",
+        "4.5 ガバナンスとライフサイクル"
+      ],
+      "ds": [
+        "変更管理",
+        "CI/CD",
+        "環境の等価性"
+      ],
+      "quiz": "L1801",
+      "lab": null,
+      "module": "M18",
+      "moduleTitle": "ガバナンスとライフサイクル",
+      "tier": "T4",
+      "level": "T4",
+      "order": 94,
+      "hasBody": true,
+      "figures": 11
+    },
+    {
+      "id": "L1802",
+      "title": "PBIP と Git — BIをソース管理する",
+      "minutes": 55,
+      "type": "concept",
+      "why": "「売上分析_最終_修正版2.pbix」が共有フォルダーに並ぶのは、バイナリ1ファイルで開発していることの必然的な結果である。テキストで管理できれば、BIはソフトウェア開発と同じ規律に乗る。",
+      "gain": "PBIP形式とGit統合でモデルとレポートをテキスト管理し、差分レビューできる。",
+      "objectives": [
+        "PBIXとPBIPの構造上の違いを説明できる",
+        "TMDLとPBIRが何を表すファイルか言える",
+        "BIに適したブランチ戦略とレビュー観点を設計できる"
+      ],
+      "prereq": [
+        "L1801"
+      ],
+      "unlocks": "変更履歴・レビュー・巻き戻しが手に入り、複数人開発が現実的になる。",
+      "keywords": [
+        "PBIP",
+        "TMDL",
+        "PBIR",
+        "Git統合",
+        "ブランチ戦略",
+        "プルリクエスト",
+        "ALM Toolkit",
+        "Tabular Editor",
+        "マージ競合"
+      ],
+      "pl300": [
+        "4.5 ガバナンスとライフサイクル",
+        "4.2 セマンティックモデルの管理"
+      ],
+      "ds": [
+        "バージョン管理",
+        "コードレビュー",
+        "Infrastructure as Code"
+      ],
+      "quiz": "L1802",
+      "lab": null,
+      "module": "M18",
+      "moduleTitle": "ガバナンスとライフサイクル",
+      "tier": "T4",
+      "level": "T4",
+      "order": 95,
+      "hasBody": true,
+      "figures": 11
+    },
+    {
+      "id": "L1803",
+      "title": "テストと品質保証 — BIにおけるテストとは何か",
+      "minutes": 55,
+      "type": "concept",
+      "why": "BIの不具合は落ちない。静かに間違った数字を出し続ける。だからテストは「動くか」ではなく「合っているか」を問う設計にしなければならない。",
+      "gain": "データ・計算・性能・表示の4層でテストを設計し、リリース前に自動で回せる形にできる。",
+      "objectives": [
+        "BIのテストを4種類に分類し、それぞれの検出対象を言える",
+        "DAXクエリビューでの計算テストを設計できる",
+        "受け入れ基準とリコンシリエーションの手順を作れる"
+      ],
+      "prereq": [
+        "L1802"
+      ],
+      "unlocks": "リリースの可否を主観ではなく合否で判断でき、品質が担当者の力量に依存しなくなる。",
+      "keywords": [
+        "データテスト",
+        "リコンシリエーション",
+        "DAXクエリビュー",
+        "ベストプラクティスアナライザー",
+        "回帰テスト",
+        "受け入れ基準",
+        "ゴールデンデータセット",
+        "参照整合性"
+      ],
+      "pl300": [
+        "4.5 ガバナンスとライフサイクル",
+        "2.5 モデルの最適化"
+      ],
+      "ds": [
+        "データ品質の6次元",
+        "テストピラミッド",
+        "回帰テスト",
+        "受け入れテスト"
+      ],
+      "quiz": "L1803",
+      "lab": null,
+      "module": "M18",
+      "moduleTitle": "ガバナンスとライフサイクル",
+      "tier": "T4",
+      "level": "T4",
+      "order": 96,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1804",
+      "title": "監査・秘密度ラベル・データ保護",
+      "minutes": 50,
+      "type": "concept",
+      "why": "誰が何を見たか説明できない基盤は、監査でも情報漏えい時でも組織を守れない。BIは組織で最も機密データが集まる場所だという自覚が要る。",
+      "gain": "アクティビティログ・秘密度ラベル・テナント設定を組み合わせ、データ保護の方針を実装できる。",
+      "objectives": [
+        "アクティビティログと使用状況メトリックの使い分けを説明できる",
+        "秘密度ラベルの継承と下流保護の挙動を説明できる",
+        "テナント設定で塞ぐべき経路を挙げられる"
+      ],
+      "prereq": [
+        "L1803"
+      ],
+      "unlocks": "セキュリティ部門と対等に会話でき、機密データを扱う案件を任される。",
+      "keywords": [
+        "アクティビティログ",
+        "監査ログ",
+        "使用状況メトリック",
+        "秘密度ラベル",
+        "情報保護",
+        "DLPポリシー",
+        "テナント設定",
+        "下流の継承",
+        "Webに公開"
+      ],
+      "pl300": [
+        "4.4 アクセス権とセキュリティ",
+        "4.5 ガバナンスとライフサイクル"
+      ],
+      "ds": [
+        "データガバナンス",
+        "最小権限の原則",
+        "監査証跡",
+        "データ分類"
+      ],
+      "quiz": "L1804",
+      "lab": null,
+      "module": "M18",
+      "moduleTitle": "ガバナンスとライフサイクル",
+      "tier": "T4",
+      "level": "T4",
+      "order": 97,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1805",
+      "title": "エンドースメントとデータカタログ — 信頼できる数字を1つにする",
+      "minutes": 45,
+      "type": "concept",
+      "why": "似たレポートが50個ある組織で本当に必要なのは、削除ではなく「どれが正なのか」の表示である。信頼のラベルを付けられる人が、組織の数字を統一する。",
+      "gain": "昇格済み・認定済みの運用ルールを設計し、カタログと系列で資産を管理できる。",
+      "objectives": [
+        "昇格済みと認定済みの違いと承認プロセスを説明できる",
+        "系列ビューと影響分析を変更管理に組み込める",
+        "指標定義をカタログ化する手順を設計できる"
+      ],
+      "prereq": [
+        "L1804"
+      ],
+      "unlocks": "組織のBI資産が「探せる・信頼できる」状態になり、重複開発が止まる。",
+      "keywords": [
+        "エンドースメント",
+        "昇格済み",
+        "認定済み",
+        "マスターデータ",
+        "OneLakeカタログ",
+        "系列ビュー",
+        "影響分析",
+        "データスチュワード",
+        "Microsoft Purview"
+      ],
+      "pl300": [
+        "4.5 ガバナンスとライフサイクル",
+        "4.2 セマンティックモデルの管理"
+      ],
+      "ds": [
+        "データカタログ",
+        "データスチュワードシップ",
+        "DMBOK",
+        "メタデータ管理"
+      ],
+      "quiz": "L1805",
+      "lab": null,
+      "module": "M18",
+      "moduleTitle": "ガバナンスとライフサイクル",
+      "tier": "T4",
+      "level": "T4",
+      "order": 98,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1901",
+      "title": "Fabric の全体像 — Power BIはどこに位置するか",
+      "minutes": 50,
+      "type": "concept",
+      "why": "Power BI は単体製品からFabricの1ワークロードになった。この地図を持たないと、目の前の課題をPower BIの中だけで無理に解こうとして遠回りする。",
+      "gain": "Fabricの主要ワークロードと共通基盤を説明し、Power BIの担当範囲を線引きできる。",
+      "objectives": [
+        "Fabricの共通基盤（OneLake・容量・ワークスペース）を説明できる",
+        "主要ワークロードの用途を区別できる",
+        "Power BI単体で足りる案件とFabricが要る案件を判別できる"
+      ],
+      "prereq": [
+        "L1805"
+      ],
+      "unlocks": "データエンジニアと同じ地図の上で会話でき、基盤側の設計に踏み込める。",
+      "keywords": [
+        "Microsoft Fabric",
+        "ワークロード",
+        "OneLake",
+        "Fabric容量",
+        "SaaS",
+        "Data Factory",
+        "Data Engineering",
+        "Real-Time Intelligence",
+        "アイテム"
+      ],
+      "pl300": [
+        "4.1 ワークスペースの管理"
+      ],
+      "ds": [
+        "データプラットフォーム",
+        "レイクハウスアーキテクチャ",
+        "統合分析基盤"
+      ],
+      "quiz": "L1901",
+      "lab": null,
+      "module": "M19",
+      "moduleTitle": "Microsoft Fabric",
+      "tier": "T4",
+      "level": "T4",
+      "order": 99,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1902",
+      "title": "OneLake と Lakehouse — データを1か所に置く",
+      "minutes": 50,
+      "type": "concept",
+      "why": "分析基盤のコストの大半は、同じデータを何度もコピーすることで生まれる。コピーせずに参照する設計を知っているかどうかで、構成は根本的に変わる。",
+      "gain": "OneLakeとLakehouseの構造を理解し、コピーとショートカットを使い分けられる。",
+      "objectives": [
+        "OneLakeの論理構造とDeltaフォーマットの役割を説明できる",
+        "ショートカットとミラーリングの適用条件を判定できる",
+        "LakehouseのFilesとTablesの使い分けができる"
+      ],
+      "prereq": [
+        "L1901"
+      ],
+      "unlocks": "Direct Lakeの前提が揃い、コピーを増やさない基盤設計ができる。",
+      "keywords": [
+        "OneLake",
+        "Lakehouse",
+        "Delta Lake",
+        "Parquet",
+        "ショートカット",
+        "ミラーリング",
+        "SQL分析エンドポイント",
+        "Files",
+        "Tables"
+      ],
+      "pl300": [
+        "1.1 データソースへの接続"
+      ],
+      "ds": [
+        "データレイク",
+        "オープンテーブルフォーマット",
+        "ゼロコピー",
+        "スキーマオンリード"
+      ],
+      "quiz": "L1902",
+      "lab": null,
+      "module": "M19",
+      "moduleTitle": "Microsoft Fabric",
+      "tier": "T4",
+      "level": "T4",
+      "order": 100,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1903",
+      "title": "Warehouse・Notebook・パイプライン",
+      "minutes": 50,
+      "type": "concept",
+      "why": "同じ変換を書く手段がFabricには4つある。選択理由を言えないままどれかを選ぶと、後任者が読めない基盤ができあがる。",
+      "gain": "Warehouse・Lakehouse・Notebook・パイプライン・Dataflow Gen2を、チームのスキルと要件から選べる。",
+      "objectives": [
+        "WarehouseとLakehouseの違いを4観点で説明できる",
+        "パイプラインとDataflow Gen2の役割分担を説明できる",
+        "オーケストレーションの設計原則を挙げられる"
+      ],
+      "prereq": [
+        "L1902"
+      ],
+      "unlocks": "BI担当としてデータ基盤側の実装方針をレビューでき、手戻りを防げる。",
+      "keywords": [
+        "Fabric Warehouse",
+        "Notebook",
+        "Spark",
+        "Data Pipeline",
+        "Dataflow Gen2",
+        "オーケストレーション",
+        "T-SQL",
+        "medallion",
+        "冪等性"
+      ],
+      "pl300": [
+        "1.2 データの取得と変換",
+        "1.6 パフォーマンスを考慮した取り込み"
+      ],
+      "ds": [
+        "ELTオーケストレーション",
+        "分散処理",
+        "ワークフロー管理",
+        "べき等な再実行"
+      ],
+      "quiz": "L1903",
+      "lab": null,
+      "module": "M19",
+      "moduleTitle": "Microsoft Fabric",
+      "tier": "T4",
+      "level": "T4",
+      "order": 101,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1904",
+      "title": "Direct Lake — インポートとDirectQueryの第三の道",
+      "minutes": 55,
+      "type": "concept",
+      "why": "インポートの速さとDirectQueryの鮮度は長年トレードオフだった。Direct Lakeはその前提を変えるが、無条件に速いわけではない。条件を知らないと期待外れになる。",
+      "gain": "Direct Lakeの仕組みとフォールバック条件を理解し、3つの接続方式から根拠つきで選べる。",
+      "objectives": [
+        "Direct Lakeが読むファイルと常駐の仕組みを説明できる",
+        "DirectQueryへフォールバックする条件を挙げられる",
+        "3方式の選択基準をフローで示せる"
+      ],
+      "prereq": [
+        "L1903"
+      ],
+      "unlocks": "鮮度と性能を両立する構成を提案でき、大規模データの案件で選択肢が増える。",
+      "keywords": [
+        "Direct Lake",
+        "トランスコード",
+        "フレーミング",
+        "ウォームアップ",
+        "DirectQueryフォールバック",
+        "V-Order",
+        "常駐メモリ",
+        "Direct Lake on OneLake"
+      ],
+      "pl300": [
+        "1.1 データソースへの接続",
+        "2.5 モデルの最適化"
+      ],
+      "ds": [
+        "列指向ストレージ",
+        "メモリ階層",
+        "遅延読み込み"
+      ],
+      "quiz": "L1904",
+      "lab": null,
+      "module": "M19",
+      "moduleTitle": "Microsoft Fabric",
+      "tier": "T4",
+      "level": "T4",
+      "order": 102,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L1905",
+      "title": "容量管理とコスト — CU・スロットリング・監視",
+      "minutes": 50,
+      "type": "concept",
+      "why": "容量が逼迫すると、まず更新が失敗し、次に画面が固まる。そして原因は「昨日誰かが回した重い処理」であることが多い。見える化していない容量は必ず溢れる。",
+      "gain": "CUの消費モデルとスロットリングの段階を理解し、容量を監視・是正・配賦できる。",
+      "objectives": [
+        "CU・スムージング・バーストの関係を説明できる",
+        "スロットリングの3段階と利用者への影響を言える",
+        "容量メトリックから犯人アイテムを特定する手順を作れる"
+      ],
+      "prereq": [
+        "L1904"
+      ],
+      "unlocks": "コストと性能を数字で語れるようになり、基盤の意思決定を任される立場になる。",
+      "keywords": [
+        "容量ユニット",
+        "CU",
+        "SKU",
+        "スムージング",
+        "バースト",
+        "スロットリング",
+        "容量メトリックアプリ",
+        "自動スケール",
+        "チャージバック"
+      ],
+      "pl300": [
+        "4.3 データ更新の管理",
+        "4.1 ワークスペースの管理"
+      ],
+      "ds": [
+        "リソース管理",
+        "コスト配賦",
+        "キャパシティプランニング",
+        "監視とアラート"
+      ],
+      "quiz": "L1905",
+      "lab": null,
+      "module": "M19",
+      "moduleTitle": "Microsoft Fabric",
+      "tier": "T4",
+      "level": "T4",
+      "order": 103,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L2001",
+      "title": "AIビジュアルを正しく使う — 主要因・分解ツリー・異常検知",
+      "minutes": 45,
+      "type": "concept",
+      "why": "「売上が落ちた理由は？」と聞かれて、手作業でスライサーを何十回も切り替えている。AIビジュアルはその探索を数秒に縮めるが、出力の意味を誤読すると、相関を原因と言い切る事故になる。",
+      "gain": "主要因分析・分解ツリー・異常検知の3つを使い分け、出力を統計的に正しく読める。",
+      "objectives": [
+        "主要因分析が何を計算しているかを説明できる",
+        "分解ツリーの「高い値」分割がグリーディ探索であることを理解して使える",
+        "異常検知の感度設定と期待範囲の意味を説明できる"
+      ],
+      "prereq": [
+        "L1305"
+      ],
+      "unlocks": "探索の速度が上がり、仮説検証に時間を使えるようになる。",
+      "keywords": [
+        "主要因分析",
+        "分解ツリー",
+        "異常検知",
+        "AIビジュアル",
+        "交絡",
+        "相関と因果"
+      ],
+      "pl300": [
+        "3.6 AI ビジュアルの活用",
+        "3.5 データの探索と分析"
+      ],
+      "ds": [
+        "相関と因果",
+        "交絡因子",
+        "シンプソンのパラドックス",
+        "外れ値検出",
+        "時系列分解"
+      ],
+      "quiz": "L2001",
+      "lab": null,
+      "module": "M20",
+      "moduleTitle": "高度な分析とAI",
+      "tier": "T4",
+      "level": "T4",
+      "order": 104,
+      "hasBody": true,
+      "figures": 16
+    },
+    {
+      "id": "L2002",
+      "title": "Q&Aとスマートナラティブ — 自然言語で使えるモデルにする",
+      "minutes": 40,
+      "type": "concept",
+      "why": "Q&Aを有効にしただけでは、現場の言葉は通じない。「今月の粗利」と聞かれてモデルが答えられないのは、AIの限界ではなくモデル側の準備不足である。",
+      "gain": "同義語・線形化用語・除外設定を整備し、自然言語で答えられるモデルを作れる。",
+      "objectives": [
+        "Q&Aが語彙をどう解決するかを説明できる",
+        "Q&A設定で同義語と用語を登録できる",
+        "スマートナラティブの自動要約を編集して信頼できる文章にできる"
+      ],
+      "prereq": [
+        "L2001"
+      ],
+      "unlocks": "レポートを触らない層が、自分で質問して答えを得られるようになる。",
+      "keywords": [
+        "Q&A",
+        "同義語",
+        "線形化スキーマ",
+        "Q&Aセットアップ",
+        "スマートナラティブ",
+        "動的な値"
+      ],
+      "pl300": [
+        "3.6 AI ビジュアルの活用",
+        "3.1 レポートの作成"
+      ],
+      "ds": [
+        "自然言語インターフェース",
+        "セマンティックレイヤー",
+        "オントロジー"
+      ],
+      "quiz": "L2002",
+      "lab": null,
+      "module": "M20",
+      "moduleTitle": "高度な分析とAI",
+      "tier": "T4",
+      "level": "T4",
+      "order": 105,
+      "hasBody": true,
+      "figures": 14
+    },
+    {
+      "id": "L2003",
+      "title": "Copilot と生成AI — 何を任せ、何を任せないか",
+      "minutes": 40,
+      "type": "concept",
+      "why": "Copilotが書いたDAXをそのまま本番に入れて、数字がずれたまま経営会議に出る事故が起きている。生成AIは下書き機だと理解して初めて戦力になる。",
+      "gain": "生成AIに任せてよい作業と、人が必ず検証すべき作業を線引きして運用できる。",
+      "objectives": [
+        "Copilotが参照する文脈（モデルのメタデータ）を説明できる",
+        "生成物を検証する手順を定義できる",
+        "生成AIを前提としたモデル整備の方針を立てられる"
+      ],
+      "prereq": [
+        "L2002"
+      ],
+      "unlocks": "AIを使う速度と、数字の信頼性を両立できるようになる。",
+      "keywords": [
+        "Copilot",
+        "生成AI",
+        "ハルシネーション",
+        "プロンプト",
+        "検証手順",
+        "AI利用ガバナンス"
+      ],
+      "pl300": [
+        "3.6 AI ビジュアルの活用",
+        "4.5 ガバナンスとライフサイクル"
+      ],
+      "ds": [
+        "大規模言語モデル",
+        "ヒューマン・イン・ザ・ループ",
+        "検証可能性"
+      ],
+      "quiz": "L2003",
+      "lab": null,
+      "module": "M20",
+      "moduleTitle": "高度な分析とAI",
+      "tier": "T4",
+      "level": "T4",
+      "order": 106,
+      "hasBody": true,
+      "figures": 14
+    },
+    {
+      "id": "L2004",
+      "title": "Python・R連携と外部機械学習",
+      "minutes": 45,
+      "type": "hands-on",
+      "why": "Power BIだけでは書けない分析がある。クラスタリング、回帰、統計検定。だが安易にPythonビジュアルを置くと、更新が失敗し、共有もできないレポートができあがる。",
+      "gain": "Python/Rをどの工程で使うべきかを判断し、制約を踏まえて実装できる。",
+      "objectives": [
+        "Power Queryスクリプトとビジュアルスクリプトの違いを説明できる",
+        "パーソナルゲートウェイなど実行環境の制約を挙げられる",
+        "外部で計算した結果を取り込む設計を選べる"
+      ],
+      "prereq": [
+        "L2003"
+      ],
+      "unlocks": "統計・機械学習の成果をレポートに載せる道筋がつく。",
+      "keywords": [
+        "Pythonスクリプト",
+        "Rスクリプト",
+        "Pythonビジュアル",
+        "パーソナルゲートウェイ",
+        "特徴量",
+        "scikit-learn"
+      ],
+      "pl300": [
+        "1.2 データの取得と変換",
+        "3.5 データの探索と分析"
+      ],
+      "ds": [
+        "機械学習",
+        "クラスタリング",
+        "回帰分析",
+        "特徴量エンジニアリング"
+      ],
+      "quiz": "L2004",
+      "lab": null,
+      "module": "M20",
+      "moduleTitle": "高度な分析とAI",
+      "tier": "T4",
+      "level": "T4",
+      "order": 107,
+      "hasBody": true,
+      "figures": 12
+    },
+    {
+      "id": "L2005",
+      "title": "予測モデルをBIに載せる — スコアリング結果の運用",
+      "minutes": 45,
+      "type": "concept",
+      "why": "解約予測モデルを作っても、営業が見る画面に出なければ売上は1円も変わらない。価値が出るのはスコアが行動に変換された瞬間である。",
+      "gain": "予測スコアをモデルに取り込み、精度と業務効果の両方を監視する設計ができる。",
+      "objectives": [
+        "バッチスコアリングの標準的なデータフローを図示できる",
+        "混同行列から精度・再現率を読み、閾値を業務コストで決められる",
+        "モデルドリフトを検知する監視レポートを設計できる"
+      ],
+      "prereq": [
+        "L2004"
+      ],
+      "unlocks": "「予測できます」から「予測で成果が出ました」に進める。",
+      "keywords": [
+        "スコアリング",
+        "混同行列",
+        "適合率",
+        "再現率",
+        "閾値設計",
+        "モデルドリフト",
+        "MLOps"
+      ],
+      "pl300": [
+        "2.1 データモデルの設計",
+        "3.5 データの探索と分析"
+      ],
+      "ds": [
+        "教師あり学習",
+        "評価指標",
+        "ROC曲線",
+        "期待値計算",
+        "MLOps"
+      ],
+      "quiz": "L2005",
+      "lab": null,
+      "module": "M20",
+      "moduleTitle": "高度な分析とAI",
+      "tier": "T4",
+      "level": "T4",
+      "order": 108,
+      "hasBody": true,
+      "figures": 17
+    },
+    {
+      "id": "L2101",
+      "title": "情報設計 — 誰の何の意思決定を助けるのか",
+      "minutes": 45,
+      "type": "concept",
+      "why": "「全部見たい」と言われて全部載せたレポートは、誰の意思決定も助けない。設計は画面から始めてはいけない。まず読み手と決定から始める。",
+      "gain": "対象読者と意思決定を定義し、そこから逆算してレポートの構成を組める。",
+      "objectives": [
+        "読者・意思決定・行動の3点セットを1枚に書ける",
+        "戦略/戦術/運用の3層でレポートを分けられる",
+        "1画面に載せる指標の上限を根拠を持って決められる"
+      ],
+      "prereq": [
+        "L1005"
+      ],
+      "unlocks": "以降のデザイン判断すべてに、揺るがない基準ができる。",
+      "keywords": [
+        "情報設計",
+        "オーディエンス定義",
+        "意思決定マップ",
+        "レポート階層",
+        "スコープ",
+        "1画面1メッセージ"
+      ],
+      "pl300": [
+        "3.1 レポートの作成",
+        "3.2 ビジュアルの選択と構成"
+      ],
+      "ds": [
+        "意思決定支援システム",
+        "要件工学",
+        "ユーザー中心設計"
+      ],
+      "quiz": "L2101",
+      "lab": null,
+      "module": "M21",
+      "moduleTitle": "デザインとストーリーテリング",
+      "tier": "T4",
+      "level": "T4",
+      "order": 109,
+      "hasBody": true,
+      "figures": 13
+    },
+    {
+      "id": "L2102",
+      "title": "可視化の理論 — 知覚・認知・ゲシュタルト",
+      "minutes": 50,
+      "type": "concept",
+      "why": "「なんとなく見やすい」では他人を説得できない。人の目と脳がどう情報を処理するかには研究の蓄積があり、それを知れば設計は好みの議論から根拠の議論になる。",
+      "gain": "前注意的処理・知覚精度・ゲシュタルト原則・データインク比を根拠に、ビジュアル選択を説明できる。",
+      "objectives": [
+        "前注意的属性を5つ挙げ、どれが量の表現に向くか言える",
+        "Cleveland & McGillの精度順序を上から並べられる",
+        "ゲシュタルト原則をレポートのレイアウトに適用できる"
+      ],
+      "prereq": [
+        "L2101"
+      ],
+      "unlocks": "ビジュアル選択とレイアウトを、理論で正当化できるようになる。",
+      "keywords": [
+        "前注意的処理",
+        "Cleveland & McGill",
+        "知覚精度",
+        "ゲシュタルト原則",
+        "データインク比",
+        "色覚多様性",
+        "認知負荷"
+      ],
+      "pl300": [
+        "3.2 ビジュアルの選択と構成",
+        "3.4 レポートの書式とアクセシビリティ"
+      ],
+      "ds": [
+        "視覚的知覚",
+        "グラフィカル認知",
+        "情報可視化理論",
+        "アクセシビリティ"
+      ],
+      "quiz": "L2102",
+      "lab": null,
+      "module": "M21",
+      "moduleTitle": "デザインとストーリーテリング",
+      "tier": "T4",
+      "level": "T4",
+      "order": 110,
+      "hasBody": true,
+      "figures": 17
+    },
+    {
+      "id": "L2103",
+      "title": "ダッシュボード設計の原則 — 5秒・30秒・5分",
+      "minutes": 45,
+      "type": "concept",
+      "why": "経営会議で開かれた画面は、最初の5秒で「読む価値があるか」を判定される。時間軸で情報を階層化しないと、どんなに正確なレポートも読まれない。",
+      "gain": "5秒・30秒・5分の3層でレポートを構成し、レイアウトとインタラクションを設計できる。",
+      "objectives": [
+        "3層モデルで画面を分割できる",
+        "Zパターン・F字パターンを踏まえた配置ができる",
+        "ドリルスルーとツールチップで深掘り層を作れる"
+      ],
+      "prereq": [
+        "L2102"
+      ],
+      "unlocks": "「見た瞬間に分かる」レポートを再現性のある手順で作れる。",
+      "keywords": [
+        "5秒ルール",
+        "情報階層",
+        "Zパターン",
+        "視線誘導",
+        "ドリルスルー",
+        "ツールチップページ",
+        "余白"
+      ],
+      "pl300": [
+        "3.1 レポートの作成",
+        "3.3 対話機能の設定",
+        "3.7 モバイル対応"
+      ],
+      "ds": [
+        "情報階層",
+        "プログレッシブディスクロージャ",
+        "UXデザイン"
+      ],
+      "quiz": "L2103",
+      "lab": null,
+      "module": "M21",
+      "moduleTitle": "デザインとストーリーテリング",
+      "tier": "T4",
+      "level": "T4",
+      "order": 111,
+      "hasBody": true,
+      "figures": 12
+    },
+    {
+      "id": "L2104",
+      "title": "データストーリーテリング — 数字を物語にする",
+      "minutes": 45,
+      "type": "concept",
+      "why": "正しいグラフを並べても人は動かない。動くのは「だから何をすべきか」が分かったときだけ。数字を物語の形に組み直す技術がいる。",
+      "gain": "状況・変化・示唆・行動の型でデータを構成し、意思決定者を動かせる。",
+      "objectives": [
+        "ストーリーアークの4要素で構成を組める",
+        "1スライド1メッセージのタイトルを書ける",
+        "注釈とハイライトで読み手の視線を制御できる"
+      ],
+      "prereq": [
+        "L2103"
+      ],
+      "unlocks": "レポートが報告書から意思決定の道具に変わる。",
+      "keywords": [
+        "データストーリーテリング",
+        "ストーリーアーク",
+        "アクションタイトル",
+        "注釈",
+        "ハイライト",
+        "So What"
+      ],
+      "pl300": [
+        "3.1 レポートの作成",
+        "3.5 データの探索と分析"
+      ],
+      "ds": [
+        "ナラティブ構造",
+        "説得のフレーム",
+        "認知バイアス"
+      ],
+      "quiz": "L2104",
+      "lab": null,
+      "module": "M21",
+      "moduleTitle": "デザインとストーリーテリング",
+      "tier": "T4",
+      "level": "T4",
+      "order": 112,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L2105",
+      "title": "レビューと改善 — 使われるレポートにする",
+      "minutes": 40,
+      "type": "concept",
+      "why": "公開して終わりにしたレポートは、3か月後には誰も開いていない。使われ続けるレポートは、計測され、直され続けている。",
+      "gain": "デザインレビューと利用ログをもとに、レポートを継続的に改善できる。",
+      "objectives": [
+        "デザインレビューのチェックリストを運用できる",
+        "使用状況メトリックから改善点を特定できる",
+        "アクセシビリティ検証を手順化できる"
+      ],
+      "prereq": [
+        "L2104"
+      ],
+      "unlocks": "作りっぱなしを卒業し、改善が回る運用に入る。",
+      "keywords": [
+        "デザインレビュー",
+        "使用状況メトリック",
+        "ユーザビリティテスト",
+        "アクセシビリティ検証",
+        "改善サイクル"
+      ],
+      "pl300": [
+        "3.4 レポートの書式とアクセシビリティ",
+        "4.5 ガバナンスとライフサイクル"
+      ],
+      "ds": [
+        "ユーザビリティ評価",
+        "A/Bテスト",
+        "継続的改善"
+      ],
+      "quiz": "L2105",
+      "lab": null,
+      "module": "M21",
+      "moduleTitle": "デザインとストーリーテリング",
+      "tier": "T4",
+      "level": "T4",
+      "order": 113,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L2201",
+      "title": "要件定義 — 「ダッシュボードが欲しい」の裏を聞く",
+      "minutes": 50,
+      "type": "concept",
+      "why": "依頼された通りに作ったのに使われない。原因はほぼ一つで、依頼者が言った要求と、本当に解きたい問題がずれているからである。",
+      "gain": "ヒアリングで真の課題を掘り出し、合意できる要件定義書にまとめられる。",
+      "objectives": [
+        "要求と要件の違いを説明できる",
+        "5つの必須質問で意思決定と行動を特定できる",
+        "スコープと非スコープを文書化して合意できる"
+      ],
+      "prereq": [
+        "L2101"
+      ],
+      "unlocks": "作る前に成否が決まる工程を、自分でコントロールできるようになる。",
+      "keywords": [
+        "要件定義",
+        "要求と要件",
+        "ヒアリング",
+        "ユーザーストーリー",
+        "スコープ",
+        "受け入れ基準",
+        "ステークホルダー"
+      ],
+      "pl300": [
+        "3.1 レポートの作成",
+        "4.5 ガバナンスとライフサイクル"
+      ],
+      "ds": [
+        "要件工学",
+        "課題設定",
+        "5 Whys",
+        "ジョブ理論"
+      ],
+      "quiz": "L2201",
+      "lab": null,
+      "module": "M22",
+      "moduleTitle": "現場で価値を出す",
+      "tier": "T4",
+      "level": "T4",
+      "order": 114,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L2202",
+      "title": "KPIツリーの設計 — 事業構造を数式にする",
+      "minutes": 50,
+      "type": "concept",
+      "why": "KPIを30個並べたレポートでは何も決まらない。事業を数式に分解し、動かせる変数を特定して初めて、指標は打ち手につながる。",
+      "gain": "売上や利益を掛け算・足し算に分解し、行動可能なKPIツリーを設計できる。",
+      "objectives": [
+        "North Star Metricと下位KPIを区別できる",
+        "売上を客数×客単価などに分解し、ツリーを描ける",
+        "先行指標と遅行指標を見分けて配置できる"
+      ],
+      "prereq": [
+        "L2201"
+      ],
+      "unlocks": "「何を測るか」を自分で決められるようになり、モデル設計の指針が定まる。",
+      "keywords": [
+        "KPIツリー",
+        "North Star Metric",
+        "先行指標",
+        "遅行指標",
+        "ドライバーツリー",
+        "ユニットエコノミクス",
+        "OKR"
+      ],
+      "pl300": [
+        "2.3 計算列とメジャーの作成",
+        "3.5 データの探索と分析"
+      ],
+      "ds": [
+        "North Star Metric",
+        "OKR",
+        "バランススコアカード",
+        "ユニットエコノミクス",
+        "ファネル分析",
+        "Goodhartの法則"
+      ],
+      "quiz": "L2202",
+      "lab": null,
+      "module": "M22",
+      "moduleTitle": "現場で価値を出す",
+      "tier": "T4",
+      "level": "T4",
+      "order": 115,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L2203",
+      "title": "データ品質とデータ契約 — 信頼できる数字を作る",
+      "minutes": 50,
+      "type": "concept",
+      "why": "一度でも数字が間違えば、そのレポートは二度と信用されない。品質は気合いではなく、定義・測定・契約で担保する。",
+      "gain": "データ品質を6次元で測定し、提供側と契約を結んで品質を維持できる。",
+      "objectives": [
+        "データ品質の6次元を挙げ、測定方法を書ける",
+        "データ契約に含める項目を列挙できる",
+        "品質監視レポートとアラートを設計できる"
+      ],
+      "prereq": [
+        "L2202"
+      ],
+      "unlocks": "数字への信頼が積み上がり、BIが意思決定の前提になる。",
+      "keywords": [
+        "データ品質",
+        "完全性",
+        "正確性",
+        "一貫性",
+        "適時性",
+        "一意性",
+        "妥当性",
+        "データ契約",
+        "SLA",
+        "データカタログ"
+      ],
+      "pl300": [
+        "1.3 データのプロファイリング",
+        "1.4 データのクリーニング",
+        "4.3 データ更新の管理"
+      ],
+      "ds": [
+        "データ品質次元",
+        "データガバナンス",
+        "データオブザーバビリティ",
+        "マスターデータ管理"
+      ],
+      "quiz": "L2203",
+      "lab": null,
+      "module": "M22",
+      "moduleTitle": "現場で価値を出す",
+      "tier": "T4",
+      "level": "T4",
+      "order": 116,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L2204",
+      "title": "導入と定着 — 使われないBIの原因を潰す",
+      "minutes": 45,
+      "type": "concept",
+      "why": "作ったレポートの多くは、公開2週間後にアクセスがゼロになる。定着は自然に起きない。設計して起こすものである。",
+      "gain": "導入計画を立て、利用が定着するまでの施策を実行・計測できる。",
+      "objectives": [
+        "定着しない典型5原因と対策を対応づけられる",
+        "パイロットから全社展開までのロードマップを引ける",
+        "チャンピオンモデルとトレーニング設計を組める"
+      ],
+      "prereq": [
+        "L2203"
+      ],
+      "unlocks": "作ったものが実際に使われ、成果が生まれる状態にできる。",
+      "keywords": [
+        "定着化",
+        "アダプション",
+        "チャンピオン",
+        "パイロット導入",
+        "チェンジマネジメント",
+        "使用状況メトリック",
+        "業務プロセス組み込み"
+      ],
+      "pl300": [
+        "4.1 ワークスペースの管理",
+        "4.5 ガバナンスとライフサイクル"
+      ],
+      "ds": [
+        "イノベーション普及理論",
+        "チェンジマネジメント",
+        "アダプション指標"
+      ],
+      "quiz": "L2204",
+      "lab": null,
+      "module": "M22",
+      "moduleTitle": "現場で価値を出す",
+      "tier": "T4",
+      "level": "T4",
+      "order": 117,
+      "hasBody": false,
+      "figures": 0
+    },
+    {
+      "id": "L2205",
+      "title": "効果測定とキャリア — BIの価値を証明する",
+      "minutes": 45,
+      "type": "concept",
+      "why": "予算を取り続けるには、BIが生んだ金額を語れなければならない。同時にそれは、自分の市場価値を語る言葉でもある。",
+      "gain": "BI施策のROIを算定し、成果を数字と物語の両方で提示できる。",
+      "objectives": [
+        "時間削減・意思決定改善・収益影響の3系統で効果を算定できる",
+        "ベースラインと比較の設計ができる",
+        "職務経歴として成果を記述できる"
+      ],
+      "prereq": [
+        "L2204"
+      ],
+      "unlocks": "BI人材から、事業を動かす人材への転換が完了する。",
+      "keywords": [
+        "ROI",
+        "ベースライン",
+        "効果測定",
+        "反実仮想",
+        "ビジネスケース",
+        "ポートフォリオ",
+        "キャリアパス"
+      ],
+      "pl300": [
+        "4.5 ガバナンスとライフサイクル"
+      ],
+      "ds": [
+        "因果推論",
+        "反実仮想",
+        "A/Bテスト",
+        "投資対効果",
+        "バランススコアカード"
+      ],
+      "quiz": "L2205",
+      "lab": null,
+      "module": "M22",
+      "moduleTitle": "現場で価値を出す",
+      "tier": "T4",
+      "level": "T4",
+      "order": 118,
+      "hasBody": false,
+      "figures": 0
+    }
   ],
   "labs": [
-    { "id": "LAB01", "title": "はじめてのレポート — 売上ダッシュボードを30分で作る", "level": "L0", "minutes": 30, "difficulty": 1,
-      "dataset": ["sales.csv"], "goal": "CSVを読み込み、KPIカード・棒グラフ・折れ線を配置したレポートを完成させる。" },
-    { "id": "LAB02", "title": "汚いデータを洗う — Power Query実践", "level": "L1", "minutes": 45, "difficulty": 2,
-      "dataset": ["sales_dirty.csv"], "goal": "全角空白・型崩れ・横持ち・重複を含むデータを整然データに変換する。" },
-    { "id": "LAB03", "title": "スタースキーマを組む", "level": "L2", "minutes": 45, "difficulty": 3,
-      "dataset": ["sales.csv", "products.csv", "customers.csv", "stores.csv"], "goal": "フラットな表を分解し、日付テーブルを含むスタースキーマを構築する。" },
-    { "id": "LAB04", "title": "DAXメジャー10本ノック", "level": "L3", "minutes": 60, "difficulty": 4,
-      "dataset": ["sales.csv", "products.csv", "customers.csv", "stores.csv"], "goal": "売上・粗利・前年比・累計・構成比・ランキングなど10指標を実装する。" },
-    { "id": "LAB05", "title": "伝わるダッシュボード設計 + モバイル対応", "level": "L4", "minutes": 60, "difficulty": 3,
-      "dataset": ["sales.csv", "products.csv", "customers.csv", "stores.csv"], "goal": "1画面で意思決定できるレポートを設計し、スマホビューまで作り込む。" },
-    { "id": "LAB06", "title": "RLSを設定して安全に配布する", "level": "L5", "minutes": 45, "difficulty": 4,
-      "dataset": ["stores.csv", "security_users.csv"], "goal": "店舗別に閲覧範囲を絞る動的RLSを実装し、アプリとして配布する。" }
+    {
+      "id": "LAB01",
+      "title": "はじめてのレポート — 売上ダッシュボードを30分で作る",
+      "level": "T1",
+      "minutes": 30,
+      "difficulty": 1,
+      "dataset": [
+        "sales.csv"
+      ],
+      "goal": "CSVを読み込み、KPIカード・棒グラフ・折れ線を配置したレポートを完成させる。",
+      "legacyLevel": "T1",
+      "tier": "T1"
+    },
+    {
+      "id": "LAB02",
+      "title": "汚いデータを洗う — Power Query実践",
+      "level": "T2",
+      "minutes": 45,
+      "difficulty": 2,
+      "dataset": [
+        "sales_dirty.csv"
+      ],
+      "goal": "全角空白・型崩れ・横持ち・重複を含むデータを整然データに変換する。",
+      "legacyLevel": "T2",
+      "tier": "T2"
+    },
+    {
+      "id": "LAB03",
+      "title": "スタースキーマを組む",
+      "level": "T2",
+      "minutes": 45,
+      "difficulty": 3,
+      "dataset": [
+        "sales.csv",
+        "products.csv",
+        "customers.csv",
+        "stores.csv"
+      ],
+      "goal": "フラットな表を分解し、日付テーブルを含むスタースキーマを構築する。",
+      "legacyLevel": "T2",
+      "tier": "T2"
+    },
+    {
+      "id": "LAB04",
+      "title": "DAXメジャー10本ノック",
+      "level": "T2",
+      "minutes": 60,
+      "difficulty": 4,
+      "dataset": [
+        "sales.csv",
+        "products.csv",
+        "customers.csv",
+        "stores.csv"
+      ],
+      "goal": "売上・粗利・前年比・累計・構成比・ランキングなど10指標を実装する。",
+      "legacyLevel": "T2",
+      "tier": "T2"
+    },
+    {
+      "id": "LAB05",
+      "title": "伝わるダッシュボード設計 + モバイル対応",
+      "level": "T3",
+      "minutes": 60,
+      "difficulty": 3,
+      "dataset": [
+        "sales.csv",
+        "products.csv",
+        "customers.csv",
+        "stores.csv"
+      ],
+      "goal": "1画面で意思決定できるレポートを設計し、スマホビューまで作り込む。",
+      "legacyLevel": "T3",
+      "tier": "T3"
+    },
+    {
+      "id": "LAB06",
+      "title": "RLSを設定して安全に配布する",
+      "level": "T4",
+      "minutes": 45,
+      "difficulty": 4,
+      "dataset": [
+        "stores.csv",
+        "security_users.csv"
+      ],
+      "goal": "店舗別に閲覧範囲を絞る動的RLSを実装し、アプリとして配布する。",
+      "legacyLevel": "T4",
+      "tier": "T4"
+    }
   ]
 }
