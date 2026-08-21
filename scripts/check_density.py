@@ -74,6 +74,7 @@ def analyze(path):
         "run": max_run,
         "lines": len(src.split("\n")),
         "h2": len(re.findall(r"^## ", src, re.M)),
+        "h1": len(re.findall(r"^# ", src, re.M)),
     }
 
 
@@ -89,6 +90,8 @@ def check(m, LIM=LIM):
     if m["run"] > LIM["run"]:                  b.append("段落%d連続（%dまで）" % (m["run"], LIM["run"]))
     if not (LIM["lines_min"] <= m["lines"] <= LIM["lines_max"]):
         b.append("%d行（%d〜%d行）" % (m["lines"], LIM["lines_min"], LIM["lines_max"]))
+    if m["h1"]:
+        b.append("H1(# )が%d個ある（タイトルは自動表示。本文に書かない）" % m["h1"])
     if not (LIM["h2_min"] <= m["h2"] <= LIM["h2_max"]):
         b.append("H2 %d個（%d〜%d個）" % (m["h2"], LIM["h2_min"], LIM["h2_max"]))
     return b
