@@ -1,0 +1,71 @@
+{
+  "id": "L305",
+  "lesson": "L305",
+  "title": "タイムインテリジェンス",
+  "questions": [
+    {
+      "id": "L305-q1",
+      "type": "single",
+      "stem": "`SAMEPERIODLASTYEAR( Date )` と等価な DATEADD の書き方はどれですか。",
+      "choices": [
+        "DATEADD( Date, -1, YEAR )",
+        "DATEADD( Date, 1, YEAR )",
+        "DATEADD( Date, -12, MONTH )",
+        "PARALLELPERIOD( Date, -1, YEAR )"
+      ],
+      "answer": 0,
+      "explain": "SAMEPERIODLASTYEAR は DATEADD( 日付, -1, YEAR ) と等価です。DATEADD は月・四半期・日など任意の単位でずらせるため、より汎用的です。",
+      "area": "データのモデル化",
+      "ref": "L305",
+      "difficulty": 2
+    },
+    {
+      "id": "L305-q2",
+      "type": "single",
+      "stem": "4月10日〜4月20日が選択されているとき、`PARALLELPERIOD( Date, -1, MONTH )` が返す期間はどれですか。",
+      "choices": [
+        "3月1日〜3月31日",
+        "3月10日〜3月20日",
+        "4月10日〜4月20日",
+        "3月10日〜4月10日"
+      ],
+      "answer": 0,
+      "explain": "PARALLELPERIOD は指定単位の**期間全体**を返します。同じ日数分だけずらすのは DATEADD です。「月まるごとと比較」なら PARALLELPERIOD、「月途中まで同士の比較」なら DATEADD です。",
+      "area": "データのモデル化",
+      "ref": "L305",
+      "difficulty": 3
+    },
+    {
+      "id": "L305-q3",
+      "type": "single",
+      "stem": "在庫のような半加法的な指標を月次で集計するときに使う関数はどれですか。",
+      "choices": [
+        "LASTDATE（または ENDOFMONTH）",
+        "SUM",
+        "TOTALYTD",
+        "DATESINPERIOD"
+      ],
+      "answer": 0,
+      "explain": "在庫は時間方向に足せません。日々の在庫を合計すると異常な数値になります。月末時点の値を取るために LASTDATE や ENDOFMONTH を使います。",
+      "area": "データのモデル化",
+      "ref": "L305",
+      "difficulty": 3
+    },
+    {
+      "id": "L305-q4",
+      "type": "single",
+      "stem": "7日移動平均を求める式で使う関数はどれですか。",
+      "choices": [
+        "DATESINPERIOD",
+        "SAMEPERIODLASTYEAR",
+        "TOTALYTD",
+        "PARALLELPERIOD"
+      ],
+      "answer": 0,
+      "explain": "DATESINPERIOD( 日付列, 起点, -7, DAY ) で直近7日分の日付テーブルを返し、AVERAGEX で平均します。曜日変動を均して傾向を見るのに有効です。",
+      "area": "データのモデル化",
+      "ref": "L305",
+      "difficulty": 3
+    }
+  ]
+}

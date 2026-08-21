@@ -1,0 +1,15 @@
+StoreID,StoreName,Prefecture,Region,OpenDate,Manager,ManagerEmail
+S001,新宿本店,東京都,関東,2015-04-01,田中 一郎,tanaka@northstar-retail.example.com
+S002,渋谷店,東京都,関東,2017-09-15,佐藤 花子,sato@northstar-retail.example.com
+S003,横浜店,神奈川県,関東,2016-06-01,鈴木 健太,suzuki@northstar-retail.example.com
+S004,大宮店,埼玉県,関東,2019-03-20,高橋 美咲,takahashi@northstar-retail.example.com
+S005,名古屋店,愛知県,中部,2016-11-01,伊藤 大輔,ito@northstar-retail.example.com
+S006,金沢店,石川県,中部,2021-07-01,渡辺 由美,watanabe@northstar-retail.example.com
+S007,梅田店,大阪府,近畿,2015-10-01,山本 翔太,yamamoto@northstar-retail.example.com
+S008,神戸店,兵庫県,近畿,2018-05-10,中村 彩,nakamura@northstar-retail.example.com
+S009,京都店,京都府,近畿,2020-02-14,小林 拓也,kobayashi@northstar-retail.example.com
+S010,広島店,広島県,中国,2019-08-01,加藤 沙織,kato@northstar-retail.example.com
+S011,福岡天神店,福岡県,九州,2017-04-01,吉田 涼,yoshida@northstar-retail.example.com
+S012,札幌店,北海道,北海道,2018-10-01,山田 直樹,yamada@northstar-retail.example.com
+S013,仙台店,宮城県,東北,2020-09-01,佐々木 亮,sasaki@northstar-retail.example.com
+S014,オンライン,—,オンライン,2014-01-01,松本 恵,matsumoto@northstar-retail.example.com

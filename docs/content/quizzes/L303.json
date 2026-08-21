@@ -1,0 +1,73 @@
+{
+  "id": "L303",
+  "lesson": "L303",
+  "title": "CALCULATE",
+  "questions": [
+    {
+      "id": "L303-q1",
+      "type": "single",
+      "stem": "CALCULATE のフィルター引数が、外側のフィルターコンテキストと**同じ列**に対するものだった場合、どうなりますか。",
+      "choices": [
+        "外側のフィルターを上書きする",
+        "外側のフィルターと AND で結合される",
+        "エラーになる",
+        "無視される"
+      ],
+      "answer": 0,
+      "explain": "同じ列は上書き、違う列は追加（AND）が原則です。既存フィルターを尊重して AND にしたい場合は KEEPFILTERS を使います。",
+      "area": "データのモデル化",
+      "ref": "L303",
+      "difficulty": 2
+    },
+    {
+      "id": "L303-q2",
+      "type": "single",
+      "stem": "スライサーの選択範囲を尊重したうえで構成比の分母を求めたい場合、使うべき関数はどれですか。",
+      "choices": [
+        "ALLSELECTED",
+        "ALL",
+        "ALLEXCEPT",
+        "REMOVEFILTERS"
+      ],
+      "answer": 0,
+      "explain": "ALL は常に全体を分母にします。ALLSELECTED はユーザーがスライサーで選んだ範囲まで戻すため、「選んだ3カテゴリで100%」という直感に合う結果になります。",
+      "area": "データのモデル化",
+      "ref": "L303",
+      "difficulty": 3
+    },
+    {
+      "id": "L303-q3",
+      "type": "single",
+      "stem": "次のメジャーを「カテゴリ別の表」に置いたとき、衣料の行には何が表示されますか。",
+      "choices": [
+        "家電の売上",
+        "衣料の売上",
+        "全カテゴリの合計",
+        "BLANK"
+      ],
+      "answer": 0,
+      "explain": "CALCULATE のフィルターがビジュアルのカテゴリフィルターを上書きするため、どの行でも家電の売上が表示されます。上書きの挙動を確認する典型例です。",
+      "area": "データのモデル化",
+      "ref": "L303",
+      "difficulty": 2,
+      "code": "家電の売上 =\nCALCULATE(\n    [売上合計],\n    Dim_商品[カテゴリ] = \"家電\"\n)",
+      "codeLang": "dax"
+    },
+    {
+      "id": "L303-q4",
+      "type": "single",
+      "stem": "パフォーマンスの観点で最も推奨される書き方はどれですか。",
+      "choices": [
+        "CALCULATE( [売上合計], Fact_売上[UnitPrice] > 10000 )",
+        "CALCULATE( [売上合計], FILTER( Fact_売上, Fact_売上[UnitPrice] > 10000 ) )",
+        "CALCULATE( [売上合計], FILTER( ALL( Fact_売上 ), Fact_売上[UnitPrice] > 10000 ) )",
+        "SUMX( FILTER( Fact_売上, Fact_売上[UnitPrice] > 10000 ), Fact_売上[売上金額] )"
+      ],
+      "answer": 0,
+      "explain": "単純な条件は列だけをスキャンする形に内部変換されるため高速です。FILTER でファクトテーブル全体をイテレートすると、行数分の反復が発生して重くなります。",
+      "area": "データのモデル化",
+      "ref": "L303",
+      "difficulty": 4
+    }
+  ]
+}

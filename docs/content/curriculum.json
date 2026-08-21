@@ -196,7 +196,7 @@
       "keywords": ["PL-300", "出題範囲", "受験申込", "スコア"], "quiz": "L506", "lab": null },
     { "id": "L507", "level": "L5", "title": "模擬試験と弱点分析 — 合格へのラストマイル", "minutes": 60, "type": "exam",
       "objectives": ["模擬試験を時間内に解ける", "誤答を領域別に分析できる", "復習計画を立てられる"],
-      "keywords": ["模擬試験", "弱点分析", "復習"], "quiz": "EXAM-PL300", "lab": null }
+      "keywords": ["模擬試験", "弱点分析", "復習"], "quiz": "L507", "lab": null }
   ],
   "labs": [
     { "id": "LAB01", "title": "はじめてのレポート — 売上ダッシュボードを30分で作る", "level": "L0", "minutes": 30, "difficulty": 1,

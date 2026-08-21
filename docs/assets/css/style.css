@@ -375,3 +375,9 @@ label.field { display: block; font-size: 13px; font-weight: 700; color: var(--fg
 .result-hero .score { font-size: 54px; font-weight: 900; line-height: 1.1; }
 .area-row { display: grid; grid-template-columns: 1fr 62px; gap: 10px; align-items: center; margin: 10px 0; }
 .area-row .nm { font-size: 13.5px; }
+
+/* Mermaid図：小さな図も読みやすい大きさまで拡大する */
+.mermaid-wrap svg { width: 100%; height: auto; max-width: min(100%, 720px) !important; }
+
+/* 固定ヘッダーに隠れないようスクロール位置を補正 */
+#quiz, #prose, .lesson-layout { scroll-margin-top: 72px; }

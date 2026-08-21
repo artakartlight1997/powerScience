@@ -58,8 +58,21 @@
     EXAM: { cls: "exam", icon: "\u{1F3AF}",     label: "試験に出る" }
   };
 
+  /* CommonMark の強調は、閉じ「**」の直前が句読点だと成立しない。
+     日本語では 「**〜する」**です。 のような書き方が普通なので、
+     コードブロックを保護したうえで自前で <strong> に変換する。          */
+  function cjkStrong(md) {
+    const blocks = [], inlines = [];
+    let s = md.replace(/```[\s\S]*?```/g, function (m) { blocks.push(m); return "\u0002B" + (blocks.length - 1) + "\u0002"; });
+    s = s.replace(/`[^`\n]*`/g, function (m) { inlines.push(m); return "\u0002I" + (inlines.length - 1) + "\u0002"; });
+    s = s.replace(/\*\*(?!\s)((?:[^*\n]|\*(?!\*))+?)\*\*/g, "<strong>$1</strong>");
+    s = s.replace(/\u0002I(\d+)\u0002/g, function (m, i) { return inlines[+i]; });
+    return s.replace(/\u0002B(\d+)\u0002/g, function (m, i) { return blocks[+i]; });
+  }
+
   PBM.markdown = function (md) {
     if (!window.marked) return "<pre>" + PBM.esc(md) + "</pre>";
+    md = cjkStrong(md);
     const renderer = new marked.Renderer();
     let figNo = 0, hNo = 0;
 
@@ -91,21 +104,38 @@
     return marked.parse(md);
   };
 
-  /* ---------- Mermaid 初期化 ---------- */
+  /* ---------- Mermaid 初期化 ----------
+     同梱したい場合は MERMAID_URL を assets/vendor/mermaid/mermaid.esm.min.mjs に変更
+     （docs/assets/vendor/README.md 参照）                                      */
+  const MERMAID_URL = "https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.esm.min.mjs";
   let mermaidReady = null;
   PBM.renderMermaid = async function (root) {
     const nodes = (root || document).querySelectorAll(".mermaid:not([data-processed])");
     if (!nodes.length) return;
+    nodes.forEach(function (n) {
+      if (!n.hasAttribute("data-src")) n.setAttribute("data-src", n.textContent);
+    });
     if (!mermaidReady) {
-      mermaidReady = import("https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.esm.min.mjs")
+      mermaidReady = import(MERMAID_URL)
         .then(function (m) { window.mermaid = m.default; return m.default; })
         .catch(function () { return null; });
     }
     const mermaid = await mermaidReady;
     if (!mermaid) {
+      // 図が描けない場合も本文の理解を妨げないよう、説明とソースを残す
       nodes.forEach(function (n) {
         const w = n.closest(".mermaid-wrap");
-        if (w) w.innerHTML = '<p class="small muted">図の描画ライブラリを読み込めませんでした（オフライン環境の可能性があります）。</p>';
+        if (!w) return;
+        const cap = w.querySelector(".cap");
+        const src = n.getAttribute("data-src") || n.textContent;
+        w.innerHTML =
+          '<div class="callout warn" style="margin:0;text-align:left">' +
+            '<div class="callout-title">図を表示できませんでした</div>' +
+            '<p class="small">描画ライブラリ (mermaid) を読み込めませんでした。' +
+            "ネットワークがオフラインか、外部への接続が制限されている可能性があります。</p>" +
+            '<details><summary class="small" style="cursor:pointer">図の内容をテキストで見る</summary>' +
+            '<pre class="small">' + PBM.esc(src) + "</pre></details>" +
+          "</div>" + (cap ? cap.outerHTML : "");
       });
       return;
     }

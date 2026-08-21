@@ -1,0 +1,71 @@
+{
+  "id": "L304",
+  "lesson": "L304",
+  "title": "イテレータとコンテキスト遷移",
+  "questions": [
+    {
+      "id": "L304-q1",
+      "type": "single",
+      "stem": "多側のテーブルから1側のテーブルの列を取得する関数はどれですか。",
+      "choices": [
+        "RELATED",
+        "RELATEDTABLE",
+        "LOOKUPVALUE",
+        "USERELATIONSHIP"
+      ],
+      "answer": 0,
+      "explain": "RELATED は多側から1側へ（単一の値を取得）、RELATEDTABLE は1側から多側へ（テーブルを取得）です。方向を逆にするとエラーになります。",
+      "area": "データのモデル化",
+      "ref": "L304",
+      "difficulty": 2
+    },
+    {
+      "id": "L304-q2",
+      "type": "single",
+      "stem": "コンテキスト遷移の説明として正しいものはどれですか。",
+      "choices": [
+        "CALCULATE により行コンテキストがフィルターコンテキストに変換される現象",
+        "フィルターコンテキストが行コンテキストに変換される現象",
+        "リレーションシップに沿ってフィルターが伝播すること",
+        "計算列がメジャーに変換されること"
+      ],
+      "answer": 0,
+      "explain": "CALCULATE（メジャー参照に含まれる暗黙のものを含む）が、現在の行の値でフィルターを作ります。これが AVERAGEX( Dim_商品, [売上合計] ) が正しく動く理由です。",
+      "area": "データのモデル化",
+      "ref": "L304",
+      "difficulty": 3
+    },
+    {
+      "id": "L304-q3",
+      "type": "single",
+      "stem": "`Dim_商品` の計算列に `SUM( Fact_売上[売上金額] )` と書くと、何が返りますか。",
+      "choices": [
+        "全商品の売上合計（すべての行で同じ値）",
+        "その商品の売上合計",
+        "エラー",
+        "BLANK"
+      ],
+      "answer": 0,
+      "explain": "計算列に行コンテキストはありますが、それだけではフィルターになりません。その商品に絞るには CALCULATE で包むか RELATEDTABLE を使う必要があります。初学者が必ず踏む罠です。",
+      "area": "データのモデル化",
+      "ref": "L304",
+      "difficulty": 3
+    },
+    {
+      "id": "L304-q4",
+      "type": "single",
+      "stem": "既存の `売上金額` 列がないモデルで、数量×単価の合計を求める正しい式はどれですか。",
+      "choices": [
+        "SUMX( Fact_売上, Fact_売上[Quantity] * Fact_売上[UnitPrice] )",
+        "SUM( Fact_売上[Quantity] * Fact_売上[UnitPrice] )",
+        "SUM( Fact_売上[Quantity] ) * SUM( Fact_売上[UnitPrice] )",
+        "CALCULATE( Fact_売上[Quantity] * Fact_売上[UnitPrice] )"
+      ],
+      "answer": 0,
+      "explain": "SUM は列を1つしか受け取れません。行ごとに計算してから合計するには SUMX を使います。選択肢3は「合計×合計」で意味が変わります。",
+      "area": "データのモデル化",
+      "ref": "L304",
+      "difficulty": 2
+    }
+  ]
+}

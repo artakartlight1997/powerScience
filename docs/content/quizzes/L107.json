@@ -1,0 +1,71 @@
+{
+  "id": "L107",
+  "lesson": "L107",
+  "title": "M言語入門",
+  "questions": [
+    {
+      "id": "L107-q1",
+      "type": "single",
+      "stem": "M言語の let ... in 構文について正しい説明はどれですか。",
+      "choices": [
+        "let の中で定義した変数が「適用したステップ」に対応し、in の後が返す値",
+        "let はループ、in は条件分岐を表す",
+        "in の中で変数を定義し、let の後に結果を書く",
+        "let ... in は Power BI では使えない"
+      ],
+      "answer": 0,
+      "explain": "let の中で定義した各変数が、右ペインの「適用したステップ」1つひとつに対応します。in の後に最終的に返すステップ名を書きます。",
+      "area": "データの準備",
+      "ref": "L107",
+      "difficulty": 2
+    },
+    {
+      "id": "L107-q2",
+      "type": "single",
+      "stem": "M言語について正しいものはどれですか。",
+      "choices": [
+        "大文字と小文字を厳密に区別する",
+        "大文字と小文字を区別しない",
+        "関数名はすべて小文字で書く必要がある",
+        "DAXと同じ構文である"
+      ],
+      "answer": 0,
+      "explain": "M言語は大文字小文字を厳密に区別します（Table.SelectRows は正しく、table.selectrows はエラー）。一方 DAX は区別しません。「MはうるさくてDAXは寛容」と覚えます。",
+      "area": "データの準備",
+      "ref": "L107",
+      "difficulty": 2
+    },
+    {
+      "id": "L107-q3",
+      "type": "single",
+      "stem": "Mコードで `each [Quantity] > 0` と書いたとき、`each` の意味はどれですか。",
+      "choices": [
+        "引数を1つ取る無名関数の省略記法",
+        "ループの開始を表すキーワード",
+        "テーブル全体を集計する関数",
+        "エラーを無視する指定"
+      ],
+      "answer": 0,
+      "explain": "each は (_) => ... の省略記法で、_ が引数を指します。行ごとの処理では [列名] が _[列名] の省略として解釈されます。",
+      "area": "データの準備",
+      "ref": "L107",
+      "difficulty": 3
+    },
+    {
+      "id": "L107-q4",
+      "type": "single",
+      "stem": "型変換に失敗したときに null を返すMの書き方はどれですか。",
+      "choices": [
+        "try Number.FromText([コード]) otherwise null",
+        "if error then null",
+        "onerror Number.FromText([コード]) null",
+        "catch Number.FromText([コード]) null"
+      ],
+      "answer": 0,
+      "explain": "try ... otherwise がMのエラーハンドリング構文です。ただし安易に使うと本来直すべき問題を隠すため、列プロファイルで実態を確認してから使ってください。",
+      "area": "データの準備",
+      "ref": "L107",
+      "difficulty": 2
+    }
+  ]
+}

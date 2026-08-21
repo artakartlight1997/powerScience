@@ -19,7 +19,7 @@
     <aside class="toc-box"><nav class="toc" id="toc"></nav></aside>
   </div>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="assets/vendor/marked.umd.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/analytics.js"></script>
 <script src="assets/js/render.js"></script>
@@ -64,7 +64,7 @@
     document.getElementById("foot").innerHTML = "<hr>" +
       '<div class="row"><button class="btn btn-sm ' + (done ? "btn-ghost" : "btn-primary") + '" id="btn-done">' +
       (done ? "✓ 完了済み（取り消す）" : "このラボを完了にする") + "</button>" +
-      '<a class="btn btn-ghost btn-sm" href="labs.html">ラボ一覧へ</a></div>";
+      '<a class="btn btn-ghost btn-sm" href="labs.html">ラボ一覧へ</a></div>';
     document.getElementById("btn-done").addEventListener("click", function () {
       PBM.progress.setLabDone(id, !PBM.progress.isLabDone(id)); drawFoot();
     });
