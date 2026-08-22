@@ -12,7 +12,7 @@ depends_on: [arch-target-v2, t-sakana-ab-mcts, t-alibaba-stack-deep, t-competito
 mechanism_inventory_as_of: "2026-08-22(2026年4月世代のGDR Max・私有データ検索まで含む)"
 ---
 
-# 優越証明 v0.3
+# 優越証明 v0.4
 
 > **改訂の経緯**: v0.2 への敵対レビューR1は「骨格は生存、ただし現文言の『確実に超える』
 > は成立しない(致命1・重大9・軽微6)」、整合監査は「条件付き合格(必須1)」。
