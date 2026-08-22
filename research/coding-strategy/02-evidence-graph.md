@@ -1,15 +1,15 @@
 ---
 doc_id: cs-evidence-graph
 title: "★中心データモデル — 証拠グラフ"
-version: 0.1.0
+version: 0.2.0
 status: draft
 created: 2026-08-22
 updated: 2026-08-22
 project: integral-prism
 doc_type: strategy
 language: ja
-tags: [data-model, evidence-graph, provenance, schema, append-only]
-depends_on: [t-provenance, t-citation-attribution, t-point-in-time, t-agent-security]
+tags: [data-model, evidence-graph, provenance, schema, append-only, retrievability, negative-status]
+depends_on: [t-provenance, t-citation-attribution, t-point-in-time, t-agent-security, disc-integrated-v2]
 ---
 
 # 証拠グラフ（Evidence Graph）
@@ -44,7 +44,10 @@ Evidence      Source 内の特定の位置にある事実
   { id, source_id, locator(page/bbox/xpath/cell/char_range), text,
     extracted_value: value|NOT_FOUND|AMBIGUOUS,   ← P19
     extraction_confidence, trust_label(trusted|untrusted|derived),  ← P18
-    valid_from, valid_until, supersedes(evidence_id?) }  ← 修正再表示の追跡
+    valid_from, valid_until, supersedes(evidence_id?),  ← 修正再表示の追跡
+    negative_status(supported_negative|unknown|not_searched),  ← P21（v2.0）
+    independence_cluster_id }  ← 上流ソース単位のクラスタ。同一プレスリリース由来の
+                                  複数記事を「独立した証拠」と誤算しないための正規化キー（P22, O2 の暫定解）
 
 Hypothesis    仮説（ACH の列）
   { id, text, origin(human|template|case_memory|agent), status(open|supported|refuted),
@@ -56,7 +59,10 @@ Claim         レポートに出る主張
 
 Question      未解決の問い（＝反証課題）
   { id, text, targets_hypothesis_ids[], eig_estimate, cost_estimate,
-    channel(web|db|expert|human|calc), status, diagnosticity }
+    channel(web|db|expert|human|calc), retrievability_estimate,  ← P21（v2.0）
+    status, diagnosticity }
+    ★ retrievability_estimate が低いと判定された時点で、channel を
+      web から vdr/expert/compute へ切り替える（Action Router, → 17章）
 
 ToolCall      ツール実行の記録
   { id, tool, args_hash, cost, latency, inputs_evidence_ids[], outputs[] }

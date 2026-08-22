@@ -1,6 +1,6 @@
 {
   "$schema": "./schema.md#taxonomy",
-  "version": "0.5.0",
+  "version": "0.4.0",
   "generated": "2026-08-22",
   "purpose": "Integral Prism の設計要素を分類する軸。後の設計文書・評価・課題管理で共通のタグ体系として使う。",
   "layers": [
@@ -73,6 +73,13 @@
       "desc": "文書理解（レイアウト/表/座標）、未信頼コンテンツの隔離と taint 伝播、案件データの分離",
       "competitor_coverage": "抽出は既存勢が強い / 防御は各社とも未成熟",
       "ip_priority": "must"
+    },
+    {
+      "id": "L10",
+      "name": "意思決定インターフェース層",
+      "desc": "Decision Compiler の最小形（人間3行→命題→数値）、感度分析、EVPI、Action Router のチャネル選択（retrievability駆動）",
+      "competitor_coverage": "未確認（外部評価は非公開実装を評価不能と明記）",
+      "ip_priority": "must（段階導入）"
     }
   ],
   "axes": {
@@ -155,6 +162,19 @@
       "llm-native(禁止)",
       "tool-augmented",
       "deterministic-code+identity-checks"
+    ],
+    "negative_status": [
+      "supported_negative",
+      "unknown",
+      "not_searched"
+    ],
+    "action_channel": [
+      "web",
+      "premium_db",
+      "vdr",
+      "expert",
+      "management_qa",
+      "compute"
     ]
   },
   "design_principles": [
@@ -257,6 +277,26 @@
       "id": "P20",
       "principle": "矛盾する証拠は平均も抑制もせず、保存して提示し、追加取得タスクに変換する",
       "source": "S-125"
+    },
+    {
+      "id": "P21",
+      "principle": "到達可能性(retrievability)を探索の一級変数にする。Web で見つからないと判定した瞬間に channel を VDR/専門家/計算へ切り替える。不在を真に変換しない（三値: supported_negative/unknown/not_searched）",
+      "source": "external-assessment-v2,ARGUS,CROWN-QA"
+    },
+    {
+      "id": "P22",
+      "principle": "証拠の独立性はクラスタで正規化する。同一上流ソース由来の複数記事を独立支持証拠として数えない",
+      "source": "external-assessment-v2,CAMA"
+    },
+    {
+      "id": "P23",
+      "principle": "意思決定モデルの取得は最小形から段階導入する（人間3行→命題化→数値モデル）。機械可読な決定コンパイラを前提条件にしない",
+      "source": "disc-devils-advocate(F4'),disc-evaluation(DQ6)"
+    },
+    {
+      "id": "P24",
+      "principle": "較正のMoat主張は時間軸を分ける。近期は台帳自体、Worker/Source較正は数年がかりの長期資産と位置づける",
+      "source": "disc-evaluation"
     }
   ],
   "tags": [

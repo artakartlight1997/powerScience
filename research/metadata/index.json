@@ -1,8 +1,8 @@
 {
-  "index_version": "0.9.0",
+  "index_version": "2.0.0",
   "generated": "2026-08-22",
   "project": "integral-prism",
-  "note": "全ファイル一覧。",
+  "note": "全ファイル一覧。v2.0: 外部評価文書(S-137)との統合設計を追加。",
   "groups": {
     "competitors": [
       "t-anthropic-research",
@@ -107,8 +107,9 @@
       "disc-evaluation",
       "disc-validation",
       "disc-open-problems",
-      "disc-index",
-      "disc-prism-proposal"
+      "disc-prism-proposal",
+      "disc-integrated-v2",
+      "disc-index"
     ],
     "meta": [
       "survey-00-method"
@@ -1377,7 +1378,7 @@
     {
       "doc_id": "t-design-principles",
       "path": "topics/06-synthesis/design-principles.md",
-      "title": "設計原則 P1-P20 — サーベイから導かれる制約",
+      "title": "設計原則 P1-P24 — サーベイから導かれる制約",
       "topic_group": "synthesis",
       "tags": [
         "design-principles",
@@ -1387,7 +1388,7 @@
       "confidence": "medium-high",
       "primary_sources": [],
       "depends_on": [],
-      "lines": 72
+      "lines": 81
     },
     {
       "doc_id": "t-differentiation-hypotheses",
@@ -1478,7 +1479,9 @@
         "evidence-graph",
         "provenance",
         "schema",
-        "append-only"
+        "append-only",
+        "retrievability",
+        "negative-status"
       ],
       "confidence": null,
       "primary_sources": [],
@@ -1486,9 +1489,10 @@
         "t-provenance",
         "t-citation-attribution",
         "t-point-in-time",
-        "t-agent-security"
+        "t-agent-security",
+        "disc-integrated-v2"
       ],
-      "lines": 131
+      "lines": 137
     },
     {
       "doc_id": "cs-components",
@@ -1949,6 +1953,53 @@
       "lines": 108
     },
     {
+      "doc_id": "disc-prism-proposal",
+      "path": "discussion/16-prism-proposal-vs-sakana.md",
+      "title": "★提案確定版 — サカナAIに勝る Integral Prism（W1 差し替え）",
+      "topic_group": "discussion",
+      "tags": [
+        "proposal",
+        "sakana",
+        "product-definition",
+        "battle-map",
+        "supersedes-W1"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "disc-first-wedge",
+        "disc-product-shape",
+        "t-sakana-marlin",
+        "t-model-proof",
+        "t-alpha-decay"
+      ],
+      "lines": 119
+    },
+    {
+      "doc_id": "disc-integrated-v2",
+      "path": "discussion/17-integrated-design-v2.md",
+      "title": "Integral Prism v2.0 — 統合設計（Decision-Centric Meta-Research Control Plane）",
+      "topic_group": "discussion",
+      "tags": [
+        "v2",
+        "integrated-design",
+        "decision-centric",
+        "voi",
+        "epistemic-ledger",
+        "external-review"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "disc-prism-proposal",
+        "t-design-principles",
+        "cs-evidence-graph",
+        "t-decision-boundary",
+        "t-information-value-eig"
+      ],
+      "lines": 239
+    },
+    {
       "doc_id": "disc-index",
       "path": "discussion/README.md",
       "title": "設計ディスカッション — インデックスと進め方",
@@ -1965,7 +2016,7 @@
         "research-index",
         "cs-index"
       ],
-      "lines": 80
+      "lines": 82
     },
     {
       "doc_id": "survey-00-method",
@@ -1992,12 +2043,14 @@
         "summary",
         "executive",
         "decisions",
-        "next-steps"
+        "next-steps",
+        "v2",
+        "decision-centric"
       ],
       "confidence": null,
       "primary_sources": [],
       "depends_on": [],
-      "lines": 196
+      "lines": 221
     },
     {
       "doc_id": "notes-discussion-agenda",
@@ -2027,27 +2080,6 @@
       "primary_sources": [],
       "depends_on": [],
       "lines": 73
-    },
-    {
-      "doc_id": "disc-prism-proposal",
-      "path": "discussion/16-prism-proposal-vs-sakana.md",
-      "title": "★提案確定版 — サカナAIに勝る Integral Prism（W1 差し替え）",
-      "topic_group": "discussion",
-      "tags": [
-        "proposal",
-        "sakana",
-        "product-definition"
-      ],
-      "confidence": null,
-      "primary_sources": [],
-      "depends_on": [
-        "disc-first-wedge",
-        "disc-product-shape",
-        "t-sakana-marlin",
-        "t-model-proof",
-        "t-alpha-decay"
-      ],
-      "lines": 119
     }
   ]
 }

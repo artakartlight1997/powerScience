@@ -1,6 +1,6 @@
 {
   "$schema": "./schema.md#sources",
-  "registry_version": "0.5.0",
+  "registry_version": "0.6.0",
   "generated": "2026-08-22",
   "retrieval_method": "web_search_snippets",
   "retrieval_caveat": "実行環境のエグレス制限により sakana.ai / arxiv.org / ai.google.dev 等の本文は未取得。記載は検索エンジン要約および二次記事に基づく。confidence を参照のこと。",
@@ -2720,6 +2720,29 @@
         "cs-what-to-build",
         "t-contribution-map",
         "t-document-understanding"
+      ]
+    },
+    {
+      "id": "S-137",
+      "title": "Integral Prism 最終設計評価 v1.0（ユーザ提供の外部設計文書。Decision-Centric Meta-Research Control Plane案）",
+      "url": "research/discussion/external-sources/integral_prism_final_design_assessment_v1.0.docx",
+      "type": "external-user-provided",
+      "org": "外部（提供元不明）",
+      "year": 2026,
+      "lang": "ja",
+      "confidence": "C",
+      "topics": [
+        "decision-compiler",
+        "voi",
+        "epistemic-ledger",
+        "retrievability",
+        "negative-status",
+        "outcome-calibration"
+      ],
+      "note": "文書内の一次引用 R1-R25（DeepTRACE, CAMA, ARGUS, CROWN-QA, POPPER, MindSearch 等）はこの環境からアクセス不可のため未検証。特に R2 の著者表記(Matsuo et al.)はAB-MCTS原論文の著者と一致しない可能性があり要確認。R1-R25は個別のS-IDを付与せず、本ソースの下に一括で『未検証の外部引用』として記録する。",
+      "used_in": [
+        "disc-integrated-v2",
+        "research-index"
       ]
     }
   ],

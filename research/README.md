@@ -1,7 +1,7 @@
 ---
 doc_id: research-index
 title: "Integral Prism リサーチ・インデックス"
-version: 0.8.0
+version: 2.0.0
 status: draft
 created: 2026-08-22
 updated: 2026-08-22
@@ -118,7 +118,7 @@ tags: [index, survey, deep-research, agent, investment-research]
 | [contribution-map.md](topics/06-synthesis/contribution-map.md) | **R1–R34: どの研究がどこに効くか** |
 | [model-proof-differentiation.md](topics/06-synthesis/model-proof-differentiation.md) | **★モデルが賢くなっても勝てる要素 — 4分類と賭けどころ**（**v0.4 追加**） |
 | [differentiation-hypotheses.md](topics/06-synthesis/differentiation-hypotheses.md) | **差別化仮説 A/B/C** |
-| [design-principles.md](topics/06-synthesis/design-principles.md) | **設計原則 P1–P20** |
+| [design-principles.md](topics/06-synthesis/design-principles.md) | **設計原則 P1–P24**（v2.0 で P21–P24 追加） |
 
 ## 7. 実装戦略 — `coding-strategy/`
 
@@ -173,18 +173,23 @@ tags: [index, survey, deep-research, agent, investment-research]
 >
 > **討論の自己評価: DQ = 4/10**（論理は 8/10 だが、**顧客情報がゼロ 5/10**、**実行主体が未定 4/10**）。
 > **これ以上考えても上がらない。顧客に会い、M0 を回す段階。**
+>
+> **【v2.0 更新】** 外部から独立に作成された設計評価文書（`[S-137]`）を受領し、統合した。
+> 両者は独立に同じ結論（Decision-Centric な制御層）へ収束していた。
+> 統合版は **[discussion/17-integrated-design-v2.md](discussion/17-integrated-design-v2.md)**。
+> 設計原則は **P24 まで拡張**（Retrievability・Negative status・意思決定モデルの段階導入・較正の時間軸分離）。
 
 ## 9. ノートとメタデータ
 
 | ファイル | 内容 |
 |---|---|
 | [notes/discussion-agenda.md](notes/discussion-agenda.md) | **未決の議論論点 D1–D10** |
-| [notes/open-questions.md](notes/open-questions.md) | 一次確認の宿題 Q1–Q31 |
+| [notes/open-questions.md](notes/open-questions.md) | 一次確認の宿題 Q1–Q31（+ 外部評価の一次検証タスク） |
 | [metadata/schema.md](metadata/schema.md) | フロントマター / 参考文献のスキーマ |
 | [metadata/index.json](metadata/index.json) | **全ファイルの機械可読インデックス** |
-| [metadata/sources.json](metadata/sources.json) | 出典レジストリ（**120件**、確度・使用箇所つき） |
+| [metadata/sources.json](metadata/sources.json) | 出典レジストリ（**121件**、確度・使用箇所つき） |
 | [metadata/claims.json](metadata/claims.json) | 主要な事実主張（**66件**、根拠・再検証手順つき） |
-| [metadata/taxonomy.json](metadata/taxonomy.json) | 機能層 L0–L9 / 設計軸 / 設計原則 **P1–P20** |
+| [metadata/taxonomy.json](metadata/taxonomy.json) | 機能層 L0–L10 / 設計軸 / 設計原則 **P1–P24** |
 | [metadata/glossary.md](metadata/glossary.md) | 用語集 |
 
 ---
