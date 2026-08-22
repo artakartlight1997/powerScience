@@ -23,22 +23,23 @@ from .ingest import snapshot
 
 log = logging.getLogger(__name__)
 
-_WEB_CHANNELS = {"public", "premium"}
-
 
 def build_queries(case: Case, items: list[SpecItem],
                   judgments: dict[str, Judgment], max_queries: int) -> list[Query]:
-    """gap の優先順(fill.plan)に沿って検索クエリを作る。純関数。"""
+    """gap の優先順(fill.plan)に沿って検索クエリを作る。純関数。
+    「公開経路」の定義は fill.is_public_reachable と共有(R4 判定とのズレ防止)。"""
+    if max_queries <= 0:
+        return []
     by_id = {it.id: it for it in items}
     queries: list[Query] = []
     for item_id in fill.plan(items, judgments):
+        if len(queries) >= max_queries:
+            break
         it = by_id[item_id]
-        if not any(ch in _WEB_CHANNELS for ch in it.retrievability):
+        if not fill.is_public_reachable(it):
             continue  # vdr/expert 専用項目は Web に浪費しない(P21)
         seg = f" {it.segment}" if it.segment else ""
         queries.append(Query(item_key=it.key, text=f"{case.name}{seg} {it.label}"))
-        if len(queries) >= max_queries:
-            break
     return queries
 
 
@@ -46,14 +47,22 @@ def collect(store, case: Case, gate: Gate, search: SearchClient, fetcher: Fetche
             queries: list[Query], data_dir: Path, results_per_query: int,
             max_fetch: int, trust_tier_web: int,
             today: date | None = None) -> list[Source]:
-    """検索→取得→スナップショット→Source。取得できなかった URL からは何も生まれない。"""
+    """検索→取得→スナップショット→Source。取得できなかった URL からは何も生まれない。
+    同一 URL はラン内でも既存 Source とも重複取得しない(動的ページで「独立」を
+    水増ししない — P22)。"""
     created: list[Source] = []
     fetched = 0
+    seen_urls = {s.url for s in store.all("source", case.id, Source) if s.url}
     for q in queries:
+        if fetched >= max_fetch:
+            log.info("収集: 取得上限 %d 到達(以降のクエリは検索しない)", max_fetch)
+            break
         for hit in search.search(q.text, results_per_query):
             if fetched >= max_fetch:
-                log.info("収集: 取得上限 %d 到達", max_fetch)
-                return created
+                break
+            if hit.url in seen_urls:
+                continue
+            seen_urls.add(hit.url)
             try:
                 gate.check_host(hit.url)
             except GateError as e:
@@ -65,9 +74,9 @@ def collect(store, case: Case, gate: Gate, search: SearchClient, fetcher: Fetche
                 log.info("収集: 取得失敗 url=%s(候補は証拠にならず消える)", hit.url)
                 continue
             h = hashlib.sha256(text.encode("utf-8")).hexdigest()
-            if store.has_source_hash(case.id, h):
-                continue  # 冪等: 同一内容は登録しない
-            snap = snapshot(data_dir, case.id, h, None, text)
+            if store.has_source_hash(case.id, h, kind="web"):
+                continue  # 冪等: 同一内容の Web ソースは登録しない
+            snap = snapshot(data_dir, case.id, h, None, text, gate)
             src = Source(id=f"src-{uuid.uuid4().hex[:12]}", case_id=case.id,
                          kind="web", trust_tier=trust_tier_web,
                          seller_provided=False, url=hit.url,

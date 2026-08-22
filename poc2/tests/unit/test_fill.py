@@ -55,3 +55,29 @@ def test_stop_always_has_reason():
 def test_first_round_not_stopped_by_diminishing_returns():
     stop, _ = should_stop(1, 0, 0, open_public_gaps=5, stop_rules=RULES)
     assert not stop  # R3 は round>1 のみ
+
+
+def test_channel_prefers_public_when_mixed():
+    """[vdr, public] は web チャネル — audit/research の「含む」判定と揃える。
+    先頭要素だけ見ると R4(公開経路の完了)が偽発火する。"""
+    items = [make_item(id="c:m", key="m", retrievability=["vdr", "public"])]
+    judgments = {"c:m": _j("c:m", "missing")}
+    qs = make_questions("case1", items, judgments, max_open=5)
+    assert qs[0].channel == "web"
+
+
+def test_open_public_gaps_counts_items_not_questions():
+    from prism.fill import open_public_gaps
+    items = [make_item(id="c:a", key="a", retrievability=["vdr", "public"]),
+             make_item(id="c:b", key="b", retrievability=["vdr"]),
+             make_item(id="c:c", key="c", retrievability=["public"])]
+    judgments = {"c:a": _j("c:a", "missing"), "c:b": _j("c:b", "unknown"),
+                 "c:c": _j("c:c", "filled")}
+    assert open_public_gaps(items, judgments) == 1  # a のみ(c は filled、b は非公開)
+
+
+def test_box10_ranks_after_box2_numerically():
+    items = [make_item(id="c:x10", key="x10", box="box10"),
+             make_item(id="c:x2", key="x2", box="box2")]
+    order = plan(items, {})
+    assert order == ["c:x2", "c:x10"]  # 辞書順の罠("box10" < "box2")を踏まない

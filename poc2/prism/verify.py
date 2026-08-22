@@ -17,6 +17,12 @@ from .contracts import Contradiction, Evidence, Grounded, LLMClient, LLMError
 log = logging.getLogger(__name__)
 
 _WS = re.compile(r"\s+")
+_WINDOW = 16000  # extract._MAX_CHARS と揃える(抽出できた位置の引用が照合窓から漏れないように)
+
+# 単位表記 → 次元。「10億円」と「1,500百万円」は同じ次元(円)として比較する
+_DIM = {"兆円": "円", "億円": "円", "百万円": "円", "万円": "円", "千円": "円",
+        "円": "円", "%": "%", "％": "%", "万人": "人", "人": "人", "名": "人",
+        "件": "件", "社": "社"}
 
 VERIFY_SYSTEM = """与えられた原文抜粋が、与えられた引用文を逐語的または実質的に含むかだけを判定せよ。
 内容の良し悪しは判定しない。出力は {"supported": true} または {"supported": false} のみ。"""
@@ -26,6 +32,10 @@ def _norm(s: str) -> str:
     return _WS.sub("", s)
 
 
+def _dim(unit: str | None) -> str | None:
+    return _DIM.get(unit) if unit else None
+
+
 def ground(ev: Evidence, snap_text: str | None, llm: LLMClient) -> Grounded:
     """原文支持の判定。スナップショットが無ければ pass にはならない(契約 §3)。"""
     if not snap_text:
@@ -33,7 +43,10 @@ def ground(ev: Evidence, snap_text: str | None, llm: LLMClient) -> Grounded:
         return "fail"
     if _norm(ev.quote) and _norm(ev.quote) in _norm(snap_text):
         return "pass"  # 決定的照合が最優先(LLM を使わない)
-    window = snap_text[:12000]
+    if len(snap_text) > _WINDOW:
+        log.warning("grounding: 証拠 %s の照合窓を %d 字に切り詰め(原文 %d 字)",
+                    ev.id, _WINDOW, len(snap_text))  # C-8: 縮退は黙って起きない
+    window = snap_text[:_WINDOW]
     votes = []
     for order in ("ab", "ba"):  # P10: 提示順を入れ替えて2回
         if order == "ab":
@@ -52,31 +65,41 @@ def ground(ev: Evidence, snap_text: str | None, llm: LLMClient) -> Grounded:
 
 
 def cluster(evidences: list[Evidence]) -> list[Evidence]:
-    """独立性クラスタの付与(P22)。同一項目で正規化数値が一致、または文面が高類似の
-    証拠は同一クラスタ = 独立した支持として二重に数えない。純関数的(新リスト返却)。"""
+    """独立性クラスタの付与(P22)。同一項目で「同じ次元の数値が一致」または
+    「数値で区別できず文面が高類似」の証拠は同一クラスタ = 独立支持として二重に
+    数えない。union-find で連結成分に併合するため入力順に依存しない(決定性)。
+    純関数的(新リスト返却)。"""
     by_item: dict[str, list[Evidence]] = defaultdict(list)
     for e in evidences:
         by_item[e.item_key].append(e)
     out: list[Evidence] = []
     for key, evs in by_item.items():
-        labels: list[int] = []
-        for i, e in enumerate(evs):
-            assigned = None
-            for j in range(i):
-                if _same_cluster(evs[j], e):
-                    assigned = labels[j]
-                    break
-            labels.append(assigned if assigned is not None else i)
-        for e, lab in zip(evs, labels):
-            out.append(e.model_copy(update={"cluster_id": f"{key}-c{lab}"}))
+        parent = list(range(len(evs)))
+
+        def find(i: int) -> int:
+            while parent[i] != i:
+                parent[i] = parent[parent[i]]
+                i = parent[i]
+            return i
+
+        for i in range(len(evs)):
+            for j in range(i + 1, len(evs)):
+                if _same_cluster(evs[i], evs[j]):
+                    parent[find(j)] = find(i)
+        # クラスタ番号は「成分内の最小インデックス」で安定化
+        for e, i in zip(evs, range(len(evs))):
+            out.append(e.model_copy(update={"cluster_id": f"{key}-c{find(i)}"}))
     return out
 
 
 def _same_cluster(a: Evidence, b: Evidence) -> bool:
-    if (a.value and b.value and a.value.num is not None and b.value.num is not None):
-        base = max(abs(a.value.num), abs(b.value.num), 1e-9)
-        if abs(a.value.num - b.value.num) / base < 1e-3:
-            return True
+    an = a.value.num if a.value else None
+    bn = b.value.num if b.value else None
+    if an is not None and bn is not None and _dim(a.value.unit) == _dim(b.value.unit):
+        # 同じ次元の数値同士は数値だけで判定する。数値が異なるのに文面類似で
+        # 併合すると、矛盾検出(同一クラスタ対は除外)を構造的に殺す(P20)
+        base = max(abs(an), abs(bn), 1e-9)
+        return abs(an - bn) / base < 1e-3
     return difflib.SequenceMatcher(None, _norm(a.quote), _norm(b.quote)).ratio() > 0.85
 
 
@@ -97,8 +120,10 @@ def contradictions(case_id: str, evidences: list[Evidence],
                 a, b = evs[i], evs[j]
                 if a.cluster_id == b.cluster_id:
                     continue
-                if (a.value.unit or "") != (b.value.unit or ""):
-                    continue  # 単位が違う数値の比較は矛盾と断定しない
+                # 次元が違う数値の比較は矛盾と断定しない
+                # (「10億円」vs「1,500百万円」は同一次元=円として比較される)
+                if _dim(a.value.unit) != _dim(b.value.unit):
+                    continue
                 base = max(abs(a.value.num), abs(b.value.num), 1e-9)
                 delta = abs(a.value.num - b.value.num) / base
                 if delta > tolerance and frozenset((a.id, b.id)) not in seen:

@@ -16,11 +16,23 @@ from ..conftest import FakeLLM, make_item
     ("約5億円", 5e8, "億円"),
     ("▲3億円", -3e8, "億円"),
     ("300名", 300.0, "名"),
+    ("前年比▲3%", -3.0, "%"),     # 負号が文字列先頭でなくても負(P19)
+    ("−3%", -3.0, "%"),            # U+2212
+    ("3%増", 3.0, "%"),            # 「増」は正のまま
+    ("1.5万人", 15000.0, "万人"),
+    ("0.5億円", 5e7, "億円"),
 ])
 def test_parse_number(raw, num, unit):
     v = parse_number(raw)
     assert v.num == pytest.approx(num)
     assert v.unit == unit
+
+
+@pytest.mark.parametrize("raw", ["3〜5億円", "10億円→12億円", "3~5億円"])
+def test_parse_number_range_is_not_collapsed(raw):
+    """範囲・遷移表現を先頭の裸の数値に潰さない(P19: 誤った数値を台帳に入れない)。"""
+    v = parse_number(raw)
+    assert v.raw == raw and v.num is None
 
 
 def test_parse_number_no_digits_keeps_raw_only():
@@ -74,3 +86,18 @@ def test_run_llm_failure_degrades_to_empty(tmp_path):
 def test_run_without_snapshot_returns_empty(tmp_path):
     src = _source(tmp_path).model_copy(update={"snapshot_path": None})
     assert run(src, [make_item()], FakeLLM()) == []
+
+
+def test_run_normalizes_status_and_passes_not_found(tmp_path):
+    """C-3: 不正な status は AMBIGUOUS に正規化(ValidationErrorで全滅させない)。
+    NOT_FOUND(探して無かった)はそのまま通る。"""
+    items = [make_item(key="a"), make_item(id="c:b", key="b")]
+    llm = FakeLLM(lambda r, s, u: {"evidences": [
+        {"item_key": "a", "quote": "何かの記述", "raw_value": None, "status": "weird!!"},
+        {"item_key": "b", "quote": "設備投資はほぼ不要", "raw_value": None,
+         "status": "NOT_FOUND"},
+    ]})
+    evs = run(_source(tmp_path), items, llm)
+    by = {e.item_key: e for e in evs}
+    assert by["a"].status == "AMBIGUOUS"
+    assert by["b"].status == "NOT_FOUND"

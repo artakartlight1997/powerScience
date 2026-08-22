@@ -26,6 +26,8 @@ def test_host_allowlist(tmp_path):
     with pytest.raises(GateError):
         gate.check_host("https://evil.example.net/x")
     with pytest.raises(GateError):
+        gate.check_host("https://sub.example.com/x")  # 完全一致のみ(サブドメイン不可)
+    with pytest.raises(GateError):
         gate.check_host("ftp://example.com/x")
 
 

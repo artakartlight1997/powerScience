@@ -10,8 +10,7 @@ from __future__ import annotations
 from datetime import date, timedelta
 
 from .contracts import Evidence, Judgment, SpecItem
-
-_PUBLIC_CHANNELS = {"public", "premium", "web"}
+from .fill import is_public_reachable  # 「公開経路」の定義は fill と共有(判定のズレ防止)
 
 
 def _fresh(ev: Evidence, today: date, freshness_days: int) -> bool:
@@ -34,9 +33,16 @@ def judge(item: SpecItem, evidences: list[Evidence], open_contradiction: bool,
 
     clusters: dict[str, list[Evidence]] = {}
     for e in usable:
-        clusters.setdefault(e.cluster_id or e.id, []).append(e)  # I9
+        # I9。cluster_id 未付与は「独立」でなく単一の擬似クラスタに畳む(保守方向)。
+        # 未クラスタ証拠2件を独立2票と数えて filled にする事故を防ぐ
+        clusters.setdefault(e.cluster_id or "unclustered", []).append(e)
     non_seller = [cid for cid, evs in clusters.items()
                   if any(not e.seller_provided for e in evs)]
+    # expect_absent 項目で「存在の主張(value)」と「不在の確認(NOT_FOUND)」が併存
+    # したら、それは数値では捕まらない意味的矛盾 — filled にせず人間判断へ(P20)
+    absent_conflict = (item.expect_absent
+                       and any(e.status == "value" for e in usable)
+                       and any(e.status == "NOT_FOUND" for e in usable))
 
     jid = f"{item.id}:r{round_no}"
     base = dict(id=jid, case_id=item.case_id, item_id=item.id, round=round_no,
@@ -46,7 +52,7 @@ def judge(item: SpecItem, evidences: list[Evidence], open_contradiction: bool,
 
     if usable:
         if (len(clusters) >= item.required_clusters and non_seller
-                and not open_contradiction):
+                and not open_contradiction and not absent_conflict):
             return Judgment(**base, status="filled",
                             rationale=f"独立{len(clusters)}クラスタが原文支持で確認")
         reasons = []
@@ -56,10 +62,12 @@ def judge(item: SpecItem, evidences: list[Evidence], open_contradiction: bool,
             reasons.append("売り手の主張のみ(I3: 外部突合が必要)")
         if open_contradiction:
             reasons.append("未解消の矛盾あり(P20)")
+        if absent_conflict:
+            reasons.append("存在の主張と不在の確認が併存(要人間判断)")
         return Judgment(**base, status="thin", rationale="、".join(reasons),
                         acquisition_path=_path(item))
     # 証拠ゼロ: 公開経路で取れるはずなら missing、そうでなければ unknown
-    if any(ch in _PUBLIC_CHANNELS for ch in item.retrievability):
+    if is_public_reachable(item):
         return Judgment(**base, status="missing",
                         rationale="公開経路で未取得(探索を継続)",
                         acquisition_path=_path(item))

@@ -20,6 +20,7 @@ def archetype(llm: LLMClient, name: str, industry: str | None,
               choices: list[str]) -> str:
     user = (f"対象: {name}" + (f"(業界: {industry})" if industry else "")
             + f"\n選択肢: {', '.join(choices)}")
+    out: dict = {}
     try:
         out = llm.complete_json("online", SYSTEM, user)
         ans = str(out.get("archetype", ""))

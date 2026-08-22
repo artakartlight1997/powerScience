@@ -11,6 +11,11 @@ from .contracts import Case, Contradiction, Evidence, Judgment, Question, Source
 _MARK = {"filled": "✅", "thin": "🟡", "missing": "🔴", "unknown": "⚫"}
 
 
+def _cell(s) -> str:
+    """Markdown テーブルのセル安全化。quote/value は untrusted な Web 由来でありうる。"""
+    return str(s).replace("|", "/").replace("\r", " ").replace("\n", " ")
+
+
 def _ev_index(evidences: list[Evidence]) -> dict[str, Evidence]:
     return {e.id: e for e in evidences}
 
@@ -35,15 +40,15 @@ def render_sakusenban(case: Case, items: list[SpecItem], judgments: dict[str, Ju
         for it in by_box[box]:
             j = judgments.get(it.id)
             st = j.status if j else "-"
-            lines.append(f"| {it.label} | {it.segment or '全社'} | "
-                         f"{_MARK.get(st, '')} {st} | {j.rationale if j else ''} |")
+            lines.append(f"| {_cell(it.label)} | {it.segment or '全社'} | "
+                         f"{_MARK.get(st, '')} {st} | {_cell(j.rationale) if j else ''} |")
         lines.append("")
     lines += ["## 見張り台帳(thesis_dependence=high の項目)", "",
               "| ドライバー | 項目 | 状態 | 取得手段 |", "|---|---|---|---|"]
     for it in items:
         if it.dependence == "high":
             j = judgments.get(it.id)
-            lines.append(f"| {it.driver} | {it.label} | {j.status if j else '-'} | "
+            lines.append(f"| {it.driver} | {_cell(it.label)} | {j.status if j else '-'} | "
                          f"{(j.acquisition_path if j else None) or '—'} |")
     open_cx = [c for c in contradictions if c.status == "open"]
     lines += ["", f"## 未解消の矛盾({len(open_cx)}件 — 平均も抑制もしない/P20)", ""]
@@ -63,21 +68,25 @@ def render_order_spec(case: Case, items: list[SpecItem], judgments: dict[str, Ju
     for q in sorted(questions, key=lambda q: q.rank):
         it = by_key.get(q.item_key)
         j = judgments.get(it.id) if it else None
-        lines.append(f"| {q.rank} | {q.text} | {q.channel} | {j.status if j else '-'} |")
+        lines.append(f"| {q.rank} | {_cell(q.text)} | {q.channel} | {j.status if j else '-'} |")
     filled = [it.label for it in items
               if (j := judgments.get(it.id)) and j.status == "filled"]
     lines += ["", f"## 発注不要(公開情報で確認済み: {len(filled)}件)", ""]
-    lines += [f"- {label}" for label in filled]
+    lines += [f"- {_cell(label)}" for label in filled]
     return "\n".join(lines) + "\n"
 
 
 def render_qc(case: Case, items: list[SpecItem], evidences: list[Evidence],
               sources: list[Source]) -> str:
-    """O3 検収QC: コンサル成果物のうち公開証拠で再現できた項目の割合。"""
+    """O3 検収QC: コンサル成果物のうち公開証拠で再現できた項目の割合。
+    分母・分子とも原文照合(grounded=pass)を通った証拠だけで数える —
+    幻覚引用(fail)で分母を膨らませ再現率を過小表示しない。"""
     src = {s.id: s for s in sources}
     cons_items = {e.item_key for e in evidences
-                  if src.get(e.source_id) and src[e.source_id].kind == "consultant"}
-    repro = {e.item_key for e in evidences if e.grounded == "pass"
+                  if e.grounded == "pass" and e.status == "value"
+                  and src.get(e.source_id) and src[e.source_id].kind == "consultant"}
+    repro = {e.item_key for e in evidences
+             if e.grounded == "pass" and e.status == "value"
              and src.get(e.source_id)
              and src[e.source_id].kind in ("general", "web", "filing")}
     both = cons_items & repro
@@ -98,10 +107,10 @@ def render_ledger(case: Case, evidences: list[Evidence], sources: list[Source]) 
              "|---|---|---|---|---|---|---|---|"]
     for e in sorted(evidences, key=lambda e: (e.item_key, e.id)):
         s = src.get(e.source_id)
-        v = e.value.raw if e.value else ""
+        v = _cell(e.value.raw) if e.value else ""
         origin = (s.kind + (f":{s.publisher}" if s and s.publisher else "")) if s else "?"
-        lines.append(f"| {e.item_key} | {e.quote[:60].replace('|', '/')} | {v} | "
-                     f"{origin} | {e.as_of} | {e.grounded} | {e.cluster_id or ''} | "
+        lines.append(f"| {e.item_key} | {_cell(e.quote[:60])} | {v} | "
+                     f"{_cell(origin)} | {e.as_of} | {e.grounded} | {e.cluster_id or ''} | "
                      f"{'○' if e.seller_provided else ''} |")
     return "\n".join(lines) + "\n"
 

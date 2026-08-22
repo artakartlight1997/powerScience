@@ -64,7 +64,7 @@ boxes:
       - {id: b6-valuechain, text: バリューチェーン上の位置(どこで付加価値を取るか・川上川下の交渉力), must: true, retrievability: [public, expert], driver: margin_share}
       - {id: b6-supplier, text: サプライヤー集中と調達リスク, must: true, retrievability: [vdr], driver: downside_margin}
       - {id: b6-capacity, text: キャパシティと拡張性(成長の物理的制約。労働集約なら採用力), must: true, retrievability: [vdr, expert], driver: volume_cap}
-      - {id: b6-capex, text: 設備投資・資本集約度(「ほぼ不要」も確認済みfilledとして記録), must: true, retrievability: [vdr, public], driver: cash_conversion}
+      - {id: b6-capex, text: 設備投資・資本集約度(「ほぼ不要」も確認済みfilledとして記録), must: true, retrievability: [vdr, public], driver: cash_conversion, expect_absent: true}
       - {id: b6-quality, text: 品質・事故・リコール履歴, must: false, retrievability: [public, vdr], driver: downside}
   - id: box7
     name: 収益の質

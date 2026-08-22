@@ -44,6 +44,54 @@ def test_build_queries_excludes_filled():
     assert qs == []
 
 
+def test_build_queries_zero_budget_returns_empty():
+    items = [make_item(id="c:a", key="a", retrievability=["public"])]
+    assert build_queries(_case(), items, {}, max_queries=0) == []
+
+
+def test_collect_respects_max_fetch_and_stops_searching(tmp_path):
+    """取得上限で止まり、枯渇後は次クエリの検索(LLM呼び出し)もしない。"""
+    store = Store(tmp_path / "db.sqlite")
+    urls = [f"https://h{i}.example/p" for i in range(10)]
+    search = FakeSearch(lambda q, k: [SearchHit(url=u) for u in urls])
+    fetcher = FakeFetcher({u: f"本文{u}" for u in urls})
+    qs = [build_queries(_case(), [make_item(id=f"c:{n}", key=f"k{n}",
+                                            retrievability=["public"])], {}, 1)[0]
+          for n in range(5)]
+    created = collect(store, _case(), Gate([], tmp_path), search, fetcher, qs,
+                      tmp_path, results_per_query=10, max_fetch=3,
+                      trust_tier_web=3, today=date(2026, 8, 22))
+    assert len(fetcher.fetched) == 3            # 取得は上限ちょうど
+    assert len(created) == 3
+    assert len(search.queries) == 1             # 枯渇後のクエリは検索しない
+
+
+def test_collect_dedupes_same_url_within_run_and_against_store(tmp_path):
+    """同一URLはラン内でも既存Sourceとも再取得しない(動的ページで独立を水増ししない)。"""
+    store = Store(tmp_path / "db.sqlite")
+    url = "https://same.example/p"
+    calls = {"n": 0}
+
+    def dyn(u):
+        calls["n"] += 1
+        return f"タイムスタンプ{calls['n']} の本文"  # 毎回内容が変わる動的ページ
+
+    class DynFetcher:
+        def fetch(self, u):
+            return dyn(u)
+
+    search = FakeSearch(lambda q, k: [SearchHit(url=url)])
+    qs = build_queries(_case(), [make_item(id="c:a", key="a", retrievability=["public"]),
+                                 make_item(id="c:b", key="b", retrievability=["public"])],
+                       {}, 5)
+    created = collect(store, _case(), Gate([], tmp_path), search, DynFetcher(), qs,
+                      tmp_path, 3, 10, 3, today=date(2026, 8, 22))
+    assert len(created) == 1                    # 2クエリでヒットしても Source は1つ
+    again = collect(store, _case(), Gate([], tmp_path), search, DynFetcher(), qs,
+                    tmp_path, 3, 10, 3, today=date(2026, 8, 22))
+    assert again == []                          # 既存 Source の URL は再取得しない
+
+
 def test_collect_dead_url_produces_nothing(tmp_path):
     """捏造URL(取得失敗)からは Source も生まれない(R-1)。"""
     store = Store(tmp_path / "db.sqlite")

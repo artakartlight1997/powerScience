@@ -21,18 +21,31 @@ _FENCE = re.compile(r"```(?:json)?\s*(.*?)\s*```", re.DOTALL)
 
 
 def parse_json_str(text: str) -> dict:
-    """コードフェンス・前後の散文を許容して JSON オブジェクトを取り出す。"""
-    m = _FENCE.search(text)
-    if m:
-        text = m.group(1)
-    start = text.find("{")
-    end = text.rfind("}")
-    if start < 0 or end <= start:
-        raise ValueError("JSON オブジェクトが見つからない")
-    obj = json.loads(text[start:end + 1])
-    if not isinstance(obj, dict):
-        raise ValueError("JSON オブジェクトでない")
-    return obj
+    """コードフェンス・前後の散文を許容して JSON オブジェクトを取り出す。
+
+    順に試す: ①全文そのまま ②各コードフェンスの中身(最初の1つだけでなく全部)
+    ③文中の各 '{' 位置から raw_decode(前後に波括弧を含む散文があっても正しい
+    オブジェクトを見つける)。dict 以外(配列・スカラ)は受理しない。
+    """
+    candidates = [text.strip()] + [m.strip() for m in _FENCE.findall(text)]
+    for cand in candidates:
+        try:
+            obj = json.loads(cand)
+            if isinstance(obj, dict):
+                return obj
+        except ValueError:
+            pass
+    decoder = json.JSONDecoder()
+    idx = text.find("{")
+    while idx >= 0:
+        try:
+            obj, _end = decoder.raw_decode(text, idx)
+            if isinstance(obj, dict):
+                return obj
+        except ValueError:
+            pass
+        idx = text.find("{", idx + 1)
+    raise ValueError("JSON オブジェクトが見つからない")
 
 
 class OpenRouterClient:

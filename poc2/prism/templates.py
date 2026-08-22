@@ -6,11 +6,14 @@ templates/ は定義ファイルであり、アーキタイプ追加にコード
 """
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 
 import yaml
 
 from .contracts import Case, ConfigError, SpecItem
+
+log = logging.getLogger(__name__)
 
 
 def load_yaml(path: str | Path) -> dict:
@@ -84,6 +87,13 @@ def build_spec(case: Case, templates_dir: str | Path, standards: dict) -> list[S
 
     items = [to_item(row, box["id"], None)
              for box in boxes["boxes"] for row in box["items"]]
-    items += [to_item(row, row["box"], row.get("segment"))
-              for row in archetype.get("items", [])]
+    boxes_drivers = {row.get("driver") for box in boxes["boxes"] for row in box["items"]}
+    for row in archetype.get("items", []):
+        drv = row.get("driver")
+        if drv and drv not in dep and drv not in boxes_drivers:
+            # C-8: 見張り重みから黙って外れるテンプレ記述ミスを知らせる
+            log.warning("テンプレ整合: アーキタイプ項目 %s の driver=%r が"
+                        "ドライバーツリーに存在しない(dependence は mid 扱い)",
+                        row.get("id"), drv)
+        items.append(to_item(row, row["box"], row.get("segment")))
     return items

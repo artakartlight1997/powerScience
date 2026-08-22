@@ -67,8 +67,59 @@ def test_contradiction_detected_and_preserved():
     assert contradictions("case1", evs, existing=found) == []
 
 
-def test_no_contradiction_across_units_or_within_tolerance():
+def test_no_contradiction_across_dimensions_or_within_tolerance():
     evs = cluster([make_ev(id="e1", num=100.0, unit="%"),
                    make_ev(id="e2", num=95.0, unit="%"),   # 5% 乖離 < 15%
-                   make_ev(id="e3", num=200.0, unit="円")])  # 単位が違う
+                   make_ev(id="e3", num=200.0, unit="円")])  # 次元が違う(% vs 円)
     assert contradictions("case1", evs, existing=[]) == []
+
+
+def test_boundary_delta_equal_to_tolerance_is_not_contradiction():
+    evs = cluster([make_ev(id="e1", num=100.0, unit="%"),
+                   make_ev(id="e2", num=85.0, unit="%")])  # delta = 0.15 ちょうど
+    assert contradictions("case1", evs, existing=[], tolerance=0.15) == []
+
+
+def test_contradiction_across_unit_notations_same_dimension():
+    """「10億円」vs「1,500百万円」— 表記は違うが次元は同じ円。矛盾を見逃さない(P20)。"""
+    evs = cluster([make_ev(id="e1", quote="売上高10億円", num=1e9, unit="億円"),
+                   make_ev(id="e2", quote="売上高1,500百万円", num=1.5e9, unit="百万円")])
+    found = contradictions("case1", evs, existing=[])
+    assert len(found) == 1
+
+
+def test_same_number_different_dimension_not_same_cluster():
+    """「95%」と「95人」を同一上流と誤認しない(P22)。"""
+    out = cluster([make_ev(id="e1", quote="稼働率は95%", num=95.0, unit="%"),
+                   make_ev(id="e2", quote="エンジニア95人体制", num=95.0, unit="人")])
+    ids = {e.id: e.cluster_id for e in out}
+    assert ids["e1"] != ids["e2"]
+
+
+def test_similar_text_different_numbers_stay_separate_and_contradict():
+    """定型文で数値だけ違う引用を文面類似で併合しない — 矛盾検出を殺さない(P20)。"""
+    a = make_ev(id="e1", quote="2023年度の国内SES市場規模は約1兆2000億円と推計される",
+                num=1.2e12, unit="億円")
+    b = make_ev(id="e2", quote="2023年度の国内SES市場規模は約8000億円と推計される",
+                num=8e11, unit="億円")
+    out = cluster([a, b])
+    ids = {e.id: e.cluster_id for e in out}
+    assert ids["e1"] != ids["e2"]
+    assert len(contradictions("case1", out, existing=[])) == 1
+
+
+def test_cluster_assignment_is_order_invariant():
+    """A~B, B~C, A≁C でも union-find で入力順によらず同一の分割になる。"""
+    base = "同社の主力事業はITサービスの提供であり顧客基盤は安定している"
+    a = make_ev(id="a", quote=base + "とされる")
+    b = make_ev(id="b", quote=base + "との評価が多い")
+    c = make_ev(id="c", quote=base + "との評価が多いようだが一部に異論もある")
+
+    def partition(evs):
+        out = cluster(evs)
+        groups = {}
+        for e in out:
+            groups.setdefault(e.cluster_id, set()).add(e.id)
+        return sorted(frozenset(g) for g in groups.values())
+
+    assert partition([a, b, c]) == partition([c, a, b]) == partition([b, c, a])

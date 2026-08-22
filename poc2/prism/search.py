@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import logging
 
-from .contracts import LLMClient, LLMError, SearchHit
+from .contracts import LLMClient, SearchHit
 
 log = logging.getLogger(__name__)
 
@@ -24,15 +24,22 @@ class OpenRouterSearch:
         self.llm = llm
 
     def search(self, query: str, k: int) -> list[SearchHit]:
+        """契約: 失敗は [](例外にしない)。応答の形の異常もここで吸収する。"""
         try:
             out = self.llm.complete_json("online", SYSTEM,
                                          f"検索クエリ: {query}\n最大 {k} 件。")
-        except LLMError as e:
-            log.warning("検索失敗(スキップ): query=%r: %s", query, e)
+            rows = out.get("results")
+            if not isinstance(rows, list):
+                log.warning("検索: results が list でない(%s)→ 0件扱い",
+                            type(rows).__name__)
+                rows = []
+            hits: list[SearchHit] = []
+            for row in rows[:k]:
+                if isinstance(row, dict) and str(row.get("url", "")).startswith("http"):
+                    hits.append(SearchHit(url=str(row["url"]),
+                                          title=str(row.get("title", ""))))
+        except Exception as e:  # LLMError 以外の想定外もケースを落とさない(C-7)
+            log.warning("検索失敗(スキップ): query=%r: %r", query, e)
             return []
-        hits: list[SearchHit] = []
-        for row in (out.get("results") or [])[:k]:
-            if isinstance(row, dict) and str(row.get("url", "")).startswith("http"):
-                hits.append(SearchHit(url=row["url"], title=str(row.get("title", ""))))
         log.info("検索: query=%r → 候補 %d 件", query, len(hits))
         return hits

@@ -22,6 +22,9 @@ from .templates import build_spec, list_archetypes, load_standards
 log = logging.getLogger(__name__)
 
 
+_CASE_ID = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
+
+
 def slugify(name: str) -> str:
     """社名からケースIDを自動生成(日本語名はハッシュで安定化)。"""
     s = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
@@ -31,10 +34,25 @@ def slugify(name: str) -> str:
 def start_case(store: Store, cfg: Config, llm: LLMClient, name: str,
                industry: str | None = None, archetype: str | None = None,
                case_id: str | None = None) -> Case:
-    """社名だけで呼べる(R-0)。archetype 未指定なら外部情報から同定(P23)。"""
+    """社名だけで呼べる(R-0)。archetype 未指定なら外部情報から同定(P23)。
+    人間の archetype 指定は常に優先: 既存ケースでも差し替えてスペックを再実体化する。"""
     cid = case_id or slugify(name)
+    if not _CASE_ID.match(cid):
+        from .contracts import ConfigError
+        raise ConfigError(f"ケースIDが不正: {cid!r}(半角英数小文字・ハイフン等のみ)")
+    standards = load_standards(cfg.templates_dir)
     existing = store.get("case", cid, cid, Case)
     if existing:
+        if archetype and archetype != existing.archetype:
+            # 契約 §3: 人間の指定が常に勝つ。黙って無視しない
+            log.info("アーキタイプ差替え: %s → %s(スペック再実体化)",
+                     existing.archetype, archetype)
+            for it in store.all("spec_item", cid, SpecItem):
+                store.delete("spec_item", cid, it.id)
+            existing.archetype = archetype
+            store.put("case", existing)
+            store.put_many("spec_item",
+                           build_spec(existing, cfg.templates_dir, standards))
         return existing
     if not archetype:
         archetype = identify.archetype(llm, name, industry,
@@ -42,7 +60,6 @@ def start_case(store: Store, cfg: Config, llm: LLMClient, name: str,
     case = Case(id=cid, name=name, industry=industry, archetype=archetype,
                 created_at=datetime.now(timezone.utc).isoformat())
     store.put("case", case)
-    standards = load_standards(cfg.templates_dir)
     store.put_many("spec_item", build_spec(case, cfg.templates_dir, standards))
     for sub in ("seller", "consultant", "general"):  # 補助入力(任意)の受け口
         (cfg.inbox_dir / cid / sub).mkdir(parents=True, exist_ok=True)
@@ -64,12 +81,17 @@ def run(store: Store, cfg: Config, case_id: str, llm: LLMClient,
     stop_rules = standards["stop_rules"]
     web_enabled = search is not None and fetcher is not None
     prev_progress = _progress(store.latest_judgments(case_id))
+    # 再実行は「続行」: 前回の停止理由・ラウンド数を今回の停止判定に持ち込まない。
+    # case.round は通算表示用、停止判定は今回のラン内ラウンド数で行う
+    case.stop_reason = None
+    rounds_this_run = 0
 
     while True:
         case.round += 1
+        rounds_this_run += 1
         # 1) 補助取込(任意の資料。無くても正常 — R-0)
         new_sources = ingest.scan(store, case, cfg.inbox_dir, cfg.data_dir,
-                                  standards["trust_tiers"])
+                                  standards["trust_tiers"], gate)
         # 2) Web 収集(一次経路): gap → クエリ(純関数)→ 検索 → 取得 → スナップショット
         if web_enabled:
             queries = research.build_queries(
@@ -85,14 +107,19 @@ def run(store: Store, cfg: Config, case_id: str, llm: LLMClient,
             store.put_many("evidence", extract.run(src, items, llm))
         # 4) 検証: grounding → クラスタ → 矛盾
         sources = {s.id: s for s in store.all("source", case_id, Source)}
+        stored = store.all("evidence", case_id, Evidence)
+        before = {e.id: (e.grounded, e.cluster_id) for e in stored}
         evidences = []
-        for ev in store.all("evidence", case_id, Evidence):
+        for ev in stored:
             if ev.grounded == "none":
                 snap = ingest.snapshot_text(sources[ev.source_id].snapshot_path)
                 ev = ev.model_copy(update={"grounded": verify.ground(ev, snap, llm)})
             evidences.append(ev)
         evidences = verify.cluster(evidences)
-        store.put_many("evidence", evidences)
+        # 変化した証拠だけ書き戻す(追記専用の連鎖を無変更 put で肥大させない)
+        store.put_many("evidence",
+                       [e for e in evidences
+                        if (e.grounded, e.cluster_id) != before.get(e.id)])
         existing_cx = store.all("contradiction", case_id, Contradiction)
         new_cx = verify.contradictions(case_id, evidences, existing_cx)
         store.put_many("contradiction", new_cx)
@@ -109,21 +136,22 @@ def run(store: Store, cfg: Config, case_id: str, llm: LLMClient,
         questions = fill.make_questions(
             case_id, items, judgments, standards["question_budget"]["max_open_questions"])
         store.put_many("question", questions)
-        # 7) 停止判定(理由必須)
+        # 7) 停止判定(理由必須)。R4 は質問リスト(上限で切られる)でなく
+        #    項目そのものから公開経路の gap を数える(偽の完了宣言を防ぐ)
         progress = _progress(judgments)
         llm_calls = getattr(llm, "calls", 0)
-        open_public = sum(1 for q in questions if q.channel in ("web", "premium"))
-        stop, reason = fill.should_stop(case.round, llm_calls,
+        open_public = fill.open_public_gaps(items, judgments)
+        stop, reason = fill.should_stop(rounds_this_run, llm_calls,
                                         progress - prev_progress, open_public, stop_rules)
-        log.info("case=%s round=%d: 新規source=%d 証拠=%d 進捗(filled+thin)=%d "
-                 "LLM呼び出し累計=%d 停止=%s",
-                 case_id, case.round, len(new_sources), len(evidences), progress,
-                 llm_calls, reason or "続行")
+        log.info("case=%s round=%d(今回%d周目): 新規source=%d 証拠=%d "
+                 "進捗(filled+thin)=%d LLM呼び出し累計=%d 停止=%s",
+                 case_id, case.round, rounds_this_run, len(new_sources),
+                 len(evidences), progress, llm_calls, reason or "続行")
         prev_progress = progress
-        store.put("case", case)
         if stop:
             case.stop_reason = reason
-            store.put("case", case)
+        store.put("case", case)
+        if stop:
             break
 
     write_outputs(store, cfg, case_id)
@@ -136,6 +164,8 @@ def _progress(judgments: dict) -> int:
 
 def write_outputs(store: Store, cfg: Config, case_id: str) -> list[Path]:
     case = store.get("case", case_id, case_id, Case)
+    if case is None:
+        raise ValueError(f"ケースが存在しない: {case_id}")
     chain_ok, _ = store.events.verify_chain(case_id)
     return project.write_all(
         cfg.out_dir, case,

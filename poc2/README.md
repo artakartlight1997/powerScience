@@ -35,24 +35,24 @@ pip install -e ".[dev]" && pytest
 | ファイル | 役割 | 純関数? | 外部I/O |
 |---|---|---|---|
 | `contracts.py` | 全データ型(pydantic)と Protocol(`LLMClient`/`SearchClient`/`Fetcher`)、共有例外。**型定義はここだけ** | — | — |
-| `config.py` | 環境変数 → `Config`(パス・ロール別モデル) | — | — |
-| `log.py` | 飛行記録: `data/logs/prism.log`。縮退は必ずWARNING、未処理例外はトレースバック込み。資料本文は書かない | — | — |
-| `events.py` | 追記専用イベントログ(SHA256連鎖)。`verify_chain` で改竄検知 | — | DB |
+| `config.py` | 環境変数 → `Config`(パス・ロール別モデル)。不正値は ConfigError | — | — |
+| `log.py` | 飛行記録: `data/logs/prism.log` へ書き込み。縮退は必ずWARNING、未処理例外はトレースバック込み。資料本文は書かない | — | FS |
+| `events.py` | 追記専用イベントログ(SHA256連鎖+chain_heads アンカー)。`verify_chain` は末尾切り詰め・全消去も検知 | — | DB |
 | `store.py` | 状態ストア(SQLite)。書き込みは必ずイベント併記 | — | DB |
-| `templates.py` | YAML → ケースの SpecItem 列へ実体化。`list_archetypes` | — | FS |
-| `gate.py` | ポリシーゲート: ベンダ分離・ホストallowlist・パス逸脱・taint | — | — |
-| `llm.py` | OpenRouter クライアント。JSON強制+1回だけ再試行 | — | HTTP |
+| `templates.py` | YAML → ケースの SpecItem 列へ実体化。`list_archetypes`。テンプレ記述ミスは警告 | — | FS |
+| `gate.py` | ポリシーゲート: ベンダ分離・ホストallowlist・スナップショットのパス検査・taint | — | — |
+| `llm.py` | OpenRouter クライアント。JSON強制+1回だけ再試行。呼び出し数を計数(R2) | — | HTTP |
 | **`identify.py`** | **社名/業界 → アーキタイプ自動同定**(選択肢外は受理せず人間へ) | — | LLM |
-| **`research.py`** | **収集ループの中核**: `build_queries`(gap→クエリ、純関数)と `collect`(検索→取得→必ずスナップショット)。`HttpxFetcher` | 一部 | HTTP |
-| **`search.py`** | `SearchClient` 実装(OpenRouter online ロールで URL 候補)。実検索APIへの差し替えは1クラス | — | LLM |
-| `ingest.py` | (任意の補助)ドロップフォルダ取込。冪等・as_of 規約 | — | FS |
-| `extract.py` | 原文から逐語引用を抽出。**数値の解釈はコードのみ**(P19) | — | LLM |
-| `verify.py` | grounding(逐語一致→二値判定×提示順入替)・独立性クラスタ(P22)・矛盾検出(P20) | 一部 | LLM |
+| **`research.py`** | **収集ループの中核**: `build_queries`(gap→クエリ、純関数)と `collect`(検索→取得→必ずスナップショット。URL/内容の二重取得なし)。`HttpxFetcher` | 一部 | HTTP+FS+DB |
+| **`search.py`** | `SearchClient` 実装(OpenRouter online ロールで URL 候補。失敗・異常応答は常に[])。実検索APIへの差し替えは1クラス | — | LLM |
+| `ingest.py` | (任意の補助)ドロップフォルダ取込。冪等・as_of 規約・1ファイル失敗は落とすだけ(C-7) | — | FS+DB |
+| `extract.py` | スナップショットから逐語引用を抽出。**数値の解釈はコードのみ**(P19: 負号・範囲・単位次元) | — | LLM+FS |
+| `verify.py` | grounding(逐語一致→二値判定×提示順入替)・独立性クラスタ(union-find, P22)・矛盾検出(次元正規化, P20) | 一部 | LLM |
 | `audit.py` | カバレッジ判定 filled/thin/missing/unknown。**純関数** | ○ | — |
-| `fill.py` | gap順位付け・問い生成・停止判定(理由必須)。**純関数** | ○ | — |
+| `fill.py` | gap順位付け・問い生成・公開gap計数・停止判定(理由必須)。**純関数** | ○ | — |
 | `project.py` | 射影のみ(判定しない): 作戦盤・発注仕様書・検収QC・台帳・状況 | ○ | FS |
-| `pipeline.py` | `start_case`(社名だけで開始)+ ループ本体 | — | — |
-| `cli.py` | CLI(**research** / run / report / status / verify-chain) | — | — |
+| `pipeline.py` | `start_case`(社名だけで開始・人間のアーキタイプ指定優先)+ ループ本体(再実行は続行) | — | FS+DB |
+| `cli.py` | CLI(**research** / run / report / status / verify-chain)。エラーの3分類(入力/設定/バグ) | — | — |
 
 ### templates/ — v1 と同一の物差し + `research` パラメータ(standards.yaml)
 

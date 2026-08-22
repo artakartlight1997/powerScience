@@ -153,6 +153,8 @@ class ConfigError(Exception):
 
 # --- Protocol(C-1: モジュールはこれにのみ依存する) ---
 class LLMClient(Protocol):
+    calls: int  # 実呼び出しの累計。停止則 R2(max_llm_calls)の入力
+
     def complete_json(self, role: Literal["generator", "verifier", "online"],
                       system: str, user: str) -> dict: ...
 

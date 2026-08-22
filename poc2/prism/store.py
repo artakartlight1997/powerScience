@@ -33,8 +33,18 @@ class Store:
         self.conn.close()
 
     # --- 書き込み(イベント経由のみ) ---
+    @staticmethod
+    def _case_id_of(obj: BaseModel) -> str:
+        from .contracts import Case
+        if isinstance(obj, Case):
+            return obj.id
+        case_id = getattr(obj, "case_id", None)
+        if not case_id:
+            raise ValueError(f"case_id が空のオブジェクトは保存できない: {obj!r}")
+        return case_id
+
     def put(self, kind: str, obj: BaseModel, actor: str = "system") -> None:
-        case_id = getattr(obj, "case_id", None) or obj.id  # Case は自分が case
+        case_id = self._case_id_of(obj)
         payload = obj.model_dump()
         self.events.append(case_id, f"{kind}.put", payload, actor)
         self.conn.execute(
@@ -45,6 +55,14 @@ class Store:
     def put_many(self, kind: str, objs: Iterable[BaseModel], actor: str = "system") -> None:
         for o in objs:
             self.put(kind, o, actor)
+
+    def delete(self, kind: str, case_id: str, id: str, actor: str = "system") -> None:
+        """レコードの削除(イベントに記録した上で、マテリアライズドビューから除く)。"""
+        self.events.append(case_id, f"{kind}.delete", {"id": id}, actor)
+        self.conn.execute(
+            "DELETE FROM records WHERE case_id=? AND kind=? AND id=?",
+            (case_id, kind, id))
+        self.conn.commit()
 
     # --- 読み出し ---
     def get(self, kind: str, case_id: str, id: str, model: Type[T]) -> Optional[T]:
@@ -65,8 +83,11 @@ class Store:
         return [r[0] for r in rows]
 
     # --- 特化ビュー ---
-    def has_source_hash(self, case_id: str, content_hash: str) -> bool:
-        return any(s.content_hash == content_hash
+    def has_source_hash(self, case_id: str, content_hash: str,
+                        kind: str | None = None) -> bool:
+        """冪等判定。kind を渡すと同一 kind 内でのみ重複とみなす
+        (売り手資料と同一文面の公式サイトは別の出所として登録する — I3 との整合)。"""
+        return any(s.content_hash == content_hash and (kind is None or s.kind == kind)
                    for s in self.all("source", case_id, Source))
 
     def latest_judgments(self, case_id: str) -> dict[str, Judgment]:

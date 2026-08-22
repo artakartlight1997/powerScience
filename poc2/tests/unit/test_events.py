@@ -40,3 +40,26 @@ def test_cases_have_independent_chains():
     log.append("case1", "b", {})
     assert log.verify_chain("case1") == (True, 2)
     assert log.verify_chain("case2") == (True, 1)
+
+
+def test_tail_truncation_detected():
+    """末尾切り詰め(最新の不都合な事実の抹消)は chain_heads アンカーで検知(I6)。"""
+    log = _log()
+    for i in range(4):
+        log.append("case1", "k", {"i": i})
+    log.conn.execute(
+        "DELETE FROM events WHERE seq=(SELECT MAX(seq) FROM events WHERE case_id='case1')")
+    ok, n = log.verify_chain("case1")
+    assert not ok and n == 3
+
+
+def test_full_wipe_detected():
+    log = _log()
+    log.append("case1", "k", {})
+    log.conn.execute("DELETE FROM events WHERE case_id='case1'")
+    ok, n = log.verify_chain("case1")
+    assert not ok and n == 0
+
+
+def test_empty_case_verifies_as_zero():
+    assert _log().verify_chain("never-existed") == (True, 0)

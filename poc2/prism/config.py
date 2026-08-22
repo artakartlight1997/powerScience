@@ -37,9 +37,17 @@ def load_config(env: dict | None = None) -> Config:
         out_dir=Path(e.get("PRISM_OUT_DIR", root / "out")),
         templates_dir=Path(e.get("PRISM_TEMPLATES_DIR", root / "templates")),
         allow_same_vendor=e.get("PRISM_ALLOW_SAME_VENDOR", "") == "1",
-        timeout=float(e.get("PRISM_LLM_TIMEOUT", "120")),
+        timeout=_float_env(e, "PRISM_LLM_TIMEOUT", "120"),
     )
     return cfg
+
+
+def _float_env(e, key: str, default: str) -> float:
+    raw = e.get(key, default)
+    try:
+        return float(raw)
+    except ValueError:
+        raise ConfigError(f"{key} は数値であること(現在値: {raw!r})") from None
 
 
 def require_api_key(cfg: Config) -> None:

@@ -56,6 +56,11 @@ def main(argv: list[str] | None = None) -> int:
         rc = _dispatch(args, cfg, store)
         log.info("コマンド終了: %s rc=%d", args.cmd, rc)
         return rc
+    except ValueError as e:
+        # ユーザ入力の誤り(存在しないケースID等): バグ扱いにしない
+        log.error("入力エラー: %s", e, extra={"console_suppress": True})
+        print(f"{e}", file=sys.stderr)
+        return 1
     except (ConfigError, GateError) as e:
         # 想定内の拒否(設定・ポリシー): ユーザが直せるのでメッセージだけ返す
         log.error("設定/ポリシーエラー: %s", e, extra={"console_suppress": True})
@@ -131,6 +136,10 @@ def _dispatch(args, cfg, store: Store) -> int:
 
     if args.cmd == "verify-chain":
         ok, n = store.events.verify_chain(args.case_id)
+        if ok and n == 0:
+            print(f"イベントが存在しない: {args.case_id}(ケースIDを確認)",
+                  file=sys.stderr)
+            return 1
         print(f"{'OK' if ok else 'NG(改竄の疑い)'}: {n} イベントを検証")
         return 0 if ok else 2
 

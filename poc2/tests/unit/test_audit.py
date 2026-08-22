@@ -79,3 +79,31 @@ def test_not_found_is_not_support_for_normal_items():
     item = make_item(required_clusters=1)
     j = judge(item, [make_ev(status="NOT_FOUND")], False, 1, TODAY)
     assert j.status == "missing"
+
+
+def test_unclustered_evidence_is_one_pseudo_cluster_not_two():
+    """cluster_id 未付与の証拠2件を独立2票と数えて filled にしない(I9 保守方向)。"""
+    item = make_item(required_clusters=2)
+    evs = [make_ev(id="e1", cluster_id=None), make_ev(id="e2", cluster_id=None)]
+    j = judge(item, evs, False, 1, TODAY)
+    assert j.status == "thin"
+    assert j.verified_clusters == 1
+
+
+def test_thin_also_carries_evidence_ids():  # I1 は thin 側にも効く
+    item = make_item(required_clusters=2)
+    j = judge(item, [make_ev(id="e1", cluster_id="c1")], False, 1, TODAY)
+    assert j.status == "thin"
+    assert j.evidence_ids == ["e1"]
+
+
+def test_expect_absent_conflict_blocks_filled():
+    """「存在の主張」と「不在の確認」が併存したら filled にしない(P20 の意味的矛盾)。"""
+    item = make_item(required_clusters=1, expect_absent=True)
+    evs = [make_ev(id="e1", cluster_id="c1", status="NOT_FOUND",
+                   quote="設備投資はほぼ不要"),
+           make_ev(id="e2", cluster_id="c2", status="value",
+                   quote="設備投資に10億円を投じた")]
+    j = judge(item, evs, False, 1, TODAY)
+    assert j.status == "thin"
+    assert "併存" in j.rationale

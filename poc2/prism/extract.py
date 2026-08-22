@@ -23,26 +23,30 @@ SYSTEM = """あなたはPEファンドのビジネスDDの証拠抽出器であ�
 出力は次の JSON のみ: {"evidences":[{"item_key":"...","quote":"原文の逐語引用","page":1,"raw_value":"95%","status":"value"}]}
 raw_value は quote 中の中心的な数値や値の文字列(なければ null)。"""
 
-_NUM = re.compile(r"[▲△-]?\s*([0-9][0-9,]*\.?[0-9]*)\s*(兆円|億円|百万円|万円|千円|万人|%|％|人|円|件|社|名)?")
+_NUM = re.compile(r"([▲△−-])?\s*([0-9][0-9,]*\.?[0-9]*)\s*(兆円|億円|百万円|万円|千円|万人|%|％|人|円|件|社|名)?")
+_RANGE = re.compile(r"[〜~→]")  # 範囲・遷移の表現(「3〜5億円」「10億円→12億円」)
 _SCALE = {"兆円": 1e12, "億円": 1e8, "百万円": 1e6, "万円": 1e4, "千円": 1e3,
           "万人": 1e4, "円": 1, "%": 1, "％": 1, "人": 1, "件": 1, "社": 1, "名": 1}
 
 
 def parse_number(raw: str | None) -> ExtractedValue | None:
-    """数値の解釈はコードのみが行う(P19)。単位を正規化した num を付す。"""
+    """数値の解釈はコードのみが行う(P19)。単位を正規化した num を付す。
+    範囲・遷移表現は単一値に潰さない(num なしで raw のみ保持)。"""
     if not raw:
         return None
-    m = _NUM.search(raw)
-    if not m:
+    matches = list(_NUM.finditer(raw))
+    if not matches:
         return ExtractedValue(raw=raw)
-    num = float(m.group(1).replace(",", ""))
-    unit = m.group(2)
+    if _RANGE.search(raw) and len(matches) >= 2:
+        return ExtractedValue(raw=raw)  # 「3〜5億円」を 3.0 と偽らない(P19)
+    m = matches[0]
+    sign, digits, unit = m.groups()
+    num = float(digits.replace(",", ""))
     if unit:
         num *= _SCALE.get(unit, 1)
         if unit == "％":
             unit = "%"
-    neg = raw.strip()[:1] in "▲△-"
-    return ExtractedValue(raw=raw, num=-num if neg else num, unit=unit)
+    return ExtractedValue(raw=raw, num=-num if sign else num, unit=unit)
 
 
 def run(source: Source, spec_items: list[SpecItem], llm: LLMClient) -> list[Evidence]:

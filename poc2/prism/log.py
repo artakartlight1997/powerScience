@@ -28,11 +28,13 @@ class _NoTraceback(logging.Formatter):
 
     def format(self, record: logging.LogRecord) -> str:
         exc_info, exc_text = record.exc_info, record.exc_text
-        record.exc_info, record.exc_text = None, None
+        stack_info = record.stack_info
+        record.exc_info, record.exc_text, record.stack_info = None, None, None
         try:
             return super().format(record)
         finally:
             record.exc_info, record.exc_text = exc_info, exc_text
+            record.stack_info = stack_info
 
 
 def setup(data_dir: str | Path, verbose: bool = False) -> Path:
@@ -43,8 +45,9 @@ def setup(data_dir: str | Path, verbose: bool = False) -> Path:
     root = logging.getLogger("prism")
     root.setLevel(logging.DEBUG)
     # 既存のファイルハンドラ: 同じパスなら再利用、違うパスなら付け替える
+    # (両辺 resolve で比較 — シンボリックリンク経由の同一ディレクトリを毎回付け替えない)
     for h in [h for h in root.handlers if isinstance(h, RotatingFileHandler)]:
-        if Path(h.baseFilename) != path.resolve():
+        if Path(h.baseFilename).resolve() != path.resolve():
             root.removeHandler(h)
             h.close()
     if not any(isinstance(h, RotatingFileHandler) for h in root.handlers):
@@ -53,8 +56,11 @@ def setup(data_dir: str | Path, verbose: bool = False) -> Path:
         fh.setLevel(logging.DEBUG)
         fh.setFormatter(logging.Formatter(FORMAT))
         root.addHandler(fh)
-    if not any(isinstance(h, logging.StreamHandler)
-               and not isinstance(h, RotatingFileHandler) for h in root.handlers):
+    console = [h for h in root.handlers if isinstance(h, logging.StreamHandler)
+               and not isinstance(h, RotatingFileHandler)]
+    if console:
+        console[0].setLevel(logging.INFO if verbose else logging.WARNING)
+    else:
         ch = logging.StreamHandler(sys.stderr)
         ch.setLevel(logging.INFO if verbose else logging.WARNING)
         ch.setFormatter(_NoTraceback("%(levelname)s: %(message)s"))

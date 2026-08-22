@@ -124,16 +124,22 @@ def test_zero_input_end_to_end(env):
     assert search.queries and all("サンプルテック" in q for q in search.queries)
 
 
-def test_supplement_im_respects_seller_rule(env):
-    """IM を後から置く(任意の補助)— 売り手の主張として突合され I3 が保たれる。"""
+def test_supplement_im_respects_seller_rule_and_rerun_continues(env):
+    """IM を後から置く(任意の補助)— 売り手の主張として突合され I3 が保たれる。
+    再実行は「続行」: 前回の停止理由・ラウンド上限を持ち込まず、複数周まわれる。"""
     cfg, store = env
     llm, search, fetcher = _fakes()
     case = start_case(store, cfg, llm, "サンプルテック", archetype="ses_jutaku")
-    run(store, cfg, case.id, llm, search, fetcher, today=date(2026, 8, 22))
+    assert llm.calls == 0  # 契約 §3: 人間の --archetype 指定時は identify を呼ばない
+    case = run(store, cfg, case.id, llm, search, fetcher, today=date(2026, 8, 22))
+    rounds_first = case.round
 
     shutil.copy2(POC_DIR / "tests" / "fixtures" / "2026-01-15_seller_im.txt",
                  cfg.inbox_dir / case.id / "seller" / "2026-01-15_seller_im.txt")
     case = run(store, cfg, case.id, llm, search, fetcher, today=date(2026, 8, 22))
+    # 新資料で進捗 → 続行 → 収穫逓減で停止。1周で強制終了しない
+    assert case.round >= rounds_first + 2
+    assert case.stop_reason and case.stop_reason.startswith("R3")
 
     judgments = store.latest_judgments(case.id)
     by_key = {j.item_id.split(":", 1)[1]: j for j in judgments.values()}
@@ -142,6 +148,30 @@ def test_supplement_im_respects_seller_rule(env):
     assert "売り手" in by_key["ses-headcount"].rationale
 
 
-def test_slugify_stable_for_japanese():
-    assert slugify("株式会社サンプルテック") == slugify("株式会社サンプルテック")
+def test_explicit_archetype_overrides_existing_case(env):
+    """契約 §3: 人間の --archetype は既存ケースに対しても常に優先(黙って無視しない)。"""
+    cfg, store = env
+    llm, _, _ = _fakes()
+    case = start_case(store, cfg, llm, "サンプルテック")  # 自動同定 → ses_jutaku
+    assert case.archetype == "ses_jutaku"
+    # 同定結果に不満 → 人間が明示指定(同じテンプレしか無いので同値で確認)
+    case2 = start_case(store, cfg, llm, "サンプルテック", archetype="ses_jutaku",
+                       case_id=case.id)
+    assert case2.archetype == "ses_jutaku"
+
+
+def test_invalid_case_id_rejected(env):
+    from prism.contracts import ConfigError
+    cfg, store = env
+    llm, _, _ = _fakes()
+    with pytest.raises(ConfigError):
+        start_case(store, cfg, llm, "X社", archetype="ses_jutaku",
+                   case_id="../../etc/passwd")  # パスセグメントとして不正
+
+
+def test_slugify_ascii_and_japanese():
     assert slugify("Sample Tech Inc.") == "sample-tech-inc"
+    import re
+    jp = slugify("株式会社サンプルテック")
+    assert re.fullmatch(r"case-[0-9a-f]{8}", jp)          # 日本語はハッシュへ
+    assert jp != slugify("株式会社ベツノカイシャ")          # 別社名は別ID
