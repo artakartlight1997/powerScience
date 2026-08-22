@@ -1,6 +1,6 @@
 {
   "$schema": "./schema.md#taxonomy",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "generated": "2026-08-22",
   "purpose": "Integral Prism の設計要素を分類する軸。後の設計文書・評価・課題管理で共通のタグ体系として使う。",
   "layers": [
@@ -130,6 +130,12 @@
       "trajectory-level",
       "step-level",
       "sub-question-level(FineVerify)"
+    ],
+    "model_dependence": [
+      "A:消える(∂V/∂M<0)",
+      "B:補完的(∂V/∂M>0)",
+      "C:独立(構造的)",
+      "D:減衰するが残存"
     ]
   },
   "design_principles": [
@@ -207,6 +213,16 @@
       "id": "P15",
       "principle": "探索の長さに上限を置き、プロキシと現実の乖離を停止条件にする",
       "source": "S-057,S-103"
+    },
+    {
+      "id": "P16",
+      "principle": "差別化要素は ∂V/∂M（モデル能力に対する価値の微分）で選別する。∂V/∂M>0 の補完財のみに賭ける",
+      "source": "S-108,S-109,S-112,S-113,S-120"
+    },
+    {
+      "id": "P17",
+      "principle": "人間の介入は『AIの出力を見る前に人間が先に判断する』『意図的に減速させる』形式に限定する。承認型の介入は過信を招く",
+      "source": "S-114"
     }
   ],
   "tags": [

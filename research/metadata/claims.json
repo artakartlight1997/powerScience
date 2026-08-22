@@ -1,6 +1,6 @@
 {
   "$schema": "./schema.md#claims",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "generated": "2026-08-22",
   "note": "設計判断に効く『数値つきの事実主張』のみを抽出。confidence が C/D のものを設計前提にしないこと。再検証は verify_by の手順で行う。",
   "claims": [
@@ -440,6 +440,104 @@
       "confidence": "B",
       "topic": "reward-hacking",
       "impact": "探索の停止条件（P15）の定量的根拠"
+    },
+    {
+      "id": "C-042",
+      "claim": "較正された言語モデルは理論的に一定率で幻覚せざるをえない（アーキテクチャやデータ品質と無関係の統計的下限）",
+      "value": "Good-Turing 率に近い下限",
+      "sources": [
+        "S-109"
+      ],
+      "confidence": "A",
+      "topic": "limits",
+      "impact": "幻覚はモデル改善で消えない。外部検証と較正が構造的に必要"
+    },
+    {
+      "id": "C-043",
+      "claim": "主要な評価の10個中9個が二値採点で棄権を罰し、自信に満ちた誤答を報いている",
+      "value": "9/10",
+      "sources": [
+        "S-108"
+      ],
+      "confidence": "A",
+      "topic": "limits",
+      "impact": "モデル層は較正・棄権を最適化しない。アプリ層が担うべき補完機能"
+    },
+    {
+      "id": "C-044",
+      "claim": "METR の時間地平は成功率50%で定義され、2026-02 時点の首位は 14時間30分。倍化周期は約105日",
+      "value": "14h30m @50%, 105日",
+      "sources": [
+        "S-110"
+      ],
+      "confidence": "B",
+      "topic": "scaling",
+      "impact": "業務要求(95%+)との差が我々の商品領域"
+    },
+    {
+      "id": "C-045",
+      "claim": "エンタープライズのエージェントAIはベンチと本番で37%の性能ギャップがあり、同等精度で50倍のコスト差がある",
+      "value": "37% gap / 50x cost",
+      "sources": [
+        "S-111"
+      ],
+      "confidence": "B",
+      "topic": "reliability"
+    },
+    {
+      "id": "C-046",
+      "claim": "人間とAIの組み合わせは、多くの場合AI単独に劣る。特に意思決定タスクでは損失、創造タスクでは利得",
+      "value": "decision: loss / creative: gain",
+      "sources": [
+        "S-114"
+      ],
+      "confidence": "A",
+      "topic": "hitl",
+      "impact": "介入点は『先に人間が判断する』『減速させる』形式に限定する"
+    },
+    {
+      "id": "C-047",
+      "claim": "AI採用の進展により投資シグナルの半減期は5-7年から約18ヶ月に短縮し、機関ポートフォリオの収束は42%増加した",
+      "value": "18ヶ月 / +42%",
+      "sources": [
+        "S-117"
+      ],
+      "confidence": "B",
+      "topic": "finance",
+      "impact": "モデル由来の優位は投資では自己消滅する。私有情報と処理の差だけが残る"
+    },
+    {
+      "id": "C-048",
+      "claim": "FINRA の2026年の期待では、AIが生成・要約した推奨に人間の署名と代替案検討の文書化が求められる",
+      "value": "human sign-off 必須",
+      "sources": [
+        "S-118"
+      ],
+      "confidence": "B",
+      "topic": "regulation",
+      "impact": "署名者を支える記録の需要はモデル能力と無関係に残る"
+    },
+    {
+      "id": "C-049",
+      "claim": "同一ハーネスでのモデル更新は大きな利得を生む（SWE-agent 49.0%→73.2%）が、同一モデル内でもハーネス差は一貫して効く",
+      "value": "49→73.2% / 23.2-38.8%",
+      "sources": [
+        "S-113"
+      ],
+      "confidence": "B",
+      "topic": "scaffolding",
+      "impact": "巧妙なスキャフォールドは食われるが、状態管理・エラー回復は残る"
+    },
+    {
+      "id": "C-050",
+      "claim": "GDPval では、フロンティアモデルは実世界タスクを専門家の約100倍速く約100倍安くこなす",
+      "value": "~100x",
+      "sources": [
+        "S-112"
+      ],
+      "confidence": "B",
+      "topic": "economics",
+      "impact": "生成では戦えない。選別と保証に価値が移る"
     }
   ]
 }

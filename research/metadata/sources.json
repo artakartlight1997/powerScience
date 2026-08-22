@@ -1,6 +1,6 @@
 {
   "$schema": "./schema.md#sources",
-  "registry_version": "0.3.0",
+  "registry_version": "0.4.0",
   "generated": "2026-08-22",
   "retrieval_method": "web_search_snippets",
   "retrieval_caveat": "実行環境のエグレス制限により sakana.ai / arxiv.org / ai.google.dev 等の本文は未取得。記載は検索エンジン要約および二次記事に基づく。confidence を参照のこと。",
@@ -182,6 +182,7 @@
       "used_in": [
         "t-commoditization-moat",
         "t-contribution-map",
+        "t-model-proof",
         "t-openai-dr",
         "t-sakana-ab-mcts",
         "t-sakana-marlin"
@@ -398,6 +399,7 @@
         "t-design-principles",
         "t-google-gemini-dr",
         "t-information-value-eig",
+        "t-model-proof",
         "t-model-routing",
         "t-pricing-unit-economics",
         "t-sakana-ab-mcts",
@@ -677,6 +679,7 @@
       "used_in": [
         "t-contribution-map",
         "t-design-principles",
+        "t-model-proof",
         "t-model-routing",
         "t-verifier-design"
       ]
@@ -1018,6 +1021,7 @@
         "fact-check"
       ],
       "used_in": [
+        "research-index",
         "t-citation-attribution",
         "t-contribution-map",
         "t-design-principles",
@@ -1120,6 +1124,7 @@
         "bias"
       ],
       "used_in": [
+        "t-alpha-decay",
         "t-contribution-map",
         "t-design-principles",
         "t-differentiation-hypotheses",
@@ -1329,6 +1334,7 @@
         "notes-discussion-agenda",
         "t-contribution-map",
         "t-design-principles",
+        "t-model-proof",
         "t-recursive-self-improvement",
         "t-regulation-compliance",
         "t-sakana-marlin"
@@ -1387,7 +1393,8 @@
       "used_in": [
         "t-commoditization-moat",
         "t-contribution-map",
-        "t-differentiation-hypotheses"
+        "t-differentiation-hypotheses",
+        "t-model-proof"
       ]
     },
     {
@@ -1425,6 +1432,7 @@
       "used_in": [
         "t-commoditization-moat",
         "t-contribution-map",
+        "t-model-proof",
         "t-openai-dr",
         "t-rl-search-agents",
         "t-sakana-marlin"
@@ -1509,9 +1517,11 @@
         "polyglot": "14.2%→30.7%"
       },
       "used_in": [
+        "research-index",
         "t-competitive-map",
         "t-contribution-map",
         "t-design-principles",
+        "t-persistent-limits",
         "t-recursive-self-improvement",
         "t-sakana-evolution-rsi"
       ]
@@ -1564,6 +1574,7 @@
         "search_token_reduction": "1.35x-1.72x vs HGM-H (Polyglot)"
       },
       "used_in": [
+        "research-index",
         "t-contribution-map",
         "t-design-principles",
         "t-recursive-self-improvement",
@@ -1729,6 +1740,7 @@
         "trajectories": 4
       },
       "used_in": [
+        "research-index",
         "t-contribution-map",
         "t-tree-search-algorithms",
         "t-verifier-design"
@@ -1754,8 +1766,10 @@
         "step_trend": "26.4%→57.8% (10→100 steps)"
       },
       "used_in": [
+        "research-index",
         "t-contribution-map",
         "t-design-principles",
+        "t-model-proof",
         "t-recursive-self-improvement",
         "t-reward-hacking",
         "t-test-time-scaling"
@@ -1782,6 +1796,7 @@
       "used_in": [
         "t-competitive-map",
         "t-contribution-map",
+        "t-model-proof",
         "t-sakana-fugu-namazu"
       ]
     },
@@ -1808,6 +1823,7 @@
       "used_in": [
         "t-competitive-map",
         "t-contribution-map",
+        "t-model-proof",
         "t-sakana-evolution-rsi",
         "t-sakana-fugu-namazu"
       ]
@@ -1850,6 +1866,319 @@
       "used_in": [
         "t-contribution-map",
         "t-tree-search-algorithms"
+      ]
+    },
+    {
+      "id": "S-108",
+      "title": "Why Language Models Hallucinate（Kalai, Nachum, Vempala, Zhang / OpenAI）",
+      "url": "https://arxiv.org/abs/2509.04664",
+      "type": "paper",
+      "org": "OpenAI / Georgia Tech",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "hallucination",
+        "calibration",
+        "evaluation-incentives"
+      ],
+      "key_numbers": {
+        "binary_graded_evals": "9/10 が棄権を罰する"
+      },
+      "used_in": [
+        "research-index",
+        "t-contribution-map",
+        "t-design-principles",
+        "t-model-proof",
+        "t-persistent-limits"
+      ]
+    },
+    {
+      "id": "S-109",
+      "title": "Calibrated Language Models Must Hallucinate（STOC 2024）",
+      "url": "https://arxiv.org/abs/2311.14648",
+      "type": "paper",
+      "org": "OpenAI ほか",
+      "year": 2024,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "hallucination",
+        "theoretical-lower-bound",
+        "calibration"
+      ],
+      "used_in": [
+        "research-index",
+        "t-contribution-map",
+        "t-design-principles",
+        "t-model-proof",
+        "t-persistent-limits"
+      ]
+    },
+    {
+      "id": "S-110",
+      "title": "METR Time Horizons（2025-03 / Time Horizon 1.1, 2026-01-29）",
+      "url": "https://metr.org/time-horizons/",
+      "type": "paper",
+      "org": "METR",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "time-horizon",
+        "reliability",
+        "scaling"
+      ],
+      "key_numbers": {
+        "doubling": "7ヶ月→4ヶ月→105日(2026-02 fit)",
+        "top": "Claude Opus 4.6: 50%-horizon 14h30m",
+        "caveat": "成功率50%定義"
+      },
+      "used_in": [
+        "research-index",
+        "t-benchmark-crisis",
+        "t-contribution-map"
+      ]
+    },
+    {
+      "id": "S-111",
+      "title": "jagged frontier / 能力-信頼性ギャップ（Stanford HAI AI Index 第9回、Characterizing Model Jaggedness、NBER w34712、本番失敗率の報告）",
+      "url": "https://cs.stanford.edu/~merrie/papers/jaggedness_preprint.pdf",
+      "type": "paper",
+      "org": "Stanford / NBER ほか",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "reliability",
+        "jaggedness",
+        "production-gap"
+      ],
+      "key_numbers": {
+        "lab_vs_prod_gap": "37%",
+        "cost_variation": "50x",
+        "prod_failure": "約1/3"
+      },
+      "used_in": [
+        "t-benchmark-crisis",
+        "t-contribution-map",
+        "t-model-proof",
+        "t-persistent-limits"
+      ]
+    },
+    {
+      "id": "S-112",
+      "title": "GDPval（実世界の経済的タスクでの評価）",
+      "url": "https://openai.com/index/gdpval/",
+      "type": "official",
+      "org": "OpenAI",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "benchmark",
+        "real-world-work"
+      ],
+      "key_numbers": {
+        "tasks": 1320,
+        "occupations": 44,
+        "speed_cost": "専門家の約100倍速く・安い"
+      },
+      "used_in": [
+        "research-index",
+        "t-benchmark-crisis",
+        "t-contribution-map",
+        "t-design-principles",
+        "t-model-proof"
+      ]
+    },
+    {
+      "id": "S-113",
+      "title": "エージェント・ハーネス工学（harness vs model の寄与、Self-Harness、arXiv:2606.20683 サーベイ）",
+      "url": "https://arxiv.org/pdf/2606.20683",
+      "type": "paper",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "scaffolding",
+        "harness",
+        "erosion",
+        "infrastructure"
+      ],
+      "key_numbers": {
+        "model_upgrade": "SWE-agent 49.0%→73.2%",
+        "harness_range_gpt4o": "23.2%→38.8%",
+        "harness_range_sonnet35": "33.6%→53.6%"
+      },
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-model-proof",
+        "t-persistent-limits"
+      ]
+    },
+    {
+      "id": "S-114",
+      "title": "人間-AI 補完性のメタ分析と枠組み（Vaccaro et al. ほか）",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11659167/",
+      "type": "paper",
+      "org": "複数",
+      "year": 2024,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "human-ai-teaming",
+        "over-reliance",
+        "complementarity"
+      ],
+      "key_numbers": {
+        "finding": "多くの場合 人間+AI < AI単独",
+        "task_split": "意思決定は損失 / 創造は利得"
+      },
+      "used_in": [
+        "research-index",
+        "t-contribution-map",
+        "t-design-principles",
+        "t-human-in-the-loop",
+        "t-model-proof"
+      ]
+    },
+    {
+      "id": "S-115",
+      "title": "LLM の不確実性（アレアトリック vs エピステミック）",
+      "url": "https://arxiv.org/pdf/2506.07461",
+      "type": "paper",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "uncertainty",
+        "aleatoric",
+        "irreducible"
+      ],
+      "used_in": [
+        "research-index",
+        "t-contribution-map",
+        "t-model-proof",
+        "t-persistent-limits"
+      ]
+    },
+    {
+      "id": "S-116",
+      "title": "LLM 評価の危機（飽和・汚染・judge 問題、LiveBench、SWE-bench Verified 汚染監査）",
+      "url": "https://acingai.com/articles/llm-evaluation-crisis",
+      "type": "industry",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "benchmark-saturation",
+        "contamination"
+      ],
+      "key_numbers": {
+        "mmlu": "約93%",
+        "gsm8k": "約99%",
+        "hellaswag": ">95%"
+      },
+      "used_in": [
+        "t-benchmark-crisis",
+        "t-contribution-map"
+      ]
+    },
+    {
+      "id": "S-117",
+      "title": "AI-Driven Alpha Decay: Algorithmic Homogenization, Reflexive Signal Erosion",
+      "url": "https://arxiv.org/abs/2605.23905",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "alpha-decay",
+        "homogenization",
+        "crowding",
+        "finance"
+      ],
+      "key_numbers": {
+        "signal_half_life": "18ヶ月（AI以前 5-7年）",
+        "portfolio_convergence": "+42%（2013-2024）",
+        "net_alpha": "モノカルチャー均衡でゼロ"
+      },
+      "used_in": [
+        "research-index",
+        "t-alpha-decay",
+        "t-contribution-map",
+        "t-model-proof"
+      ]
+    },
+    {
+      "id": "S-118",
+      "title": "AI の責任と署名（FINRA 2026 の human sign-off、CPA/SEC/PCAOB、専門職賠償）",
+      "url": "https://www.shumaker.com/insight/client-alert-generative-artificial-intelligence-in-financial-services-a-practical-compliance-playbook-for-2026/",
+      "type": "industry",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "accountability",
+        "liability",
+        "sign-off",
+        "finra"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-model-proof",
+        "t-regulation-compliance"
+      ]
+    },
+    {
+      "id": "S-119",
+      "title": "長文脈の実効性能（RULER、実効文脈帯、妨害要素の意味的類似性）",
+      "url": "https://www.digitalapplied.com/blog/long-context-retrieval-needle-in-haystack-2026",
+      "type": "industry",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "long-context",
+        "context-rot",
+        "retrieval"
+      ],
+      "key_numbers": {
+        "ruler_drop": "4K→128K で 15-30%",
+        "effective_context": "200-400K 帯（多くのモデル）"
+      },
+      "used_in": [
+        "t-contribution-map",
+        "t-model-proof",
+        "t-persistent-limits"
+      ]
+    },
+    {
+      "id": "S-120",
+      "title": "Commoditize your complement（Shapiro & Varian / Spolsky）と AI 時代の価値移転",
+      "url": "https://www.econforeverybody.com/p/commoditize-your-complements",
+      "type": "industry",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "economics",
+        "value-accrual",
+        "strategy"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-model-proof"
       ]
     }
   ],

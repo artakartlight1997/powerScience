@@ -1,7 +1,7 @@
 ---
 doc_id: research-index
 title: "Integral Prism リサーチ・インデックス"
-version: 0.3.0
+version: 0.4.0
 status: draft
 created: 2026-08-22
 updated: 2026-08-22
@@ -65,6 +65,7 @@ tags: [index, survey, deep-research, agent, investment-research]
 | [structured-analytic-techniques.md](topics/02-methods/structured-analytic-techniques.md) | **ACH / SATs — 反証を一次データ構造にする** |
 | [tree-search-algorithms-and-rewards.md](topics/02-methods/tree-search-algorithms-and-rewards.md) | **木探索の詳細地図**（統一タクソノミ / rStar / 検証粒度 / 計算最適配分 / FineVerify）（**v0.3 追加**） |
 | [recursive-self-improvement.md](topics/02-methods/recursive-self-improvement.md) | **RSI** — DGM / SIFT / Red Queen / AlphaEvolve / ADAS / GEPA（**v0.3 追加**） |
+| [persistent-limits-of-scaling.md](topics/02-methods/persistent-limits-of-scaling.md) | **モデルが賢くなっても消えない制約** — 幻覚の理論的下限 / アレアトリック / jagged frontier / ハーネスの目減り（**v0.4 追加**） |
 
 ## 3. 評価 — `topics/03-evaluation/`
 
@@ -76,6 +77,7 @@ tags: [index, survey, deep-research, agent, investment-research]
 | [general-dr-benchmarks.md](topics/03-evaluation/general-dr-benchmarks.md) | GAIA / BrowseComp / HLE / レポート級ベンチ |
 | [finance-benchmarks.md](topics/03-evaluation/finance-benchmarks.md) | FinanceBench / FinTrace / FinVerBench / IPO Finance Agent |
 | [reward-hacking-and-proxy-gaming.md](topics/03-evaluation/reward-hacking-and-proxy-gaming.md) | **報酬ハッキング** — 自己改善と探索の最大の落とし穴（**v0.3 追加**） |
+| [benchmark-crisis-and-real-world-gap.md](topics/03-evaluation/benchmark-crisis-and-real-world-gap.md) | **ベンチマークの崩壊と実世界ギャップ** — METR 時間地平 / GDPval / 汚染（**v0.4 追加**） |
 | [integral-prism-evaluation-design.md](topics/03-evaluation/integral-prism-evaluation-design.md) | **反実仮想 DD ほか、自製評価 A–E** |
 
 ## 4. ドメイン — `topics/04-domain/`
@@ -86,6 +88,7 @@ tags: [index, survey, deep-research, agent, investment-research]
 | [data-sources.md](topics/04-domain/data-sources.md) | 公開 / 準公開 / **プライベート**（堀） |
 | [regulation-and-compliance.md](topics/04-domain/regulation-and-compliance.md) | EU AI Act、MNPI、監査証跡 |
 | [vc-dd-multi-agent-research.md](topics/04-domain/vc-dd-multi-agent-research.md) | VC DD の学術先行事例（DIALECTIC ほか） |
+| [alpha-decay-and-homogenization.md](topics/04-domain/alpha-decay-and-homogenization.md) | **AI によるアルファ減衰と同質化** — 投資領域固有の構造（**v0.4 追加**） |
 
 ## 5. 戦略 — `topics/05-strategy/`
 
@@ -100,8 +103,9 @@ tags: [index, survey, deep-research, agent, investment-research]
 | ファイル | 内容 |
 |---|---|
 | [contribution-map.md](topics/06-synthesis/contribution-map.md) | **R1–R34: どの研究がどこに効くか** |
+| [model-proof-differentiation.md](topics/06-synthesis/model-proof-differentiation.md) | **★モデルが賢くなっても勝てる要素 — 4分類と賭けどころ**（**v0.4 追加**） |
 | [differentiation-hypotheses.md](topics/06-synthesis/differentiation-hypotheses.md) | **差別化仮説 A/B/C** |
-| [design-principles.md](topics/06-synthesis/design-principles.md) | **設計原則 P1–P15** |
+| [design-principles.md](topics/06-synthesis/design-principles.md) | **設計原則 P1–P17** |
 
 ## 7. ノートとメタデータ
 
@@ -111,9 +115,9 @@ tags: [index, survey, deep-research, agent, investment-research]
 | [notes/open-questions.md](notes/open-questions.md) | 一次確認の宿題 Q1–Q20 |
 | [metadata/schema.md](metadata/schema.md) | フロントマター / 参考文献のスキーマ |
 | [metadata/index.json](metadata/index.json) | **全ファイルの機械可読インデックス** |
-| [metadata/sources.json](metadata/sources.json) | 出典レジストリ（**91件**、確度・使用箇所つき） |
-| [metadata/claims.json](metadata/claims.json) | 主要な事実主張（**41件**、根拠・再検証手順つき） |
-| [metadata/taxonomy.json](metadata/taxonomy.json) | 機能層 L0–L8 / 設計軸 / 設計原則 **P1–P15** |
+| [metadata/sources.json](metadata/sources.json) | 出典レジストリ（**104件**、確度・使用箇所つき） |
+| [metadata/claims.json](metadata/claims.json) | 主要な事実主張（**50件**、根拠・再検証手順つき） |
+| [metadata/taxonomy.json](metadata/taxonomy.json) | 機能層 L0–L8 / 設計軸 / 設計原則 **P1–P17** |
 | [metadata/glossary.md](metadata/glossary.md) | 用語集 |
 
 ---
@@ -135,6 +139,27 @@ tags: [index, survey, deep-research, agent, investment-research]
 5. RSI は範囲を絞れば使える。**スキャフォールドの改善はモデルを跨いで転移する**（DGM）`[S-092]`。
    → 設計原則 **P13 / P14** を追加。
 
+## v0.4 での更新（「モデルが賢くなっても勝てるか」）
+
+**差別化要素を ∂V/∂M（モデル能力に対する価値の微分）で分類した。** → [model-proof-differentiation.md](topics/06-synthesis/model-proof-differentiation.md)
+
+| クラス | 中身 | 判定 |
+|---|---|---|
+| **A 消える** | 巧妙なスキャフォールド / 統率 / 日本語品質 / 探索アルゴリズム / 生成速度 | 賭けない |
+| **B 補完的（∂V/∂M>0）** | **較正と棄権 / 特権を持つ検証 / 問いの設計 / 選別と保証** | **本命** |
+| **C 独立（構造的）** | 私有情報 / 責任と署名 / 監査証跡 / 顧客の記憶 / アルファ減衰への耐性 | 本命 |
+| **D 減衰するが残存** | 状態管理・エラー回復・長文脈の扱い | 必要条件 |
+
+決め手になった証拠:
+- **較正されたモデルは理論的に必ず幻覚する** `[S-109]`。さらに**主要評価の10個中9個が棄権を罰する** `[S-108]`
+  → **モデル層は構造的に較正を最適化しない**。較正はアプリ層の補完財である
+- **アレアトリック不確実性は削減不能** `[S-115]` → 「当てる」ではなく「較正する」が正しい目標
+- **METR の時間地平は成功率50%の定義** `[S-110]` → 業務要求（95%+）との溝が我々の領域
+- **GDPval: 生成は専門家の約100倍安い** `[S-112]` → 生成では戦えない。**選別と保証**に価値が移る
+- **AI 駆動のアルファ減衰: シグナル半減期 5-7年 → 18ヶ月** `[S-117]`
+  → **投資領域では、モデルが賢くなるほどモデル由来の優位が速く消える**
+- ⚠️ **人間+AI はしばしば AI 単独に劣る** `[S-114]` → 介入点設計を P17 に修正（承認型をやめる）
+
 ## 現時点の一行結論
 
 > Marlin は「**長時間 × 木探索 × マルチモデル**」で、Google DR は「**単一モデル×RL×低単価×分布**」で戦っている。
@@ -143,4 +168,9 @@ tags: [index, survey, deep-research, agent, investment-research]
 > Integral Prism の差別化仮説は「**レポート生成機ではなく、投資判断の反証可能な証拠構造を作る機械**」に置く。
 > v0.3 の追加調査は、この仮説を**弱めるどころか補強した** — 競合は「どう答えるか」の層を垂直に固めており、
 > 「**何を調べるべきか / その主張は本当か / どれくらい確からしいか**」の層は依然として空いている。
+>
+> v0.4 はさらに、この層が **モデルの進歩に食われないこと**を理論と実証の両面から確認した。
+> **賢いモデルを上手に使うものを作ってはいけない。賢いモデルが構造的に提供できないものを作る。**
+> それは **①較正された確度 ②特権を持つ検証 ③持たない情報 ④責任の記録** の4つであり、
+> **いずれもモデルが賢くなるほど価値が上がる。**
 > → [topics/06-synthesis/differentiation-hypotheses.md](topics/06-synthesis/differentiation-hypotheses.md)

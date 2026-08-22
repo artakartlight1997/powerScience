@@ -1,8 +1,8 @@
 {
-  "index_version": "0.3.0",
+  "index_version": "0.4.0",
   "generated": "2026-08-22",
   "project": "integral-prism",
-  "note": "トピック単位のファイル一覧。doc_id / パス / トピック群 / タグ / 主要出典 を機械可読に保持する。",
+  "note": "トピック単位のファイル一覧。",
   "groups": {
     "competitors": [
       "t-anthropic-research",
@@ -30,6 +30,7 @@
       "t-model-routing",
       "t-multi-agent-debate",
       "t-multi-agent-orchestration",
+      "t-persistent-limits",
       "t-recursive-self-improvement",
       "t-retrieval-graphrag",
       "t-rl-search-agents",
@@ -39,6 +40,7 @@
       "t-verifier-design"
     ],
     "evaluation": [
+      "t-benchmark-crisis",
       "t-calibration-forecasting",
       "t-citation-attribution",
       "t-finance-benchmarks",
@@ -48,6 +50,7 @@
       "t-reward-hacking"
     ],
     "domain": [
+      "t-alpha-decay",
       "t-data-sources",
       "t-pe-dd-workflow",
       "t-regulation-compliance",
@@ -61,7 +64,8 @@
     "synthesis": [
       "t-contribution-map",
       "t-design-principles",
-      "t-differentiation-hypotheses"
+      "t-differentiation-hypotheses",
+      "t-model-proof"
     ],
     "meta": [
       "survey-00-method"
@@ -504,7 +508,7 @@
         "t-google-gemini-dr",
         "t-storm-costorm"
       ],
-      "lines": 76
+      "lines": 95
     },
     {
       "doc_id": "t-information-value-eig",
@@ -653,6 +657,36 @@
         "t-pe-dd-workflow"
       ],
       "lines": 76
+    },
+    {
+      "doc_id": "t-persistent-limits",
+      "path": "topics/02-methods/persistent-limits-of-scaling.md",
+      "title": "モデルが賢くなっても消えない制約 — 理論的下限と経験的ギャップ",
+      "topic_group": "methods",
+      "tags": [
+        "hallucination-theory",
+        "aleatoric",
+        "jagged-frontier",
+        "capability-reliability-gap",
+        "context-rot",
+        "harness"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-108",
+        "S-109",
+        "S-111",
+        "S-113",
+        "S-115",
+        "S-119"
+      ],
+      "related_topics": [
+        "t-model-proof",
+        "t-verifier-design",
+        "t-calibration-forecasting",
+        "t-context-engineering"
+      ],
+      "lines": 150
     },
     {
       "doc_id": "t-recursive-self-improvement",
@@ -849,6 +883,33 @@
       "lines": 106
     },
     {
+      "doc_id": "t-benchmark-crisis",
+      "path": "topics/03-evaluation/benchmark-crisis-and-real-world-gap.md",
+      "title": "ベンチマークの崩壊と実世界ギャップ — METR / GDPval / 汚染",
+      "topic_group": "evaluation",
+      "tags": [
+        "benchmark-saturation",
+        "contamination",
+        "metr",
+        "time-horizon",
+        "gdpval",
+        "reliability"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-110",
+        "S-112",
+        "S-116",
+        "S-111"
+      ],
+      "related_topics": [
+        "t-persistent-limits",
+        "t-ip-evaluation-design",
+        "t-model-proof"
+      ],
+      "lines": 87
+    },
+    {
       "doc_id": "t-calibration-forecasting",
       "path": "topics/03-evaluation/calibration-and-forecasting.md",
       "title": "較正と予測 — 投資プロの母語で話す",
@@ -1029,6 +1090,30 @@
       "lines": 114
     },
     {
+      "doc_id": "t-alpha-decay",
+      "path": "topics/04-domain/alpha-decay-and-homogenization.md",
+      "title": "AI によるアルファ減衰と同質化 — 投資領域固有の構造",
+      "topic_group": "domain",
+      "tags": [
+        "alpha-decay",
+        "homogenization",
+        "crowding",
+        "red-queen",
+        "private-data",
+        "differentiation"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-117"
+      ],
+      "related_topics": [
+        "t-model-proof",
+        "t-data-sources",
+        "t-commoditization-moat"
+      ],
+      "lines": 84
+    },
+    {
       "doc_id": "t-data-sources",
       "path": "topics/04-domain/data-sources.md",
       "title": "データ源の地図 — 公開 / 準公開 / プライベート",
@@ -1103,7 +1188,7 @@
         "t-data-sources",
         "t-commoditization-moat"
       ],
-      "lines": 83
+      "lines": 102
     },
     {
       "doc_id": "t-vc-dd-multi-agent",
@@ -1227,12 +1312,12 @@
         "t-differentiation-hypotheses",
         "t-design-principles"
       ],
-      "lines": 91
+      "lines": 109
     },
     {
       "doc_id": "t-design-principles",
       "path": "topics/06-synthesis/design-principles.md",
-      "title": "設計原則 P1-P15 — サーベイから導かれる制約",
+      "title": "設計原則 P1-P17 — サーベイから導かれる制約",
       "topic_group": "synthesis",
       "tags": [
         "design-principles",
@@ -1245,7 +1330,7 @@
         "t-contribution-map",
         "t-differentiation-hypotheses"
       ],
-      "lines": 60
+      "lines": 66
     },
     {
       "doc_id": "t-differentiation-hypotheses",
@@ -1266,6 +1351,40 @@
         "t-competitive-map"
       ],
       "lines": 137
+    },
+    {
+      "doc_id": "t-model-proof",
+      "path": "topics/06-synthesis/model-proof-differentiation.md",
+      "title": "モデルが賢くなっても勝てる要素 — 4分類と賭けどころ",
+      "topic_group": "synthesis",
+      "tags": [
+        "model-proof",
+        "complementarity",
+        "moat",
+        "strategy",
+        "scaling",
+        "differentiation"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-108",
+        "S-109",
+        "S-111",
+        "S-113",
+        "S-114",
+        "S-115",
+        "S-117",
+        "S-118",
+        "S-120"
+      ],
+      "related_topics": [
+        "t-persistent-limits",
+        "t-alpha-decay",
+        "t-benchmark-crisis",
+        "t-commoditization-moat",
+        "t-differentiation-hypotheses"
+      ],
+      "lines": 187
     },
     {
       "doc_id": "survey-00-method",
