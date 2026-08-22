@@ -1,0 +1,21 @@
+# PoC v2 のCIゲート(poc2/docs/EVALUATION.md の G-U/G-I/G-C)。poc2/ 配下の変更で走る。
+name: poc2-tests
+on:
+  push:
+    paths: ["poc2/**"]
+  pull_request:
+    paths: ["poc2/**"]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: poc2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]" pyflakes
+      - run: python -m pyflakes prism tests
+      - run: pytest tests -q

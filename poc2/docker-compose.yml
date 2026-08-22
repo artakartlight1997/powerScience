@@ -1,0 +1,12 @@
+services:
+  prism:
+    build: .
+    env_file: .env                 # OPENROUTER_API_KEY など(.env.example 参照)
+    environment:
+      PRISM_TEMPLATES_DIR: /app/templates   # 差し替えるなら ./templates を volume に
+    volumes:
+      - ./inbox:/work/inbox        # 資料ドロップフォルダ(唯一の入力口)
+      - ./data:/work/data          # SQLite・スナップショット(追記専用の台帳)
+      - ./out:/work/out            # 射影(作戦盤・発注仕様書ほか)
+    # 使い方: docker compose run --rm prism init-case case1 --name 対象会社 --archetype ses_jutaku
+    #         docker compose run --rm prism run case1 [--online]
