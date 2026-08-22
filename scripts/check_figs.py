@@ -13,13 +13,15 @@ LDIR = os.path.join(ROOT, "docs", "content", "lessons")
 
 TYPES = {"flow", "steps", "compare", "cards", "stack", "matrix", "tablediff",
          "star", "tree", "timeline", "formula", "chart", "pipeline"}
-# 型ごとに、これが無いと描けないもの
+# 型ごとに、これが無いと描けないもの。
+# 内側のリストは「どれか1つあればよい」（描画エンジンが両方の書き方を受ける型がある）
 NEED = {
-    "flow": ["items"], "steps": ["items"], "cards": ["items"], "stack": ["items"],
-    "timeline": ["items"], "tree": ["root"], "compare": ["panels"],
-    "matrix": ["quadrants"], "tablediff": ["before", "after"],
-    "chart": ["categories", "series"], "formula": ["code"], "star": ["fact", "dims"],
-    "pipeline": ["nodes"],
+    "flow": [["items"]], "steps": [["items"]], "cards": [["items"]],
+    "stack": [["layers", "items"]],          # stack は layers でも items でも描ける
+    "timeline": [["items"]], "tree": [["root"]], "compare": [["panels"]],
+    "matrix": [["quadrants"]], "tablediff": [["before"], ["after"]],
+    "chart": [["categories"], ["series"]], "formula": [["code"]],
+    "star": [["fact"], ["dims"]], "pipeline": [["nodes"]],
 }
 
 bad, total = [], 0
@@ -45,9 +47,9 @@ for p in sorted(glob.glob(os.path.join(LDIR, "*.md"))):
         if t not in TYPES:
             bad.append((name, "知らない図の種類 '%s'" % t))
             continue
-        for k in NEED.get(t, []):
-            if not cfg.get(k):
-                bad.append((name, "%s の図に %s がない" % (t, k)))
+        for group in NEED.get(t, []):
+            if not any(cfg.get(k) for k in group):
+                bad.append((name, "%s の図に %s がない" % (t, " か ".join(group))))
         # tablediff は head と rows。cols と書くと見出しが出ない
         if t == "tablediff":
             for side in ("before", "after"):

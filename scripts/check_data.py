@@ -36,15 +36,56 @@ def forms(n):
     return {str(n), format(n, ",")}
 
 
-# どの味の行にも出てよい数（合計・全部の値段・日数など）
+# 実データから確かめられる数は、すべて正しい数として扱う。
+#   ・味ごとの個数と金額 / 全体の合計
+#   ・曜日ごと、日ごとの合計
+#   ・値段
+#   ・味どうしの差、全体から1つを引いた残り
+import datetime
+dow_n, dow_y = collections.Counter(), collections.Counter()
+day_n, day_y = collections.Counter(), collections.Counter()
+for r in rows:
+    d = datetime.date.fromisoformat(r["日付"])
+    dow_n[d.weekday()] += int(r["個数"]); dow_y[d.weekday()] += int(r["金額"])
+    day_n[r["日付"]] += int(r["個数"]); day_y[r["日付"]] += int(r["金額"])
+
 GLOBAL_OK = set()
-for v in [total_n, total_y, len(rows), 31]:
+for v in ([total_n, total_y, len(rows), 31]
+          + list(price.values())
+          + list(dow_n.values()) + list(dow_y.values())
+          + list(day_n.values()) + list(day_y.values())):
     GLOBAL_OK |= forms(v)
-for v in price.values():
-    GLOBAL_OK |= forms(v)
+# 差と残り（「1位と2位の差は114個」「チーズ以外は1,938個」など）
+vals = list(per.values()) + list(yen.values())
+for a in vals:
+    GLOBAL_OK |= forms(total_n - a) | forms(total_y - a)
+    for b in vals:
+        if a > b:
+            GLOBAL_OK |= forms(a - b)
 
 NUM = re.compile(r"(?<![0-9.,])([0-9]{3}|[0-9]{1,3},[0-9]{3})(?![0-9.,%])")
 DECL = re.compile(r"<!--\s*data:\s*(.+?)\s*-->")
+# 「もし〜だったら」の図は、わざと実データと違う数を出す。
+# 書き手が仮の話だと明示しているので、そこは数えない。
+IF_WORDS = ("もし", "仮に", "たとえば", "もしも")
+
+
+def hypothetical_lines(src):
+    """仮の話だと明示している図の行を集める"""
+    out, keep, buf = set(), False, []
+    for i, ln in enumerate(src.split("\n")):
+        if ln.lstrip().startswith("```"):
+            if keep:
+                text = "\n".join(x[1] for x in buf)
+                if any(w in text for w in IF_WORDS):
+                    out |= {x[0] for x in buf}
+                keep, buf = False, []
+            elif ln.lstrip()[3:].strip().lower() == "figure":
+                keep, buf = True, []
+            continue
+        if keep:
+            buf.append((i, ln))
+    return out
 
 print("サンプルデータ（docs/data/sales.csv）")
 for k, v in per.most_common():
@@ -59,7 +100,10 @@ for p in sorted(glob.glob(os.path.join(LDIR, "*.md"))):
     if d:
         skipped.append((name, d.group(1)))
         continue
-    for line in src.split("\n"):
+    skip = hypothetical_lines(src)
+    for i, line in enumerate(src.split("\n")):
+        if i in skip:
+            continue
         # 1行に複数の味が出ることがある（グラフの見出しと値の並びなど）。
         # その行は、出てくる味すべての数字を正しいものとして扱う。
         here = [f for f in per if f in line]
