@@ -80,6 +80,15 @@ def cluster(evidences: list[Evidence]) -> list[Evidence]:
     out: list[Evidence] = []
     for key, evs in by_item.items():
         parent = list(range(len(evs)))
+        # 成分ごとの数値レンジ(次元別 min/max)。併合の結果 tolerance 超の乖離を
+        # 内包する成分を作らない — 丸め帯域の中間値が「橋」になって
+        # 対立する数値(>tolerance)が推移閉包で同一クラスタ化するのを防ぐ(P20)
+        ranges: list[dict[str, tuple[float, float]]] = []
+        for e in evs:
+            if e.value and e.value.num is not None and _dim(e.value.unit):
+                ranges.append({_dim(e.value.unit): (e.value.num, e.value.num)})
+            else:
+                ranges.append({})
 
         def find(i: int) -> int:
             while parent[i] != i:
@@ -87,10 +96,24 @@ def cluster(evidences: list[Evidence]) -> list[Evidence]:
                 i = parent[i]
             return i
 
+        def try_union(i: int, j: int) -> None:
+            ra, rb = find(i), find(j)
+            if ra == rb:
+                return
+            merged = dict(ranges[ra])
+            for dim, (lo, hi) in ranges[rb].items():
+                mlo, mhi = merged.get(dim, (lo, hi))
+                merged[dim] = (min(mlo, lo), max(mhi, hi))
+            for lo, hi in merged.values():
+                if (hi - lo) / max(abs(hi), abs(lo), 1e-9) > CONTRA_TOLERANCE:
+                    return  # 併合拒否: 矛盾候補を内包する成分を作らない
+            parent[rb] = ra
+            ranges[ra] = merged
+
         for i in range(len(evs)):
             for j in range(i + 1, len(evs)):
                 if _same_cluster(evs[i], evs[j]):
-                    parent[find(j)] = find(i)
+                    try_union(i, j)
         # ラベルは「成分内の最小 evidence.id」— 入力順にもインデックスにも依存せず、
         # 新証拠の追加で既存成分のラベルが揺れない(無変更 re-put を誘発しない)
         comps: dict[int, list[Evidence]] = defaultdict(list)
@@ -145,10 +168,11 @@ def reevaluate_contradictions(existing: list[Contradiction],
         if c.status != "open":
             continue
         a, b = ev.get(c.evidence_a), ev.get(c.evidence_b)
+        # 「まだ矛盾か」は数値の実乖離だけで判定する。クラスタの一致は理由にしない —
+        # 併合バグや橋があっても、実乖離が残る限り open を維持する(防御の二重化)
         still = (
             a is not None and b is not None
             and a.grounded == "pass" and b.grounded == "pass"
-            and a.cluster_id != b.cluster_id
             and a.value is not None and b.value is not None
             and a.value.num is not None and b.value.num is not None
             and _dim(a.value.unit) == _dim(b.value.unit)
@@ -166,8 +190,10 @@ def contradictions(case_id: str, evidences: list[Evidence],
                    tolerance: float = CONTRA_TOLERANCE,
                    ) -> list[Contradiction]:
     """同一項目で数値が tolerance 超乖離する別クラスタ対 → 矛盾(P20)。
-    既存の対は再登録しない。解消はここでは起きない(追加証拠の判断は人間)。"""
-    seen = {frozenset((c.evidence_a, c.evidence_b)) for c in existing}
+    open の既存対は再登録しない。resolved の対が再び成立した場合は**新しい open として
+    再検出される**(resolved 記録は履歴として残る — 復帰経路を殺さない)。"""
+    seen = {frozenset((c.evidence_a, c.evidence_b))
+            for c in existing if c.status == "open"}
     found: list[Contradiction] = []
     by_item: dict[str, list[Evidence]] = defaultdict(list)
     for e in evidences:

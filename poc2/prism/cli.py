@@ -99,19 +99,25 @@ def _make_web(cfg, llm, no_web: bool):
 def _today() -> date | None:
     """鮮度判定の基準日。通常は None(=今日)。PRISM_TODAY で固定できる(検証・テスト用)。"""
     v = os.environ.get("PRISM_TODAY")
-    return date.fromisoformat(v) if v else None
+    if not v:
+        return None
+    try:
+        return date.fromisoformat(v)
+    except ValueError:
+        raise ConfigError(f"PRISM_TODAY が不正: {v!r}(YYYY-MM-DD形式)") from None
 
 
 def _dispatch(args, cfg, store: Store) -> int:
     from . import pipeline
 
     if args.cmd == "research":
+        today = _today()  # 設定不備はケース作成前に落とす
         llm = _make_llm(cfg)
         search, fetcher = _make_web(cfg, llm, args.no_web)
         case = pipeline.start_case(store, cfg, llm, args.name, args.industry,
                                    args.archetype, args.case_id)
         print(f"ケース {case.id}(アーキタイプ: {case.archetype})でリサーチ開始…")
-        case = pipeline.run(store, cfg, case.id, llm, search, fetcher, _today())
+        case = pipeline.run(store, cfg, case.id, llm, search, fetcher, today)
         print(f"停止: {case.stop_reason}(ラウンド{case.round}, LLM呼び出し{llm.calls}回)")
         print(f"出力: {cfg.out_dir / case.id}/(作戦盤: sakusenban.md)")
         print(f"補助資料(IM等)があれば {cfg.inbox_dir / case.id}/ に置いて"

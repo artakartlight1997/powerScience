@@ -60,6 +60,7 @@ class Source(BaseModel):
     as_of: str                          # 情報が入手可能になった時点(point-in-time)
     content_hash: str                   # 冪等取り込みのキー
     snapshot_path: Optional[str] = None # 原文スナップショット(grounding の照合先)
+    extracted: bool = False             # 抽出完了。False のソースはラン跨ぎでも再試行される
 
 
 class Evidence(BaseModel):

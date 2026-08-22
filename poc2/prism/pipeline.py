@@ -26,6 +26,11 @@ log = logging.getLogger(__name__)
 _CASE_ID = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
 
 
+def _norm_name(s: str) -> str:
+    import unicodedata
+    return " ".join(unicodedata.normalize("NFKC", s).split()).casefold()
+
+
 def slugify(name: str) -> str:
     """社名からケースIDを自動生成(日本語名はハッシュで安定化)。"""
     s = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
@@ -43,8 +48,9 @@ def start_case(store: Store, cfg: Config, llm: LLMClient, name: str,
     standards = load_standards(cfg.templates_dir)
     existing = store.get("case", cid, cid, Case)
     if existing:
-        if existing.name != name:
-            # slugify 衝突等で別対象のケースに合流させない(証拠の混線防止)
+        if _norm_name(existing.name) != _norm_name(name):
+            # slugify 衝突等で別対象のケースに合流させない(証拠の混線防止)。
+            # 空白・全角・大小文字の表記ゆれは同一とみなす(誤拒否による証拠分断防止)
             raise ConfigError(
                 f"ケースID {cid} は別対象({existing.name})に使用済み。"
                 f" --case-id で別IDを指定せよ")
@@ -101,7 +107,13 @@ def run(store: Store, cfg: Config, case_id: str, llm: LLMClient,
     case.stop_reason = None
     rounds_this_run = 0
     llm_budget = int(stop_rules["max_llm_calls"])
-    retry_extract: set[str] = set()  # 前ラウンドで LLM 障害だったソース(C-7 再試行)
+    # 抽出未完了ソースの再試行はラン内メモリでなく Source.extracted で永続化する —
+    # 障害中に R3 で停止しても、次の run が未抽出ソースを拾い直す(C-7 のラン跨ぎ保証)。
+    # 旧版DB互換: extracted フラグが無く証拠も無いソースだけを対象にする
+    _has_ev = {e.source_id for e in store.all("evidence", case_id, Evidence)}
+    retry_extract: set[str] = {
+        s.id for s in store.all("source", case_id, Source)
+        if not s.extracted and s.id not in _has_ev}
 
     while True:
         case.round += 1
@@ -126,10 +138,11 @@ def run(store: Store, cfg: Config, case_id: str, llm: LLMClient,
         for src in targets:
             evs = extract.run(src, items, llm)
             if evs is None:
-                retry_extract.add(src.id)  # 一時障害: 次ラウンドで再試行
+                retry_extract.add(src.id)  # 一時障害: 次ラウンド(または次の run)で再試行
             else:
                 retry_extract.discard(src.id)
                 store.put_many("evidence", evs)
+                store.put("source", src.model_copy(update={"extracted": True}))
         # 4) 検証: grounding → クラスタ → 矛盾。R2 予算はラウンド内でも守る
         stored = store.all("evidence", case_id, Evidence)
         before = {e.id: (e.grounded, e.cluster_id) for e in stored}
@@ -176,7 +189,9 @@ def run(store: Store, cfg: Config, case_id: str, llm: LLMClient,
                 store.put("question", q.model_copy(update={"status": "answered"}))
         questions = fill.make_questions(
             case_id, items, judgments, standards["question_budget"]["max_open_questions"])
-        store.put_many("question", questions)
+        # 内容が変わった問いだけ書き戻す(無変更 re-put でイベント連鎖を肥大させない)
+        prev_q = {q.id: q for q in store.all("question", case_id, Question)}
+        store.put_many("question", [q for q in questions if prev_q.get(q.id) != q])
         # 7) 停止判定(理由必須)。R4 は質問リスト(上限で切られる)でなく
         #    項目そのものから公開経路の gap を数える(偽の完了宣言を防ぐ)
         progress = _progress(judgments)

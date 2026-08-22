@@ -141,6 +141,41 @@ def test_cluster_labels_stable_when_new_evidence_added():
     assert before["ev-ccc"] == after["ev-ccc"]
 
 
+def test_numeric_bridge_in_rounding_band_cannot_merge_conflicting_pair():
+    """中間の数値(丸め帯域で両側と文面類似)が橋になっても、tolerance 超乖離の
+    対は同一クラスタにならない(成分の数値レンジで併合を拒否)。契約 §3 の明文。"""
+    a = make_ev(id="ev-a", quote="当社の売上高は100億円と公表している",
+                num=1e10, unit="億円")
+    b = make_ev(id="ev-b", quote="当社の売上高は120億円と公表している",
+                num=1.2e10, unit="億円")
+    c = make_ev(id="ev-c", quote="当社の売上高は110億円と公表している",
+                num=1.1e10, unit="億円")  # A とも B とも帯域内+文面類似の「橋」
+    out = cluster([a, c, b])
+    ids = {e.id: e.cluster_id for e in out}
+    assert ids["ev-a"] != ids["ev-b"]  # 16.7% 乖離の対は推移閉包でも併合されない
+    assert len(contradictions("case1", out, existing=[])) >= 1
+
+
+def test_reevaluate_keeps_contradiction_alive_even_if_same_cluster():
+    """防御の二重化: 万一 >tolerance の対が同一クラスタになっても resolve しない。"""
+    from prism.verify import reevaluate_contradictions
+    a = make_ev(id="e1", quote="売上100億円", num=1e10, unit="億円", cluster_id="k-x")
+    b = make_ev(id="e2", quote="売上120億円", num=1.2e10, unit="億円", cluster_id="k-y")
+    cx = contradictions("case1", [a, b], existing=[])
+    b_merged = b.model_copy(update={"cluster_id": "k-x"})  # 同一クラスタ化(異常系)
+    assert reevaluate_contradictions(cx, [a, b_merged]) == []  # 実乖離が残る限り open
+
+
+def test_resolved_pair_can_be_redetected_as_new_open():
+    """resolved は履歴として残り、同じ対が再び成立したら新しい open として再検出される。"""
+    a = make_ev(id="e1", quote="稼働率95%", num=95.0, unit="%", cluster_id="k-x")
+    b = make_ev(id="e2", quote="稼働率80%", num=80.0, unit="%", cluster_id="k-y")
+    cx = contradictions("case1", [a, b], existing=[])
+    resolved = [cx[0].model_copy(update={"status": "resolved"})]
+    again = contradictions("case1", [a, b], existing=resolved)
+    assert len(again) == 1 and again[0].status == "open"
+
+
 def test_reevaluate_resolves_only_dead_contradictions():
     """resolve は証拠状態の変化によってのみ起きる。生きている矛盾は触らない(P20)。"""
     from prism.verify import reevaluate_contradictions
@@ -154,9 +189,9 @@ def test_reevaluate_resolves_only_dead_contradictions():
     b_fail = b.model_copy(update={"grounded": "fail"})
     resolved = reevaluate_contradictions(cx, [a, b_fail])
     assert len(resolved) == 1 and resolved[0].status == "resolved"
-    # 同一クラスタに組み替わった → resolved
-    b_same = b.model_copy(update={"cluster_id": "k-x"})
-    assert reevaluate_contradictions(cx, [a, b_same])[0].status == "resolved"
+    # 数値の実乖離が解消した(訂正版の証拠に置き換わった)→ resolved
+    b_close = b.model_copy(update={"value": b.value.model_copy(update={"num": 95.0})})
+    assert reevaluate_contradictions(cx, [a, b_close])[0].status == "resolved"
 
 
 def test_ground_double_llm_error_returns_none_not_fail():
