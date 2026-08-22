@@ -1,7 +1,7 @@
 /**
  * 全レッスン・全ラボの描画テスト（Playwright が必要）
  *
- *     cd docs && python3 -m http.server 8123   # 別ターミナル
+ *     cd docs && python3 -m http.server 8123   # v1 は /v1/ 配下   # 別ターミナル
  *     node tests/render-all.mjs
  *
  * 検出するもの
@@ -14,7 +14,7 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs';
 
-const BASE = 'http://localhost:8123';
+const BASE = 'http://localhost:8123/v1';
 const cur = JSON.parse(fs.readFileSync(new URL('../docs/content/curriculum.json', import.meta.url), 'utf8'));
 const written = new Set(fs.readdirSync(new URL('../docs/content/lessons', import.meta.url)).map(f => f.replace(/\.md$/, '')));
 

@@ -22,8 +22,8 @@ import datetime
 import glob
 import re
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CONTENT = os.path.join(ROOT, "docs", "content")
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+CONTENT = os.path.join(ROOT, "docs", "v1", "content")
 MODULES_DIR = os.path.join(CONTENT, "modules")
 OUT_CURRICULUM = os.path.join(CONTENT, "curriculum.json")
 OUT_PL300 = os.path.join(CONTENT, "pl300.json")
@@ -172,7 +172,7 @@ def module_sort_key(m):
 
 
 def read_modules():
-    """docs/content/modules/M*.json をすべて読む。壊れたファイル・欠番はスキップ。"""
+    """docs/v1/content/modules/M*.json をすべて読む。壊れたファイル・欠番はスキップ。"""
     mods = []
     if not os.path.isdir(MODULES_DIR):
         warn("modules ディレクトリがありません: %s" % MODULES_DIR)

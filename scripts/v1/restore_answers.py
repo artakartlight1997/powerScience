@@ -12,7 +12,7 @@ import io, os, re, sys, glob, subprocess
 
 BASE = "e973cf5"                      # 圧縮を始める前のコミット
 ROOT = "/home/user/powerScience"
-LDIR = os.path.join(ROOT, "docs", "content", "lessons")
+LDIR = os.path.join(ROOT, "docs", "v1", "content", "lessons")
 DETAILS = re.compile(r"<details>.*?</details>\n?", re.S)
 
 restored, skipped, nosrc = [], [], []
@@ -24,7 +24,7 @@ for path in sorted(glob.glob(os.path.join(LDIR, "*.md"))):
     if "<details>" in cur:
         skipped.append(lid); continue
 
-    rel = "docs/content/lessons/%s.md" % lid
+    rel = "docs/v1/content/lessons/%s.md" % lid
     r = subprocess.run(["git", "-C", ROOT, "show", "%s:%s" % (BASE, rel)],
                        capture_output=True, text=True)
     if r.returncode != 0:

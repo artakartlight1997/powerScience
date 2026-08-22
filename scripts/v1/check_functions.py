@@ -9,8 +9,8 @@
 """
 import io, json, re, sys, os, glob, collections
 
-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-C = os.path.join(ROOT, "docs", "content")
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
+C = os.path.join(ROOT, "docs", "v1", "content")
 
 DAXF = re.compile(r"\b([A-Z][A-Z0-9]{2,}(?:\.[A-Z][A-Za-z0-9]+)?)\s*\(")
 MF = re.compile(r"\b((?:Table|List|Text|Date|Number|Record|Value|Splitter|Csv|Excel|Sql|"

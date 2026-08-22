@@ -1,12 +1,12 @@
 /**
  * 全ページのスモークテスト（Playwright が必要）
  *
- *     cd docs && python3 -m http.server 8123   # 別ターミナル
+ *     cd docs && python3 -m http.server 8123   # v1 は /v1/ 配下   # 別ターミナル
  *     node tests/smoke.mjs
  */
 import { chromium } from 'playwright';
 
-const BASE = 'http://localhost:8123';
+const BASE = 'http://localhost:8123/v1';
 const PAGES = [
   ['index.html', 'main'],
   ['tiers.html', 'main'],

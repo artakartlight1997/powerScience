@@ -23,9 +23,9 @@
 """
 import io, os, re, sys, glob
 
-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-LDIR = os.path.join(ROOT, "docs", "content", "lessons")
-BDIR = os.path.join(ROOT, "docs", "content", "labs")
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
+LDIR = os.path.join(ROOT, "docs", "v1", "content", "lessons")
+BDIR = os.path.join(ROOT, "docs", "v1", "content", "labs")
 
 LIM = {
     "read": 2200, "prose": 800, "callout_chars": 600, "callouts": 3,

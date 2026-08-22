@@ -13,8 +13,8 @@
 """
 import io, json, os, re, sys, glob
 
-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-C = os.path.join(ROOT, "docs", "content")
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
+C = os.path.join(ROOT, "docs", "v1", "content")
 MAX_LESSON = 220        # レッスン概要の抜粋
 MAX_SECTION = 110       # 見出しセクションの抜粋（数が多いので短く）
 MAX_TERM = 170          # 用語の抜粋

@@ -1,11 +1,11 @@
 /**
  * 機能テスト（Playwright が必要・モバイル幅で実行）
  *
- *     cd docs && python3 -m http.server 8123   # 別ターミナル
+ *     cd docs && python3 -m http.server 8123   # v1 は /v1/ 配下   # 別ターミナル
  *     node tests/functional.mjs
  */
 import { chromium } from 'playwright';
-const BASE = 'http://localhost:8123';
+const BASE = 'http://localhost:8123/v1';
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 const page = await ctx.newPage();

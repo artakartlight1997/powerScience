@@ -20,8 +20,8 @@
 import json, os, io, sys, re, glob
 from collections import Counter, defaultdict
 
-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-DOCS = os.path.join(ROOT, "docs")
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
+DOCS = os.path.join(ROOT, "docs", "v1")
 C = os.path.join(DOCS, "content")
 
 FIGURE_TYPES = {

@@ -10,8 +10,8 @@ docs/content/quizzes/*.json を読み、docs/content/quizzes/index.json を書�
 import json, os, io, glob, sys
 from collections import Counter
 
-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-QDIR = os.path.join(ROOT, "docs", "content", "quizzes")
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
+QDIR = os.path.join(ROOT, "docs", "v1", "content", "quizzes")
 
 idx, total, exam_total = {}, 0, 0
 area_counter, skill_counter, diff_counter = Counter(), Counter(), Counter()

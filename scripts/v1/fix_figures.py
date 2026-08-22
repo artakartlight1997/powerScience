@@ -15,10 +15,10 @@ figure ブロックのJSONを検査し、機械的に直せる誤りを修正す
 """
 import io, json, os, re, sys, glob
 
-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
 TARGET_DIRS = [
-    os.path.join(ROOT, "docs", "content", "lessons"),
-    os.path.join(ROOT, "docs", "content", "labs"),
+    os.path.join(ROOT, "docs", "v1", "content", "lessons"),
+    os.path.join(ROOT, "docs", "v1", "content", "labs"),
 ]
 WRITE = "--write" in sys.argv
 FENCE = re.compile(r"(```figure[^\n]*\n)(.*?)(```)", re.S)

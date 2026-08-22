@@ -13,9 +13,9 @@ docs/content/glossary/index.json に統合したものを書き出します。
 import json, os, io, glob, sys
 from collections import Counter
 
-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-GDIR = os.path.join(ROOT, "docs", "content", "glossary")
-CUR = os.path.join(ROOT, "docs", "content", "curriculum.json")
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
+GDIR = os.path.join(ROOT, "docs", "v1", "content", "glossary")
+CUR = os.path.join(ROOT, "docs", "v1", "content", "curriculum.json")
 
 # レッスン → モジュール / ティア の対応（あれば付与する）
 lesson_meta = {}

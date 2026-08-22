@@ -17,8 +17,8 @@ GitHub Pages は CSS/JS をブラウザにキャッシュさせるため、
 """
 import io, os, re, sys, glob, hashlib
 
-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-DOCS = os.path.join(ROOT, "docs")
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
+DOCS = os.path.join(ROOT, "docs", "v1")
 
 # href="assets/…" / src="assets/…" の ?v=… は付け直す
 REF = re.compile(r'((?:href|src)=")(assets/[^"?#]+\.(?:css|js))(?:\?v=[0-9a-f]+)?(")')

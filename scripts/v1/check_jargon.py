@@ -15,8 +15,8 @@
 """
 import io, json, os, re, sys
 
-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-IDX = os.path.join(ROOT, "docs", "content", "glossary", "index.json")
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
+IDX = os.path.join(ROOT, "docs", "v1", "content", "glossary", "index.json")
 
 # 専門用語らしい語尾。ここに当てはまる語だけを見る
 SUFFIX = (

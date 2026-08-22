@@ -1,215 +1,86 @@
-<!doctype html>
-<html lang="ja">
-<head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>レッスン | Aki’s Power BI 道場</title>
-<link rel="icon" href="assets/img/favicon.svg">
-<link rel="stylesheet" href="assets/css/style.css?v=70acef71">
-<link rel="stylesheet" href="assets/css/search.css?v=56b3a91e">
-<link rel="stylesheet" href="assets/css/figure.css?v=521727e1">
-<link rel="stylesheet" href="assets/css/interactive.css?v=f4cfc731">
-<link rel="stylesheet" href="assets/css/glossary.css?v=e41f4d6b">
-<link rel="stylesheet" href="assets/css/lesson.css?v=863d9c6e">
-<script src="assets/js/config.js?v=dbf88e4a"></script>
-</head>
-<body>
-<a class="skip-link" href="#prose">本文へスキップ</a>
-
-<div class="read-progress" id="read-progress" aria-hidden="true"><span></span></div>
-
-<main id="main" class="wrap" style="padding-top:22px">
-  <div id="head"></div>
-  <div class="lesson-layout">
-    <article>
-      <div id="prose" class="prose"><div class="spinner"></div></div>
-      <div id="foot"></div>
-    </article>
-    <aside class="toc-box"><nav class="toc" id="toc"></nav></aside>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>レッスン | たい焼き屋のデータ入門</title>
+<link rel="icon" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/figure.css">
+<script src="assets/js/app.js"></script>
+<script src="assets/vendor/marked.umd.js"></script>
+<script src="assets/js/figure.js"></script>
+<script src="assets/js/render.js"></script>
+<main class="wrap">
+  <div class="lesson-head">
+    <div class="crumb" id="crumb"></div>
+    <h1 id="title">読み込み中…</h1>
+    <div class="qa" id="qa"></div>
   </div>
+  <article class="prose" id="body"></article>
+  <button class="btn-done" id="done" hidden>読み終わった</button>
+  <nav class="pager" id="pager"></nav>
 </main>
-
-<script src="assets/vendor/marked.umd.js?v=5dbc0daa"></script>
-<script src="assets/js/app.js?v=b855ea7b"></script>
-<script src="assets/js/search.js?v=0675a18e"></script>
-<script src="assets/js/analytics.js?v=b6fe81c9"></script>
-<script src="assets/js/render.js?v=4460cfca"></script>
-<script src="assets/js/figure.js?v=4b483f10"></script>
-<script src="assets/js/interactive.js?v=8c7608c9"></script>
-<script src="assets/js/glossary.js?v=b039b5b2"></script>
 <script>
-(async function () {
-  PBM.renderChrome();
-  const id = PBM.qs("id");
-  const c = await PBM.curriculum();
-  const l = c.lessonById[id];
-  const prose = document.getElementById("prose");
-  const head = document.getElementById("head");
+(function () {
+  TD.header();
+  var id = new URLSearchParams(location.search).get("id") || "";
+  var bodyEl = document.getElementById("body");
 
-  if (!l) {
-    head.innerHTML =
-      '<div class="card"><h1>レッスンが見つかりません</h1>' +
-      '<p class="muted">URLをご確認ください。カリキュラムが更新された可能性もあります。</p>' +
-      '<a class="btn btn-brand btn-sm" href="roadmap.html">ロードマップへ</a></div>';
-    prose.innerHTML = "";
-    return;
+  TD.course().then(function (c) {
+    var l = c.byId[id];
+    if (!l) { bodyEl.innerHTML = "<p>そのレッスンは見つかりませんでした。</p>"; TD.footer(); return; }
+
+    document.title = l.title + " | " + c.title;
+    document.getElementById("crumb").textContent = "第" + l.chapterNo + "章  " + l.chapter;
+    document.getElementById("title").textContent = l.title;
+    document.getElementById("qa").innerHTML =
+      (l.q ? '<div class="q"><b>あきの困りごと</b>' + esc(l.q) + "</div>" : "") +
+      (l.gain ? '<div class="g"><b>これができるようになる</b>' + esc(l.gain) + "</div>" : "");
+
+    return fetch(TD.url("content/lessons/" + l.id + ".md"), { cache: "no-cache" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("本文がまだありません (" + r.status + ")");
+        return r.text();
+      })
+      .then(function (md) {
+        bodyEl.innerHTML = PBM.markdown(md);
+        return PBM.enhance(bodyEl);
+      })
+      .then(function () { pager(c, l); doneButton(l); })
+      .catch(function (e) {
+        bodyEl.innerHTML = "<p>" + esc(e.message) + "</p>";
+        pager(c, l);
+      });
+  }).catch(function (e) {
+    bodyEl.innerHTML = "<p>" + esc(e.message) + "</p>";
+  });
+
+  function pager(c, l) {
+    var p = c.flat[l.index - 1], n = c.flat[l.index + 1];
+    document.getElementById("pager").innerHTML =
+      (p ? '<a href="lesson.html?id=' + encodeURIComponent(p.id) + '">' +
+           '<span class="dir">← 前</span><span class="t">' + esc(p.title) + "</span></a>" : "") +
+      (n ? '<a class="next" href="lesson.html?id=' + encodeURIComponent(n.id) + '">' +
+           '<span class="dir">次 →</span><span class="t">' + esc(n.title) + "</span></a>"
+         : '<a class="next" href="index.html"><span class="dir">目次へ</span>' +
+           '<span class="t">ここまでで初級はおしまい</span></a>');
+    TD.footer();
   }
 
-  /* ---------- 位置づけの解決（v2: tier/module、v1: level にフォールバック） ---------- */
-  const tier = l.tier ? c.tierById[l.tier] : null;
-  const mod  = l.module ? c.moduleById[l.module] : null;
-  const level = l.level ? c.levelById[l.level] : null;
-  const groupColor = (tier && tier.color) || (level && level.color) || "var(--brand)";
-  const groupName  = (tier ? tier.title + (tier.en ? " " + tier.en : "") : (level ? level.title : ""));
-
-  document.title = l.title + " | Aki’s Power BI 道場";
-
-  /* 同じモジュール内の並び、および全体の並び */
-  const all = c.lessons;
-  const idx = all.findIndex((x) => x.id === id);
-  const prev = all[idx - 1], next = all[idx + 1];
-  const siblings = mod ? PBM.lessonsOfModule(c, mod.id) : (level ? PBM.lessonsOfLevel(c, level.id) : []);
-  const posInMod = siblings.findIndex((x) => x.id === id) + 1;
-
-  const chip = (txt, cls) => '<span class="badge ' + (cls || "") + '">' + PBM.esc(txt) + "</span>";
-
-  /* ---------- ヘッダー ---------- */
-  const crumbs = [];
-  crumbs.push('<a href="tiers.html">学習の全体像</a>');
-  if (tier) crumbs.push('<a href="roadmap.html#' + tier.id + '">' + PBM.esc(tier.title) + "</a>");
-  if (mod)  crumbs.push('<a href="roadmap.html#' + mod.id + '">' + PBM.esc(mod.title) + "</a>");
-  if (!tier && level) crumbs.push('<a href="roadmap.html#' + level.id + '">' + PBM.esc(level.title) + "</a>");
-
-  const pr = PBM.prereqStatus(c, l);
-
-  head.innerHTML =
-    '<nav class="crumbs">' + crumbs.join('<span class="sep">›</span>') + "</nav>" +
-    '<div class="row lesson-chips" style="margin:10px 0 4px">' +
-      (groupName ? '<span class="badge badge-tier" style="background:' + groupColor + '">' + PBM.esc(groupName) + "</span>" : "") +
-      (mod ? chip(mod.title) : "") +
-      chip(l.id) +
-      chip("⏱ " + l.minutes + "分") +
-      (posInMod ? chip(posInMod + " / " + siblings.length + " 本目") : "") +
-      (l.type === "hands-on" ? chip("ハンズオン", "badge-ok") : "") +
-      (l.type === "drill" ? chip("演習中心", "badge-ok") : "") +
-      (l.type === "exam" ? chip("試験対策", "badge-warn") : "") +
-    "</div>" +
-    '<h1 class="lesson-title">' + PBM.esc(l.title) + "</h1>" +
-
-    /* なぜ学ぶのか → 何ができるようになるか → 次に何が開けるか */
-    '<div class="growth-card">' +
-      (l.why ? '<div class="growth-row"><div class="growth-k">なぜ学ぶのか</div><div class="growth-v">' + PBM.esc(l.why) + "</div></div>" : "") +
-      (l.gain ? '<div class="growth-row growth-gain"><div class="growth-k">このレッスンで身につく力</div><div class="growth-v">' + PBM.esc(l.gain) + "</div></div>" : "") +
-      (l.objectives && l.objectives.length
-        ? '<div class="growth-row"><div class="growth-k">到達目標</div><div class="growth-v"><ul class="obj">' +
-          l.objectives.map((o) => "<li>" + PBM.esc(o) + "</li>").join("") + "</ul></div></div>"
-        : "") +
-      (l.unlocks ? '<div class="growth-row growth-unlock"><div class="growth-k">次に開けること</div><div class="growth-v">' + PBM.esc(l.unlocks) + "</div></div>" : "") +
-    "</div>" +
-
-    /* 前提レッスンが未了なら警告 */
-    (pr.total && !pr.ok
-      ? '<div class="callout warn"><div class="callout-title"><span class="callout-icon">⚠</span>前提レッスンが未完了です</div>' +
-        "<p>先に読むと理解が速くなります：" +
-        pr.missing.map((mid) => {
-          const t = c.lessonById[mid];
-          return '<a href="lesson.html?id=' + mid + '">' + PBM.esc(t ? t.title : mid) + "</a>";
-        }).join(" ／ ") + "</p></div>"
-      : "") +
-
-    /* PL-300 / データサイエンス のタグ */
-    ((l.pl300 && l.pl300.length) || (l.ds && l.ds.length)
-      ? '<div class="meta-tags">' +
-        (l.pl300 && l.pl300.length
-          ? '<div class="meta-tag-row"><span class="meta-tag-k">PL-300</span>' +
-            l.pl300.map((x) => '<a class="badge badge-exam" href="pl300.html#' + encodeURIComponent(x) + '">' + PBM.esc(x) + "</a>").join("") + "</div>"
-          : "") +
-        (l.ds && l.ds.length
-          ? '<div class="meta-tag-row"><span class="meta-tag-k">同時に学ぶ</span>' +
-            l.ds.map((x) => '<span class="badge badge-ds">' + PBM.esc(x) + "</span>").join("") + "</div>"
-          : "") +
-        "</div>"
-      : "");
-
-  /* ---------- 本文 ---------- */
-  let md = null;
-  try {
-    const res = await fetch("content/lessons/" + id + ".md", { cache: "no-cache" });
-    if (res.ok) md = await res.text();
-  } catch (e) { /* noop */ }
-
-  if (md == null) {
-    prose.innerHTML =
-      '<div class="callout warn"><div class="callout-title"><span class="callout-icon">⚠</span>執筆中</div>' +
-      "<p>このレッスンの本文はまだ用意されていません。学習目標は上に表示されています。</p></div>";
-  } else {
-    prose.innerHTML = PBM.markdown(md);
-    await PBM.enhance(prose);
-    PBM.buildToc(prose, document.getElementById("toc"));
+  function doneButton(l) {
+    var b = document.getElementById("done");
+    b.hidden = false;
+    var on = TD.isDone(l.id);
+    paint();
+    b.addEventListener("click", function () { on = TD.setDone(l.id, !on); paint(); });
+    function paint() {
+      b.dataset.on = on ? "1" : "0";
+      b.textContent = on ? "✓ 読み終わった" : "読み終わった";
+    }
   }
 
-  /* ---------- フッター ---------- */
-  function drawFoot() {
-    const done = PBM.progress.isLessonDone(id);
-    const q = l.quiz ? PBM.progress.quizResult(l.quiz) : null;
-    const lab = l.lab ? c.labById[l.lab] : null;
-    const ms = mod ? PBM.moduleStats(c, mod.id) : null;
-
-    document.getElementById("foot").innerHTML =
-      '<div class="finish-card">' +
-        "<h3>ここまでで身についたこと</h3>" +
-        (l.gain ? '<p class="finish-gain">' + PBM.esc(l.gain) + "</p>" : "") +
-        (l.unlocks ? '<p class="small muted">次に開けること：' + PBM.esc(l.unlocks) + "</p>" : "") +
-        '<div class="finish-actions">' +
-          '<button class="btn ' + (done ? "btn-ghost" : "btn-primary") + '" id="btn-done">' +
-            (done ? "✓ 完了済み（取り消す）" : "このレッスンを完了にする") + "</button>" +
-          (l.quiz ? '<a class="btn btn-brand" href="quiz.html?id=' + l.quiz + '">理解度クイズに挑戦' +
-                    (q ? "（最高 " + q.best + "%）" : "") + "</a>" : "") +
-          (lab ? '<a class="btn btn-ghost" href="lab.html?id=' + lab.id + '">ハンズオン：' + PBM.esc(lab.title) + "</a>" : "") +
-        "</div>" +
-        (ms ? '<div class="mod-progress"><div class="small muted">' + PBM.esc(mod.title) + " の進捗 " +
-              ms.done + " / " + ms.total + '</div><div class="bar"><span style="width:' + ms.pct +
-              "%;background:" + groupColor + '"></span></div></div>' : "") +
-      "</div>" +
-      '<nav class="pager">' +
-        (prev ? '<a class="pager-item" href="lesson.html?id=' + prev.id + '"><span class="pager-k">← 前のレッスン</span>' +
-                '<span class="pager-t">' + PBM.esc(prev.title) + "</span></a>" : "<span></span>") +
-        (next ? '<a class="pager-item pager-next" href="lesson.html?id=' + next.id + '"><span class="pager-k">次のレッスン →</span>' +
-                '<span class="pager-t">' + PBM.esc(next.title) + "</span></a>"
-              : '<a class="pager-item pager-next" href="exam.html"><span class="pager-k">仕上げ →</span><span class="pager-t">模擬試験に挑戦する</span></a>') +
-      "</nav>";
-
-    document.getElementById("btn-done").addEventListener("click", function () {
-      const nowDone = !PBM.progress.isLessonDone(id);
-      PBM.progress.setLessonDone(id, nowDone);
-      drawFoot();
-      if (nowDone) {
-        celebrate();
-        if (next) setTimeout(function () { location.href = "lesson.html?id=" + next.id; }, 900);
-      }
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
-  drawFoot();
-
-  /* 完了時の小さな演出 */
-  function celebrate() {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = document.createElement("div");
-    t.className = "toast";
-    t.textContent = "完了しました。次のレッスンへ進みます。";
-    document.body.appendChild(t);
-    setTimeout(function () { t.classList.add("show"); }, 10);
-    setTimeout(function () { t.remove(); }, 2400);
-  }
-
-  /* 読み進みバー */
-  const bar = document.querySelector("#read-progress > span");
-  addEventListener("scroll", function () {
-    const h = document.documentElement;
-    const pct = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
-    bar.style.width = Math.min(100, Math.max(0, pct * 100)) + "%";
-  }, { passive: true });
 })();
 </script>
-</body>
-</html>
