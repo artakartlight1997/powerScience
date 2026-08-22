@@ -1,6 +1,6 @@
 {
   "$schema": "./schema.md#taxonomy",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "generated": "2026-08-22",
   "purpose": "Integral Prism の設計要素を分類する軸。後の設計文書・評価・課題管理で共通のタグ体系として使う。",
   "layers": [
@@ -290,8 +290,8 @@
     },
     {
       "id": "P23",
-      "principle": "意思決定モデルの取得は最小形から段階導入する（人間3行→命題化→数値モデル）。機械可読な決定コンパイラを前提条件にしない",
-      "source": "disc-devils-advocate(F4'),disc-evaluation(DQ6)"
+      "principle": "（改訂）意思決定モデルの入力を実務家に要求しない。カテゴリは業界標準テンプレート、急所は初期資料からの自動検出、閾値はファンド標準として一度だけ設定。人間の入力は任意の補強であり起動条件にしない",
+      "source": "disc-internal-build（ユーザー判定）"
     },
     {
       "id": "P24",

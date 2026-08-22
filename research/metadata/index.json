@@ -1,8 +1,8 @@
 {
-  "index_version": "2.0.0",
+  "index_version": "2.1.0",
   "generated": "2026-08-22",
   "project": "integral-prism",
-  "note": "全ファイル一覧。v2.0: 外部評価文書(S-137)との統合設計を追加。",
+  "note": "v2.1: 内製利用の確定と入力ゼロ化(discussion/18)。",
   "groups": {
     "competitors": [
       "t-anthropic-research",
@@ -109,7 +109,9 @@
       "disc-open-problems",
       "disc-prism-proposal",
       "disc-integrated-v2",
-      "disc-index"
+      "disc-internal-build",
+      "disc-index",
+      "disc-external-sources"
     ],
     "meta": [
       "survey-00-method"
@@ -1997,7 +1999,29 @@
         "t-decision-boundary",
         "t-information-value-eig"
       ],
-      "lines": 239
+      "lines": 243
+    },
+    {
+      "doc_id": "disc-internal-build",
+      "path": "discussion/18-internal-build-and-zero-input.md",
+      "title": "★確定 — 内製利用の決定と、入力ゼロ化（P23改訂）",
+      "topic_group": "discussion",
+      "tags": [
+        "internal-use",
+        "build-vs-buy",
+        "zero-input",
+        "decision",
+        "supersedes-external-sale"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "disc-integrated-v2",
+        "t-alpha-decay",
+        "t-commoditization-moat",
+        "disc-unit-economics"
+      ],
+      "lines": 126
     },
     {
       "doc_id": "disc-index",
@@ -2016,7 +2040,22 @@
         "research-index",
         "cs-index"
       ],
-      "lines": 82
+      "lines": 83
+    },
+    {
+      "doc_id": "disc-external-sources",
+      "path": "discussion/external-sources/README.md",
+      "title": "外部提供の設計文書 — 原本の保管",
+      "topic_group": "discussion",
+      "tags": [
+        "external",
+        "provenance",
+        "source-preservation"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [],
+      "lines": 27
     },
     {
       "doc_id": "survey-00-method",

@@ -1,7 +1,7 @@
 ---
 doc_id: research-index
 title: "Integral Prism リサーチ・インデックス"
-version: 2.0.0
+version: 2.1.0
 status: draft
 created: 2026-08-22
 updated: 2026-08-22
@@ -178,6 +178,11 @@ tags: [index, survey, deep-research, agent, investment-research]
 > 両者は独立に同じ結論（Decision-Centric な制御層）へ収束していた。
 > 統合版は **[discussion/17-integrated-design-v2.md](discussion/17-integrated-design-v2.md)**。
 > 設計原則は **P24 まで拡張**（Retrievability・Negative status・意思決定モデルの段階導入・較正の時間軸分離）。
+>
+> **【v2.1 確定 — [discussion/18](discussion/18-internal-build-and-zero-input.md)】**
+> ①**売らない。自社ファンドの内製システム**（サカナ等とは契約せず、モデル・データは契約して使う。
+> 「DR が薄い」のは公開情報しか食べていないためで、私有情報を食べられるのは内製だけ、が決定的根拠）
+> ②**Stage 0 は入力ゼロ**（P23 改訂: カテゴリは業界標準、急所は初期資料から自動検出、人間の入力は任意の補強）
 
 ## 9. ノートとメタデータ
 

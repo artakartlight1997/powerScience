@@ -163,6 +163,7 @@
         "test-time-scaling"
       ],
       "used_in": [
+        "disc-external-sources",
         "t-contribution-map",
         "t-sakana-ab-mcts",
         "t-test-time-scaling",
@@ -1330,6 +1331,7 @@
         "disc-devils-advocate",
         "disc-embarrass",
         "disc-evaluation",
+        "disc-internal-build",
         "disc-product-shape",
         "disc-value",
         "disc-week",
@@ -2124,6 +2126,7 @@
       "used_in": [
         "cs-tech-choices",
         "cs-what-to-build",
+        "disc-internal-build",
         "t-contribution-map",
         "t-design-principles",
         "t-model-proof",
@@ -2230,6 +2233,7 @@
       },
       "used_in": [
         "disc-embarrass",
+        "disc-internal-build",
         "disc-value",
         "research-index",
         "research-summary",
@@ -2741,7 +2745,9 @@
       ],
       "note": "文書内の一次引用 R1-R25（DeepTRACE, CAMA, ARGUS, CROWN-QA, POPPER, MindSearch 等）はこの環境からアクセス不可のため未検証。特に R2 の著者表記(Matsuo et al.)はAB-MCTS原論文の著者と一致しない可能性があり要確認。R1-R25は個別のS-IDを付与せず、本ソースの下に一括で『未検証の外部引用』として記録する。",
       "used_in": [
+        "disc-external-sources",
         "disc-integrated-v2",
+        "disc-internal-build",
         "research-index"
       ]
     }

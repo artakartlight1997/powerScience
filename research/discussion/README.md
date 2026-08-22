@@ -59,7 +59,8 @@ depends_on: [research-index, cs-index]
 | **14** | [14-how-we-know-it-works.md](14-how-we-know-it-works.md) | **検証の設計** — 先行/遅行指標、反実仮想 DD のプロトコル、撤退トリガー |
 | **15** | [15-open-problems.md](15-open-problems.md) | **未解決の難問 O1–O10**（正直に「解けていない」を並べる) |
 | **16** | [16-prism-proposal-vs-sakana.md](16-prism-proposal-vs-sakana.md) | **提案 v1** — サカナに勝る形。**W1（メモ校閲）は却下され、「着手時の作戦盤＋生きた台帳」に差し替え**（A2/A3 を更新） |
-| **17** | [17-integrated-design-v2.md](17-integrated-design-v2.md) | **★★v2.0 統合設計** — 外部評価文書との統合。Decision Compiler / Dual Loop / Epistemic Ledger / Action Router / Stop Rule / Outcome Calibration。**設計原則 P21–P24 を追加、Evidence Graph を拡張** |
+| **17** | [17-integrated-design-v2.md](17-integrated-design-v2.md) | **v2.0 統合設計** — 外部評価文書との統合。Decision Compiler / Dual Loop / Epistemic Ledger / Action Router / Stop Rule / Outcome Calibration。**設計原則 P21–P24 を追加、Evidence Graph を拡張** |
+| **18** | [18-internal-build-and-zero-input.md](18-internal-build-and-zero-input.md) | **★★確定** — ①**売らない。自社ファンドの内製システム**（外販前提の 03/04/05/11・F2 はアーカイブ化）②**Stage 0 の入力ゼロ化**（P23 改訂：人間の入力は起動条件にしない） |
 
 ## 討論の到達点（2026-08-22）
 
