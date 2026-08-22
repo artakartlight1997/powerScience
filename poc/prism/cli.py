@@ -9,12 +9,18 @@
 from __future__ import annotations
 
 import argparse
+import logging
 import sys
 
 from .config import load_config, require_api_key
-from .contracts import Case
+from .contracts import Case, ConfigError, GateError
 from .gate import check_vendor_separation
+from .log import setup as setup_logging
 from .store import Store
+
+# 注意: __name__ は `python -m prism.cli` だと "__main__" になり prism 階層から
+# 外れてファイルに書かれない。ここだけは名前を固定する。
+log = logging.getLogger("prism.cli")
 
 
 def _store(cfg) -> Store:
@@ -42,9 +48,25 @@ def main(argv: list[str] | None = None) -> int:
 
     args = p.parse_args(argv)
     cfg = load_config()
+    log_path = setup_logging(cfg.data_dir)
+    log.info("コマンド開始: %s", vars(args))
     store = _store(cfg)
     try:
-        return _dispatch(args, cfg, store)
+        rc = _dispatch(args, cfg, store)
+        log.info("コマンド終了: %s rc=%d", args.cmd, rc)
+        return rc
+    except (ConfigError, GateError) as e:
+        # 想定内の拒否(設定・ポリシー): ユーザが直せるのでメッセージだけ返す
+        log.error("設定/ポリシーエラー: %s", e, extra={"console_suppress": True})
+        print(f"設定エラー: {e}", file=sys.stderr)
+        return 2
+    except Exception:
+        # バグの可能性: 全トレースバックはログへ。ユーザに状況説明はさせない —
+        # ログファイルを渡してもらえば再現調査に足りる(資料本文はログに書かない方針)
+        log.exception("未処理例外(バグの可能性)", extra={"console_suppress": True})
+        print(f"内部エラーが発生した。詳細な記録は {log_path} にある。\n"
+              f"このファイルを開発者に渡せば、何が起きたかの説明は不要。", file=sys.stderr)
+        return 3
     finally:
         store.close()
 

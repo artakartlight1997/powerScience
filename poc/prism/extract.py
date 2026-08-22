@@ -5,11 +5,14 @@ LLM 失敗はそのソースの抽出を落とすだけ(C-7)。
 """
 from __future__ import annotations
 
+import logging
 import re
 import uuid
 
 from .contracts import Evidence, ExtractedValue, LLMClient, LLMError, Source, SpecItem
 from .ingest import snapshot_text
+
+log = logging.getLogger(__name__)
 
 _MAX_CHARS = 16000
 
@@ -45,6 +48,7 @@ def parse_number(raw: str | None) -> ExtractedValue | None:
 def run(source: Source, spec_items: list[SpecItem], llm: LLMClient) -> list[Evidence]:
     text = snapshot_text(source.snapshot_path)
     if not text:
+        log.warning("抽出スキップ: source=%s にスナップショット本文がない", source.id)
         return []
     items_desc = "\n".join(
         f"- {it.key}: {it.label}" + (f" [セグメント:{it.segment}]" if it.segment else "")
@@ -53,15 +57,19 @@ def run(source: Source, spec_items: list[SpecItem], llm: LLMClient) -> list[Evid
             f"{text[:_MAX_CHARS]}")
     try:
         out = llm.complete_json("generator", SYSTEM, user)
-    except LLMError:
+    except LLMError as e:
+        log.warning("抽出失敗(C-7縮退): source=%s kind=%s: %s", source.id, source.kind, e)
         return []  # C-7: このソースの抽出のみ落とす
     valid_keys = {it.key for it in spec_items}
     evidences: list[Evidence] = []
+    dropped = 0
     for row in out.get("evidences", []):
         if not isinstance(row, dict):
+            dropped += 1
             continue
         key, quote = row.get("item_key"), row.get("quote")
         if key not in valid_keys or not quote or not str(quote).strip():
+            dropped += 1
             continue  # 契約: 読めない項目は出力しない(壊れた行は落とす)
         status = row.get("status", "value")
         if status not in ("value", "NOT_FOUND", "AMBIGUOUS"):
@@ -73,4 +81,7 @@ def run(source: Source, spec_items: list[SpecItem], llm: LLMClient) -> list[Evid
             locator={"page": row.get("page")},
             trust_label="untrusted" if source.kind == "web" else "trusted",
             seller_provided=source.seller_provided, as_of=source.as_of))
+    if dropped:
+        log.warning("抽出: source=%s で壊れた行 %d 件を破棄(C-3)", source.id, dropped)
+    log.info("抽出: source=%s kind=%s → 証拠 %d 件", source.id, source.kind, len(evidences))
     return evidences

@@ -7,11 +7,14 @@ grounding は「良い/悪い」を聞かない。原文支持の二値判定の
 from __future__ import annotations
 
 import difflib
+import logging
 import re
 import uuid
 from collections import defaultdict
 
 from .contracts import Contradiction, Evidence, Grounded, LLMClient, LLMError
+
+log = logging.getLogger(__name__)
 
 _WS = re.compile(r"\s+")
 
@@ -26,6 +29,7 @@ def _norm(s: str) -> str:
 def ground(ev: Evidence, snap_text: str | None, llm: LLMClient) -> Grounded:
     """原文支持の判定。スナップショットが無ければ pass にはならない(契約 §3)。"""
     if not snap_text:
+        log.warning("grounding: 証拠 %s に照合先スナップショットがない → fail", ev.id)
         return "fail"
     if _norm(ev.quote) and _norm(ev.quote) in _norm(snap_text):
         return "pass"  # 決定的照合が最優先(LLM を使わない)
@@ -39,7 +43,8 @@ def ground(ev: Evidence, snap_text: str | None, llm: LLMClient) -> Grounded:
         try:
             out = llm.complete_json("verifier", VERIFY_SYSTEM, user)
             votes.append(bool(out.get("supported", False)))
-        except LLMError:
+        except LLMError as e:
+            log.warning("grounding: 証拠 %s の判定票が取れず不支持に倒す: %s", ev.id, e)
             votes.append(False)  # 検証できない票は不支持に倒す(捏造を通さない)
     if all(votes):
         return "pass"

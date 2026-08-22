@@ -5,8 +5,11 @@ LLM を持たないのは audit / fill(純関数)。I/O を持つのは ingest /
 """
 from __future__ import annotations
 
+import logging
 from datetime import date, datetime, timezone
 from pathlib import Path
+
+log = logging.getLogger(__name__)
 
 from . import audit, extract, fill, ingest, project, verify
 from .config import Config
@@ -90,6 +93,10 @@ def run(store: Store, cfg: Config, case_id: str, llm: LLMClient,
         open_public = sum(1 for q in questions if q.channel in ("web", "premium"))
         stop, reason = fill.should_stop(case.round, llm_calls,
                                         progress - prev_progress, open_public, stop_rules)
+        log.info("case=%s round=%d: 新規source=%d 証拠=%d 進捗(filled+thin)=%d "
+                 "LLM呼び出し累計=%d 停止=%s",
+                 case_id, case.round, len(new_sources), len(evidences), progress,
+                 llm_calls, reason or "続行")
         prev_progress = progress
         if stop:
             case.stop_reason = reason

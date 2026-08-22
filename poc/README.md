@@ -32,6 +32,7 @@ pip install -e ".[dev]" && pytest
 |---|---|---|---|
 | `contracts.py` | 全データ型(pydantic)と Protocol(`LLMClient`/`Fetcher`)、共有例外。**型定義はここだけ** | — | — |
 | `config.py` | 環境変数 → `Config`。パス・ロール別モデル・タイムアウト | — | — |
+| `log.py` | 飛行記録: `data/logs/prism.log`(ローテーション)。縮退は必ずWARNING、未処理例外はトレースバック込み。**資料本文は書かない**(MNPI) | — | — |
 | `events.py` | 追記専用イベントログ(SHA256 ハッシュ連鎖)。`verify_chain` で改竄検知 | — | — |
 | `store.py` | 状態ストア(SQLite)。**書き込みは必ずイベント併記**。最新判定などのビュー | — | — |
 | `templates.py` | YAML(箱・アーキタイプ・ツリー・基準)を読み、ケースの SpecItem 列へ実体化 | — | — |

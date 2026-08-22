@@ -5,9 +5,12 @@ grounded=pass になれない)。取得は gate を通す(C-5)。Web 由来は u
 from __future__ import annotations
 
 import hashlib
+import logging
 import uuid
 from datetime import date
 from pathlib import Path
+
+log = logging.getLogger(__name__)
 
 from .contracts import Case, Fetcher, GateError, LLMClient, LLMError, Question, Source
 from .gate import Gate
@@ -36,7 +39,8 @@ class OnlineCollector:
                 + f"\n\n## 未解決の問い\n{qtext}")
         try:
             out = self.llm.complete_json("online", SYSTEM, user)
-        except LLMError:
+        except LLMError as e:
+            log.warning("収集: URL候補の生成に失敗(ラウンドは続行): %s", e)
             return []  # C-7: 収集の失敗はラウンドを止めない
         created: list[Source] = []
         for row in (out.get("urls") or [])[:max_fetch]:
@@ -45,10 +49,12 @@ class OnlineCollector:
                 continue
             try:
                 self.gate.check_host(url)
-            except GateError:
-                continue  # 許可外ホストは黙って捨てない方が良いが、PoC ではskip記録のみ
+            except GateError as e:
+                log.warning("収集: gate が拒否 url=%s: %s", url, e)
+                continue
             text = self.fetcher.fetch(url)
             if not text:
+                log.info("収集: 取得失敗 url=%s(スキップ)", url)
                 continue
             h = hashlib.sha256(text.encode("utf-8")).hexdigest()
             if store.has_source_hash(case.id, h):
@@ -61,6 +67,7 @@ class OnlineCollector:
                          snapshot_path=str(snap))
             store.put("source", src)
             created.append(src)
+            log.info("収集: source=%s url=%s をスナップショット済みで登録", src.id, url)
         return created
 
 

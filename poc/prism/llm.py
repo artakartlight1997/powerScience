@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import re
 from typing import Literal
 
@@ -13,6 +14,8 @@ import httpx
 
 from .config import Config
 from .contracts import LLMError
+
+log = logging.getLogger(__name__)
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)\s*```", re.DOTALL)
 
@@ -58,4 +61,7 @@ class OpenRouterClient:
                 return parse_json_str(content)
             except Exception as e:  # ネットワーク・HTTP・JSON いずれも同じ扱い
                 last = e
+                log.warning("LLM失敗 role=%s model=%s 試行%d/2 入力%d字: %r",
+                            role, model, _attempt + 1, len(user), e)
+        log.error("LLM断念 role=%s model=%s: %r", role, model, last)
         raise LLMError(f"{role}({model}) の JSON 応答に2回失敗: {last}")

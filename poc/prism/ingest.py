@@ -8,6 +8,7 @@ YYYY-MM-DD_ プレフィクス、なければファイルの更新日時。
 from __future__ import annotations
 
 import hashlib
+import logging
 import re
 import shutil
 import uuid
@@ -16,6 +17,8 @@ from pathlib import Path
 
 from .contracts import Case, Source
 from .store import Store
+
+log = logging.getLogger(__name__)
 
 _DATE_PREFIX = re.compile(r"^(\d{4}-\d{2}-\d{2})_")
 _EXTS = {".pdf", ".txt", ".md"}
@@ -81,4 +84,6 @@ def scan(store: Store, case: Case, inbox_dir: Path, data_dir: Path,
                          content_hash=h, snapshot_path=str(snap))
             store.put("source", src)
             created.append(src)
+            log.info("取り込み: source=%s kind=%s file=%s as_of=%s hash=%s",
+                     src.id, kind, f.name, src.as_of, h[:12])
     return created
