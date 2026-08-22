@@ -18,11 +18,27 @@ DATA = os.path.join(ROOT, "docs", "data")
 LDIR = os.path.join(ROOT, "docs", "content", "lessons")
 
 rows = list(csv.DictReader(io.open(os.path.join(DATA, "sales.csv"), encoding="utf-8")))
+
+# 物語の本編は10月。9月は「くらべる相手」として置いてある。
+# 味ごとの数は月によって違うので、月ごとに数えたうえで、
+# どの月の数字が出てきてもよいことにする。
+MAIN = "2025-10"
+oct_rows = [r for r in rows if r["日付"].startswith(MAIN)]
+
 per, yen = collections.Counter(), collections.Counter()
-for r in rows:
+for r in oct_rows:
     per[r["味"]] += int(r["個数"])
     yen[r["味"]] += int(r["金額"])
 total_n, total_y = sum(per.values()), sum(yen.values())
+
+# ほかの月の集計も、正しい数として認める
+other = collections.Counter()
+for r in rows:
+    m = r["日付"][:7]
+    other[(m, r["味"], "個")] += int(r["個数"])
+    other[(m, r["味"], "円")] += int(r["金額"])
+    other[(m, "*", "個")] += int(r["個数"])
+    other[(m, "*", "円")] += int(r["金額"])
 
 # 値段の表も正しい数字なので、照合できるようにしておく
 price = {}
@@ -44,7 +60,7 @@ def forms(n):
 import datetime
 dow_n, dow_y = collections.Counter(), collections.Counter()
 day_n, day_y = collections.Counter(), collections.Counter()
-for r in rows:
+for r in oct_rows:
     d = datetime.date.fromisoformat(r["日付"])
     dow_n[d.weekday()] += int(r["個数"]); dow_y[d.weekday()] += int(r["金額"])
     day_n[r["日付"]] += int(r["個数"]); day_y[r["日付"]] += int(r["金額"])
@@ -53,7 +69,8 @@ GLOBAL_OK = set()
 for v in ([total_n, total_y, len(rows), 31]
           + list(price.values())
           + list(dow_n.values()) + list(dow_y.values())
-          + list(day_n.values()) + list(day_y.values())):
+          + list(day_n.values()) + list(day_y.values())
+          + list(other.values())):
     GLOBAL_OK |= forms(v)
 # 差と残り（「1位と2位の差は114個」「チーズ以外は1,938個」など）
 vals = list(per.values()) + list(yen.values())
@@ -87,7 +104,7 @@ def hypothetical_lines(src):
             buf.append((i, ln))
     return out
 
-print("サンプルデータ（docs/data/sales.csv）")
+print("サンプルデータ（docs/data/sales.csv）— 本編の %s" % MAIN)
 for k, v in per.most_common():
     print("  %-6s %4d個  %8s円  （1個 %d円）" % (k, v, format(yen[k], ","), price.get(k, 0)))
 print("  合計    %4d個  %8s円\n" % (total_n, format(total_y, ",")))
