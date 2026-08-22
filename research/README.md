@@ -1,7 +1,7 @@
 ---
 doc_id: research-index
 title: "Integral Prism リサーチ・インデックス"
-version: 0.5.0
+version: 0.6.0
 status: draft
 created: 2026-08-22
 updated: 2026-08-22
@@ -23,6 +23,7 @@ tags: [index, survey, deep-research, agent, investment-research]
 
 **最初に読む** → [method-and-scope.md](method-and-scope.md)（調査方法・確度スケール・限界）
 **議論する** → [notes/discussion-agenda.md](notes/discussion-agenda.md)（未決の論点 D1–D10）
+**何を作るか** → **[coding-strategy/](coding-strategy/README.md)（実装戦略・v0.6 追加）**
 
 ---
 
@@ -117,7 +118,29 @@ tags: [index, survey, deep-research, agent, investment-research]
 | [differentiation-hypotheses.md](topics/06-synthesis/differentiation-hypotheses.md) | **差別化仮説 A/B/C** |
 | [design-principles.md](topics/06-synthesis/design-principles.md) | **設計原則 P1–P20** |
 
-## 7. ノートとメタデータ
+## 7. 実装戦略 — `coding-strategy/`
+
+サーベイから「**何を作るべきか**」を導いた文書群。🔒確定 / 🔧推奨 / ❓未決 を区別して記述している。
+
+| ファイル | 内容 |
+|---|---|
+| [coding-strategy/README.md](coding-strategy/README.md) | 索引と一枚の結論 |
+| [00-from-research-to-requirements.md](coding-strategy/00-from-research-to-requirements.md) | **設計原則 P1–P20 → 実装要件**の変換表 |
+| [01-what-to-build-and-not.md](coding-strategy/01-what-to-build-and-not.md) | **作るもの / 作らないもの** |
+| [02-evidence-graph.md](coding-strategy/02-evidence-graph.md) | **★中心データモデル（証拠グラフ）** |
+| [03-components.md](coding-strategy/03-components.md) | コンポーネント C1–C15 と責務 |
+| [04-build-buy-borrow.md](coding-strategy/04-build-buy-borrow.md) | 自作 / 購入 / OSS |
+| [05-milestones.md](coding-strategy/05-milestones.md) | **M0（技術検証）〜 M4** と終了条件 |
+| [06-tech-choices.md](coding-strategy/06-tech-choices.md) | 技術選択の指針 |
+| [07-quality-gates.md](coding-strategy/07-quality-gates.md) | 出荷ゲート G1–G20 |
+| [08-risks-and-kill-criteria.md](coding-strategy/08-risks-and-kill-criteria.md) | **撤退・転換基準** |
+| [09-open-decisions.md](coding-strategy/09-open-decisions.md) | 実装に効く未決定事項 |
+
+> **一行**: 作るのは「賢いリサーチエージェント」ではなく、
+> **「投資判断の証拠グラフを構築・検証・較正し、追記専用で記録する機械」**である。
+> 探索・生成・モデル・統率は全て調達可能な部品であり、モデルの進歩に食われる。
+
+## 8. ノートとメタデータ
 
 | ファイル | 内容 |
 |---|---|

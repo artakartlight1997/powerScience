@@ -1,8 +1,8 @@
 {
-  "index_version": "0.5.0",
+  "index_version": "0.6.0",
   "generated": "2026-08-22",
   "project": "integral-prism",
-  "note": "トピック単位のファイル一覧。",
+  "note": "トピック単位のファイル一覧（coding-strategy を含む）。",
   "groups": {
     "competitors": [
       "t-anthropic-research",
@@ -77,6 +77,19 @@
       "t-differentiation-hypotheses",
       "t-model-proof"
     ],
+    "strategy-docs": [
+      "cs-requirements",
+      "cs-what-to-build",
+      "cs-evidence-graph",
+      "cs-components",
+      "cs-build-buy",
+      "cs-milestones",
+      "cs-tech-choices",
+      "cs-quality-gates",
+      "cs-risks",
+      "cs-open-decisions",
+      "cs-index"
+    ],
     "meta": [
       "survey-00-method"
     ],
@@ -102,11 +115,7 @@
       "primary_sources": [
         "S-028"
       ],
-      "related_topics": [
-        "t-failure-modes-mast",
-        "t-multi-agent-orchestration",
-        "t-citation-attribution"
-      ],
+      "depends_on": [],
       "lines": 74
     },
     {
@@ -125,12 +134,7 @@
       "primary_sources": [
         "S-019"
       ],
-      "related_topics": [
-        "t-sakana-marlin",
-        "t-google-gemini-dr",
-        "t-openai-dr",
-        "t-anthropic-research"
-      ],
+      "depends_on": [],
       "lines": 65
     },
     {
@@ -151,11 +155,7 @@
       "primary_sources": [
         "S-081"
       ],
-      "related_topics": [
-        "t-pe-dd-workflow",
-        "t-competitive-map",
-        "t-pricing-unit-economics"
-      ],
+      "depends_on": [],
       "lines": 65
     },
     {
@@ -177,11 +177,7 @@
         "S-022",
         "S-023"
       ],
-      "related_topics": [
-        "t-llm-judge-reliability",
-        "t-multi-agent-debate",
-        "t-information-value-eig"
-      ],
+      "depends_on": [],
       "lines": 81
     },
     {
@@ -205,11 +201,7 @@
         "S-020",
         "S-021"
       ],
-      "related_topics": [
-        "t-sakana-marlin",
-        "t-pricing-unit-economics",
-        "t-human-in-the-loop"
-      ],
+      "depends_on": [],
       "lines": 79
     },
     {
@@ -229,10 +221,7 @@
         "S-026",
         "S-027"
       ],
-      "related_topics": [
-        "t-rl-search-agents",
-        "t-google-gemini-dr"
-      ],
+      "depends_on": [],
       "lines": 54
     },
     {
@@ -255,11 +244,7 @@
         "S-010",
         "S-011"
       ],
-      "related_topics": [
-        "t-sakana-marlin",
-        "t-test-time-scaling",
-        "t-model-routing"
-      ],
+      "depends_on": [],
       "lines": 92
     },
     {
@@ -279,11 +264,7 @@
         "S-007",
         "S-012"
       ],
-      "related_topics": [
-        "t-sakana-marlin",
-        "t-sakana-ab-mcts",
-        "t-long-form-report"
-      ],
+      "depends_on": [],
       "lines": 66
     },
     {
@@ -304,11 +285,7 @@
         "S-016",
         "S-017"
       ],
-      "related_topics": [
-        "t-data-sources",
-        "t-finance-benchmarks",
-        "t-ip-evaluation-design"
-      ],
+      "depends_on": [],
       "lines": 69
     },
     {
@@ -331,10 +308,7 @@
         "S-014",
         "S-015"
       ],
-      "related_topics": [
-        "t-multi-agent-debate",
-        "t-differentiation-hypotheses"
-      ],
+      "depends_on": [],
       "lines": 85
     },
     {
@@ -357,12 +331,7 @@
         "S-104",
         "S-105"
       ],
-      "related_topics": [
-        "t-sakana-marlin",
-        "t-model-routing",
-        "t-competitive-map",
-        "t-sakana-ab-mcts"
-      ],
+      "depends_on": [],
       "lines": 119
     },
     {
@@ -387,12 +356,7 @@
         "S-005",
         "S-006"
       ],
-      "related_topics": [
-        "t-sakana-ab-mcts",
-        "t-sakana-ai-scientist",
-        "t-pricing-unit-economics",
-        "t-competitive-map"
-      ],
+      "depends_on": [],
       "lines": 141
     },
     {
@@ -413,11 +377,7 @@
       "primary_sources": [
         "S-031"
       ],
-      "related_topics": [
-        "t-long-form-report",
-        "t-human-in-the-loop",
-        "t-structured-analytic-techniques"
-      ],
+      "depends_on": [],
       "lines": 78
     },
     {
@@ -437,11 +397,7 @@
       "primary_sources": [
         "S-030"
       ],
-      "related_topics": [
-        "t-context-engineering",
-        "t-commoditization-moat",
-        "t-general-dr-benchmarks"
-      ],
+      "depends_on": [],
       "lines": 75
     },
     {
@@ -463,11 +419,7 @@
         "S-126",
         "S-127"
       ],
-      "related_topics": [
-        "t-regulation-compliance",
-        "t-provenance",
-        "t-data-sources"
-      ],
+      "depends_on": [],
       "lines": 100
     },
     {
@@ -489,11 +441,7 @@
         "S-051",
         "S-030"
       ],
-      "related_topics": [
-        "t-tongyi-deepresearch",
-        "t-memory-continual-learning",
-        "t-failure-modes-mast"
-      ],
+      "depends_on": [],
       "lines": 80
     },
     {
@@ -516,11 +464,7 @@
         "S-122",
         "S-040"
       ],
-      "related_topics": [
-        "t-information-value-eig",
-        "t-differentiation-hypotheses",
-        "t-evidence-aggregation"
-      ],
+      "depends_on": [],
       "lines": 94
     },
     {
@@ -542,11 +486,7 @@
         "S-124",
         "S-125"
       ],
-      "related_topics": [
-        "t-structured-analytic-techniques",
-        "t-calibration-forecasting",
-        "t-decision-boundary"
-      ],
+      "depends_on": [],
       "lines": 113
     },
     {
@@ -565,11 +505,7 @@
       "primary_sources": [
         "S-029"
       ],
-      "related_topics": [
-        "t-multi-agent-orchestration",
-        "t-verifier-design",
-        "t-test-time-scaling"
-      ],
+      "depends_on": [],
       "lines": 69
     },
     {
@@ -592,11 +528,7 @@
         "S-034",
         "S-035"
       ],
-      "related_topics": [
-        "t-sakana-marlin",
-        "t-google-gemini-dr",
-        "t-storm-costorm"
-      ],
+      "depends_on": [],
       "lines": 95
     },
     {
@@ -617,11 +549,7 @@
         "S-041",
         "S-042"
       ],
-      "related_topics": [
-        "t-structured-analytic-techniques",
-        "t-test-time-scaling",
-        "t-differentiation-hypotheses"
-      ],
+      "depends_on": [],
       "lines": 88
     },
     {
@@ -641,11 +569,7 @@
       "primary_sources": [
         "S-070"
       ],
-      "related_topics": [
-        "t-storm-costorm",
-        "t-sakana-marlin",
-        "t-ip-evaluation-design"
-      ],
+      "depends_on": [],
       "lines": 65
     },
     {
@@ -666,11 +590,7 @@
         "S-052",
         "S-053"
       ],
-      "related_topics": [
-        "t-context-engineering",
-        "t-commoditization-moat",
-        "t-sakana-evolution-rsi"
-      ],
+      "depends_on": [],
       "lines": 85
     },
     {
@@ -691,11 +611,7 @@
       "primary_sources": [
         "S-089"
       ],
-      "related_topics": [
-        "t-sakana-ab-mcts",
-        "t-pricing-unit-economics",
-        "t-verifier-design"
-      ],
+      "depends_on": [],
       "lines": 62
     },
     {
@@ -716,11 +632,7 @@
         "S-046",
         "S-063"
       ],
-      "related_topics": [
-        "t-google-ai-coscientist",
-        "t-structured-analytic-techniques",
-        "t-llm-judge-reliability"
-      ],
+      "depends_on": [],
       "lines": 71
     },
     {
@@ -740,11 +652,7 @@
         "S-028",
         "S-029"
       ],
-      "related_topics": [
-        "t-anthropic-research",
-        "t-failure-modes-mast",
-        "t-pe-dd-workflow"
-      ],
+      "depends_on": [],
       "lines": 76
     },
     {
@@ -769,12 +677,7 @@
         "S-115",
         "S-119"
       ],
-      "related_topics": [
-        "t-model-proof",
-        "t-verifier-design",
-        "t-calibration-forecasting",
-        "t-context-engineering"
-      ],
+      "depends_on": [],
       "lines": 150
     },
     {
@@ -794,11 +697,7 @@
       "primary_sources": [
         "S-128"
       ],
-      "related_topics": [
-        "t-regulation-compliance",
-        "t-citation-attribution",
-        "t-agent-security"
-      ],
+      "depends_on": [],
       "lines": 78
     },
     {
@@ -826,12 +725,7 @@
         "S-097",
         "S-098"
       ],
-      "related_topics": [
-        "t-sakana-evolution-rsi",
-        "t-reward-hacking",
-        "t-memory-continual-learning",
-        "t-verifier-design"
-      ],
+      "depends_on": [],
       "lines": 182
     },
     {
@@ -854,11 +748,7 @@
         "S-048",
         "S-049"
       ],
-      "related_topics": [
-        "t-data-sources",
-        "t-context-engineering",
-        "t-memory-continual-learning"
-      ],
+      "depends_on": [],
       "lines": 75
     },
     {
@@ -879,11 +769,7 @@
         "S-043",
         "S-044"
       ],
-      "related_topics": [
-        "t-information-value-eig",
-        "t-verifier-design",
-        "t-openai-dr"
-      ],
+      "depends_on": [],
       "lines": 71
     },
     {
@@ -903,11 +789,7 @@
       "primary_sources": [
         "S-129"
       ],
-      "related_topics": [
-        "t-pricing-unit-economics",
-        "t-context-engineering",
-        "t-model-routing"
-      ],
+      "depends_on": [],
       "lines": 72
     },
     {
@@ -929,11 +811,7 @@
         "S-061",
         "S-062"
       ],
-      "related_topics": [
-        "t-information-value-eig",
-        "t-multi-agent-debate",
-        "t-differentiation-hypotheses"
-      ],
+      "depends_on": [],
       "lines": 101
     },
     {
@@ -955,11 +833,7 @@
         "S-022",
         "S-045"
       ],
-      "related_topics": [
-        "t-sakana-ab-mcts",
-        "t-verifier-design",
-        "t-information-value-eig"
-      ],
+      "depends_on": [],
       "lines": 94
     },
     {
@@ -985,12 +859,7 @@
         "S-102",
         "S-107"
       ],
-      "related_topics": [
-        "t-test-time-scaling",
-        "t-sakana-ab-mcts",
-        "t-verifier-design",
-        "t-information-value-eig"
-      ],
+      "depends_on": [],
       "lines": 160
     },
     {
@@ -1012,11 +881,7 @@
         "S-038",
         "S-039"
       ],
-      "related_topics": [
-        "t-citation-attribution",
-        "t-test-time-scaling",
-        "t-llm-judge-reliability"
-      ],
+      "depends_on": [],
       "lines": 106
     },
     {
@@ -1039,11 +904,7 @@
         "S-116",
         "S-111"
       ],
-      "related_topics": [
-        "t-persistent-limits",
-        "t-ip-evaluation-design",
-        "t-model-proof"
-      ],
+      "depends_on": [],
       "lines": 87
     },
     {
@@ -1064,11 +925,7 @@
       "primary_sources": [
         "S-060"
       ],
-      "related_topics": [
-        "t-differentiation-hypotheses",
-        "t-llm-judge-reliability",
-        "t-ip-evaluation-design"
-      ],
+      "depends_on": [],
       "lines": 68
     },
     {
@@ -1088,11 +945,7 @@
       "primary_sources": [
         "S-057"
       ],
-      "related_topics": [
-        "t-verifier-design",
-        "t-sakana-marlin",
-        "t-ip-evaluation-design"
-      ],
+      "depends_on": [],
       "lines": 96
     },
     {
@@ -1115,11 +968,7 @@
         "S-068",
         "S-016"
       ],
-      "related_topics": [
-        "t-sakana-edinet-bench",
-        "t-ip-evaluation-design",
-        "t-pe-dd-workflow"
-      ],
+      "depends_on": [],
       "lines": 60
     },
     {
@@ -1142,11 +991,7 @@
         "S-069",
         "S-030"
       ],
-      "related_topics": [
-        "t-finance-benchmarks",
-        "t-ip-evaluation-design",
-        "t-tongyi-deepresearch"
-      ],
+      "depends_on": [],
       "lines": 74
     },
     {
@@ -1169,11 +1014,7 @@
         "S-016",
         "S-068"
       ],
-      "related_topics": [
-        "t-citation-attribution",
-        "t-calibration-forecasting",
-        "t-finance-benchmarks"
-      ],
+      "depends_on": [],
       "lines": 85
     },
     {
@@ -1193,11 +1034,7 @@
         "S-058",
         "S-059"
       ],
-      "related_topics": [
-        "t-google-ai-coscientist",
-        "t-citation-attribution",
-        "t-multi-agent-debate"
-      ],
+      "depends_on": [],
       "lines": 74
     },
     {
@@ -1219,11 +1056,7 @@
         "S-131",
         "S-132"
       ],
-      "related_topics": [
-        "t-verifier-design",
-        "t-decision-boundary",
-        "t-finance-benchmarks"
-      ],
+      "depends_on": [],
       "lines": 106
     },
     {
@@ -1243,11 +1076,7 @@
       "primary_sources": [
         "S-133"
       ],
-      "related_topics": [
-        "t-ip-evaluation-design",
-        "t-retrieval-graphrag",
-        "t-benchmark-crisis"
-      ],
+      "depends_on": [],
       "lines": 96
     },
     {
@@ -1269,11 +1098,7 @@
         "S-106",
         "S-093"
       ],
-      "related_topics": [
-        "t-recursive-self-improvement",
-        "t-llm-judge-reliability",
-        "t-ip-evaluation-design"
-      ],
+      "depends_on": [],
       "lines": 114
     },
     {
@@ -1293,11 +1118,7 @@
       "primary_sources": [
         "S-117"
       ],
-      "related_topics": [
-        "t-model-proof",
-        "t-data-sources",
-        "t-commoditization-moat"
-      ],
+      "depends_on": [],
       "lines": 84
     },
     {
@@ -1319,11 +1140,7 @@
         "S-078",
         "S-016"
       ],
-      "related_topics": [
-        "t-sakana-edinet-bench",
-        "t-retrieval-graphrag",
-        "t-commoditization-moat"
-      ],
+      "depends_on": [],
       "lines": 88
     },
     {
@@ -1344,12 +1161,7 @@
       "primary_sources": [
         "S-134"
       ],
-      "related_topics": [
-        "t-competitive-map",
-        "t-data-sources",
-        "t-finance-platforms",
-        "t-model-proof"
-      ],
+      "depends_on": [],
       "lines": 100
     },
     {
@@ -1369,11 +1181,7 @@
       "primary_sources": [
         "S-136"
       ],
-      "related_topics": [
-        "t-numeric-verification",
-        "t-vc-dd-multi-agent",
-        "t-data-sources"
-      ],
+      "depends_on": [],
       "lines": 68
     },
     {
@@ -1394,11 +1202,7 @@
         "S-076",
         "S-077"
       ],
-      "related_topics": [
-        "t-finance-platforms",
-        "t-differentiation-hypotheses",
-        "t-data-sources"
-      ],
+      "depends_on": [],
       "lines": 82
     },
     {
@@ -1418,11 +1222,7 @@
       "primary_sources": [
         "S-135"
       ],
-      "related_topics": [
-        "t-information-value-eig",
-        "t-pe-dd-workflow",
-        "t-regulation-compliance"
-      ],
+      "depends_on": [],
       "lines": 86
     },
     {
@@ -1444,11 +1244,7 @@
         "S-080",
         "S-005"
       ],
-      "related_topics": [
-        "t-failure-modes-mast",
-        "t-data-sources",
-        "t-commoditization-moat"
-      ],
+      "depends_on": [],
       "lines": 102
     },
     {
@@ -1469,11 +1265,7 @@
         "S-090",
         "S-091"
       ],
-      "related_topics": [
-        "t-pe-dd-workflow",
-        "t-multi-agent-orchestration",
-        "t-verifier-design"
-      ],
+      "depends_on": [],
       "lines": 70
     },
     {
@@ -1497,11 +1289,7 @@
         "S-030",
         "S-009"
       ],
-      "related_topics": [
-        "t-memory-continual-learning",
-        "t-regulation-compliance",
-        "t-competitive-map"
-      ],
+      "depends_on": [],
       "lines": 79
     },
     {
@@ -1523,12 +1311,7 @@
         "S-081",
         "S-016"
       ],
-      "related_topics": [
-        "t-sakana-marlin",
-        "t-google-gemini-dr",
-        "t-finance-platforms",
-        "t-commoditization-moat"
-      ],
+      "depends_on": [],
       "lines": 100
     },
     {
@@ -1550,11 +1333,7 @@
         "S-020",
         "S-089"
       ],
-      "related_topics": [
-        "t-google-gemini-dr",
-        "t-model-routing",
-        "t-competitive-map"
-      ],
+      "depends_on": [],
       "lines": 81
     },
     {
@@ -1569,10 +1348,7 @@
       ],
       "confidence": "medium",
       "primary_sources": [],
-      "related_topics": [
-        "t-differentiation-hypotheses",
-        "t-design-principles"
-      ],
+      "depends_on": [],
       "lines": 129
     },
     {
@@ -1587,10 +1363,7 @@
       ],
       "confidence": "medium-high",
       "primary_sources": [],
-      "related_topics": [
-        "t-contribution-map",
-        "t-differentiation-hypotheses"
-      ],
+      "depends_on": [],
       "lines": 72
     },
     {
@@ -1606,11 +1379,7 @@
       ],
       "confidence": "medium",
       "primary_sources": [],
-      "related_topics": [
-        "t-contribution-map",
-        "t-design-principles",
-        "t-competitive-map"
-      ],
+      "depends_on": [],
       "lines": 137
     },
     {
@@ -1638,14 +1407,219 @@
         "S-118",
         "S-120"
       ],
-      "related_topics": [
-        "t-persistent-limits",
-        "t-alpha-decay",
-        "t-benchmark-crisis",
-        "t-commoditization-moat",
-        "t-differentiation-hypotheses"
-      ],
+      "depends_on": [],
       "lines": 187
+    },
+    {
+      "doc_id": "cs-requirements",
+      "path": "coding-strategy/00-from-research-to-requirements.md",
+      "title": "設計原則 → 実装要件の変換表",
+      "topic_group": "strategy-docs",
+      "tags": [
+        "requirements",
+        "principles",
+        "traceability"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "t-design-principles"
+      ],
+      "lines": 45
+    },
+    {
+      "doc_id": "cs-what-to-build",
+      "path": "coding-strategy/01-what-to-build-and-not.md",
+      "title": "作るもの / 作らないもの",
+      "topic_group": "strategy-docs",
+      "tags": [
+        "scope",
+        "build",
+        "non-goals"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "t-model-proof",
+        "t-design-principles"
+      ],
+      "lines": 86
+    },
+    {
+      "doc_id": "cs-evidence-graph",
+      "path": "coding-strategy/02-evidence-graph.md",
+      "title": "★中心データモデル — 証拠グラフ",
+      "topic_group": "strategy-docs",
+      "tags": [
+        "data-model",
+        "evidence-graph",
+        "provenance",
+        "schema",
+        "append-only"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "t-provenance",
+        "t-citation-attribution",
+        "t-point-in-time",
+        "t-agent-security"
+      ],
+      "lines": 131
+    },
+    {
+      "doc_id": "cs-components",
+      "path": "coding-strategy/03-components.md",
+      "title": "コンポーネント一覧と責務",
+      "topic_group": "strategy-docs",
+      "tags": [
+        "components",
+        "architecture",
+        "responsibilities",
+        "layers"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "cs-evidence-graph",
+        "t-multi-agent-orchestration"
+      ],
+      "lines": 94
+    },
+    {
+      "doc_id": "cs-build-buy",
+      "path": "coding-strategy/04-build-buy-borrow.md",
+      "title": "自作 / 購入 / OSS 利用の判断",
+      "topic_group": "strategy-docs",
+      "tags": [
+        "build-buy",
+        "vendors",
+        "oss",
+        "dependencies"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "cs-what-to-build",
+        "t-data-vendors"
+      ],
+      "lines": 42
+    },
+    {
+      "doc_id": "cs-milestones",
+      "path": "coding-strategy/05-milestones.md",
+      "title": "マイルストーン M0–M4 と終了条件",
+      "topic_group": "strategy-docs",
+      "tags": [
+        "roadmap",
+        "milestones",
+        "validation",
+        "exit-criteria"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "cs-what-to-build",
+        "t-ip-evaluation-design"
+      ],
+      "lines": 117
+    },
+    {
+      "doc_id": "cs-tech-choices",
+      "path": "coding-strategy/06-tech-choices.md",
+      "title": "技術選択の指針",
+      "topic_group": "strategy-docs",
+      "tags": [
+        "tech-stack",
+        "choices",
+        "cost",
+        "models",
+        "execution"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "cs-evidence-graph",
+        "t-serving-cost",
+        "t-model-routing",
+        "t-context-engineering"
+      ],
+      "lines": 86
+    },
+    {
+      "doc_id": "cs-quality-gates",
+      "path": "coding-strategy/07-quality-gates.md",
+      "title": "出荷ゲート — CI で何を測るか",
+      "topic_group": "strategy-docs",
+      "tags": [
+        "quality-gates",
+        "ci",
+        "evaluation",
+        "metrics"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "t-ip-evaluation-design",
+        "t-citation-attribution",
+        "t-reward-hacking"
+      ],
+      "lines": 73
+    },
+    {
+      "doc_id": "cs-risks",
+      "path": "coding-strategy/08-risks-and-kill-criteria.md",
+      "title": "リスクと撤退基準（kill criteria）",
+      "topic_group": "strategy-docs",
+      "tags": [
+        "risk",
+        "kill-criteria",
+        "decision",
+        "pivot"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "cs-milestones",
+        "t-competitive-map",
+        "t-model-proof"
+      ],
+      "lines": 63
+    },
+    {
+      "doc_id": "cs-open-decisions",
+      "path": "coding-strategy/09-open-decisions.md",
+      "title": "実装に効く未決定事項",
+      "topic_group": "strategy-docs",
+      "tags": [
+        "open-decisions",
+        "blocking",
+        "dependencies"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "notes-discussion-agenda"
+      ],
+      "lines": 57
+    },
+    {
+      "doc_id": "cs-index",
+      "path": "coding-strategy/README.md",
+      "title": "Integral Prism — 実装戦略インデックス",
+      "topic_group": "strategy-docs",
+      "tags": [
+        "strategy",
+        "build",
+        "implementation",
+        "roadmap"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "research-index"
+      ],
+      "lines": 78
     },
     {
       "doc_id": "survey-00-method",
@@ -1660,7 +1634,7 @@
       ],
       "confidence": "high",
       "primary_sources": [],
-      "related_topics": [],
+      "depends_on": [],
       "lines": 107
     },
     {
@@ -1675,7 +1649,7 @@
       ],
       "confidence": null,
       "primary_sources": [],
-      "related_topics": [],
+      "depends_on": [],
       "lines": 137
     },
     {
@@ -1689,7 +1663,7 @@
       ],
       "confidence": null,
       "primary_sources": [],
-      "related_topics": [],
+      "depends_on": [],
       "lines": 73
     }
   ]
