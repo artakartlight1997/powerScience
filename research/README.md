@@ -1,7 +1,7 @@
 ---
 doc_id: research-index
 title: "Integral Prism リサーチ・インデックス"
-version: 0.7.0
+version: 0.8.0
 status: draft
 created: 2026-08-22
 updated: 2026-08-22
@@ -21,6 +21,7 @@ tags: [index, survey, deep-research, agent, investment-research]
 > アーキテクチャ議論に入る前に、(a) 競合の実像、(b) 学術研究の到達点と未解決点、(c) 投資実務側の制約 を、
 > 根拠つきで棚卸しすることにある。
 
+**★1枚で把握する** → **[SUMMARY.md](SUMMARY.md)（全体サマリー）**
 **最初に読む** → [method-and-scope.md](method-and-scope.md)（調査方法・確度スケール・限界）
 **議論する** → [notes/discussion-agenda.md](notes/discussion-agenda.md)（未決の論点 D1–D10）
 **何を作るか** → **[coding-strategy/](coding-strategy/README.md)（実装戦略）**
@@ -159,10 +160,19 @@ tags: [index, survey, deep-research, agent, investment-research]
 | [07-what-could-embarrass-us.md](discussion/07-what-could-embarrass-us.md) | 経営陣が呆れる11の瞬間と予防 |
 | [08-minimum-lovable.md](discussion/08-minimum-lovable.md) | **実益を最短で出す最小形**（成果物と60秒デモ） |
 | [09-decisions-and-next.md](discussion/09-decisions-and-next.md) | 決着A1–A12 / 未決U1–U8 / 次の一手 |
+| [10-deep-dive-f2-calibration.md](discussion/10-deep-dive-f2-calibration.md) | **★F2 の徹底解剖**（拒否の5メカニズム、表示3案） |
+| [11-unit-economics-model.md](discussion/11-unit-economics-model.md) | **単価と原価**（原価内訳・粗利・損益分岐・自社トルネード） |
+| [12-competitive-wargame.md](discussion/12-competitive-wargame.md) | **競合ウォーゲーム**（相手の最善手・2年3シナリオ） |
+| [13-evaluation-framework.md](discussion/13-evaluation-framework.md) | **★討論の評価**（DQ=4/10、決定の脆さ、期待値、討論の穴） |
+| [14-how-we-know-it-works.md](discussion/14-how-we-know-it-works.md) | **検証の設計**（先行/遅行指標、反実仮想DDのプロトコル） |
+| [15-open-problems.md](discussion/15-open-problems.md) | **未解決の難問 O1–O10** |
 
 > **討論の結論**: **作るのは「調べる機械」ではなく「調べ終わったことを証明する機械」。**
 > 投資プロの実益は「速く調べられた」ではなく
 > 「**この仮説を殺しうる事実を、探したのに見つからなかった**」という確信にある。
+>
+> **討論の自己評価: DQ = 4/10**（論理は 8/10 だが、**顧客情報がゼロ 5/10**、**実行主体が未定 4/10**）。
+> **これ以上考えても上がらない。顧客に会い、M0 を回す段階。**
 
 ## 9. ノートとメタデータ
 

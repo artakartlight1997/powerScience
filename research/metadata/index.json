@@ -1,8 +1,8 @@
 {
-  "index_version": "0.7.0",
+  "index_version": "0.8.0",
   "generated": "2026-08-22",
   "project": "integral-prism",
-  "note": "全ファイル一覧（topics / coding-strategy / discussion / notes）。",
+  "note": "全ファイル一覧。",
   "groups": {
     "competitors": [
       "t-anthropic-research",
@@ -101,10 +101,19 @@
       "disc-embarrass",
       "disc-mlp",
       "disc-decisions",
+      "disc-f2-deep",
+      "disc-unit-economics",
+      "disc-wargame",
+      "disc-evaluation",
+      "disc-validation",
+      "disc-open-problems",
       "disc-index"
     ],
     "meta": [
       "survey-00-method"
+    ],
+    "summary": [
+      "research-summary"
     ],
     "notes": [
       "notes-discussion-agenda",
@@ -1822,6 +1831,123 @@
       "lines": 80
     },
     {
+      "doc_id": "disc-f2-deep",
+      "path": "discussion/10-deep-dive-f2-calibration.md",
+      "title": "★F2 の徹底解剖 — 較正された確率は本当に使われないのか",
+      "topic_group": "discussion",
+      "tags": [
+        "calibration",
+        "F2",
+        "risk",
+        "probability",
+        "behavioral"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "disc-devils-advocate",
+        "t-calibration-forecasting"
+      ],
+      "lines": 116
+    },
+    {
+      "doc_id": "disc-unit-economics",
+      "path": "discussion/11-unit-economics-model.md",
+      "title": "単価と原価のモデル — 数字で殴る",
+      "topic_group": "discussion",
+      "tags": [
+        "unit-economics",
+        "cost",
+        "margin",
+        "breakeven",
+        "sensitivity"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "t-serving-cost",
+        "t-pricing-unit-economics",
+        "disc-who-pays"
+      ],
+      "lines": 117
+    },
+    {
+      "doc_id": "disc-wargame",
+      "path": "discussion/12-competitive-wargame.md",
+      "title": "競合ウォーゲーム — 相手の手と、我々の応手",
+      "topic_group": "discussion",
+      "tags": [
+        "wargame",
+        "competition",
+        "scenarios",
+        "response"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "t-competitive-map",
+        "t-data-vendors",
+        "t-sakana-fugu-namazu"
+      ],
+      "lines": 105
+    },
+    {
+      "doc_id": "disc-evaluation",
+      "path": "discussion/13-evaluation-framework.md",
+      "title": "★討論そのものの評価 — 決定の採点と、脆さの特定",
+      "topic_group": "discussion",
+      "tags": [
+        "evaluation",
+        "decision-quality",
+        "scoring",
+        "fragility"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "disc-decisions",
+        "t-decision-boundary"
+      ],
+      "lines": 105
+    },
+    {
+      "doc_id": "disc-validation",
+      "path": "discussion/14-how-we-know-it-works.md",
+      "title": "設計が正しかったと、どう分かるか — 検証の設計",
+      "topic_group": "discussion",
+      "tags": [
+        "validation",
+        "metrics",
+        "experiment",
+        "leading-indicators",
+        "ab-test"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "t-ip-evaluation-design",
+        "t-point-in-time",
+        "disc-evaluation"
+      ],
+      "lines": 117
+    },
+    {
+      "doc_id": "disc-open-problems",
+      "path": "discussion/15-open-problems.md",
+      "title": "未解決の難問 — 正直に「解けていない」を列挙する",
+      "topic_group": "discussion",
+      "tags": [
+        "open-problems",
+        "hard",
+        "unsolved",
+        "honesty"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [],
+      "lines": 108
+    },
+    {
       "doc_id": "disc-index",
       "path": "discussion/README.md",
       "title": "設計ディスカッション — インデックスと進め方",
@@ -1838,7 +1964,7 @@
         "research-index",
         "cs-index"
       ],
-      "lines": 60
+      "lines": 80
     },
     {
       "doc_id": "survey-00-method",
@@ -1855,6 +1981,22 @@
       "primary_sources": [],
       "depends_on": [],
       "lines": 107
+    },
+    {
+      "doc_id": "research-summary",
+      "path": "SUMMARY.md",
+      "title": "Integral Prism — 全体サマリー",
+      "topic_group": "summary",
+      "tags": [
+        "summary",
+        "executive",
+        "decisions",
+        "next-steps"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [],
+      "lines": 196
     },
     {
       "doc_id": "notes-discussion-agenda",

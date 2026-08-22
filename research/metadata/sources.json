@@ -321,6 +321,7 @@
       ],
       "used_in": [
         "cs-risks",
+        "disc-wargame",
         "notes-discussion-agenda",
         "t-competitive-map",
         "t-contribution-map",
@@ -406,6 +407,7 @@
         "cs-build-buy",
         "cs-tech-choices",
         "cs-what-to-build",
+        "disc-unit-economics",
         "t-commoditization-moat",
         "t-competitive-map",
         "t-design-principles",
@@ -1059,8 +1061,10 @@
         "disc-decisions",
         "disc-devils-advocate",
         "disc-embarrass",
+        "disc-evaluation",
         "disc-product-shape",
         "research-index",
+        "research-summary",
         "t-citation-attribution",
         "t-contribution-map",
         "t-design-principles",
@@ -1139,6 +1143,7 @@
       ],
       "used_in": [
         "disc-devils-advocate",
+        "disc-f2-deep",
         "t-calibration-forecasting",
         "t-contribution-map",
         "t-differentiation-hypotheses",
@@ -1323,6 +1328,7 @@
         "disc-decisions",
         "disc-devils-advocate",
         "disc-embarrass",
+        "disc-evaluation",
         "disc-product-shape",
         "disc-value",
         "disc-week",
@@ -1788,6 +1794,7 @@
       "used_in": [
         "disc-architecture",
         "disc-decisions",
+        "disc-evaluation",
         "t-contribution-map",
         "t-test-time-scaling",
         "t-tree-search-algorithms"
@@ -1816,6 +1823,7 @@
         "cs-build-buy",
         "cs-components",
         "cs-what-to-build",
+        "disc-open-problems",
         "research-index",
         "t-contribution-map",
         "t-tree-search-algorithms",
@@ -1848,6 +1856,7 @@
         "cs-what-to-build",
         "disc-decisions",
         "disc-embarrass",
+        "disc-evaluation",
         "disc-product-shape",
         "research-index",
         "t-contribution-map",
@@ -1908,6 +1917,7 @@
       "used_in": [
         "cs-risks",
         "cs-what-to-build",
+        "disc-wargame",
         "t-competitive-map",
         "t-contribution-map",
         "t-model-proof",
@@ -1974,7 +1984,9 @@
       },
       "used_in": [
         "disc-devils-advocate",
+        "disc-wargame",
         "research-index",
+        "research-summary",
         "t-contribution-map",
         "t-design-principles",
         "t-model-proof",
@@ -1998,6 +2010,7 @@
       "used_in": [
         "disc-devils-advocate",
         "research-index",
+        "research-summary",
         "t-contribution-map",
         "t-design-principles",
         "t-model-proof",
@@ -2078,6 +2091,7 @@
         "cs-what-to-build",
         "disc-mlp",
         "disc-product-shape",
+        "disc-validation",
         "research-index",
         "t-benchmark-crisis",
         "t-contribution-map",
@@ -2137,7 +2151,9 @@
         "cs-what-to-build",
         "disc-architecture",
         "disc-decisions",
+        "disc-evaluation",
         "research-index",
+        "research-summary",
         "t-contribution-map",
         "t-design-principles",
         "t-human-in-the-loop",
@@ -2184,6 +2200,7 @@
         "hellaswag": ">95%"
       },
       "used_in": [
+        "disc-validation",
         "t-benchmark-crisis",
         "t-contribution-map",
         "t-point-in-time"
@@ -2213,6 +2230,7 @@
         "disc-embarrass",
         "disc-value",
         "research-index",
+        "research-summary",
         "t-alpha-decay",
         "t-contribution-map",
         "t-model-proof"
@@ -2236,6 +2254,7 @@
       "used_in": [
         "cs-components",
         "cs-evidence-graph",
+        "disc-f2-deep",
         "disc-value",
         "t-contribution-map",
         "t-model-proof",
@@ -2305,6 +2324,7 @@
       "used_in": [
         "cs-build-buy",
         "cs-what-to-build",
+        "disc-evaluation",
         "disc-value",
         "disc-week",
         "research-index",
@@ -2395,6 +2415,7 @@
       ],
       "used_in": [
         "disc-mlp",
+        "disc-validation",
         "research-index",
         "t-contribution-map",
         "t-design-principles",
@@ -2479,7 +2500,9 @@
         "cs-what-to-build",
         "disc-decisions",
         "disc-devils-advocate",
+        "disc-evaluation",
         "research-index",
+        "research-summary",
         "t-contribution-map",
         "t-provenance"
       ]
@@ -2509,6 +2532,7 @@
         "cs-quality-gates",
         "cs-tech-choices",
         "disc-embarrass",
+        "disc-unit-economics",
         "research-index",
         "t-contribution-map",
         "t-serving-cost"
@@ -2536,6 +2560,7 @@
         "cs-what-to-build",
         "disc-first-wedge",
         "research-index",
+        "research-summary",
         "t-contribution-map",
         "t-design-principles",
         "t-numeric-verification"
@@ -2566,6 +2591,7 @@
         "cs-what-to-build",
         "disc-devils-advocate",
         "research-index",
+        "research-summary",
         "t-contribution-map",
         "t-decision-boundary",
         "t-design-principles",
@@ -2635,6 +2661,7 @@
         "cs-build-buy",
         "cs-what-to-build",
         "disc-devils-advocate",
+        "disc-wargame",
         "research-index",
         "t-contribution-map",
         "t-data-vendors"

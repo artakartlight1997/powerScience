@@ -52,6 +52,26 @@ depends_on: [research-index, cs-index]
 | 07 | [07-what-could-embarrass-us.md](07-what-could-embarrass-us.md) | 経営陣が呆れる瞬間と、その予防 |
 | 08 | [08-minimum-lovable.md](08-minimum-lovable.md) | **実益を最短で出す最小形**（具体） |
 | 09 | [09-decisions-and-next.md](09-decisions-and-next.md) | 決着一覧・未決一覧・次の一手 |
+| **10** | [10-deep-dive-f2-calibration.md](10-deep-dive-f2-calibration.md) | **★F2 の徹底解剖** — 較正は本当に使われないのか（拒否の5メカニズム、表示3案） |
+| **11** | [11-unit-economics-model.md](11-unit-economics-model.md) | **単価と原価のモデル** — 数字で殴る（原価内訳・粗利・損益分岐・自社トルネード） |
+| **12** | [12-competitive-wargame.md](12-competitive-wargame.md) | **競合ウォーゲーム** — 相手の最善手と我々の応手、2年3シナリオ |
+| **13** | [13-evaluation-framework.md](13-evaluation-framework.md) | **★討論そのものの評価** — DQ 採点、決定の脆さ、選択肢の期待値、討論の穴 |
+| **14** | [14-how-we-know-it-works.md](14-how-we-know-it-works.md) | **検証の設計** — 先行/遅行指標、反実仮想 DD のプロトコル、撤退トリガー |
+| **15** | [15-open-problems.md](15-open-problems.md) | **未解決の難問 O1–O10**（正直に「解けていない」を並べる） |
+
+## 討論の到達点（2026-08-22）
+
+| 項目 | 状態 |
+|---|---|
+| **決着** | A1–A12（全て反証条件つき） |
+| **未決** | U1–U8（顧客・法務・M0 の結果待ち） |
+| **未解決の難問** | O1–O10（正直に列挙。特に O1 定性主張の接地） |
+| **討論の質（自己採点）** | **DQ = 4/10** — 弱点は **DQ3（顧客情報がゼロ）** と **DQ6（実行主体が未定）** |
+| **脆い決定 Top3** | A9（記憶の3層・法務）／ A2（一次商品）／ A4（価格枠） |
+| **最も警戒すべき競合の手** | **Hebbia / Rogo が「想定問答」を足すこと** |
+
+> **総合評価**: 論理は整った（DQ5=8/10）が、**外の情報がゼロ（DQ3=5/10）で実行に落ちていない（DQ6=4/10）**。
+> **これ以上考えても DQ は上がらない。** 顧客に会い、M0 を回す段階。
 
 ## 関連
 
