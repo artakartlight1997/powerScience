@@ -1077,11 +1077,12 @@
         "t-test-time-scaling"
       ],
       "key_numbers": {
-        "link_works": ">94%",
-        "relevant": ">80%",
-        "fact_check": "39-77%",
-        "degradation_2_to_150_tool_calls": "-42%"
-      }
+        "fact_check": "24-77%(OSS-120B 24%〜Claude Opus 4.5 77%。旧記載39-77%は下限改訂)",
+        "fact_check_degradation": "ツール呼び出し2→150でFact Check平均-42pt(GPT系-62pt/Claude系-22pt)",
+        "link_works_relevant": ">92%で安定(劣化は統合段階特異)"
+      },
+      "arxiv_id": "2605.06635",
+      "title_confirmed": "Cited but Not Verified: Parsing and Evaluating Source Attribution in LLM Deep Research Agents"
     },
     {
       "id": "S-058",
@@ -2751,6 +2752,15 @@
         "disc-internal-build",
         "research-index"
       ]
+    },
+    {
+      "id": "S-138",
+      "title": "SakanaAI/ab-mcts-arc2(ARC-AGI-2実験・採点コード)",
+      "url": "https://github.com/SakanaAI/ab-mcts-arc2",
+      "type": "code",
+      "confidence": "A",
+      "retrieved": "2026-08-22",
+      "notes": "raw.githubusercontent 経由でコード精読。採点=サンドボックス実行の完全一致照合"
     }
   ],
   "structure_note": "v0.2.0 でサーベイをトピック単位に再分割。used_in は topics/ 配下の doc_id を指す。"

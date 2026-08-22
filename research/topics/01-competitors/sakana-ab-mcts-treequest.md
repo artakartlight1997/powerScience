@@ -1,7 +1,7 @@
 ---
 doc_id: t-sakana-ab-mcts
 title: "AB-MCTS / TreeQuest — 適応分岐木探索とマルチモデル集合知"
-version: 0.2.0
+version: 0.3.0
 status: draft
 created: 2026-08-22
 updated: 2026-08-22
@@ -86,7 +86,7 @@ AB-MCTS が配分するのは LLM 呼び出しだが、IP が配分すべき資�
 
 ## 5. 【v0.3 追補】実装コードの精読結果(確度A: raw.githubusercontent 経由で実コード取得)
 
-詳細: scratchpad/deep-dives/treequest-code.md(取得ファイル一覧つき)。設計判断に効く事実:
+詳細: research/notes/deep-dives/treequest-code.md(取得ファイル一覧つき・リポジトリ収載済み)。設計判断に効く事実:
 
 1. **スコアIF**: `generate_fn(parent_state) -> (new_state, float∈[0,1])` — 生成と採点を
    ユーザー関数が一体で担う。**ライブラリ内に評価器・価値関数・学習要素はゼロ**。
@@ -114,7 +114,7 @@ AB-MCTS が配分するのは LLM 呼び出しだが、IP が配分すべき資�
 ## 6. 出典
 
 - `[S-008]` arXiv:2503.04412 https://arxiv.org/abs/2503.04412
-- `[S-009]` https://github.com/SakanaAI/treequest(v0.3.2 のコード precisely 精読済み)
+- `[S-009]` https://github.com/SakanaAI/treequest(v0.3.2 のコードを精読済み)
 - `[S-010]` https://sakana.ai/ab-mcts/
 - `[S-011]` https://venturebeat.com/ai/sakana-ais-treequest-deploy-multi-model-teams-that-outperform-individual-llms-by-30
 - `[S-138]` https://github.com/SakanaAI/ab-mcts-arc2(実験・採点コード精読済み)
