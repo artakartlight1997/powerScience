@@ -84,9 +84,37 @@ AB-MCTS が配分するのは LLM 呼び出しだが、IP が配分すべき資�
 つまり AB-MCTS 自体は誰でも使える。**アルゴリズムは差別化にならない。**
 → [t-commoditization-moat](../05-strategy/commoditization-and-moat.md)
 
-## 5. 出典
+## 5. 【v0.3 追補】実装コードの精読結果(確度A: raw.githubusercontent 経由で実コード取得)
+
+詳細: scratchpad/deep-dives/treequest-code.md(取得ファイル一覧つき)。設計判断に効く事実:
+
+1. **スコアIF**: `generate_fn(parent_state) -> (new_state, float∈[0,1])` — 生成と採点を
+   ユーザー関数が一体で担う。**ライブラリ内に評価器・価値関数・学習要素はゼロ**。
+   探索中に更新されるのは Thompson 用の共役事後(Beta/NIG)のパラメータのみ
+2. **同一スカラーの使い回し**: GEN/CONT 判断・子選択・モデル選択・最終 top-k の
+   **全てが同じ1次元 float に乗る**。多目的の扱いは構造上ない
+3. **最終候補選択 = 公開スコアの argmax のみ**(`ranker.top_k` は降順 sort)。
+   ARC の成績集計は「木の中に正解が存在した率」(オラクル的カバレッジ)で、
+   **システム自身が正解を同定する機構は存在しない** — pass@k 問題の実装上の姿
+4. **深さ方向の文脈は1段のみ**: 子生成に渡るのは親の state だけ。ARC 実装の
+   リファインも直前ノードの結果のみ(祖先履歴なし)。「深い木」でも各改良は浅い
+5. **ABMCTSM の枝刈りは離散スコア前提**(同一スコア75%ルール)。連続でノイジーな
+   LLM-judge スコアではほぼ発火しない見込み(推測)
+6. **ARC の採点の実物**: サンドボックスで生成コードを実行し正解グリッドと完全一致
+   照合。機械実行可能・決定的・正解データ実在の3条件に完全依存 —
+   ビジネスリサーチはこの3条件をすべて欠く
+7. 運用系は堅実: ask/tell 分離(ULID Trial・冪等)、pickle チェックポイント、
+   `batch_size<=5` 推奨(大バッチは木を過度に広げる)— **取り込む価値がある部分**
+
+> **含意**: AB-MCTS の「賢さ」は全て外部採点の質に従属する。採点が主観(LLM-judge)に
+> なった瞬間、①自己確信の高い誤りへの深掘り ②argmax 選択の無防備 ③プロキシ乖離の
+> 無補正、が同時に顕在化する。逆に、**機械計算可能な採点を持つ領域では強い** —
+> だからこそ勝負は「ビジネスDDに機械計算可能な採点を作れるか」に帰着する。
+
+## 6. 出典
 
 - `[S-008]` arXiv:2503.04412 https://arxiv.org/abs/2503.04412
-- `[S-009]` https://github.com/SakanaAI/treequest
+- `[S-009]` https://github.com/SakanaAI/treequest(v0.3.2 のコード precisely 精読済み)
 - `[S-010]` https://sakana.ai/ab-mcts/
 - `[S-011]` https://venturebeat.com/ai/sakana-ais-treequest-deploy-multi-model-teams-that-outperform-individual-llms-by-30
+- `[S-138]` https://github.com/SakanaAI/ab-mcts-arc2(実験・採点コード精読済み)
