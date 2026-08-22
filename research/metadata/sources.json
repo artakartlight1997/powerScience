@@ -1062,6 +1062,7 @@
         "disc-devils-advocate",
         "disc-embarrass",
         "disc-evaluation",
+        "disc-prism-proposal",
         "disc-product-shape",
         "research-index",
         "research-summary",
@@ -1391,6 +1392,7 @@
       "used_in": [
         "cs-evidence-graph",
         "cs-tech-choices",
+        "disc-prism-proposal",
         "disc-value",
         "notes-discussion-agenda",
         "t-contribution-map",
@@ -2255,6 +2257,7 @@
         "cs-components",
         "cs-evidence-graph",
         "disc-f2-deep",
+        "disc-prism-proposal",
         "disc-value",
         "t-contribution-map",
         "t-model-proof",

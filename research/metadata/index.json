@@ -1,5 +1,5 @@
 {
-  "index_version": "0.8.0",
+  "index_version": "0.9.0",
   "generated": "2026-08-22",
   "project": "integral-prism",
   "note": "全ファイル一覧。",
@@ -107,7 +107,8 @@
       "disc-evaluation",
       "disc-validation",
       "disc-open-problems",
-      "disc-index"
+      "disc-index",
+      "disc-prism-proposal"
     ],
     "meta": [
       "survey-00-method"
@@ -2026,6 +2027,27 @@
       "primary_sources": [],
       "depends_on": [],
       "lines": 73
+    },
+    {
+      "doc_id": "disc-prism-proposal",
+      "path": "discussion/16-prism-proposal-vs-sakana.md",
+      "title": "★提案確定版 — サカナAIに勝る Integral Prism（W1 差し替え）",
+      "topic_group": "discussion",
+      "tags": [
+        "proposal",
+        "sakana",
+        "product-definition"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "disc-first-wedge",
+        "disc-product-shape",
+        "t-sakana-marlin",
+        "t-model-proof",
+        "t-alpha-decay"
+      ],
+      "lines": 119
     }
   ]
 }

@@ -57,7 +57,8 @@ depends_on: [research-index, cs-index]
 | **12** | [12-competitive-wargame.md](12-competitive-wargame.md) | **競合ウォーゲーム** — 相手の最善手と我々の応手、2年3シナリオ |
 | **13** | [13-evaluation-framework.md](13-evaluation-framework.md) | **★討論そのものの評価** — DQ 採点、決定の脆さ、選択肢の期待値、討論の穴 |
 | **14** | [14-how-we-know-it-works.md](14-how-we-know-it-works.md) | **検証の設計** — 先行/遅行指標、反実仮想 DD のプロトコル、撤退トリガー |
-| **15** | [15-open-problems.md](15-open-problems.md) | **未解決の難問 O1–O10**（正直に「解けていない」を並べる） |
+| **15** | [15-open-problems.md](15-open-problems.md) | **未解決の難問 O1–O10**（正直に「解けていない」を並べる) |
+| **16** | [16-prism-proposal-vs-sakana.md](16-prism-proposal-vs-sakana.md) | **★提案確定版** — サカナに勝る形。**W1（メモ校閲）は却下され、「着手時の作戦盤＋生きた台帳」に差し替え**（A2/A3 を更新） |
 
 ## 討論の到達点（2026-08-22）
 
