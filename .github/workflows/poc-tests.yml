@@ -1,0 +1,17 @@
+# PoC のCIゲート(poc/docs/EVALUATION.md の G-U/G-I)。poc/ 配下の変更で走る。
+name: poc-tests
+on:
+  push:
+    paths: ["poc/**"]
+  pull_request:
+    paths: ["poc/**"]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e "poc[dev]"
+      - run: pytest poc/tests -q

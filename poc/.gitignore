@@ -1,0 +1,7 @@
+.env
+data/
+inbox/
+out/
+__pycache__/
+*.egg-info/
+.pytest_cache/
