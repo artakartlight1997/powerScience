@@ -1,8 +1,8 @@
 {
-  "index_version": "0.6.0",
+  "index_version": "0.7.0",
   "generated": "2026-08-22",
   "project": "integral-prism",
-  "note": "トピック単位のファイル一覧（coding-strategy を含む）。",
+  "note": "全ファイル一覧（topics / coding-strategy / discussion / notes）。",
   "groups": {
     "competitors": [
       "t-anthropic-research",
@@ -89,6 +89,19 @@
       "cs-risks",
       "cs-open-decisions",
       "cs-index"
+    ],
+    "discussion": [
+      "disc-value",
+      "disc-week",
+      "disc-devils-advocate",
+      "disc-who-pays",
+      "disc-product-shape",
+      "disc-first-wedge",
+      "disc-architecture",
+      "disc-embarrass",
+      "disc-mlp",
+      "disc-decisions",
+      "disc-index"
     ],
     "meta": [
       "survey-00-method"
@@ -1620,6 +1633,212 @@
         "research-index"
       ],
       "lines": 78
+    },
+    {
+      "doc_id": "disc-value",
+      "path": "discussion/00-what-is-practical-value.md",
+      "title": "「実益」の定義 — 金額と時間で書く",
+      "topic_group": "discussion",
+      "tags": [
+        "value",
+        "roi",
+        "metrics",
+        "practical"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [],
+      "lines": 81
+    },
+    {
+      "doc_id": "disc-week",
+      "path": "discussion/01-a-week-in-the-deal.md",
+      "title": "投資プロは実際に何をしているのか — 工程の解像度",
+      "topic_group": "discussion",
+      "tags": [
+        "workflow",
+        "practice",
+        "hours",
+        "pain-points"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "t-pe-dd-workflow",
+        "t-primary-research"
+      ],
+      "lines": 86
+    },
+    {
+      "doc_id": "disc-devils-advocate",
+      "path": "discussion/02-devils-advocate.md",
+      "title": "★このプロジェクトが失敗する理由 — 自社への ACH 適用",
+      "topic_group": "discussion",
+      "tags": [
+        "devils-advocate",
+        "ach",
+        "falsification",
+        "risk"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "t-structured-analytic-techniques",
+        "t-model-proof"
+      ],
+      "lines": 159
+    },
+    {
+      "doc_id": "disc-who-pays",
+      "path": "discussion/03-who-pays-and-why.md",
+      "title": "誰が、何と比較して、いくら払うのか",
+      "topic_group": "discussion",
+      "tags": [
+        "pricing",
+        "buyer",
+        "procurement",
+        "roi",
+        "comparison"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "t-pricing-unit-economics",
+        "disc-value"
+      ],
+      "lines": 94
+    },
+    {
+      "doc_id": "disc-product-shape",
+      "path": "discussion/04-product-shape.md",
+      "title": "一次商品の形 — D1 の徹底討論",
+      "topic_group": "discussion",
+      "tags": [
+        "product",
+        "D1",
+        "monday-morning",
+        "comparison"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "notes-discussion-agenda",
+        "disc-value"
+      ],
+      "lines": 108
+    },
+    {
+      "doc_id": "disc-first-wedge",
+      "path": "discussion/05-first-wedge.md",
+      "title": "最初の楔をどこに打つか（D10）",
+      "topic_group": "discussion",
+      "tags": [
+        "wedge",
+        "entry",
+        "D10",
+        "adoption"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "disc-week",
+        "disc-product-shape"
+      ],
+      "lines": 93
+    },
+    {
+      "doc_id": "disc-architecture",
+      "path": "discussion/06-architecture-debates.md",
+      "title": "設計上の6つの対立点 — 討論",
+      "topic_group": "discussion",
+      "tags": [
+        "architecture",
+        "debate",
+        "tradeoffs",
+        "decisions"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "cs-evidence-graph",
+        "cs-components"
+      ],
+      "lines": 131
+    },
+    {
+      "doc_id": "disc-embarrass",
+      "path": "discussion/07-what-could-embarrass-us.md",
+      "title": "経営陣が呆れる瞬間と、その予防",
+      "topic_group": "discussion",
+      "tags": [
+        "failure-modes",
+        "demo",
+        "credibility",
+        "prevention"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "disc-value",
+        "t-reward-hacking"
+      ],
+      "lines": 72
+    },
+    {
+      "doc_id": "disc-mlp",
+      "path": "discussion/08-minimum-lovable.md",
+      "title": "実益を最短で出す最小形",
+      "topic_group": "discussion",
+      "tags": [
+        "mvp",
+        "mlp",
+        "ui",
+        "deliverable",
+        "concrete"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "disc-first-wedge",
+        "cs-milestones"
+      ],
+      "lines": 106
+    },
+    {
+      "doc_id": "disc-decisions",
+      "path": "discussion/09-decisions-and-next.md",
+      "title": "決着一覧・未決一覧・次の一手",
+      "topic_group": "discussion",
+      "tags": [
+        "decisions",
+        "summary",
+        "next-steps"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "disc-index"
+      ],
+      "lines": 80
+    },
+    {
+      "doc_id": "disc-index",
+      "path": "discussion/README.md",
+      "title": "設計ディスカッション — インデックスと進め方",
+      "topic_group": "discussion",
+      "tags": [
+        "discussion",
+        "design",
+        "debate",
+        "practical-value"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "research-index",
+        "cs-index"
+      ],
+      "lines": 60
     },
     {
       "doc_id": "survey-00-method",

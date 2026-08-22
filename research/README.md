@@ -1,7 +1,7 @@
 ---
 doc_id: research-index
 title: "Integral Prism リサーチ・インデックス"
-version: 0.6.0
+version: 0.7.0
 status: draft
 created: 2026-08-22
 updated: 2026-08-22
@@ -23,7 +23,8 @@ tags: [index, survey, deep-research, agent, investment-research]
 
 **最初に読む** → [method-and-scope.md](method-and-scope.md)（調査方法・確度スケール・限界）
 **議論する** → [notes/discussion-agenda.md](notes/discussion-agenda.md)（未決の論点 D1–D10）
-**何を作るか** → **[coding-strategy/](coding-strategy/README.md)（実装戦略・v0.6 追加）**
+**何を作るか** → **[coding-strategy/](coding-strategy/README.md)（実装戦略）**
+**どう設計すべきか** → **[discussion/](discussion/README.md)（設計ディスカッション・v0.7 追加）**
 
 ---
 
@@ -140,7 +141,30 @@ tags: [index, survey, deep-research, agent, investment-research]
 > **「投資判断の証拠グラフを構築・検証・較正し、追記専用で記録する機械」**である。
 > 探索・生成・モデル・統率は全て調達可能な部品であり、モデルの進歩に食われる。
 
-## 8. ノートとメタデータ
+## 8. 設計ディスカッション — `discussion/`
+
+**実益から逆算して「どんな設計にすべきか」を討論した記録。**
+各論点で両論を強く書き、**【決着】と【反証条件】**を明記している。
+
+| ファイル | 問い |
+|---|---|
+| [discussion/README.md](discussion/README.md) | 討論の作法（ストローマン禁止・数字で語る） |
+| [00-what-is-practical-value.md](discussion/00-what-is-practical-value.md) | **実益とは何か**（V1時間/V2損失回避/V3機会/V4説明責任） |
+| [01-a-week-in-the-deal.md](discussion/01-a-week-in-the-deal.md) | 投資プロは実際に何をしているか（時間が溶ける場所 P1–P8） |
+| [02-devils-advocate.md](discussion/02-devils-advocate.md) | **★このプロジェクトが失敗する理由**（F1–F6、自社への ACH 適用） |
+| [03-who-pays-and-why.md](discussion/03-who-pays-and-why.md) | 誰が何と比較していくら払うか（比較枠で3桁変わる） |
+| [04-product-shape.md](discussion/04-product-shape.md) | 一次商品の形（案A/B/C/D の討論） |
+| [05-first-wedge.md](discussion/05-first-wedge.md) | 最初の楔（W1–W5） |
+| [06-architecture-debates.md](discussion/06-architecture-debates.md) | **設計上の6つの対立点** |
+| [07-what-could-embarrass-us.md](discussion/07-what-could-embarrass-us.md) | 経営陣が呆れる11の瞬間と予防 |
+| [08-minimum-lovable.md](discussion/08-minimum-lovable.md) | **実益を最短で出す最小形**（成果物と60秒デモ） |
+| [09-decisions-and-next.md](discussion/09-decisions-and-next.md) | 決着A1–A12 / 未決U1–U8 / 次の一手 |
+
+> **討論の結論**: **作るのは「調べる機械」ではなく「調べ終わったことを証明する機械」。**
+> 投資プロの実益は「速く調べられた」ではなく
+> 「**この仮説を殺しうる事実を、探したのに見つからなかった**」という確信にある。
+
+## 9. ノートとメタデータ
 
 | ファイル | 内容 |
 |---|---|

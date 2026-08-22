@@ -99,6 +99,8 @@
         "data-policy"
       ],
       "used_in": [
+        "disc-embarrass",
+        "disc-value",
         "t-long-form-report",
         "t-regulation-compliance",
         "t-sakana-ab-mcts",
@@ -616,6 +618,7 @@
         "steering"
       ],
       "used_in": [
+        "disc-architecture",
         "notes-discussion-agenda",
         "t-contribution-map",
         "t-design-principles",
@@ -693,6 +696,7 @@
       ],
       "used_in": [
         "cs-tech-choices",
+        "disc-devils-advocate",
         "t-contribution-map",
         "t-design-principles",
         "t-model-proof",
@@ -1051,6 +1055,11 @@
         "cs-milestones",
         "cs-quality-gates",
         "cs-what-to-build",
+        "disc-architecture",
+        "disc-decisions",
+        "disc-devils-advocate",
+        "disc-embarrass",
+        "disc-product-shape",
         "research-index",
         "t-citation-attribution",
         "t-contribution-map",
@@ -1129,6 +1138,7 @@
         "ece"
       ],
       "used_in": [
+        "disc-devils-advocate",
         "t-calibration-forecasting",
         "t-contribution-map",
         "t-differentiation-hypotheses",
@@ -1156,6 +1166,7 @@
         "bias"
       ],
       "used_in": [
+        "disc-embarrass",
         "t-alpha-decay",
         "t-contribution-map",
         "t-design-principles",
@@ -1309,6 +1320,12 @@
       ],
       "used_in": [
         "cs-risks",
+        "disc-decisions",
+        "disc-devils-advocate",
+        "disc-embarrass",
+        "disc-product-shape",
+        "disc-value",
+        "disc-week",
         "t-competitive-map",
         "t-contribution-map",
         "t-pe-dd-workflow"
@@ -1368,6 +1385,7 @@
       "used_in": [
         "cs-evidence-graph",
         "cs-tech-choices",
+        "disc-value",
         "notes-discussion-agenda",
         "t-contribution-map",
         "t-design-principles",
@@ -1409,6 +1427,7 @@
         "fintech"
       ],
       "used_in": [
+        "disc-week",
         "t-competitive-map",
         "t-contribution-map",
         "t-finance-platforms"
@@ -1429,6 +1448,8 @@
       ],
       "used_in": [
         "cs-what-to-build",
+        "disc-architecture",
+        "disc-devils-advocate",
         "t-commoditization-moat",
         "t-contribution-map",
         "t-differentiation-hypotheses",
@@ -1516,6 +1537,7 @@
         "hallucination"
       ],
       "used_in": [
+        "disc-devils-advocate",
         "t-contribution-map",
         "t-document-understanding",
         "t-numeric-verification",
@@ -1764,6 +1786,8 @@
         "vg_search": "+3.1% vs beam, +3.6% vs BoN, FLOPs -52%"
       },
       "used_in": [
+        "disc-architecture",
+        "disc-decisions",
         "t-contribution-map",
         "t-test-time-scaling",
         "t-tree-search-algorithms"
@@ -1822,6 +1846,9 @@
         "cs-quality-gates",
         "cs-risks",
         "cs-what-to-build",
+        "disc-decisions",
+        "disc-embarrass",
+        "disc-product-shape",
         "research-index",
         "t-contribution-map",
         "t-design-principles",
@@ -1946,6 +1973,7 @@
         "binary_graded_evals": "9/10 が棄権を罰する"
       },
       "used_in": [
+        "disc-devils-advocate",
         "research-index",
         "t-contribution-map",
         "t-design-principles",
@@ -1968,6 +1996,7 @@
         "calibration"
       ],
       "used_in": [
+        "disc-devils-advocate",
         "research-index",
         "t-contribution-map",
         "t-design-principles",
@@ -2047,6 +2076,8 @@
       "used_in": [
         "cs-build-buy",
         "cs-what-to-build",
+        "disc-mlp",
+        "disc-product-shape",
         "research-index",
         "t-benchmark-crisis",
         "t-contribution-map",
@@ -2104,6 +2135,8 @@
       "used_in": [
         "cs-risks",
         "cs-what-to-build",
+        "disc-architecture",
+        "disc-decisions",
         "research-index",
         "t-contribution-map",
         "t-design-principles",
@@ -2177,6 +2210,8 @@
         "net_alpha": "モノカルチャー均衡でゼロ"
       },
       "used_in": [
+        "disc-embarrass",
+        "disc-value",
         "research-index",
         "t-alpha-decay",
         "t-contribution-map",
@@ -2201,6 +2236,7 @@
       "used_in": [
         "cs-components",
         "cs-evidence-graph",
+        "disc-value",
         "t-contribution-map",
         "t-model-proof",
         "t-regulation-compliance"
@@ -2269,6 +2305,8 @@
       "used_in": [
         "cs-build-buy",
         "cs-what-to-build",
+        "disc-value",
+        "disc-week",
         "research-index",
         "t-contribution-map",
         "t-decision-boundary"
@@ -2356,6 +2394,7 @@
         "fact-verification"
       ],
       "used_in": [
+        "disc-mlp",
         "research-index",
         "t-contribution-map",
         "t-design-principles",
@@ -2412,6 +2451,8 @@
         "cs-components",
         "cs-evidence-graph",
         "cs-what-to-build",
+        "disc-embarrass",
+        "disc-value",
         "research-index",
         "t-agent-security",
         "t-contribution-map",
@@ -2436,6 +2477,8 @@
         "cs-evidence-graph",
         "cs-tech-choices",
         "cs-what-to-build",
+        "disc-decisions",
+        "disc-devils-advocate",
         "research-index",
         "t-contribution-map",
         "t-provenance"
@@ -2465,6 +2508,7 @@
       "used_in": [
         "cs-quality-gates",
         "cs-tech-choices",
+        "disc-embarrass",
         "research-index",
         "t-contribution-map",
         "t-serving-cost"
@@ -2490,6 +2534,7 @@
       "used_in": [
         "cs-build-buy",
         "cs-what-to-build",
+        "disc-first-wedge",
         "research-index",
         "t-contribution-map",
         "t-design-principles",
@@ -2519,6 +2564,7 @@
       "used_in": [
         "cs-quality-gates",
         "cs-what-to-build",
+        "disc-devils-advocate",
         "research-index",
         "t-contribution-map",
         "t-decision-boundary",
@@ -2565,6 +2611,8 @@
         "cs-evidence-graph",
         "cs-milestones",
         "cs-what-to-build",
+        "disc-embarrass",
+        "disc-who-pays",
         "t-contribution-map",
         "t-point-in-time"
       ]
@@ -2586,6 +2634,7 @@
       "used_in": [
         "cs-build-buy",
         "cs-what-to-build",
+        "disc-devils-advocate",
         "research-index",
         "t-contribution-map",
         "t-data-vendors"
@@ -2609,6 +2658,7 @@
         "bottleneck": "30本×1万語 → シニア3-4日"
       },
       "used_in": [
+        "disc-week",
         "research-index",
         "t-contribution-map",
         "t-primary-research"
