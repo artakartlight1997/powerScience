@@ -1,6 +1,6 @@
 {
   "$schema": "./schema.md#sources",
-  "registry_version": "0.4.0",
+  "registry_version": "0.5.0",
   "generated": "2026-08-22",
   "retrieval_method": "web_search_snippets",
   "retrieval_caveat": "実行環境のエグレス制限により sakana.ai / arxiv.org / ai.google.dev 等の本文は未取得。記載は検索エンジン要約および二次記事に基づく。confidence を参照のこと。",
@@ -404,6 +404,7 @@
         "t-pricing-unit-economics",
         "t-sakana-ab-mcts",
         "t-sakana-marlin",
+        "t-serving-cost",
         "t-test-time-scaling"
       ]
     },
@@ -755,6 +756,7 @@
       ],
       "used_in": [
         "t-contribution-map",
+        "t-decision-boundary",
         "t-design-principles",
         "t-differentiation-hypotheses",
         "t-information-value-eig",
@@ -1101,6 +1103,7 @@
         "t-calibration-forecasting",
         "t-contribution-map",
         "t-differentiation-hypotheses",
+        "t-evidence-aggregation",
         "t-ip-evaluation-design"
       ],
       "key_numbers": {
@@ -1314,7 +1317,8 @@
       ],
       "used_in": [
         "t-contribution-map",
-        "t-data-sources"
+        "t-data-sources",
+        "t-numeric-verification"
       ]
     },
     {
@@ -1476,6 +1480,8 @@
       ],
       "used_in": [
         "t-contribution-map",
+        "t-document-understanding",
+        "t-numeric-verification",
         "t-vc-dd-multi-agent"
       ]
     },
@@ -2086,7 +2092,8 @@
       },
       "used_in": [
         "t-benchmark-crisis",
-        "t-contribution-map"
+        "t-contribution-map",
+        "t-point-in-time"
       ]
     },
     {
@@ -2177,8 +2184,369 @@
       ],
       "used_in": [
         "t-contribution-map",
+        "t-data-vendors",
         "t-design-principles",
         "t-model-proof"
+      ]
+    },
+    {
+      "id": "S-121",
+      "title": "意思決定分析の道具立て（決定木・インフルエンス図・トルネード図・EVPI・ベイズ改訂）",
+      "url": "https://www.vosesoftware.com/Risk-In-Excel/Seven-Best-Decision-Analysis-Tools.php",
+      "type": "industry",
+      "org": "Vose / TreeAge / Palisade / SGH",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "decision-analysis",
+        "tornado",
+        "evpi",
+        "influence-diagram"
+      ],
+      "used_in": [
+        "research-index",
+        "t-contribution-map",
+        "t-decision-boundary"
+      ]
+    },
+    {
+      "id": "S-122",
+      "title": "Structured Uncertainty guided Clarification for LLM Agents（SAGE-Agent, POMDP+EVPI）ほか",
+      "url": "https://arxiv.org/html/2511.08798v1",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "evpi",
+        "clarification",
+        "pomdp"
+      ],
+      "key_numbers": {
+        "coverage": "+7-39%",
+        "questions": "1.5-2.7x 削減"
+      },
+      "used_in": [
+        "research-index",
+        "t-contribution-map",
+        "t-decision-boundary"
+      ]
+    },
+    {
+      "id": "S-123",
+      "title": "Bayesian teaching enables probabilistic reasoning in LLMs（Nature Communications）／ LLMs are not (consistently) Bayesian",
+      "url": "https://www.nature.com/articles/s41467-025-67998-6",
+      "type": "paper",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "bayesian",
+        "belief-update",
+        "consistency"
+      ],
+      "used_in": [
+        "research-index",
+        "t-contribution-map",
+        "t-evidence-aggregation"
+      ]
+    },
+    {
+      "id": "S-124",
+      "title": "BayesAgent: Bayesian Agentic Reasoning via Verbalized Probabilistic Graphical Modeling",
+      "url": "https://www.researchgate.net/publication/402626769_BayesAgent",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "pgm",
+        "bayesian",
+        "training-free"
+      ],
+      "used_in": [
+        "research-index",
+        "t-contribution-map",
+        "t-evidence-aggregation"
+      ]
+    },
+    {
+      "id": "S-125",
+      "title": "矛盾する証拠の扱い（Contradiction to Consensus / 情報源信頼度の重み付け / 事実検証における矛盾解消）",
+      "url": "https://arxiv.org/pdf/2505.17762",
+      "type": "paper",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "conflicting-evidence",
+        "source-credibility",
+        "fact-verification"
+      ],
+      "used_in": [
+        "research-index",
+        "t-contribution-map",
+        "t-design-principles",
+        "t-evidence-aggregation"
+      ]
+    },
+    {
+      "id": "S-126",
+      "title": "プロンプトインジェクションの脅威と評価（ASB / AgentDojo / InjecAgent / EchoLeak CVE-2025-32711）",
+      "url": "https://zylos.ai/research/2026-04-12-indirect-prompt-injection-defenses-agents-untrusted-content/",
+      "type": "paper",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "prompt-injection",
+        "security",
+        "exfiltration"
+      ],
+      "key_numbers": {
+        "asb_max_asr": "84.3%",
+        "injecagent_gpt4": "24%→47%",
+        "agentdojo": "97タスク/629テスト"
+      },
+      "used_in": [
+        "research-index",
+        "t-agent-security",
+        "t-contribution-map",
+        "t-design-principles"
+      ]
+    },
+    {
+      "id": "S-127",
+      "title": "CaMeL（Defeating Prompt Injections by Design）ほか外部強制型の防御（FIDES/Progent/RTBAS/FORGE/ClawGuard/VIGIL）",
+      "url": "https://arxiv.org/abs/2503.18813",
+      "type": "paper",
+      "org": "Google DeepMind ほか",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "camel",
+        "capability-control",
+        "dual-llm",
+        "information-flow"
+      ],
+      "used_in": [
+        "research-index",
+        "t-agent-security",
+        "t-contribution-map",
+        "t-design-principles"
+      ]
+    },
+    {
+      "id": "S-128",
+      "title": "From Agent Traces to Trust: 実行プロヴェナンスと証拠トレースのサーベイ ／ LEDGER",
+      "url": "https://arxiv.org/abs/2606.04990",
+      "type": "paper",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "provenance",
+        "evidence-tracing",
+        "audit"
+      ],
+      "used_in": [
+        "research-index",
+        "t-contribution-map",
+        "t-provenance"
+      ]
+    },
+    {
+      "id": "S-129",
+      "title": "KV キャッシュ / プレフィックスキャッシュの経済学（2026）",
+      "url": "https://www.weka.io/article/why-gpu-memory-scarcity-and-kv-cache-eviction-are-undermining-agentic-ai-economics-in-2026",
+      "type": "industry",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "inference-cost",
+        "kv-cache",
+        "finops"
+      ],
+      "key_numbers": {
+        "hit_rate_0_to_90": "$20,000→$2,000/月",
+        "prefix_cache_saving": "85-95%",
+        "prefill_share": "85-95%",
+        "input_output_ratio": "267:1",
+        "agent_token_multiple": "5-30x"
+      },
+      "used_in": [
+        "research-index",
+        "t-contribution-map",
+        "t-serving-cost"
+      ]
+    },
+    {
+      "id": "S-130",
+      "title": "AUDITFLOW: Executable Symbolic Environments for Structured Financial Reporting Verification（FinAuditing）",
+      "url": "https://arxiv.org/pdf/2606.03031",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "xbrl",
+        "audit",
+        "numerical-consistency"
+      ],
+      "key_numbers": {
+        "best_model_numerical_consistency": "13.86%"
+      },
+      "used_in": [
+        "research-index",
+        "t-contribution-map",
+        "t-design-principles",
+        "t-numeric-verification"
+      ]
+    },
+    {
+      "id": "S-131",
+      "title": "財務数値の抽出と計算の精度（Daloopa ベンチ / Finance Agent Benchmark / 幻覚ベンチ）",
+      "url": "https://arxiv.org/html/2508.00828v1",
+      "type": "paper",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "numerical-reasoning",
+        "extraction",
+        "hallucination"
+      ],
+      "key_numbers": {
+        "extraction": "88%",
+        "native_calculation": "52%",
+        "o3_finance_agent": "46.8% @ $3.79/query",
+        "fabrication": "6モデル中4"
+      },
+      "used_in": [
+        "research-index",
+        "t-contribution-map",
+        "t-decision-boundary",
+        "t-design-principles",
+        "t-document-understanding",
+        "t-numeric-verification"
+      ]
+    },
+    {
+      "id": "S-132",
+      "title": "スプレッドシート/財務モデル系ベンチ（WorkstreamBench・MBABench / MoCA-Agent / GAUGE / BigFinanceBench / PortBench）",
+      "url": "https://arxiv.org/html/2605.22664v1",
+      "type": "paper",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "spreadsheet-agent",
+        "financial-modeling",
+        "evaluation"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-numeric-verification"
+      ]
+    },
+    {
+      "id": "S-133",
+      "title": "Point-in-time / バイテンポラル / look-ahead bias 防止",
+      "url": "https://www.tejwin.com/en/insight/tej-point-in-time-audited-financial-database/",
+      "type": "industry",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "point-in-time",
+        "bitemporal",
+        "leakage",
+        "backtest"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-point-in-time"
+      ]
+    },
+    {
+      "id": "S-134",
+      "title": "データベンダーの AI 展開と供給網（S&P/With Intelligence、PitchBook Navigator・Premium Connector、Rogo/Hebbia の統合）",
+      "url": "https://pitchbook.com/news/articles/pitchbook-navigator-openai-generative-ai-due-diligence",
+      "type": "industry",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "data-vendor",
+        "connector",
+        "private-markets"
+      ],
+      "used_in": [
+        "research-index",
+        "t-contribution-map",
+        "t-data-vendors"
+      ]
+    },
+    {
+      "id": "S-135",
+      "title": "エキスパートネットワークと一次リサーチの AI 化（Third Bridge / InsightAgent / 音声AI / MNPI リアルタイム検知）",
+      "url": "https://www.thirdbridge.com/en-us/about-us/media/perspectives/ai-tools-for-primary-market-research",
+      "type": "industry",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "expert-network",
+        "primary-research",
+        "mnpi"
+      ],
+      "key_numbers": {
+        "bottleneck": "30本×1万語 → シニア3-4日"
+      },
+      "used_in": [
+        "research-index",
+        "t-contribution-map",
+        "t-primary-research"
+      ]
+    },
+    {
+      "id": "S-136",
+      "title": "文書AI/OCR 2026（RealDoc-Bench ほか実本番評価）",
+      "url": "https://www.extend.ai/resources/ocr-benchmarks-real-world-documents",
+      "type": "industry",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "ocr",
+        "layout",
+        "document-ai",
+        "table-extraction"
+      ],
+      "key_numbers": {
+        "realdoc_layout_f1": 0.847,
+        "doc_qa": "95.7%"
+      },
+      "used_in": [
+        "t-contribution-map",
+        "t-document-understanding"
       ]
     }
   ],

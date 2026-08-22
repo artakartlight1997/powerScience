@@ -1,5 +1,5 @@
 {
-  "index_version": "0.4.0",
+  "index_version": "0.5.0",
   "generated": "2026-08-22",
   "project": "integral-prism",
   "note": "トピック単位のファイル一覧。",
@@ -21,7 +21,10 @@
       "t-tongyi-deepresearch"
     ],
     "methods": [
+      "t-agent-security",
       "t-context-engineering",
+      "t-decision-boundary",
+      "t-evidence-aggregation",
       "t-failure-modes-mast",
       "t-human-in-the-loop",
       "t-information-value-eig",
@@ -31,9 +34,11 @@
       "t-multi-agent-debate",
       "t-multi-agent-orchestration",
       "t-persistent-limits",
+      "t-provenance",
       "t-recursive-self-improvement",
       "t-retrieval-graphrag",
       "t-rl-search-agents",
+      "t-serving-cost",
       "t-structured-analytic-techniques",
       "t-test-time-scaling",
       "t-tree-search-algorithms",
@@ -47,12 +52,17 @@
       "t-general-dr-benchmarks",
       "t-ip-evaluation-design",
       "t-llm-judge-reliability",
+      "t-numeric-verification",
+      "t-point-in-time",
       "t-reward-hacking"
     ],
     "domain": [
       "t-alpha-decay",
       "t-data-sources",
+      "t-data-vendors",
+      "t-document-understanding",
       "t-pe-dd-workflow",
+      "t-primary-research",
       "t-regulation-compliance",
       "t-vc-dd-multi-agent"
     ],
@@ -435,6 +445,32 @@
       "lines": 75
     },
     {
+      "doc_id": "t-agent-security",
+      "path": "topics/02-methods/agent-security-and-prompt-injection.md",
+      "title": "エージェントのセキュリティ — 間接プロンプトインジェクション",
+      "topic_group": "methods",
+      "tags": [
+        "security",
+        "prompt-injection",
+        "exfiltration",
+        "camel",
+        "capability-control",
+        "agentdojo",
+        "mnpi"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-126",
+        "S-127"
+      ],
+      "related_topics": [
+        "t-regulation-compliance",
+        "t-provenance",
+        "t-data-sources"
+      ],
+      "lines": 100
+    },
+    {
       "doc_id": "t-context-engineering",
       "path": "topics/02-methods/context-engineering.md",
       "title": "文脈工学 — context rot と圧縮の設計",
@@ -459,6 +495,59 @@
         "t-failure-modes-mast"
       ],
       "lines": 80
+    },
+    {
+      "doc_id": "t-decision-boundary",
+      "path": "topics/02-methods/decision-boundary-and-decision-analysis.md",
+      "title": "決定境界の形式化と意思決定分析 — 論点 D3 への回答",
+      "topic_group": "methods",
+      "tags": [
+        "decision-analysis",
+        "influence-diagram",
+        "evpi",
+        "tornado",
+        "sensitivity",
+        "clarification",
+        "pomdp"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-121",
+        "S-122",
+        "S-040"
+      ],
+      "related_topics": [
+        "t-information-value-eig",
+        "t-differentiation-hypotheses",
+        "t-evidence-aggregation"
+      ],
+      "lines": 94
+    },
+    {
+      "doc_id": "t-evidence-aggregation",
+      "path": "topics/02-methods/evidence-aggregation-and-belief-update.md",
+      "title": "証拠の集約と信念更新 — ACH 行列から確率へ",
+      "topic_group": "methods",
+      "tags": [
+        "bayesian",
+        "belief-update",
+        "evidence-aggregation",
+        "conflicting-evidence",
+        "source-credibility",
+        "pgm"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-123",
+        "S-124",
+        "S-125"
+      ],
+      "related_topics": [
+        "t-structured-analytic-techniques",
+        "t-calibration-forecasting",
+        "t-decision-boundary"
+      ],
+      "lines": 113
     },
     {
       "doc_id": "t-failure-modes-mast",
@@ -689,6 +778,30 @@
       "lines": 150
     },
     {
+      "doc_id": "t-provenance",
+      "path": "topics/02-methods/provenance-and-evidence-tracing.md",
+      "title": "実行プロヴェナンスと証拠トレース — 監査可能性の実装形",
+      "topic_group": "methods",
+      "tags": [
+        "provenance",
+        "evidence-tracing",
+        "audit",
+        "trace-graph",
+        "accountability",
+        "ledger"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-128"
+      ],
+      "related_topics": [
+        "t-regulation-compliance",
+        "t-citation-attribution",
+        "t-agent-security"
+      ],
+      "lines": 78
+    },
+    {
       "doc_id": "t-recursive-self-improvement",
       "path": "topics/02-methods/recursive-self-improvement.md",
       "title": "再帰的自己改善（RSI）— DGM / SIFT / Red Queen / AlphaEvolve / ADAS / GEPA",
@@ -772,6 +885,30 @@
         "t-openai-dr"
       ],
       "lines": 71
+    },
+    {
+      "doc_id": "t-serving-cost",
+      "path": "topics/02-methods/serving-cost-and-caching.md",
+      "title": "長時間エージェントの原価構造 — KV キャッシュと文脈の経済学",
+      "topic_group": "methods",
+      "tags": [
+        "inference-cost",
+        "kv-cache",
+        "prefix-caching",
+        "finops",
+        "serving",
+        "economics"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-129"
+      ],
+      "related_topics": [
+        "t-pricing-unit-economics",
+        "t-context-engineering",
+        "t-model-routing"
+      ],
+      "lines": 72
     },
     {
       "doc_id": "t-structured-analytic-techniques",
@@ -1064,6 +1201,56 @@
       "lines": 74
     },
     {
+      "doc_id": "t-numeric-verification",
+      "path": "topics/03-evaluation/numeric-and-table-verification.md",
+      "title": "数値・表・財務データの検証 — 「再計算権」は本当に機能するか",
+      "topic_group": "evaluation",
+      "tags": [
+        "numerical-reasoning",
+        "table-qa",
+        "xbrl",
+        "auditflow",
+        "spreadsheet-agent",
+        "financial-modeling"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-130",
+        "S-131",
+        "S-132"
+      ],
+      "related_topics": [
+        "t-verifier-design",
+        "t-decision-boundary",
+        "t-finance-benchmarks"
+      ],
+      "lines": 106
+    },
+    {
+      "doc_id": "t-point-in-time",
+      "path": "topics/03-evaluation/point-in-time-and-leakage.md",
+      "title": "時点再現とリーク防止 — 反実仮想 DD を成立させる技術",
+      "topic_group": "evaluation",
+      "tags": [
+        "point-in-time",
+        "bitemporal",
+        "look-ahead-bias",
+        "leakage",
+        "backtest",
+        "restatement"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-133"
+      ],
+      "related_topics": [
+        "t-ip-evaluation-design",
+        "t-retrieval-graphrag",
+        "t-benchmark-crisis"
+      ],
+      "lines": 96
+    },
+    {
       "doc_id": "t-reward-hacking",
       "path": "topics/03-evaluation/reward-hacking-and-proxy-gaming.md",
       "title": "報酬ハッキングとプロキシ最適化 — 自己改善の最大の落とし穴",
@@ -1140,6 +1327,56 @@
       "lines": 88
     },
     {
+      "doc_id": "t-data-vendors",
+      "path": "topics/04-domain/data-vendor-landscape.md",
+      "title": "データベンダーの垂直統合 — 構造的には最も危険な競合",
+      "topic_group": "domain",
+      "tags": [
+        "data-vendor",
+        "pitchbook",
+        "capital-iq",
+        "preqin",
+        "factset",
+        "connector",
+        "moat-risk"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-134"
+      ],
+      "related_topics": [
+        "t-competitive-map",
+        "t-data-sources",
+        "t-finance-platforms",
+        "t-model-proof"
+      ],
+      "lines": 100
+    },
+    {
+      "doc_id": "t-document-understanding",
+      "path": "topics/04-domain/document-understanding.md",
+      "title": "文書理解 — 契約書・スキャン PDF・図表の抽出",
+      "topic_group": "domain",
+      "tags": [
+        "document-ai",
+        "ocr",
+        "layout",
+        "contract",
+        "table-extraction",
+        "realdoc-bench"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-136"
+      ],
+      "related_topics": [
+        "t-numeric-verification",
+        "t-vc-dd-multi-agent",
+        "t-data-sources"
+      ],
+      "lines": 68
+    },
+    {
       "doc_id": "t-pe-dd-workflow",
       "path": "topics/04-domain/pe-dd-workflow.md",
       "title": "PE/VC デューデリの工程と、AI の効きどころ",
@@ -1163,6 +1400,30 @@
         "t-data-sources"
       ],
       "lines": 82
+    },
+    {
+      "doc_id": "t-primary-research",
+      "path": "topics/04-domain/primary-research-and-expert-networks.md",
+      "title": "一次情報の取得 — エキスパートネットワークと質的リサーチ",
+      "topic_group": "domain",
+      "tags": [
+        "expert-network",
+        "primary-research",
+        "interview",
+        "transcript",
+        "mnpi",
+        "commercial-dd"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-135"
+      ],
+      "related_topics": [
+        "t-information-value-eig",
+        "t-pe-dd-workflow",
+        "t-regulation-compliance"
+      ],
+      "lines": 86
     },
     {
       "doc_id": "t-regulation-compliance",
@@ -1312,12 +1573,12 @@
         "t-differentiation-hypotheses",
         "t-design-principles"
       ],
-      "lines": 109
+      "lines": 129
     },
     {
       "doc_id": "t-design-principles",
       "path": "topics/06-synthesis/design-principles.md",
-      "title": "設計原則 P1-P17 — サーベイから導かれる制約",
+      "title": "設計原則 P1-P20 — サーベイから導かれる制約",
       "topic_group": "synthesis",
       "tags": [
         "design-principles",
@@ -1330,7 +1591,7 @@
         "t-contribution-map",
         "t-differentiation-hypotheses"
       ],
-      "lines": 66
+      "lines": 72
     },
     {
       "doc_id": "t-differentiation-hypotheses",
@@ -1429,7 +1690,7 @@
       "confidence": null,
       "primary_sources": [],
       "related_topics": [],
-      "lines": 54
+      "lines": 73
     }
   ]
 }

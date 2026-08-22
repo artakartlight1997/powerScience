@@ -1,6 +1,6 @@
 {
   "$schema": "./schema.md#taxonomy",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "generated": "2026-08-22",
   "purpose": "Integral Prism の設計要素を分類する軸。後の設計文書・評価・課題管理で共通のタグ体系として使う。",
   "layers": [
@@ -66,6 +66,13 @@
       "desc": "スキャフォールド（プロンプト・ルーブリック・反証役）の進化。評価器の更新は人間承認を経る",
       "competitor_coverage": "Sakana は RSI Lab で先行",
       "ip_priority": "later"
+    },
+    {
+      "id": "L9",
+      "name": "取り込み・防御層",
+      "desc": "文書理解（レイアウト/表/座標）、未信頼コンテンツの隔離と taint 伝播、案件データの分離",
+      "competitor_coverage": "抽出は既存勢が強い / 防御は各社とも未成熟",
+      "ip_priority": "must"
     }
   ],
   "axes": {
@@ -136,6 +143,18 @@
       "B:補完的(∂V/∂M>0)",
       "C:独立(構造的)",
       "D:減衰するが残存"
+    ],
+    "security_posture": [
+      "none",
+      "prompt-level-defense",
+      "dual-llm",
+      "capability-control(CaMeL)",
+      "runtime-monitor+audit"
+    ],
+    "numeric_handling": [
+      "llm-native(禁止)",
+      "tool-augmented",
+      "deterministic-code+identity-checks"
     ]
   },
   "design_principles": [
@@ -223,6 +242,21 @@
       "id": "P17",
       "principle": "人間の介入は『AIの出力を見る前に人間が先に判断する』『意図的に減速させる』形式に限定する。承認型の介入は過信を招く",
       "source": "S-114"
+    },
+    {
+      "id": "P18",
+      "principle": "未信頼コンテンツは隔離し、ツール呼び出しは capability で門番する。Webを読んだLLMに機密アクセス権とツール権限を同時に与えない",
+      "source": "S-126,S-127"
+    },
+    {
+      "id": "P19",
+      "principle": "数値は必ずコードで計算する。モデルに計算させない。抽出は value|NOT_FOUND|AMBIGUOUS の三値を返す",
+      "source": "S-130,S-131,S-090"
+    },
+    {
+      "id": "P20",
+      "principle": "矛盾する証拠は平均も抑制もせず、保存して提示し、追加取得タスクに変換する",
+      "source": "S-125"
     }
   ],
   "tags": [

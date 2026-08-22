@@ -1,6 +1,6 @@
 {
   "$schema": "./schema.md#claims",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "generated": "2026-08-22",
   "note": "設計判断に効く『数値つきの事実主張』のみを抽出。confidence が C/D のものを設計前提にしないこと。再検証は verify_by の手順で行う。",
   "claims": [
@@ -538,6 +538,180 @@
       "confidence": "B",
       "topic": "economics",
       "impact": "生成では戦えない。選別と保証に価値が移る"
+    },
+    {
+      "id": "C-051",
+      "claim": "EVPI は情報収集活動の価値の上限を与え、情報の価値は決してゼロを下回らない",
+      "value": "上限 = EVPI",
+      "sources": [
+        "S-122",
+        "S-121"
+      ],
+      "confidence": "A",
+      "topic": "decision-analysis",
+      "impact": "調査予算の理論的上限を顧客に提示できる"
+    },
+    {
+      "id": "C-052",
+      "claim": "EVPI を目的関数とする明確化質問の選択で、曖昧タスクのカバレッジが7-39%向上し質問回数が1.5-2.7倍削減された",
+      "value": "+7-39% / 1.5-2.7x",
+      "sources": [
+        "S-122"
+      ],
+      "confidence": "B",
+      "topic": "decision-analysis"
+    },
+    {
+      "id": "C-053",
+      "claim": "LLM は一貫してベイズ的ではなく条件付き独立とコヒーレンスで失敗するが、規範的ベイズモデルの模倣を教えると改善し汎化する",
+      "value": "—",
+      "sources": [
+        "S-123"
+      ],
+      "confidence": "A",
+      "topic": "belief-update",
+      "impact": "確率計算はアルゴリズムに任せ、LLM は変数と依存の抽出に限定する"
+    },
+    {
+      "id": "C-054",
+      "claim": "LLM が矛盾情報に取る既定戦略（加重合意・平均化・抑制・多視点）のうち、平均化と抑制は投資分析では有害である",
+      "value": "4戦略",
+      "sources": [
+        "S-125"
+      ],
+      "confidence": "B",
+      "topic": "conflicting-evidence",
+      "impact": "矛盾は解消せず保存し、追加取得タスクに変換する"
+    },
+    {
+      "id": "C-055",
+      "claim": "Agent Security Bench では最高の平均攻撃成功率が84.3%に達し、既存防御の効果は限定的である",
+      "value": "84.3%",
+      "sources": [
+        "S-126"
+      ],
+      "confidence": "B",
+      "topic": "security",
+      "impact": "プロンプト内の防御では不十分。外部の決定論的統制が必要"
+    },
+    {
+      "id": "C-056",
+      "claim": "プロンプトインジェクションは現行 LLM アーキテクチャの内部では完全に解けず、プロンプトで表現された防御はプロンプトで上書きされうる",
+      "value": "—",
+      "sources": [
+        "S-126"
+      ],
+      "confidence": "B",
+      "topic": "security",
+      "impact": "CaMeL 型の capability 制御と二層 LLM が必要（P18）"
+    },
+    {
+      "id": "C-057",
+      "claim": "CaMeL は特権LLMと隔離LLMを分離し、全ての値に capability を付与して taint を伝播させ、ツール呼び出し直前にポリシーを強制する",
+      "value": "dual-LLM + capability",
+      "sources": [
+        "S-127"
+      ],
+      "confidence": "A",
+      "topic": "security",
+      "impact": "IP の証拠メタデータ構造にそのまま載る"
+    },
+    {
+      "id": "C-058",
+      "claim": "エージェント推論では prefill が85-95%を占め、入力対出力比は267:1、エージェントは通常のチャットの5-30倍のトークンを消費する",
+      "value": "267:1 / 5-30x",
+      "sources": [
+        "S-129"
+      ],
+      "confidence": "B",
+      "topic": "cost"
+    },
+    {
+      "id": "C-059",
+      "claim": "キャッシュヒット率を0%から90%に上げると同一ワークロードの月額GPU費用が$20,000から$2,000になる",
+      "value": "10x",
+      "sources": [
+        "S-129"
+      ],
+      "confidence": "B",
+      "topic": "cost",
+      "impact": "キャッシュヒット率は粗利率そのもの"
+    },
+    {
+      "id": "C-060",
+      "claim": "XBRL 財務報告の数値整合性検証（FinAuditing）で最強モデルの精度は13.86%にとどまる",
+      "value": "13.86%",
+      "sources": [
+        "S-130"
+      ],
+      "confidence": "B",
+      "topic": "numeric-verification",
+      "impact": "再計算はモデルでなくコードで行う。同時に工学的な堀になる"
+    },
+    {
+      "id": "C-061",
+      "claim": "財務データの抽出精度は約88%だが、LLM の素の数値計算は約52%に落ちる",
+      "value": "88% vs 52%",
+      "sources": [
+        "S-131"
+      ],
+      "confidence": "B",
+      "topic": "numeric-verification",
+      "impact": "設計原則 P19（数値はコードで計算する）の根拠"
+    },
+    {
+      "id": "C-062",
+      "claim": "不完全な原文書に直面すると主要6モデル中4つが財務数値を捏造する",
+      "value": "4/6",
+      "sources": [
+        "S-131"
+      ],
+      "confidence": "B",
+      "topic": "numeric-verification",
+      "impact": "抽出層は value|NOT_FOUND|AMBIGUOUS の三値を返す"
+    },
+    {
+      "id": "C-063",
+      "claim": "point-in-time データとバイテンポラル構造が look-ahead bias に対する最も有効な防御であり、規制水準の再現性を担保する",
+      "value": "—",
+      "sources": [
+        "S-133"
+      ],
+      "confidence": "B",
+      "topic": "evaluation",
+      "impact": "反実仮想DD の実装要件。IP は全証拠に as_of を持つため機械的に証明できる"
+    },
+    {
+      "id": "C-064",
+      "claim": "データベンダーはコネクタ経由で全アプリにデータを供給しており（PitchBook Premium Connector など）、データによる差別化はアプリ層では起きない",
+      "value": "—",
+      "sources": [
+        "S-134"
+      ],
+      "confidence": "B",
+      "topic": "competition",
+      "impact": "Class C の堀は『ベンダーが持たない情報』に限定して定義し直す"
+    },
+    {
+      "id": "C-065",
+      "claim": "商業DDの質的リサーチでは、1万語×30本のトランスクリプトの分析にシニアアナリストで3-4日かかる",
+      "value": "3-4日",
+      "sources": [
+        "S-135"
+      ],
+      "confidence": "B",
+      "topic": "workflow",
+      "impact": "『聞いた後』は埋まっている。『何を聞くか』が空白"
+    },
+    {
+      "id": "C-066",
+      "claim": "OCR/文書AIはベンチマークでは高精度でも実本番文書で意味のある精度低下を示す（RealDoc-Bench: レイアウトF1 0.847）",
+      "value": "0.847 / 95.7%",
+      "sources": [
+        "S-136"
+      ],
+      "confidence": "B",
+      "topic": "ingestion"
     }
   ]
 }

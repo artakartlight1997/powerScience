@@ -1,7 +1,7 @@
 ---
 doc_id: research-index
 title: "Integral Prism リサーチ・インデックス"
-version: 0.4.0
+version: 0.5.0
 status: draft
 created: 2026-08-22
 updated: 2026-08-22
@@ -66,6 +66,11 @@ tags: [index, survey, deep-research, agent, investment-research]
 | [tree-search-algorithms-and-rewards.md](topics/02-methods/tree-search-algorithms-and-rewards.md) | **木探索の詳細地図**（統一タクソノミ / rStar / 検証粒度 / 計算最適配分 / FineVerify）（**v0.3 追加**） |
 | [recursive-self-improvement.md](topics/02-methods/recursive-self-improvement.md) | **RSI** — DGM / SIFT / Red Queen / AlphaEvolve / ADAS / GEPA（**v0.3 追加**） |
 | [persistent-limits-of-scaling.md](topics/02-methods/persistent-limits-of-scaling.md) | **モデルが賢くなっても消えない制約** — 幻覚の理論的下限 / アレアトリック / jagged frontier / ハーネスの目減り（**v0.4 追加**） |
+| [decision-boundary-and-decision-analysis.md](topics/02-methods/decision-boundary-and-decision-analysis.md) | **決定境界の形式化** — インフルエンス図 / トルネード / EVPI（**論点 D3 への回答・v0.5**） |
+| [evidence-aggregation-and-belief-update.md](topics/02-methods/evidence-aggregation-and-belief-update.md) | **証拠の集約と信念更新** — ACH 行列から確率へ / 矛盾証拠の扱い（**v0.5**） |
+| [agent-security-and-prompt-injection.md](topics/02-methods/agent-security-and-prompt-injection.md) | **エージェントのセキュリティ** — 間接プロンプトインジェクションと CaMeL（**v0.5**） |
+| [provenance-and-evidence-tracing.md](topics/02-methods/provenance-and-evidence-tracing.md) | **実行プロヴェナンスと証拠トレース** — 監査可能性の実装形（**v0.5**） |
+| [serving-cost-and-caching.md](topics/02-methods/serving-cost-and-caching.md) | **長時間エージェントの原価構造** — KV キャッシュの経済学（**v0.5**） |
 
 ## 3. 評価 — `topics/03-evaluation/`
 
@@ -78,6 +83,8 @@ tags: [index, survey, deep-research, agent, investment-research]
 | [finance-benchmarks.md](topics/03-evaluation/finance-benchmarks.md) | FinanceBench / FinTrace / FinVerBench / IPO Finance Agent |
 | [reward-hacking-and-proxy-gaming.md](topics/03-evaluation/reward-hacking-and-proxy-gaming.md) | **報酬ハッキング** — 自己改善と探索の最大の落とし穴（**v0.3 追加**） |
 | [benchmark-crisis-and-real-world-gap.md](topics/03-evaluation/benchmark-crisis-and-real-world-gap.md) | **ベンチマークの崩壊と実世界ギャップ** — METR 時間地平 / GDPval / 汚染（**v0.4 追加**） |
+| [numeric-and-table-verification.md](topics/03-evaluation/numeric-and-table-verification.md) | **数値・表・財務データの検証** — 「再計算権」の実現可能性（**v0.5**） |
+| [point-in-time-and-leakage.md](topics/03-evaluation/point-in-time-and-leakage.md) | **時点再現とリーク防止** — 反実仮想 DD を成立させる技術（**v0.5**） |
 | [integral-prism-evaluation-design.md](topics/03-evaluation/integral-prism-evaluation-design.md) | **反実仮想 DD ほか、自製評価 A–E** |
 
 ## 4. ドメイン — `topics/04-domain/`
@@ -89,6 +96,9 @@ tags: [index, survey, deep-research, agent, investment-research]
 | [regulation-and-compliance.md](topics/04-domain/regulation-and-compliance.md) | EU AI Act、MNPI、監査証跡 |
 | [vc-dd-multi-agent-research.md](topics/04-domain/vc-dd-multi-agent-research.md) | VC DD の学術先行事例（DIALECTIC ほか） |
 | [alpha-decay-and-homogenization.md](topics/04-domain/alpha-decay-and-homogenization.md) | **AI によるアルファ減衰と同質化** — 投資領域固有の構造（**v0.4 追加**） |
+| [data-vendor-landscape.md](topics/04-domain/data-vendor-landscape.md) | **データベンダーの垂直統合** — 構造的に最も危険な競合（**v0.5**） |
+| [primary-research-and-expert-networks.md](topics/04-domain/primary-research-and-expert-networks.md) | **一次情報の取得** — エキスパートネットワークと質問設計（**v0.5**） |
+| [document-understanding.md](topics/04-domain/document-understanding.md) | **文書理解** — 契約書・スキャン PDF・図表（**v0.5**） |
 
 ## 5. 戦略 — `topics/05-strategy/`
 
@@ -105,19 +115,19 @@ tags: [index, survey, deep-research, agent, investment-research]
 | [contribution-map.md](topics/06-synthesis/contribution-map.md) | **R1–R34: どの研究がどこに効くか** |
 | [model-proof-differentiation.md](topics/06-synthesis/model-proof-differentiation.md) | **★モデルが賢くなっても勝てる要素 — 4分類と賭けどころ**（**v0.4 追加**） |
 | [differentiation-hypotheses.md](topics/06-synthesis/differentiation-hypotheses.md) | **差別化仮説 A/B/C** |
-| [design-principles.md](topics/06-synthesis/design-principles.md) | **設計原則 P1–P17** |
+| [design-principles.md](topics/06-synthesis/design-principles.md) | **設計原則 P1–P20** |
 
 ## 7. ノートとメタデータ
 
 | ファイル | 内容 |
 |---|---|
 | [notes/discussion-agenda.md](notes/discussion-agenda.md) | **未決の議論論点 D1–D10** |
-| [notes/open-questions.md](notes/open-questions.md) | 一次確認の宿題 Q1–Q20 |
+| [notes/open-questions.md](notes/open-questions.md) | 一次確認の宿題 Q1–Q31 |
 | [metadata/schema.md](metadata/schema.md) | フロントマター / 参考文献のスキーマ |
 | [metadata/index.json](metadata/index.json) | **全ファイルの機械可読インデックス** |
-| [metadata/sources.json](metadata/sources.json) | 出典レジストリ（**104件**、確度・使用箇所つき） |
-| [metadata/claims.json](metadata/claims.json) | 主要な事実主張（**50件**、根拠・再検証手順つき） |
-| [metadata/taxonomy.json](metadata/taxonomy.json) | 機能層 L0–L8 / 設計軸 / 設計原則 **P1–P17** |
+| [metadata/sources.json](metadata/sources.json) | 出典レジストリ（**120件**、確度・使用箇所つき） |
+| [metadata/claims.json](metadata/claims.json) | 主要な事実主張（**66件**、根拠・再検証手順つき） |
+| [metadata/taxonomy.json](metadata/taxonomy.json) | 機能層 L0–L9 / 設計軸 / 設計原則 **P1–P20** |
 | [metadata/glossary.md](metadata/glossary.md) | 用語集 |
 
 ---
@@ -159,6 +169,25 @@ tags: [index, survey, deep-research, agent, investment-research]
 - **AI 駆動のアルファ減衰: シグナル半減期 5-7年 → 18ヶ月** `[S-117]`
   → **投資領域では、モデルが賢くなるほどモデル由来の優位が速く消える**
 - ⚠️ **人間+AI はしばしば AI 単独に劣る** `[S-114]` → 介入点設計を P17 に修正（承認型をやめる）
+
+## v0.5 での更新（残りギャップの全掘り）
+
+自覚していた9つのホールを全て掘り、10トピックを追加した。設計に直結した発見:
+
+1. **決定境界は意思決定分析で解ける**（論点 D3）。トルネード図が「どの前提が判断を反転させるか」を、
+   **EVPI が「この調査に払ってよい上限額」**を与える `[S-121][S-122]`
+2. **確率は LLM に計算させない**。LLM は変数と依存関係の抽出に限定し、推論はアルゴリズムに任せる `[S-123][S-124]`
+3. **矛盾する証拠を平均・抑制してはいけない** — LLM の既定の振る舞いは投資分析で有害 `[S-125]`（→ P20）
+4. **プロンプトインジェクションは深刻**（ASB で最高攻撃成功率 **84.3%**）かつ**アーキテクチャ内では解けない**。
+   CaMeL 型の二層 LLM ＋ capability 制御が必要 `[S-126][S-127]`（→ P18）
+5. **数値検証は素の LLM では無理**（XBRL 整合性で **13.86%**、素の計算 **52%**、6モデル中4つが捏造）。
+   **だからこそ工学的な堀になる** `[S-130][S-131]`（→ P19）
+6. **「探索木＝監査証跡」には既に学名がある**（実行プロヴェナンス / 証拠トレース）。
+   **1つのグラフで引用検証・規制監査・taint 追跡・デバッグの4要求を満たせる** `[S-128]`
+7. **キャッシュヒット率＝粗利率**（0→90% で月額 $20,000→$2,000）`[S-129]`
+8. **データベンダーはコネクタで全アプリに供給している** → データによる差別化はアプリ層では起きない。
+   Class C の堀は「**ベンダーが持たない情報**」に限定して再定義 `[S-134]`
+9. **エキスパートコールは「聞いた後」が埋まり「何を聞くか」が空白** `[S-135]`。EVPI が金額換算できる場所
 
 ## 現時点の一行結論
 
