@@ -1,5 +1,5 @@
 {
-  "index_version": "2.1.3",
+  "index_version": "2.1.4",
   "generated": "2026-08-22",
   "project": "integral-prism",
   "note": "v2.1: 内製利用の確定と入力ゼロ化(discussion/18)。",
@@ -88,7 +88,8 @@
       "cs-quality-gates",
       "cs-risks",
       "cs-open-decisions",
-      "cs-index"
+      "cs-index",
+      "cs-bizdd-spec"
     ],
     "discussion": [
       "disc-value",
@@ -2021,7 +2022,7 @@
         "t-commoditization-moat",
         "disc-unit-economics"
       ],
-      "lines": 293
+      "lines": 321
     },
     {
       "doc_id": "disc-index",
@@ -2089,7 +2090,7 @@
       "confidence": null,
       "primary_sources": [],
       "depends_on": [],
-      "lines": 226
+      "lines": 227
     },
     {
       "doc_id": "notes-discussion-agenda",
@@ -2118,7 +2119,26 @@
       "confidence": null,
       "primary_sources": [],
       "depends_on": [],
-      "lines": 73
+      "lines": 79
+    },
+    {
+      "doc_id": "cs-bizdd-spec",
+      "path": "coding-strategy/10-bizdd-coverage-spec.md",
+      "title": "Biz DD カバレッジ・スペック v0.1（叩き台）— 固定の物差し",
+      "topic_group": "strategy-docs",
+      "tags": [
+        "bizdd",
+        "coverage-spec",
+        "ten-boxes",
+        "driver-tree"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "disc-internal-build",
+        "cs-evidence-graph"
+      ],
+      "lines": 132
     }
   ]
 }
