@@ -5,13 +5,13 @@
 項目の確認済みfilled。判定は全て決定論的(grounding は逐語一致で LLM 不要)。
 """
 import shutil
-from datetime import date, datetime, timezone
-from pathlib import Path
+from datetime import date
+
 
 import pytest
 
 from prism.config import Config
-from prism.contracts import Case, Contradiction, Evidence, Question
+from prism.contracts import Contradiction, Evidence, Question
 from prism.pipeline import init_case, run
 from prism.store import Store
 

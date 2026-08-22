@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 import pytest
 
 from prism.contracts import Case, ConfigError
-from prism.templates import build_spec, load_archetype, load_standards
+from prism.templates import build_spec, load_archetype
 
 
 def _case():
