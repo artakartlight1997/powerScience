@@ -10,7 +10,12 @@ const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, is
 const page = await ctx.newPage();
 const errs = [];
 page.on('pageerror', e => errs.push('PAGEERROR ' + e.message));
-page.on('console', m => { if (m.type() === 'error') errs.push('CONSOLE ' + m.text()); });
+// まだ書いていないレッスンの 404 は、別の項目で見ているのでここでは数えない
+page.on('console', m => {
+  if (m.type() !== 'error') return;
+  if (/status of 404/.test(m.text())) return;
+  errs.push('CONSOLE ' + m.text());
+});
 const ok = (label, cond, extra = '') => console.log(`${cond ? ' OK ' : 'FAIL'} ${label} ${extra}`);
 let bad = 0;
 const chk = (label, cond, extra) => { ok(label, cond, extra); if (!cond) bad++; };
