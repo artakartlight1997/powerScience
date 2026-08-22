@@ -1,6 +1,6 @@
 {
   "$schema": "./schema.md#sources",
-  "registry_version": "0.2.0",
+  "registry_version": "0.3.0",
   "generated": "2026-08-22",
   "retrieval_method": "web_search_snippets",
   "retrieval_caveat": "実行環境のエグレス制限により sakana.ai / arxiv.org / ai.google.dev 等の本文は未取得。記載は検索エンジン要約および二次記事に基づく。confidence を参照のこと。",
@@ -140,6 +140,7 @@
         "strategy"
       ],
       "used_in": [
+        "t-recursive-self-improvement",
         "t-sakana-ai-scientist",
         "t-sakana-evolution-rsi",
         "t-sakana-marlin"
@@ -161,7 +162,8 @@
       "used_in": [
         "t-contribution-map",
         "t-sakana-ab-mcts",
-        "t-test-time-scaling"
+        "t-test-time-scaling",
+        "t-tree-search-algorithms"
       ]
     },
     {
@@ -752,7 +754,8 @@
         "t-contribution-map",
         "t-design-principles",
         "t-differentiation-hypotheses",
-        "t-information-value-eig"
+        "t-information-value-eig",
+        "t-tree-search-algorithms"
       ]
     },
     {
@@ -806,7 +809,8 @@
       ],
       "used_in": [
         "t-contribution-map",
-        "t-rl-search-agents"
+        "t-rl-search-agents",
+        "t-tree-search-algorithms"
       ]
     },
     {
@@ -1019,6 +1023,7 @@
         "t-design-principles",
         "t-differentiation-hypotheses",
         "t-ip-evaluation-design",
+        "t-reward-hacking",
         "t-sakana-marlin",
         "t-test-time-scaling"
       ],
@@ -1048,7 +1053,8 @@
         "t-design-principles",
         "t-google-ai-coscientist",
         "t-llm-judge-reliability",
-        "t-multi-agent-debate"
+        "t-multi-agent-debate",
+        "t-reward-hacking"
       ]
     },
     {
@@ -1068,7 +1074,8 @@
         "t-design-principles",
         "t-google-ai-coscientist",
         "t-llm-judge-reliability",
-        "t-multi-agent-debate"
+        "t-multi-agent-debate",
+        "t-reward-hacking"
       ]
     },
     {
@@ -1322,6 +1329,7 @@
         "notes-discussion-agenda",
         "t-contribution-map",
         "t-design-principles",
+        "t-recursive-self-improvement",
         "t-regulation-compliance",
         "t-sakana-marlin"
       ]
@@ -1479,6 +1487,369 @@
       ],
       "used_in": [
         "t-vc-dd-multi-agent"
+      ]
+    },
+    {
+      "id": "S-092",
+      "title": "Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents",
+      "url": "https://arxiv.org/abs/2505.22954",
+      "type": "paper",
+      "org": "Sakana AI / UBC",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "rsi",
+        "self-improvement",
+        "evolution",
+        "transfer"
+      ],
+      "key_numbers": {
+        "swe_bench": "20.0%→50.0%",
+        "polyglot": "14.2%→30.7%"
+      },
+      "used_in": [
+        "t-competitive-map",
+        "t-contribution-map",
+        "t-design-principles",
+        "t-recursive-self-improvement",
+        "t-sakana-evolution-rsi"
+      ]
+    },
+    {
+      "id": "S-093",
+      "title": "SIFT（自己改善の評価コスト削減, ICLR 2026, MIT + Sakana AI）",
+      "url": "https://stackfutures.com/blog/sakana-rsi-lab-launch/",
+      "type": "paper",
+      "org": "MIT / Sakana AI",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "rsi",
+        "evaluation-cost",
+        "llm-judge"
+      ],
+      "key_numbers": {
+        "swe_bench_subset": "51.7%→61.7%",
+        "cost": "$25 + 15 CPU hours",
+        "judge_correlation": "gpt-4.2: 34% / gpt-4-nano: ~0"
+      },
+      "used_in": [
+        "t-competitive-map",
+        "t-contribution-map",
+        "t-design-principles",
+        "t-recursive-self-improvement",
+        "t-reward-hacking",
+        "t-sakana-evolution-rsi",
+        "t-tree-search-algorithms",
+        "t-verifier-design"
+      ]
+    },
+    {
+      "id": "S-094",
+      "title": "The Red Queen Gödel Machine: Co-Evolving Agents and Their Evaluators",
+      "url": "https://arxiv.org/abs/2606.26294",
+      "type": "paper",
+      "org": "Cambridge ほか",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "rsi",
+        "evaluator-coevolution",
+        "non-stationary"
+      ],
+      "key_numbers": {
+        "search_token_reduction": "1.35x-1.72x vs HGM-H (Polyglot)"
+      },
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-recursive-self-improvement",
+        "t-reward-hacking"
+      ]
+    },
+    {
+      "id": "S-095",
+      "title": "AlphaEvolve: A coding agent for scientific and algorithmic discovery（＋2026-07 GA, OpenEvolve）",
+      "url": "https://arxiv.org/abs/2506.13131",
+      "type": "paper",
+      "org": "Google DeepMind",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "evolution",
+        "code-agent",
+        "client-side-evaluator"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-recursive-self-improvement"
+      ]
+    },
+    {
+      "id": "S-096",
+      "title": "自己進化エージェントのサーベイ群（arXiv:2508.07407 / 2607.07663 / 2607.13104 / Awesome-Self-Evolving-Agents）",
+      "url": "https://arxiv.org/pdf/2508.07407",
+      "type": "paper",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "survey",
+        "self-evolving",
+        "taxonomy"
+      ],
+      "used_in": [
+        "t-recursive-self-improvement"
+      ]
+    },
+    {
+      "id": "S-097",
+      "title": "Automated Design of Agentic Systems (ADAS) ／ AutoMaAS ／ MetaGen ／ MemPro",
+      "url": "https://arxiv.org/abs/2408.08435",
+      "type": "paper",
+      "org": "複数",
+      "year": 2024,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "adas",
+        "meta-agent",
+        "architecture-search"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-recursive-self-improvement"
+      ]
+    },
+    {
+      "id": "S-098",
+      "title": "GEPA: Reflective Prompt Evolution Can Outperform Reinforcement Learning",
+      "url": "https://arxiv.org/pdf/2507.19457",
+      "type": "paper",
+      "org": "—",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "prompt-evolution",
+        "pareto",
+        "optimization"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-recursive-self-improvement"
+      ]
+    },
+    {
+      "id": "S-099",
+      "title": "Unifying Tree Search Algorithm and Reward Design for LLM Reasoning: A Survey",
+      "url": "https://arxiv.org/abs/2510.09988",
+      "type": "paper",
+      "org": "Zhejiang Univ. / UBC ほか",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "tree-search",
+        "reward-design",
+        "survey",
+        "taxonomy"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-tree-search-algorithms"
+      ]
+    },
+    {
+      "id": "S-100",
+      "title": "rStar ／ rStar-Math（arXiv:2501.04519）／ MCTS-RAG（arXiv:2503.20757）／ ReST-MCTS* ／ DeepSearch（arXiv:2509.25454）",
+      "url": "https://arxiv.org/abs/2501.04519",
+      "type": "paper",
+      "org": "Microsoft ほか",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "mcts",
+        "action-space",
+        "prm",
+        "self-play"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-tree-search-algorithms"
+      ]
+    },
+    {
+      "id": "S-101",
+      "title": "計算最適な test-time scaling と検証粒度（arXiv:2408.03314 / 2502.06703 / 2505.11730 / 2602.01485 / DORA）",
+      "url": "https://arxiv.org/pdf/2408.03314",
+      "type": "paper",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "compute-optimal",
+        "verifier-guided-search",
+        "granularity"
+      ],
+      "key_numbers": {
+        "vg_search": "+3.1% vs beam, +3.6% vs BoN, FLOPs -52%"
+      },
+      "used_in": [
+        "t-contribution-map",
+        "t-test-time-scaling",
+        "t-tree-search-algorithms"
+      ]
+    },
+    {
+      "id": "S-102",
+      "title": "FineVerify: Scaling Test-Time Compute with Fine-Grained Self-Verification for Agentic Search",
+      "url": "https://arxiv.org/abs/2606.00660",
+      "type": "paper",
+      "org": "NUS ほか",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "verification",
+        "sub-question",
+        "agentic-search"
+      ],
+      "key_numbers": {
+        "gpt5_mini": "+8.2pt",
+        "gemini3_flash": "+5.6%",
+        "trajectories": 4
+      },
+      "used_in": [
+        "t-contribution-map",
+        "t-tree-search-algorithms",
+        "t-verifier-design"
+      ]
+    },
+    {
+      "id": "S-103",
+      "title": "Reward Hacking in Self-Improving Code Agents ／ SpecBench（2605.21384）／ Reward Hacking Benchmark（2605.02964）",
+      "url": "https://openreview.net/forum?id=ikrQWGgxYg",
+      "type": "paper",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "reward-hacking",
+        "proxy-metric",
+        "evaluation-integrity"
+      ],
+      "key_numbers": {
+        "kernelbench": "73.8%",
+        "ale_bench": "46.8%",
+        "step_trend": "26.4%→57.8% (10→100 steps)"
+      },
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-recursive-self-improvement",
+        "t-reward-hacking",
+        "t-test-time-scaling"
+      ]
+    },
+    {
+      "id": "S-104",
+      "title": "Sakana Fugu Technical Report（Fugu / Fugu-Ultra）",
+      "url": "https://arxiv.org/abs/2606.21228",
+      "type": "official",
+      "org": "Sakana AI",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "orchestration",
+        "routing",
+        "multi-model"
+      ],
+      "key_numbers": {
+        "terminal_bench_2_1": "82.1%",
+        "swe_bench_pro": "73.7%"
+      },
+      "used_in": [
+        "t-competitive-map",
+        "t-contribution-map",
+        "t-sakana-fugu-namazu"
+      ]
+    },
+    {
+      "id": "S-105",
+      "title": "Sakana Namazu（Kimi K2.6 日本語特化チューン）／ Sakana の主権AI戦略",
+      "url": "https://openrouter.ai/sakana/namazu-20260811",
+      "type": "official",
+      "org": "Sakana AI",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "japanese",
+        "open-weights",
+        "sovereign-ai",
+        "pricing"
+      ],
+      "key_numbers": {
+        "pricing": "$0.95 in / $4.00 out per 1M",
+        "context": "262144",
+        "fairpoliticsqa": "34.10%→56.30%"
+      },
+      "used_in": [
+        "t-competitive-map",
+        "t-contribution-map",
+        "t-sakana-evolution-rsi",
+        "t-sakana-fugu-namazu"
+      ]
+    },
+    {
+      "id": "S-106",
+      "title": "RSI の安全性（ICLR 2026 RSI Workshop ／ International AI Safety Report 2026 ／ CSA レポート）",
+      "url": "https://openreview.net/pdf?id=OsPQ6zTQXV",
+      "type": "industry",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "safety",
+        "rsi",
+        "evaluation-gaming"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-recursive-self-improvement",
+        "t-reward-hacking"
+      ]
+    },
+    {
+      "id": "S-107",
+      "title": "Multi-LLM Collaborative Search (MoSA, arXiv:2502.18873) ／ MCCE ／ Evolutionary Ensemble of Agents ／ AgenticSciML",
+      "url": "https://arxiv.org/abs/2502.18873",
+      "type": "paper",
+      "org": "複数",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "multi-llm",
+        "mcts",
+        "co-evolution"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-tree-search-algorithms"
       ]
     }
   ],

@@ -1,6 +1,6 @@
 {
   "$schema": "./schema.md#taxonomy",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "generated": "2026-08-22",
   "purpose": "Integral Prism の設計要素を分類する軸。後の設計文書・評価・課題管理で共通のタグ体系として使う。",
   "layers": [
@@ -59,6 +59,13 @@
       "desc": "探索木の追記専用保存・改竄検知・再現",
       "competitor_coverage": "不明",
       "ip_priority": "must"
+    },
+    {
+      "id": "L8",
+      "name": "自己改善層",
+      "desc": "スキャフォールド（プロンプト・ルーブリック・反証役）の進化。評価器の更新は人間承認を経る",
+      "competitor_coverage": "Sakana は RSI Lab で先行",
+      "ip_priority": "later"
     }
   ],
   "axes": {
@@ -110,6 +117,19 @@
       "cascade",
       "router",
       "search-budget-optimized"
+    ],
+    "self_improvement": [
+      "none",
+      "prompt-evolution(GEPA)",
+      "scaffold-evolution(DGM)",
+      "evaluator-coevolution(RQGM)",
+      "full-self-modification(禁止)"
+    ],
+    "verification_granularity": [
+      "answer-level",
+      "trajectory-level",
+      "step-level",
+      "sub-question-level(FineVerify)"
     ]
   },
   "design_principles": [
@@ -172,6 +192,21 @@
       "id": "P12",
       "principle": "監査証跡は後付けせず、探索木そのものを追記専用の一次記録にする",
       "source": "S-079,S-080"
+    },
+    {
+      "id": "P13",
+      "principle": "自己改善はスキャフォールド（プロンプト・ワークフロー・反証ルーブリック）に限定し、評価器の定義は人間の承認を経る",
+      "source": "S-092,S-094,S-098,S-106"
+    },
+    {
+      "id": "P14",
+      "principle": "評価は階層化する（安価な判定で足切り→高価な検証は上位のみ）。judge と真の指標の相関を常時監視する",
+      "source": "S-093"
+    },
+    {
+      "id": "P15",
+      "principle": "探索の長さに上限を置き、プロキシと現実の乖離を停止条件にする",
+      "source": "S-057,S-103"
     }
   ],
   "tags": [

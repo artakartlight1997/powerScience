@@ -20,6 +20,11 @@ contributes_to: [search-policy, architecture]
 
 > **このトピックの主題は一つ： 探索を回すのは簡単。何を報酬にするかが全て。**
 
+> 📎 アルゴリズムと報酬の**内部構造の詳細**（統一タクソノミ、rStar、検証粒度、計算最適配分、FineVerify）は
+> → [t-tree-search-algorithms](tree-search-algorithms-and-rewards.md)
+> 自己改善（DGM / SIFT / Red Queen / AlphaEvolve / GEPA）は
+> → [t-recursive-self-improvement](recursive-self-improvement.md)
+
 ## 1. 手法の系譜
 
 | 手法 | 幅 | 深さ | 報酬 | 備考 |
@@ -29,6 +34,13 @@ contributes_to: [search-policy, architecture]
 | **Tree of Thoughts / LATS** | ○ | ○ | 自己評価・環境 | 行動空間が固定的 |
 | **AB-MCTS** `[S-008]` | ◎ | ◎ | 外部フィードバック | **生成による分岐**を確率モデルに載せた点が新規 → [t-sakana-ab-mcts](../01-competitors/sakana-ab-mcts-treequest.md) |
 | **Elo トーナメント（co-scientist）** `[S-022]` | ◎ | ○ | **ペアワイズ比較** | **絶対報酬が無い領域で機能する** → [t-google-ai-coscientist](../01-competitors/google-ai-coscientist.md) |
+
+### 難易度と予算で最適手法が変わる `[S-101]`
+- **ビームサーチは、難しい問題・低予算で有利**
+- **Best-of-N は、易しい問題・高予算で有利**
+- 両者は「**検証の粒度**」というパラメータで連続的に繋がる（VG-Search）。
+  適応制御で **精度 +3.1〜3.6%、FLOPs −52%超** `[S-101]`
+→ 詳細は [t-tree-search-algorithms](tree-search-algorithms-and-rewards.md)
 
 ### ベースラインの強さを忘れない
 Best-of-N / Self-Consistency は**極めて強いベースライン**であり、
@@ -63,10 +75,18 @@ MAST では**失敗の 41.8% が仕様/設計の欠陥**で、その中に**停�
 
 ## 4. 探索を増やすと悪くなる領域がある（重要な反証）
 
-引用の事実整合性は、**ツール呼び出しを 2 → 150 に増やすと平均約42%低下**する `[S-057]`。
-つまり **「探索量 = 品質」は成立しない**。
+**2つの独立した研究が、別々の領域で同じ形の劣化を報告している。**
+
+| 研究 | 領域 | 劣化 |
+|---|---|---|
+| *Cited but Not Verified* `[S-057]` | Deep Research の引用 | ツール呼び出し 2 → 150 で**事実整合性 −42%** |
+| *Reward Hacking in Self-Improving Code Agents* `[S-103]` | 自己改善コード最適化 | 10 → 100 ステップで**報酬ハッキング 26.4% → 57.8%** |
+
+つまり **「探索量 = 品質」は成立しない**。むしろ**長く走らせるほど、見かけの指標が良くなり実質が悪くなる**。
 探索を増やすなら、**同時に検証を強化しなければ純減する**。
-→ [t-verifier-design](verifier-design.md) / [t-citation-attribution](../03-evaluation/citation-attribution.md)
+
+→ [t-verifier-design](verifier-design.md) / [t-citation-attribution](../03-evaluation/citation-attribution.md) /
+[t-reward-hacking](../03-evaluation/reward-hacking-and-proxy-gaming.md)
 
 ## 5. 出典
 

@@ -63,15 +63,44 @@ Marlin / Gemini DR は基本的に **同じモデル系列が自己評価する*
 → 実装の詳細は [t-citation-attribution](../03-evaluation/citation-attribution.md)、
 判定タスクの設計制約は [t-llm-judge-reliability](../03-evaluation/llm-judge-reliability.md)。
 
-## 4. 注意 — 自己検証には限界がある
+## 4. 実装の型 — FineVerify（サブ質問分解）
+
+*FineVerify*（arXiv:2606.00660）`[S-102]` は、**IP の L1 接地層の実装そのもの**と言える。
+
+```
+質問 → 検証可能なサブ質問へ分解
+     → サンプルした各候補を、各サブ質問に対して検証
+     → 集約スコアが最も高い候補を選択
+```
+
+- **選択が単純な局所判断の集合になる**ため、モデルの較正への依存とバイアスが減る `[S-102]`
+- 4つのエージェント検索ベンチ × 2モデルで標準的なスケーリング手法を一貫して上回り、
+  **4軌跡だけで GPT-5-mini +8.2pt / Gemini-3-flash 平均 +5.6%** `[S-102]`
+- **解釈可能な検証トレース**を生成する（＝監査証跡にもなる）`[S-102]`
+
+## 5. 検証コストの階層化（SIFT の教訓）
+
+RSI 研究は **「律速は評価コストである」** と特定している `[S-093]`。
+IP の検証は特に高価（原文取得は安い / 数値再計算は中 / **人間確認は最も高い**）なので、階層化が必須。
+
+```
+安価な judge で全候補を足切り  →  高価な検証は上位候補にのみ適用
+```
+
+**ただし警告**: judge の忠実度が低いと**何も改善しない**。
+SIFT の実測では、judge を替えるだけで実性能との Pearson 相関が **34% → ほぼゼロ**になった `[S-093]`。
+→ **judge と真の指標の相関を、継続的に監視する**（→ [t-reward-hacking](../03-evaluation/reward-hacking-and-proxy-gaming.md)）
+
+## 6. 注意 — 自己検証には限界がある
 
 自己検証（self-verification）の性能は、生成能力との非対称性に縛られる `[S-036][S-037]`。
 「もう一度考えさせる」だけでは、構造的な誤りは取れない。
 **外部の事実・外部のツール・外部のモデル**を入れることが必要条件。
 
-## 5. 出典
+## 7. 出典
 
 - `[S-036]` *Trust but Verify! A Survey on Verification Design for Test-time Scaling* arXiv:2508.16665
 - `[S-037]` *Exploiting Verification-Generation Gap* arXiv:2606.03608
 - `[S-038]` GenPRM arXiv:2504.00891 ／ T1 arXiv:2504.04718
 - `[S-039]` *Multi-Agent Verification* arXiv:2502.20379
+- `[S-102]` *FineVerify* arXiv:2606.00660 ／ `[S-093]` SIFT（MIT + Sakana, ICLR 2026）

@@ -1,7 +1,7 @@
 ---
 doc_id: research-index
 title: "Integral Prism リサーチ・インデックス"
-version: 0.2.0
+version: 0.3.0
 status: draft
 created: 2026-08-22
 updated: 2026-08-22
@@ -42,6 +42,7 @@ tags: [index, survey, deep-research, agent, investment-research]
 | [tongyi-deepresearch.md](topics/01-competitors/tongyi-deepresearch.md) | **Tongyi DeepResearch** — オープンモデルの到達点と IterResearch |
 | [storm-costorm.md](topics/01-competitors/storm-costorm.md) | **STORM / Co-STORM** — 多視点質問生成と談話プロトコル |
 | [dr-agent-taxonomy.md](topics/01-competitors/dr-agent-taxonomy.md) | DR エージェントのタクソノミと **IP の自己位置** |
+| [sakana-fugu-and-namazu.md](topics/01-competitors/sakana-fugu-and-namazu.md) | **Fugu / Namazu** — オーケストレーションのモデル化と主権AI戦略（**v0.3 追加**） |
 | [finance-research-platforms.md](topics/01-competitors/finance-research-platforms.md) | AlphaSense / Hebbia / Rogo / BlueFlame |
 
 ## 2. 手法 — `topics/02-methods/`
@@ -62,6 +63,8 @@ tags: [index, survey, deep-research, agent, investment-research]
 | [human-in-the-loop.md](topics/02-methods/human-in-the-loop.md) | 自律性-対話ジレンマと **4つの介入点** |
 | [model-routing-and-cascades.md](topics/02-methods/model-routing-and-cascades.md) | 品質戦略かつ原価戦略、クロスベンダ独立性 |
 | [structured-analytic-techniques.md](topics/02-methods/structured-analytic-techniques.md) | **ACH / SATs — 反証を一次データ構造にする** |
+| [tree-search-algorithms-and-rewards.md](topics/02-methods/tree-search-algorithms-and-rewards.md) | **木探索の詳細地図**（統一タクソノミ / rStar / 検証粒度 / 計算最適配分 / FineVerify）（**v0.3 追加**） |
+| [recursive-self-improvement.md](topics/02-methods/recursive-self-improvement.md) | **RSI** — DGM / SIFT / Red Queen / AlphaEvolve / ADAS / GEPA（**v0.3 追加**） |
 
 ## 3. 評価 — `topics/03-evaluation/`
 
@@ -72,6 +75,7 @@ tags: [index, survey, deep-research, agent, investment-research]
 | [calibration-and-forecasting.md](topics/03-evaluation/calibration-and-forecasting.md) | **較正 — 投資プロの母語で話す** |
 | [general-dr-benchmarks.md](topics/03-evaluation/general-dr-benchmarks.md) | GAIA / BrowseComp / HLE / レポート級ベンチ |
 | [finance-benchmarks.md](topics/03-evaluation/finance-benchmarks.md) | FinanceBench / FinTrace / FinVerBench / IPO Finance Agent |
+| [reward-hacking-and-proxy-gaming.md](topics/03-evaluation/reward-hacking-and-proxy-gaming.md) | **報酬ハッキング** — 自己改善と探索の最大の落とし穴（**v0.3 追加**） |
 | [integral-prism-evaluation-design.md](topics/03-evaluation/integral-prism-evaluation-design.md) | **反実仮想 DD ほか、自製評価 A–E** |
 
 ## 4. ドメイン — `topics/04-domain/`
@@ -97,22 +101,39 @@ tags: [index, survey, deep-research, agent, investment-research]
 |---|---|
 | [contribution-map.md](topics/06-synthesis/contribution-map.md) | **R1–R34: どの研究がどこに効くか** |
 | [differentiation-hypotheses.md](topics/06-synthesis/differentiation-hypotheses.md) | **差別化仮説 A/B/C** |
-| [design-principles.md](topics/06-synthesis/design-principles.md) | **設計原則 P1–P12** |
+| [design-principles.md](topics/06-synthesis/design-principles.md) | **設計原則 P1–P15** |
 
 ## 7. ノートとメタデータ
 
 | ファイル | 内容 |
 |---|---|
 | [notes/discussion-agenda.md](notes/discussion-agenda.md) | **未決の議論論点 D1–D10** |
-| [notes/open-questions.md](notes/open-questions.md) | 一次確認の宿題 Q1–Q12 |
+| [notes/open-questions.md](notes/open-questions.md) | 一次確認の宿題 Q1–Q20 |
 | [metadata/schema.md](metadata/schema.md) | フロントマター / 参考文献のスキーマ |
 | [metadata/index.json](metadata/index.json) | **全ファイルの機械可読インデックス** |
-| [metadata/sources.json](metadata/sources.json) | 出典レジストリ（75件、確度・使用箇所つき） |
-| [metadata/claims.json](metadata/claims.json) | 主要な事実主張（32件、根拠・再検証手順つき） |
-| [metadata/taxonomy.json](metadata/taxonomy.json) | 機能層 L0–L7 / 設計軸 / 設計原則 P1–P12 |
+| [metadata/sources.json](metadata/sources.json) | 出典レジストリ（**91件**、確度・使用箇所つき） |
+| [metadata/claims.json](metadata/claims.json) | 主要な事実主張（**41件**、根拠・再検証手順つき） |
+| [metadata/taxonomy.json](metadata/taxonomy.json) | 機能層 L0–L8 / 設計軸 / 設計原則 **P1–P15** |
 | [metadata/glossary.md](metadata/glossary.md) | 用語集 |
 
 ---
+
+## v0.3 での更新（木探索・RSI の深掘り）
+
+一周目で薄かった2領域を掘った結果、**競合評価に修正が入った**。
+
+1. **Sakana Fugu を見落としていた**（2026-06）。オーケストレーションは既に独立した商用モデルであり、
+   「マルチモデルで束ねる」は IP の差別化にならない。Sakana は **アプリ / 統率 / モデル / 改善エンジン**の
+   4層を垂直に固めつつある（Marlin / Fugu / Namazu / RSI Lab）。
+2. **「長く走らせるほど良くなる」は、2つの独立研究が否定している**。
+   引用の事実精度は探索量とともに **−42%** `[S-057]`、報酬ハッキングは 10→100 ステップで
+   **26.4% → 57.8%** `[S-103]`。→ 設計原則 **P15（探索の上限と乖離監視）**を追加。
+3. **評価器を共進化させると、品質とコストが同時に改善する**（RQGM: 探索トークン 1.35〜1.72倍削減）`[S-094]`。
+   → IP の「反証役」設計の定量的裏付け。
+4. **検証は「サブ質問への分解」で実装できる**（FineVerify: 4軌跡で +8.2pt）`[S-102]`。
+   → L1 接地層の実装型が具体化した。
+5. RSI は範囲を絞れば使える。**スキャフォールドの改善はモデルを跨いで転移する**（DGM）`[S-092]`。
+   → 設計原則 **P13 / P14** を追加。
 
 ## 現時点の一行結論
 
@@ -120,4 +141,6 @@ tags: [index, survey, deep-research, agent, investment-research]
 > どちらも **『出力＝レポート』を最終成果物とする設計**であり、
 > 投資プロの実益（＝**意思決定の質と、後から検証できること**）に最適化されてはいない。
 > Integral Prism の差別化仮説は「**レポート生成機ではなく、投資判断の反証可能な証拠構造を作る機械**」に置く。
+> v0.3 の追加調査は、この仮説を**弱めるどころか補強した** — 競合は「どう答えるか」の層を垂直に固めており、
+> 「**何を調べるべきか / その主張は本当か / どれくらい確からしいか**」の層は依然として空いている。
 > → [topics/06-synthesis/differentiation-hypotheses.md](topics/06-synthesis/differentiation-hypotheses.md)

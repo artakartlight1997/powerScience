@@ -1,5 +1,5 @@
 {
-  "index_version": "0.2.0",
+  "index_version": "0.3.0",
   "generated": "2026-08-22",
   "project": "integral-prism",
   "note": "トピック単位のファイル一覧。doc_id / パス / トピック群 / タグ / 主要出典 を機械可読に保持する。",
@@ -15,6 +15,7 @@
       "t-sakana-ai-scientist",
       "t-sakana-edinet-bench",
       "t-sakana-evolution-rsi",
+      "t-sakana-fugu-namazu",
       "t-sakana-marlin",
       "t-storm-costorm",
       "t-tongyi-deepresearch"
@@ -29,10 +30,12 @@
       "t-model-routing",
       "t-multi-agent-debate",
       "t-multi-agent-orchestration",
+      "t-recursive-self-improvement",
       "t-retrieval-graphrag",
       "t-rl-search-agents",
       "t-structured-analytic-techniques",
       "t-test-time-scaling",
+      "t-tree-search-algorithms",
       "t-verifier-design"
     ],
     "evaluation": [
@@ -41,7 +44,8 @@
       "t-finance-benchmarks",
       "t-general-dr-benchmarks",
       "t-ip-evaluation-design",
-      "t-llm-judge-reliability"
+      "t-llm-judge-reliability",
+      "t-reward-hacking"
     ],
     "domain": [
       "t-data-sources",
@@ -317,7 +321,35 @@
         "t-multi-agent-debate",
         "t-differentiation-hypotheses"
       ],
-      "lines": 64
+      "lines": 85
+    },
+    {
+      "doc_id": "t-sakana-fugu-namazu",
+      "path": "topics/01-competitors/sakana-fugu-and-namazu.md",
+      "title": "Sakana Fugu / Namazu — オーケストレーションのモデル化と主権AI戦略",
+      "topic_group": "competitors",
+      "tags": [
+        "sakana",
+        "fugu",
+        "namazu",
+        "orchestration",
+        "routing",
+        "sovereign-ai",
+        "open-weights",
+        "japanese"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-104",
+        "S-105"
+      ],
+      "related_topics": [
+        "t-sakana-marlin",
+        "t-model-routing",
+        "t-competitive-map",
+        "t-sakana-ab-mcts"
+      ],
+      "lines": 119
     },
     {
       "doc_id": "t-sakana-marlin",
@@ -347,7 +379,7 @@
         "t-pricing-unit-economics",
         "t-competitive-map"
       ],
-      "lines": 134
+      "lines": 141
     },
     {
       "doc_id": "t-storm-costorm",
@@ -623,6 +655,39 @@
       "lines": 76
     },
     {
+      "doc_id": "t-recursive-self-improvement",
+      "path": "topics/02-methods/recursive-self-improvement.md",
+      "title": "再帰的自己改善（RSI）— DGM / SIFT / Red Queen / AlphaEvolve / ADAS / GEPA",
+      "topic_group": "methods",
+      "tags": [
+        "rsi",
+        "self-improvement",
+        "darwin-godel-machine",
+        "alphaevolve",
+        "adas",
+        "gepa",
+        "evolution",
+        "evaluator"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-092",
+        "S-093",
+        "S-094",
+        "S-095",
+        "S-096",
+        "S-097",
+        "S-098"
+      ],
+      "related_topics": [
+        "t-sakana-evolution-rsi",
+        "t-reward-hacking",
+        "t-memory-continual-learning",
+        "t-verifier-design"
+      ],
+      "lines": 182
+    },
+    {
       "doc_id": "t-retrieval-graphrag",
       "path": "topics/02-methods/retrieval-and-graphrag.md",
       "title": "検索と知識グラフ — 局所検索と大域センスメイキングの二層",
@@ -724,7 +789,38 @@
         "t-verifier-design",
         "t-information-value-eig"
       ],
-      "lines": 74
+      "lines": 94
+    },
+    {
+      "doc_id": "t-tree-search-algorithms",
+      "path": "topics/02-methods/tree-search-algorithms-and-rewards.md",
+      "title": "木探索アルゴリズムと報酬設計 — 2026年時点の詳細地図",
+      "topic_group": "methods",
+      "tags": [
+        "tree-search",
+        "mcts",
+        "rstar",
+        "prm",
+        "verifier-guided-search",
+        "compute-optimal",
+        "beam-search",
+        "granularity"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-099",
+        "S-100",
+        "S-101",
+        "S-102",
+        "S-107"
+      ],
+      "related_topics": [
+        "t-test-time-scaling",
+        "t-sakana-ab-mcts",
+        "t-verifier-design",
+        "t-information-value-eig"
+      ],
+      "lines": 160
     },
     {
       "doc_id": "t-verifier-design",
@@ -750,7 +846,7 @@
         "t-test-time-scaling",
         "t-llm-judge-reliability"
       ],
-      "lines": 77
+      "lines": 106
     },
     {
       "doc_id": "t-calibration-forecasting",
@@ -907,6 +1003,32 @@
       "lines": 74
     },
     {
+      "doc_id": "t-reward-hacking",
+      "path": "topics/03-evaluation/reward-hacking-and-proxy-gaming.md",
+      "title": "報酬ハッキングとプロキシ最適化 — 自己改善の最大の落とし穴",
+      "topic_group": "evaluation",
+      "tags": [
+        "reward-hacking",
+        "proxy-metric",
+        "specbench",
+        "self-improvement",
+        "evaluation-integrity",
+        "safety"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-103",
+        "S-106",
+        "S-093"
+      ],
+      "related_topics": [
+        "t-recursive-self-improvement",
+        "t-llm-judge-reliability",
+        "t-ip-evaluation-design"
+      ],
+      "lines": 114
+    },
+    {
       "doc_id": "t-data-sources",
       "path": "topics/04-domain/data-sources.md",
       "title": "データ源の地図 — 公開 / 準公開 / プライベート",
@@ -1061,7 +1183,7 @@
         "t-finance-platforms",
         "t-commoditization-moat"
       ],
-      "lines": 77
+      "lines": 100
     },
     {
       "doc_id": "t-pricing-unit-economics",
@@ -1105,12 +1227,12 @@
         "t-differentiation-hypotheses",
         "t-design-principles"
       ],
-      "lines": 71
+      "lines": 91
     },
     {
       "doc_id": "t-design-principles",
       "path": "topics/06-synthesis/design-principles.md",
-      "title": "設計原則 P1-P12 — サーベイから導かれる制約",
+      "title": "設計原則 P1-P15 — サーベイから導かれる制約",
       "topic_group": "synthesis",
       "tags": [
         "design-principles",
@@ -1123,7 +1245,7 @@
         "t-contribution-map",
         "t-differentiation-hypotheses"
       ],
-      "lines": 53
+      "lines": 60
     },
     {
       "doc_id": "t-differentiation-hypotheses",
@@ -1159,7 +1281,7 @@
       "confidence": "high",
       "primary_sources": [],
       "related_topics": [],
-      "lines": 79
+      "lines": 107
     },
     {
       "doc_id": "notes-discussion-agenda",
@@ -1188,7 +1310,7 @@
       "confidence": null,
       "primary_sources": [],
       "related_topics": [],
-      "lines": 39
+      "lines": 54
     }
   ]
 }
