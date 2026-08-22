@@ -48,6 +48,7 @@ def ground(ev: Evidence, snap_text: str | None, llm: LLMClient) -> Grounded:
                     ev.id, _WINDOW, len(snap_text))  # C-8: 縮退は黙って起きない
     window = snap_text[:_WINDOW]
     votes = []
+    errors = 0
     for order in ("ab", "ba"):  # P10: 提示順を入れ替えて2回
         if order == "ab":
             user = f"## 引用文\n{ev.quote}\n\n## 原文抜粋\n{window}"
@@ -57,8 +58,12 @@ def ground(ev: Evidence, snap_text: str | None, llm: LLMClient) -> Grounded:
             out = llm.complete_json("verifier", VERIFY_SYSTEM, user)
             votes.append(bool(out.get("supported", False)))
         except LLMError as e:
-            log.warning("grounding: 証拠 %s の判定票が取れず不支持に倒す: %s", ev.id, e)
+            log.warning("grounding: 証拠 %s の判定票が取れない: %s", ev.id, e)
+            errors += 1
             votes.append(False)  # 検証できない票は不支持に倒す(捏造を通さない)
+    if errors == 2:
+        # 検証手段が一時的に無かっただけ: fail を恒久事実にせず none 温存 → 次ラウンド再試行
+        return "none"
     if all(votes):
         return "pass"
     return "partial" if any(votes) else "fail"
@@ -86,25 +91,79 @@ def cluster(evidences: list[Evidence]) -> list[Evidence]:
             for j in range(i + 1, len(evs)):
                 if _same_cluster(evs[i], evs[j]):
                     parent[find(j)] = find(i)
-        # クラスタ番号は「成分内の最小インデックス」で安定化
-        for e, i in zip(evs, range(len(evs))):
-            out.append(e.model_copy(update={"cluster_id": f"{key}-c{find(i)}"}))
+        # ラベルは「成分内の最小 evidence.id」— 入力順にもインデックスにも依存せず、
+        # 新証拠の追加で既存成分のラベルが揺れない(無変更 re-put を誘発しない)
+        comps: dict[int, list[Evidence]] = defaultdict(list)
+        for i, e in enumerate(evs):
+            comps[find(i)].append(e)
+        for members in comps.values():
+            label = min(m.id for m in members)
+            for m in members:
+                out.append(m.model_copy(update={"cluster_id": f"{key}-{label}"}))
     return out
+
+
+CONTRA_TOLERANCE = 0.15  # contradictions() の既定 tolerance と同じ値を共有する
+
+
+def _text_sim(a: Evidence, b: Evidence) -> bool:
+    return difflib.SequenceMatcher(None, _norm(a.quote), _norm(b.quote)).ratio() > 0.85
 
 
 def _same_cluster(a: Evidence, b: Evidence) -> bool:
     an = a.value.num if a.value else None
     bn = b.value.num if b.value else None
-    if an is not None and bn is not None and _dim(a.value.unit) == _dim(b.value.unit):
-        # 同じ次元の数値同士は数値だけで判定する。数値が異なるのに文面類似で
-        # 併合すると、矛盾検出(同一クラスタ対は除外)を構造的に殺す(P20)
+    if an is not None and bn is not None:
+        if _dim(a.value.unit) != _dim(b.value.unit):
+            return False  # 次元が違う数値(95% vs 95人)は別物
         base = max(abs(an), abs(bn), 1e-9)
-        return abs(an - bn) / base < 1e-3
-    return difflib.SequenceMatcher(None, _norm(a.quote), _norm(b.quote)).ratio() > 0.85
+        rel = abs(an - bn) / base
+        if rel < 1e-3:
+            return True
+        if rel > CONTRA_TOLERANCE:
+            return False  # 矛盾候補は必ず分離する(P20: 矛盾検出を殺さない)
+        # 0.1%〜tolerance の帯域は丸め・概数の再掲でありうる。文面で判定し、
+        # 同一上流の丸め違い(95% と 95.4%)を「独立2票」に数えない(P22)
+        return _text_sim(a, b)
+    if an is None and bn is None:
+        return _text_sim(a, b)
+    # num あり×なし は併合しない: 範囲表現「10〜12億円」等が対立する数値
+    # 10億と12億の「橋」になり、推移閉包で矛盾検出を殺すのを防ぐ(P20)
+    return False
+
+
+def reevaluate_contradictions(existing: list[Contradiction],
+                              evidences: list[Evidence],
+                              tolerance: float = CONTRA_TOLERANCE,
+                              ) -> list[Contradiction]:
+    """open 矛盾を現在の証拠状態で再評価し、**もはや成立しない対**を resolved に
+    した複製を返す(削除はしない — P20)。resolve が起きるのは新しい証拠の追加が
+    クラスタ組替えや grounding の変化を起こした時だけであり、人間の黙認では起きない。"""
+    ev = {e.id: e for e in evidences}
+    changed: list[Contradiction] = []
+    for c in existing:
+        if c.status != "open":
+            continue
+        a, b = ev.get(c.evidence_a), ev.get(c.evidence_b)
+        still = (
+            a is not None and b is not None
+            and a.grounded == "pass" and b.grounded == "pass"
+            and a.cluster_id != b.cluster_id
+            and a.value is not None and b.value is not None
+            and a.value.num is not None and b.value.num is not None
+            and _dim(a.value.unit) == _dim(b.value.unit)
+            and abs(a.value.num - b.value.num)
+            / max(abs(a.value.num), abs(b.value.num), 1e-9) > tolerance)
+        if not still:
+            log.info("矛盾 %s(%s)は証拠状態の変化により解消 → resolved",
+                     c.id, c.item_key)
+            changed.append(c.model_copy(update={"status": "resolved"}))
+    return changed
 
 
 def contradictions(case_id: str, evidences: list[Evidence],
-                   existing: list[Contradiction], tolerance: float = 0.15,
+                   existing: list[Contradiction],
+                   tolerance: float = CONTRA_TOLERANCE,
                    ) -> list[Contradiction]:
     """同一項目で数値が tolerance 超乖離する別クラスタ対 → 矛盾(P20)。
     既存の対は再登録しない。解消はここでは起きない(追加証拠の判断は人間)。"""

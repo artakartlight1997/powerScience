@@ -9,10 +9,13 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import sqlite3
 from datetime import datetime, timezone
 
 from .contracts import Event
+
+log = logging.getLogger(__name__)
 
 _SCHEMA = """CREATE TABLE IF NOT EXISTS events(
   seq INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -59,10 +62,19 @@ class EventLog:
                 "INSERT INTO events(case_id,kind,payload,actor,prev_hash,this_hash,created_at)"
                 " VALUES(?,?,?,?,?,?,?)",
                 (case_id, kind, pj, actor, prev, this, created))
-            conn.execute(
-                "INSERT INTO chain_heads(case_id,n,head_hash) VALUES(?,1,?)"
-                " ON CONFLICT(case_id) DO UPDATE SET n=n+1, head_hash=excluded.head_hash",
-                (case_id, this))
+            head = conn.execute("SELECT n FROM chain_heads WHERE case_id=?",
+                                (case_id,)).fetchone()
+            if head is None:
+                # 旧版DB(アンカー導入前)からの追記: 実件数で初期化(新挿入分を含む)
+                n_new = conn.execute(
+                    "SELECT COUNT(*) FROM events WHERE case_id=?",
+                    (case_id,)).fetchone()[0]
+                conn.execute("INSERT INTO chain_heads(case_id,n,head_hash) VALUES(?,?,?)",
+                             (case_id, n_new, this))
+            else:
+                conn.execute(
+                    "UPDATE chain_heads SET n=?, head_hash=? WHERE case_id=?",
+                    (head[0] + 1, this, case_id))
             conn.commit()
         except BaseException:
             conn.rollback()
@@ -87,8 +99,18 @@ class EventLog:
         head = self.conn.execute(
             "SELECT n, head_hash FROM chain_heads WHERE case_id=?",
             (case_id,)).fetchone()
-        expected_n, expected_head = head if head else (0, GENESIS)
-        if n != expected_n or prev != expected_head:
+        if head is None:
+            if n == 0:
+                return True, 0
+            # 旧版DB(アンカー導入前)の健全な連鎖: 改竄扱いにせず、ここでアンカー化
+            log.warning("chain_heads 未登録の連鎖(旧版DB)を検出 → アンカーを初期化"
+                        "(case=%s, n=%d)", case_id, n)
+            self.conn.execute(
+                "INSERT INTO chain_heads(case_id,n,head_hash) VALUES(?,?,?)",
+                (case_id, n, prev))
+            self.conn.commit()
+            return True, n
+        if n != head[0] or prev != head[1]:
             return False, n  # 末尾切り詰め・全消去・アンカー不整合
         return True, n
 

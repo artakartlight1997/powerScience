@@ -46,7 +46,7 @@ def test_parse_number_none():
 
 def _source(tmp_path: Path, kind="seller", seller=True) -> Source:
     snap = tmp_path / "snap"
-    snap.mkdir()
+    snap.mkdir(parents=True)
     (snap / "text.txt").write_text("稼働率は95%で推移している。", encoding="utf-8")
     return Source(id="s1", case_id="case1", kind=kind, trust_tier=5,
                   seller_provided=seller, as_of="2026-01-15",
@@ -77,10 +77,23 @@ def test_run_web_source_is_untrusted(tmp_path):
     assert evs[0].trust_label == "untrusted"  # P18
 
 
-def test_run_llm_failure_degrades_to_empty(tmp_path):
+def test_run_llm_failure_returns_none_for_retry(tmp_path):
+    """C-7: LLM障害は None(再試行対象)。正常な0件([])と区別する。"""
     def boom(r, s, u):
         raise LLMError("down")
-    assert run(_source(tmp_path), [make_item()], FakeLLM(boom)) == []  # C-7
+    assert run(_source(tmp_path / "a"), [make_item()], FakeLLM(boom)) is None
+    ok = FakeLLM(lambda r, s, u: {"evidences": []})
+    assert run(_source(tmp_path / "b", kind="general", seller=False),
+               [make_item()], ok) == []
+
+
+def test_run_caps_excessive_evidence_rows(tmp_path):
+    items = [make_item(key="a")]
+    rows = [{"item_key": "a", "quote": f"引用{i}", "raw_value": None}
+            for i in range(10)]
+    llm = FakeLLM(lambda r, s, u: {"evidences": rows})
+    evs = run(_source(tmp_path), items, llm)
+    assert len(evs) == 2 * len(items)  # 過剰生成は上限で切り詰め(R2予算の保護)
 
 
 def test_run_without_snapshot_returns_empty(tmp_path):

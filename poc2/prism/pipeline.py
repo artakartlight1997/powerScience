@@ -13,8 +13,9 @@ from pathlib import Path
 
 from . import audit, extract, fill, identify, ingest, project, research, verify
 from .config import Config
-from .contracts import (Case, Contradiction, Evidence, Fetcher, LLMClient,
-                        Question, SearchClient, Source, SpecItem)
+from .contracts import (Case, ConfigError, Contradiction, Evidence, Fetcher,
+                        LLMClient, Question, SearchClient, Source, SpecItem,
+                        UserInputError)
 from .gate import Gate
 from .store import Store
 from .templates import build_spec, list_archetypes, load_standards
@@ -38,21 +39,35 @@ def start_case(store: Store, cfg: Config, llm: LLMClient, name: str,
     人間の archetype 指定は常に優先: 既存ケースでも差し替えてスペックを再実体化する。"""
     cid = case_id or slugify(name)
     if not _CASE_ID.match(cid):
-        from .contracts import ConfigError
         raise ConfigError(f"ケースIDが不正: {cid!r}(半角英数小文字・ハイフン等のみ)")
     standards = load_standards(cfg.templates_dir)
     existing = store.get("case", cid, cid, Case)
     if existing:
+        if existing.name != name:
+            # slugify 衝突等で別対象のケースに合流させない(証拠の混線防止)
+            raise ConfigError(
+                f"ケースID {cid} は別対象({existing.name})に使用済み。"
+                f" --case-id で別IDを指定せよ")
         if archetype and archetype != existing.archetype:
-            # 契約 §3: 人間の指定が常に勝つ。黙って無視しない
+            # 契約 §3: 人間の指定が常に勝つ。黙って無視しない。
+            # 旧アーキタイプの判定・問いも消す(幽霊項目がレポート集計を汚さないように)
             log.info("アーキタイプ差替え: %s → %s(スペック再実体化)",
                      existing.archetype, archetype)
-            for it in store.all("spec_item", cid, SpecItem):
-                store.delete("spec_item", cid, it.id)
             existing.archetype = archetype
             store.put("case", existing)
-            store.put_many("spec_item",
-                           build_spec(existing, cfg.templates_dir, standards))
+            new_items = build_spec(existing, cfg.templates_dir, standards)
+            new_ids = {it.id for it in new_items}
+            new_keys = {it.key for it in new_items}
+            for it in store.all("spec_item", cid, SpecItem):
+                store.delete("spec_item", cid, it.id)
+            from .contracts import Judgment
+            for j in store.all("judgment", cid, Judgment):
+                if j.item_id not in new_ids:
+                    store.delete("judgment", cid, j.id)
+            for q in store.all("question", cid, Question):
+                if q.item_key not in new_keys:
+                    store.delete("question", cid, q.id)
+            store.put_many("spec_item", new_items)
         return existing
     if not archetype:
         archetype = identify.archetype(llm, name, industry,
@@ -73,7 +88,7 @@ def run(store: Store, cfg: Config, case_id: str, llm: LLMClient,
     """search+fetcher が両方あるとき Web 収集が有効(既定の姿)。無ければ資料のみ。"""
     case = store.get("case", case_id, case_id, Case)
     if case is None:
-        raise ValueError(f"ケースが存在しない: {case_id}(先に research)")
+        raise UserInputError(f"ケースが存在しない: {case_id}(先に research)")
     standards = load_standards(cfg.templates_dir)
     items = store.all("spec_item", case_id, SpecItem)
     gate = Gate(standards["online"]["allowed_hosts"], cfg.data_dir)
@@ -85,6 +100,8 @@ def run(store: Store, cfg: Config, case_id: str, llm: LLMClient,
     # case.round は通算表示用、停止判定は今回のラン内ラウンド数で行う
     case.stop_reason = None
     rounds_this_run = 0
+    llm_budget = int(stop_rules["max_llm_calls"])
+    retry_extract: set[str] = set()  # 前ラウンドで LLM 障害だったソース(C-7 再試行)
 
     while True:
         case.round += 1
@@ -102,25 +119,44 @@ def run(store: Store, cfg: Config, case_id: str, llm: LLMClient,
                 standards["research"]["results_per_query"],
                 standards["online"]["max_fetch_per_iter"],
                 standards["trust_tiers"]["web"], today)
-        # 3) 抽出
-        for src in new_sources:
-            store.put_many("evidence", extract.run(src, items, llm))
-        # 4) 検証: grounding → クラスタ → 矛盾
+        # 3) 抽出(新規ソース + 前ラウンドで LLM 障害だったソースの再試行)
         sources = {s.id: s for s in store.all("source", case_id, Source)}
+        targets = list(new_sources) + [sources[i] for i in sorted(retry_extract)
+                                       if i in sources]
+        for src in targets:
+            evs = extract.run(src, items, llm)
+            if evs is None:
+                retry_extract.add(src.id)  # 一時障害: 次ラウンドで再試行
+            else:
+                retry_extract.discard(src.id)
+                store.put_many("evidence", evs)
+        # 4) 検証: grounding → クラスタ → 矛盾。R2 予算はラウンド内でも守る
         stored = store.all("evidence", case_id, Evidence)
         before = {e.id: (e.grounded, e.cluster_id) for e in stored}
         evidences = []
+        deferred = 0
         for ev in stored:
             if ev.grounded == "none":
-                snap = ingest.snapshot_text(sources[ev.source_id].snapshot_path)
-                ev = ev.model_copy(update={"grounded": verify.ground(ev, snap, llm)})
+                if getattr(llm, "calls", 0) >= llm_budget:
+                    deferred += 1  # none のまま温存(判定に使われず、R2 で停止する)
+                else:
+                    snap = ingest.snapshot_text(sources[ev.source_id].snapshot_path)
+                    ev = ev.model_copy(update={"grounded": verify.ground(ev, snap, llm)})
             evidences.append(ev)
+        if deferred:
+            log.warning("R2予算(%d)到達: 証拠 %d 件の照合を保留", llm_budget, deferred)
         evidences = verify.cluster(evidences)
         # 変化した証拠だけ書き戻す(追記専用の連鎖を無変更 put で肥大させない)
         store.put_many("evidence",
                        [e for e in evidences
                         if (e.grounded, e.cluster_id) != before.get(e.id)])
+        # 矛盾: 既存 open を現在の証拠状態で再評価(成立しなくなった対は resolved)
+        # → その上で新規検出。resolve は新証拠の追加によってのみ起きる(P20)
         existing_cx = store.all("contradiction", case_id, Contradiction)
+        resolved = verify.reevaluate_contradictions(existing_cx, evidences)
+        store.put_many("contradiction", resolved)
+        resolved_ids = {c.id for c in resolved}
+        existing_cx = [c for c in existing_cx if c.id not in resolved_ids] + resolved
         new_cx = verify.contradictions(case_id, evidences, existing_cx)
         store.put_many("contradiction", new_cx)
         all_cx = existing_cx + new_cx
@@ -132,7 +168,12 @@ def run(store: Store, cfg: Config, case_id: str, llm: LLMClient,
             judgments[it.id] = audit.judge(it, evs, it.key in open_keys,
                                            case.round, today)
         store.put_many("judgment", list(judgments.values()))
-        # 6) 充填計画と問い
+        # 6) 充填計画と問い。gap でなくなった項目の既存の問いは answered へ遷移
+        #    (発注仕様書に「filledなのに発注scope」という自己矛盾を残さない)
+        gap_keys = {it.key for it in fill.gaps(items, judgments)}
+        for q in store.all("question", case_id, Question):
+            if q.status == "open" and q.item_key not in gap_keys:
+                store.put("question", q.model_copy(update={"status": "answered"}))
         questions = fill.make_questions(
             case_id, items, judgments, standards["question_budget"]["max_open_questions"])
         store.put_many("question", questions)
@@ -165,14 +206,19 @@ def _progress(judgments: dict) -> int:
 def write_outputs(store: Store, cfg: Config, case_id: str) -> list[Path]:
     case = store.get("case", case_id, case_id, Case)
     if case is None:
-        raise ValueError(f"ケースが存在しない: {case_id}")
+        raise UserInputError(f"ケースが存在しない: {case_id}")
     chain_ok, _ = store.events.verify_chain(case_id)
+    # 防御的フィルタ: アーキタイプ差替え等の残骸(現行スペック外の項目)を
+    # 集計・成果物に混入させない。証拠は事実なので無フィルタで台帳に載せる
+    items = store.all("spec_item", case_id, SpecItem)
+    ids = {it.id for it in items}
+    keys = {it.key for it in items}
+    judgments = {k: v for k, v in store.latest_judgments(case_id).items() if k in ids}
     return project.write_all(
-        cfg.out_dir, case,
-        store.all("spec_item", case_id, SpecItem),
-        store.latest_judgments(case_id),
+        cfg.out_dir, case, items, judgments,
         store.all("evidence", case_id, Evidence),
         store.all("source", case_id, Source),
-        store.all("contradiction", case_id, Contradiction),
-        store.all("question", case_id, Question),
+        [c for c in store.all("contradiction", case_id, Contradiction)
+         if c.item_key in keys],
+        [q for q in store.all("question", case_id, Question) if q.item_key in keys],
         chain_ok)

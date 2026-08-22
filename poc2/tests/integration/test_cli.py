@@ -28,8 +28,8 @@ def cli_env(tmp_path, monkeypatch):
                 FakeFetcher(PAGES))
 
     monkeypatch.setattr(cli, "_make_web", fake_web)
-    # 再現性: pipeline.run の today は date.today() だが、鮮度判定は2年窓なので
-    # フィクスチャの as_of(2026)が古くなるまでは実日付で問題ない
+    # 再現性: 鮮度判定の基準日を固定(実日付に依存すると2028年以降に自然死する)
+    monkeypatch.setenv("PRISM_TODAY", "2026-08-22")
     return tmp_path, llm
 
 

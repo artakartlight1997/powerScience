@@ -10,10 +10,12 @@ from __future__ import annotations
 
 import argparse
 import logging
+import os
 import sys
+from datetime import date
 
 from .config import load_config, require_api_key
-from .contracts import Case, ConfigError, GateError
+from .contracts import Case, ConfigError, GateError, UserInputError
 from .gate import check_vendor_separation
 from .log import setup as setup_logging
 from .store import Store
@@ -56,8 +58,10 @@ def main(argv: list[str] | None = None) -> int:
         rc = _dispatch(args, cfg, store)
         log.info("コマンド終了: %s rc=%d", args.cmd, rc)
         return rc
-    except ValueError as e:
-        # ユーザ入力の誤り(存在しないケースID等): バグ扱いにしない
+    except UserInputError as e:
+        # ユーザ入力の誤り(存在しないケースID等): バグ扱いにしない。
+        # 汎用 ValueError は捕捉しない — pydantic ValidationError(バグ級)が
+        # そのサブクラスであり、rc=3 経路でトレースバックをログに残すべきだから
         log.error("入力エラー: %s", e, extra={"console_suppress": True})
         print(f"{e}", file=sys.stderr)
         return 1
@@ -92,6 +96,12 @@ def _make_web(cfg, llm, no_web: bool):
     return OpenRouterSearch(llm), HttpxFetcher()
 
 
+def _today() -> date | None:
+    """鮮度判定の基準日。通常は None(=今日)。PRISM_TODAY で固定できる(検証・テスト用)。"""
+    v = os.environ.get("PRISM_TODAY")
+    return date.fromisoformat(v) if v else None
+
+
 def _dispatch(args, cfg, store: Store) -> int:
     from . import pipeline
 
@@ -101,7 +111,7 @@ def _dispatch(args, cfg, store: Store) -> int:
         case = pipeline.start_case(store, cfg, llm, args.name, args.industry,
                                    args.archetype, args.case_id)
         print(f"ケース {case.id}(アーキタイプ: {case.archetype})でリサーチ開始…")
-        case = pipeline.run(store, cfg, case.id, llm, search, fetcher)
+        case = pipeline.run(store, cfg, case.id, llm, search, fetcher, _today())
         print(f"停止: {case.stop_reason}(ラウンド{case.round}, LLM呼び出し{llm.calls}回)")
         print(f"出力: {cfg.out_dir / case.id}/(作戦盤: sakusenban.md)")
         print(f"補助資料(IM等)があれば {cfg.inbox_dir / case.id}/ に置いて"
@@ -111,7 +121,7 @@ def _dispatch(args, cfg, store: Store) -> int:
     if args.cmd == "run":
         llm = _make_llm(cfg)
         search, fetcher = _make_web(cfg, llm, args.no_web)
-        case = pipeline.run(store, cfg, args.case_id, llm, search, fetcher)
+        case = pipeline.run(store, cfg, args.case_id, llm, search, fetcher, _today())
         print(f"停止: {case.stop_reason}(ラウンド{case.round}, LLM呼び出し{llm.calls}回)")
         print(f"出力: {cfg.out_dir / args.case_id}/")
         return 0

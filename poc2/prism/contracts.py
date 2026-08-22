@@ -93,14 +93,15 @@ class Judgment(BaseModel):
 
 
 class Question(BaseModel):
-    """未充足項目から生成する問い。発注仕様書・オンライン収集の入力。"""
+    """未充足項目から生成する問い。発注仕様書・オンライン収集の入力。
+    gap でなくなった項目の問いは answered へ遷移し、成果物には open のみ載る。"""
     id: str
     case_id: str
     item_key: str
     text: str
     channel: str                        # web / premium / vdr / expert / mgmt
     rank: int                           # 順位のみ。数値スコアは契約上返さない
-    status: Literal["open", "routed", "answered"] = "open"
+    status: Literal["open", "answered"] = "open"
 
 
 class Contradiction(BaseModel):
@@ -149,6 +150,11 @@ class GateError(Exception):
 
 class ConfigError(Exception):
     """設定不備。起動時に落とす。"""
+
+
+class UserInputError(Exception):
+    """ユーザ入力の誤り(存在しないケースID等)。CLI は rc=1 の1行で返す。
+    ValueError を使わないこと — pydantic ValidationError(バグ級)と混ざる。"""
 
 
 # --- Protocol(C-1: モジュールはこれにのみ依存する) ---

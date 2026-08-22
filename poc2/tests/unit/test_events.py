@@ -63,3 +63,26 @@ def test_full_wipe_detected():
 
 def test_empty_case_verifies_as_zero():
     assert _log().verify_chain("never-existed") == (True, 0)
+
+
+def test_legacy_db_without_anchor_is_not_false_positive():
+    """旧版DB(chain_heads導入前)の健全な連鎖を「改竄」と誤告発しない。
+    検証時にアンカーが初期化され、以降は末尾切り詰めも検知できる。"""
+    log = _log()
+    log.append("case1", "a", {})
+    log.append("case1", "b", {})
+    log.conn.execute("DELETE FROM chain_heads WHERE case_id='case1'")  # 旧版DBを再現
+    assert log.verify_chain("case1") == (True, 2)   # 偽陽性を出さない(バックフィル)
+    assert log.verify_chain("case1") == (True, 2)   # 以降も安定
+    log.conn.execute(
+        "DELETE FROM events WHERE seq=(SELECT MAX(seq) FROM events WHERE case_id='case1')")
+    assert log.verify_chain("case1")[0] is False    # アンカー化後は切り詰めを検知
+
+
+def test_append_to_legacy_db_initializes_anchor_with_true_count():
+    log = _log()
+    for i in range(3):
+        log.append("case1", "k", {"i": i})
+    log.conn.execute("DELETE FROM chain_heads WHERE case_id='case1'")
+    log.append("case1", "k", {"i": 3})               # 旧版DBへ新コードで追記
+    assert log.verify_chain("case1") == (True, 4)    # n=1 でなく実件数で初期化される

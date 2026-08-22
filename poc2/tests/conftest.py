@@ -5,10 +5,24 @@ from pathlib import Path
 POC_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(POC_DIR))
 
+import logging  # noqa: E402
+
 import pytest  # noqa: E402
 
 from prism.contracts import Evidence, ExtractedValue, SpecItem  # noqa: E402
 from prism.templates import load_standards  # noqa: E402
+
+
+@pytest.fixture(autouse=True)
+def _clean_prism_log_handlers():
+    """各テスト後にグローバル 'prism' ロガーのハンドラを外す。
+    CLI 経由のテストが付けたハンドラ(消えた tmp_path を指す)が
+    後続テストへ漏れる実行順依存を防ぐ。"""
+    yield
+    root = logging.getLogger("prism")
+    for h in list(root.handlers):
+        root.removeHandler(h)
+        h.close()
 
 
 class FakeLLM:

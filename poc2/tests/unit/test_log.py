@@ -6,19 +6,9 @@
 """
 import logging
 
-import pytest
-
 from prism import cli
 
-
-@pytest.fixture(autouse=True)
-def _clean_prism_handlers():
-    """このファイルの各テスト後にグローバルロガーのハンドラを外す(状態リーク防止)。"""
-    yield
-    root = logging.getLogger("prism")
-    for h in list(root.handlers):
-        root.removeHandler(h)
-        h.close()
+# ハンドラの後始末は tests/conftest.py の autouse fixture が全テストに対して行う
 from prism.contracts import LLMError
 from prism.extract import run as extract_run
 from prism.log import setup
@@ -54,7 +44,7 @@ def test_extract_degradation_is_logged(tmp_path, caplog):
         raise LLMError("api down")
 
     with caplog.at_level(logging.WARNING, logger="prism.extract"):
-        assert extract_run(src, [make_item()], FakeLLM(boom)) == []
+        assert extract_run(src, [make_item()], FakeLLM(boom)) is None
     assert any("抽出失敗" in r.message for r in caplog.records)
 
 

@@ -60,12 +60,13 @@ class Fetcher(Protocol):
 
 | 関数 | 事前条件 | 事後条件 |
 |---|---|---|
-| `pipeline.start_case(store,cfg,llm,name,…)` | **社名だけで呼べる** | Case+スペック実体化。archetype 未指定なら `identify` が外部情報から同定(P23)。同定不能は**推測せず** ConfigError で `--archetype` を要求。**人間の archetype 指定は既存ケースに対しても常に優先**(黙って無視しない — 差し替え時はスペック再実体化)。case_id は安全な文字集合のみ受理 |
+| `pipeline.start_case(store,cfg,llm,name,…)` | **社名だけで呼べる** | Case+スペック実体化。archetype 未指定なら `identify` が外部情報から同定(P23)。同定不能は**推測せず** ConfigError で `--archetype` を要求。**人間の archetype 指定は既存ケースに対しても常に優先**(黙って無視しない — 差し替え時はスペック再実体化+旧項目の判定・問いを削除)。case_id は安全な文字集合のみ受理。**既存ケースと社名が一致しない合流は拒否**(slugify 衝突による証拠混線の防止) |
 | `identify.archetype(llm,name,industry,choices)` | 選択肢=templates のアーキタイプID | 選択肢外の答えは受理しない |
 | `research.build_queries(case,items,judgments,max_queries)` | **純関数** | gap の優先順に最大 max_queries 件。公開経路(public/premium)を含む項目だけ — この述語は `fill.is_public_reachable` を audit・R4 判定と共有する。vdr/expert 項目にクエリを浪費しない(P21) |
 | `research.collect(store,case,gate,search,fetcher,queries,…)` | gate 必須 | 検索→取得→**必ずスナップショット(gate のパス検査を通す)**→Source(kind=web, untrusted)。同一 URL・同一 kind 内の同一 content_hash は再取得/再登録しない(冪等・P22)。取得予算(max_fetch)超過後は検索もしない。取得できなかった URL からは何も生まれない |
 | `ingest.scan(store,case,inbox_dir,data_dir,trust_tiers,gate)` | 任意の補助。フォルダが無くても正常 | 冪等(同一 kind 内 hash)・as_of 規約(不正日付は警告して mtime へ)・seller は主張扱い。**1ファイルの失敗はそのファイルだけ落とす**(C-7)。inbox 外を指すリンクは拒否 |
-| `extract.run` / `verify.*` / `audit.judge` / `fill.*` | v1 と同じ | v1 と同じ(I1/I3/I8/I9、P10/P19/P20/P22)+数値細則(§1)。クラスタは union-find(入力順に依存しない)。未クラスタ証拠は独立と数えない。expect_absent 項目で存在主張と不在確認が併存したら filled 不可 |
+| `extract.run(source,items,llm)` | — | Evidence[](正常。0件もある)または **None(LLM障害=再試行対象)**。1ソースの証拠数は項目数×2で切り詰め(警告つき) |
+| `verify.*` / `audit.judge` / `fill.*` | v1 と同じ | v1 と同じ(I1/I3/I8/I9、P10/P19/P20/P22)+数値細則(§1)。クラスタは union-find(入力順・インデックスに依存しないラベル)。同次元の数値が tolerance 超乖離する対は**決して併合しない**(矛盾検出を殺さない)。数値あり×なしも併合しない(橋の防止)。未クラスタ証拠は独立と数えない。expect_absent 項目で存在主張と不在確認が併存したら filled 不可 |
 | `pipeline.run(store,cfg,case_id,llm,search,fetcher)` | — | 各ラウンド: 補助取込 → **Web収集** → 抽出 → 検証 → 監査 → 停止判定(理由必須)。**再実行は続行**: 前回の停止理由・ラウンド数を今回の停止判定に持ち込まない。R4 は項目そのものから公開 gap を数える(質問リストの上限に影響されない) |
 
 ## 4. 不変条件 → テストの対応(CI で全て緑であること)
@@ -83,12 +84,34 @@ v1 の表(I1/I3/I6/I8/I9、C-5/C-6、E2E)に加えて:
 | identify は選択肢外を受理せず、失敗時は人間に委ねる | unit/test_identify |
 | 補助ドロップ(IM)を足しても I3(売り手単独 filled 不可)が保たれる | integration/test_research_e2e |
 
+**運用セマンティクスの明文化(v2.1 で追補)**:
+- **矛盾の resolve**: 矛盾は削除されない。毎ラウンド、open の対を現在の証拠状態で
+  再評価し、成立しなくなった対(クラスタ組替え・grounding の喪失)のみ
+  `status=resolved` へ遷移する — つまり resolve は**新しい証拠の追加によってのみ**
+  起きる。人間の黙認や時間経過では起きない
+- **問いの遷移**: gap でなくなった項目の問いは `answered` へ。発注仕様書には
+  `open` のみ載る
+- **一時障害の扱い**: LLM 障害で抽出できなかったソース・照合票が取れなかった証拠は
+  「失敗」を恒久記録せず、次ラウンドで再試行される(R2 予算はラウンド内でも守る:
+  予算到達後の照合は保留される)
+- **スペックの凍結**: SpecItem(必須項目・独立クラスタ数・鮮度・見張り重み)は
+  ケース作成時に焼き込まれ、テンプレ変更は既存ケースに遡及しない(監査履歴の一貫性)。
+  例外は人間の archetype 差替え(再実体化+旧項目の判定・問いの削除)。一方
+  stop_rules / trust_tiers / research / online の運転パラメータは実行のたびに読む
+
 **既知の限界(明示)**: ①chain_heads アンカーは同一 SQLite 内にあるため、
 「イベントとアンカーの両方を整合させて改竄する」攻撃は検知できない。本番では
-アンカー(件数+末尾ハッシュ)を外部ストレージ/署名へ退避する。
+アンカー(件数+末尾ハッシュ)を外部ストレージ/署名へ退避する(旧版DBの
+未アンカー連鎖は改竄扱いせず、検証時にアンカーを初期化する)。
 ②C-5 の taint 検査(`gate.check_untainted`)は「特権操作(シェル・外部送信等)」に
 untrusted 値を渡す時の門番だが、**PoC には特権操作が存在しない**ため呼び出し箇所も
 ない(APIとテストのみ)。特権操作を導入する変更は、必ずこの gate を経由すること。
+③**Web 収集の as_of は取得日**であり記事の発行日ではない。一次経路(Web)では
+「新鮮」の保証が「最近取得した」に弱まる — 台帳にその旨を明記して射影する。
+本番では本文からの発行日抽出を追加する。
+④Case.phase(T/N/DD)と Source.kind=filing、premium チャネルの収集は v2 では
+**未接続**(型と設定の受け口のみ)。業界名での起動は動くが、社名前提の項目まで
+クエリされる — フェーズTの意味論は未実装。
 
 ## 5. 変更管理
 

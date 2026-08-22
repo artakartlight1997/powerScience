@@ -65,6 +65,7 @@ def render_order_spec(case: Case, items: list[SpecItem], judgments: dict[str, Ju
     lines = [f"# コンサル発注仕様書(叩き台) — {case.name}", "",
              "公開情報で **filled** の項目は発注不要。以下は未充足項目とその取得経路。", "",
              "| # | 問い | チャネル | 現状 |", "|---|---|---|---|"]
+    questions = [q for q in questions if q.status == "open"]  # 解消済みの問いは載せない
     for q in sorted(questions, key=lambda q: q.rank):
         it = by_key.get(q.item_key)
         j = judgments.get(it.id) if it else None
@@ -103,6 +104,7 @@ def render_ledger(case: Case, evidences: list[Evidence], sources: list[Source]) 
     """O4 証拠台帳: 全証拠の生きた一覧(検証状態・クラスタ・出所つき)。"""
     src = {s.id: s for s in sources}
     lines = [f"# 証拠台帳 — {case.name}", "",
+             "as_of は情報の入手時点(Web 収集分は**取得日**であり記事の発行日ではない)。", "",
              "| 項目 | 引用(先頭60字) | 値 | 出所 | as_of | grounded | クラスタ | 売り手? |",
              "|---|---|---|---|---|---|---|---|"]
     for e in sorted(evidences, key=lambda e: (e.item_key, e.id)):

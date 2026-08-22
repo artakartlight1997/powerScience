@@ -49,7 +49,11 @@ def parse_number(raw: str | None) -> ExtractedValue | None:
     return ExtractedValue(raw=raw, num=-num if sign else num, unit=unit)
 
 
-def run(source: Source, spec_items: list[SpecItem], llm: LLMClient) -> list[Evidence]:
+def run(source: Source, spec_items: list[SpecItem],
+        llm: LLMClient) -> list[Evidence] | None:
+    """抽出。戻り値の区別: [] = 正常に証拠ゼロ / None = LLM障害(再試行に値する)。
+    呼び出し側(pipeline)は None のソースを次ラウンドで再試行する(C-7 の一時障害を
+    台帳の恒久事実にしない)。"""
     text = snapshot_text(source.snapshot_path)
     if not text:
         log.warning("抽出スキップ: source=%s にスナップショット本文がない", source.id)
@@ -62,12 +66,22 @@ def run(source: Source, spec_items: list[SpecItem], llm: LLMClient) -> list[Evid
     try:
         out = llm.complete_json("generator", SYSTEM, user)
     except LLMError as e:
-        log.warning("抽出失敗(C-7縮退): source=%s kind=%s: %s", source.id, source.kind, e)
-        return []  # C-7: このソースの抽出のみ落とす
+        log.warning("抽出失敗(C-7縮退・次ラウンド再試行): source=%s kind=%s: %s",
+                    source.id, source.kind, e)
+        return None  # このソースの抽出のみ落とす。一時障害なので再試行対象
+    rows = out.get("evidences")
+    if not isinstance(rows, list):
+        log.warning("抽出: source=%s の evidences が list でない → 0件扱い", source.id)
+        rows = []
+    cap = 2 * len(spec_items)  # 1ソースからの過剰生成はノイズ+R2予算の食い潰し
+    if len(rows) > cap:
+        log.warning("抽出: source=%s の証拠 %d 件を上限 %d に切り詰め",
+                    source.id, len(rows), cap)
+        rows = rows[:cap]
     valid_keys = {it.key for it in spec_items}
     evidences: list[Evidence] = []
     dropped = 0
-    for row in out.get("evidences", []):
+    for row in rows:
         if not isinstance(row, dict):
             dropped += 1
             continue

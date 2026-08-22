@@ -108,6 +108,67 @@ def test_similar_text_different_numbers_stay_separate_and_contradict():
     assert len(contradictions("case1", out, existing=[])) == 1
 
 
+def test_no_num_bridge_cannot_merge_conflicting_numbers():
+    """数値なし証拠(範囲表現等)が対立する数値の「橋」になって矛盾検出を殺さない(P20)。"""
+    a = make_ev(id="ev-a", quote="当社の売上高は10億円である", num=1e9, unit="億円")
+    b = make_ev(id="ev-b", quote="当社の売上高は12億円である", num=1.2e9, unit="億円")
+    d = make_ev(id="ev-d", quote="当社の売上高は10〜12億円である")  # num なし
+    out = cluster([a, d, b])
+    ids = {e.id: e.cluster_id for e in out}
+    assert ids["ev-a"] != ids["ev-b"]           # 橋を渡らない
+    assert len(contradictions("case1", out, existing=[])) == 1  # 矛盾は生きている
+
+
+def test_rounding_variants_do_not_become_two_votes():
+    """同一上流の丸め違い(95% と 95.4%)を独立2票=filled に化けさせない(P22)。"""
+    a = make_ev(id="e1", quote="エンジニアの稼働率は約95%で推移している",
+                num=95.0, unit="%")
+    b = make_ev(id="e2", quote="エンジニアの稼働率は95.4%で推移している",
+                num=95.4, unit="%")
+    out = cluster([a, b])
+    ids = {e.id: e.cluster_id for e in out}
+    assert ids["e1"] == ids["e2"]
+
+
+def test_cluster_labels_stable_when_new_evidence_added():
+    """既存成分のラベルは新証拠の追加で揺れない(無変更 re-put を誘発しない)。"""
+    a = make_ev(id="ev-bbb", quote="市場規模は約1兆円である", num=1e12, unit="兆円")
+    b = make_ev(id="ev-ccc", quote="市場は1兆円規模と推計される", num=1e12, unit="兆円")
+    before = {e.id: e.cluster_id for e in cluster([a, b])}
+    c = make_ev(id="ev-aaa", quote="全く別の話題の証拠")  # 辞書順で先頭に来る新証拠
+    after = {e.id: e.cluster_id for e in cluster([c, a, b])}
+    assert before["ev-bbb"] == after["ev-bbb"]
+    assert before["ev-ccc"] == after["ev-ccc"]
+
+
+def test_reevaluate_resolves_only_dead_contradictions():
+    """resolve は証拠状態の変化によってのみ起きる。生きている矛盾は触らない(P20)。"""
+    from prism.verify import reevaluate_contradictions
+    a = make_ev(id="e1", quote="稼働率95%", num=95.0, unit="%", cluster_id="k-x")
+    b = make_ev(id="e2", quote="稼働率80%", num=80.0, unit="%", cluster_id="k-y")
+    cx = contradictions("case1", [a, b], existing=[])
+    assert len(cx) == 1
+    # まだ成立 → 触らない
+    assert reevaluate_contradictions(cx, [a, b]) == []
+    # 片側の grounding が失われた → resolved
+    b_fail = b.model_copy(update={"grounded": "fail"})
+    resolved = reevaluate_contradictions(cx, [a, b_fail])
+    assert len(resolved) == 1 and resolved[0].status == "resolved"
+    # 同一クラスタに組み替わった → resolved
+    b_same = b.model_copy(update={"cluster_id": "k-x"})
+    assert reevaluate_contradictions(cx, [a, b_same])[0].status == "resolved"
+
+
+def test_ground_double_llm_error_returns_none_not_fail():
+    """検証手段の一時喪失を恒久 fail にしない(次ラウンド再試行)。"""
+    from prism.verify import ground
+
+    def boom(r, s, u):
+        raise LLMError("down")
+    ev = make_ev(quote="本文にない引用", grounded="none")
+    assert ground(ev, "別の本文", FakeLLM(boom)) == "none"
+
+
 def test_cluster_assignment_is_order_invariant():
     """A~B, B~C, A≁C でも union-find で入力順によらず同一の分割になる。"""
     base = "同社の主力事業はITサービスの提供であり顧客基盤は安定している"
