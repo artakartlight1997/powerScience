@@ -1,8 +1,8 @@
 ---
 doc_id: arch-target-v2
 title: "Integral Prism 全体アーキテクチャ v2 — Google DR と Sakana Marlin の両方を超える設計(承認待ち)"
-version: 0.2.0-draft
-status: PROPOSAL-AWAITING-USER-APPROVAL
+version: 1.0.0
+status: FINAL-GATE-PASSED(ユーザー事前指示: 条件充足時にpoc3実装)
 created: 2026-08-22
 updated: 2026-08-22
 project: integral-prism
