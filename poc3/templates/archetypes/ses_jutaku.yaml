@@ -1,0 +1,33 @@
+# 校正済みアーキタイプ第1号: ITサービス(SES × 受託)
+# 出典: research/coding-strategy/10-bizdd-coverage-spec.md v0.3(ユーザー校正済み)
+# 混合業態の実例。箱0でセグメントを割ってから各セグメントに別の型を適用する。
+# アーキタイプの追加は定義ファイルで行い、コード変更を要しない(運用ルール)。
+id: ses_jutaku
+name: ITサービス(SES×受託)
+industry_keywords: [SES, システムエンジニアリングサービス, 受託開発, SIer, ITサービス]
+segments:
+  - id: ses
+    name: SES
+    archetype: utilization        # 稼働率型 → templates/drivers/utilization.yaml
+    revenue_equation: エンジニア数 × 稼働率 × 単価
+  - id: jutaku
+    name: 受託開発
+    archetype: order              # 受注型 → templates/drivers/order.yaml
+    revenue_equation: 受注残の消化 + 新規受注
+# 第2層: 業態固有の必須項目(箱の問いに差し込む・差し替える)
+items:
+  - {id: ses-mix, box: box0, segment: null, text: 受託/SES比率とその推移・戦略(受託に寄せるとマージンと炎上リスクが同時に上がる), must: true, retrievability: [vdr, public], driver: tree_split}
+  - {id: ses-headcount, box: box6, segment: ses, text: エンジニア数(正社員/BP比率)の水準と推移, must: true, retrievability: [public, vdr], driver: volume_cap}
+  - {id: ses-hiring, box: box8, segment: ses, text: 採用力・離職率(=成長制約そのもの), must: true, retrievability: [vdr, public], driver: volume_cap}
+  - {id: ses-skill, box: box4, segment: ses, text: スキル構成(上流/下流・モダン/レガシー), must: true, retrievability: [vdr, expert], driver: price}
+  - {id: ses-shoryu, box: box5, segment: ses, text: 商流の深さ(何次請けか=単価の上限), must: true, retrievability: [expert, vdr], driver: price}
+  - {id: ses-spread, box: box4, segment: ses, text: 顧客単価とBP仕入単価のスプレッド, must: true, retrievability: [vdr], driver: price_margin}
+  - {id: ses-utilization, box: box6, segment: ses, text: 稼働率(アベイラブル率)の水準と推移, must: true, retrievability: [vdr], driver: utilization}
+  - {id: ses-termination, box: box7, segment: ses, text: 契約の即時解約条項の有無, must: true, retrievability: [vdr], driver: volume_stability}
+  - {id: jutaku-backlog, box: box7, segment: jutaku, text: 受注残・パイプラインの水準と推移, must: true, retrievability: [vdr], driver: volume}
+  - {id: jutaku-contract, box: box4, segment: jutaku, text: 契約形態の内訳(固定価格 vs 準委任), must: true, retrievability: [vdr], driver: price}
+  - {id: jutaku-progress, box: box7, segment: jutaku, text: 進捗・消化率と進行基準の会計処理, must: true, retrievability: [vdr], driver: verification}
+  - {id: jutaku-enjo, box: box6, segment: jutaku, text: 炎上案件の履歴・赤字案件率、PM能力・品質管理・検収条件, must: true, retrievability: [vdr, expert], driver: downside_margin}
+  - {id: ses-sga, box: box6, segment: null, text: 販管費の構造(採用費・営業費)、受託は外注費管理も, must: true, retrievability: [vdr], driver: margin}
+  - {id: ses-capex, box: box6, segment: null, text: 設備投資ほぼ不要の確認(アセットライト・高キャッシュ変換率), must: true, retrievability: [public], driver: cash_conversion, expect_absent: true}
+# expect_absent: 「該当なし」が正解の項目。不在の確認自体が確認済みfilled(仕様v0.3 ④)

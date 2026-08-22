@@ -1,0 +1,16 @@
+# EBITDAドライバーツリー: 受注型(建設・SI・受託開発)
+# 収益 = 受注残の消化 + 新規受注。下方リスクは炎上(赤字案件)。
+id: order
+name: 受注型
+revenue_equation: 受注残の消化 + 新規受注
+nodes:
+  - {id: revenue, text: 売上, parent: null}
+  - {id: volume, text: 受注残・パイプライン, parent: revenue}
+  - {id: price, text: 契約単価・契約形態(固定価格/準委任), parent: revenue}
+  - {id: verification, text: 進行基準の会計処理(検証横断), parent: null}
+  - {id: margin, text: マージン, parent: null}
+  - {id: downside_margin, text: 炎上案件・赤字案件率, parent: margin, note: 固定価格比率が高いほどリスク増}
+  - {id: execution_risk, text: PM能力・品質管理・検収条件, parent: null}
+watch_defaults:
+  high: [volume, downside_margin]
+  medium: [price, verification]

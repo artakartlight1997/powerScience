@@ -1,0 +1,19 @@
+# EBITDAドライバーツリー: 稼働率型(人材・SES・運輸・施設)
+# 収益 = 供給量(人数等) × 稼働率 × 単価。成長制約は供給量の獲得(採用力)。
+id: utilization
+name: 稼働率型
+revenue_equation: 供給量 × 稼働率 × 単価
+nodes:
+  - {id: revenue, text: 売上, parent: null}
+  - {id: volume_cap, text: 供給量(エンジニア数・車両数・部屋数), parent: revenue, note: 成長の物理的制約。労働集約なら採用力が上限}
+  - {id: utilization, text: 稼働率(アベイラブル率), parent: revenue}
+  - {id: price, text: 単価(スキル・商流・契約形態で決まる), parent: revenue}
+  - {id: margin, text: マージン, parent: null}
+  - {id: price_margin, text: 単価と仕入単価のスプレッド, parent: margin}
+  - {id: downside_margin, text: 下方リスク(赤字案件・解約), parent: margin}
+  - {id: volume_stability, text: 契約の安定性(即時解約条項・契約期間), parent: revenue}
+  - {id: cash_conversion, text: キャッシュ変換率(設備投資ほぼ不要), parent: null}
+  - {id: execution_risk, text: 実行リスク(採用・離職・キーマン), parent: null}
+watch_defaults:                 # 見張り台帳の初期重み: thesis_dependence の事前値
+  high: [volume_cap, utilization, price]
+  medium: [price_margin, downside_margin, volume_stability]

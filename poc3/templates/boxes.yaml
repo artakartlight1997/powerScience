@@ -1,0 +1,104 @@
+# 固定の物差し: Biz DD カバレッジ・スペック(第1層 = 業態非依存の問い)
+# 出典: research/coding-strategy/10-bizdd-coverage-spec.md v0.3
+# 変更は人間の承認を要する(P13)。アーキタイプ(第2層)が項目を差し替える。
+# retrievability: public / premium / vdr / expert / calc
+spec_version: "0.3"
+boxes:
+  - id: box0
+    name: 事業構成の分解
+    order: 0
+    note: 最初に実行。セグメントを割ってから各セグメントに別アーキタイプを適用する
+    items:
+      - {id: b0-segments, text: セグメント構成比(売上・利益)と推移, must: true, retrievability: [vdr, public], driver: tree_split}
+      - {id: b0-archetype, text: 各セグメントの収益方程式アーキタイプ同定, must: true, retrievability: [public], driver: tree_root}
+      - {id: b0-mix-strategy, text: セグメント間ミックスの戦略(マージンとリスクのトレードオフ), must: true, retrievability: [expert, vdr], driver: growth_lever}
+  - id: box1
+    name: 市場
+    order: 1
+    items:
+      - {id: b1-size, text: 市場規模(金額・数量、セグメント別), must: true, retrievability: [public, premium], driver: volume_market}
+      - {id: b1-growth, text: 過去成長率・将来成長率と予測根拠(出所別に), must: true, retrievability: [public, premium], driver: volume_market}
+      - {id: b1-decompose, text: 成長の分解(数量×価格、構造要因×景気要因), must: true, retrievability: [premium, expert], driver: volume_price}
+      - {id: b1-structure, text: 市場の構造変化(技術・規制・代替品・顧客行動), must: true, retrievability: [public, expert], driver: market_threat}
+      - {id: b1-cyclicality, text: 景気感応度・シクリカリティ, must: false, retrievability: [public], driver: volume_market}
+  - id: box2
+    name: 顧客
+    order: 2
+    items:
+      - {id: b2-segments, text: 顧客セグメントと構成比, must: true, retrievability: [vdr], driver: volume_share}
+      - {id: b2-concentration, text: 上位顧客集中度(Top1/5/10), must: true, retrievability: [vdr], driver: downside_volume}
+      - {id: b2-retention, text: 継続率・解約率の水準と推移, must: true, retrievability: [vdr], driver: volume}
+      - {id: b2-kpc, text: 購買決定要因(KPC)と価格感度, must: true, retrievability: [expert], driver: price}
+      - {id: b2-switching, text: スイッチングコストの実在性, must: false, retrievability: [expert], driver: share_defense}
+  - id: box3
+    name: 競合
+    order: 3
+    items:
+      - {id: b3-map, text: 競合マップとシェア(推移含む), must: true, retrievability: [public, premium], driver: share}
+      - {id: b3-positioning, text: 対象会社のポジショニング(何で勝っているか), must: true, retrievability: [public, expert], driver: share}
+      - {id: b3-moves, text: 競合の戦略的動き(投資・新製品・価格), must: true, retrievability: [public], driver: share_threat}
+      - {id: b3-entrants, text: 新規参入・代替品の脅威, must: true, retrievability: [public, expert], driver: market_share}
+      - {id: b3-basis-shift, text: 競争の基盤の変化可能性(AI等), must: false, retrievability: [expert], driver: structure_change}
+  - id: box4
+    name: 製品・サービス・価格
+    order: 4
+    items:
+      - {id: b4-value, text: 提供価値と差別化の実体(顧客側の認識か), must: true, retrievability: [expert], driver: price_share}
+      - {id: b4-pricing, text: 価格設定と価格改定の履歴(値上げ実績), must: true, retrievability: [vdr], driver: price}
+      - {id: b4-passthrough, text: 価格転嫁力(コスト上昇時に転嫁できた実績), must: true, retrievability: [vdr, expert], driver: price_margin}
+      - {id: b4-mix, text: 製品ミックスと収益性の分布, must: true, retrievability: [vdr], driver: price_margin}
+      - {id: b4-pipeline, text: パイプライン・製品ライフサイクル, must: false, retrievability: [vdr], driver: growth_lever}
+  - id: box5
+    name: チャネル・営業
+    order: 5
+    items:
+      - {id: b5-structure, text: チャネル構造と依存度(代理店・プラットフォーム), must: true, retrievability: [vdr], driver: downside_volume}
+      - {id: b5-salesforce, text: 営業体制と人的依存, must: true, retrievability: [vdr, expert], driver: volume}
+      - {id: b5-cac, text: 顧客獲得の再現性(獲得コスト的観点), must: false, retrievability: [vdr], driver: growth_lever}
+      - {id: b5-channel-shift, text: チャネルの構造変化(直販化・EC化等), must: false, retrievability: [public, expert], driver: volume}
+  - id: box6
+    name: オペレーション・サプライ・資本
+    order: 6
+    items:
+      - {id: b6-cost, text: コスト構造の分解(変動/固定、原価と販管費を分けて), must: true, retrievability: [vdr], driver: margin}
+      - {id: b6-valuechain, text: バリューチェーン上の位置(どこで付加価値を取るか・川上川下の交渉力), must: true, retrievability: [public, expert], driver: margin_share}
+      - {id: b6-supplier, text: サプライヤー集中と調達リスク, must: true, retrievability: [vdr], driver: downside_margin}
+      - {id: b6-capacity, text: キャパシティと拡張性(成長の物理的制約。労働集約なら採用力), must: true, retrievability: [vdr, expert], driver: volume_cap}
+      - {id: b6-capex, text: 設備投資・資本集約度(「ほぼ不要」も確認済みfilledとして記録), must: true, retrievability: [vdr, public], driver: cash_conversion, expect_absent: true}
+      - {id: b6-quality, text: 品質・事故・リコール履歴, must: false, retrievability: [public, vdr], driver: downside}
+  - id: box7
+    name: 収益の質
+    order: 7
+    items:
+      - {id: b7-recurring, text: 収益の性質(リカーリング比率・契約期間・解約条項), must: true, retrievability: [vdr], driver: volume_stability}
+      - {id: b7-accounting, text: 会計方針の変更履歴, must: true, retrievability: [public], driver: verification}
+      - {id: b7-unit-econ, text: 顧客単位・製品単位の採算, must: true, retrievability: [vdr], driver: margin}
+      - {id: b7-wc, text: 運転資本の特性・季節性, must: false, retrievability: [vdr], driver: cash}
+      - {id: b7-budget, text: 予算達成率の履歴(計画の信頼性), must: true, retrievability: [vdr], driver: tree_confidence}
+  - id: box8
+    name: 経営・組織
+    order: 8
+    items:
+      - {id: b8-keyman, text: キーマン依存(創業者・トップ営業・技術)と継続意向, must: true, retrievability: [vdr, expert], driver: execution_risk}
+      - {id: b8-bench, text: 組織の厚み・後継, must: true, retrievability: [expert], driver: execution_risk}
+      - {id: b8-attrition, text: 離職率・採用力, must: false, retrievability: [vdr, public], driver: execution_risk}
+      - {id: b8-governance, text: ガバナンス・関連当事者取引, must: true, retrievability: [public, vdr], driver: downside}
+  - id: box9
+    name: 規制・外部リスク
+    order: 9
+    items:
+      - {id: b9-regulation, text: 事業に効く規制と改正動向, must: true, retrievability: [public], driver: market_downside}
+      - {id: b9-license, text: 許認可・ライセンスの安定性, must: true, retrievability: [public, vdr], driver: continuity}
+      - {id: b9-litigation, text: 訴訟・コンプライアンス履歴, must: true, retrievability: [public, vdr], driver: downside}
+      - {id: b9-esg, text: ESG・レピュテーション, must: false, retrievability: [public], driver: downside}
+      - {id: b9-macro, text: 地政学・為替・マクロ感応度, must: false, retrievability: [public], driver: market}
+  - id: box10
+    name: 成長仮説の検証
+    order: 10
+    note: ドライバーツリーとの接続点
+    items:
+      - {id: b10-equity-story, text: エクイティストーリーの分解(どのドライバーに賭けているか), must: true, retrievability: [public], driver: tree_all}
+      - {id: b10-levers, text: 各成長レバーの実現可能性(値上げ/新製品/新地域/クロスセル/M&A/コスト), must: true, retrievability: [public, expert], driver: growth_lever}
+      - {id: b10-baserate, text: 類似事例のbase rate(outside view), must: true, retrievability: [premium], driver: tree_all}
+      - {id: b10-downside, text: ダウンサイドシナリオと撤退可能性, must: true, retrievability: [calc], driver: downside}
+      - {id: b10-why-sell, text: なぜ今売りに出ているか(売り手の動機), must: true, retrievability: [expert], driver: info_asymmetry}
