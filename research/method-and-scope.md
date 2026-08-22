@@ -1,7 +1,7 @@
 ---
 doc_id: survey-00-method
 title: "調査方法・スコープ・信頼度の扱い"
-version: 0.1.0
+version: 0.2.0
 status: draft
 created: 2026-08-22
 updated: 2026-08-22
@@ -72,8 +72,36 @@ Integral Prism（PE / 投資プロ向けリサーチシステム）の **アー�
 - **投資プロ**: PE / VC / ヘッジファンド / IB / 事業会社の投資・経営企画担当。
 - **本システム / IP**: Integral Prism（仮称）。
 
-## 6. 更新運用
+## 6. ファイル分割の方針（v0.2.0）
 
-- 各ファイルはフロントマターに `version` / `updated` を持つ。
+**1ファイル = 1トピック**。基準は
+「**そのトピックについて知りたい人が、そのファイルだけ読めば足りる**」こと。
+
+- そのため、**トピック間で事実の重複記述を許す**（出典 ID は共通なので追跡できる）
+- 横断的な統合は `topics/06-synthesis/` に置き、個別トピックからは相互リンクで到達させる
+- **情報の欠落を防ぐことを、簡潔さより優先する**
+
+構造:
+
+```
+research/
+  README.md                 索引
+  method-and-scope.md       ← 本ファイル
+  topics/01-competitors/    競合（13）
+  topics/02-methods/        手法（14）
+  topics/03-evaluation/     評価（6）
+  topics/04-domain/         ドメイン（4）
+  topics/05-strategy/       戦略（3）
+  topics/06-synthesis/      統合（3）
+  notes/                    未決論点 D1-D10 / 宿題 Q1-Q12
+  metadata/                 スキーマ・索引・出典・主張・分類・用語
+```
+
+## 7. 更新運用
+
+- 各ファイルはフロントマターに `doc_id` / `version` / `updated` を持つ。
 - 出典は `metadata/sources.json` に一元登録し、本文からは `[S-xxx]` で参照する。
-- 事実主張は `metadata/claims.json` に切り出し、確度と根拠 ID を持たせる（後で自動再検証に回せる形）。
+  `used_in` は**手で書かず、ファイル走査から自動再生成**する。
+- 事実主張は `metadata/claims.json` に切り出し、確度と根拠 ID を持たせる（自動再検証に回せる形）。
+- `metadata/index.json` はフロントマターから機械生成する。手で編集しない。
+- 整合性チェック項目は `metadata/schema.md` §8。

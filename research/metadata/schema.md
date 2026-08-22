@@ -1,7 +1,7 @@
 ---
 doc_id: metadata-schema
 title: "メタデータ・スキーマ定義"
-version: 0.1.0
+version: 0.2.0
 created: 2026-08-22
 updated: 2026-08-22
 project: integral-prism
@@ -79,11 +79,34 @@ owner: email                              # 任意
 - `design_principles`: P1〜P12。各原則は出典 ID を持つ
 - `tags`: 横断タグ
 
-## 5. 命名規約
+## 5. ディレクトリ構造（v0.2.0）
+
+```
+research/
+  README.md                 索引
+  method-and-scope.md       調査方法・確度スケール（最初に読む）
+  topics/
+    01-competitors/         競合（13ファイル）
+    02-methods/             手法（14ファイル）
+    03-evaluation/          評価（6ファイル）
+    04-domain/              ドメイン（4ファイル）
+    05-strategy/            戦略（3ファイル）
+    06-synthesis/           統合（3ファイル）
+  notes/                    未決論点・宿題
+  metadata/                 スキーマ・索引・出典・主張・分類・用語
+```
+
+**分割方針**: 1ファイル = 1トピック。
+「あるトピックについて知りたい人が、そのファイルだけ読めば足りる」ことを基準にする。
+そのため**トピック間で事実の重複記述を許す**（ただし出典 ID は共通）。
+横断的な統合は `topics/06-synthesis/` に置き、個別トピックからは相互リンクで到達させる。
+
+## 6. 命名規約
 
 | 種別 | 形式 | 例 |
 |---|---|---|
-| サーベイ文書 | `NN-kebab-case.md` | `07-verification-attribution-calibration.md` |
+| トピック文書 | `kebab-case.md`（トピック群ディレクトリ配下） | `topics/02-methods/verifier-design.md` |
+| doc_id | `t-<topic-slug>` | `t-verifier-design` |
 | 出典 ID | `S-NNN` | `S-057` |
 | 主張 ID | `C-NNN` | `C-015` |
 | 設計原則 | `P-N` / `PN` | `P6` |
@@ -91,10 +114,31 @@ owner: email                              # 任意
 | 議論論点 | `D-N` / `DN` | `D2` |
 | 未解決 | `Q-N` / `QN` | `Q3` |
 
-## 6. 整合性チェック（推奨 CI）
+## 7. index.json（ファイル索引）  {#index}
+
+```jsonc
+{
+  "doc_id": "t-verifier-design",
+  "path": "topics/02-methods/verifier-design.md",
+  "title": "検証器の設計 — ...",
+  "topic_group": "competitors|methods|evaluation|domain|strategy|synthesis|meta|notes",
+  "tags": ["..."],
+  "confidence": "high|medium-high|medium|low",
+  "primary_sources": ["S-036"],
+  "related_topics": ["t-citation-attribution"],
+  "lines": 78
+}
+```
+
+生成は機械的に行う（フロントマターから抽出）。手で編集しない。
+
+## 8. 整合性チェック（推奨 CI）
 
 1. 本文中の `S-xxx` が全て `sources.json` に存在する
-2. `sources.json` の `used_in` が実ファイルと一致する
+2. `sources.json` の `used_in` が実ファイルと一致する（**自動再生成**する）
 3. `claims.json` の `sources` が全て存在する
 4. `confidence: C|D` の主張が、設計決定文書から参照されていない
 5. 各 md のフロントマターが必須キーを持つ
+6. **相対リンクが全て解決する**（トピック間リンク）
+7. `index.json` が実ファイル一覧と一致する
+8. **used_in が空の出典が存在しない**（孤立出典の検出）

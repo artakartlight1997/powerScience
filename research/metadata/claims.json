@@ -1,36 +1,346 @@
 {
   "$schema": "./schema.md#claims",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "generated": "2026-08-22",
   "note": "設計判断に効く『数値つきの事実主張』のみを抽出。confidence が C/D のものを設計前提にしないこと。再検証は verify_by の手順で行う。",
   "claims": [
-    {"id":"C-001","claim":"Sakana Marlin は 2026-06-15 に商用提供開始された Sakana AI 初の商用プロダクトである","value":"2026-06-15","sources":["S-001","S-002","S-004"],"confidence":"A","topic":"competitor","verify_by":"公式リリース原文"},
-    {"id":"C-002","claim":"Marlin は最大約8時間、無人で自律実行しレポートとスライドを生成する","value":"<=8h, 最大100ページ","sources":["S-001","S-003","S-005"],"confidence":"A","topic":"competitor"},
-    {"id":"C-003","claim":"Marlin の価格は 1実行=100クレジット、追加クレジット ¥98/個、月額プランは ¥150,000 から","value":"~¥9,800/run, ¥150,000/月〜","sources":["S-004","S-005"],"confidence":"B","topic":"pricing","verify_by":"価格ページ・見積"},
-    {"id":"C-004","claim":"Marlin の中核は AB-MCTS（NeurIPS 2025 Spotlight）と AI Scientist 由来のワークフロー基盤である","value":"AB-MCTS + AI Scientist","sources":["S-005","S-006"],"confidence":"A","topic":"competitor-architecture"},
-    {"id":"C-005","claim":"Marlin の探索の報酬設計は公開されていない","value":"unknown","sources":[],"confidence":"D","topic":"competitor-architecture","verify_by":"論文・製品ドキュメント・実測"},
-    {"id":"C-006","claim":"AB-MCTS（マルチモデル）は ARC-AGI-2 で 39.2% を達成し、単一フロンティアモデルを 15pt 以上上回った","value":"39.2%, +15pt","sources":["S-010"],"confidence":"A","topic":"search"},
-    {"id":"C-007","claim":"TreeQuest は Apache-2.0 で公開されており、AB-MCTS 自体は専有技術ではない","value":"Apache-2.0","sources":["S-009"],"confidence":"A","topic":"moat"},
-    {"id":"C-008","claim":"Gemini Deep Research API は 1タスク約 $2（標準）/ $5（Max）、検索コストが $1.12〜$2.24 を占める","value":"$2 / $5 per task","sources":["S-020"],"confidence":"B","topic":"pricing","verify_by":"実測課金"},
-    {"id":"C-009","claim":"Gemini DR は非同期タスクマネージャで planner とタスクモデル間の共有状態を保持し、部分失敗から回復する","value":"async shared-state","sources":["S-018"],"confidence":"B","topic":"competitor-architecture"},
-    {"id":"C-010","claim":"AI co-scientist は Elo トーナメントで仮説を順位付けし、test-time compute の増加に伴い Elo が向上する","value":"Elo ↑ with compute","sources":["S-022","S-023"],"confidence":"A","topic":"reward-design"},
-    {"id":"C-011","claim":"Anthropic の Research は マルチエージェント構成で単一 Opus を社内評価で 90.2% 上回った","value":"+90.2%","sources":["S-028"],"confidence":"B","topic":"orchestration"},
-    {"id":"C-012","claim":"MAST の分析では失敗の 41.8% が仕様/設計、36.9% がエージェント間不整合、21.3% が検証失敗である","value":"41.8/36.9/21.3 %","sources":["S-029"],"confidence":"A","topic":"failure-modes"},
-    {"id":"C-013","claim":"未協調のマルチエージェントは誤りを最大17倍に増幅しうるが、中央集権＋検証で約4.4倍に抑えられる","value":"17x -> 4.4x","sources":["S-029"],"confidence":"B","topic":"failure-modes"},
-    {"id":"C-014","claim":"Deep Research 生成レポートの引用は、URL 到達性 94%超・関連性 80%超に対し、事実整合性は 39〜77% にとどまる","value":"fact-check 39-77%","sources":["S-057"],"confidence":"A","topic":"attribution","impact":"core-differentiation"},
-    {"id":"C-015","claim":"ツール呼び出しを 2 → 150 に増やすと、引用の事実整合性はフロンティア2モデル平均で約42%低下する","value":"-42%","sources":["S-057"],"confidence":"A","topic":"attribution","impact":"『長時間探索＝高品質』を否定する最重要の反証"},
-    {"id":"C-016","claim":"LLM-as-a-Judge にはルーブリック選択肢の位置バイアスがあり、方向はモデル固有である","value":"position bias","sources":["S-058"],"confidence":"A","topic":"judge-bias"},
-    {"id":"C-017","claim":"LLM 予測システムは ForecastBench 系で superforecaster と統計的に区別できない水準に到達している","value":"Brier 0.0753 vs 0.0740","sources":["S-060"],"confidence":"B","topic":"calibration","verify_by":"リーダーボード条件の確認"},
-    {"id":"C-018","claim":"Brier 報酬でのファインチューンにより ECE ≈ 0.042 まで較正が改善した報告がある","value":"ECE 0.042","sources":["S-060"],"confidence":"B","topic":"calibration"},
-    {"id":"C-019","claim":"戦略的に設計された敵対エージェント1体で、多エージェント討論の精度が 10〜40% 低下し誤答合意が 30%超増加する","value":"-10..40%","sources":["S-046"],"confidence":"A","topic":"debate-risk"},
-    {"id":"C-020","claim":"長文脈は主要モデル横断で性能劣化（context rot）を起こし、context editing で +29%、memory tool 併用で +39% の改善が報告されている","value":"+29% / +39%","sources":["S-050"],"confidence":"B","topic":"context"},
-    {"id":"C-021","claim":"オープンな 30B(A3B) モデルが BrowseComp 43.4 / GAIA 70.9 / HLE 32.9 を達成している","value":"BrowseComp 43.4","sources":["S-030"],"confidence":"A","topic":"commoditization"},
-    {"id":"C-022","claim":"MMLU で GPT-3.5 相当の推論単価は 2022/11 の約 $20/M から 2024/10 の約 $0.07/M へ低下した","value":"~1/300","sources":["S-088"],"confidence":"B","topic":"commoditization"},
-    {"id":"C-023","claim":"RouteLLM は MT-Bench で約85%のコスト削減と GPT-4 品質の約95%維持を報告（フロンティア呼出は約26%）","value":"-85% cost","sources":["S-089"],"confidence":"B","topic":"cost"},
-    {"id":"C-024","claim":"大手 PE の 60% 超が agentic AI を試験導入/拡大中だが、スケールできているのは 10〜15% にとどまる","value":"60% vs 10-15%","sources":["S-076"],"confidence":"B","topic":"market"},
-    {"id":"C-025","claim":"文書抽出・スクリーニングでは 70〜85% の時間削減、回収期間9ヶ月未満が報告されている","value":"-70..85%","sources":["S-076"],"confidence":"C","topic":"market"},
-    {"id":"C-026","claim":"EU AI Act の高リスク義務は 2026-08-02 に完全適用され、監査ログは改竄検知可能な形で10年保持が求められる","value":"2026-08-02 / 10年","sources":["S-079","S-080"],"confidence":"B","topic":"regulation","verify_by":"法務レビュー（附属書IIIの該当性含む）"},
-    {"id":"C-027","claim":"Sakana は EDINET-Bench（2014-2024 の有報 約4万件以上）を公開しており、日本語金融データに既に参入している","value":"~40,000 filings","sources":["S-016"],"confidence":"B","topic":"japan-data"},
-    {"id":"C-028","claim":"BED-LLM は期待情報利得(EIG)最大化により逐次質問を選択し、情報収集効率を改善する","value":"EIG-based","sources":["S-040"],"confidence":"A","topic":"information-value","impact":"IP の報酬設計の理論的基盤"}
+    {
+      "id": "C-001",
+      "claim": "Sakana Marlin は 2026-06-15 に商用提供開始された Sakana AI 初の商用プロダクトである",
+      "value": "2026-06-15",
+      "sources": [
+        "S-001",
+        "S-002",
+        "S-004"
+      ],
+      "confidence": "A",
+      "topic": "competitor",
+      "verify_by": "公式リリース原文"
+    },
+    {
+      "id": "C-002",
+      "claim": "Marlin は最大約8時間、無人で自律実行しレポートとスライドを生成する",
+      "value": "<=8h, 最大100ページ",
+      "sources": [
+        "S-001",
+        "S-003",
+        "S-005"
+      ],
+      "confidence": "A",
+      "topic": "competitor"
+    },
+    {
+      "id": "C-003",
+      "claim": "Marlin の価格は 1実行=100クレジット、追加クレジット ¥98/個、月額プランは ¥150,000 から",
+      "value": "~¥9,800/run, ¥150,000/月〜",
+      "sources": [
+        "S-004",
+        "S-005"
+      ],
+      "confidence": "B",
+      "topic": "pricing",
+      "verify_by": "価格ページ・見積"
+    },
+    {
+      "id": "C-004",
+      "claim": "Marlin の中核は AB-MCTS（NeurIPS 2025 Spotlight）と AI Scientist 由来のワークフロー基盤である",
+      "value": "AB-MCTS + AI Scientist",
+      "sources": [
+        "S-005",
+        "S-006"
+      ],
+      "confidence": "A",
+      "topic": "competitor-architecture"
+    },
+    {
+      "id": "C-005",
+      "claim": "Marlin の探索の報酬設計は公開されていない",
+      "value": "unknown",
+      "sources": [],
+      "confidence": "D",
+      "topic": "competitor-architecture",
+      "verify_by": "論文・製品ドキュメント・実測"
+    },
+    {
+      "id": "C-006",
+      "claim": "AB-MCTS（マルチモデル）は ARC-AGI-2 で 39.2% を達成し、単一フロンティアモデルを 15pt 以上上回った",
+      "value": "39.2%, +15pt",
+      "sources": [
+        "S-010"
+      ],
+      "confidence": "A",
+      "topic": "search"
+    },
+    {
+      "id": "C-007",
+      "claim": "TreeQuest は Apache-2.0 で公開されており、AB-MCTS 自体は専有技術ではない",
+      "value": "Apache-2.0",
+      "sources": [
+        "S-009"
+      ],
+      "confidence": "A",
+      "topic": "moat"
+    },
+    {
+      "id": "C-008",
+      "claim": "Gemini Deep Research API は 1タスク約 $2（標準）/ $5（Max）、検索コストが $1.12〜$2.24 を占める",
+      "value": "$2 / $5 per task",
+      "sources": [
+        "S-020"
+      ],
+      "confidence": "B",
+      "topic": "pricing",
+      "verify_by": "実測課金"
+    },
+    {
+      "id": "C-009",
+      "claim": "Gemini DR は非同期タスクマネージャで planner とタスクモデル間の共有状態を保持し、部分失敗から回復する",
+      "value": "async shared-state",
+      "sources": [
+        "S-018"
+      ],
+      "confidence": "B",
+      "topic": "competitor-architecture"
+    },
+    {
+      "id": "C-010",
+      "claim": "AI co-scientist は Elo トーナメントで仮説を順位付けし、test-time compute の増加に伴い Elo が向上する",
+      "value": "Elo ↑ with compute",
+      "sources": [
+        "S-022",
+        "S-023"
+      ],
+      "confidence": "A",
+      "topic": "reward-design"
+    },
+    {
+      "id": "C-011",
+      "claim": "Anthropic の Research は マルチエージェント構成で単一 Opus を社内評価で 90.2% 上回った",
+      "value": "+90.2%",
+      "sources": [
+        "S-028"
+      ],
+      "confidence": "B",
+      "topic": "orchestration"
+    },
+    {
+      "id": "C-012",
+      "claim": "MAST の分析では失敗の 41.8% が仕様/設計、36.9% がエージェント間不整合、21.3% が検証失敗である",
+      "value": "41.8/36.9/21.3 %",
+      "sources": [
+        "S-029"
+      ],
+      "confidence": "A",
+      "topic": "failure-modes"
+    },
+    {
+      "id": "C-013",
+      "claim": "未協調のマルチエージェントは誤りを最大17倍に増幅しうるが、中央集権＋検証で約4.4倍に抑えられる",
+      "value": "17x -> 4.4x",
+      "sources": [
+        "S-029"
+      ],
+      "confidence": "B",
+      "topic": "failure-modes"
+    },
+    {
+      "id": "C-014",
+      "claim": "Deep Research 生成レポートの引用は、URL 到達性 94%超・関連性 80%超に対し、事実整合性は 39〜77% にとどまる",
+      "value": "fact-check 39-77%",
+      "sources": [
+        "S-057"
+      ],
+      "confidence": "A",
+      "topic": "attribution",
+      "impact": "core-differentiation"
+    },
+    {
+      "id": "C-015",
+      "claim": "ツール呼び出しを 2 → 150 に増やすと、引用の事実整合性はフロンティア2モデル平均で約42%低下する",
+      "value": "-42%",
+      "sources": [
+        "S-057"
+      ],
+      "confidence": "A",
+      "topic": "attribution",
+      "impact": "『長時間探索＝高品質』を否定する最重要の反証"
+    },
+    {
+      "id": "C-016",
+      "claim": "LLM-as-a-Judge にはルーブリック選択肢の位置バイアスがあり、方向はモデル固有である",
+      "value": "position bias",
+      "sources": [
+        "S-058"
+      ],
+      "confidence": "A",
+      "topic": "judge-bias"
+    },
+    {
+      "id": "C-017",
+      "claim": "LLM 予測システムは ForecastBench 系で superforecaster と統計的に区別できない水準に到達している",
+      "value": "Brier 0.0753 vs 0.0740",
+      "sources": [
+        "S-060"
+      ],
+      "confidence": "B",
+      "topic": "calibration",
+      "verify_by": "リーダーボード条件の確認"
+    },
+    {
+      "id": "C-018",
+      "claim": "Brier 報酬でのファインチューンにより ECE ≈ 0.042 まで較正が改善した報告がある",
+      "value": "ECE 0.042",
+      "sources": [
+        "S-060"
+      ],
+      "confidence": "B",
+      "topic": "calibration"
+    },
+    {
+      "id": "C-019",
+      "claim": "戦略的に設計された敵対エージェント1体で、多エージェント討論の精度が 10〜40% 低下し誤答合意が 30%超増加する",
+      "value": "-10..40%",
+      "sources": [
+        "S-046"
+      ],
+      "confidence": "A",
+      "topic": "debate-risk"
+    },
+    {
+      "id": "C-020",
+      "claim": "長文脈は主要モデル横断で性能劣化（context rot）を起こし、context editing で +29%、memory tool 併用で +39% の改善が報告されている",
+      "value": "+29% / +39%",
+      "sources": [
+        "S-050"
+      ],
+      "confidence": "B",
+      "topic": "context"
+    },
+    {
+      "id": "C-021",
+      "claim": "オープンな 30B(A3B) モデルが BrowseComp 43.4 / GAIA 70.9 / HLE 32.9 を達成している",
+      "value": "BrowseComp 43.4",
+      "sources": [
+        "S-030"
+      ],
+      "confidence": "A",
+      "topic": "commoditization"
+    },
+    {
+      "id": "C-022",
+      "claim": "MMLU で GPT-3.5 相当の推論単価は 2022/11 の約 $20/M から 2024/10 の約 $0.07/M へ低下した",
+      "value": "~1/300",
+      "sources": [
+        "S-088"
+      ],
+      "confidence": "B",
+      "topic": "commoditization"
+    },
+    {
+      "id": "C-023",
+      "claim": "RouteLLM は MT-Bench で約85%のコスト削減と GPT-4 品質の約95%維持を報告（フロンティア呼出は約26%）",
+      "value": "-85% cost",
+      "sources": [
+        "S-089"
+      ],
+      "confidence": "B",
+      "topic": "cost"
+    },
+    {
+      "id": "C-024",
+      "claim": "大手 PE の 60% 超が agentic AI を試験導入/拡大中だが、スケールできているのは 10〜15% にとどまる",
+      "value": "60% vs 10-15%",
+      "sources": [
+        "S-076"
+      ],
+      "confidence": "B",
+      "topic": "market"
+    },
+    {
+      "id": "C-025",
+      "claim": "文書抽出・スクリーニングでは 70〜85% の時間削減、回収期間9ヶ月未満が報告されている",
+      "value": "-70..85%",
+      "sources": [
+        "S-076"
+      ],
+      "confidence": "C",
+      "topic": "market"
+    },
+    {
+      "id": "C-026",
+      "claim": "EU AI Act の高リスク義務は 2026-08-02 に完全適用され、監査ログは改竄検知可能な形で10年保持が求められる",
+      "value": "2026-08-02 / 10年",
+      "sources": [
+        "S-079",
+        "S-080"
+      ],
+      "confidence": "B",
+      "topic": "regulation",
+      "verify_by": "法務レビュー（附属書IIIの該当性含む）"
+    },
+    {
+      "id": "C-027",
+      "claim": "Sakana は EDINET-Bench（2014-2024 の有報 約4万件以上）を公開しており、日本語金融データに既に参入している",
+      "value": "~40,000 filings",
+      "sources": [
+        "S-016"
+      ],
+      "confidence": "B",
+      "topic": "japan-data"
+    },
+    {
+      "id": "C-028",
+      "claim": "BED-LLM は期待情報利得(EIG)最大化により逐次質問を選択し、情報収集効率を改善する",
+      "value": "EIG-based",
+      "sources": [
+        "S-040"
+      ],
+      "confidence": "A",
+      "topic": "information-value",
+      "impact": "IP の報酬設計の理論的基盤"
+    },
+    {
+      "id": "C-029",
+      "claim": "VC デューデリの学術的マルチエージェント枠組みは、レイアウト認識OCRと『データ不在を明示フラグする』構造的フォールバックで金融文脈の幻覚に対処している",
+      "value": "NOT_FOUND を明示",
+      "sources": [
+        "S-090"
+      ],
+      "confidence": "B",
+      "topic": "extraction",
+      "impact": "抽出層は value|NOT_FOUND|AMBIGUOUS の三値を返すべき"
+    },
+    {
+      "id": "C-030",
+      "claim": "スタートアップ評価を弁証法的推論でモデル化するマルチエージェントシステム（DIALECTIC）が既に存在する",
+      "value": "prior art あり",
+      "sources": [
+        "S-091"
+      ],
+      "confidence": "B",
+      "topic": "prior-art",
+      "impact": "『反証エンジン』は突飛ではない。差分は検証・較正・記憶の統合"
+    },
+    {
+      "id": "C-031",
+      "claim": "Gemini Deep Research API は Interactions API 経由の非同期専用で、有料ティア限定である",
+      "value": "async only",
+      "sources": [
+        "S-020",
+        "S-021"
+      ],
+      "confidence": "B",
+      "topic": "competitor-architecture"
+    },
+    {
+      "id": "C-032",
+      "claim": "Tongyi DeepResearch は IterResearch/Heavy Mode でラウンドごとに作業文脈を再構成し、ノイズ蓄積を抑える",
+      "value": "context reconstruction",
+      "sources": [
+        "S-030"
+      ],
+      "confidence": "A",
+      "topic": "context"
+    }
   ]
 }

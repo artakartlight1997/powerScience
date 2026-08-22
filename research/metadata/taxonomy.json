@@ -1,41 +1,193 @@
 {
   "$schema": "./schema.md#taxonomy",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "generated": "2026-08-22",
   "purpose": "Integral Prism の設計要素を分類する軸。後の設計文書・評価・課題管理で共通のタグ体系として使う。",
   "layers": [
-    {"id":"L0","name":"取得層","desc":"一次情報の取得と恒久保存（スナップショット、ハッシュ、取得時刻、point-in-time）","competitor_coverage":"部分（URL のみ）","ip_priority":"must"},
-    {"id":"L1","name":"接地層","desc":"主張 ↔ 原文スパンの機械検証（Fact Check ループ）","competitor_coverage":"弱い（fact-check 39-77%）","ip_priority":"must"},
-    {"id":"L2","name":"整合層","desc":"数値再計算・時系列整合・文書間矛盾検出","competitor_coverage":"不明","ip_priority":"must"},
-    {"id":"L3","name":"反証層","desc":"ACH 行列・反証タスク・レッドチーム・診断的証拠の優先探索","competitor_coverage":"なし","ip_priority":"differentiator"},
-    {"id":"L4","name":"較正層","desc":"主張ごとの確率と較正履歴（Brier/ECE）","competitor_coverage":"なし","ip_priority":"differentiator"},
-    {"id":"L5","name":"記憶層","desc":"案件横断のケースベース記憶（外した理由を含む）","competitor_coverage":"なし","ip_priority":"moat"},
-    {"id":"L6","name":"協働層","desc":"人間の介入点（仮説承認/反証優先度/一次情報投入/確度上書き）","competitor_coverage":"弱い","ip_priority":"should"},
-    {"id":"L7","name":"監査層","desc":"探索木の追記専用保存・改竄検知・再現","competitor_coverage":"不明","ip_priority":"must"}
+    {
+      "id": "L0",
+      "name": "取得層",
+      "desc": "一次情報の取得と恒久保存（スナップショット、ハッシュ、取得時刻、point-in-time）",
+      "competitor_coverage": "部分（URL のみ）",
+      "ip_priority": "must"
+    },
+    {
+      "id": "L1",
+      "name": "接地層",
+      "desc": "主張 ↔ 原文スパンの機械検証（Fact Check ループ）",
+      "competitor_coverage": "弱い（fact-check 39-77%）",
+      "ip_priority": "must"
+    },
+    {
+      "id": "L2",
+      "name": "整合層",
+      "desc": "数値再計算・時系列整合・文書間矛盾検出",
+      "competitor_coverage": "不明",
+      "ip_priority": "must"
+    },
+    {
+      "id": "L3",
+      "name": "反証層",
+      "desc": "ACH 行列・反証タスク・レッドチーム・診断的証拠の優先探索",
+      "competitor_coverage": "なし",
+      "ip_priority": "differentiator"
+    },
+    {
+      "id": "L4",
+      "name": "較正層",
+      "desc": "主張ごとの確率と較正履歴（Brier/ECE）",
+      "competitor_coverage": "なし",
+      "ip_priority": "differentiator"
+    },
+    {
+      "id": "L5",
+      "name": "記憶層",
+      "desc": "案件横断のケースベース記憶（外した理由を含む）",
+      "competitor_coverage": "なし",
+      "ip_priority": "moat"
+    },
+    {
+      "id": "L6",
+      "name": "協働層",
+      "desc": "人間の介入点（仮説承認/反証優先度/一次情報投入/確度上書き）",
+      "competitor_coverage": "弱い",
+      "ip_priority": "should"
+    },
+    {
+      "id": "L7",
+      "name": "監査層",
+      "desc": "探索木の追記専用保存・改竄検知・再現",
+      "competitor_coverage": "不明",
+      "ip_priority": "must"
+    }
   ],
   "axes": {
-    "workflow": ["static", "dynamic"],
-    "agent_composition": ["single", "multi-centralized", "multi-decentralized", "tree-search"],
-    "acquisition": ["api-search", "browser", "internal-corpus", "structured-db", "human-expert"],
-    "reward": ["self-eval", "pairwise-elo", "rule-verifier", "expected-information-gain", "multi-objective"],
-    "verification_privilege": ["none", "source-fetch", "numeric-recompute", "temporal-consistency", "cross-vendor"],
-    "human_role": ["none", "plan-approval", "interrupt-points", "pairing"],
-    "memory": ["none", "session", "case-based", "knowledge-graph"],
-    "cost_strategy": ["single-frontier", "cascade", "router", "search-budget-optimized"]
+    "workflow": [
+      "static",
+      "dynamic"
+    ],
+    "agent_composition": [
+      "single",
+      "multi-centralized",
+      "multi-decentralized",
+      "tree-search"
+    ],
+    "acquisition": [
+      "api-search",
+      "browser",
+      "internal-corpus",
+      "structured-db",
+      "human-expert"
+    ],
+    "reward": [
+      "self-eval",
+      "pairwise-elo",
+      "rule-verifier",
+      "expected-information-gain",
+      "multi-objective"
+    ],
+    "verification_privilege": [
+      "none",
+      "source-fetch",
+      "numeric-recompute",
+      "temporal-consistency",
+      "cross-vendor"
+    ],
+    "human_role": [
+      "none",
+      "plan-approval",
+      "interrupt-points",
+      "pairing"
+    ],
+    "memory": [
+      "none",
+      "session",
+      "case-based",
+      "knowledge-graph"
+    ],
+    "cost_strategy": [
+      "single-frontier",
+      "cascade",
+      "router",
+      "search-budget-optimized"
+    ]
   },
   "design_principles": [
-    {"id":"P1","principle":"タスクが独立並列に分解できるときだけマルチエージェントにする","source":"S-028"},
-    {"id":"P2","principle":"停止条件と検証をアーキテクチャの一級市民にする","source":"S-029"},
-    {"id":"P3","principle":"視点の多様性は自動発見に任せず、実務由来の型で与える","source":"S-031,S-061"},
-    {"id":"P4","principle":"自律だけを売らず、介入点を設計して売る","source":"S-032,S-034"},
-    {"id":"P5","principle":"検証器には生成器が持たない権限（原文取得・再計算・時系列）を与える","source":"S-036"},
-    {"id":"P6","principle":"探索の報酬は decision-relevant な期待情報利得に置く","source":"S-040,S-062"},
-    {"id":"P7","principle":"討論で合意させない。討論は反証の生産にのみ使う","source":"S-046"},
-    {"id":"P8","principle":"長時間実行では『何を忘れるか』を設計し、圧縮時に出典IDを失わない","source":"S-050,S-051"},
-    {"id":"P9","principle":"記憶は量ではなく『意思決定に効いた事実＋反証結果』だけを残す","source":"S-052,S-053"},
-    {"id":"P10","principle":"LLM judge には『良い/悪い』を聞かず、原文支持の二値判定だけを聞く","source":"S-058,S-059"},
-    {"id":"P11","principle":"ACH 行列を一次データ構造にする（レポートは view にすぎない）","source":"S-061,S-062"},
-    {"id":"P12","principle":"監査証跡は後付けせず、探索木そのものを追記専用の一次記録にする","source":"S-079,S-080"}
+    {
+      "id": "P1",
+      "principle": "タスクが独立並列に分解できるときだけマルチエージェントにする",
+      "source": "S-028"
+    },
+    {
+      "id": "P2",
+      "principle": "停止条件と検証をアーキテクチャの一級市民にする",
+      "source": "S-029"
+    },
+    {
+      "id": "P3",
+      "principle": "視点の多様性は自動発見に任せず、実務由来の型で与える",
+      "source": "S-031,S-061"
+    },
+    {
+      "id": "P4",
+      "principle": "自律だけを売らず、介入点を設計して売る",
+      "source": "S-032,S-034"
+    },
+    {
+      "id": "P5",
+      "principle": "検証器には生成器が持たない権限（原文取得・再計算・時系列）を与える",
+      "source": "S-036"
+    },
+    {
+      "id": "P6",
+      "principle": "探索の報酬は decision-relevant な期待情報利得に置く",
+      "source": "S-040,S-062"
+    },
+    {
+      "id": "P7",
+      "principle": "討論で合意させない。討論は反証の生産にのみ使う",
+      "source": "S-046"
+    },
+    {
+      "id": "P8",
+      "principle": "長時間実行では『何を忘れるか』を設計し、圧縮時に出典IDを失わない",
+      "source": "S-050,S-051"
+    },
+    {
+      "id": "P9",
+      "principle": "記憶は量ではなく『意思決定に効いた事実＋反証結果』だけを残す",
+      "source": "S-052,S-053"
+    },
+    {
+      "id": "P10",
+      "principle": "LLM judge には『良い/悪い』を聞かず、原文支持の二値判定だけを聞く",
+      "source": "S-058,S-059"
+    },
+    {
+      "id": "P11",
+      "principle": "ACH 行列を一次データ構造にする（レポートは view にすぎない）",
+      "source": "S-061,S-062"
+    },
+    {
+      "id": "P12",
+      "principle": "監査証跡は後付けせず、探索木そのものを追記専用の一次記録にする",
+      "source": "S-079,S-080"
+    }
   ],
-  "tags": ["marlin","gemini-dr","co-scientist","ab-mcts","eig","ach","calibration","attribution","context-engineering","case-based-memory","routing","regulation","japan-data","pe-workflow"]
+  "tags": [
+    "marlin",
+    "gemini-dr",
+    "co-scientist",
+    "ab-mcts",
+    "eig",
+    "ach",
+    "calibration",
+    "attribution",
+    "context-engineering",
+    "case-based-memory",
+    "routing",
+    "regulation",
+    "japan-data",
+    "pe-workflow"
+  ]
 }

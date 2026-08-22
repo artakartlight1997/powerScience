@@ -1,6 +1,6 @@
 {
   "$schema": "./schema.md#sources",
-  "registry_version": "0.1.0",
+  "registry_version": "0.2.0",
   "generated": "2026-08-22",
   "retrieval_method": "web_search_snippets",
   "retrieval_caveat": "実行環境のエグレス制限により sakana.ai / arxiv.org / ai.google.dev 等の本文は未取得。記載は検索エンジン要約および二次記事に基づく。confidence を参照のこと。",
@@ -11,78 +11,1476 @@
     "D": "断片のみ・未確認"
   },
   "sources": [
-    {"id":"S-001","title":"初の商用プロダクト「Sakana Marlin」を提供開始","url":"https://sakana.ai/marlin-release/","type":"official","org":"Sakana AI","year":2026,"lang":"ja","confidence":"A","topics":["marlin","product"],"used_in":["survey-01-marlin"]},
-    {"id":"S-002","title":"Sakana AIが自律型リサーチエージェント「Sakana Marlin」の提供を開始","url":"https://www.sbbit.jp/article/cont1/185772","type":"press","org":"ビジネス+IT","year":2026,"lang":"ja","confidence":"A","topics":["marlin","product"],"used_in":["survey-01-marlin"]},
-    {"id":"S-003","title":"Sakana Marlin: Autonomous Research Agent 2026","url":"https://www.layer3labs.io/guides/sakana-marlin-explained","type":"industry","org":"Layer3Labs","year":2026,"lang":"en","confidence":"B","topics":["marlin","architecture","ab-mcts"],"used_in":["survey-01-marlin"]},
-    {"id":"S-004","title":"Sakana Marlin 解説（gihyo / 一創 / AI革命 ほか国内記事群）","url":"https://gihyo.jp/article/2026/06/sakana-marlin","type":"press","org":"gihyo.jp ほか","year":2026,"lang":"ja","confidence":"B","topics":["marlin","pricing"],"used_in":["survey-01-marlin","survey-03-google","survey-10-market"]},
-    {"id":"S-005","title":"When deep research isn't enough for your business: Sakana AI launches 'ultra deep research' agent","url":"https://venturebeat.com/technology/when-deep-research-isnt-enough-for-your-business-sakana-ai-launches-ultra-deep-research-agent-for-100-page-reports-in-8-hours","type":"press","org":"VentureBeat","year":2026,"lang":"en","confidence":"A","topics":["marlin","pricing","data-policy"],"used_in":["survey-01-marlin","survey-09-finance-pe"]},
-    {"id":"S-006","title":"hardmaru (David Ha) launch post for Sakana Marlin","url":"https://x.com/hardmaru/status/2066529282588094713","type":"official","org":"Sakana AI","year":2026,"lang":"en","confidence":"A","topics":["marlin","ab-mcts","ai-scientist"],"used_in":["survey-01-marlin"]},
-    {"id":"S-007","title":"Introducing Sakana AI's Recursive Self-Improvement (RSI) Lab","url":"https://sakana.ai/rsi-lab/","type":"official","org":"Sakana AI","year":2026,"lang":"en","confidence":"A","topics":["rsi","ale-agent","ai-scientist","strategy"],"used_in":["survey-02-sakana-lineage"]},
-    {"id":"S-008","title":"Wider or Deeper? Scaling LLM Inference-Time Compute with Adaptive Branching Tree Search","url":"https://arxiv.org/abs/2503.04412","type":"paper","org":"Sakana AI","year":2025,"lang":"en","confidence":"A","topics":["ab-mcts","test-time-scaling"],"used_in":["survey-02-sakana-lineage","survey-05-search","survey-11-implications"]},
-    {"id":"S-009","title":"SakanaAI/treequest (Apache-2.0)","url":"https://github.com/SakanaAI/treequest","type":"code","org":"Sakana AI","year":2025,"lang":"en","confidence":"A","topics":["ab-mcts","oss"],"used_in":["survey-02-sakana-lineage","survey-10-market","survey-11-implications"]},
-    {"id":"S-010","title":"Inference-Time Scaling and Collective Intelligence for Frontier AI","url":"https://sakana.ai/ab-mcts/","type":"official","org":"Sakana AI","year":2025,"lang":"en","confidence":"A","topics":["ab-mcts","multi-model","arc-agi"],"used_in":["survey-02-sakana-lineage"]},
-    {"id":"S-011","title":"Sakana AI's TreeQuest: Deploy multi-model teams that outperform individual LLMs by 30%","url":"https://venturebeat.com/ai/sakana-ais-treequest-deploy-multi-model-teams-that-outperform-individual-llms-by-30","type":"press","org":"VentureBeat","year":2025,"lang":"en","confidence":"B","topics":["treequest","multi-model"],"used_in":["survey-02-sakana-lineage"]},
-    {"id":"S-012","title":"The AI Scientist-v2: Workshop-Level Automated Scientific Discovery via Agentic Tree Search","url":"https://arxiv.org/pdf/2504.08066","type":"paper","org":"Sakana AI","year":2025,"lang":"en","confidence":"A","topics":["ai-scientist","agentic-tree-search"],"used_in":["survey-02-sakana-lineage"]},
-    {"id":"S-013","title":"Evolutionary Optimization of Model Merging Recipes","url":"https://sakana.ai/evolutionary-model-merge/","type":"official","org":"Sakana AI","year":2024,"lang":"en","confidence":"B","topics":["model-merge","evolution"],"used_in":["survey-02-sakana-lineage"]},
-    {"id":"S-014","title":"Sakana AI Publications (ShinkaEvolve / CTM / Text-to-LoRA ほか)","url":"https://pub.sakana.ai/","type":"official","org":"Sakana AI","year":2026,"lang":"en","confidence":"B","topics":["shinka-evolve","ctm","text-to-lora"],"used_in":["survey-02-sakana-lineage"]},
-    {"id":"S-015","title":"Digital Red Queen: Adversarial Program Evolution in Core War with LLMs","url":"https://arxiv.org/html/2601.03335v1","type":"paper","org":"Sakana AI / MIT","year":2026,"lang":"en","confidence":"B","topics":["adversarial-coevolution","red-team"],"used_in":["survey-02-sakana-lineage","survey-07-verification","survey-11-implications"]},
-    {"id":"S-016","title":"EDINET-Bench: 有価証券報告書を用いた日本語金融ベンチマーク","url":"https://sakana.ai/edinet-bench/","type":"official","org":"Sakana AI","year":2025,"lang":"ja","confidence":"B","topics":["edinet","benchmark","japan"],"used_in":["survey-02-sakana-lineage","survey-08-benchmarks","survey-10-market","survey-11-implications"]},
-    {"id":"S-017","title":"日本の有価証券報告書 XBRL を構造化するときに直面する4つの課題","url":"https://edinetdb.jp/blog/xbrl-japan-securities-reports-structuring","type":"industry","org":"EDINET DB","year":2026,"lang":"ja","confidence":"B","topics":["xbrl","data-engineering","japan"],"used_in":["survey-02-sakana-lineage"]},
-    {"id":"S-018","title":"Gemini Deep Research — your personal research assistant","url":"https://gemini.google/overview/deep-research/","type":"official","org":"Google","year":2026,"lang":"en","confidence":"A","topics":["gemini-dr","planner","async"],"used_in":["survey-03-google"]},
-    {"id":"S-019","title":"Deep Research Agents: A Systematic Examination And Roadmap","url":"https://arxiv.org/abs/2506.18096","type":"paper","org":"複数大学","year":2025,"lang":"en","confidence":"A","topics":["survey","taxonomy"],"used_in":["survey-03-google","survey-04-other-dr","survey-11-implications"]},
-    {"id":"S-020","title":"Gemini Deep Research pricing: cost per task 2026","url":"https://tokencost.app/blog/gemini-deep-research-agent-cost","type":"industry","org":"TokenCost","year":2026,"lang":"en","confidence":"B","topics":["pricing","unit-economics"],"used_in":["survey-01-marlin","survey-03-google","survey-05-search","survey-10-market"]},
-    {"id":"S-021","title":"Gemini Deep Research agent (Gemini API docs)","url":"https://ai.google.dev/gemini-api/docs/deep-research","type":"official","org":"Google","year":2026,"lang":"en","confidence":"A","topics":["api","async"],"used_in":["survey-03-google"]},
-    {"id":"S-022","title":"Accelerating scientific discovery with Co-Scientist","url":"https://www.nature.com/articles/s41586-026-10644-y","type":"paper","org":"Google DeepMind","year":2026,"lang":"en","confidence":"A","topics":["co-scientist","elo","tournament","multi-agent"],"used_in":["survey-03-google","survey-05-search","survey-11-implications"]},
-    {"id":"S-023","title":"Accelerating scientific breakthroughs with an AI co-scientist (blog)","url":"https://research.google/blog/accelerating-scientific-breakthroughs-with-an-ai-co-scientist/","type":"official","org":"Google Research","year":2025,"lang":"en","confidence":"A","topics":["co-scientist"],"used_in":["survey-03-google"]},
-    {"id":"S-026","title":"Introducing deep research","url":"https://openai.com/index/introducing-deep-research/","type":"official","org":"OpenAI","year":2025,"lang":"en","confidence":"A","topics":["openai-dr","rl","single-agent"],"used_in":["survey-04-other-dr"]},
-    {"id":"S-027","title":"Training AI Agents End-to-End (Sequoia podcast, OpenAI Deep Research team)","url":"https://sequoiacap.com/podcast/training-data-deep-research/","type":"interview","org":"Sequoia","year":2025,"lang":"en","confidence":"B","topics":["openai-dr","rl"],"used_in":["survey-04-other-dr"]},
-    {"id":"S-028","title":"How we built our multi-agent research system","url":"https://www.anthropic.com/engineering/multi-agent-research-system","type":"official","org":"Anthropic","year":2025,"lang":"en","confidence":"A","topics":["orchestrator-worker","citation-agent","prompting"],"used_in":["survey-04-other-dr","survey-11-implications"]},
-    {"id":"S-029","title":"Why Do Multi-Agent LLM Systems Fail? (MAST)","url":"https://arxiv.org/pdf/2503.13657","type":"paper","org":"UC Berkeley ほか","year":2025,"lang":"en","confidence":"A","topics":["failure-taxonomy","multi-agent"],"used_in":["survey-04-other-dr","survey-11-implications"]},
-    {"id":"S-030","title":"Tongyi DeepResearch Technical Report / blog","url":"https://arxiv.org/html/2510.24701v1","type":"paper","org":"Alibaba","year":2025,"lang":"en","confidence":"A","topics":["open-source","iterresearch","context-management","benchmark"],"used_in":["survey-04-other-dr","survey-06-retrieval-memory","survey-10-market","survey-11-implications"]},
-    {"id":"S-031","title":"stanford-oval/storm (STORM / Co-STORM)","url":"https://github.com/stanford-oval/storm","type":"code","org":"Stanford OVAL","year":2024,"lang":"en","confidence":"A","topics":["multi-perspective","outline","discourse"],"used_in":["survey-04-other-dr","survey-11-implications"]},
-    {"id":"S-032","title":"InterDeepResearch: Enabling Human-Agent Collaborative Information Seeking","url":"https://arxiv.org/html/2603.12608","type":"paper","org":"—","year":2026,"lang":"en","confidence":"B","topics":["hitl","steering"],"used_in":["survey-01-marlin","survey-04-other-dr","survey-11-implications","notes-discussion-agenda"]},
-    {"id":"S-033","title":"Interaction as Intelligence: Deep Research With Human-AI Partnership","url":"https://arxiv.org/pdf/2507.15759","type":"paper","org":"—","year":2025,"lang":"en","confidence":"B","topics":["hitl"],"used_in":["survey-04-other-dr","survey-11-implications"]},
-    {"id":"S-034","title":"IntentRL: Training Proactive User-intent Agents for Open-ended Deep Research","url":"https://arxiv.org/pdf/2602.03468","type":"paper","org":"—","year":2026,"lang":"en","confidence":"B","topics":["intent","pomdp","hitl"],"used_in":["survey-04-other-dr","survey-11-implications","notes-discussion-agenda"]},
-    {"id":"S-035","title":"Human-in-the-Loop AI 2026 実務レビュー各種","url":"https://pickaxe.co/post/human-in-the-loop-ai-agents","type":"industry","org":"各社","year":2026,"lang":"en","confidence":"C","topics":["hitl"],"used_in":["survey-04-other-dr"]},
-    {"id":"S-036","title":"Trust but Verify! A Survey on Verification Design for Test-time Scaling","url":"https://arxiv.org/html/2508.16665","type":"paper","org":"—","year":2025,"lang":"en","confidence":"A","topics":["verifier","asymmetry"],"used_in":["survey-05-search","survey-11-implications"]},
-    {"id":"S-037","title":"Exploiting Verification-Generation Gap: Test-Time RL with Confidence-Conditioned Verification","url":"https://arxiv.org/html/2606.03608v1","type":"paper","org":"—","year":2026,"lang":"en","confidence":"B","topics":["verifier","confidence"],"used_in":["survey-05-search","survey-11-implications"]},
-    {"id":"S-038","title":"GenPRM (arXiv:2504.00891) / T1 (arXiv:2504.04718)","url":"https://arxiv.org/abs/2504.00891","type":"paper","org":"—","year":2025,"lang":"en","confidence":"A","topics":["prm","tool-verification"],"used_in":["survey-05-search"]},
-    {"id":"S-039","title":"Multi-Agent Verification: Scaling Test-Time Compute with Multiple Verifiers","url":"https://arxiv.org/pdf/2502.20379","type":"paper","org":"—","year":2025,"lang":"en","confidence":"A","topics":["verifier","multi-agent"],"used_in":["survey-05-search"]},
-    {"id":"S-040","title":"BED-LLM: Intelligent Information Gathering with LLMs and Bayesian Experimental Design","url":"https://arxiv.org/abs/2508.21184","type":"paper","org":"Apple ほか","year":2025,"lang":"en","confidence":"A","topics":["eig","bed","information-gathering"],"used_in":["survey-05-search","survey-11-implications"]},
-    {"id":"S-041","title":"Amortising Bayesian Experimental Design for Sequential Information Gathering (ASIG)","url":"https://arxiv.org/pdf/2607.03426","type":"paper","org":"—","year":2026,"lang":"en","confidence":"B","topics":["eig","amortisation"],"used_in":["survey-05-search","survey-11-implications"]},
-    {"id":"S-042","title":"Active Task Disambiguation with LLMs","url":"https://arxiv.org/pdf/2502.04485","type":"paper","org":"—","year":2025,"lang":"en","confidence":"B","topics":["clarification","eig"],"used_in":["survey-05-search"]},
-    {"id":"S-043","title":"A Comprehensive Survey on RL-based Agentic Search (arXiv:2510.16724) / Search-R1 / R1-Searcher (arXiv:2503.05592)","url":"https://arxiv.org/pdf/2510.16724","type":"paper","org":"—","year":2025,"lang":"en","confidence":"A","topics":["rl-search","reward-design"],"used_in":["survey-05-search","survey-11-implications"]},
-    {"id":"S-044","title":"ARBOR (arXiv:2606.03239) / Retrieval, Reward, and Training Protocols (arXiv:2605.27881)","url":"https://arxiv.org/pdf/2606.03239","type":"paper","org":"—","year":2026,"lang":"en","confidence":"B","topics":["process-reward","rubric"],"used_in":["survey-05-search","survey-11-implications"]},
-    {"id":"S-045","title":"Multi-Agent Debate 効果検証（GroupDebate arXiv:2409.14051 ほか、メタ評価）","url":"https://arxiv.org/pdf/2409.14051","type":"paper","org":"—","year":2025,"lang":"en","confidence":"B","topics":["debate","accuracy"],"used_in":["survey-05-search"]},
-    {"id":"S-046","title":"When collaboration fails: persuasion driven adversarial influence in multi agent LLM debate","url":"https://www.nature.com/articles/s41598-026-42705-7","type":"paper","org":"Scientific Reports","year":2026,"lang":"en","confidence":"A","topics":["debate","adversarial","risk"],"used_in":["survey-05-search","survey-07-verification","survey-11-implications"]},
-    {"id":"S-047","title":"GraphRAG / RAPTOR / LightRAG 系レビュー（Towards Practical GraphRAG arXiv:2507.03226 ほか）","url":"https://arxiv.org/html/2507.03226v3","type":"paper","org":"—","year":2025,"lang":"en","confidence":"A","topics":["graphrag","hierarchical-retrieval"],"used_in":["survey-06-retrieval-memory","survey-11-implications"]},
-    {"id":"S-048","title":"From RAG to Memory: Non-Parametric Continual Learning for LLMs (HippoRAG2)","url":"https://arxiv.org/pdf/2502.14802","type":"paper","org":"OSU ほか","year":2025,"lang":"en","confidence":"A","topics":["hipporag","ppr","memory"],"used_in":["survey-06-retrieval-memory","survey-11-implications"]},
-    {"id":"S-049","title":"RAG vs. GraphRAG: A Systematic Evaluation (arXiv:2502.11371) / 'Stop graphing everything'","url":"https://arxiv.org/html/2502.11371v3","type":"paper","org":"—","year":2025,"lang":"en","confidence":"A","topics":["graphrag","evaluation"],"used_in":["survey-06-retrieval-memory"]},
-    {"id":"S-050","title":"Context engineering 2026 実務レビュー（context rot / context editing +29% / memory tool +39%）","url":"https://www.digitalapplied.com/blog/context-engineering-agent-reliability-playbook-2026","type":"industry","org":"各社","year":2026,"lang":"en","confidence":"B","topics":["context-rot","compaction","memory"],"used_in":["survey-06-retrieval-memory","survey-11-implications"]},
-    {"id":"S-051","title":"CompactionRL (2607.05378) / Slipstream (2605.08580) / FoldAct (2512.22733) / Self-GC (2607.00692)","url":"https://arxiv.org/pdf/2605.08580","type":"paper","org":"—","year":2026,"lang":"en","confidence":"B","topics":["compaction","validation"],"used_in":["survey-06-retrieval-memory","survey-11-implications"]},
-    {"id":"S-052","title":"AgentCL (2606.02461) / When Continual Learning Moves to Memory (2604.27003)","url":"https://arxiv.org/abs/2604.27003","type":"paper","org":"—","year":2026,"lang":"en","confidence":"B","topics":["continual-learning","memory"],"used_in":["survey-06-retrieval-memory","survey-11-implications"]},
-    {"id":"S-053","title":"Agent KB (2507.06229) / Transferable Expertise via Case-Based Learning (2604.12717)","url":"https://arxiv.org/pdf/2507.06229","type":"paper","org":"—","year":2025,"lang":"en","confidence":"B","topics":["case-based","experience-reuse"],"used_in":["survey-06-retrieval-memory","survey-11-implications"]},
-    {"id":"S-057","title":"Cited but Not Verified: Parsing and Evaluating Source Attribution in LLM Deep Research Agents","url":"https://arxiv.org/abs/2605.06635","type":"paper","org":"—","year":2026,"lang":"en","confidence":"A","topics":["citation","attribution","fact-check"],"used_in":["survey-01-marlin","survey-07-verification","survey-08-benchmarks","survey-11-implications"],"key_numbers":{"link_works":">94%","relevant":">80%","fact_check":"39-77%","degradation_2_to_150_tool_calls":"-42%"}},
-    {"id":"S-058","title":"Am I More Pointwise or Pairwise? Position Bias in Rubric-Based LLM-as-a-Judge (2602.02219) / IJCNLP 2025 position bias study","url":"https://arxiv.org/html/2602.02219v2","type":"paper","org":"—","year":2026,"lang":"en","confidence":"A","topics":["judge-bias","position-bias","reliability"],"used_in":["survey-03-google","survey-07-verification","survey-11-implications"]},
-    {"id":"S-059","title":"Bias in the Loop (2604.16790) / LLM-as-a-Judge reliability in production","url":"https://arxiv.org/html/2604.16790v1","type":"paper","org":"—","year":2026,"lang":"en","confidence":"B","topics":["judge-bias"],"used_in":["survey-03-google","survey-07-verification","survey-11-implications"]},
-    {"id":"S-060","title":"ForecastBench / AI models reach parity with superforecasters / AIA Forecaster / Agentic Forecasting (2604.18576)","url":"https://forecastingresearch.substack.com/p/ai-models-have-likely-reached-parity","type":"paper","org":"Forecasting Research Institute ほか","year":2026,"lang":"en","confidence":"B","topics":["calibration","forecasting","brier","ece"],"used_in":["survey-07-verification","survey-11-implications"],"key_numbers":{"aia_brier":0.0753,"human_sota_brier":0.0740,"ece":0.042}},
-    {"id":"S-061","title":"Structured Analytic Techniques for LLMs","url":"https://mattdot.github.io/sats4llms/concepts/structured-analytic-techniques","type":"industry","org":"—","year":2026,"lang":"en","confidence":"B","topics":["sats","ach","bias"],"used_in":["survey-07-verification","survey-11-implications"]},
-    {"id":"S-062","title":"The analysis of competing hypotheses in intelligence analysis (Dhami et al., 2019) / Heuer, Psychology of Intelligence Analysis (1999)","url":"https://onlinelibrary.wiley.com/doi/full/10.1002/acp.3550","type":"paper","org":"Applied Cognitive Psychology","year":2019,"lang":"en","confidence":"A","topics":["ach","methodology"],"used_in":["survey-07-verification","survey-11-implications"]},
-    {"id":"S-063","title":"TriAdReview (2606.15074) / Elenchus: prover-skeptic dialogues (2603.06974)","url":"https://arxiv.org/pdf/2606.15074","type":"paper","org":"—","year":2026,"lang":"en","confidence":"B","topics":["adversarial-review","knowledge-base"],"used_in":["survey-07-verification"]},
-    {"id":"S-066","title":"DeepResearchEval (2601.09688) / DeepResearch-9K (2603.01152) / ReportBench (2508.15804)","url":"https://arxiv.org/html/2601.09688v1","type":"paper","org":"—","year":2026,"lang":"en","confidence":"B","topics":["benchmark","report-eval"],"used_in":["survey-08-benchmarks"]},
-    {"id":"S-067","title":"FinanceBench / FinQA","url":"https://arxiv.org/abs/2311.11944","type":"paper","org":"Patronus AI / 各所","year":2023,"lang":"en","confidence":"A","topics":["finance-benchmark"],"used_in":["survey-08-benchmarks"]},
-    {"id":"S-068","title":"FinTrace (2604.10015) / FinVerBench (2605.29586) / IPO Finance Agent (2606.23032) / Herculean (2605.14355)","url":"https://arxiv.org/pdf/2604.10015","type":"paper","org":"—","year":2026,"lang":"en","confidence":"B","topics":["finance-benchmark","trajectory-eval","calibration"],"used_in":["survey-08-benchmarks"]},
-    {"id":"S-069","title":"Demystifying deep search: holistic evaluation with hint-free multi-hop questions","url":"https://arxiv.org/pdf/2510.05137","type":"paper","org":"—","year":2025,"lang":"en","confidence":"B","topics":["evaluation","deep-search"],"used_in":["survey-08-benchmarks"]},
-    {"id":"S-070","title":"Learning Query-Specific Rubrics from Human Preferences for DeepResearch Report Generation","url":"https://arxiv.org/pdf/2602.03619","type":"paper","org":"—","year":2026,"lang":"en","confidence":"B","topics":["rubric","report-eval"],"used_in":["survey-08-benchmarks"]},
-    {"id":"S-076","title":"Agentic AI Is Redefining Private Equity in 2026 / Agentic AI in Private Equity 2026 Report","url":"https://www.accenture.com/us-en/blogs/strategy/ai-redefining-private-equity","type":"industry","org":"Accenture / Multimodal","year":2026,"lang":"en","confidence":"B","topics":["pe-adoption","workflow"],"used_in":["survey-09-finance-pe","survey-10-market","survey-11-implications"]},
-    {"id":"S-077","title":"PE due diligence with AI: The complete workflow (2026 guide)","url":"https://www.thirdbridge.com/en-us/about-us/media/perspectives/ai-due-diligence-private-equity","type":"industry","org":"Third Bridge","year":2026,"lang":"en","confidence":"B","topics":["due-diligence","workflow"],"used_in":["survey-09-finance-pe","survey-11-implications"]},
-    {"id":"S-078","title":"EDINET DB: XBRL 構造化の課題／2026年の実務ガイド","url":"https://edinetdb.jp/blog/xbrl-japan-securities-reports-structuring","type":"industry","org":"EDINET DB","year":2026,"lang":"ja","confidence":"B","topics":["xbrl","japan","data"],"used_in":["survey-09-finance-pe","survey-11-implications"]},
-    {"id":"S-079","title":"EU AI Act 2026: high-risk obligations, Articles 12 & 13 traceability","url":"https://aigovernancedesk.com/eu-ai-act-articles-12-13-decision-traceability/","type":"industry","org":"各法務メディア","year":2026,"lang":"en","confidence":"B","topics":["regulation","audit-trail"],"used_in":["survey-09-finance-pe","survey-11-implications","notes-discussion-agenda"]},
-    {"id":"S-080","title":"AI Decision Audit Trails: Regulator Rules June 2026","url":"https://velt.dev/blog/audit-trails-ai-decisions-regulators-require","type":"industry","org":"Velt","year":2026,"lang":"en","confidence":"C","topics":["audit-trail"],"used_in":["survey-09-finance-pe","survey-11-implications"]},
-    {"id":"S-081","title":"BlueFlame AI vs. Rogo vs. Hebbia / AlphaSense 比較","url":"https://blueflame.ai/blog/blueflame-ai-vs-rogo-vs-hebbia","type":"industry","org":"各社","year":2026,"lang":"en","confidence":"B","topics":["competitor","fintech"],"used_in":["survey-09-finance-pe"]},
-    {"id":"S-086","title":"Proprietary Data Moats and AI Startup Defensibility in 2026","url":"https://theinnovationattorney.com/proprietary-data-moats-and-ai-startup-defensibility-in-2026/","type":"industry","org":"—","year":2026,"lang":"en","confidence":"C","topics":["moat","strategy"],"used_in":["survey-10-market","survey-11-implications"]},
-    {"id":"S-087","title":"AI Moats in 2026 / The Tech Moat Is Dead / Point of View is the Only Moat Left","url":"https://www.valtorian.com/blog/ai-moats-2026","type":"industry","org":"—","year":2026,"lang":"en","confidence":"C","topics":["moat","strategy"],"used_in":["survey-10-market","survey-11-implications"]},
-    {"id":"S-088","title":"推論単価の低下（GPT-3.5 相当 $20/M → $0.07/M）に関する分析","url":"https://www.the-ai-corner.com/p/marc-andreessen-ai-moat-not-the-model-2026","type":"industry","org":"—","year":2026,"lang":"en","confidence":"B","topics":["commoditization","cost"],"used_in":["survey-01-marlin","survey-10-market"]},
-    {"id":"S-089","title":"RouteLLM (ICLR 2025) / FrugalGPT / 2026 routing・cascade 実務レビュー","url":"https://www.digitalapplied.com/blog/llm-model-routing-2026-cost-quality-optimization-engineering-guide","type":"industry","org":"—","year":2026,"lang":"en","confidence":"B","topics":["routing","cascade","cost"],"used_in":["survey-10-market","survey-11-implications"]}
-  ]
+    {
+      "id": "S-001",
+      "title": "初の商用プロダクト「Sakana Marlin」を提供開始",
+      "url": "https://sakana.ai/marlin-release/",
+      "type": "official",
+      "org": "Sakana AI",
+      "year": 2026,
+      "lang": "ja",
+      "confidence": "A",
+      "topics": [
+        "marlin",
+        "product"
+      ],
+      "used_in": [
+        "t-sakana-marlin"
+      ]
+    },
+    {
+      "id": "S-002",
+      "title": "Sakana AIが自律型リサーチエージェント「Sakana Marlin」の提供を開始",
+      "url": "https://www.sbbit.jp/article/cont1/185772",
+      "type": "press",
+      "org": "ビジネス+IT",
+      "year": 2026,
+      "lang": "ja",
+      "confidence": "A",
+      "topics": [
+        "marlin",
+        "product"
+      ],
+      "used_in": [
+        "t-sakana-marlin"
+      ]
+    },
+    {
+      "id": "S-003",
+      "title": "Sakana Marlin: Autonomous Research Agent 2026",
+      "url": "https://www.layer3labs.io/guides/sakana-marlin-explained",
+      "type": "industry",
+      "org": "Layer3Labs",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "marlin",
+        "architecture",
+        "ab-mcts"
+      ],
+      "used_in": [
+        "t-sakana-marlin"
+      ]
+    },
+    {
+      "id": "S-004",
+      "title": "Sakana Marlin 解説（gihyo / 一創 / AI革命 ほか国内記事群）",
+      "url": "https://gihyo.jp/article/2026/06/sakana-marlin",
+      "type": "press",
+      "org": "gihyo.jp ほか",
+      "year": 2026,
+      "lang": "ja",
+      "confidence": "B",
+      "topics": [
+        "marlin",
+        "pricing"
+      ],
+      "used_in": [
+        "t-competitive-map",
+        "t-google-gemini-dr",
+        "t-pricing-unit-economics",
+        "t-sakana-marlin"
+      ]
+    },
+    {
+      "id": "S-005",
+      "title": "When deep research isn't enough for your business: Sakana AI launches 'ultra deep research' agent",
+      "url": "https://venturebeat.com/technology/when-deep-research-isnt-enough-for-your-business-sakana-ai-launches-ultra-deep-research-agent-for-100-page-reports-in-8-hours",
+      "type": "press",
+      "org": "VentureBeat",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "marlin",
+        "pricing",
+        "data-policy"
+      ],
+      "used_in": [
+        "t-long-form-report",
+        "t-regulation-compliance",
+        "t-sakana-ab-mcts",
+        "t-sakana-ai-scientist",
+        "t-sakana-marlin"
+      ]
+    },
+    {
+      "id": "S-006",
+      "title": "hardmaru (David Ha) launch post for Sakana Marlin",
+      "url": "https://x.com/hardmaru/status/2066529282588094713",
+      "type": "official",
+      "org": "Sakana AI",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "marlin",
+        "ab-mcts",
+        "ai-scientist"
+      ],
+      "used_in": [
+        "t-sakana-ai-scientist",
+        "t-sakana-marlin"
+      ]
+    },
+    {
+      "id": "S-007",
+      "title": "Introducing Sakana AI's Recursive Self-Improvement (RSI) Lab",
+      "url": "https://sakana.ai/rsi-lab/",
+      "type": "official",
+      "org": "Sakana AI",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "rsi",
+        "ale-agent",
+        "ai-scientist",
+        "strategy"
+      ],
+      "used_in": [
+        "t-sakana-ai-scientist",
+        "t-sakana-evolution-rsi",
+        "t-sakana-marlin"
+      ]
+    },
+    {
+      "id": "S-008",
+      "title": "Wider or Deeper? Scaling LLM Inference-Time Compute with Adaptive Branching Tree Search",
+      "url": "https://arxiv.org/abs/2503.04412",
+      "type": "paper",
+      "org": "Sakana AI",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "ab-mcts",
+        "test-time-scaling"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-sakana-ab-mcts",
+        "t-test-time-scaling"
+      ]
+    },
+    {
+      "id": "S-009",
+      "title": "SakanaAI/treequest (Apache-2.0)",
+      "url": "https://github.com/SakanaAI/treequest",
+      "type": "code",
+      "org": "Sakana AI",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "ab-mcts",
+        "oss"
+      ],
+      "used_in": [
+        "t-commoditization-moat",
+        "t-contribution-map",
+        "t-openai-dr",
+        "t-sakana-ab-mcts",
+        "t-sakana-marlin"
+      ]
+    },
+    {
+      "id": "S-010",
+      "title": "Inference-Time Scaling and Collective Intelligence for Frontier AI",
+      "url": "https://sakana.ai/ab-mcts/",
+      "type": "official",
+      "org": "Sakana AI",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "ab-mcts",
+        "multi-model",
+        "arc-agi"
+      ],
+      "used_in": [
+        "t-model-routing",
+        "t-sakana-ab-mcts"
+      ]
+    },
+    {
+      "id": "S-011",
+      "title": "Sakana AI's TreeQuest: Deploy multi-model teams that outperform individual LLMs by 30%",
+      "url": "https://venturebeat.com/ai/sakana-ais-treequest-deploy-multi-model-teams-that-outperform-individual-llms-by-30",
+      "type": "press",
+      "org": "VentureBeat",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "treequest",
+        "multi-model"
+      ],
+      "used_in": [
+        "t-sakana-ab-mcts"
+      ]
+    },
+    {
+      "id": "S-012",
+      "title": "The AI Scientist-v2: Workshop-Level Automated Scientific Discovery via Agentic Tree Search",
+      "url": "https://arxiv.org/pdf/2504.08066",
+      "type": "paper",
+      "org": "Sakana AI",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "ai-scientist",
+        "agentic-tree-search"
+      ],
+      "used_in": [
+        "t-sakana-ai-scientist"
+      ]
+    },
+    {
+      "id": "S-013",
+      "title": "Evolutionary Optimization of Model Merging Recipes",
+      "url": "https://sakana.ai/evolutionary-model-merge/",
+      "type": "official",
+      "org": "Sakana AI",
+      "year": 2024,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "model-merge",
+        "evolution"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-sakana-evolution-rsi"
+      ]
+    },
+    {
+      "id": "S-014",
+      "title": "Sakana AI Publications (ShinkaEvolve / CTM / Text-to-LoRA ほか)",
+      "url": "https://pub.sakana.ai/",
+      "type": "official",
+      "org": "Sakana AI",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "shinka-evolve",
+        "ctm",
+        "text-to-lora"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-sakana-evolution-rsi"
+      ]
+    },
+    {
+      "id": "S-015",
+      "title": "Digital Red Queen: Adversarial Program Evolution in Core War with LLMs",
+      "url": "https://arxiv.org/html/2601.03335v1",
+      "type": "paper",
+      "org": "Sakana AI / MIT",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "adversarial-coevolution",
+        "red-team"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-differentiation-hypotheses",
+        "t-memory-continual-learning",
+        "t-sakana-evolution-rsi"
+      ]
+    },
+    {
+      "id": "S-016",
+      "title": "EDINET-Bench: 有価証券報告書を用いた日本語金融ベンチマーク",
+      "url": "https://sakana.ai/edinet-bench/",
+      "type": "official",
+      "org": "Sakana AI",
+      "year": 2025,
+      "lang": "ja",
+      "confidence": "B",
+      "topics": [
+        "edinet",
+        "benchmark",
+        "japan"
+      ],
+      "used_in": [
+        "notes-discussion-agenda",
+        "t-competitive-map",
+        "t-contribution-map",
+        "t-data-sources",
+        "t-finance-benchmarks",
+        "t-ip-evaluation-design",
+        "t-sakana-edinet-bench"
+      ]
+    },
+    {
+      "id": "S-017",
+      "title": "日本の有価証券報告書 XBRL を構造化するときに直面する4つの課題",
+      "url": "https://edinetdb.jp/blog/xbrl-japan-securities-reports-structuring",
+      "type": "industry",
+      "org": "EDINET DB",
+      "year": 2026,
+      "lang": "ja",
+      "confidence": "B",
+      "topics": [
+        "xbrl",
+        "data-engineering",
+        "japan"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-sakana-edinet-bench"
+      ]
+    },
+    {
+      "id": "S-018",
+      "title": "Gemini Deep Research — your personal research assistant",
+      "url": "https://gemini.google/overview/deep-research/",
+      "type": "official",
+      "org": "Google",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "gemini-dr",
+        "planner",
+        "async"
+      ],
+      "used_in": [
+        "t-google-gemini-dr",
+        "t-human-in-the-loop"
+      ]
+    },
+    {
+      "id": "S-019",
+      "title": "Deep Research Agents: A Systematic Examination And Roadmap",
+      "url": "https://arxiv.org/abs/2506.18096",
+      "type": "paper",
+      "org": "複数大学",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "survey",
+        "taxonomy"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-dr-taxonomy",
+        "t-google-gemini-dr",
+        "t-storm-costorm"
+      ]
+    },
+    {
+      "id": "S-020",
+      "title": "Gemini Deep Research pricing: cost per task 2026",
+      "url": "https://tokencost.app/blog/gemini-deep-research-agent-cost",
+      "type": "industry",
+      "org": "TokenCost",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "pricing",
+        "unit-economics"
+      ],
+      "used_in": [
+        "t-commoditization-moat",
+        "t-competitive-map",
+        "t-design-principles",
+        "t-google-gemini-dr",
+        "t-information-value-eig",
+        "t-model-routing",
+        "t-pricing-unit-economics",
+        "t-sakana-ab-mcts",
+        "t-sakana-marlin",
+        "t-test-time-scaling"
+      ]
+    },
+    {
+      "id": "S-021",
+      "title": "Gemini Deep Research agent (Gemini API docs)",
+      "url": "https://ai.google.dev/gemini-api/docs/deep-research",
+      "type": "official",
+      "org": "Google",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "api",
+        "async"
+      ],
+      "used_in": [
+        "t-google-gemini-dr"
+      ]
+    },
+    {
+      "id": "S-022",
+      "title": "Accelerating scientific discovery with Co-Scientist",
+      "url": "https://www.nature.com/articles/s41586-026-10644-y",
+      "type": "paper",
+      "org": "Google DeepMind",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "co-scientist",
+        "elo",
+        "tournament",
+        "multi-agent"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-google-ai-coscientist",
+        "t-test-time-scaling"
+      ]
+    },
+    {
+      "id": "S-023",
+      "title": "Accelerating scientific breakthroughs with an AI co-scientist (blog)",
+      "url": "https://research.google/blog/accelerating-scientific-breakthroughs-with-an-ai-co-scientist/",
+      "type": "official",
+      "org": "Google Research",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "co-scientist"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-google-ai-coscientist"
+      ]
+    },
+    {
+      "id": "S-026",
+      "title": "Introducing deep research",
+      "url": "https://openai.com/index/introducing-deep-research/",
+      "type": "official",
+      "org": "OpenAI",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "openai-dr",
+        "rl",
+        "single-agent"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-openai-dr"
+      ]
+    },
+    {
+      "id": "S-027",
+      "title": "Training AI Agents End-to-End (Sequoia podcast, OpenAI Deep Research team)",
+      "url": "https://sequoiacap.com/podcast/training-data-deep-research/",
+      "type": "interview",
+      "org": "Sequoia",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "openai-dr",
+        "rl"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-openai-dr"
+      ]
+    },
+    {
+      "id": "S-028",
+      "title": "How we built our multi-agent research system",
+      "url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+      "type": "official",
+      "org": "Anthropic",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "orchestrator-worker",
+        "citation-agent",
+        "prompting"
+      ],
+      "used_in": [
+        "t-anthropic-research",
+        "t-contribution-map",
+        "t-design-principles",
+        "t-multi-agent-orchestration"
+      ]
+    },
+    {
+      "id": "S-029",
+      "title": "Why Do Multi-Agent LLM Systems Fail? (MAST)",
+      "url": "https://arxiv.org/pdf/2503.13657",
+      "type": "paper",
+      "org": "UC Berkeley ほか",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "failure-taxonomy",
+        "multi-agent"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-dr-taxonomy",
+        "t-failure-modes-mast",
+        "t-multi-agent-orchestration",
+        "t-openai-dr",
+        "t-test-time-scaling"
+      ]
+    },
+    {
+      "id": "S-030",
+      "title": "Tongyi DeepResearch Technical Report / blog",
+      "url": "https://arxiv.org/html/2510.24701v1",
+      "type": "paper",
+      "org": "Alibaba",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "open-source",
+        "iterresearch",
+        "context-management",
+        "benchmark"
+      ],
+      "used_in": [
+        "t-commoditization-moat",
+        "t-context-engineering",
+        "t-contribution-map",
+        "t-general-dr-benchmarks",
+        "t-tongyi-deepresearch"
+      ]
+    },
+    {
+      "id": "S-031",
+      "title": "stanford-oval/storm (STORM / Co-STORM)",
+      "url": "https://github.com/stanford-oval/storm",
+      "type": "code",
+      "org": "Stanford OVAL",
+      "year": 2024,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "multi-perspective",
+        "outline",
+        "discourse"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-human-in-the-loop",
+        "t-storm-costorm"
+      ]
+    },
+    {
+      "id": "S-032",
+      "title": "InterDeepResearch: Enabling Human-Agent Collaborative Information Seeking",
+      "url": "https://arxiv.org/html/2603.12608",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "hitl",
+        "steering"
+      ],
+      "used_in": [
+        "notes-discussion-agenda",
+        "t-contribution-map",
+        "t-design-principles",
+        "t-human-in-the-loop",
+        "t-sakana-marlin"
+      ]
+    },
+    {
+      "id": "S-033",
+      "title": "Interaction as Intelligence: Deep Research With Human-AI Partnership",
+      "url": "https://arxiv.org/pdf/2507.15759",
+      "type": "paper",
+      "org": "—",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "hitl"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-human-in-the-loop"
+      ]
+    },
+    {
+      "id": "S-034",
+      "title": "IntentRL: Training Proactive User-intent Agents for Open-ended Deep Research",
+      "url": "https://arxiv.org/pdf/2602.03468",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "intent",
+        "pomdp",
+        "hitl"
+      ],
+      "used_in": [
+        "notes-discussion-agenda",
+        "t-contribution-map",
+        "t-design-principles",
+        "t-human-in-the-loop"
+      ]
+    },
+    {
+      "id": "S-035",
+      "title": "Human-in-the-Loop AI 2026 実務レビュー各種",
+      "url": "https://pickaxe.co/post/human-in-the-loop-ai-agents",
+      "type": "industry",
+      "org": "各社",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "C",
+      "topics": [
+        "hitl"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-human-in-the-loop"
+      ]
+    },
+    {
+      "id": "S-036",
+      "title": "Trust but Verify! A Survey on Verification Design for Test-time Scaling",
+      "url": "https://arxiv.org/html/2508.16665",
+      "type": "paper",
+      "org": "—",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "verifier",
+        "asymmetry"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-model-routing",
+        "t-verifier-design"
+      ]
+    },
+    {
+      "id": "S-037",
+      "title": "Exploiting Verification-Generation Gap: Test-Time RL with Confidence-Conditioned Verification",
+      "url": "https://arxiv.org/html/2606.03608v1",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "verifier",
+        "confidence"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-verifier-design"
+      ]
+    },
+    {
+      "id": "S-038",
+      "title": "GenPRM (arXiv:2504.00891) / T1 (arXiv:2504.04718)",
+      "url": "https://arxiv.org/abs/2504.00891",
+      "type": "paper",
+      "org": "—",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "prm",
+        "tool-verification"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-verifier-design"
+      ]
+    },
+    {
+      "id": "S-039",
+      "title": "Multi-Agent Verification: Scaling Test-Time Compute with Multiple Verifiers",
+      "url": "https://arxiv.org/pdf/2502.20379",
+      "type": "paper",
+      "org": "—",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "verifier",
+        "multi-agent"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-verifier-design"
+      ]
+    },
+    {
+      "id": "S-040",
+      "title": "BED-LLM: Intelligent Information Gathering with LLMs and Bayesian Experimental Design",
+      "url": "https://arxiv.org/abs/2508.21184",
+      "type": "paper",
+      "org": "Apple ほか",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "eig",
+        "bed",
+        "information-gathering"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-differentiation-hypotheses",
+        "t-information-value-eig"
+      ]
+    },
+    {
+      "id": "S-041",
+      "title": "Amortising Bayesian Experimental Design for Sequential Information Gathering (ASIG)",
+      "url": "https://arxiv.org/pdf/2607.03426",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "eig",
+        "amortisation"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-information-value-eig"
+      ]
+    },
+    {
+      "id": "S-042",
+      "title": "Active Task Disambiguation with LLMs",
+      "url": "https://arxiv.org/pdf/2502.04485",
+      "type": "paper",
+      "org": "—",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "clarification",
+        "eig"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-information-value-eig"
+      ]
+    },
+    {
+      "id": "S-043",
+      "title": "A Comprehensive Survey on RL-based Agentic Search (arXiv:2510.16724) / Search-R1 / R1-Searcher (arXiv:2503.05592)",
+      "url": "https://arxiv.org/pdf/2510.16724",
+      "type": "paper",
+      "org": "—",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "rl-search",
+        "reward-design"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-rl-search-agents"
+      ]
+    },
+    {
+      "id": "S-044",
+      "title": "ARBOR (arXiv:2606.03239) / Retrieval, Reward, and Training Protocols (arXiv:2605.27881)",
+      "url": "https://arxiv.org/pdf/2606.03239",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "process-reward",
+        "rubric"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-rl-search-agents"
+      ]
+    },
+    {
+      "id": "S-045",
+      "title": "Multi-Agent Debate 効果検証（GroupDebate arXiv:2409.14051 ほか、メタ評価）",
+      "url": "https://arxiv.org/pdf/2409.14051",
+      "type": "paper",
+      "org": "—",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "debate",
+        "accuracy"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-multi-agent-debate",
+        "t-test-time-scaling"
+      ]
+    },
+    {
+      "id": "S-046",
+      "title": "When collaboration fails: persuasion driven adversarial influence in multi agent LLM debate",
+      "url": "https://www.nature.com/articles/s41598-026-42705-7",
+      "type": "paper",
+      "org": "Scientific Reports",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "debate",
+        "adversarial",
+        "risk"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-multi-agent-debate"
+      ]
+    },
+    {
+      "id": "S-047",
+      "title": "GraphRAG / RAPTOR / LightRAG 系レビュー（Towards Practical GraphRAG arXiv:2507.03226 ほか）",
+      "url": "https://arxiv.org/html/2507.03226v3",
+      "type": "paper",
+      "org": "—",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "graphrag",
+        "hierarchical-retrieval"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-retrieval-graphrag"
+      ]
+    },
+    {
+      "id": "S-048",
+      "title": "From RAG to Memory: Non-Parametric Continual Learning for LLMs (HippoRAG2)",
+      "url": "https://arxiv.org/pdf/2502.14802",
+      "type": "paper",
+      "org": "OSU ほか",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "hipporag",
+        "ppr",
+        "memory"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-retrieval-graphrag"
+      ]
+    },
+    {
+      "id": "S-049",
+      "title": "RAG vs. GraphRAG: A Systematic Evaluation (arXiv:2502.11371) / 'Stop graphing everything'",
+      "url": "https://arxiv.org/html/2502.11371v3",
+      "type": "paper",
+      "org": "—",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "graphrag",
+        "evaluation"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-retrieval-graphrag"
+      ]
+    },
+    {
+      "id": "S-050",
+      "title": "Context engineering 2026 実務レビュー（context rot / context editing +29% / memory tool +39%）",
+      "url": "https://www.digitalapplied.com/blog/context-engineering-agent-reliability-playbook-2026",
+      "type": "industry",
+      "org": "各社",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "context-rot",
+        "compaction",
+        "memory"
+      ],
+      "used_in": [
+        "t-context-engineering",
+        "t-contribution-map",
+        "t-design-principles"
+      ]
+    },
+    {
+      "id": "S-051",
+      "title": "CompactionRL (2607.05378) / Slipstream (2605.08580) / FoldAct (2512.22733) / Self-GC (2607.00692)",
+      "url": "https://arxiv.org/pdf/2605.08580",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "compaction",
+        "validation"
+      ],
+      "used_in": [
+        "t-context-engineering",
+        "t-contribution-map",
+        "t-design-principles"
+      ]
+    },
+    {
+      "id": "S-052",
+      "title": "AgentCL (2606.02461) / When Continual Learning Moves to Memory (2604.27003)",
+      "url": "https://arxiv.org/abs/2604.27003",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "continual-learning",
+        "memory"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-differentiation-hypotheses",
+        "t-memory-continual-learning"
+      ]
+    },
+    {
+      "id": "S-053",
+      "title": "Agent KB (2507.06229) / Transferable Expertise via Case-Based Learning (2604.12717)",
+      "url": "https://arxiv.org/pdf/2507.06229",
+      "type": "paper",
+      "org": "—",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "case-based",
+        "experience-reuse"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-differentiation-hypotheses",
+        "t-memory-continual-learning"
+      ]
+    },
+    {
+      "id": "S-057",
+      "title": "Cited but Not Verified: Parsing and Evaluating Source Attribution in LLM Deep Research Agents",
+      "url": "https://arxiv.org/abs/2605.06635",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "citation",
+        "attribution",
+        "fact-check"
+      ],
+      "used_in": [
+        "t-citation-attribution",
+        "t-contribution-map",
+        "t-design-principles",
+        "t-differentiation-hypotheses",
+        "t-ip-evaluation-design",
+        "t-sakana-marlin",
+        "t-test-time-scaling"
+      ],
+      "key_numbers": {
+        "link_works": ">94%",
+        "relevant": ">80%",
+        "fact_check": "39-77%",
+        "degradation_2_to_150_tool_calls": "-42%"
+      }
+    },
+    {
+      "id": "S-058",
+      "title": "Am I More Pointwise or Pairwise? Position Bias in Rubric-Based LLM-as-a-Judge (2602.02219) / IJCNLP 2025 position bias study",
+      "url": "https://arxiv.org/html/2602.02219v2",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "judge-bias",
+        "position-bias",
+        "reliability"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-google-ai-coscientist",
+        "t-llm-judge-reliability",
+        "t-multi-agent-debate"
+      ]
+    },
+    {
+      "id": "S-059",
+      "title": "Bias in the Loop (2604.16790) / LLM-as-a-Judge reliability in production",
+      "url": "https://arxiv.org/html/2604.16790v1",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "judge-bias"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-google-ai-coscientist",
+        "t-llm-judge-reliability",
+        "t-multi-agent-debate"
+      ]
+    },
+    {
+      "id": "S-060",
+      "title": "ForecastBench / AI models reach parity with superforecasters / AIA Forecaster / Agentic Forecasting (2604.18576)",
+      "url": "https://forecastingresearch.substack.com/p/ai-models-have-likely-reached-parity",
+      "type": "paper",
+      "org": "Forecasting Research Institute ほか",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "calibration",
+        "forecasting",
+        "brier",
+        "ece"
+      ],
+      "used_in": [
+        "t-calibration-forecasting",
+        "t-contribution-map",
+        "t-differentiation-hypotheses",
+        "t-ip-evaluation-design"
+      ],
+      "key_numbers": {
+        "aia_brier": 0.0753,
+        "human_sota_brier": 0.074,
+        "ece": 0.042
+      }
+    },
+    {
+      "id": "S-061",
+      "title": "Structured Analytic Techniques for LLMs",
+      "url": "https://mattdot.github.io/sats4llms/concepts/structured-analytic-techniques",
+      "type": "industry",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "sats",
+        "ach",
+        "bias"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-differentiation-hypotheses",
+        "t-human-in-the-loop",
+        "t-storm-costorm",
+        "t-structured-analytic-techniques"
+      ]
+    },
+    {
+      "id": "S-062",
+      "title": "The analysis of competing hypotheses in intelligence analysis (Dhami et al., 2019) / Heuer, Psychology of Intelligence Analysis (1999)",
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/acp.3550",
+      "type": "paper",
+      "org": "Applied Cognitive Psychology",
+      "year": 2019,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "ach",
+        "methodology"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-differentiation-hypotheses",
+        "t-structured-analytic-techniques"
+      ]
+    },
+    {
+      "id": "S-063",
+      "title": "TriAdReview (2606.15074) / Elenchus: prover-skeptic dialogues (2603.06974)",
+      "url": "https://arxiv.org/pdf/2606.15074",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "adversarial-review",
+        "knowledge-base"
+      ],
+      "used_in": [
+        "t-multi-agent-debate"
+      ]
+    },
+    {
+      "id": "S-066",
+      "title": "DeepResearchEval (2601.09688) / DeepResearch-9K (2603.01152) / ReportBench (2508.15804)",
+      "url": "https://arxiv.org/html/2601.09688v1",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "benchmark",
+        "report-eval"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-general-dr-benchmarks"
+      ]
+    },
+    {
+      "id": "S-067",
+      "title": "FinanceBench / FinQA",
+      "url": "https://arxiv.org/abs/2311.11944",
+      "type": "paper",
+      "org": "Patronus AI / 各所",
+      "year": 2023,
+      "lang": "en",
+      "confidence": "A",
+      "topics": [
+        "finance-benchmark"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-finance-benchmarks"
+      ]
+    },
+    {
+      "id": "S-068",
+      "title": "FinTrace (2604.10015) / FinVerBench (2605.29586) / IPO Finance Agent (2606.23032) / Herculean (2605.14355)",
+      "url": "https://arxiv.org/pdf/2604.10015",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "finance-benchmark",
+        "trajectory-eval",
+        "calibration"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-finance-benchmarks",
+        "t-ip-evaluation-design"
+      ]
+    },
+    {
+      "id": "S-069",
+      "title": "Demystifying deep search: holistic evaluation with hint-free multi-hop questions",
+      "url": "https://arxiv.org/pdf/2510.05137",
+      "type": "paper",
+      "org": "—",
+      "year": 2025,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "evaluation",
+        "deep-search"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-general-dr-benchmarks"
+      ]
+    },
+    {
+      "id": "S-070",
+      "title": "Learning Query-Specific Rubrics from Human Preferences for DeepResearch Report Generation",
+      "url": "https://arxiv.org/pdf/2602.03619",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "rubric",
+        "report-eval"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-long-form-report"
+      ]
+    },
+    {
+      "id": "S-076",
+      "title": "Agentic AI Is Redefining Private Equity in 2026 / Agentic AI in Private Equity 2026 Report",
+      "url": "https://www.accenture.com/us-en/blogs/strategy/ai-redefining-private-equity",
+      "type": "industry",
+      "org": "Accenture / Multimodal",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "pe-adoption",
+        "workflow"
+      ],
+      "used_in": [
+        "t-competitive-map",
+        "t-contribution-map",
+        "t-pe-dd-workflow"
+      ]
+    },
+    {
+      "id": "S-077",
+      "title": "PE due diligence with AI: The complete workflow (2026 guide)",
+      "url": "https://www.thirdbridge.com/en-us/about-us/media/perspectives/ai-due-diligence-private-equity",
+      "type": "industry",
+      "org": "Third Bridge",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "due-diligence",
+        "workflow"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-pe-dd-workflow"
+      ]
+    },
+    {
+      "id": "S-078",
+      "title": "EDINET DB: XBRL 構造化の課題／2026年の実務ガイド",
+      "url": "https://edinetdb.jp/blog/xbrl-japan-securities-reports-structuring",
+      "type": "industry",
+      "org": "EDINET DB",
+      "year": 2026,
+      "lang": "ja",
+      "confidence": "B",
+      "topics": [
+        "xbrl",
+        "japan",
+        "data"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-data-sources"
+      ]
+    },
+    {
+      "id": "S-079",
+      "title": "EU AI Act 2026: high-risk obligations, Articles 12 & 13 traceability",
+      "url": "https://aigovernancedesk.com/eu-ai-act-articles-12-13-decision-traceability/",
+      "type": "industry",
+      "org": "各法務メディア",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "regulation",
+        "audit-trail"
+      ],
+      "used_in": [
+        "notes-discussion-agenda",
+        "t-contribution-map",
+        "t-design-principles",
+        "t-regulation-compliance",
+        "t-sakana-marlin"
+      ]
+    },
+    {
+      "id": "S-080",
+      "title": "AI Decision Audit Trails: Regulator Rules June 2026",
+      "url": "https://velt.dev/blog/audit-trails-ai-decisions-regulators-require",
+      "type": "industry",
+      "org": "Velt",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "C",
+      "topics": [
+        "audit-trail"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-regulation-compliance"
+      ]
+    },
+    {
+      "id": "S-081",
+      "title": "BlueFlame AI vs. Rogo vs. Hebbia / AlphaSense 比較",
+      "url": "https://blueflame.ai/blog/blueflame-ai-vs-rogo-vs-hebbia",
+      "type": "industry",
+      "org": "各社",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "competitor",
+        "fintech"
+      ],
+      "used_in": [
+        "t-competitive-map",
+        "t-contribution-map",
+        "t-finance-platforms"
+      ]
+    },
+    {
+      "id": "S-086",
+      "title": "Proprietary Data Moats and AI Startup Defensibility in 2026",
+      "url": "https://theinnovationattorney.com/proprietary-data-moats-and-ai-startup-defensibility-in-2026/",
+      "type": "industry",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "C",
+      "topics": [
+        "moat",
+        "strategy"
+      ],
+      "used_in": [
+        "t-commoditization-moat",
+        "t-contribution-map",
+        "t-differentiation-hypotheses"
+      ]
+    },
+    {
+      "id": "S-087",
+      "title": "AI Moats in 2026 / The Tech Moat Is Dead / Point of View is the Only Moat Left",
+      "url": "https://www.valtorian.com/blog/ai-moats-2026",
+      "type": "industry",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "C",
+      "topics": [
+        "moat",
+        "strategy"
+      ],
+      "used_in": [
+        "t-commoditization-moat",
+        "t-contribution-map",
+        "t-differentiation-hypotheses"
+      ]
+    },
+    {
+      "id": "S-088",
+      "title": "推論単価の低下（GPT-3.5 相当 $20/M → $0.07/M）に関する分析",
+      "url": "https://www.the-ai-corner.com/p/marc-andreessen-ai-moat-not-the-model-2026",
+      "type": "industry",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "commoditization",
+        "cost"
+      ],
+      "used_in": [
+        "t-commoditization-moat",
+        "t-contribution-map",
+        "t-openai-dr",
+        "t-rl-search-agents",
+        "t-sakana-marlin"
+      ]
+    },
+    {
+      "id": "S-089",
+      "title": "RouteLLM (ICLR 2025) / FrugalGPT / 2026 routing・cascade 実務レビュー",
+      "url": "https://www.digitalapplied.com/blog/llm-model-routing-2026-cost-quality-optimization-engineering-guide",
+      "type": "industry",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "routing",
+        "cascade",
+        "cost"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-model-routing",
+        "t-pricing-unit-economics"
+      ]
+    },
+    {
+      "id": "S-090",
+      "title": "A Multi-Agent Orchestration Framework for Venture Capital Due Diligence（ほか金融オーケストレーション比較）",
+      "url": "https://arxiv.org/abs/2605.13110",
+      "type": "paper",
+      "org": "Athens University of Economics and Business ほか",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "venture-capital",
+        "due-diligence",
+        "multi-agent",
+        "ocr",
+        "hallucination"
+      ],
+      "used_in": [
+        "t-contribution-map",
+        "t-vc-dd-multi-agent"
+      ]
+    },
+    {
+      "id": "S-091",
+      "title": "DIALECTIC: A Multi-Agent System for Startup Evaluation",
+      "url": "https://arxiv.org/html/2603.12274v1",
+      "type": "paper",
+      "org": "—",
+      "year": 2026,
+      "lang": "en",
+      "confidence": "B",
+      "topics": [
+        "venture-capital",
+        "dialectical-reasoning",
+        "multi-agent"
+      ],
+      "used_in": [
+        "t-vc-dd-multi-agent"
+      ]
+    }
+  ],
+  "structure_note": "v0.2.0 でサーベイをトピック単位に再分割。used_in は topics/ 配下の doc_id を指す。"
 }

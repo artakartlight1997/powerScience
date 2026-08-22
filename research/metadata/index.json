@@ -1,0 +1,1194 @@
+{
+  "index_version": "0.2.0",
+  "generated": "2026-08-22",
+  "project": "integral-prism",
+  "note": "トピック単位のファイル一覧。doc_id / パス / トピック群 / タグ / 主要出典 を機械可読に保持する。",
+  "groups": {
+    "competitors": [
+      "t-anthropic-research",
+      "t-dr-taxonomy",
+      "t-finance-platforms",
+      "t-google-ai-coscientist",
+      "t-google-gemini-dr",
+      "t-openai-dr",
+      "t-sakana-ab-mcts",
+      "t-sakana-ai-scientist",
+      "t-sakana-edinet-bench",
+      "t-sakana-evolution-rsi",
+      "t-sakana-marlin",
+      "t-storm-costorm",
+      "t-tongyi-deepresearch"
+    ],
+    "methods": [
+      "t-context-engineering",
+      "t-failure-modes-mast",
+      "t-human-in-the-loop",
+      "t-information-value-eig",
+      "t-long-form-report",
+      "t-memory-continual-learning",
+      "t-model-routing",
+      "t-multi-agent-debate",
+      "t-multi-agent-orchestration",
+      "t-retrieval-graphrag",
+      "t-rl-search-agents",
+      "t-structured-analytic-techniques",
+      "t-test-time-scaling",
+      "t-verifier-design"
+    ],
+    "evaluation": [
+      "t-calibration-forecasting",
+      "t-citation-attribution",
+      "t-finance-benchmarks",
+      "t-general-dr-benchmarks",
+      "t-ip-evaluation-design",
+      "t-llm-judge-reliability"
+    ],
+    "domain": [
+      "t-data-sources",
+      "t-pe-dd-workflow",
+      "t-regulation-compliance",
+      "t-vc-dd-multi-agent"
+    ],
+    "strategy": [
+      "t-commoditization-moat",
+      "t-competitive-map",
+      "t-pricing-unit-economics"
+    ],
+    "synthesis": [
+      "t-contribution-map",
+      "t-design-principles",
+      "t-differentiation-hypotheses"
+    ],
+    "meta": [
+      "survey-00-method"
+    ],
+    "notes": [
+      "notes-discussion-agenda",
+      "notes-open-questions"
+    ]
+  },
+  "files": [
+    {
+      "doc_id": "t-anthropic-research",
+      "path": "topics/01-competitors/anthropic-research-system.md",
+      "title": "Anthropic Research — オーケストレータ/ワーカ型の実装知と限界",
+      "topic_group": "competitors",
+      "tags": [
+        "anthropic",
+        "orchestrator-worker",
+        "subagent",
+        "citation-agent",
+        "prompting"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-028"
+      ],
+      "related_topics": [
+        "t-failure-modes-mast",
+        "t-multi-agent-orchestration",
+        "t-citation-attribution"
+      ],
+      "lines": 74
+    },
+    {
+      "doc_id": "t-dr-taxonomy",
+      "path": "topics/01-competitors/dr-agent-taxonomy.md",
+      "title": "Deep Research エージェントのタクソノミと自己位置",
+      "topic_group": "competitors",
+      "tags": [
+        "taxonomy",
+        "survey",
+        "deep-research",
+        "mcp",
+        "positioning"
+      ],
+      "confidence": "high",
+      "primary_sources": [
+        "S-019"
+      ],
+      "related_topics": [
+        "t-sakana-marlin",
+        "t-google-gemini-dr",
+        "t-openai-dr",
+        "t-anthropic-research"
+      ],
+      "lines": 65
+    },
+    {
+      "doc_id": "t-finance-platforms",
+      "path": "topics/01-competitors/finance-research-platforms.md",
+      "title": "金融特化リサーチ製品 — AlphaSense / Hebbia / Rogo / BlueFlame",
+      "topic_group": "competitors",
+      "tags": [
+        "competitor",
+        "alphasense",
+        "hebbia",
+        "rogo",
+        "blueflame",
+        "fintech",
+        "workflow"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-081"
+      ],
+      "related_topics": [
+        "t-pe-dd-workflow",
+        "t-competitive-map",
+        "t-pricing-unit-economics"
+      ],
+      "lines": 65
+    },
+    {
+      "doc_id": "t-google-ai-coscientist",
+      "path": "topics/01-competitors/google-ai-coscientist.md",
+      "title": "Google AI co-scientist — Elo トーナメントという報酬設計",
+      "topic_group": "competitors",
+      "tags": [
+        "google",
+        "co-scientist",
+        "multi-agent",
+        "elo",
+        "tournament",
+        "hypothesis",
+        "test-time-compute"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-022",
+        "S-023"
+      ],
+      "related_topics": [
+        "t-llm-judge-reliability",
+        "t-multi-agent-debate",
+        "t-information-value-eig"
+      ],
+      "lines": 81
+    },
+    {
+      "doc_id": "t-google-gemini-dr",
+      "path": "topics/01-competitors/google-gemini-deep-research.md",
+      "title": "Gemini Deep Research — プロダクトと API（単価・非同期・計画承認）",
+      "topic_group": "competitors",
+      "tags": [
+        "google",
+        "gemini",
+        "deep-research",
+        "api",
+        "pricing",
+        "async",
+        "planner"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-018",
+        "S-019",
+        "S-020",
+        "S-021"
+      ],
+      "related_topics": [
+        "t-sakana-marlin",
+        "t-pricing-unit-economics",
+        "t-human-in-the-loop"
+      ],
+      "lines": 79
+    },
+    {
+      "doc_id": "t-openai-dr",
+      "path": "topics/01-competitors/openai-deep-research.md",
+      "title": "OpenAI Deep Research — end-to-end RL で探索をモデル内部化する路線",
+      "topic_group": "competitors",
+      "tags": [
+        "openai",
+        "deep-research",
+        "rl",
+        "single-agent",
+        "browsing"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-026",
+        "S-027"
+      ],
+      "related_topics": [
+        "t-rl-search-agents",
+        "t-google-gemini-dr"
+      ],
+      "lines": 54
+    },
+    {
+      "doc_id": "t-sakana-ab-mcts",
+      "path": "topics/01-competitors/sakana-ab-mcts-treequest.md",
+      "title": "AB-MCTS / TreeQuest — 適応分岐木探索とマルチモデル集合知",
+      "topic_group": "competitors",
+      "tags": [
+        "ab-mcts",
+        "treequest",
+        "mcts",
+        "thompson-sampling",
+        "multi-model",
+        "test-time-scaling"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-008",
+        "S-009",
+        "S-010",
+        "S-011"
+      ],
+      "related_topics": [
+        "t-sakana-marlin",
+        "t-test-time-scaling",
+        "t-model-routing"
+      ],
+      "lines": 92
+    },
+    {
+      "doc_id": "t-sakana-ai-scientist",
+      "path": "topics/01-competitors/sakana-ai-scientist.md",
+      "title": "The AI Scientist v1/v2 — 研究プロセス自動化の骨格",
+      "topic_group": "competitors",
+      "tags": [
+        "sakana",
+        "ai-scientist",
+        "agentic-tree-search",
+        "workflow",
+        "nature"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-007",
+        "S-012"
+      ],
+      "related_topics": [
+        "t-sakana-marlin",
+        "t-sakana-ab-mcts",
+        "t-long-form-report"
+      ],
+      "lines": 66
+    },
+    {
+      "doc_id": "t-sakana-edinet-bench",
+      "path": "topics/01-competitors/sakana-edinet-bench.md",
+      "title": "EDINET-Bench — 日本語金融ベンチマークという伏兵",
+      "topic_group": "competitors",
+      "tags": [
+        "edinet",
+        "xbrl",
+        "japan",
+        "benchmark",
+        "sakana",
+        "finance"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-016",
+        "S-017"
+      ],
+      "related_topics": [
+        "t-data-sources",
+        "t-finance-benchmarks",
+        "t-ip-evaluation-design"
+      ],
+      "lines": 69
+    },
+    {
+      "doc_id": "t-sakana-evolution-rsi",
+      "path": "topics/01-competitors/sakana-evolution-and-rsi.md",
+      "title": "Sakana の進化・自己改善系譜 — Model Merge / ShinkaEvolve / ALE-Agent / Digital Red Queen / RSI Lab",
+      "topic_group": "competitors",
+      "tags": [
+        "sakana",
+        "evolution",
+        "rsi",
+        "model-merge",
+        "adversarial-coevolution",
+        "red-team"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-007",
+        "S-013",
+        "S-014",
+        "S-015"
+      ],
+      "related_topics": [
+        "t-multi-agent-debate",
+        "t-differentiation-hypotheses"
+      ],
+      "lines": 64
+    },
+    {
+      "doc_id": "t-sakana-marlin",
+      "path": "topics/01-competitors/sakana-marlin.md",
+      "title": "Sakana Marlin — 製品事実・アーキテクチャ・弱点仮説",
+      "topic_group": "competitors",
+      "tags": [
+        "competitor",
+        "sakana",
+        "marlin",
+        "ultra-deep-research",
+        "product",
+        "pricing"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-001",
+        "S-002",
+        "S-003",
+        "S-004",
+        "S-005",
+        "S-006"
+      ],
+      "related_topics": [
+        "t-sakana-ab-mcts",
+        "t-sakana-ai-scientist",
+        "t-pricing-unit-economics",
+        "t-competitive-map"
+      ],
+      "lines": 134
+    },
+    {
+      "doc_id": "t-storm-costorm",
+      "path": "topics/01-competitors/storm-costorm.md",
+      "title": "STORM / Co-STORM — 多視点質問生成と協調的談話プロトコル",
+      "topic_group": "competitors",
+      "tags": [
+        "storm",
+        "co-storm",
+        "stanford",
+        "multi-perspective",
+        "outline",
+        "discourse",
+        "oss"
+      ],
+      "confidence": "high",
+      "primary_sources": [
+        "S-031"
+      ],
+      "related_topics": [
+        "t-long-form-report",
+        "t-human-in-the-loop",
+        "t-structured-analytic-techniques"
+      ],
+      "lines": 78
+    },
+    {
+      "doc_id": "t-tongyi-deepresearch",
+      "path": "topics/01-competitors/tongyi-deepresearch.md",
+      "title": "Tongyi DeepResearch — オープンモデルの到達点と IterResearch",
+      "topic_group": "competitors",
+      "tags": [
+        "alibaba",
+        "open-source",
+        "iterresearch",
+        "context-management",
+        "benchmark",
+        "moe"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-030"
+      ],
+      "related_topics": [
+        "t-context-engineering",
+        "t-commoditization-moat",
+        "t-general-dr-benchmarks"
+      ],
+      "lines": 75
+    },
+    {
+      "doc_id": "t-context-engineering",
+      "path": "topics/02-methods/context-engineering.md",
+      "title": "文脈工学 — context rot と圧縮の設計",
+      "topic_group": "methods",
+      "tags": [
+        "context-rot",
+        "compaction",
+        "note-taking",
+        "tool-scoping",
+        "iterresearch",
+        "ace"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-050",
+        "S-051",
+        "S-030"
+      ],
+      "related_topics": [
+        "t-tongyi-deepresearch",
+        "t-memory-continual-learning",
+        "t-failure-modes-mast"
+      ],
+      "lines": 80
+    },
+    {
+      "doc_id": "t-failure-modes-mast",
+      "path": "topics/02-methods/failure-modes-mast.md",
+      "title": "マルチエージェントの失敗モード（MAST）— 設計の制約条件",
+      "topic_group": "methods",
+      "tags": [
+        "mast",
+        "failure-modes",
+        "reliability",
+        "termination",
+        "verification"
+      ],
+      "confidence": "high",
+      "primary_sources": [
+        "S-029"
+      ],
+      "related_topics": [
+        "t-multi-agent-orchestration",
+        "t-verifier-design",
+        "t-test-time-scaling"
+      ],
+      "lines": 69
+    },
+    {
+      "doc_id": "t-human-in-the-loop",
+      "path": "topics/02-methods/human-in-the-loop.md",
+      "title": "人間との協働 — 自律性-対話のジレンマと介入点設計",
+      "topic_group": "methods",
+      "tags": [
+        "hitl",
+        "mixed-initiative",
+        "steering",
+        "intent",
+        "pomdp",
+        "interaction"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-032",
+        "S-033",
+        "S-034",
+        "S-035"
+      ],
+      "related_topics": [
+        "t-sakana-marlin",
+        "t-google-gemini-dr",
+        "t-storm-costorm"
+      ],
+      "lines": 76
+    },
+    {
+      "doc_id": "t-information-value-eig",
+      "path": "topics/02-methods/information-value-eig.md",
+      "title": "情報価値（EIG）— 「次に何を調べるか」の理論",
+      "topic_group": "methods",
+      "tags": [
+        "eig",
+        "bayesian-experimental-design",
+        "bed-llm",
+        "information-gain",
+        "decision-theory"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-040",
+        "S-041",
+        "S-042"
+      ],
+      "related_topics": [
+        "t-structured-analytic-techniques",
+        "t-test-time-scaling",
+        "t-differentiation-hypotheses"
+      ],
+      "lines": 88
+    },
+    {
+      "doc_id": "t-long-form-report",
+      "path": "topics/02-methods/long-form-report-generation.md",
+      "title": "長文レポート生成 — 階層計画・一貫性・スライド化",
+      "topic_group": "methods",
+      "tags": [
+        "long-form",
+        "report-generation",
+        "outline",
+        "coherence",
+        "multimodal",
+        "slides"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-070"
+      ],
+      "related_topics": [
+        "t-storm-costorm",
+        "t-sakana-marlin",
+        "t-ip-evaluation-design"
+      ],
+      "lines": 65
+    },
+    {
+      "doc_id": "t-memory-continual-learning",
+      "path": "topics/02-methods/memory-and-continual-learning.md",
+      "title": "記憶と継続学習 — ファンドの資産化と、その落とし穴",
+      "topic_group": "methods",
+      "tags": [
+        "memory",
+        "continual-learning",
+        "case-based",
+        "agent-kb",
+        "experience-reuse",
+        "moat"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-052",
+        "S-053"
+      ],
+      "related_topics": [
+        "t-context-engineering",
+        "t-commoditization-moat",
+        "t-sakana-evolution-rsi"
+      ],
+      "lines": 85
+    },
+    {
+      "doc_id": "t-model-routing",
+      "path": "topics/02-methods/model-routing-and-cascades.md",
+      "title": "モデルルーティングとカスケード — 品質戦略かつ原価戦略",
+      "topic_group": "methods",
+      "tags": [
+        "routing",
+        "cascade",
+        "routellm",
+        "frugalgpt",
+        "cost",
+        "pareto",
+        "multi-vendor"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-089"
+      ],
+      "related_topics": [
+        "t-sakana-ab-mcts",
+        "t-pricing-unit-economics",
+        "t-verifier-design"
+      ],
+      "lines": 62
+    },
+    {
+      "doc_id": "t-multi-agent-debate",
+      "path": "topics/02-methods/multi-agent-debate-risks.md",
+      "title": "マルチエージェント討論 — 効果と、投資判断における危険",
+      "topic_group": "methods",
+      "tags": [
+        "debate",
+        "adversarial",
+        "persuasion",
+        "consensus",
+        "red-team"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-045",
+        "S-046",
+        "S-063"
+      ],
+      "related_topics": [
+        "t-google-ai-coscientist",
+        "t-structured-analytic-techniques",
+        "t-llm-judge-reliability"
+      ],
+      "lines": 71
+    },
+    {
+      "doc_id": "t-multi-agent-orchestration",
+      "path": "topics/02-methods/multi-agent-orchestration.md",
+      "title": "マルチエージェント・オーケストレーション — 勝てる条件",
+      "topic_group": "methods",
+      "tags": [
+        "multi-agent",
+        "orchestration",
+        "parallelism",
+        "patterns",
+        "financial-documents"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-028",
+        "S-029"
+      ],
+      "related_topics": [
+        "t-anthropic-research",
+        "t-failure-modes-mast",
+        "t-pe-dd-workflow"
+      ],
+      "lines": 76
+    },
+    {
+      "doc_id": "t-retrieval-graphrag",
+      "path": "topics/02-methods/retrieval-and-graphrag.md",
+      "title": "検索と知識グラフ — 局所検索と大域センスメイキングの二層",
+      "topic_group": "methods",
+      "tags": [
+        "rag",
+        "graphrag",
+        "hipporag",
+        "raptor",
+        "lightrag",
+        "knowledge-graph",
+        "temporal"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-047",
+        "S-048",
+        "S-049"
+      ],
+      "related_topics": [
+        "t-data-sources",
+        "t-context-engineering",
+        "t-memory-continual-learning"
+      ],
+      "lines": 75
+    },
+    {
+      "doc_id": "t-rl-search-agents",
+      "path": "topics/02-methods/rl-search-agents.md",
+      "title": "RL 探索エージェント — 報酬設計の潮流（学習せずに流用する）",
+      "topic_group": "methods",
+      "tags": [
+        "rl",
+        "search-r1",
+        "reward-design",
+        "process-reward",
+        "rubric",
+        "agentic-search"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-043",
+        "S-044"
+      ],
+      "related_topics": [
+        "t-information-value-eig",
+        "t-verifier-design",
+        "t-openai-dr"
+      ],
+      "lines": 71
+    },
+    {
+      "doc_id": "t-structured-analytic-techniques",
+      "path": "topics/02-methods/structured-analytic-techniques.md",
+      "title": "構造化分析技法（SATs / ACH）— 反証を一次データ構造にする",
+      "topic_group": "methods",
+      "tags": [
+        "ach",
+        "sats",
+        "heuer",
+        "intelligence-analysis",
+        "bias",
+        "premortem",
+        "red-team"
+      ],
+      "confidence": "high",
+      "primary_sources": [
+        "S-061",
+        "S-062"
+      ],
+      "related_topics": [
+        "t-information-value-eig",
+        "t-multi-agent-debate",
+        "t-differentiation-hypotheses"
+      ],
+      "lines": 101
+    },
+    {
+      "doc_id": "t-test-time-scaling",
+      "path": "topics/02-methods/test-time-scaling-and-tree-search.md",
+      "title": "推論時スケーリングと木探索 — 系譜と予算配分",
+      "topic_group": "methods",
+      "tags": [
+        "test-time-scaling",
+        "mcts",
+        "tree-of-thoughts",
+        "best-of-n",
+        "bandit",
+        "budget"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-008",
+        "S-022",
+        "S-045"
+      ],
+      "related_topics": [
+        "t-sakana-ab-mcts",
+        "t-verifier-design",
+        "t-information-value-eig"
+      ],
+      "lines": 74
+    },
+    {
+      "doc_id": "t-verifier-design",
+      "path": "topics/02-methods/verifier-design.md",
+      "title": "検証器の設計 — 生成-検証の非対称性と特権",
+      "topic_group": "methods",
+      "tags": [
+        "verifier",
+        "prm",
+        "orm",
+        "generator-verifier-gap",
+        "tool-verification"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-036",
+        "S-037",
+        "S-038",
+        "S-039"
+      ],
+      "related_topics": [
+        "t-citation-attribution",
+        "t-test-time-scaling",
+        "t-llm-judge-reliability"
+      ],
+      "lines": 77
+    },
+    {
+      "doc_id": "t-calibration-forecasting",
+      "path": "topics/03-evaluation/calibration-and-forecasting.md",
+      "title": "較正と予測 — 投資プロの母語で話す",
+      "topic_group": "evaluation",
+      "tags": [
+        "calibration",
+        "brier",
+        "ece",
+        "forecasting",
+        "superforecaster",
+        "ensemble",
+        "argumentation"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-060"
+      ],
+      "related_topics": [
+        "t-differentiation-hypotheses",
+        "t-llm-judge-reliability",
+        "t-ip-evaluation-design"
+      ],
+      "lines": 68
+    },
+    {
+      "doc_id": "t-citation-attribution",
+      "path": "topics/03-evaluation/citation-attribution.md",
+      "title": "出典帰属の検証 — 「引用されているが検証されていない」問題",
+      "topic_group": "evaluation",
+      "tags": [
+        "citation",
+        "attribution",
+        "fact-check",
+        "hallucination",
+        "evaluation",
+        "ci"
+      ],
+      "confidence": "high",
+      "primary_sources": [
+        "S-057"
+      ],
+      "related_topics": [
+        "t-verifier-design",
+        "t-sakana-marlin",
+        "t-ip-evaluation-design"
+      ],
+      "lines": 96
+    },
+    {
+      "doc_id": "t-finance-benchmarks",
+      "path": "topics/03-evaluation/finance-benchmarks.md",
+      "title": "金融ドメインのベンチマーク — 評価の重心が「軌跡と較正」に移った",
+      "topic_group": "evaluation",
+      "tags": [
+        "finance-benchmark",
+        "financebench",
+        "finqa",
+        "fintrace",
+        "finverbench",
+        "ipo",
+        "edinet"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-067",
+        "S-068",
+        "S-016"
+      ],
+      "related_topics": [
+        "t-sakana-edinet-bench",
+        "t-ip-evaluation-design",
+        "t-pe-dd-workflow"
+      ],
+      "lines": 60
+    },
+    {
+      "doc_id": "t-general-dr-benchmarks",
+      "path": "topics/03-evaluation/general-dr-benchmarks.md",
+      "title": "汎用 Deep Research ベンチマークの地図",
+      "topic_group": "evaluation",
+      "tags": [
+        "benchmark",
+        "gaia",
+        "browsecomp",
+        "hle",
+        "frames",
+        "xbench",
+        "report-eval"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-066",
+        "S-069",
+        "S-030"
+      ],
+      "related_topics": [
+        "t-finance-benchmarks",
+        "t-ip-evaluation-design",
+        "t-tongyi-deepresearch"
+      ],
+      "lines": 74
+    },
+    {
+      "doc_id": "t-ip-evaluation-design",
+      "path": "topics/03-evaluation/integral-prism-evaluation-design.md",
+      "title": "Integral Prism の評価設計 — 何を測れば勝ちなのか",
+      "topic_group": "evaluation",
+      "tags": [
+        "evaluation-design",
+        "counterfactual-dd",
+        "point-in-time",
+        "leakage",
+        "brier",
+        "ci"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-057",
+        "S-060",
+        "S-016",
+        "S-068"
+      ],
+      "related_topics": [
+        "t-citation-attribution",
+        "t-calibration-forecasting",
+        "t-finance-benchmarks"
+      ],
+      "lines": 85
+    },
+    {
+      "doc_id": "t-llm-judge-reliability",
+      "path": "topics/03-evaluation/llm-judge-reliability.md",
+      "title": "LLM-as-a-Judge の信頼性 — バイアスと設計制約",
+      "topic_group": "evaluation",
+      "tags": [
+        "llm-judge",
+        "position-bias",
+        "verbosity-bias",
+        "rubric",
+        "reproducibility"
+      ],
+      "confidence": "high",
+      "primary_sources": [
+        "S-058",
+        "S-059"
+      ],
+      "related_topics": [
+        "t-google-ai-coscientist",
+        "t-citation-attribution",
+        "t-multi-agent-debate"
+      ],
+      "lines": 74
+    },
+    {
+      "doc_id": "t-data-sources",
+      "path": "topics/04-domain/data-sources.md",
+      "title": "データ源の地図 — 公開 / 準公開 / プライベート",
+      "topic_group": "domain",
+      "tags": [
+        "data",
+        "edinet",
+        "xbrl",
+        "edgar",
+        "alternative-data",
+        "expert-network",
+        "private-data"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-078",
+        "S-016"
+      ],
+      "related_topics": [
+        "t-sakana-edinet-bench",
+        "t-retrieval-graphrag",
+        "t-commoditization-moat"
+      ],
+      "lines": 88
+    },
+    {
+      "doc_id": "t-pe-dd-workflow",
+      "path": "topics/04-domain/pe-dd-workflow.md",
+      "title": "PE/VC デューデリの工程と、AI の効きどころ",
+      "topic_group": "domain",
+      "tags": [
+        "private-equity",
+        "due-diligence",
+        "workflow",
+        "ic",
+        "pmi",
+        "adoption"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [
+        "S-076",
+        "S-077"
+      ],
+      "related_topics": [
+        "t-finance-platforms",
+        "t-differentiation-hypotheses",
+        "t-data-sources"
+      ],
+      "lines": 82
+    },
+    {
+      "doc_id": "t-regulation-compliance",
+      "path": "topics/04-domain/regulation-and-compliance.md",
+      "title": "規制とコンプライアンス — 設計制約であり、同時に堀",
+      "topic_group": "domain",
+      "tags": [
+        "eu-ai-act",
+        "audit-trail",
+        "mnpi",
+        "chinese-wall",
+        "iso42001",
+        "security"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-079",
+        "S-080",
+        "S-005"
+      ],
+      "related_topics": [
+        "t-failure-modes-mast",
+        "t-data-sources",
+        "t-commoditization-moat"
+      ],
+      "lines": 83
+    },
+    {
+      "doc_id": "t-vc-dd-multi-agent",
+      "path": "topics/04-domain/vc-dd-multi-agent-research.md",
+      "title": "VC/スタートアップ評価のマルチエージェント研究 — 直接の先行事例",
+      "topic_group": "domain",
+      "tags": [
+        "venture-capital",
+        "due-diligence",
+        "multi-agent",
+        "dialectic",
+        "ocr",
+        "hallucination"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-090",
+        "S-091"
+      ],
+      "related_topics": [
+        "t-pe-dd-workflow",
+        "t-multi-agent-orchestration",
+        "t-verifier-design"
+      ],
+      "lines": 70
+    },
+    {
+      "doc_id": "t-commoditization-moat",
+      "path": "topics/05-strategy/commoditization-and-moat.md",
+      "title": "コモディティ化と堀 — どこに価値を置くか",
+      "topic_group": "strategy",
+      "tags": [
+        "commoditization",
+        "moat",
+        "defensibility",
+        "proprietary-data",
+        "workflow",
+        "distribution"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-086",
+        "S-087",
+        "S-088",
+        "S-030",
+        "S-009"
+      ],
+      "related_topics": [
+        "t-memory-continual-learning",
+        "t-regulation-compliance",
+        "t-competitive-map"
+      ],
+      "lines": 79
+    },
+    {
+      "doc_id": "t-competitive-map",
+      "path": "topics/05-strategy/competitive-map.md",
+      "title": "競争地図とリスク — どこに立つか",
+      "topic_group": "strategy",
+      "tags": [
+        "competitive-map",
+        "positioning",
+        "risk",
+        "differentiation"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-004",
+        "S-020",
+        "S-076",
+        "S-081",
+        "S-016"
+      ],
+      "related_topics": [
+        "t-sakana-marlin",
+        "t-google-gemini-dr",
+        "t-finance-platforms",
+        "t-commoditization-moat"
+      ],
+      "lines": 77
+    },
+    {
+      "doc_id": "t-pricing-unit-economics",
+      "path": "topics/05-strategy/pricing-and-unit-economics.md",
+      "title": "価格と単価構造 — 空白帯域はどこか",
+      "topic_group": "strategy",
+      "tags": [
+        "pricing",
+        "unit-economics",
+        "cogs",
+        "cache",
+        "search-cost",
+        "positioning"
+      ],
+      "confidence": "medium",
+      "primary_sources": [
+        "S-004",
+        "S-020",
+        "S-089"
+      ],
+      "related_topics": [
+        "t-google-gemini-dr",
+        "t-model-routing",
+        "t-competitive-map"
+      ],
+      "lines": 81
+    },
+    {
+      "doc_id": "t-contribution-map",
+      "path": "topics/06-synthesis/contribution-map.md",
+      "title": "貢献マップ — どの研究が本システムのどこに効くか",
+      "topic_group": "synthesis",
+      "tags": [
+        "synthesis",
+        "contribution-map",
+        "priorities"
+      ],
+      "confidence": "medium",
+      "primary_sources": [],
+      "related_topics": [
+        "t-differentiation-hypotheses",
+        "t-design-principles"
+      ],
+      "lines": 71
+    },
+    {
+      "doc_id": "t-design-principles",
+      "path": "topics/06-synthesis/design-principles.md",
+      "title": "設計原則 P1-P12 — サーベイから導かれる制約",
+      "topic_group": "synthesis",
+      "tags": [
+        "design-principles",
+        "constraints",
+        "architecture"
+      ],
+      "confidence": "medium-high",
+      "primary_sources": [],
+      "related_topics": [
+        "t-contribution-map",
+        "t-differentiation-hypotheses"
+      ],
+      "lines": 53
+    },
+    {
+      "doc_id": "t-differentiation-hypotheses",
+      "path": "topics/06-synthesis/differentiation-hypotheses.md",
+      "title": "差別化仮説 — 反証エンジン / 較正された確度 / ファンドの記憶",
+      "topic_group": "synthesis",
+      "tags": [
+        "differentiation",
+        "hypothesis",
+        "strategy",
+        "product"
+      ],
+      "confidence": "medium",
+      "primary_sources": [],
+      "related_topics": [
+        "t-contribution-map",
+        "t-design-principles",
+        "t-competitive-map"
+      ],
+      "lines": 137
+    },
+    {
+      "doc_id": "survey-00-method",
+      "path": "method-and-scope.md",
+      "title": "調査方法・スコープ・信頼度の扱い",
+      "topic_group": "meta",
+      "tags": [
+        "method",
+        "scope",
+        "epistemics",
+        "limitations"
+      ],
+      "confidence": "high",
+      "primary_sources": [],
+      "related_topics": [],
+      "lines": 79
+    },
+    {
+      "doc_id": "notes-discussion-agenda",
+      "path": "notes/discussion-agenda.md",
+      "title": "アーキテクチャ議論の前に決めるべき論点",
+      "topic_group": "notes",
+      "tags": [
+        "discussion",
+        "decisions",
+        "open"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "related_topics": [],
+      "lines": 137
+    },
+    {
+      "doc_id": "notes-open-questions",
+      "path": "notes/open-questions.md",
+      "title": "未検証事項・一次確認の宿題",
+      "topic_group": "notes",
+      "tags": [
+        "open-questions",
+        "verification-backlog"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "related_topics": [],
+      "lines": 39
+    }
+  ]
+}
