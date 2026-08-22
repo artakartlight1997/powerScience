@@ -1,5 +1,5 @@
 {
-  "index_version": "2.1.2",
+  "index_version": "2.1.3",
   "generated": "2026-08-22",
   "project": "integral-prism",
   "note": "v2.1: 内製利用の確定と入力ゼロ化(discussion/18)。",
@@ -2021,7 +2021,7 @@
         "t-commoditization-moat",
         "disc-unit-economics"
       ],
-      "lines": 230
+      "lines": 293
     },
     {
       "doc_id": "disc-index",
@@ -2089,7 +2089,7 @@
       "confidence": null,
       "primary_sources": [],
       "depends_on": [],
-      "lines": 223
+      "lines": 226
     },
     {
       "doc_id": "notes-discussion-agenda",
