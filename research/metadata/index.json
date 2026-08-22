@@ -1,5 +1,5 @@
 {
-  "index_version": "2.1.6",
+  "index_version": "2.2.0",
   "generated": "2026-08-22",
   "project": "integral-prism",
   "note": "v2.1: 内製利用の確定と入力ゼロ化(discussion/18)。",
@@ -123,6 +123,15 @@
     "notes": [
       "notes-discussion-agenda",
       "notes-open-questions"
+    ],
+    "architecture": [
+      "arch-data-model",
+      "arch-pipeline",
+      "arch-collectors",
+      "arch-outputs",
+      "arch-security-ops",
+      "arch-build-plan",
+      "arch-index"
     ]
   },
   "files": [
@@ -2139,6 +2148,142 @@
         "cs-evidence-graph"
       ],
       "lines": 183
+    },
+    {
+      "doc_id": "arch-data-model",
+      "path": "arch/01-data-model.md",
+      "title": "設計仕様 01 — データモデル",
+      "topic_group": "architecture",
+      "tags": [
+        "data-model",
+        "schema",
+        "postgres",
+        "append-only"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "cs-evidence-graph",
+        "cs-bizdd-spec"
+      ],
+      "lines": 141
+    },
+    {
+      "doc_id": "arch-pipeline",
+      "path": "arch/02-pipeline.md",
+      "title": "設計仕様 02 — パイプラインと監査アルゴリズム",
+      "topic_group": "architecture",
+      "tags": [
+        "pipeline",
+        "coverage-audit",
+        "stop-rule",
+        "components"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "arch-data-model",
+        "disc-internal-build"
+      ],
+      "lines": 111
+    },
+    {
+      "doc_id": "arch-collectors",
+      "path": "arch/03-collectors-and-verification.md",
+      "title": "設計仕様 03 — 収集系と検証スタック",
+      "topic_group": "architecture",
+      "tags": [
+        "collectors",
+        "router",
+        "verification",
+        "grounding",
+        "licensing"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "arch-pipeline",
+        "t-citation-attribution",
+        "t-numeric-verification"
+      ],
+      "lines": 80
+    },
+    {
+      "doc_id": "arch-outputs",
+      "path": "arch/04-outputs.md",
+      "title": "設計仕様 04 — 射影（6つの成果物）",
+      "topic_group": "architecture",
+      "tags": [
+        "outputs",
+        "projections",
+        "deliverables"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "arch-pipeline"
+      ],
+      "lines": 42
+    },
+    {
+      "doc_id": "arch-security-ops",
+      "path": "arch/05-security-and-ops.md",
+      "title": "設計仕様 05 — セキュリティ・運用・コスト",
+      "topic_group": "architecture",
+      "tags": [
+        "security",
+        "ops",
+        "cost",
+        "caching",
+        "isolation"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "t-agent-security",
+        "t-serving-cost"
+      ],
+      "lines": 43
+    },
+    {
+      "doc_id": "arch-build-plan",
+      "path": "arch/06-build-plan.md",
+      "title": "設計仕様 06 — v0 の範囲・6週間計画・実験E・撤退基準",
+      "topic_group": "architecture",
+      "tags": [
+        "build-plan",
+        "v0",
+        "experiment",
+        "kill-criteria",
+        "repo-layout"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "arch-pipeline",
+        "disc-internal-build"
+      ],
+      "lines": 72
+    },
+    {
+      "doc_id": "arch-index",
+      "path": "arch/README.md",
+      "title": "Integral Prism 設計仕様 — インデックス",
+      "topic_group": "architecture",
+      "tags": [
+        "architecture",
+        "spec",
+        "index"
+      ],
+      "confidence": null,
+      "primary_sources": [],
+      "depends_on": [
+        "disc-internal-build",
+        "disc-integrated-v2",
+        "cs-evidence-graph",
+        "cs-bizdd-spec"
+      ],
+      "lines": 81
     }
   ]
 }

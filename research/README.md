@@ -22,6 +22,7 @@ tags: [index, survey, deep-research, agent, investment-research]
 > 根拠つきで棚卸しすることにある。
 
 **★1枚で把握する** → **[SUMMARY.md](SUMMARY.md)（全体サマリー）**
+**★設計仕様（実装用）** → **[arch/](arch/README.md)（データモデル・パイプライン・v0計画・実験E）**
 **最初に読む** → [method-and-scope.md](method-and-scope.md)（調査方法・確度スケール・限界）
 **議論する** → [notes/discussion-agenda.md](notes/discussion-agenda.md)（未決の論点 D1–D10）
 **何を作るか** → **[coding-strategy/](coding-strategy/README.md)（実装戦略）**
