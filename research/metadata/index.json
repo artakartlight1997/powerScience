@@ -1,5 +1,5 @@
 {
-  "index_version": "2.1.5",
+  "index_version": "2.1.6",
   "generated": "2026-08-22",
   "project": "integral-prism",
   "note": "v2.1: 内製利用の確定と入力ゼロ化(discussion/18)。",
@@ -2138,7 +2138,7 @@
         "disc-internal-build",
         "cs-evidence-graph"
       ],
-      "lines": 148
+      "lines": 183
     }
   ]
 }
